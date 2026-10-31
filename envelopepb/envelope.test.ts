@@ -51,6 +51,12 @@ describe("asMultiEnvelope", () => {
     expect(multi.header).toBe(header);
     expect(multi.bodies).toEqual([body]);
   });
+
+  it("throws if the envelope has no body", () => {
+    expect(() => asMultiEnvelope(create(EnvelopeSchema, {}))).toThrow(
+      "envelope must have a body",
+    );
+  });
 });
 
 describe("tryAppendEnvelope", () => {

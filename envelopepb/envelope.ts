@@ -33,11 +33,17 @@ export function expandMultiEnvelope(x: MultiEnvelope): Envelope[] {
  * env.
  *
  * The multi-envelope shares the envelope's header and body.
+ *
+ * @throws {Error} If env has no body.
  */
 export function asMultiEnvelope(env: Envelope): MultiEnvelope {
+  if (!env.body) {
+    throw new Error("envelope must have a body");
+  }
+
   return create(MultiEnvelopeSchema, {
     header: env.header,
-    bodies: env.body ? [env.body] : [],
+    bodies: [env.body],
   });
 }
 

@@ -174,23 +174,23 @@ export const MessageSchema: GenMessage<Message> = /*@__PURE__*/
  */
 export type Header = Message$1<"dogma.protobuf.v1.Header"> & {
   /**
-   * CausationId is the (optional) ID of the message that was the direct cause
-   * of the messages.
+   * CausationId is the ID of the message that was the direct cause of the
+   * messages.
    *
-   * If it is the zero-value, the messages were not caused by any other
-   * message.
+   * It is required. A message that was not caused by any other message is its
+   * own cause, so its causation ID is its own message ID.
    *
    * @generated from field: dogma.protobuf.v1.UUID causation_id = 1;
    */
   causationId?: UUID | undefined;
 
   /**
-   * CorrelationId is the (optional) ID of the first ancestor of the messages
-   * that was itself not caused by another message, that is, it's the root of
-   * the message chain that ultimately resulted in these messages.
+   * CorrelationId is the ID of the first ancestor of the messages that was
+   * itself not caused by another message, that is, it's the root of the message
+   * chain that ultimately resulted in these messages.
    *
-   * If it is the zero-value, the messages were not caused by any other
-   * message.
+   * It is required. A message that was not caused by any other message is the
+   * root of its own chain, so its correlation ID is its own message ID.
    *
    * @generated from field: dogma.protobuf.v1.UUID correlation_id = 2;
    */
