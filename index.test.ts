@@ -28,8 +28,15 @@ describe("package indexes", () => {
       .map((f) => f.slice(0, -".ts".length));
 
     it.each(generated)("re-exports %s", async (name) => {
-      const index = await import(`./${pkg}/index.ts`);
-      const module = await import(`./${pkg}/${name}.ts`);
+      // The paths are only known at runtime, so they're imported by URL rather
+      // than letting Vite rewrite the import with a list of files that it
+      // found, which it caches.
+      const index = await import(
+        /* @vite-ignore */ new URL(`./${pkg}/index.ts`, import.meta.url).href
+      );
+      const module = await import(
+        /* @vite-ignore */ new URL(`./${pkg}/${name}.ts`, import.meta.url).href
+      );
 
       for (const [key, value] of Object.entries(module)) {
         expect(index, key).toHaveProperty(key, value);
