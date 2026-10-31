@@ -1,0 +1,13 @@
+edition = "2024";
+package dogma.messaging.v1;
+
+option go_package = "github.com/dogmatiq/protobuf/messaginggrpc";
+
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// UnrecognizedEventStream is an error-details value for NOT_FOUND errors that
+// occurred because a client requested an unrecognized stream ID.
+message UnrecognizedEventStream {
+  // EventStreamId is the ID of the unrecognized stream.
+  dogma.protobuf.v1.UUID event_stream_id = 1;
+}
