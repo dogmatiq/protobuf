@@ -34,7 +34,7 @@
       "types": "./artifacts/dist/uuidpb/index.d.ts",
       "default": "./artifacts/dist/uuidpb/index.js"
     },
-    "./*_pb.js": {
+    "./github.com/dogmatiq/protobuf/*_pb.js": {
       "types": "./artifacts/dist/*_pb.d.ts",
       "default": "./artifacts/dist/*_pb.js"
     }

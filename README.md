@@ -70,6 +70,26 @@ servers.
 `uint64` and `int64` fields, such as event stream offsets and the components of
 a `UUID`, are represented as `bigint` values.
 
+### Importing from your own schema
+
+If your own `.proto` files import Dogma's, tell `protoc` where to find them, and
+tell `protoc-gen-es` to import the generated code from this package:
+
+```sh
+protoc \
+  --proto_path=. \
+  --proto_path=github.com/dogmatiq/protobuf=node_modules/@dogmatiq/protobuf \
+  --plugin=protoc-gen-es=node_modules/.bin/protoc-gen-es \
+  --es_out=. \
+  --es_opt=target=ts,import_extension=js \
+  --es_opt=map_imports=github.com/dogmatiq/protobuf/:@dogmatiq/protobuf \
+  your/schema.proto
+```
+
+The generated code then imports from paths such as
+`@dogmatiq/protobuf/github.com/dogmatiq/protobuf/uuidpb/uuid_pb.js`, which the
+package exports for this purpose.
+
 <!-- references -->
 
 [connect-es]: https://github.com/connectrpc/connect-es
