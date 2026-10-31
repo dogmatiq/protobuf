@@ -281,7 +281,7 @@ export type Body = Message$1<"dogma.protobuf.v1.Body"> & {
    * Extensions is a set of extension values associated with this message.
    *
    * Any values in [Header.Extensions] are overridden by values in this field
-   * that have the same type URL.
+   * of the same message type.
    *
    * @generated from field: repeated google.protobuf.Any extensions = 6;
    */
@@ -292,7 +292,7 @@ export type Body = Message$1<"dogma.protobuf.v1.Body"> & {
    * its causal chain.
    *
    * Any values in [Header.Baggage] are overridden by values in this field
-   * that have the same type URL.
+   * of the same message type.
    *
    * @generated from field: repeated google.protobuf.Any baggage = 7;
    */

@@ -1,4 +1,4 @@
-import { create, equals } from "@bufbuild/protobuf";
+import { create, toBinary } from "@bufbuild/protobuf";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import { IdentitySchema, type Identity } from "../identitypb/identity_pb.js";
 import { identityToString, validateIdentity } from "../identitypb/identity.js";
@@ -61,7 +61,7 @@ export function tryAppendEnvelope(x: MultiEnvelope, env: Envelope): boolean {
 
   const a = x.header;
   const b = env.header;
-  const same = a && b ? equals(HeaderSchema, a, b) : a === b;
+  const same = a && b ? headersEqual(a, b) : a === b;
 
   if (!same) {
     return false;
@@ -237,4 +237,15 @@ function check(prefix: string, fn: () => void): void {
   } catch (cause) {
     throw new Error(`${prefix}: ${(cause as Error).message}`, { cause });
   }
+}
+
+// headersEqual returns true if a and b are equivalent, including any unknown
+// fields, as Go's proto.Equal() does. The equals() function from protobuf-es
+// ignores unknown fields by default. Header has no map fields, so its binary
+// encoding is stable and can be compared directly.
+function headersEqual(a: Header, b: Header): boolean {
+  const x = toBinary(HeaderSchema, a);
+  const y = toBinary(HeaderSchema, b);
+
+  return x.length === y.length && x.every((v, i) => v === y[i]);
 }

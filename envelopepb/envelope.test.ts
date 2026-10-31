@@ -1,4 +1,4 @@
-import { create, fromBinary } from "@bufbuild/protobuf";
+import { create, fromBinary, toBinary } from "@bufbuild/protobuf";
 import { anyPack, anyUnpack, StringValueSchema } from "@bufbuild/protobuf/wkt";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
@@ -86,6 +86,26 @@ describe("tryAppendEnvelope", () => {
     expect(multi.bodies).toEqual([]);
   });
 
+  it("returns false if the headers differ only in unknown fields", () => {
+    const header = create(HeaderSchema, {
+      correlationId: { upper: 1n, lower: 2n },
+    });
+
+    // Field 99 is unknown to this schema. Encoded as varint 1, its tag is
+    // (99 << 3) | 0 = 792, which is 0x98 0x06.
+    const bytes = toBinary(HeaderSchema, header);
+    const withUnknown = fromBinary(
+      HeaderSchema,
+      new Uint8Array([...bytes, 0x98, 0x06, 0x01]),
+    );
+
+    const multi = create(MultiEnvelopeSchema, { header });
+    const env = create(EnvelopeSchema, { header: withUnknown, body: {} });
+
+    expect(tryAppendEnvelope(multi, env)).toBe(false);
+    expect(multi.bodies).toEqual([]);
+  });
+
   it("returns false without modifying the multi-envelope if the headers differ", () => {
     const multi = create(MultiEnvelopeSchema, {
       header: { correlationId: { upper: 1n, lower: 2n } },
@@ -129,6 +149,18 @@ describe.each([
     expect(anyUnpack(body[field][1], StringValueSchema)?.value).toBe("b");
   });
 
+  it("ignores values whose type URL has no message name", () => {
+    const body = create(BodySchema, {});
+    const malformed = anyPack(StringValueSchema, create(StringValueSchema, {}));
+    malformed.typeUrl = "example.com/";
+    body[field].push(malformed);
+
+    set(body, StringValueSchema, create(StringValueSchema, { value: "a" }));
+
+    expect(body[field]).toHaveLength(2);
+    expect(body[field][0]).toBe(malformed);
+  });
+
   it("replaces an existing value of the same type with a different type URL prefix", () => {
     const body = create(BodySchema, {});
     const first = anyPack(
@@ -144,6 +176,22 @@ describe.each([
     expect(body[field][0].typeUrl).toBe(
       "type.googleapis.com/google.protobuf.StringValue",
     );
+  });
+});
+
+describe("getExtension", () => {
+  it("skips values whose type URL has no message name", () => {
+    const position = create(EventStreamPositionSchema, { offset: 42n });
+    const malformed = anyPack(StringValueSchema, create(StringValueSchema, {}));
+    malformed.typeUrl = "example.com/";
+
+    const env = create(EnvelopeSchema, {
+      body: {
+        extensions: [malformed, anyPack(EventStreamPositionSchema, position)],
+      },
+    });
+
+    expect(getExtension(env, EventStreamPositionSchema)?.offset).toBe(42n);
   });
 });
 

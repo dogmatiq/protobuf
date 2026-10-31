@@ -1,5 +1,5 @@
 import type { DescMessage, MessageShape } from "@bufbuild/protobuf";
-import { anyIs, anyPack, anyUnpack, type Any } from "@bufbuild/protobuf/wkt";
+import { anyPack, anyUnpack, type Any } from "@bufbuild/protobuf/wkt";
 
 /**
  * Returns the first value matching the given schema from the given sets of
@@ -13,7 +13,7 @@ export function findAnyValue<Desc extends DescMessage>(
 ): MessageShape<Desc> | undefined {
   for (const values of sets) {
     for (const v of values ?? []) {
-      if (anyIs(v, schema)) {
+      if (isType(v, schema)) {
         return anyUnpack(v, schema);
       }
     }
@@ -26,8 +26,8 @@ export function findAnyValue<Desc extends DescMessage>(
  * Packs value into an {@link Any} and replaces the value in values of the same
  * message type, or appends it if there is none.
  *
- * Like {@link anyIs}, it compares only the message name at the end of the type
- * URL, so values packed with different type URL prefixes are the same type.
+ * Only the message name at the end of the type URL is compared, so values
+ * packed with different type URL prefixes are the same type.
  */
 export function setAnyValue<Desc extends DescMessage>(
   values: Any[],
@@ -35,11 +35,22 @@ export function setAnyValue<Desc extends DescMessage>(
   value: MessageShape<Desc>,
 ): void {
   const packed = anyPack(schema, value);
-  const index = values.findIndex((v) => anyIs(v, schema));
+  const index = values.findIndex((v) => isType(v, schema));
 
   if (index === -1) {
     values.push(packed);
   } else {
     values[index] = packed;
   }
+}
+
+// isType returns true if v contains a message of the given type.
+//
+// Like Go's anypb.Any.MessageIs(), it compares the message name at the end of
+// the type URL. Unlike anyIs() from protobuf-es, it doesn't throw if a type URL
+// has no message name, so a malformed value doesn't prevent other values from
+// being found.
+function isType(v: Any, schema: DescMessage): boolean {
+  const name = v.typeUrl.slice(v.typeUrl.lastIndexOf("/") + 1);
+  return name !== "" && name === schema.typeName;
 }

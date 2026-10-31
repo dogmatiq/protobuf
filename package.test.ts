@@ -27,6 +27,13 @@ describe("package.json", () => {
     }
   });
 
+  it("exports generated files by path, but not other modules", () => {
+    expect(pkg.exports).toHaveProperty(["./*_pb.js"]);
+    expect(Object.keys(pkg.exports).filter((k) => k.includes("*"))).toEqual([
+      "./*_pb.js",
+    ]);
+  });
+
   it("requires a @bufbuild/protobuf version that supports the generated code", () => {
     const range: string = pkg.peerDependencies["@bufbuild/protobuf"];
     const [, lowerBound] = range.match(/(\d+\.\d+\.\d+)/) ?? [];

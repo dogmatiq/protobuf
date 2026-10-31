@@ -823,13 +823,13 @@ type Body_builder struct {
 	// Extensions is a set of extension values associated with this message.
 	//
 	// Any values in [Header.Extensions] are overridden by values in this field
-	// that have the same type URL.
+	// of the same message type.
 	Extensions []*anypb.Any
 	// Baggage is a set of extension values associated with this message and/or
 	// its causal chain.
 	//
 	// Any values in [Header.Baggage] are overridden by values in this field
-	// that have the same type URL.
+	// of the same message type.
 	Baggage []*anypb.Any
 }
 
