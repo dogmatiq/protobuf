@@ -12,7 +12,30 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/errors.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_errors: GenFile = /*@__PURE__*/
-  fileDesc("CjdnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXJyb3JzLnByb3RvEhJkb2dtYS5tZXNzYWdpbmcudjEiSwoXVW5yZWNvZ25pemVkRXZlbnRTdHJlYW0SMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJREIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjdnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXJyb3JzLnByb3RvEhJkb2dtYS5tZXNzYWdpbmcudjEiSwoXVW5yZWNvZ25pemVkQXBwbGljYXRpb24SMAoPYXBwbGljYXRpb25fa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCJLChdVbnJlY29nbml6ZWRFdmVudFN0cmVhbRIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIksKF1VucmVjb2duaXplZENvbW1hbmRUeXBlEjAKD21lc3NhZ2VfdHlwZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQiSQoVVW5yZWNvZ25pemVkRXZlbnRUeXBlEjAKD21lc3NhZ2VfdHlwZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQiRAoQTWFsZm9ybWVkTWVzc2FnZRIwCg9tZXNzYWdlX3R5cGVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIkIKDkludmFsaWRNZXNzYWdlEjAKD21lc3NhZ2VfdHlwZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSURCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+
+/**
+ * UnrecognizedApplication is an error-details value for NOT_FOUND errors that
+ * occurred because a client requested an application that is unknown to the
+ * server.
+ *
+ * @generated from message dogma.messaging.v1.UnrecognizedApplication
+ */
+export type UnrecognizedApplication = Message<"dogma.messaging.v1.UnrecognizedApplication"> & {
+  /**
+   * ApplicationKey is the key of the unrecognized application.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID application_key = 1;
+   */
+  applicationKey?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.UnrecognizedApplication.
+ * Use `create(UnrecognizedApplicationSchema)` to create a new message.
+ */
+export const UnrecognizedApplicationSchema: GenMessage<UnrecognizedApplication> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 0);
 
 /**
  * UnrecognizedEventStream is an error-details value for NOT_FOUND errors that
@@ -34,5 +57,96 @@ export type UnrecognizedEventStream = Message<"dogma.messaging.v1.UnrecognizedEv
  * Use `create(UnrecognizedEventStreamSchema)` to create a new message.
  */
 export const UnrecognizedEventStreamSchema: GenMessage<UnrecognizedEventStream> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 1);
+
+/**
+ * UnrecognizedCommandType is an error-details value for INVALID_ARGUMENT
+ * errors that occurred because a specific command type was not recognized by
+ * the server, or is not executable within the target application.
+ *
+ * @generated from message dogma.messaging.v1.UnrecognizedCommandType
+ */
+export type UnrecognizedCommandType = Message<"dogma.messaging.v1.UnrecognizedCommandType"> & {
+  /**
+   * MessageTypeId is the ID of the unrecognized command type.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID message_type_id = 1;
+   */
+  messageTypeId?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.UnrecognizedCommandType.
+ * Use `create(UnrecognizedCommandTypeSchema)` to create a new message.
+ */
+export const UnrecognizedCommandTypeSchema: GenMessage<UnrecognizedCommandType> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 2);
+
+/**
+ * UnrecognizedEventType is an error-details value for INVALID_ARGUMENT errors
+ * that occurred because a specific event type was not recognized by the
+ * server.
+ *
+ * @generated from message dogma.messaging.v1.UnrecognizedEventType
+ */
+export type UnrecognizedEventType = Message<"dogma.messaging.v1.UnrecognizedEventType"> & {
+  /**
+   * MessageTypeId is the ID of the unrecognized event type.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID message_type_id = 1;
+   */
+  messageTypeId?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.UnrecognizedEventType.
+ * Use `create(UnrecognizedEventTypeSchema)` to create a new message.
+ */
+export const UnrecognizedEventTypeSchema: GenMessage<UnrecognizedEventType> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 3);
+
+/**
+ * MalformedMessage is an error-details value for INVALID_ARGUMENT errors that
+ * occurred because a message's binary data could not be unmarshaled.
+ *
+ * @generated from message dogma.messaging.v1.MalformedMessage
+ */
+export type MalformedMessage = Message<"dogma.messaging.v1.MalformedMessage"> & {
+  /**
+   * MessageTypeId is the ID of the message type that the data could not be
+   * unmarshaled as.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID message_type_id = 1;
+   */
+  messageTypeId?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.MalformedMessage.
+ * Use `create(MalformedMessageSchema)` to create a new message.
+ */
+export const MalformedMessageSchema: GenMessage<MalformedMessage> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 4);
+
+/**
+ * InvalidMessage is an error-details value for INVALID_ARGUMENT errors that
+ * occurred because a message failed the application's validation logic.
+ *
+ * @generated from message dogma.messaging.v1.InvalidMessage
+ */
+export type InvalidMessage = Message<"dogma.messaging.v1.InvalidMessage"> & {
+  /**
+   * MessageTypeId is the ID of the type of the invalid message.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID message_type_id = 1;
+   */
+  messageTypeId?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.InvalidMessage.
+ * Use `create(InvalidMessageSchema)` to create a new message.
+ */
+export const InvalidMessageSchema: GenMessage<InvalidMessage> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 5);
 

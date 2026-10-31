@@ -35,7 +35,7 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 | `uuidpb`        | `dogma.protobuf.v1`      | `UUID`                                     |
 | `identitypb`    | `dogma.protobuf.v1`      | `Identity`                                 |
 | `envelopepb`    | `dogma.protobuf.v1`      | `Envelope`, `MultiEnvelope` and extensions |
-| `messaginggrpc` | `dogma.messaging.v1`     | The event stream consumer API              |
+| `messaginggrpc` | `dogma.messaging.v1`     | The command executor and event stream APIs |
 
 ## Message data
 
