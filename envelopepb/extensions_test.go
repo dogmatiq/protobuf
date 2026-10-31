@@ -54,7 +54,7 @@ func TestSetExtension(t *testing.T) {
 		})
 	})
 
-	t.Run("when an extension with the same type URL is already present", func(t *testing.T) {
+	t.Run("when an extension of the same message type is already present", func(t *testing.T) {
 		t.Run("it replaces the existing value", func(t *testing.T) {
 			want, err := anypb.New(wrapperspb.String("second"))
 			if err != nil {

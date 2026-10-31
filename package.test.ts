@@ -37,6 +37,10 @@ describe("package.json", () => {
     expect(Object.keys(pkg.exports).filter((k) => k.includes("*"))).toEqual([
       `./${importPath}/*_pb.js`,
     ]);
+    expect(pkg.exports[`./${importPath}/*_pb.js`]).toEqual({
+      types: "./artifacts/dist/*_pb.d.ts",
+      default: "./artifacts/dist/*_pb.js",
+    });
   });
 
   it("requires a @bufbuild/protobuf version that supports the generated code", () => {

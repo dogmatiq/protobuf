@@ -1,5 +1,9 @@
-import type { DescMessage, MessageShape } from "@bufbuild/protobuf";
-import { anyPack, anyUnpack, type Any } from "@bufbuild/protobuf/wkt";
+import {
+  fromBinary,
+  type DescMessage,
+  type MessageShape,
+} from "@bufbuild/protobuf";
+import { anyPack, type Any } from "@bufbuild/protobuf/wkt";
 
 /**
  * Returns the first value matching the given schema from the given sets of
@@ -14,7 +18,7 @@ export function findAnyValue<Desc extends DescMessage>(
   for (const values of sets) {
     for (const v of values ?? []) {
       if (isType(v, schema)) {
-        return anyUnpack(v, schema);
+        return fromBinary(schema, v.value);
       }
     }
   }
@@ -52,5 +56,5 @@ export function setAnyValue<Desc extends DescMessage>(
 // being found.
 function isType(v: Any, schema: DescMessage): boolean {
   const name = v.typeUrl.slice(v.typeUrl.lastIndexOf("/") + 1);
-  return name !== "" && name === schema.typeName;
+  return name === schema.typeName;
 }

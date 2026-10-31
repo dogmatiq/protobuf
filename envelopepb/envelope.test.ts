@@ -133,7 +133,7 @@ describe.each([
     expect(anyUnpack(body[field][0], StringValueSchema)?.value).toBe("a");
   });
 
-  it("replaces an existing value with the same type URL", () => {
+  it("replaces an existing value of the same message type", () => {
     const body = create(BodySchema, {});
     const other = anyPack(
       EventStreamPositionSchema,
