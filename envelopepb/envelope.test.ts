@@ -106,6 +106,18 @@ describe("tryAppendEnvelope", () => {
     expect(multi.bodies).toEqual([]);
   });
 
+  it("does not throw if a header contains values that can't be encoded", () => {
+    // -1 is outside the range of a uint64, so encoding it would fail.
+    const header = () =>
+      create(HeaderSchema, { correlationId: { upper: -1n, lower: 2n } });
+
+    const multi = create(MultiEnvelopeSchema, { header: header() });
+    const env = create(EnvelopeSchema, { header: header(), body: {} });
+
+    expect(tryAppendEnvelope(multi, env)).toBe(true);
+    expect(multi.bodies).toHaveLength(1);
+  });
+
   it("returns false without modifying the multi-envelope if the headers differ", () => {
     const multi = create(MultiEnvelopeSchema, {
       header: { correlationId: { upper: 1n, lower: 2n } },

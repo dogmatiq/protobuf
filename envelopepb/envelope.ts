@@ -1,4 +1,4 @@
-import { create, toBinary } from "@bufbuild/protobuf";
+import { create, createRegistry, equals } from "@bufbuild/protobuf";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import { IdentitySchema, type Identity } from "../identitypb/identity_pb.js";
 import { identityToString, validateIdentity } from "../identitypb/identity.js";
@@ -241,11 +241,19 @@ function check(prefix: string, fn: () => void): void {
 
 // headersEqual returns true if a and b are equivalent, including any unknown
 // fields, as Go's proto.Equal() does. The equals() function from protobuf-es
-// ignores unknown fields by default. Header has no map fields, so its binary
-// encoding is stable and can be compared directly.
+// ignores unknown fields unless the "unknown" option is set.
+//
+// Unlike proto.Equal(), it compares unknown fields in the order they were
+// decoded, rather than grouped by field number, so headers whose unknown fields
+// arrived in a different order are not equal.
+//
+// The "unknown" option is marked as experimental by protobuf-es, so it may
+// change in a later release. A test covers it, so that such a change is
+// noticed.
 function headersEqual(a: Header, b: Header): boolean {
-  const x = toBinary(HeaderSchema, a);
-  const y = toBinary(HeaderSchema, b);
-
-  return x.length === y.length && x.every((v, i) => v === y[i]);
+  return equals(HeaderSchema, a, b, { registry: REGISTRY, unknown: true });
 }
+
+// REGISTRY is the registry passed to equals(). It's empty because Header has no
+// extensions, so every unknown field is genuinely unknown.
+const REGISTRY = createRegistry();
