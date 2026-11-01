@@ -18,6 +18,7 @@ JS_PUBLINT_REQ += artifacts/dist
 -include .makefiles/pkg/js/v1/with-tsc.mk
 -include .makefiles/pkg/js/v1/with-publint.mk
 -include .makefiles/pkg/vscode/v1/Makefile
+-include .makefiles/pkg/changelog/v2/Makefile
 
 # TODO: Add these lines once arethetypeswrong runs under pnpm, and include
 # .makefiles/pkg/js/v1/with-arethetypeswrong.mk above:
