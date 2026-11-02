@@ -145,6 +145,15 @@ describe.each([
     expect(anyUnpack(body[field][0], StringValueSchema)?.value).toBe("a");
   });
 
+  it("adds the value to a header", () => {
+    const header = create(HeaderSchema, {});
+
+    set(header, StringValueSchema, create(StringValueSchema, { value: "a" }));
+
+    expect(header[field]).toHaveLength(1);
+    expect(anyUnpack(header[field][0], StringValueSchema)?.value).toBe("a");
+  });
+
   it("replaces an existing value of the same message type", () => {
     const body = create(BodySchema, {});
     const other = anyPack(

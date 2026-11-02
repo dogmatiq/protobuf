@@ -28,6 +28,23 @@ func TestSetExtension(t *testing.T) {
 		)
 	})
 
+	t.Run("it adds the value to the header's extensions", func(t *testing.T) {
+		want, err := anypb.New(wrapperspb.String("hello"))
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		header := NewHeaderBuilder().Build()
+		SetExtension(header, wrapperspb.String("hello"))
+
+		Expect(
+			t,
+			"unexpected extensions",
+			header.GetExtensions(),
+			[]*anypb.Any{want},
+		)
+	})
+
 	t.Run("when an extension of the same type is present with a different type URL prefix", func(t *testing.T) {
 		t.Run("it replaces the existing value", func(t *testing.T) {
 			want, err := anypb.New(wrapperspb.String("second"))
@@ -105,7 +122,19 @@ func TestSetExtension(t *testing.T) {
 				t,
 				"value must not be nil",
 				func() {
-					SetExtension[*wrapperspb.StringValue](NewBodyBuilder().Build(), nil)
+					SetExtension(NewBodyBuilder().Build(), nil)
+				},
+			)
+		})
+	})
+
+	t.Run("when the value is a nil pointer", func(t *testing.T) {
+		t.Run("it panics", func(t *testing.T) {
+			ExpectPanic(
+				t,
+				"value must not be nil",
+				func() {
+					SetExtension(NewBodyBuilder().Build(), (*wrapperspb.StringValue)(nil))
 				},
 			)
 		})

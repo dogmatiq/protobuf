@@ -56,11 +56,11 @@ func isSameType(a, b *anypb.Any) bool {
 	return a.GetTypeUrl() == b.GetTypeUrl()
 }
 
-// marshalAsAny returns v as an [*anypb.Any], converting it if necessary. It
-// panics if x is nil, if x is an empty [*anypb.Any], or if it cannot be
-// marshaled.
+// marshalAsAny returns x as an [*anypb.Any], converting it if necessary. It
+// panics if x is nil or a nil pointer, if x is an empty [*anypb.Any], or if it
+// cannot be marshaled.
 func marshalAsAny(x proto.Message) *anypb.Any {
-	if x == nil {
+	if x == nil || !x.ProtoReflect().IsValid() {
 		panic("value must not be nil")
 	}
 

@@ -4,26 +4,24 @@ import (
 	"fmt"
 
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
-// SetBaggage sets x as a baggage value on body. If a baggage value of the
-// same message type is already present, it is replaced.
+// SetBaggage sets x as a baggage value on target, which is typically a
+// [*Header] or [*Body]. If a baggage value of the same message type is already
+// present, it is replaced.
 //
 // It panics if x is nil.
-func SetBaggage[
-	T interface {
-		*E
-		proto.Message
+func SetBaggage(
+	target interface {
+		GetBaggage() []*anypb.Any
+		SetBaggage([]*anypb.Any)
 	},
-	E any,
-](body *Body, x T) {
-	if x == nil {
-		panic("value must not be nil")
-	}
-
-	body.SetBaggage(
+	x proto.Message,
+) {
+	target.SetBaggage(
 		appendOrReplace(
-			body.GetBaggage(),
+			target.GetBaggage(),
 			marshalAsAny(x),
 		),
 	)

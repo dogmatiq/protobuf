@@ -1,6 +1,6 @@
 import type { DescMessage, MessageShape } from "@bufbuild/protobuf";
 import { findAnyValue, setAnyValue } from "./any.js";
-import type { Body, Envelope } from "./envelope_pb.js";
+import type { Body, Envelope, Header } from "./envelope_pb.js";
 
 /**
  * Returns the extension matching the given schema from an envelope's
@@ -19,13 +19,13 @@ export function getExtension<Desc extends DescMessage>(
 }
 
 /**
- * Sets value as an extension on body. If an extension of the same message type
- * is already present, it is replaced.
+ * Sets value as an extension on target. If an extension of the same message
+ * type is already present, it is replaced.
  */
 export function setExtension<Desc extends DescMessage>(
-  body: Body,
+  target: Header | Body,
   schema: Desc,
   value: MessageShape<Desc>,
 ): void {
-  setAnyValue(body.extensions, schema, value);
+  setAnyValue(target.extensions, schema, value);
 }

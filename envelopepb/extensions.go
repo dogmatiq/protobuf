@@ -4,26 +4,24 @@ import (
 	"fmt"
 
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
-// SetExtension sets x as an extension on body. If an extension of the same
-// message type is already present, it is replaced.
+// SetExtension sets x as an extension on target, which is typically a [*Header]
+// or [*Body]. If an extension of the same message type is already present, it
+// is replaced.
 //
 // It panics if x is nil.
-func SetExtension[
-	T interface {
-		*E
-		proto.Message
+func SetExtension(
+	target interface {
+		GetExtensions() []*anypb.Any
+		SetExtensions([]*anypb.Any)
 	},
-	E any,
-](body *Body, x T) {
-	if x == nil {
-		panic("value must not be nil")
-	}
-
-	body.SetExtensions(
+	x proto.Message,
+) {
+	target.SetExtensions(
 		appendOrReplace(
-			body.GetExtensions(),
+			target.GetExtensions(),
 			marshalAsAny(x),
 		),
 	)
