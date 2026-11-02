@@ -4,7 +4,13 @@ import { describe, expect, it } from "vitest";
 import { IdentitySchema } from "../identitypb/identity_pb.js";
 import { UUIDSchema } from "../uuidpb/uuid_pb.js";
 import { generateUUID } from "../uuidpb/uuid.js";
-import { validateEnvelope, validateMultiEnvelope } from "./envelope.js";
+import {
+  validateBody,
+  validateEnvelope,
+  validateHeader,
+  validateMessage,
+  validateMultiEnvelope,
+} from "./envelope.js";
 import {
   EnvelopeSchema,
   MultiEnvelopeSchema,
@@ -209,6 +215,72 @@ describe("validateMultiEnvelope", () => {
 
     expect(() => validateMultiEnvelope(multi)).toThrow(
       "invalid body at index 1: invalid message: invalid description: must not be empty",
+    );
+  });
+});
+
+describe("validateHeader", () => {
+  it("accepts a valid header", () => {
+    expect(() => validateHeader(newEnvelope().header)).not.toThrow();
+  });
+
+  it("rejects a missing header", () => {
+    expect(() => validateHeader(undefined)).toThrow("must be set");
+  });
+
+  it("rejects an invalid header", () => {
+    const e = newEnvelope((x) => (x.header!.source = undefined));
+
+    expect(() => validateHeader(e.header)).toThrow(
+      "invalid source: must be set",
+    );
+  });
+});
+
+describe("validateBody", () => {
+  it("accepts a valid body", () => {
+    const e = newEnvelope();
+
+    expect(() => validateBody(e.body, e.header)).not.toThrow();
+  });
+
+  it("rejects a missing body", () => {
+    expect(() => validateBody(undefined, newEnvelope().header)).toThrow(
+      "must be set",
+    );
+  });
+
+  it("rejects an invalid body", () => {
+    const e = newEnvelope((x) => (x.body!.message!.description = ""));
+
+    expect(() => validateBody(e.body, e.header)).toThrow(
+      "invalid message: invalid description: must not be empty",
+    );
+  });
+
+  it("rejects a scheduled-for time when the header has no instance ID", () => {
+    const e = newEnvelope((x) => (x.header!.source!.instanceId = ""));
+
+    expect(() => validateBody(e.body, e.header)).toThrow(
+      "invalid scheduled-for time: must not be specified without a source handler and instance ID",
+    );
+  });
+});
+
+describe("validateMessage", () => {
+  it("accepts a valid message", () => {
+    expect(() => validateMessage(newEnvelope().body!.message)).not.toThrow();
+  });
+
+  it("rejects a missing message", () => {
+    expect(() => validateMessage(undefined)).toThrow("must be set");
+  });
+
+  it("rejects an invalid message", () => {
+    const e = newEnvelope((x) => (x.body!.message!.description = ""));
+
+    expect(() => validateMessage(e.body!.message)).toThrow(
+      "invalid description: must not be empty",
     );
   });
 });
