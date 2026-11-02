@@ -1,6 +1,6 @@
 import type { DescMessage, MessageShape } from "@bufbuild/protobuf";
 import { findAnyValue, setAnyValue } from "./any.js";
-import type { Body, Envelope } from "./envelope_pb.js";
+import type { Body, Envelope, Header } from "./envelope_pb.js";
 
 /**
  * Returns the baggage value matching the given schema from an envelope's
@@ -19,13 +19,13 @@ export function getBaggage<Desc extends DescMessage>(
 }
 
 /**
- * Sets value as a baggage value on body. If a baggage value of the same message
- * type is already present, it is replaced.
+ * Sets value as a baggage value on target. If a baggage value of the same
+ * message type is already present, it is replaced.
  */
 export function setBaggage<Desc extends DescMessage>(
-  body: Body,
+  target: Header | Body,
   schema: Desc,
   value: MessageShape<Desc>,
 ): void {
-  setAnyValue(body.baggage, schema, value);
+  setAnyValue(target.baggage, schema, value);
 }

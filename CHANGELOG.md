@@ -20,6 +20,20 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added `validateHeader()`, `validateBody()` and `validateMessage()` to the
   TypeScript `envelopepb` package.
 
+### Changed
+
+- **[BC]** `envelopepb.SetExtension()` and `SetBaggage()` now accept any value
+  with the relevant getter and setter methods, such as a `*Header` or `*Body`,
+  and accept the value to set as a `proto.Message`. They are no longer generic,
+  so calls that specify type arguments explicitly must remove them.
+- `setExtension()` and `setBaggage()` in the TypeScript `envelopepb` package now
+  accept a `Header` or a `Body`.
+
+### Fixed
+
+- `envelopepb.SetExtension()` and `SetBaggage()` now panic if the value is a nil
+  pointer, as well as when it is `nil`.
+
 ## [0.1.0] - 2026-11-02
 
 - Initial release.

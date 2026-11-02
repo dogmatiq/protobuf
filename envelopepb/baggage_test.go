@@ -27,6 +27,23 @@ func TestSetBaggage(t *testing.T) {
 		)
 	})
 
+	t.Run("it adds the value to the header's baggage", func(t *testing.T) {
+		want, err := anypb.New(wrapperspb.String("hello"))
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		header := NewHeaderBuilder().Build()
+		SetBaggage(header, wrapperspb.String("hello"))
+
+		Expect(
+			t,
+			"unexpected baggage",
+			header.GetBaggage(),
+			[]*anypb.Any{want},
+		)
+	})
+
 	t.Run("when a baggage value of the same type is present with a different type URL prefix", func(t *testing.T) {
 		t.Run("it replaces the existing value", func(t *testing.T) {
 			want, err := anypb.New(wrapperspb.String("second"))
@@ -104,7 +121,19 @@ func TestSetBaggage(t *testing.T) {
 				t,
 				"value must not be nil",
 				func() {
-					SetBaggage[*wrapperspb.StringValue](NewBodyBuilder().Build(), nil)
+					SetBaggage(NewBodyBuilder().Build(), nil)
+				},
+			)
+		})
+	})
+
+	t.Run("when the value is a nil pointer", func(t *testing.T) {
+		t.Run("it panics", func(t *testing.T) {
+			ExpectPanic(
+				t,
+				"value must not be nil",
+				func() {
+					SetBaggage(NewBodyBuilder().Build(), (*wrapperspb.StringValue)(nil))
 				},
 			)
 		})
