@@ -11,6 +11,15 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Added
+
+- Added `Header.Validate()`, `Body.Validate()` and `Message.Validate()` to the
+  Go `envelopepb` package.
+- Added `validateHeader()`, `validateBody()` and `validateMessage()` to the
+  TypeScript `envelopepb` package.
+
 ## [0.1.0] - 2026-11-02
 
 - Initial release.

@@ -101,7 +101,12 @@ export function validateMultiEnvelope(x: MultiEnvelope): void {
   );
 }
 
-function validateHeader(x: Header | undefined): void {
+/**
+ * Throws an error if x is not well-formed.
+ *
+ * See {@link validateEnvelope} for what well-formedness means.
+ */
+export function validateHeader(x: Header | undefined): void {
   if (!x) {
     throw new Error("must be set");
   }
@@ -133,7 +138,19 @@ function validateSource(x: Source | undefined): void {
   }
 }
 
-function validateBody(x: Body | undefined, header: Header | undefined): void {
+/**
+ * Throws an error if x is not well-formed.
+ *
+ * header is the header of the envelope that contains x. It is needed because a
+ * body may only have a scheduled-for time if the header's source has a handler
+ * and instance ID. It is not itself validated.
+ *
+ * See {@link validateEnvelope} for what well-formedness means.
+ */
+export function validateBody(
+  x: Body | undefined,
+  header: Header | undefined,
+): void {
   if (!x) {
     throw new Error("must be set");
   }
@@ -159,7 +176,12 @@ function validateBody(x: Body | undefined, header: Header | undefined): void {
   validateAnyValues("baggage", x.baggage);
 }
 
-function validateMessage(x: Message | undefined): void {
+/**
+ * Throws an error if x is not well-formed.
+ *
+ * See {@link validateEnvelope} for what well-formedness means.
+ */
+export function validateMessage(x: Message | undefined): void {
   if (!x) {
     throw new Error("must be set");
   }

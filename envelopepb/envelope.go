@@ -27,11 +27,11 @@ func (x *Envelope) Validate() error {
 	header := x.GetHeader()
 	body := x.GetBody()
 
-	if err := header.validate(); err != nil {
+	if err := header.Validate(); err != nil {
 		return fmt.Errorf("invalid header: %w", err)
 	}
 
-	if err := body.validate(header); err != nil {
+	if err := body.Validate(header); err != nil {
 		return fmt.Errorf("invalid body: %w", err)
 	}
 
@@ -67,12 +67,12 @@ func (x *MultiEnvelope) Validate() error {
 
 	header := x.GetHeader()
 
-	if err := header.validate(); err != nil {
+	if err := header.Validate(); err != nil {
 		return fmt.Errorf("invalid header: %w", err)
 	}
 
 	for i, b := range x.GetBodies() {
-		if err := b.validate(header); err != nil {
+		if err := b.Validate(header); err != nil {
 			return fmt.Errorf("invalid body at index %d: %w", i, err)
 		}
 	}
@@ -145,8 +145,10 @@ func (x *Source) validate() error {
 	return nil
 }
 
-// validate returns an error if x is not well-formed.
-func (x *Message) validate() error {
+// Validate returns an error if x is not well-formed.
+//
+// See [Envelope.Validate] for what well-formedness means.
+func (x *Message) Validate() error {
 	if x == nil {
 		return errors.New("must not be nil")
 	}
@@ -166,8 +168,10 @@ func (x *Message) validate() error {
 	return nil
 }
 
-// validate returns an error if x is not well-formed.
-func (x *Header) validate() error {
+// Validate returns an error if x is not well-formed.
+//
+// See [Envelope.Validate] for what well-formedness means.
+func (x *Header) Validate() error {
 	if x == nil {
 		return errors.New("must not be nil")
 	}
@@ -195,8 +199,14 @@ func (x *Header) validate() error {
 	return nil
 }
 
-// validate returns an error if x is not well-formed.
-func (x *Body) validate(header *Header) error {
+// Validate returns an error if x is not well-formed.
+//
+// header is the header of the envelope that contains x. It is needed because a
+// body may only have a scheduled-for time if the header's source has a handler
+// and instance ID. It is not itself validated.
+//
+// See [Envelope.Validate] for what well-formedness means.
+func (x *Body) Validate(header *Header) error {
 	if x == nil {
 		return errors.New("must not be nil")
 	}
@@ -220,7 +230,7 @@ func (x *Body) validate(header *Header) error {
 		}
 	}
 
-	if err := x.GetMessage().validate(); err != nil {
+	if err := x.GetMessage().Validate(); err != nil {
 		return fmt.Errorf("invalid message: %w", err)
 	}
 

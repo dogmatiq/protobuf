@@ -244,6 +244,122 @@ func TestEnvelope_Validate(t *testing.T) {
 	})
 }
 
+func TestHeader_Validate(t *testing.T) {
+	t.Parallel()
+
+	t.Run("it accepts a valid header", func(t *testing.T) {
+		t.Parallel()
+
+		if err := newEnvelope().GetHeader().Validate(); err != nil {
+			t.Fatal(err)
+		}
+	})
+
+	t.Run("it rejects a nil header", func(t *testing.T) {
+		t.Parallel()
+
+		expectValidationError(t, (*Header)(nil).Validate(), "must not be nil")
+	})
+
+	t.Run("it rejects an invalid header", func(t *testing.T) {
+		t.Parallel()
+
+		h := newEnvelope().GetHeader()
+		h.SetSource(nil)
+
+		expectValidationError(t, h.Validate(), "invalid source: must not be nil")
+	})
+}
+
+func TestBody_Validate(t *testing.T) {
+	t.Parallel()
+
+	t.Run("it accepts a valid body", func(t *testing.T) {
+		t.Parallel()
+
+		env := newEnvelope()
+
+		if err := env.GetBody().Validate(env.GetHeader()); err != nil {
+			t.Fatal(err)
+		}
+	})
+
+	t.Run("it rejects a nil body", func(t *testing.T) {
+		t.Parallel()
+
+		env := newEnvelope()
+
+		expectValidationError(t, (*Body)(nil).Validate(env.GetHeader()), "must not be nil")
+	})
+
+	t.Run("it rejects an invalid body", func(t *testing.T) {
+		t.Parallel()
+
+		env := newEnvelope()
+		env.GetBody().GetMessage().SetDescription("")
+
+		expectValidationError(
+			t,
+			env.GetBody().Validate(env.GetHeader()),
+			"invalid message: invalid description: must not be empty",
+		)
+	})
+
+	t.Run("it rejects a scheduled-for time when the header has no instance ID", func(t *testing.T) {
+		t.Parallel()
+
+		env := newEnvelope()
+		env.GetHeader().GetSource().SetInstanceId("")
+
+		expectValidationError(
+			t,
+			env.GetBody().Validate(env.GetHeader()),
+			"invalid scheduled-for time: must not be specified without a source handler and instance ID",
+		)
+	})
+}
+
+func TestMessage_Validate(t *testing.T) {
+	t.Parallel()
+
+	t.Run("it accepts a valid message", func(t *testing.T) {
+		t.Parallel()
+
+		if err := newEnvelope().GetBody().GetMessage().Validate(); err != nil {
+			t.Fatal(err)
+		}
+	})
+
+	t.Run("it rejects a nil message", func(t *testing.T) {
+		t.Parallel()
+
+		expectValidationError(t, (*Message)(nil).Validate(), "must not be nil")
+	})
+
+	t.Run("it rejects an invalid message", func(t *testing.T) {
+		t.Parallel()
+
+		m := newEnvelope().GetBody().GetMessage()
+		m.SetDescription("")
+
+		expectValidationError(t, m.Validate(), "invalid description: must not be empty")
+	})
+}
+
+// expectValidationError fails the test if err is nil or its message is not
+// want.
+func expectValidationError(t *testing.T, err error, want string) {
+	t.Helper()
+
+	if err == nil {
+		t.Fatal("expected an error")
+	}
+
+	if err.Error() != want {
+		t.Fatalf("got %q, want %q", err, want)
+	}
+}
+
 func TestEnvelope_AsMultiEnvelope(t *testing.T) {
 	t.Parallel()
 
