@@ -7,6 +7,7 @@ JS_SOURCE_FILES += $(shell PATH="$(PATH)" git-find . -path '*/*' -name '*.ts' -n
 # makefiles.dev makefiles are included.
 JS_TSC_REQ += $$(GENERATED_FILES)
 JS_VITEST_REQ += $$(GENERATED_FILES)
+JS_ARETHETYPESWRONG_REQ += artifacts/dist
 JS_PUBLINT_REQ += artifacts/dist
 
 -include .makefiles/Makefile
@@ -16,22 +17,10 @@ JS_PUBLINT_REQ += artifacts/dist
 -include .makefiles/pkg/js/v1/Makefile
 -include .makefiles/pkg/js/v1/with-pnpm.mk
 -include .makefiles/pkg/js/v1/with-tsc.mk
+-include .makefiles/pkg/js/v1/with-arethetypeswrong.mk
 -include .makefiles/pkg/js/v1/with-publint.mk
 -include .makefiles/pkg/vscode/v1/Makefile
 -include .makefiles/pkg/changelog/v2/Makefile
-
-# TODO: Add these lines once arethetypeswrong runs under pnpm, and include
-# .makefiles/pkg/js/v1/with-arethetypeswrong.mk above:
-# https://github.com/make-files/makefiles/pull/149
-#
-#   JS_ARETHETYPESWRONG_REQ += artifacts/dist
-
-# TODO: Remove this rule once with-tsc.mk provides it:
-# https://github.com/make-files/makefiles/pull/148
-artifacts/dist: tsconfig.build.json tsconfig.json artifacts/link-dependencies.touch $(JS_SOURCE_FILES) $(JS_TSC_REQ)
-	@rm -rf "$@"
-	$(JS_EXEC) tsc -p "$<"
-	@touch "$@"
 
 .makefiles/%:
 	@curl -sfL https://makefiles.dev/v1 | bash /dev/stdin "$@"
