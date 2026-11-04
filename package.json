@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/dogmatiq/protobuf/issues"
   },
-  "packageManager": "pnpm@11.22.0",
+  "packageManager": "pnpm@12.16.1",
   "publishConfig": {
     "access": "public"
   },
