@@ -25,7 +25,7 @@ export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer
 export type WatchEventsRequest = Message<"dogma.messaging.v1.WatchEventsRequest"> & {
   /**
    * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments. An empty set matches no events.
+   * include in the segments. An empty set matches every event.
    *
    * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 1;
    */
@@ -64,7 +64,7 @@ export type ReadEventsRequest = Message<"dogma.messaging.v1.ReadEventsRequest"> 
 
   /**
    * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments. An empty set matches no events.
+   * include in the segments. An empty set matches every event.
    *
    * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 3;
    */
