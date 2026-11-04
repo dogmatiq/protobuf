@@ -2,6 +2,13 @@
   "name": "@dogmatiq/protobuf",
   "version": "0.0.0",
   "description": "Protocol Buffers and gRPC definitions for Dogma",
+  "keywords": [
+    "dogma",
+    "grpc",
+    "protobuf",
+    "protocol-buffers",
+    "schema"
+  ],
   "license": "MIT",
   "author": "James Harris",
   "type": "module",
@@ -13,9 +20,11 @@
   "bugs": {
     "url": "https://github.com/dogmatiq/protobuf/issues"
   },
-  "engines": {
-    "node": ">=20"
+  "packageManager": "pnpm@12.16.1",
+  "publishConfig": {
+    "access": "public"
   },
+  "sideEffects": false,
   "exports": {
     "./envelopepb": {
       "types": "./artifacts/dist/envelopepb/index.d.ts",
@@ -43,7 +52,7 @@
     "*/*.proto"
   ],
   "scripts": {
-    "prepublishOnly": "rm -rf artifacts/dist && tsc -p tsconfig.build.json"
+    "prepublishOnly": "make artifacts/dist"
   },
   "peerDependencies": {
     "@bufbuild/protobuf": "^2.16.0"

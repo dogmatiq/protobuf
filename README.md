@@ -47,12 +47,10 @@ Buffers.
 
 ## TypeScript
 
-The npm package is ESM only and requires Node.js 20 or later and TypeScript 5.7
-or later. It uses [protobuf-es] as its runtime, which you must install
-yourself:
+The npm package is ESM-only. It uses [protobuf-es] as its runtime.
 
 ```sh
-npm install @dogmatiq/protobuf @bufbuild/protobuf
+npm install @dogmatiq/protobuf
 ```
 
 Each package has its own entry point:
