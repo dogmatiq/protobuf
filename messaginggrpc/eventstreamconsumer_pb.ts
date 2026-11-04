@@ -14,101 +14,56 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer: GenFile = /*@__PURE__*/
-  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIhkKF0xpc3RFdmVudFN0cmVhbXNSZXF1ZXN0IlEKGExpc3RFdmVudFN0cmVhbXNSZXNwb25zZRI1CgxldmVudF9zdHJlYW0YASABKAsyHy5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW0iWwoLRXZlbnRTdHJlYW0SMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIaCgtuZXh0X29mZnNldBgCIAEoBEIFqgECCAIinQEKFENvbnN1bWVFdmVudHNSZXF1ZXN0EjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSIAoRY2hlY2twb2ludF9vZmZzZXQYAiABKARCBaoBAggCEjEKEG1lc3NhZ2VfdHlwZV9pZHMYAyADKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIm4KFUNvbnN1bWVFdmVudHNSZXNwb25zZRIgChFjaGVja3BvaW50X29mZnNldBgBIAEoBEIFqgECCAISMwoJZW52ZWxvcGVzGAIgAygLMiAuZG9nbWEucHJvdG9idWYudjEuTXVsdGlFbnZlbG9wZTLxAQoWRXZlbnRTdHJlYW1Db25zdW1lckFQSRJvChBMaXN0RXZlbnRTdHJlYW1zEisuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXF1ZXN0GiwuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXNwb25zZTABEmYKDUNvbnN1bWVFdmVudHMSKC5kb2dtYS5tZXNzYWdpbmcudjEuQ29uc3VtZUV2ZW50c1JlcXVlc3QaKS5kb2dtYS5tZXNzYWdpbmcudjEuQ29uc3VtZUV2ZW50c1Jlc3BvbnNlMAFCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxChBtZXNzYWdlX3R5cGVfaWRzGAEgAygLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKEG1lc3NhZ2VfdHlwZV9pZHMYAyADKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIrMBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEjMKCWVudmVsb3BlcxgEIAMoCzIgLmRvZ21hLnByb3RvYnVmLnYxLk11bHRpRW52ZWxvcGUy2AEKFkV2ZW50U3RyZWFtQ29uc3VtZXJBUEkSXwoLV2F0Y2hFdmVudHMSJi5kb2dtYS5tZXNzYWdpbmcudjEuV2F0Y2hFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABEl0KClJlYWRFdmVudHMSJS5kb2dtYS5tZXNzYWdpbmcudjEuUmVhZEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAFCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
- * ListEventStreamsRequest is the input to the
- * [EventStreamConsumerAPI.ListEventStreams] method.
+ * WatchEventsRequest is the input to the
+ * [EventStreamConsumerAPI.WatchEvents] method.
  *
- * @generated from message dogma.messaging.v1.ListEventStreamsRequest
+ * @generated from message dogma.messaging.v1.WatchEventsRequest
  */
-export type ListEventStreamsRequest = Message<"dogma.messaging.v1.ListEventStreamsRequest"> & {
+export type WatchEventsRequest = Message<"dogma.messaging.v1.WatchEventsRequest"> & {
+  /**
+   * MessageTypeIds is the set of message type IDs of the event types to
+   * include in the segments.
+   *
+   * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 1;
+   */
+  messageTypeIds: UUID[];
 };
 
 /**
- * Describes the message dogma.messaging.v1.ListEventStreamsRequest.
- * Use `create(ListEventStreamsRequestSchema)` to create a new message.
+ * Describes the message dogma.messaging.v1.WatchEventsRequest.
+ * Use `create(WatchEventsRequestSchema)` to create a new message.
  */
-export const ListEventStreamsRequestSchema: GenMessage<ListEventStreamsRequest> = /*@__PURE__*/
+export const WatchEventsRequestSchema: GenMessage<WatchEventsRequest> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 0);
 
 /**
- * ListEventStreamsResponse is the output of the
- * [EventStreamConsumerAPI.ListEventStreams] method.
+ * ReadEventsRequest is the input to the
+ * [EventStreamConsumerAPI.ReadEvents] method.
  *
- * @generated from message dogma.messaging.v1.ListEventStreamsResponse
+ * @generated from message dogma.messaging.v1.ReadEventsRequest
  */
-export type ListEventStreamsResponse = Message<"dogma.messaging.v1.ListEventStreamsResponse"> & {
+export type ReadEventsRequest = Message<"dogma.messaging.v1.ReadEventsRequest"> & {
   /**
-   * EventStream is an event stream offered by the server.
-   *
-   * @generated from field: dogma.messaging.v1.EventStream event_stream = 1;
-   */
-  eventStream?: EventStream | undefined;
-};
-
-/**
- * Describes the message dogma.messaging.v1.ListEventStreamsResponse.
- * Use `create(ListEventStreamsResponseSchema)` to create a new message.
- */
-export const ListEventStreamsResponseSchema: GenMessage<ListEventStreamsResponse> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 1);
-
-/**
- * EventStream describes an offset-based ordered event stream.
- *
- * @generated from message dogma.messaging.v1.EventStream
- */
-export type EventStream = Message<"dogma.messaging.v1.EventStream"> & {
-  /**
-   * EventStreamId is a unique identifier for the stream.
+   * EventStreamId is the ID of the stream from which events are read.
    *
    * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
    */
   eventStreamId?: UUID | undefined;
 
   /**
-   * NextOffset is the offset of the next event that will be written to the
-   * stream. The first event in the stream is at offset zero; therefore,
-   * this value is equivalent to the number of events that have been written
-   * to the stream.
+   * BeginOffset is the offset from which events are read. Events from this
+   * offset to the end of the stream are delivered, then the call is closed.
    *
-   * @generated from field: uint64 next_offset = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
    */
-  nextOffset: bigint;
-};
-
-/**
- * Describes the message dogma.messaging.v1.EventStream.
- * Use `create(EventStreamSchema)` to create a new message.
- */
-export const EventStreamSchema: GenMessage<EventStream> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 2);
-
-/**
- * ConsumeEventsRequest is the input to the
- * [EventStreamConsumerAPI.ConsumeEvents] method.
- *
- * @generated from message dogma.messaging.v1.ConsumeEventsRequest
- */
-export type ConsumeEventsRequest = Message<"dogma.messaging.v1.ConsumeEventsRequest"> & {
-  /**
-   * EventStreamId is the ID from which events are consumed.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
-   */
-  eventStreamId?: UUID | undefined;
-
-  /**
-   * CheckpointOffset is the offset at which the consumer begins.
-   *
-   * @generated from field: uint64 checkpoint_offset = 2 [features.field_presence = IMPLICIT];
-   */
-  checkpointOffset: bigint;
+  beginOffset: bigint;
 
   /**
    * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the responses.
+   * include in the segments.
    *
    * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 3;
    */
@@ -116,63 +71,74 @@ export type ConsumeEventsRequest = Message<"dogma.messaging.v1.ConsumeEventsRequ
 };
 
 /**
- * Describes the message dogma.messaging.v1.ConsumeEventsRequest.
- * Use `create(ConsumeEventsRequestSchema)` to create a new message.
+ * Describes the message dogma.messaging.v1.ReadEventsRequest.
+ * Use `create(ReadEventsRequestSchema)` to create a new message.
  */
-export const ConsumeEventsRequestSchema: GenMessage<ConsumeEventsRequest> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 3);
+export const ReadEventsRequestSchema: GenMessage<ReadEventsRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 1);
 
 /**
- * ConsumeEventsResponse is the (streaming) output of the
- * [EventStreamConsumerAPI.ConsumeEvents] method.
+ * EventStreamSegment is a contiguous piece of one event stream, the half-open
+ * range [begin_offset, end_offset). It carries the events in that range that
+ * match the requested message types.
  *
- * It contains all of the events that match the requested message type IDs
- * specified in the [ConsumeEventsRequest], starting at the checkpoint offset up
- * to, but not including, the checkpoint offset in this response.
+ * It is the (streaming) output of both [EventStreamConsumerAPI.WatchEvents]
+ * and [EventStreamConsumerAPI.ReadEvents].
  *
- * The list of events may be empty, indicating that there are no matching events
- * in that range.
- *
- * @generated from message dogma.messaging.v1.ConsumeEventsResponse
+ * @generated from message dogma.messaging.v1.EventStreamSegment
  */
-export type ConsumeEventsResponse = Message<"dogma.messaging.v1.ConsumeEventsResponse"> & {
+export type EventStreamSegment = Message<"dogma.messaging.v1.EventStreamSegment"> & {
   /**
-   * CheckpointOffset is the offset immediately after the range of the
-   * stream described by this response.
+   * EventStreamId is the ID of the stream that this is a segment of.
    *
-   * After handling this and all preceding responses, the client may use
-   * this value as the checkpoint offset to resume consuming from the
-   * stream in a subsequent [ConsumeEventsRequest].
-   *
-   * @generated from field: uint64 checkpoint_offset = 1 [features.field_presence = IMPLICIT];
+   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
    */
-  checkpointOffset: bigint;
+  eventStreamId?: UUID | undefined;
 
   /**
-   * Envelopes is a (possibly empty) list of multi-envelopes containing
-   * events at offsets between the prior checkpoint offset and the
-   * checkpoint offset in this response.
+   * BeginOffset is the offset of the first position in the range, inclusive.
+   * Each segment after the first for a stream begins at the end offset of the
+   * one before it.
+   *
+   * @generated from field: uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
+   */
+  beginOffset: bigint;
+
+  /**
+   * EndOffset is the offset immediately after the range, exclusive.
+   *
+   * After handling this and all preceding segments for the stream, the client
+   * may use this value as the begin offset in a subsequent
+   * [ReadEventsRequest].
+   *
+   * @generated from field: uint64 end_offset = 3 [features.field_presence = IMPLICIT];
+   */
+  endOffset: bigint;
+
+  /**
+   * Envelopes is a (possibly empty) list of multi-envelopes containing the
+   * events in the range that match the requested message types.
    *
    * Each envelope includes the [envelopepb.EventStreamPosition] extension.
    *
-   * The envelopes are ordered by the offset of the events they contain.
-   * There is no additional relationship implied between envelopes that
-   * appear in the same response.
+   * The envelopes are ordered by the offset of the events they contain. There
+   * is no additional relationship implied between envelopes that appear in
+   * the same segment.
    *
-   * The offsets of the events within this response, or even within a
-   * single [envelopepb.MultiEnvelope] are not necessarily contiguous.
+   * The offsets of the events within a segment, or even within a single
+   * [envelopepb.MultiEnvelope], are not necessarily contiguous.
    *
-   * @generated from field: repeated dogma.protobuf.v1.MultiEnvelope envelopes = 2;
+   * @generated from field: repeated dogma.protobuf.v1.MultiEnvelope envelopes = 4;
    */
   envelopes: MultiEnvelope[];
 };
 
 /**
- * Describes the message dogma.messaging.v1.ConsumeEventsResponse.
- * Use `create(ConsumeEventsResponseSchema)` to create a new message.
+ * Describes the message dogma.messaging.v1.EventStreamSegment.
+ * Use `create(EventStreamSegmentSchema)` to create a new message.
  */
-export const ConsumeEventsResponseSchema: GenMessage<ConsumeEventsResponse> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 4);
+export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 2);
 
 /**
  * EventStreamConsumerAPI is a service for consuming event messages from
@@ -182,24 +148,51 @@ export const ConsumeEventsResponseSchema: GenMessage<ConsumeEventsResponse> = /*
  */
 export const EventStreamConsumerAPI: GenService<{
   /**
-   * ListEventStreams returns the event streams offered by the server.
+   * WatchEvents delivers events of the requested message types as they are
+   * appended to any event stream offered by the server, for as long as the
+   * call is open.
    *
-   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams
+   * The feed starts at the tail of each stream. The first segment the client
+   * receives for a stream positions it: the segment's begin_offset is where
+   * the feed starts delivering that stream, and the segment may already carry
+   * events. Each subsequent segment for the same stream begins at the end
+   * offset of the one before it. A segment that does not is a protocol
+   * violation.
+   *
+   * The server MAY position every stream it offers, or only those streams
+   * that contain at least one event of a requested type. In the latter case
+   * the server MUST decide from the events in the stream, not from the types
+   * that the serving replica is able to record. An empty set of message type
+   * IDs matches no events.
+   *
+   * If the server can no longer deliver a stream contiguously, for example
+   * because the client has fallen too far behind, it closes the call. A
+   * client that reconnects MUST expect to have missed events, and treats the
+   * first segment it receives for each stream on the new call as a fresh
+   * position.
+   *
+   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents
    */
-  listEventStreams: {
+  watchEvents: {
     methodKind: "server_streaming";
-    input: typeof ListEventStreamsRequestSchema;
-    output: typeof ListEventStreamsResponseSchema;
+    input: typeof WatchEventsRequestSchema;
+    output: typeof EventStreamSegmentSchema;
   },
   /**
-   * ConsumeEvents returns event messages from a single stream, in order,
-   * starting from a specific offset within an event stream.
+   * ReadEvents delivers the events of the requested message types from a
+   * single stream, in order, starting at a specific offset and ending at the
+   * end of the stream as it stands when the server reaches it.
    *
-   * The server delivers every event at or after the requested checkpoint offset
-   * whose message type ID is among those in the [ConsumeEventsRequest]. If no
-   * such events remain in the event stream, and the server cannot produce new
-   * events with any of the requested message type IDs, it closes the gRPC
-   * stream.
+   * It is intended for a consumer whose checkpoint is behind the position at
+   * which [EventStreamConsumerAPI.WatchEvents] began delivering the stream.
+   * It delivers what the caller has missed, then the server closes the call.
+   * The caller cancels the call as soon as it has caught up. If the stream
+   * grew while the call was open, the last segment's end_offset is how far
+   * the caller got, and it reads again from there if it is still behind.
+   *
+   * The server closing the call means only that every matching event up to
+   * the last segment's end_offset has been delivered. It is not a claim about
+   * whether further events can be recorded.
    *
    * If the requested stream ID is not recognized the server MUST return a
    * NOT_FOUND error with an attached [UnrecognizedEventStream] value. See
@@ -208,12 +201,12 @@ export const EventStreamConsumerAPI: GenService<{
    * If the requested offset is beyond the end of the stream an OUT_OF_RANGE
    * error occurs.
    *
-   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ConsumeEvents
+   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents
    */
-  consumeEvents: {
+  readEvents: {
     methodKind: "server_streaming";
-    input: typeof ConsumeEventsRequestSchema;
-    output: typeof ConsumeEventsResponseSchema;
+    input: typeof ReadEventsRequestSchema;
+    output: typeof EventStreamSegmentSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 0);

@@ -9,18 +9,44 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 // EventStreamConsumerAPI is a service for consuming event messages from
 // offset-based, ordered event streams.
 service EventStreamConsumerAPI {
-  // ListEventStreams returns the event streams offered by the server.
-  rpc ListEventStreams(ListEventStreamsRequest)
-      returns (stream ListEventStreamsResponse);
-
-  // ConsumeEvents returns event messages from a single stream, in order,
-  // starting from a specific offset within an event stream.
+  // WatchEvents delivers events of the requested message types as they are
+  // appended to any event stream offered by the server, for as long as the
+  // call is open.
   //
-  // The server delivers every event at or after the requested checkpoint offset
-  // whose message type ID is among those in the [ConsumeEventsRequest]. If no
-  // such events remain in the event stream, and the server cannot produce new
-  // events with any of the requested message type IDs, it closes the gRPC
-  // stream.
+  // The feed starts at the tail of each stream. The first segment the client
+  // receives for a stream positions it: the segment's begin_offset is where
+  // the feed starts delivering that stream, and the segment may already carry
+  // events. Each subsequent segment for the same stream begins at the end
+  // offset of the one before it. A segment that does not is a protocol
+  // violation.
+  //
+  // The server MAY position every stream it offers, or only those streams
+  // that contain at least one event of a requested type. In the latter case
+  // the server MUST decide from the events in the stream, not from the types
+  // that the serving replica is able to record. An empty set of message type
+  // IDs matches no events.
+  //
+  // If the server can no longer deliver a stream contiguously, for example
+  // because the client has fallen too far behind, it closes the call. A
+  // client that reconnects MUST expect to have missed events, and treats the
+  // first segment it receives for each stream on the new call as a fresh
+  // position.
+  rpc WatchEvents(WatchEventsRequest) returns (stream EventStreamSegment);
+
+  // ReadEvents delivers the events of the requested message types from a
+  // single stream, in order, starting at a specific offset and ending at the
+  // end of the stream as it stands when the server reaches it.
+  //
+  // It is intended for a consumer whose checkpoint is behind the position at
+  // which [EventStreamConsumerAPI.WatchEvents] began delivering the stream.
+  // It delivers what the caller has missed, then the server closes the call.
+  // The caller cancels the call as soon as it has caught up. If the stream
+  // grew while the call was open, the last segment's end_offset is how far
+  // the caller got, and it reads again from there if it is still behind.
+  //
+  // The server closing the call means only that every matching event up to
+  // the last segment's end_offset has been delivered. It is not a claim about
+  // whether further events can be recorded.
   //
   // If the requested stream ID is not recognized the server MUST return a
   // NOT_FOUND error with an attached [UnrecognizedEventStream] value. See
@@ -28,76 +54,64 @@ service EventStreamConsumerAPI {
   //
   // If the requested offset is beyond the end of the stream an OUT_OF_RANGE
   // error occurs.
-  rpc ConsumeEvents(ConsumeEventsRequest)
-      returns (stream ConsumeEventsResponse);
+  rpc ReadEvents(ReadEventsRequest) returns (stream EventStreamSegment);
 }
 
-// ListEventStreamsRequest is the input to the
-// [EventStreamConsumerAPI.ListEventStreams] method.
-message ListEventStreamsRequest {}
-
-// ListEventStreamsResponse is the output of the
-// [EventStreamConsumerAPI.ListEventStreams] method.
-message ListEventStreamsResponse {
-  // EventStream is an event stream offered by the server.
-  EventStream event_stream = 1;
+// WatchEventsRequest is the input to the
+// [EventStreamConsumerAPI.WatchEvents] method.
+message WatchEventsRequest {
+  // MessageTypeIds is the set of message type IDs of the event types to
+  // include in the segments.
+  repeated dogma.protobuf.v1.UUID message_type_ids = 1;
 }
 
-// EventStream describes an offset-based ordered event stream.
-message EventStream {
-  // EventStreamId is a unique identifier for the stream.
+// ReadEventsRequest is the input to the
+// [EventStreamConsumerAPI.ReadEvents] method.
+message ReadEventsRequest {
+  // EventStreamId is the ID of the stream from which events are read.
   dogma.protobuf.v1.UUID event_stream_id = 1;
 
-  // NextOffset is the offset of the next event that will be written to the
-  // stream. The first event in the stream is at offset zero; therefore,
-  // this value is equivalent to the number of events that have been written
-  // to the stream.
-  uint64 next_offset = 2 [features.field_presence = IMPLICIT];
-}
-
-// ConsumeEventsRequest is the input to the
-// [EventStreamConsumerAPI.ConsumeEvents] method.
-message ConsumeEventsRequest {
-  // EventStreamId is the ID from which events are consumed.
-  dogma.protobuf.v1.UUID event_stream_id = 1;
-
-  // CheckpointOffset is the offset at which the consumer begins.
-  uint64 checkpoint_offset = 2 [features.field_presence = IMPLICIT];
+  // BeginOffset is the offset from which events are read. Events from this
+  // offset to the end of the stream are delivered, then the call is closed.
+  uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
 
   // MessageTypeIds is the set of message type IDs of the event types to
-  // include in the responses.
+  // include in the segments.
   repeated dogma.protobuf.v1.UUID message_type_ids = 3;
 }
 
-// ConsumeEventsResponse is the (streaming) output of the
-// [EventStreamConsumerAPI.ConsumeEvents] method.
+// EventStreamSegment is a contiguous piece of one event stream, the half-open
+// range [begin_offset, end_offset). It carries the events in that range that
+// match the requested message types.
 //
-// It contains all of the events that match the requested message type IDs
-// specified in the [ConsumeEventsRequest], starting at the checkpoint offset up
-// to, but not including, the checkpoint offset in this response.
-//
-// The list of events may be empty, indicating that there are no matching events
-// in that range.
-message ConsumeEventsResponse {
-  // CheckpointOffset is the offset immediately after the range of the
-  // stream described by this response.
-  //
-  // After handling this and all preceding responses, the client may use
-  // this value as the checkpoint offset to resume consuming from the
-  // stream in a subsequent [ConsumeEventsRequest].
-  uint64 checkpoint_offset = 1 [features.field_presence = IMPLICIT];
+// It is the (streaming) output of both [EventStreamConsumerAPI.WatchEvents]
+// and [EventStreamConsumerAPI.ReadEvents].
+message EventStreamSegment {
+  // EventStreamId is the ID of the stream that this is a segment of.
+  dogma.protobuf.v1.UUID event_stream_id = 1;
 
-  // Envelopes is a (possibly empty) list of multi-envelopes containing
-  // events at offsets between the prior checkpoint offset and the
-  // checkpoint offset in this response.
+  // BeginOffset is the offset of the first position in the range, inclusive.
+  // Each segment after the first for a stream begins at the end offset of the
+  // one before it.
+  uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
+
+  // EndOffset is the offset immediately after the range, exclusive.
+  //
+  // After handling this and all preceding segments for the stream, the client
+  // may use this value as the begin offset in a subsequent
+  // [ReadEventsRequest].
+  uint64 end_offset = 3 [features.field_presence = IMPLICIT];
+
+  // Envelopes is a (possibly empty) list of multi-envelopes containing the
+  // events in the range that match the requested message types.
   //
   // Each envelope includes the [envelopepb.EventStreamPosition] extension.
   //
-  // The envelopes are ordered by the offset of the events they contain.
-  // There is no additional relationship implied between envelopes that
-  // appear in the same response.
+  // The envelopes are ordered by the offset of the events they contain. There
+  // is no additional relationship implied between envelopes that appear in
+  // the same segment.
   //
-  // The offsets of the events within this response, or even within a
-  // single [envelopepb.MultiEnvelope] are not necessarily contiguous.
-  repeated dogma.protobuf.v1.MultiEnvelope envelopes = 2;
+  // The offsets of the events within a segment, or even within a single
+  // [envelopepb.MultiEnvelope], are not necessarily contiguous.
+  repeated dogma.protobuf.v1.MultiEnvelope envelopes = 4;
 }
