@@ -25,7 +25,7 @@ export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer
 export type WatchEventsRequest = Message<"dogma.messaging.v1.WatchEventsRequest"> & {
   /**
    * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments.
+   * include in the segments. An empty set matches no events.
    *
    * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 1;
    */
@@ -54,8 +54,9 @@ export type ReadEventsRequest = Message<"dogma.messaging.v1.ReadEventsRequest"> 
   eventStreamId?: UUID | undefined;
 
   /**
-   * BeginOffset is the offset from which events are read. Events from this
-   * offset to the end of the stream are delivered, then the call is closed.
+   * BeginOffset is the offset from which events are read. The first segment
+   * begins at this offset. Events from this offset to the end of the stream
+   * are delivered, then the call is closed.
    *
    * @generated from field: uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
    */
@@ -63,7 +64,7 @@ export type ReadEventsRequest = Message<"dogma.messaging.v1.ReadEventsRequest"> 
 
   /**
    * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments.
+   * include in the segments. An empty set matches no events.
    *
    * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 3;
    */
@@ -107,8 +108,8 @@ export type EventStreamSegment = Message<"dogma.messaging.v1.EventStreamSegment"
   /**
    * EndOffset is the offset immediately after the range, exclusive.
    *
-   * After handling this and all preceding segments for the stream, the client
-   * may use this value as the begin offset in a subsequent
+   * A client that has handled every matching event in the stream before this
+   * offset may use this value as the begin offset in a subsequent
    * [ReadEventsRequest].
    *
    * @generated from field: uint64 end_offset = 3 [features.field_presence = IMPLICIT];
@@ -162,8 +163,9 @@ export const EventStreamConsumerAPI: GenService<{
    * The server MAY position every stream it offers, or only those streams
    * that contain at least one event of a requested type. In the latter case
    * the server MUST decide from the events in the stream, not from the types
-   * that the serving replica is able to record. An empty set of message type
-   * IDs matches no events.
+   * that the serving replica is able to record, and the stream first appears
+   * on the feed when a matching event is appended to it, with that event in
+   * the segment.
    *
    * If the server can no longer deliver a stream contiguously, for example
    * because the client has fallen too far behind, it closes the call. A

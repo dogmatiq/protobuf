@@ -73,7 +73,7 @@ type WatchEventsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// MessageTypeIds is the set of message type IDs of the event types to
-	// include in the segments.
+	// include in the segments. An empty set matches no events.
 	MessageTypeIds []*uuidpb.UUID
 }
 
@@ -172,11 +172,12 @@ type ReadEventsRequest_builder struct {
 
 	// EventStreamId is the ID of the stream from which events are read.
 	EventStreamId *uuidpb.UUID
-	// BeginOffset is the offset from which events are read. Events from this
-	// offset to the end of the stream are delivered, then the call is closed.
+	// BeginOffset is the offset from which events are read. The first segment
+	// begins at this offset. Events from this offset to the end of the stream
+	// are delivered, then the call is closed.
 	BeginOffset uint64
 	// MessageTypeIds is the set of message type IDs of the event types to
-	// include in the segments.
+	// include in the segments. An empty set matches no events.
 	MessageTypeIds []*uuidpb.UUID
 }
 
@@ -299,8 +300,8 @@ type EventStreamSegment_builder struct {
 	BeginOffset uint64
 	// EndOffset is the offset immediately after the range, exclusive.
 	//
-	// After handling this and all preceding segments for the stream, the client
-	// may use this value as the begin offset in a subsequent
+	// A client that has handled every matching event in the stream before this
+	// offset may use this value as the begin offset in a subsequent
 	// [ReadEventsRequest].
 	EndOffset uint64
 	// Envelopes is a (possibly empty) list of multi-envelopes containing the

@@ -44,8 +44,9 @@ type EventStreamConsumerAPIClient interface {
 	// The server MAY position every stream it offers, or only those streams
 	// that contain at least one event of a requested type. In the latter case
 	// the server MUST decide from the events in the stream, not from the types
-	// that the serving replica is able to record. An empty set of message type
-	// IDs matches no events.
+	// that the serving replica is able to record, and the stream first appears
+	// on the feed when a matching event is appended to it, with that event in
+	// the segment.
 	//
 	// If the server can no longer deliver a stream contiguously, for example
 	// because the client has fallen too far behind, it closes the call. A
@@ -144,8 +145,9 @@ type EventStreamConsumerAPIServer interface {
 	// The server MAY position every stream it offers, or only those streams
 	// that contain at least one event of a requested type. In the latter case
 	// the server MUST decide from the events in the stream, not from the types
-	// that the serving replica is able to record. An empty set of message type
-	// IDs matches no events.
+	// that the serving replica is able to record, and the stream first appears
+	// on the feed when a matching event is appended to it, with that event in
+	// the segment.
 	//
 	// If the server can no longer deliver a stream contiguously, for example
 	// because the client has fallen too far behind, it closes the call. A
