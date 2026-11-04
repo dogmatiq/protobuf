@@ -18,7 +18,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added `EventStreamConsumerAPI.WatchEvents`, a server-streaming method that
   delivers events of the requested message types as they are appended to any
   stream, for as long as the call is open. The first segment received for a
-  stream gives the stream's existence and position.
+  stream tells the client that the stream exists and where the feed begins.
 - Added `EventStreamConsumerAPI.ReadEvents`, which delivers the events of the
   requested message types from a single stream, from a given offset to the end
   of the stream, then closes.

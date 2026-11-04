@@ -34,25 +34,26 @@ type EventStreamConsumerAPIClient interface {
 	// appended to any event stream offered by the server, for as long as the
 	// call is open.
 	//
-	// The feed starts at the tail of each stream. The first segment the client
-	// receives for a stream positions it: the segment's begin_offset is where
-	// the feed starts delivering that stream, and the segment may already carry
-	// events. Each subsequent segment for the same stream begins at the end
-	// offset of the one before it. A segment that does not is a protocol
-	// violation.
+	// The feed starts at the tail of each stream. There is no separate
+	// announcement that a stream exists. The first segment the client receives
+	// for a stream tells it that the stream exists and where in the stream the
+	// feed begins: the segment's begin_offset is the first offset the feed
+	// delivers for that stream, and the segment may already carry events. Each
+	// subsequent segment for the same stream begins at the end offset of the
+	// one before it. A segment that does not is a protocol violation.
 	//
-	// The server MAY position every stream it offers, or only those streams
-	// that contain at least one event of a requested type. In the latter case
-	// the server MUST decide from the events in the stream, not from the types
-	// that the serving replica is able to record, and the stream first appears
-	// on the feed when a matching event is appended to it, with that event in
-	// the segment.
+	// The server MAY send a first segment for every stream it offers, or only
+	// for those streams that contain at least one event of a requested type. In
+	// the latter case the server MUST decide from the events in the stream, not
+	// from the types that the serving replica is able to record, and the stream
+	// first appears on the feed when a matching event is appended to it, with
+	// that event in the segment.
 	//
 	// If the server can no longer deliver a stream contiguously, for example
 	// because the client has fallen too far behind, it closes the call. A
-	// client that reconnects MUST expect to have missed events, and treats the
-	// first segment it receives for each stream on the new call as a fresh
-	// position.
+	// client that reconnects MUST expect to have missed events. On the new
+	// call, the first segment it receives for each stream again tells it where
+	// the feed begins, which is not where the previous call left off.
 	WatchEvents(ctx context.Context, in *WatchEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
 	// ReadEvents delivers the events of the requested message types from a
 	// single stream, in order, starting at a specific offset and ending at the
@@ -135,25 +136,26 @@ type EventStreamConsumerAPIServer interface {
 	// appended to any event stream offered by the server, for as long as the
 	// call is open.
 	//
-	// The feed starts at the tail of each stream. The first segment the client
-	// receives for a stream positions it: the segment's begin_offset is where
-	// the feed starts delivering that stream, and the segment may already carry
-	// events. Each subsequent segment for the same stream begins at the end
-	// offset of the one before it. A segment that does not is a protocol
-	// violation.
+	// The feed starts at the tail of each stream. There is no separate
+	// announcement that a stream exists. The first segment the client receives
+	// for a stream tells it that the stream exists and where in the stream the
+	// feed begins: the segment's begin_offset is the first offset the feed
+	// delivers for that stream, and the segment may already carry events. Each
+	// subsequent segment for the same stream begins at the end offset of the
+	// one before it. A segment that does not is a protocol violation.
 	//
-	// The server MAY position every stream it offers, or only those streams
-	// that contain at least one event of a requested type. In the latter case
-	// the server MUST decide from the events in the stream, not from the types
-	// that the serving replica is able to record, and the stream first appears
-	// on the feed when a matching event is appended to it, with that event in
-	// the segment.
+	// The server MAY send a first segment for every stream it offers, or only
+	// for those streams that contain at least one event of a requested type. In
+	// the latter case the server MUST decide from the events in the stream, not
+	// from the types that the serving replica is able to record, and the stream
+	// first appears on the feed when a matching event is appended to it, with
+	// that event in the segment.
 	//
 	// If the server can no longer deliver a stream contiguously, for example
 	// because the client has fallen too far behind, it closes the call. A
-	// client that reconnects MUST expect to have missed events, and treats the
-	// first segment it receives for each stream on the new call as a fresh
-	// position.
+	// client that reconnects MUST expect to have missed events. On the new
+	// call, the first segment it receives for each stream again tells it where
+	// the feed begins, which is not where the previous call left off.
 	WatchEvents(*WatchEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
 	// ReadEvents delivers the events of the requested message types from a
 	// single stream, in order, starting at a specific offset and ending at the
