@@ -11,6 +11,32 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Added
+
+- Added `EventStreamConsumerAPI.WatchEvents`, a server-streaming method that
+  delivers events of the requested message types as they are appended to any
+  stream, for as long as the call is open. The first segment received for a
+  stream tells the client that the stream exists and where the feed begins.
+- Added `EventStreamConsumerAPI.ReadEvents`, which delivers the events of the
+  requested message types from a single stream, from a given offset to the end
+  of the stream, then closes.
+- Added `EventStreamSegment`, the output of both methods. It describes the
+  half-open range `[begin_offset, end_offset)` of one stream and carries the
+  matching events within it.
+
+### Removed
+
+- **[BC]** Removed `EventStreamConsumerAPI.ListEventStreams`,
+  `ListEventStreamsRequest`, `ListEventStreamsResponse` and `EventStream`.
+  Streams are discovered from the segments delivered by `WatchEvents`.
+- **[BC]** Removed `EventStreamConsumerAPI.ConsumeEvents`,
+  `ConsumeEventsRequest` and `ConsumeEventsResponse` in favor of `ReadEvents`.
+  The server no longer closes a call when it believes it cannot produce new
+  events of the requested types; `ReadEvents` closes when it reaches the end
+  of the stream.
+
 ## [0.2.0] - 2026-11-02
 
 ### Added
