@@ -51,7 +51,7 @@ service EventStreamConsumerAPI {
 // method.
 message WatchEventsRequest {
   // MessageTypeIds is the set of message type IDs of the event types to
-  // include in the segments. An empty set matches no events.
+  // include in the segments. An empty set matches every event.
   repeated dogma.protobuf.v1.UUID message_type_ids = 1;
 }
 
@@ -67,7 +67,7 @@ message ReadEventsRequest {
   uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
 
   // MessageTypeIds is the set of message type IDs of the event types to
-  // include in the segments. An empty set matches no events.
+  // include in the segments. An empty set matches every event.
   repeated dogma.protobuf.v1.UUID message_type_ids = 3;
 }
 

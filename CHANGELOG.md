@@ -11,6 +11,13 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Changed
+
+- **[BC]** An empty `message_type_ids` in `WatchEventsRequest` and
+  `ReadEventsRequest` now matches every event, instead of matching none.
+
 ## [0.3.0] - 2026-11-04
 
 ### Added

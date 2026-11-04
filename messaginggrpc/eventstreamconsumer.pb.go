@@ -73,7 +73,7 @@ type WatchEventsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// MessageTypeIds is the set of message type IDs of the event types to
-	// include in the segments. An empty set matches no events.
+	// include in the segments. An empty set matches every event.
 	MessageTypeIds []*uuidpb.UUID
 }
 
@@ -177,7 +177,7 @@ type ReadEventsRequest_builder struct {
 	// are delivered, then the call is closed.
 	BeginOffset uint64
 	// MessageTypeIds is the set of message type IDs of the event types to
-	// include in the segments. An empty set matches no events.
+	// include in the segments. An empty set matches every event.
 	MessageTypeIds []*uuidpb.UUID
 }
 
