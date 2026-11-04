@@ -22,8 +22,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// WatchEventsRequest is the input to the
-// [EventStreamConsumerAPI.WatchEvents] method.
+// WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
+// method.
 type WatchEventsRequest struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_MessageTypeIds *[]*uuidpb.UUID        `protobuf:"bytes,1,rep,name=message_type_ids,json=messageTypeIds"`
@@ -85,8 +85,8 @@ func (b0 WatchEventsRequest_builder) Build() *WatchEventsRequest {
 	return m0
 }
 
-// ReadEventsRequest is the input to the
-// [EventStreamConsumerAPI.ReadEvents] method.
+// ReadEventsRequest is the input to the [EventStreamConsumerAPI.ReadEvents]
+// method.
 type ReadEventsRequest struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_EventStreamId  *uuidpb.UUID           `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
@@ -294,27 +294,22 @@ type EventStreamSegment_builder struct {
 
 	// EventStreamId is the ID of the stream that this is a segment of.
 	EventStreamId *uuidpb.UUID
-	// BeginOffset is the offset of the first position in the range, inclusive.
+	// BeginOffset is the offset of the first event in the range, inclusive.
+	//
 	// Each segment after the first for a stream begins at the end offset of the
 	// one before it.
 	BeginOffset uint64
 	// EndOffset is the offset immediately after the range, exclusive.
-	//
-	// A client that has handled every matching event in the stream before this
-	// offset may use this value as the begin offset in a subsequent
-	// [ReadEventsRequest].
 	EndOffset uint64
 	// Envelopes is a (possibly empty) list of multi-envelopes containing the
 	// events in the range that match the requested message types.
 	//
 	// Each envelope includes the [envelopepb.EventStreamPosition] extension.
 	//
-	// The envelopes are ordered by the offset of the events they contain. There
-	// is no additional relationship implied between envelopes that appear in
-	// the same segment.
-	//
-	// The offsets of the events within a segment, or even within a single
-	// [envelopepb.MultiEnvelope], are not necessarily contiguous.
+	// The events appear in ascending offset order, both within each
+	// multi-envelope and across the list. Their offsets may have gaps, because
+	// events of other types are omitted. There is no additional relationship
+	// implied between envelopes that appear in the same segment.
 	Envelopes []*envelopepb.MultiEnvelope
 }
 

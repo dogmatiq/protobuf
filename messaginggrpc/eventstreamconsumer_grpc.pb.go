@@ -31,51 +31,39 @@ const (
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIClient interface {
 	// WatchEvents delivers events of the requested message types as they are
-	// appended to any event stream offered by the server, for as long as the
-	// call is open.
+	// appended to any event stream offered by the server, for as long as the call
+	// is open.
 	//
-	// The feed starts at the tail of each stream. There is no separate
-	// announcement that a stream exists. The first segment the client receives
-	// for a stream tells it that the stream exists and where in the stream the
-	// feed begins: the segment's begin_offset is the first offset the feed
-	// delivers for that stream, and the segment may already carry events. Each
-	// subsequent segment for the same stream begins at the end offset of the
-	// one before it. A segment that does not is a protocol violation.
+	// The feed starts at the tail of each stream. The first [EventStreamSegment]
+	// the client receives for a stream tells it that the stream exists and where
+	// in the stream the feed begins. After this first segment, each subsequent
+	// segment for the same stream begins at the end offset of the one before it.
 	//
-	// The server MAY send a first segment for every stream it offers, or only
-	// for those streams that contain at least one event of a requested type. In
-	// the latter case the server MUST decide from the events in the stream, not
-	// from the types that the serving replica is able to record, and the stream
-	// first appears on the feed when a matching event is appended to it, with
-	// that event in the segment.
+	// The server MAY send a first segment for every stream it offers, or only for
+	// those streams that contain events of a requested type. In the latter case
+	// the server MUST decide from the events in the stream, not from the types
+	// that the server is able to record.
 	//
 	// If the server can no longer deliver a stream contiguously, for example
-	// because the client has fallen too far behind, it closes the call. A
-	// client that reconnects MUST expect to have missed events. On the new
-	// call, the first segment it receives for each stream again tells it where
-	// the feed begins, which is not where the previous call left off.
+	// because the client has fallen too far behind, it closes the call. A client
+	// that reconnects MUST expect to have missed events. On the new call, the
+	// first segment it receives for each stream again tells it where the feed
+	// begins, which is not necessarily where the previous call left off.
 	WatchEvents(ctx context.Context, in *WatchEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
 	// ReadEvents delivers the events of the requested message types from a
 	// single stream, in order, starting at a specific offset and ending at the
 	// end of the stream as it stands when the server reaches it.
 	//
-	// It is intended for a consumer whose checkpoint is behind the position at
+	// It is intended for a consumer whose checkpoint is behind the offset at
 	// which [EventStreamConsumerAPI.WatchEvents] began delivering the stream.
 	// It delivers what the caller has missed, then the server closes the call.
-	// The caller cancels the call as soon as it has caught up. If the stream
-	// grew while the call was open, the last segment's end_offset is how far
-	// the caller got, and it reads again from there if it is still behind.
-	//
-	// The server closing the call means only that every matching event up to
-	// the last segment's end_offset has been delivered. It is not a claim about
-	// whether further events can be recorded.
 	//
 	// If the requested stream ID is not recognized the server MUST return a
 	// NOT_FOUND error with an attached [UnrecognizedEventStream] value. See
 	// [UnrecognizedEventStreamError].
 	//
-	// If the requested offset is beyond the end of the stream an OUT_OF_RANGE
-	// error occurs.
+	// If the requested offset is greater than the offset that the next event
+	// appended to the stream will have, an OUT_OF_RANGE error occurs.
 	ReadEvents(ctx context.Context, in *ReadEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
 }
 
@@ -133,51 +121,39 @@ type EventStreamConsumerAPI_ReadEventsClient = grpc.ServerStreamingClient[EventS
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIServer interface {
 	// WatchEvents delivers events of the requested message types as they are
-	// appended to any event stream offered by the server, for as long as the
-	// call is open.
+	// appended to any event stream offered by the server, for as long as the call
+	// is open.
 	//
-	// The feed starts at the tail of each stream. There is no separate
-	// announcement that a stream exists. The first segment the client receives
-	// for a stream tells it that the stream exists and where in the stream the
-	// feed begins: the segment's begin_offset is the first offset the feed
-	// delivers for that stream, and the segment may already carry events. Each
-	// subsequent segment for the same stream begins at the end offset of the
-	// one before it. A segment that does not is a protocol violation.
+	// The feed starts at the tail of each stream. The first [EventStreamSegment]
+	// the client receives for a stream tells it that the stream exists and where
+	// in the stream the feed begins. After this first segment, each subsequent
+	// segment for the same stream begins at the end offset of the one before it.
 	//
-	// The server MAY send a first segment for every stream it offers, or only
-	// for those streams that contain at least one event of a requested type. In
-	// the latter case the server MUST decide from the events in the stream, not
-	// from the types that the serving replica is able to record, and the stream
-	// first appears on the feed when a matching event is appended to it, with
-	// that event in the segment.
+	// The server MAY send a first segment for every stream it offers, or only for
+	// those streams that contain events of a requested type. In the latter case
+	// the server MUST decide from the events in the stream, not from the types
+	// that the server is able to record.
 	//
 	// If the server can no longer deliver a stream contiguously, for example
-	// because the client has fallen too far behind, it closes the call. A
-	// client that reconnects MUST expect to have missed events. On the new
-	// call, the first segment it receives for each stream again tells it where
-	// the feed begins, which is not where the previous call left off.
+	// because the client has fallen too far behind, it closes the call. A client
+	// that reconnects MUST expect to have missed events. On the new call, the
+	// first segment it receives for each stream again tells it where the feed
+	// begins, which is not necessarily where the previous call left off.
 	WatchEvents(*WatchEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
 	// ReadEvents delivers the events of the requested message types from a
 	// single stream, in order, starting at a specific offset and ending at the
 	// end of the stream as it stands when the server reaches it.
 	//
-	// It is intended for a consumer whose checkpoint is behind the position at
+	// It is intended for a consumer whose checkpoint is behind the offset at
 	// which [EventStreamConsumerAPI.WatchEvents] began delivering the stream.
 	// It delivers what the caller has missed, then the server closes the call.
-	// The caller cancels the call as soon as it has caught up. If the stream
-	// grew while the call was open, the last segment's end_offset is how far
-	// the caller got, and it reads again from there if it is still behind.
-	//
-	// The server closing the call means only that every matching event up to
-	// the last segment's end_offset has been delivered. It is not a claim about
-	// whether further events can be recorded.
 	//
 	// If the requested stream ID is not recognized the server MUST return a
 	// NOT_FOUND error with an attached [UnrecognizedEventStream] value. See
 	// [UnrecognizedEventStreamError].
 	//
-	// If the requested offset is beyond the end of the stream an OUT_OF_RANGE
-	// error occurs.
+	// If the requested offset is greater than the offset that the next event
+	// appended to the stream will have, an OUT_OF_RANGE error occurs.
 	ReadEvents(*ReadEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
 }
 

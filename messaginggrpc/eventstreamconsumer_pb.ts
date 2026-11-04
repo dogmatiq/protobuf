@@ -17,8 +17,8 @@ export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer
   fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxChBtZXNzYWdlX3R5cGVfaWRzGAEgAygLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKEG1lc3NhZ2VfdHlwZV9pZHMYAyADKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIrMBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEjMKCWVudmVsb3BlcxgEIAMoCzIgLmRvZ21hLnByb3RvYnVmLnYxLk11bHRpRW52ZWxvcGUy2AEKFkV2ZW50U3RyZWFtQ29uc3VtZXJBUEkSXwoLV2F0Y2hFdmVudHMSJi5kb2dtYS5tZXNzYWdpbmcudjEuV2F0Y2hFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABEl0KClJlYWRFdmVudHMSJS5kb2dtYS5tZXNzYWdpbmcudjEuUmVhZEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAFCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
- * WatchEventsRequest is the input to the
- * [EventStreamConsumerAPI.WatchEvents] method.
+ * WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
+ * method.
  *
  * @generated from message dogma.messaging.v1.WatchEventsRequest
  */
@@ -40,8 +40,8 @@ export const WatchEventsRequestSchema: GenMessage<WatchEventsRequest> = /*@__PUR
   messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 0);
 
 /**
- * ReadEventsRequest is the input to the
- * [EventStreamConsumerAPI.ReadEvents] method.
+ * ReadEventsRequest is the input to the [EventStreamConsumerAPI.ReadEvents]
+ * method.
  *
  * @generated from message dogma.messaging.v1.ReadEventsRequest
  */
@@ -97,7 +97,8 @@ export type EventStreamSegment = Message<"dogma.messaging.v1.EventStreamSegment"
   eventStreamId?: UUID | undefined;
 
   /**
-   * BeginOffset is the offset of the first position in the range, inclusive.
+   * BeginOffset is the offset of the first event in the range, inclusive.
+   *
    * Each segment after the first for a stream begins at the end offset of the
    * one before it.
    *
@@ -107,10 +108,6 @@ export type EventStreamSegment = Message<"dogma.messaging.v1.EventStreamSegment"
 
   /**
    * EndOffset is the offset immediately after the range, exclusive.
-   *
-   * A client that has handled every matching event in the stream before this
-   * offset may use this value as the begin offset in a subsequent
-   * [ReadEventsRequest].
    *
    * @generated from field: uint64 end_offset = 3 [features.field_presence = IMPLICIT];
    */
@@ -122,12 +119,10 @@ export type EventStreamSegment = Message<"dogma.messaging.v1.EventStreamSegment"
    *
    * Each envelope includes the [envelopepb.EventStreamPosition] extension.
    *
-   * The envelopes are ordered by the offset of the events they contain. There
-   * is no additional relationship implied between envelopes that appear in
-   * the same segment.
-   *
-   * The offsets of the events within a segment, or even within a single
-   * [envelopepb.MultiEnvelope], are not necessarily contiguous.
+   * The events appear in ascending offset order, both within each
+   * multi-envelope and across the list. Their offsets may have gaps, because
+   * events of other types are omitted. There is no additional relationship
+   * implied between envelopes that appear in the same segment.
    *
    * @generated from field: repeated dogma.protobuf.v1.MultiEnvelope envelopes = 4;
    */
@@ -150,29 +145,24 @@ export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PUR
 export const EventStreamConsumerAPI: GenService<{
   /**
    * WatchEvents delivers events of the requested message types as they are
-   * appended to any event stream offered by the server, for as long as the
-   * call is open.
+   * appended to any event stream offered by the server, for as long as the call
+   * is open.
    *
-   * The feed starts at the tail of each stream. There is no separate
-   * announcement that a stream exists. The first segment the client receives
-   * for a stream tells it that the stream exists and where in the stream the
-   * feed begins: the segment's begin_offset is the first offset the feed
-   * delivers for that stream, and the segment may already carry events. Each
-   * subsequent segment for the same stream begins at the end offset of the
-   * one before it. A segment that does not is a protocol violation.
+   * The feed starts at the tail of each stream. The first [EventStreamSegment]
+   * the client receives for a stream tells it that the stream exists and where
+   * in the stream the feed begins. After this first segment, each subsequent
+   * segment for the same stream begins at the end offset of the one before it.
    *
-   * The server MAY send a first segment for every stream it offers, or only
-   * for those streams that contain at least one event of a requested type. In
-   * the latter case the server MUST decide from the events in the stream, not
-   * from the types that the serving replica is able to record, and the stream
-   * first appears on the feed when a matching event is appended to it, with
-   * that event in the segment.
+   * The server MAY send a first segment for every stream it offers, or only for
+   * those streams that contain events of a requested type. In the latter case
+   * the server MUST decide from the events in the stream, not from the types
+   * that the server is able to record.
    *
    * If the server can no longer deliver a stream contiguously, for example
-   * because the client has fallen too far behind, it closes the call. A
-   * client that reconnects MUST expect to have missed events. On the new
-   * call, the first segment it receives for each stream again tells it where
-   * the feed begins, which is not where the previous call left off.
+   * because the client has fallen too far behind, it closes the call. A client
+   * that reconnects MUST expect to have missed events. On the new call, the
+   * first segment it receives for each stream again tells it where the feed
+   * begins, which is not necessarily where the previous call left off.
    *
    * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents
    */
@@ -186,23 +176,16 @@ export const EventStreamConsumerAPI: GenService<{
    * single stream, in order, starting at a specific offset and ending at the
    * end of the stream as it stands when the server reaches it.
    *
-   * It is intended for a consumer whose checkpoint is behind the position at
+   * It is intended for a consumer whose checkpoint is behind the offset at
    * which [EventStreamConsumerAPI.WatchEvents] began delivering the stream.
    * It delivers what the caller has missed, then the server closes the call.
-   * The caller cancels the call as soon as it has caught up. If the stream
-   * grew while the call was open, the last segment's end_offset is how far
-   * the caller got, and it reads again from there if it is still behind.
-   *
-   * The server closing the call means only that every matching event up to
-   * the last segment's end_offset has been delivered. It is not a claim about
-   * whether further events can be recorded.
    *
    * If the requested stream ID is not recognized the server MUST return a
    * NOT_FOUND error with an attached [UnrecognizedEventStream] value. See
    * [UnrecognizedEventStreamError].
    *
-   * If the requested offset is beyond the end of the stream an OUT_OF_RANGE
-   * error occurs.
+   * If the requested offset is greater than the offset that the next event
+   * appended to the stream will have, an OUT_OF_RANGE error occurs.
    *
    * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents
    */
