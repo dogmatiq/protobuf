@@ -11,6 +11,15 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Changed
+
+- **[BC]** TypeScript `getExtension()` and `getBaggage()` now throw when the
+  requested value is absent. Use `tryGetExtension()` and `tryGetBaggage()`
+  for the previous behavior of returning `undefined`. Both forms still throw
+  when the selected value cannot be decoded.
+
 ## [0.6.0] - 2026-11-06
 
 ### Added
