@@ -380,6 +380,11 @@ func (b0 Message_builder) Build() *Message {
 	return m0
 }
 
+// Header contains origin and causal context that can be common to messages
+// produced by the same cause.
+//
+// Extensions and baggage from the header and body are combined by message
+// type. Body values take precedence over header values of the same type.
 type Header struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_CausationId   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=causation_id,json=causationId"`

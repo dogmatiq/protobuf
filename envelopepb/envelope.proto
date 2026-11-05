@@ -63,6 +63,11 @@ message Message {
   bytes data = 3 [features.field_presence = IMPLICIT];
 }
 
+// Header contains origin and causal context that can be common to messages
+// produced by the same cause.
+//
+// Extensions and baggage from the header and body are combined by message
+// type. Body values take precedence over header values of the same type.
 message Header {
   // CausationId is the ID of the message that was the direct cause of the
   // message.

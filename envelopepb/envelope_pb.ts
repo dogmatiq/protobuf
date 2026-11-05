@@ -142,6 +142,12 @@ export const MessageSchema: GenMessage<Message> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 2);
 
 /**
+ * Header contains origin and causal context that can be common to messages
+ * produced by the same cause.
+ *
+ * Extensions and baggage from the header and body are combined by message
+ * type. Body values take precedence over header values of the same type.
+ *
  * @generated from message dogma.protobuf.v1.Header
  */
 export type Header = Message$1<"dogma.protobuf.v1.Header"> & {
