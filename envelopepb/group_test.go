@@ -31,11 +31,17 @@ func TestAsMultiEnvelopesFixtures(t *testing.T) {
 			var input []*Envelope
 			var before []*Envelope
 			for i, key := range c.Headers {
-				env := NewEnvelopeBuilder().WithBody(NewBodyBuilder().WithIdempotencyKey(fmt.Sprint(i)).Build()).Build()
+				env := NewEnvelopeBuilder().
+					WithBody(NewBodyBuilder().
+						WithIdempotencyKey(fmt.Sprint(i)).
+						Build()).
+					Build()
 				if key != nil {
 					header := &Header{}
 					if *key != "" {
-						header.SetSource(NewSourceBuilder().WithInstanceId(*key).Build())
+						header.SetSource(NewSourceBuilder().
+							WithInstanceId(*key).
+							Build())
 					}
 					env.SetHeader(header)
 				}
@@ -83,7 +89,11 @@ func TestAsMultiEnvelopesHeaderContext(t *testing.T) {
 	}{
 		{"causation", func(h *Header) { h.SetCausationId(uuidpb.Generate()) }},
 		{"correlation", func(h *Header) { h.SetCorrelationId(uuidpb.Generate()) }},
-		{"source", func(h *Header) { h.SetSource(NewSourceBuilder().WithInstanceId("other").Build()) }},
+		{"source", func(h *Header) {
+			h.SetSource(NewSourceBuilder().
+				WithInstanceId("other").
+				Build())
+		}},
 		{"extensions", func(h *Header) { h.SetExtensions([]*anypb.Any{{TypeUrl: "example.com/Unknown", Value: []byte{1}}}) }},
 		{"baggage", func(h *Header) { h.SetBaggage([]*anypb.Any{{TypeUrl: "example.com/Unknown", Value: []byte{1}}}) }},
 		{"unknown fields", func(h *Header) { h.ProtoReflect().SetUnknown([]byte{0x98, 0x06, 1}) }},

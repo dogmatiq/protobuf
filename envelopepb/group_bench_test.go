@@ -19,7 +19,10 @@ func BenchmarkEnvelopeBatching(b *testing.B) {
 		envelopes := make([]*Envelope, count)
 		for i := range bodies {
 			bodies[i] = newEnvelope().GetBody()
-			envelopes[i] = NewEnvelopeBuilder().WithHeader(header).WithBody(bodies[i]).Build()
+			envelopes[i] = NewEnvelopeBuilder().
+				WithHeader(header).
+				WithBody(bodies[i]).
+				Build()
 		}
 		b.Run(fmt.Sprint(count), func(b *testing.B) {
 			b.Run("existing-envelopes", func(b *testing.B) {
@@ -37,13 +40,19 @@ func BenchmarkEnvelopeBatching(b *testing.B) {
 					for _, body := range bodies {
 						packed = append(packed, body)
 					}
-					benchmarkMultiEnvelope = NewMultiEnvelopeBuilder().WithHeader(header).WithBodies(packed).Build()
+					benchmarkMultiEnvelope = NewMultiEnvelopeBuilder().
+						WithHeader(header).
+						WithBodies(packed).
+						Build()
 				}
 			})
 			b.Run("known-header-existing-body-slice", func(b *testing.B) {
 				b.ReportAllocs()
 				for b.Loop() {
-					benchmarkMultiEnvelope = NewMultiEnvelopeBuilder().WithHeader(header).WithBodies(bodies).Build()
+					benchmarkMultiEnvelope = NewMultiEnvelopeBuilder().
+						WithHeader(header).
+						WithBodies(bodies).
+						Build()
 				}
 			})
 			b.Run("known-header-through-temporary-envelopes", func(b *testing.B) {
@@ -51,7 +60,10 @@ func BenchmarkEnvelopeBatching(b *testing.B) {
 				for b.Loop() {
 					input := func(yield func(*Envelope) bool) {
 						for _, body := range bodies {
-							if !yield(NewEnvelopeBuilder().WithHeader(header).WithBody(body).Build()) {
+							if !yield(NewEnvelopeBuilder().
+								WithHeader(header).
+								WithBody(body).
+								Build()) {
 								return
 							}
 						}
