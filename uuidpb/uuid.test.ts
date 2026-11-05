@@ -121,6 +121,37 @@ describe("uuidEquals", () => {
 
 describe("validateUUID", () => {
   it.each([
+    ["negative upper half", "upper", -(1n << 64n)],
+    ["overflowing upper half", "upper", 1n << 64n],
+    ["negative lower half", "lower", -(1n << 64n)],
+    ["overflowing lower half", "lower", 1n << 64n],
+  ] as const)(
+    "rejects a %s with otherwise valid version and variant bits",
+    (_, half, delta) => {
+      const id = parseUUID("a967a8b9-3f9c-4918-9a41-19577be5fec5");
+      id[half] += delta;
+
+      expect(() => validateUUID(id)).toThrow(
+        "UUID components must be unsigned 64-bit integers",
+      );
+    },
+  );
+
+  it.each([
+    [0x0000_0000_0000_4000n, 0x8000_0000_0000_0000n],
+    [0xffff_ffff_ffff_5fffn, 0xbfff_ffff_ffff_ffffn],
+  ])(
+    "accepts valid components at the limits of the supported UUIDs",
+    (upper, lower) => {
+      const id = parseUUID("a967a8b9-3f9c-4918-9a41-19577be5fec5");
+      id.upper = upper;
+      id.lower = lower;
+
+      expect(() => validateUUID(id)).not.toThrow();
+    },
+  );
+
+  it.each([
     ["version 4", "a967a8b9-3f9c-4918-9a41-19577be5fec5"],
     ["version 5", "2ed6657d-e927-568b-95e1-2665a8aea6a2"],
   ])("accepts a %s UUID", (_, str) => {
