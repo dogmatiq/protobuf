@@ -9,8 +9,13 @@ import {
   validateEnvelope,
   validateHeader,
   validateMessage,
+  validateMultiEnvelope,
 } from "./envelope.js";
-import { EnvelopeSchema, type Envelope } from "./envelope_pb.js";
+import {
+  EnvelopeSchema,
+  MultiEnvelopeSchema,
+  type Envelope,
+} from "./envelope_pb.js";
 
 // newEnvelope returns a valid envelope, after applying the given modifications.
 function newEnvelope(modify: (e: Envelope) => void = () => {}): Envelope {
@@ -186,6 +191,31 @@ describe("validateEnvelope", () => {
     ],
   ])("rejects an envelope %s", (_, modify, message) => {
     expect(() => validateEnvelope(newEnvelope(modify))).toThrow(message);
+  });
+});
+
+describe("validateMultiEnvelope", () => {
+  it("accepts a valid multi-envelope", () => {
+    const e = newEnvelope();
+    const multi = create(MultiEnvelopeSchema, {
+      header: e.header,
+      bodies: [e.body!, newEnvelope().body!],
+    });
+
+    expect(() => validateMultiEnvelope(multi)).not.toThrow();
+  });
+
+  it("identifies the invalid body by its index", () => {
+    const e = newEnvelope();
+    const invalid = newEnvelope((x) => (x.body!.message!.description = ""));
+    const multi = create(MultiEnvelopeSchema, {
+      header: e.header,
+      bodies: [e.body!, invalid.body!],
+    });
+
+    expect(() => validateMultiEnvelope(multi)).toThrow(
+      "invalid body at index 1: invalid message: invalid description: must not be empty",
+    );
   });
 });
 

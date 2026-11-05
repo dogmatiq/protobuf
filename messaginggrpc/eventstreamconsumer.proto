@@ -86,13 +86,14 @@ message EventStreamSegment {
   // EndOffset is the offset immediately after the range, exclusive.
   uint64 end_offset = 3 [features.field_presence = IMPLICIT];
 
-  // Envelopes is a (possibly empty) list of envelopes containing the
+  // Envelopes is a (possibly empty) list of multi-envelopes containing the
   // events in the range that match the requested message types.
   //
   // Each envelope includes the [envelopepb.EventStreamPosition] extension.
   //
-  // The events appear in ascending offset order. Their offsets may have gaps,
-  // because events of other types are omitted. There is no additional
-  // relationship implied between envelopes that appear in the same segment.
-  repeated dogma.protobuf.v1.Envelope envelopes = 4;
+  // The events appear in ascending offset order, both within each
+  // multi-envelope and across the list. Their offsets may have gaps, because
+  // events of other types are omitted. There is no additional relationship
+  // implied between envelopes that appear in the same segment.
+  repeated dogma.protobuf.v1.MultiEnvelope envelopes = 4;
 }

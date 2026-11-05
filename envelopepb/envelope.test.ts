@@ -1,11 +1,136 @@
-import { readFileSync } from "node:fs";
-import { create, fromBinary } from "@bufbuild/protobuf";
+import { create, fromBinary, toBinary } from "@bufbuild/protobuf";
 import { anyPack, anyUnpack, StringValueSchema } from "@bufbuild/protobuf/wkt";
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { getBaggage, setBaggage } from "./baggage.js";
-import { BodySchema, EnvelopeSchema, HeaderSchema } from "./envelope_pb.js";
+import {
+  asMultiEnvelope,
+  expandMultiEnvelope,
+  tryAppendEnvelope,
+} from "./envelope.js";
+import {
+  BodySchema,
+  EnvelopeSchema,
+  HeaderSchema,
+  MultiEnvelopeSchema,
+} from "./envelope_pb.js";
 import { getExtension, setExtension } from "./extensions.js";
 import { EventStreamPositionSchema } from "./extensions_pb.js";
+
+describe("expandMultiEnvelope", () => {
+  it("returns an envelope for each body", () => {
+    const header = create(HeaderSchema, {});
+    const a = create(BodySchema, { idempotencyKey: "a" });
+    const b = create(BodySchema, { idempotencyKey: "b" });
+
+    const envelopes = expandMultiEnvelope(
+      create(MultiEnvelopeSchema, { header, bodies: [a, b] }),
+    );
+
+    expect(envelopes).toHaveLength(2);
+    expect(envelopes[0].header).toBe(header);
+    expect(envelopes[0].body).toBe(a);
+    expect(envelopes[1].header).toBe(header);
+    expect(envelopes[1].body).toBe(b);
+  });
+
+  it("returns an empty array if there are no bodies", () => {
+    const envelopes = expandMultiEnvelope(create(MultiEnvelopeSchema, {}));
+
+    expect(envelopes).toEqual([]);
+  });
+});
+
+describe("asMultiEnvelope", () => {
+  it("returns a multi-envelope with the envelope's header and body", () => {
+    const header = create(HeaderSchema, {});
+    const body = create(BodySchema, {});
+
+    const multi = asMultiEnvelope(create(EnvelopeSchema, { header, body }));
+
+    expect(multi.header).toBe(header);
+    expect(multi.bodies).toEqual([body]);
+  });
+
+  it("throws if the envelope has no body", () => {
+    expect(() => asMultiEnvelope(create(EnvelopeSchema, {}))).toThrow(
+      "envelope must have a body",
+    );
+  });
+});
+
+describe("tryAppendEnvelope", () => {
+  it("appends the body if the headers are equivalent", () => {
+    const multi = create(MultiEnvelopeSchema, {
+      header: { correlationId: { upper: 1n, lower: 2n } },
+      bodies: [create(BodySchema, { idempotencyKey: "a" })],
+    });
+    const body = create(BodySchema, { idempotencyKey: "b" });
+    const env = create(EnvelopeSchema, {
+      header: { correlationId: { upper: 1n, lower: 2n } },
+      body,
+    });
+
+    expect(tryAppendEnvelope(multi, env)).toBe(true);
+    expect(multi.bodies).toHaveLength(2);
+    expect(multi.bodies[1]).toBe(body);
+  });
+
+  it("throws if the envelope has no body", () => {
+    const multi = create(MultiEnvelopeSchema, {});
+    const env = create(EnvelopeSchema, {});
+
+    expect(() => tryAppendEnvelope(multi, env)).toThrow(
+      "envelope must have a body",
+    );
+    expect(multi.bodies).toEqual([]);
+  });
+
+  it("returns false if the headers differ only in unknown fields", () => {
+    const header = create(HeaderSchema, {
+      correlationId: { upper: 1n, lower: 2n },
+    });
+
+    // Field 99 is unknown to this schema. Encoded as varint 1, its tag is
+    // (99 << 3) | 0 = 792, which is 0x98 0x06.
+    const bytes = toBinary(HeaderSchema, header);
+    const withUnknown = fromBinary(
+      HeaderSchema,
+      new Uint8Array([...bytes, 0x98, 0x06, 0x01]),
+    );
+
+    const multi = create(MultiEnvelopeSchema, { header });
+    const env = create(EnvelopeSchema, { header: withUnknown, body: {} });
+
+    expect(tryAppendEnvelope(multi, env)).toBe(false);
+    expect(multi.bodies).toEqual([]);
+  });
+
+  it("does not throw if a header contains values that can't be encoded", () => {
+    // -1 is outside the range of a uint64, so encoding it would fail.
+    const header = () =>
+      create(HeaderSchema, { correlationId: { upper: -1n, lower: 2n } });
+
+    const multi = create(MultiEnvelopeSchema, { header: header() });
+    const env = create(EnvelopeSchema, { header: header(), body: {} });
+
+    expect(tryAppendEnvelope(multi, env)).toBe(true);
+    expect(multi.bodies).toHaveLength(1);
+  });
+
+  it("returns false without modifying the multi-envelope if the headers differ", () => {
+    const multi = create(MultiEnvelopeSchema, {
+      header: { correlationId: { upper: 1n, lower: 2n } },
+    });
+    const env = create(EnvelopeSchema, {
+      header: { correlationId: { upper: 1n, lower: 3n } },
+      body: {},
+    });
+
+    expect(tryAppendEnvelope(multi, env)).toBe(false);
+    expect(multi.bodies).toEqual([]);
+  });
+});
 
 describe.each([
   ["setExtension", setExtension, "extensions"] as const,
@@ -93,27 +218,30 @@ describe("getExtension", () => {
 
 // The golden fixtures are shared with the Go tests, to ensure that both
 // languages find the same extension and baggage values.
-describe("golden Envelope fixtures", () => {
+describe("golden MultiEnvelope fixtures", () => {
   const dir = new URL("./testdata/", import.meta.url);
 
   const cases: {
     file: string;
     description: string;
-    values: {
+    bodies: {
       extensionOffset: number | null;
       baggageOffset: number | null;
-    };
+    }[];
   }[] = JSON.parse(readFileSync(new URL("expectations.json", dir), "utf-8"));
 
-  it.each(cases)("$description", ({ file, values }) => {
-    const env = fromBinary(EnvelopeSchema, readFileSync(new URL(file, dir)));
+  it.each(cases)("$description", ({ file, bodies }) => {
+    const multi = fromBinary(
+      MultiEnvelopeSchema,
+      readFileSync(new URL(file, dir)),
+    );
 
-    const got = {
+    const got = expandMultiEnvelope(multi).map((env) => ({
       extensionOffset: offset(getExtension(env, EventStreamPositionSchema)),
       baggageOffset: offset(getBaggage(env, EventStreamPositionSchema)),
-    };
+    }));
 
-    expect(got).toEqual(values);
+    expect(got).toEqual(bodies);
   });
 
   function offset(x: { offset: bigint } | undefined): number | null {
