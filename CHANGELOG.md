@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ### Added
 
-- Added `MessageTypeFilter` with explicit all-types and specific-types
+- Added `MessageFilter` with explicit all-types and specific-types
   selections, and Go and TypeScript validation helpers.
 
 - Added `EventStreamConsumerTooSlow` and the Go helper
@@ -26,7 +26,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 ### Changed
 
 - **[BC]** Replaced `message_type_ids` in `WatchEventsRequest` and
-  `ReadEventsRequest` with a required `message_type_filter`. Missing filters,
+  `ReadEventsRequest` with a required `filter`. Missing filters,
   filters with no selection, and empty specific-type selections are invalid
   and result in `INVALID_ARGUMENT` from either RPC.
 

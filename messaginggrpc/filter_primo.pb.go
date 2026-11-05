@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go-primo v
 // 	protoc              v7.36.2
-// source: github.com/dogmatiq/protobuf/messaginggrpc/messagetypefilter.proto
+// source: github.com/dogmatiq/protobuf/messaginggrpc/filter.proto
 
 package messaginggrpc
 
@@ -13,31 +13,31 @@ import (
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
-// TryGetAll returns the All value if x.Selection is set to All.
+// TryGetAll returns the All value if x.Types is set to All.
 // Otherwise, ok is false and v is the zero-value.
-func (x *MessageTypeFilter) TryGetAll() (v *emptypb.Empty, ok bool) {
+func (x *MessageFilter) TryGetAll() (v *emptypb.Empty, ok bool) {
 	if x.HasAll() {
 		return x.GetAll(), true
 	}
 	return v, false
 }
 
-// TryGetMessageTypes returns the MessageTypes value if x.Selection is set to MessageTypes.
+// TryGetSpecific returns the Specific value if x.Types is set to Specific.
 // Otherwise, ok is false and v is the zero-value.
-func (x *MessageTypeFilter) TryGetMessageTypes() (v *MessageTypeFilter_MessageTypes, ok bool) {
-	if x.HasMessageTypes() {
-		return x.GetMessageTypes(), true
+func (x *MessageFilter) TryGetSpecific() (v *MessageFilter_MessageTypes, ok bool) {
+	if x.HasSpecific() {
+		return x.GetSpecific(), true
 	}
 	return v, false
 }
 
-type MessageTypeFilterBuilder struct {
-	prototype MessageTypeFilter
+type MessageFilterBuilder struct {
+	prototype MessageFilter
 }
 
-// NewMessageTypeFilterBuilder returns a builder that constructs [MessageTypeFilter] messages.
-func NewMessageTypeFilterBuilder() *MessageTypeFilterBuilder {
-	return &MessageTypeFilterBuilder{}
+// NewMessageFilterBuilder returns a builder that constructs [MessageFilter] messages.
+func NewMessageFilterBuilder() *MessageFilterBuilder {
+	return &MessageFilterBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -45,53 +45,53 @@ func NewMessageTypeFilterBuilder() *MessageTypeFilterBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *MessageTypeFilterBuilder) From(x *MessageTypeFilter) *MessageTypeFilterBuilder {
+func (b *MessageFilterBuilder) From(x *MessageFilter) *MessageFilterBuilder {
 	proto.Reset(&b.prototype)
 	if x.HasAll() {
 		b.prototype.SetAll(x.GetAll())
 	}
-	if x.HasMessageTypes() {
-		b.prototype.SetMessageTypes(x.GetMessageTypes())
+	if x.HasSpecific() {
+		b.prototype.SetSpecific(x.GetSpecific())
 	}
 	return b
 }
 
-// Build returns a new [MessageTypeFilter] containing the values configured via the builder.
+// Build returns a new [MessageFilter] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *MessageTypeFilterBuilder) Build() *MessageTypeFilter {
-	m := &MessageTypeFilter{}
+func (b *MessageFilterBuilder) Build() *MessageFilter {
+	m := &MessageFilter{}
 	if b.prototype.HasAll() {
 		m.SetAll(b.prototype.GetAll())
 	}
-	if b.prototype.HasMessageTypes() {
-		m.SetMessageTypes(b.prototype.GetMessageTypes())
+	if b.prototype.HasSpecific() {
+		m.SetSpecific(b.prototype.GetSpecific())
 	}
 	return m
 }
 
 // WithAll configures the builder to set the All field to v,
 // then returns b.
-func (b *MessageTypeFilterBuilder) WithAll(v *emptypb.Empty) *MessageTypeFilterBuilder {
+func (b *MessageFilterBuilder) WithAll(v *emptypb.Empty) *MessageFilterBuilder {
 	b.prototype.SetAll(v)
 	return b
 }
 
-// WithMessageTypes configures the builder to set the MessageTypes field to v,
+// WithSpecific configures the builder to set the Specific field to v,
 // then returns b.
-func (b *MessageTypeFilterBuilder) WithMessageTypes(v *MessageTypeFilter_MessageTypes) *MessageTypeFilterBuilder {
-	b.prototype.SetMessageTypes(v)
+func (b *MessageFilterBuilder) WithSpecific(v *MessageFilter_MessageTypes) *MessageFilterBuilder {
+	b.prototype.SetSpecific(v)
 	return b
 }
 
-type MessageTypeFilter_MessageTypesBuilder struct {
-	prototype MessageTypeFilter_MessageTypes
+type MessageFilter_MessageTypesBuilder struct {
+	prototype MessageFilter_MessageTypes
 }
 
-// NewMessageTypeFilter_MessageTypesBuilder returns a builder that constructs [MessageTypeFilter_MessageTypes] messages.
-func NewMessageTypeFilter_MessageTypesBuilder() *MessageTypeFilter_MessageTypesBuilder {
-	return &MessageTypeFilter_MessageTypesBuilder{}
+// NewMessageFilter_MessageTypesBuilder returns a builder that constructs [MessageFilter_MessageTypes] messages.
+func NewMessageFilter_MessageTypesBuilder() *MessageFilter_MessageTypesBuilder {
+	return &MessageFilter_MessageTypesBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -99,104 +99,104 @@ func NewMessageTypeFilter_MessageTypesBuilder() *MessageTypeFilter_MessageTypesB
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *MessageTypeFilter_MessageTypesBuilder) From(x *MessageTypeFilter_MessageTypes) *MessageTypeFilter_MessageTypesBuilder {
+func (b *MessageFilter_MessageTypesBuilder) From(x *MessageFilter_MessageTypes) *MessageFilter_MessageTypesBuilder {
 	proto.Reset(&b.prototype)
 	b.prototype.SetIds(x.GetIds())
 	return b
 }
 
-// Build returns a new [MessageTypeFilter_MessageTypes] containing the values configured via the builder.
+// Build returns a new [MessageFilter_MessageTypes] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *MessageTypeFilter_MessageTypesBuilder) Build() *MessageTypeFilter_MessageTypes {
-	m := &MessageTypeFilter_MessageTypes{}
+func (b *MessageFilter_MessageTypesBuilder) Build() *MessageFilter_MessageTypes {
+	m := &MessageFilter_MessageTypes{}
 	m.SetIds(b.prototype.GetIds())
 	return m
 }
 
 // WithIds configures the builder to set the Ids field to v,
 // then returns b.
-func (b *MessageTypeFilter_MessageTypesBuilder) WithIds(v []*uuidpb.UUID) *MessageTypeFilter_MessageTypesBuilder {
+func (b *MessageFilter_MessageTypesBuilder) WithIds(v []*uuidpb.UUID) *MessageFilter_MessageTypesBuilder {
 	b.prototype.SetIds(v)
 	return b
 }
 
-// MustSwitch_MessageTypeFilter_Selection invokes one of the given functions based on
-// the value of x.Selection.
+// MustSwitch_MessageFilter_Types invokes one of the given functions based on
+// the value of x.Types.
 //
-// It panics if x.Selection is nil.
-func MustSwitch_MessageTypeFilter_Selection(
-	x *MessageTypeFilter,
+// It panics if x.Types is nil.
+func MustSwitch_MessageFilter_Types(
+	x *MessageFilter,
 	caseAll func(*emptypb.Empty),
-	caseMessageTypes func(*MessageTypeFilter_MessageTypes),
+	caseSpecific func(*MessageFilter_MessageTypes),
 ) {
-	switch x.WhichSelection() {
-	case MessageTypeFilter_All_case:
+	switch x.WhichTypes() {
+	case MessageFilter_All_case:
 		caseAll(x.GetAll())
-	case MessageTypeFilter_MessageTypes_case:
-		caseMessageTypes(x.GetMessageTypes())
+	case MessageFilter_Specific_case:
+		caseSpecific(x.GetSpecific())
 	default:
-		panic("MustSwitch_MessageTypeFilter_Selection: x.Selection is not set")
+		panic("MustSwitch_MessageFilter_Types: x.Types is not set")
 	}
 }
 
-// Switch_MessageTypeFilter_Selection invokes one of the given functions based on
-// the value of x.Selection.
+// Switch_MessageFilter_Types invokes one of the given functions based on
+// the value of x.Types.
 //
-// It calls none() if x.Selection is nil.
-func Switch_MessageTypeFilter_Selection(
-	x *MessageTypeFilter,
+// It calls none() if x.Types is nil.
+func Switch_MessageFilter_Types(
+	x *MessageFilter,
 	caseAll func(*emptypb.Empty),
-	caseMessageTypes func(*MessageTypeFilter_MessageTypes),
+	caseSpecific func(*MessageFilter_MessageTypes),
 	none func(),
 ) {
-	switch x.WhichSelection() {
-	case MessageTypeFilter_All_case:
+	switch x.WhichTypes() {
+	case MessageFilter_All_case:
 		caseAll(x.GetAll())
-	case MessageTypeFilter_MessageTypes_case:
-		caseMessageTypes(x.GetMessageTypes())
+	case MessageFilter_Specific_case:
+		caseSpecific(x.GetSpecific())
 	default:
 		none()
 	}
 }
 
-// MustMap_MessageTypeFilter_Selection maps x.Selection to a value of type T by invoking
+// MustMap_MessageFilter_Types maps x.Types to a value of type T by invoking
 // one of the given functions.
 //
-// It invokes the function that corresponds to the value of x.Selection,
-// and returns that function's result. It panics if x.Selection is nil.
-func MustMap_MessageTypeFilter_Selection[T any](
-	x *MessageTypeFilter,
+// It invokes the function that corresponds to the value of x.Types,
+// and returns that function's result. It panics if x.Types is nil.
+func MustMap_MessageFilter_Types[T any](
+	x *MessageFilter,
 	caseAll func(*emptypb.Empty) T,
-	caseMessageTypes func(*MessageTypeFilter_MessageTypes) T,
+	caseSpecific func(*MessageFilter_MessageTypes) T,
 ) T {
-	switch x.WhichSelection() {
-	case MessageTypeFilter_All_case:
+	switch x.WhichTypes() {
+	case MessageFilter_All_case:
 		return caseAll(x.GetAll())
-	case MessageTypeFilter_MessageTypes_case:
-		return caseMessageTypes(x.GetMessageTypes())
+	case MessageFilter_Specific_case:
+		return caseSpecific(x.GetSpecific())
 	default:
-		panic("MustMap_MessageTypeFilter_Selection: x.Selection is not set")
+		panic("MustMap_MessageFilter_Types: x.Types is not set")
 	}
 }
 
-// Map_MessageTypeFilter_Selection maps x.Selection to a value of type T by invoking
+// Map_MessageFilter_Types maps x.Types to a value of type T by invoking
 // one of the given functions.
 //
-// It invokes the function that corresponds to the value of x.Selection,
-// and returns that function's result. It calls none() if x.Selection is nil.
-func Map_MessageTypeFilter_Selection[T any](
-	x *MessageTypeFilter,
+// It invokes the function that corresponds to the value of x.Types,
+// and returns that function's result. It calls none() if x.Types is nil.
+func Map_MessageFilter_Types[T any](
+	x *MessageFilter,
 	caseAll func(*emptypb.Empty) T,
-	caseMessageTypes func(*MessageTypeFilter_MessageTypes) T,
+	caseSpecific func(*MessageFilter_MessageTypes) T,
 	none func() T,
 ) T {
-	switch x.WhichSelection() {
-	case MessageTypeFilter_All_case:
+	switch x.WhichTypes() {
+	case MessageFilter_All_case:
 		return caseAll(x.GetAll())
-	case MessageTypeFilter_MessageTypes_case:
-		return caseMessageTypes(x.GetMessageTypes())
+	case MessageFilter_Specific_case:
+		return caseSpecific(x.GetSpecific())
 	default:
 		return none()
 	}
@@ -215,7 +215,7 @@ func Map_MessageTypeFilter_Selection[T any](
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *MessageTypeFilter) Format(f fmt.State, verb rune) {
+func (x *MessageFilter) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -270,9 +270,9 @@ func (x *MessageTypeFilter) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = MessageTypeFilter
-	type MessageTypeFilter realType
-	fmt.Fprintf(f, format, (*MessageTypeFilter)(x))
+	type realType = MessageFilter
+	type MessageFilter realType
+	fmt.Fprintf(f, format, (*MessageFilter)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -288,7 +288,7 @@ func (x *MessageTypeFilter) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *MessageTypeFilter_MessageTypes) Format(f fmt.State, verb rune) {
+func (x *MessageFilter_MessageTypes) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -343,39 +343,39 @@ func (x *MessageTypeFilter_MessageTypes) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = MessageTypeFilter_MessageTypes
-	type MessageTypeFilter_MessageTypes realType
-	fmt.Fprintf(f, format, (*MessageTypeFilter_MessageTypes)(x))
+	type realType = MessageFilter_MessageTypes
+	type MessageFilter_MessageTypes realType
+	fmt.Fprintf(f, format, (*MessageFilter_MessageTypes)(x))
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*MessageTypeFilter] to implement [encoding.BinaryMarshaler].
-func (x *MessageTypeFilter) MarshalBinary() ([]byte, error) {
+// It allows [*MessageFilter] to implement [encoding.BinaryMarshaler].
+func (x *MessageFilter) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*MessageTypeFilter] to implement [encoding.BinaryUnmarshaler].
-func (x *MessageTypeFilter) UnmarshalBinary(data []byte) error {
+// It allows [*MessageFilter] to implement [encoding.BinaryUnmarshaler].
+func (x *MessageFilter) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*MessageTypeFilter_MessageTypes] to implement [encoding.BinaryMarshaler].
-func (x *MessageTypeFilter_MessageTypes) MarshalBinary() ([]byte, error) {
+// It allows [*MessageFilter_MessageTypes] to implement [encoding.BinaryMarshaler].
+func (x *MessageFilter_MessageTypes) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*MessageTypeFilter_MessageTypes] to implement [encoding.BinaryUnmarshaler].
-func (x *MessageTypeFilter_MessageTypes) UnmarshalBinary(data []byte) error {
+// It allows [*MessageFilter_MessageTypes] to implement [encoding.BinaryUnmarshaler].
+func (x *MessageFilter_MessageTypes) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }

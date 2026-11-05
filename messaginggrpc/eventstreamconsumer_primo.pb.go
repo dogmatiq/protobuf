@@ -33,8 +33,8 @@ func NewWatchEventsRequestBuilder() *WatchEventsRequestBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *WatchEventsRequestBuilder) From(x *WatchEventsRequest) *WatchEventsRequestBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasMessageTypeFilter() {
-		b.prototype.SetMessageTypeFilter(x.GetMessageTypeFilter())
+	if x.HasFilter() {
+		b.prototype.SetFilter(x.GetFilter())
 	}
 	return b
 }
@@ -45,16 +45,16 @@ func (b *WatchEventsRequestBuilder) From(x *WatchEventsRequest) *WatchEventsRequ
 // not modify previously constructed messages.
 func (b *WatchEventsRequestBuilder) Build() *WatchEventsRequest {
 	m := &WatchEventsRequest{}
-	if b.prototype.HasMessageTypeFilter() {
-		m.SetMessageTypeFilter(b.prototype.GetMessageTypeFilter())
+	if b.prototype.HasFilter() {
+		m.SetFilter(b.prototype.GetFilter())
 	}
 	return m
 }
 
-// WithMessageTypeFilter configures the builder to set the MessageTypeFilter field to v,
+// WithFilter configures the builder to set the Filter field to v,
 // then returns b.
-func (b *WatchEventsRequestBuilder) WithMessageTypeFilter(v *MessageTypeFilter) *WatchEventsRequestBuilder {
-	b.prototype.SetMessageTypeFilter(v)
+func (b *WatchEventsRequestBuilder) WithFilter(v *MessageFilter) *WatchEventsRequestBuilder {
+	b.prototype.SetFilter(v)
 	return b
 }
 
@@ -78,8 +78,8 @@ func (b *ReadEventsRequestBuilder) From(x *ReadEventsRequest) *ReadEventsRequest
 		b.prototype.SetEventStreamId(x.GetEventStreamId())
 	}
 	b.prototype.SetBeginOffset(x.GetBeginOffset())
-	if x.HasMessageTypeFilter() {
-		b.prototype.SetMessageTypeFilter(x.GetMessageTypeFilter())
+	if x.HasFilter() {
+		b.prototype.SetFilter(x.GetFilter())
 	}
 	return b
 }
@@ -94,8 +94,8 @@ func (b *ReadEventsRequestBuilder) Build() *ReadEventsRequest {
 		m.SetEventStreamId(b.prototype.GetEventStreamId())
 	}
 	m.SetBeginOffset(b.prototype.GetBeginOffset())
-	if b.prototype.HasMessageTypeFilter() {
-		m.SetMessageTypeFilter(b.prototype.GetMessageTypeFilter())
+	if b.prototype.HasFilter() {
+		m.SetFilter(b.prototype.GetFilter())
 	}
 	return m
 }
@@ -114,10 +114,10 @@ func (b *ReadEventsRequestBuilder) WithBeginOffset(v uint64) *ReadEventsRequestB
 	return b
 }
 
-// WithMessageTypeFilter configures the builder to set the MessageTypeFilter field to v,
+// WithFilter configures the builder to set the Filter field to v,
 // then returns b.
-func (b *ReadEventsRequestBuilder) WithMessageTypeFilter(v *MessageTypeFilter) *ReadEventsRequestBuilder {
-	b.prototype.SetMessageTypeFilter(v)
+func (b *ReadEventsRequestBuilder) WithFilter(v *MessageFilter) *ReadEventsRequestBuilder {
+	b.prototype.SetFilter(v)
 	return b
 }
 

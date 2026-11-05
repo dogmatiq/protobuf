@@ -5,14 +5,14 @@ option go_package = "github.com/dogmatiq/protobuf/messaginggrpc";
 
 import "github.com/dogmatiq/protobuf/envelopepb/envelope.proto";
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
-import "github.com/dogmatiq/protobuf/messaginggrpc/messagetypefilter.proto";
+import "github.com/dogmatiq/protobuf/messaginggrpc/filter.proto";
 
 // EventStreamConsumerAPI is a service for consuming event messages from
 // offset-based, ordered event streams.
 service EventStreamConsumerAPI {
   // WatchEvents delivers matching events as they are appended to any event
   // stream offered by the server, for as long as the call is open. Matching
-  // events are selected by the request's message type filter.
+  // events are selected by the request's filter.
   //
   // The feed starts at the tail of each stream. Every offered stream that
   // already contains matching events is represented by at least one segment.
@@ -27,12 +27,12 @@ service EventStreamConsumerAPI {
   // can occur when events are appended faster than they can be delivered to the
   // client. See [EventStreamConsumerTooSlowError].
   //
-  // A missing or invalid message type filter results in INVALID_ARGUMENT.
+  // A missing or invalid message filter results in INVALID_ARGUMENT.
   rpc WatchEvents(WatchEventsRequest) returns (stream EventStreamSegment);
 
   // ReadEvents delivers matching events from a single event stream, in order,
   // beginning at the requested offset. Matching events are selected by the
-  // request's message type filter.
+  // request's filter.
   //
   // The first segment begins at the requested offset. Each subsequent segment
   // begins at the end offset of the previous segment. Delivery ends when the
@@ -44,17 +44,15 @@ service EventStreamConsumerAPI {
   // A requested offset greater than the offset that the next event appended to
   // the stream will have results in OUT_OF_RANGE.
   //
-  // A missing or invalid message type filter results in INVALID_ARGUMENT.
+  // A missing or invalid message filter results in INVALID_ARGUMENT.
   rpc ReadEvents(ReadEventsRequest) returns (stream EventStreamSegment);
 }
 
 // WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
 // method.
 message WatchEventsRequest {
-  // MessageTypeFilter selects the event types to include in the segments.
-  // The filter is required and has either an explicit all-types selection or
-  // a non-empty list of specific message type IDs.
-  MessageTypeFilter message_type_filter = 1;
+  // Filter describes the events to deliver.
+  MessageFilter filter = 1;
 }
 
 // ReadEventsRequest is the input to the [EventStreamConsumerAPI.ReadEvents]
@@ -68,10 +66,8 @@ message ReadEventsRequest {
   // are delivered, then the call is closed.
   uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
 
-  // MessageTypeFilter selects the event types to include in the segments.
-  // The filter is required and has either an explicit all-types selection or
-  // a non-empty list of specific message type IDs.
-  MessageTypeFilter message_type_filter = 3;
+  // Filter describes the events to deliver.
+  MessageFilter filter = 3;
 }
 
 // EventStreamSegment is a contiguous piece of one event stream, the half-open
