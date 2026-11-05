@@ -144,9 +144,9 @@ export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PUR
  */
 export const EventStreamConsumerAPI: GenService<{
   /**
-   * WatchEvents delivers events that match the request's filter as they are
-   * appended to any event stream available from the server, for as long as the
-   * call is open.
+   * WatchEvents delivers events from all streams available from the server.
+   * Events are delivered as they are appended, provided they match the
+   * request's filter.
    *
    * The feed starts at the tail of each stream. Every available stream that
    * already contains matching events is represented by at least one segment.
