@@ -54,6 +54,15 @@ export function uuidEquals(a: UUID, b: UUID): boolean {
  * (name-based) UUID.
  */
 export function validateUUID(x: UUID): void {
+  if (
+    x.upper < 0n ||
+    x.upper > MAX_UINT64 ||
+    x.lower < 0n ||
+    x.lower > MAX_UINT64
+  ) {
+    throw new Error("UUID components must be unsigned 64-bit integers");
+  }
+
   const version = (x.upper >> 8n) & 0xf0n;
   if (version !== 0x40n && version !== 0x50n) {
     throw new Error("UUID must use version 4 or 5");
@@ -103,6 +112,8 @@ export function parseUUID(str: string): UUID {
     lower: BigInt("0x" + hex.slice(16)),
   });
 }
+
+const MAX_UINT64 = 0xffff_ffff_ffff_ffffn;
 
 const PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;

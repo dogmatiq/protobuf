@@ -11,6 +11,13 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Fixed
+
+- Fixed TypeScript `validateUUID()` accepting negative or overflowing UUID
+  components when their version and variant bits were otherwise valid.
+
 ## [0.4.1] - 2026-11-04
 
 ### Added
