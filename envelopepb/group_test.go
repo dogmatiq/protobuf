@@ -32,16 +32,20 @@ func TestAsMultiEnvelopesFixtures(t *testing.T) {
 			var before []*Envelope
 			for i, key := range c.Headers {
 				env := NewEnvelopeBuilder().
-					WithBody(NewBodyBuilder().
-						WithIdempotencyKey(fmt.Sprint(i)).
-						Build()).
+					WithBody(
+						NewBodyBuilder().
+							WithIdempotencyKey(fmt.Sprint(i)).
+							Build(),
+					).
 					Build()
 				if key != nil {
 					header := &Header{}
 					if *key != "" {
-						header.SetSource(NewSourceBuilder().
-							WithInstanceId(*key).
-							Build())
+						header.SetSource(
+							NewSourceBuilder().
+								WithInstanceId(*key).
+								Build(),
+						)
 					}
 					env.SetHeader(header)
 				}
@@ -90,9 +94,11 @@ func TestAsMultiEnvelopesHeaderContext(t *testing.T) {
 		{"causation", func(h *Header) { h.SetCausationId(uuidpb.Generate()) }},
 		{"correlation", func(h *Header) { h.SetCorrelationId(uuidpb.Generate()) }},
 		{"source", func(h *Header) {
-			h.SetSource(NewSourceBuilder().
-				WithInstanceId("other").
-				Build())
+			h.SetSource(
+				NewSourceBuilder().
+					WithInstanceId("other").
+					Build(),
+			)
 		}},
 		{"extensions", func(h *Header) { h.SetExtensions([]*anypb.Any{{TypeUrl: "example.com/Unknown", Value: []byte{1}}}) }},
 		{"baggage", func(h *Header) { h.SetBaggage([]*anypb.Any{{TypeUrl: "example.com/Unknown", Value: []byte{1}}}) }},

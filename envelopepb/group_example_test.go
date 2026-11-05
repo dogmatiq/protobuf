@@ -9,21 +9,27 @@ import (
 
 func ExampleAsMultiEnvelopes() {
 	header := NewHeaderBuilder().
-		WithSource(NewSourceBuilder().
-			WithInstanceId("source").
-			Build()).
+		WithSource(
+			NewSourceBuilder().
+				WithInstanceId("source").
+				Build(),
+		).
 		Build()
 	first := NewEnvelopeBuilder().
 		WithHeader(header).
-		WithBody(NewBodyBuilder().
-			WithIdempotencyKey("first").
-			Build()).
+		WithBody(
+			NewBodyBuilder().
+				WithIdempotencyKey("first").
+				Build(),
+		).
 		Build()
 	second := NewEnvelopeBuilder().
 		WithHeader(header).
-		WithBody(NewBodyBuilder().
-			WithIdempotencyKey("second").
-			Build()).
+		WithBody(
+			NewBodyBuilder().
+				WithIdempotencyKey("second").
+				Build(),
+		).
 		Build()
 
 	// Group envelopes that already exist, without cloning their metadata.
@@ -40,12 +46,18 @@ func ExampleMultiEnvelopeBuilder_WithBodies() {
 	// and transfer the slice when sealing the batch; no Envelope wrappers or
 	// per-body protobuf SetBodies() calls are needed.
 	var bodies []*Body
-	bodies = append(bodies, NewBodyBuilder().
-		WithIdempotencyKey("first").
-		Build())
-	bodies = append(bodies, NewBodyBuilder().
-		WithIdempotencyKey("second").
-		Build())
+	bodies = append(
+		bodies,
+		NewBodyBuilder().
+			WithIdempotencyKey("first").
+			Build(),
+	)
+	bodies = append(
+		bodies,
+		NewBodyBuilder().
+			WithIdempotencyKey("second").
+			Build(),
+	)
 	batch := NewMultiEnvelopeBuilder().
 		WithHeader(header).
 		WithBodies(bodies).

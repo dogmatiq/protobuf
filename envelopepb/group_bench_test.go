@@ -60,10 +60,12 @@ func BenchmarkEnvelopeBatching(b *testing.B) {
 				for b.Loop() {
 					input := func(yield func(*Envelope) bool) {
 						for _, body := range bodies {
-							if !yield(NewEnvelopeBuilder().
-								WithHeader(header).
-								WithBody(body).
-								Build()) {
+							if !yield(
+								NewEnvelopeBuilder().
+									WithHeader(header).
+									WithBody(body).
+									Build(),
+							) {
 								return
 							}
 						}

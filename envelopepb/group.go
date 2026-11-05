@@ -34,10 +34,12 @@ func AsMultiEnvelopes(envelopes iter.Seq[*Envelope]) iter.Seq[*MultiEnvelope] {
 				panic("envelope must have a body")
 			}
 			if len(bodies) != 0 && !proto.Equal(header, env.GetHeader()) {
-				if !yield(NewMultiEnvelopeBuilder().
-					WithHeader(header).
-					WithBodies(bodies).
-					Build()) {
+				if !yield(
+					NewMultiEnvelopeBuilder().
+						WithHeader(header).
+						WithBodies(bodies).
+						Build(),
+				) {
 					return
 				}
 				bodies = nil
@@ -50,10 +52,12 @@ func AsMultiEnvelopes(envelopes iter.Seq[*Envelope]) iter.Seq[*MultiEnvelope] {
 			bodies = append(bodies, env.GetBody())
 		}
 		if len(bodies) != 0 {
-			yield(NewMultiEnvelopeBuilder().
-				WithHeader(header).
-				WithBodies(bodies).
-				Build())
+			yield(
+				NewMultiEnvelopeBuilder().
+					WithHeader(header).
+					WithBodies(bodies).
+					Build(),
+			)
 		}
 	}
 }
