@@ -13,6 +13,12 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added Go `GroupEnvelopes()` and TypeScript `groupEnvelopes()` to group
+  consecutive envelopes with equivalent headers into multi-envelopes while
+  preserving message order.
+
 ### Changed
 
 - **[BC]** TypeScript `getExtension()` and `getBaggage()` now throw when the
