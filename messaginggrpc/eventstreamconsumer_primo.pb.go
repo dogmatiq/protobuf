@@ -184,7 +184,7 @@ func (b *EventStreamSegmentBuilder) WithEndOffset(v uint64) *EventStreamSegmentB
 
 // WithEnvelopes configures the builder to set the Envelopes field to v,
 // then returns b.
-func (b *EventStreamSegmentBuilder) WithEnvelopes(v []*envelopepb.MultiEnvelope) *EventStreamSegmentBuilder {
+func (b *EventStreamSegmentBuilder) WithEnvelopes(v []*envelopepb.Envelope) *EventStreamSegmentBuilder {
 	b.prototype.SetEnvelopes(v)
 	return b
 }

@@ -4,7 +4,7 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
-import type { MultiEnvelope } from "../envelopepb/envelope_pb.js";
+import type { Envelope } from "../envelopepb/envelope_pb.js";
 import { file_github_com_dogmatiq_protobuf_envelopepb_envelope } from "../envelopepb/envelope_pb.js";
 import type { UUID } from "../uuidpb/uuid_pb.js";
 import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer: GenFile = /*@__PURE__*/
-  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIrMBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEjMKCWVudmVsb3BlcxgEIAMoCzIgLmRvZ21hLnByb3RvYnVmLnYxLk11bHRpRW52ZWxvcGUy2AEKFkV2ZW50U3RyZWFtQ29uc3VtZXJBUEkSXwoLV2F0Y2hFdmVudHMSJi5kb2dtYS5tZXNzYWdpbmcudjEuV2F0Y2hFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABEl0KClJlYWRFdmVudHMSJS5kb2dtYS5tZXNzYWdpbmcudjEuUmVhZEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAFCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
+  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIq4BChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEi4KCWVudmVsb3BlcxgEIAMoCzIbLmRvZ21hLnByb3RvYnVmLnYxLkVudmVsb3BlMtgBChZFdmVudFN0cmVhbUNvbnN1bWVyQVBJEl8KC1dhdGNoRXZlbnRzEiYuZG9nbWEubWVzc2FnaW5nLnYxLldhdGNoRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwARJdCgpSZWFkRXZlbnRzEiUuZG9nbWEubWVzc2FnaW5nLnYxLlJlYWRFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABQixaKmdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWVzc2FnaW5nZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
 
 /**
  * WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
@@ -114,19 +114,18 @@ export type EventStreamSegment = Message<"dogma.messaging.v1.EventStreamSegment"
   endOffset: bigint;
 
   /**
-   * Envelopes is a (possibly empty) list of multi-envelopes containing the
+   * Envelopes is a (possibly empty) list of envelopes containing the
    * events in the range that match the requested message types.
    *
    * Each envelope includes the [envelopepb.EventStreamPosition] extension.
    *
-   * The events appear in ascending offset order, both within each
-   * multi-envelope and across the list. Their offsets may have gaps, because
-   * events of other types are omitted. There is no additional relationship
-   * implied between envelopes that appear in the same segment.
+   * The events appear in ascending offset order. Their offsets may have gaps,
+   * because events of other types are omitted. There is no additional
+   * relationship implied between envelopes that appear in the same segment.
    *
-   * @generated from field: repeated dogma.protobuf.v1.MultiEnvelope envelopes = 4;
+   * @generated from field: repeated dogma.protobuf.v1.Envelope envelopes = 4;
    */
-  envelopes: MultiEnvelope[];
+  envelopes: Envelope[];
 };
 
 /**
