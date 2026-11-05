@@ -19,9 +19,10 @@ import (
 // Each output has a new body slice but shares its header and bodies with the
 // input. Inputs are not modified and must not be mutated during iteration.
 //
-// When the header is already known, accumulate bodies directly and pass the
-// slice to [MultiEnvelopeBuilder.WithBodies] instead of constructing temporary
-// envelopes to use this function. This avoids wrappers and header comparisons.
+// If the bodies share a header that is already known, prefer accumulating them
+// in a slice and constructing the multi-envelope with
+// [MultiEnvelopeBuilder.WithHeader] and [MultiEnvelopeBuilder.WithBodies]. This
+// avoids allocating temporary envelopes and comparing headers for each body.
 //
 // It panics during iteration if an envelope is nil or has no body. It does not
 // otherwise validate envelopes or change their metadata.

@@ -16,9 +16,10 @@ import type { Envelope, MultiEnvelope } from "./envelope_pb.js";
  * Each output has a new bodies array but shares its header and bodies with the
  * input. Inputs are not modified and must not be mutated during iteration.
  *
- * When the header is already known, create a MultiEnvelope with that header
- * and accumulate its bodies directly rather than constructing temporary
- * envelopes for this function. This avoids wrappers and header comparisons.
+ * If the bodies share a header that is already known, prefer constructing a
+ * multi-envelope directly with `create(MultiEnvelopeSchema, { header, bodies })`.
+ * This avoids allocating temporary envelopes and comparing headers for each
+ * body.
  *
  * @example
  * // Envelopes that already exist:
