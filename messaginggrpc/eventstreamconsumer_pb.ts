@@ -144,9 +144,9 @@ export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PUR
  */
 export const EventStreamConsumerAPI: GenService<{
   /**
-   * WatchEvents delivers matching events as they are appended to any event
-   * stream offered by the server, for as long as the call is open. Matching
-   * events are selected by the request's filter.
+   * WatchEvents delivers events that match the request's filter as they are
+   * appended to any event stream offered by the server, for as long as the call
+   * is open.
    *
    * The feed starts at the tail of each stream. Every offered stream that
    * already contains matching events is represented by at least one segment.
@@ -171,9 +171,8 @@ export const EventStreamConsumerAPI: GenService<{
     output: typeof EventStreamSegmentSchema;
   },
   /**
-   * ReadEvents delivers matching events from a single event stream, in order,
-   * beginning at the requested offset. Matching events are selected by the
-   * request's filter.
+   * ReadEvents delivers events that match the request's filter from a single
+   * event stream, in order, beginning at the requested offset.
    *
    * The first segment begins at the requested offset. Each subsequent segment
    * begins at the end offset of the previous segment. Delivery ends when the
