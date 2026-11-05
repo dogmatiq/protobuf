@@ -33,7 +33,9 @@ func NewWatchEventsRequestBuilder() *WatchEventsRequestBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *WatchEventsRequestBuilder) From(x *WatchEventsRequest) *WatchEventsRequestBuilder {
 	proto.Reset(&b.prototype)
-	b.prototype.SetMessageTypeIds(x.GetMessageTypeIds())
+	if x.HasFilter() {
+		b.prototype.SetFilter(x.GetFilter())
+	}
 	return b
 }
 
@@ -43,14 +45,16 @@ func (b *WatchEventsRequestBuilder) From(x *WatchEventsRequest) *WatchEventsRequ
 // not modify previously constructed messages.
 func (b *WatchEventsRequestBuilder) Build() *WatchEventsRequest {
 	m := &WatchEventsRequest{}
-	m.SetMessageTypeIds(b.prototype.GetMessageTypeIds())
+	if b.prototype.HasFilter() {
+		m.SetFilter(b.prototype.GetFilter())
+	}
 	return m
 }
 
-// WithMessageTypeIds configures the builder to set the MessageTypeIds field to v,
+// WithFilter configures the builder to set the Filter field to v,
 // then returns b.
-func (b *WatchEventsRequestBuilder) WithMessageTypeIds(v []*uuidpb.UUID) *WatchEventsRequestBuilder {
-	b.prototype.SetMessageTypeIds(v)
+func (b *WatchEventsRequestBuilder) WithFilter(v *MessageFilter) *WatchEventsRequestBuilder {
+	b.prototype.SetFilter(v)
 	return b
 }
 
@@ -74,7 +78,9 @@ func (b *ReadEventsRequestBuilder) From(x *ReadEventsRequest) *ReadEventsRequest
 		b.prototype.SetEventStreamId(x.GetEventStreamId())
 	}
 	b.prototype.SetBeginOffset(x.GetBeginOffset())
-	b.prototype.SetMessageTypeIds(x.GetMessageTypeIds())
+	if x.HasFilter() {
+		b.prototype.SetFilter(x.GetFilter())
+	}
 	return b
 }
 
@@ -88,7 +94,9 @@ func (b *ReadEventsRequestBuilder) Build() *ReadEventsRequest {
 		m.SetEventStreamId(b.prototype.GetEventStreamId())
 	}
 	m.SetBeginOffset(b.prototype.GetBeginOffset())
-	m.SetMessageTypeIds(b.prototype.GetMessageTypeIds())
+	if b.prototype.HasFilter() {
+		m.SetFilter(b.prototype.GetFilter())
+	}
 	return m
 }
 
@@ -106,10 +114,10 @@ func (b *ReadEventsRequestBuilder) WithBeginOffset(v uint64) *ReadEventsRequestB
 	return b
 }
 
-// WithMessageTypeIds configures the builder to set the MessageTypeIds field to v,
+// WithFilter configures the builder to set the Filter field to v,
 // then returns b.
-func (b *ReadEventsRequestBuilder) WithMessageTypeIds(v []*uuidpb.UUID) *ReadEventsRequestBuilder {
-	b.prototype.SetMessageTypeIds(v)
+func (b *ReadEventsRequestBuilder) WithFilter(v *MessageFilter) *ReadEventsRequestBuilder {
+	b.prototype.SetFilter(v)
 	return b
 }
 

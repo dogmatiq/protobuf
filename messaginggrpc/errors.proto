@@ -11,3 +11,15 @@ message UnrecognizedEventStream {
   // EventStreamId is the ID of the unrecognized stream.
   dogma.protobuf.v1.UUID event_stream_id = 1;
 }
+
+// EventStreamConsumerTooSlow is an error-details value for RESOURCE_EXHAUSTED
+// errors returned by WatchEvents when a client cannot keep up and the server
+// can no longer deliver a stream contiguously.
+//
+// A client that is behind the tail does not cause this error while contiguous
+// delivery remains possible.
+message EventStreamConsumerTooSlow {
+  // EventStreamId is the ID of the stream that could no longer be delivered
+  // contiguously.
+  dogma.protobuf.v1.UUID event_stream_id = 1;
+}

@@ -8,13 +8,15 @@ import type { MultiEnvelope } from "../envelopepb/envelope_pb.js";
 import { file_github_com_dogmatiq_protobuf_envelopepb_envelope } from "../envelopepb/envelope_pb.js";
 import type { UUID } from "../uuidpb/uuid_pb.js";
 import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
+import type { MessageFilter } from "./filter_pb.js";
+import { file_github_com_dogmatiq_protobuf_messaginggrpc_filter } from "./filter_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer: GenFile = /*@__PURE__*/
-  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxChBtZXNzYWdlX3R5cGVfaWRzGAEgAygLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKEG1lc3NhZ2VfdHlwZV9pZHMYAyADKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIrMBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEjMKCWVudmVsb3BlcxgEIAMoCzIgLmRvZ21hLnByb3RvYnVmLnYxLk11bHRpRW52ZWxvcGUy2AEKFkV2ZW50U3RyZWFtQ29uc3VtZXJBUEkSXwoLV2F0Y2hFdmVudHMSJi5kb2dtYS5tZXNzYWdpbmcudjEuV2F0Y2hFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABEl0KClJlYWRFdmVudHMSJS5kb2dtYS5tZXNzYWdpbmcudjEuUmVhZEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAFCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIrMBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEjMKCWVudmVsb3BlcxgEIAMoCzIgLmRvZ21hLnByb3RvYnVmLnYxLk11bHRpRW52ZWxvcGUy2AEKFkV2ZW50U3RyZWFtQ29uc3VtZXJBUEkSXwoLV2F0Y2hFdmVudHMSJi5kb2dtYS5tZXNzYWdpbmcudjEuV2F0Y2hFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABEl0KClJlYWRFdmVudHMSJS5kb2dtYS5tZXNzYWdpbmcudjEuUmVhZEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAFCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
 
 /**
  * WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
@@ -24,12 +26,11 @@ export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer
  */
 export type WatchEventsRequest = Message<"dogma.messaging.v1.WatchEventsRequest"> & {
   /**
-   * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments. An empty set matches every event.
+   * Filter describes the events to deliver.
    *
-   * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 1;
+   * @generated from field: dogma.messaging.v1.MessageFilter filter = 1;
    */
-  messageTypeIds: UUID[];
+  filter?: MessageFilter | undefined;
 };
 
 /**
@@ -63,12 +64,11 @@ export type ReadEventsRequest = Message<"dogma.messaging.v1.ReadEventsRequest"> 
   beginOffset: bigint;
 
   /**
-   * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments. An empty set matches every event.
+   * Filter describes the events to deliver.
    *
-   * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 3;
+   * @generated from field: dogma.messaging.v1.MessageFilter filter = 3;
    */
-  messageTypeIds: UUID[];
+  filter?: MessageFilter | undefined;
 };
 
 /**
@@ -144,25 +144,22 @@ export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PUR
  */
 export const EventStreamConsumerAPI: GenService<{
   /**
-   * WatchEvents delivers events of the requested message types as they are
-   * appended to any event stream offered by the server, for as long as the call
-   * is open.
+   * WatchEvents delivers events from all streams available from the server.
+   * Events are delivered as they are appended, provided they match the
+   * request's filter.
    *
-   * The feed starts at the tail of each stream. The first [EventStreamSegment]
-   * the client receives for a stream tells it that the stream exists and where
-   * in the stream the feed begins. After this first segment, each subsequent
-   * segment for the same stream begins at the end offset of the one before it.
+   * The feed starts at the tail of each stream. Every available stream that
+   * already contains matching events is represented by at least one segment.
+   * The first [EventStreamSegment] received for a stream may be empty, but it
+   * tells the client that the stream exists and the offset at which delivery
+   * begins. Each subsequent segment for that stream begins at the end offset
+   * of the previous segment.
    *
-   * The server MAY send a first segment for every stream it offers, or only for
-   * those streams that contain events of a requested type. In the latter case
-   * the server MUST decide from the events in the stream, not from the types
-   * that the server is able to record.
+   * If the client cannot keep up and the server can no longer deliver a stream
+   * contiguously, the call ends with RESOURCE_EXHAUSTED and an attached
+   * [EventStreamConsumerTooSlow] value identifying the affected stream.
    *
-   * If the server can no longer deliver a stream contiguously, for example
-   * because the client has fallen too far behind, it closes the call. A client
-   * that reconnects MUST expect to have missed events. On the new call, the
-   * first segment it receives for each stream again tells it where the feed
-   * begins, which is not necessarily where the previous call left off.
+   * A missing or invalid message filter results in INVALID_ARGUMENT.
    *
    * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents
    */
@@ -172,20 +169,20 @@ export const EventStreamConsumerAPI: GenService<{
     output: typeof EventStreamSegmentSchema;
   },
   /**
-   * ReadEvents delivers the events of the requested message types from a
-   * single stream, in order, starting at a specific offset and ending at the
-   * end of the stream as it stands when the server reaches it.
+   * ReadEvents delivers events that match the request's filter from a single
+   * event stream, in order, beginning at the requested offset.
    *
-   * It is intended for a consumer whose checkpoint is behind the offset at
-   * which [EventStreamConsumerAPI.WatchEvents] began delivering the stream.
-   * It delivers what the caller has missed, then the server closes the call.
+   * The first segment begins at the requested offset. Each subsequent segment
+   * begins at the end offset of the previous segment. Delivery ends when the
+   * server reaches the end of the stream, at which point it closes the call.
    *
-   * If the requested stream ID is not recognized the server MUST return a
-   * NOT_FOUND error with an attached [UnrecognizedEventStream] value. See
-   * [UnrecognizedEventStreamError].
+   * An unrecognized stream ID results in NOT_FOUND with an attached
+   * [UnrecognizedEventStream] value. See [UnrecognizedEventStreamError].
    *
-   * If the requested offset is greater than the offset that the next event
-   * appended to the stream will have, an OUT_OF_RANGE error occurs.
+   * A requested offset beyond the end of the stream results in OUT_OF_RANGE.
+   * An offset equal to the end of the stream is valid and returns no events.
+   *
+   * A missing or invalid message filter results in INVALID_ARGUMENT.
    *
    * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents
    */
