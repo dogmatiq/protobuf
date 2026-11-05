@@ -88,6 +88,21 @@ The generated code then imports from paths such as
 `@dogmatiq/protobuf/github.com/dogmatiq/protobuf/uuidpb/uuid_pb.js`, which the
 package exports for this purpose.
 
+## Extension and baggage lookup
+
+In TypeScript, use `tryGetExtension(env, schema)` or `tryGetBaggage(env, schema)`
+when absence is expected; they return `undefined` if no matching value exists.
+Use `getExtension(env, schema)` or `getBaggage(env, schema)` when the value is
+required; they throw if it is absent. Both forms throw if the selected payload
+cannot be decoded. Existing callers that relied on `getExtension()` or
+`getBaggage()` returning `undefined` must migrate to the `tryGet` names.
+
+Lookup searches the body before the header and uses the first match in each
+location. Types match by message name regardless of the `Any` type URL prefix.
+A decode failure in the selected value does not fall back to a later value or
+the header. Lookups do not modify the envelope. Setters replace the first
+matching value on their header or body target, leaving later duplicates intact.
+
 <!-- references -->
 
 [connect-es]: https://github.com/connectrpc/connect-es

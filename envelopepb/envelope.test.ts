@@ -2,7 +2,7 @@ import { create, fromBinary, toBinary } from "@bufbuild/protobuf";
 import { anyPack, anyUnpack, StringValueSchema } from "@bufbuild/protobuf/wkt";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { getBaggage, setBaggage } from "./baggage.js";
+import { tryGetBaggage, setBaggage } from "./baggage.js";
 import {
   asMultiEnvelope,
   expandMultiEnvelope,
@@ -14,7 +14,7 @@ import {
   HeaderSchema,
   MultiEnvelopeSchema,
 } from "./envelope_pb.js";
-import { getExtension, setExtension } from "./extensions.js";
+import { tryGetExtension, setExtension } from "./extensions.js";
 import { EventStreamPositionSchema } from "./extensions_pb.js";
 
 describe("expandMultiEnvelope", () => {
@@ -200,7 +200,7 @@ describe.each([
   });
 });
 
-describe("getExtension", () => {
+describe("tryGetExtension", () => {
   it("skips values whose type URL has no message name", () => {
     const position = create(EventStreamPositionSchema, { offset: 42n });
     const malformed = anyPack(StringValueSchema, create(StringValueSchema, {}));
@@ -212,7 +212,7 @@ describe("getExtension", () => {
       },
     });
 
-    expect(getExtension(env, EventStreamPositionSchema)?.offset).toBe(42n);
+    expect(tryGetExtension(env, EventStreamPositionSchema)?.offset).toBe(42n);
   });
 });
 
@@ -237,8 +237,8 @@ describe("golden MultiEnvelope fixtures", () => {
     );
 
     const got = expandMultiEnvelope(multi).map((env) => ({
-      extensionOffset: offset(getExtension(env, EventStreamPositionSchema)),
-      baggageOffset: offset(getBaggage(env, EventStreamPositionSchema)),
+      extensionOffset: offset(tryGetExtension(env, EventStreamPositionSchema)),
+      baggageOffset: offset(tryGetBaggage(env, EventStreamPositionSchema)),
     }));
 
     expect(got).toEqual(bodies);
