@@ -18,8 +18,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 - **[BC]** TypeScript `getExtension()` and `getBaggage()` now throw when the
   requested value is absent. Use `tryGetExtension()` and `tryGetBaggage()`
   for the previous behavior of returning `undefined`. Both forms still throw
-  when the selected value cannot be decoded. Envelope inputs and Go APIs
-  are unchanged.
+  when the selected value cannot be decoded.
 
 ## [0.6.0] - 2026-11-06
 
