@@ -11,6 +11,18 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Added
+
+- Restored `MultiEnvelope` and its Go and TypeScript batching, expansion and
+  validation helpers.
+
+### Changed
+
+- **[BC]** Changed `EventStreamSegment.envelopes` to contain `MultiEnvelope`
+  values again, preserving message order within and across multi-envelopes.
+
 ## [0.5.0] - 2026-11-06
 
 ### Added
