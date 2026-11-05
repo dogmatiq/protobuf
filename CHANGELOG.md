@@ -19,6 +19,19 @@ The format is based on [Keep a Changelog], and this project adheres to
   requested value is absent. Use `tryGetExtension()` and `tryGetBaggage()`
   for the previous behavior of returning `undefined`. Both forms still throw
   when the selected value cannot be decoded.
+- **[BC]** Changed `WatchEvents` to return `ABORTED` instead of
+  `RESOURCE_EXHAUSTED` when a client cannot keep up, so that it can't be
+  confused with `RESOURCE_EXHAUSTED` errors produced by gRPC itself or by
+  proxies.
+
+### Removed
+
+- **[BC]** Removed `EventStreamConsumerTooSlow` and the Go helper
+  `EventStreamConsumerTooSlowError()`. The `ABORTED` code alone identifies the
+  error.
+- **[BC]** Removed `UnrecognizedEventStream` and the Go helper
+  `UnrecognizedEventStreamError()`. `ReadEvents` still returns `NOT_FOUND` for
+  an unrecognized stream ID, without error details.
 
 ## [0.6.0] - 2026-11-06
 

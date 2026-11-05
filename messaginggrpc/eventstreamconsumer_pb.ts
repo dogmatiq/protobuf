@@ -156,8 +156,7 @@ export const EventStreamConsumerAPI: GenService<{
    * of the previous segment.
    *
    * If the client cannot keep up and the server can no longer deliver a stream
-   * contiguously, the call ends with RESOURCE_EXHAUSTED and an attached
-   * [EventStreamConsumerTooSlow] value identifying the affected stream.
+   * contiguously, the call ends with ABORTED.
    *
    * A missing or invalid message filter results in INVALID_ARGUMENT.
    *
@@ -176,8 +175,7 @@ export const EventStreamConsumerAPI: GenService<{
    * begins at the end offset of the previous segment. Delivery ends when the
    * server reaches the end of the stream, at which point it closes the call.
    *
-   * An unrecognized stream ID results in NOT_FOUND with an attached
-   * [UnrecognizedEventStream] value. See [UnrecognizedEventStreamError].
+   * An unrecognized stream ID results in NOT_FOUND.
    *
    * A requested offset beyond the end of the stream results in OUT_OF_RANGE.
    * An offset equal to the end of the stream is valid and returns no events.
