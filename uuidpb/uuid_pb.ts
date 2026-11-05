@@ -15,6 +15,9 @@ export const file_github_com_dogmatiq_protobuf_uuidpb_uuid: GenFile = /*@__PURE_
 /**
  * UUID is a size-optimized representation of an RFC 9562 UUID.
  *
+ * UUID values MUST use version 4 (random) or version 5 (name-based), and the
+ * RFC 9562 variant.
+ *
  * @generated from message dogma.protobuf.v1.UUID
  */
 export type UUID = Message<"dogma.protobuf.v1.UUID"> & {
