@@ -11,6 +11,8 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 message Identity {
   // Name is the entity's human-readable name.
   //
+  // The name MUST be between 1 and 255 bytes when encoded as UTF-8.
+  //
   // The name should be unique enough to allow a human to identify the entity
   // without ambiguity. There is no hard requirement for uniqueness.
   //

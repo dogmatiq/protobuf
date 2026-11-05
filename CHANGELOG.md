@@ -15,6 +15,9 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ### Added
 
+- Added `MessageTypeFilter` with explicit all-types and specific-types
+  selections, and Go and TypeScript validation helpers.
+
 - Added `EventStreamConsumerTooSlow` and the Go helper
   `EventStreamConsumerTooSlowError()` for `RESOURCE_EXHAUSTED` errors when a
   client cannot keep up and event stream delivery can no longer continue
@@ -22,11 +25,21 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ### Changed
 
+- **[BC]** Replaced `message_type_ids` in `WatchEventsRequest` and
+  `ReadEventsRequest` with a required `message_type_filter`. Missing filters,
+  filters with no selection, and empty specific-type selections are invalid
+  and result in `INVALID_ARGUMENT` from either RPC.
+
 - Clarified event matching, stream discovery and segment continuity requirements
   for `WatchEvents` and `ReadEvents`.
 - `WatchEvents` now requires `RESOURCE_EXHAUSTED` with an attached
   `EventStreamConsumerTooSlow` detail when a client cannot keep up and delivery
   can no longer continue contiguously.
+
+### Fixed
+
+- Fixed TypeScript `validateUUID()` accepting negative or overflowing UUID
+  components when their version and variant bits were otherwise valid.
 
 ## [0.4.1] - 2026-11-04
 

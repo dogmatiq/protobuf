@@ -25,10 +25,10 @@ const (
 // WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
 // method.
 type WatchEventsRequest struct {
-	state                     protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MessageTypeIds *[]*uuidpb.UUID        `protobuf:"bytes,1,rep,name=message_type_ids,json=messageTypeIds"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MessageTypeFilter *MessageTypeFilter     `protobuf:"bytes,1,opt,name=message_type_filter,json=messageTypeFilter"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *WatchEventsRequest) Reset() {
@@ -56,44 +56,54 @@ func (x *WatchEventsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *WatchEventsRequest) GetMessageTypeIds() []*uuidpb.UUID {
+func (x *WatchEventsRequest) GetMessageTypeFilter() *MessageTypeFilter {
 	if x != nil {
-		if x.xxx_hidden_MessageTypeIds != nil {
-			return *x.xxx_hidden_MessageTypeIds
-		}
+		return x.xxx_hidden_MessageTypeFilter
 	}
 	return nil
 }
 
-func (x *WatchEventsRequest) SetMessageTypeIds(v []*uuidpb.UUID) {
-	x.xxx_hidden_MessageTypeIds = &v
+func (x *WatchEventsRequest) SetMessageTypeFilter(v *MessageTypeFilter) {
+	x.xxx_hidden_MessageTypeFilter = v
+}
+
+func (x *WatchEventsRequest) HasMessageTypeFilter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeFilter != nil
+}
+
+func (x *WatchEventsRequest) ClearMessageTypeFilter() {
+	x.xxx_hidden_MessageTypeFilter = nil
 }
 
 type WatchEventsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// MessageTypeIds is the set of message type IDs of the event types to
-	// include in the segments. An empty set matches every event.
-	MessageTypeIds []*uuidpb.UUID
+	// MessageTypeFilter selects the event types to include in the segments.
+	// The filter is required and has either an explicit all-types selection or
+	// a non-empty list of specific message type IDs.
+	MessageTypeFilter *MessageTypeFilter
 }
 
 func (b0 WatchEventsRequest_builder) Build() *WatchEventsRequest {
 	m0 := &WatchEventsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_MessageTypeIds = &b.MessageTypeIds
+	x.xxx_hidden_MessageTypeFilter = b.MessageTypeFilter
 	return m0
 }
 
 // ReadEventsRequest is the input to the [EventStreamConsumerAPI.ReadEvents]
 // method.
 type ReadEventsRequest struct {
-	state                     protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_EventStreamId  *uuidpb.UUID           `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
-	xxx_hidden_BeginOffset    uint64                 `protobuf:"varint,2,opt,name=begin_offset,json=beginOffset"`
-	xxx_hidden_MessageTypeIds *[]*uuidpb.UUID        `protobuf:"bytes,3,rep,name=message_type_ids,json=messageTypeIds"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_EventStreamId     *uuidpb.UUID           `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
+	xxx_hidden_BeginOffset       uint64                 `protobuf:"varint,2,opt,name=begin_offset,json=beginOffset"`
+	xxx_hidden_MessageTypeFilter *MessageTypeFilter     `protobuf:"bytes,3,opt,name=message_type_filter,json=messageTypeFilter"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ReadEventsRequest) Reset() {
@@ -135,11 +145,9 @@ func (x *ReadEventsRequest) GetBeginOffset() uint64 {
 	return 0
 }
 
-func (x *ReadEventsRequest) GetMessageTypeIds() []*uuidpb.UUID {
+func (x *ReadEventsRequest) GetMessageTypeFilter() *MessageTypeFilter {
 	if x != nil {
-		if x.xxx_hidden_MessageTypeIds != nil {
-			return *x.xxx_hidden_MessageTypeIds
-		}
+		return x.xxx_hidden_MessageTypeFilter
 	}
 	return nil
 }
@@ -152,8 +160,8 @@ func (x *ReadEventsRequest) SetBeginOffset(v uint64) {
 	x.xxx_hidden_BeginOffset = v
 }
 
-func (x *ReadEventsRequest) SetMessageTypeIds(v []*uuidpb.UUID) {
-	x.xxx_hidden_MessageTypeIds = &v
+func (x *ReadEventsRequest) SetMessageTypeFilter(v *MessageTypeFilter) {
+	x.xxx_hidden_MessageTypeFilter = v
 }
 
 func (x *ReadEventsRequest) HasEventStreamId() bool {
@@ -163,8 +171,19 @@ func (x *ReadEventsRequest) HasEventStreamId() bool {
 	return x.xxx_hidden_EventStreamId != nil
 }
 
+func (x *ReadEventsRequest) HasMessageTypeFilter() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeFilter != nil
+}
+
 func (x *ReadEventsRequest) ClearEventStreamId() {
 	x.xxx_hidden_EventStreamId = nil
+}
+
+func (x *ReadEventsRequest) ClearMessageTypeFilter() {
+	x.xxx_hidden_MessageTypeFilter = nil
 }
 
 type ReadEventsRequest_builder struct {
@@ -176,9 +195,10 @@ type ReadEventsRequest_builder struct {
 	// begins at this offset. Events from this offset to the end of the stream
 	// are delivered, then the call is closed.
 	BeginOffset uint64
-	// MessageTypeIds is the set of message type IDs of the event types to
-	// include in the segments. An empty set matches every event.
-	MessageTypeIds []*uuidpb.UUID
+	// MessageTypeFilter selects the event types to include in the segments.
+	// The filter is required and has either an explicit all-types selection or
+	// a non-empty list of specific message type IDs.
+	MessageTypeFilter *MessageTypeFilter
 }
 
 func (b0 ReadEventsRequest_builder) Build() *ReadEventsRequest {
@@ -187,7 +207,7 @@ func (b0 ReadEventsRequest_builder) Build() *ReadEventsRequest {
 	_, _ = b, x
 	x.xxx_hidden_EventStreamId = b.EventStreamId
 	x.xxx_hidden_BeginOffset = b.BeginOffset
-	x.xxx_hidden_MessageTypeIds = &b.MessageTypeIds
+	x.xxx_hidden_MessageTypeFilter = b.MessageTypeFilter
 	return m0
 }
 
@@ -328,13 +348,13 @@ var File_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto pr
 
 const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_rawDesc = "" +
 	"\n" +
-	"Dgithub.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto\x12\x12dogma.messaging.v1\x1a6github.com/dogmatiq/protobuf/envelopepb/envelope.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"W\n" +
-	"\x12WatchEventsRequest\x12A\n" +
-	"\x10message_type_ids\x18\x01 \x03(\v2\x17.dogma.protobuf.v1.UUIDR\x0emessageTypeIds\"\xc1\x01\n" +
+	"Dgithub.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto\x12\x12dogma.messaging.v1\x1a6github.com/dogmatiq/protobuf/envelopepb/envelope.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\x1aBgithub.com/dogmatiq/protobuf/messaginggrpc/messagetypefilter.proto\"k\n" +
+	"\x12WatchEventsRequest\x12U\n" +
+	"\x13message_type_filter\x18\x01 \x01(\v2%.dogma.messaging.v1.MessageTypeFilterR\x11messageTypeFilter\"\xd5\x01\n" +
 	"\x11ReadEventsRequest\x12?\n" +
 	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12(\n" +
-	"\fbegin_offset\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\vbeginOffset\x12A\n" +
-	"\x10message_type_ids\x18\x03 \x03(\v2\x17.dogma.protobuf.v1.UUIDR\x0emessageTypeIds\"\xe5\x01\n" +
+	"\fbegin_offset\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\vbeginOffset\x12U\n" +
+	"\x13message_type_filter\x18\x03 \x01(\v2%.dogma.messaging.v1.MessageTypeFilterR\x11messageTypeFilter\"\xe5\x01\n" +
 	"\x12EventStreamSegment\x12?\n" +
 	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12(\n" +
 	"\fbegin_offset\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\vbeginOffset\x12$\n" +
@@ -351,15 +371,16 @@ var file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_go
 	(*WatchEventsRequest)(nil),       // 0: dogma.messaging.v1.WatchEventsRequest
 	(*ReadEventsRequest)(nil),        // 1: dogma.messaging.v1.ReadEventsRequest
 	(*EventStreamSegment)(nil),       // 2: dogma.messaging.v1.EventStreamSegment
-	(*uuidpb.UUID)(nil),              // 3: dogma.protobuf.v1.UUID
-	(*envelopepb.MultiEnvelope)(nil), // 4: dogma.protobuf.v1.MultiEnvelope
+	(*MessageTypeFilter)(nil),        // 3: dogma.messaging.v1.MessageTypeFilter
+	(*uuidpb.UUID)(nil),              // 4: dogma.protobuf.v1.UUID
+	(*envelopepb.MultiEnvelope)(nil), // 5: dogma.protobuf.v1.MultiEnvelope
 }
 var file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_depIdxs = []int32{
-	3, // 0: dogma.messaging.v1.WatchEventsRequest.message_type_ids:type_name -> dogma.protobuf.v1.UUID
-	3, // 1: dogma.messaging.v1.ReadEventsRequest.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	3, // 2: dogma.messaging.v1.ReadEventsRequest.message_type_ids:type_name -> dogma.protobuf.v1.UUID
-	3, // 3: dogma.messaging.v1.EventStreamSegment.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	4, // 4: dogma.messaging.v1.EventStreamSegment.envelopes:type_name -> dogma.protobuf.v1.MultiEnvelope
+	3, // 0: dogma.messaging.v1.WatchEventsRequest.message_type_filter:type_name -> dogma.messaging.v1.MessageTypeFilter
+	4, // 1: dogma.messaging.v1.ReadEventsRequest.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	3, // 2: dogma.messaging.v1.ReadEventsRequest.message_type_filter:type_name -> dogma.messaging.v1.MessageTypeFilter
+	4, // 3: dogma.messaging.v1.EventStreamSegment.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	5, // 4: dogma.messaging.v1.EventStreamSegment.envelopes:type_name -> dogma.protobuf.v1.MultiEnvelope
 	0, // 5: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:input_type -> dogma.messaging.v1.WatchEventsRequest
 	1, // 6: dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents:input_type -> dogma.messaging.v1.ReadEventsRequest
 	2, // 7: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:output_type -> dogma.messaging.v1.EventStreamSegment
@@ -376,6 +397,7 @@ func file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_i
 	if File_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto != nil {
 		return
 	}
+	file_github_com_dogmatiq_protobuf_messaginggrpc_messagetypefilter_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

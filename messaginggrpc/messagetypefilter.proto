@@ -1,0 +1,27 @@
+edition = "2024";
+package dogma.messaging.v1;
+
+option go_package = "github.com/dogmatiq/protobuf/messaginggrpc";
+
+import "google/protobuf/empty.proto";
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// MessageTypeFilter selects the message types to deliver. It selects either
+// every message type or a non-empty list of specific message type IDs.
+//
+// A filter with no selection, or an empty list of message type IDs, is invalid.
+message MessageTypeFilter {
+  // MessageTypes is a non-empty list of specific message type IDs to deliver.
+  message MessageTypes {
+    // Ids contains the message type IDs to deliver. Each ID is a valid UUID.
+    repeated dogma.protobuf.v1.UUID ids = 1;
+  }
+
+  oneof selection {
+    // All selects every message type, including types not yet recorded.
+    google.protobuf.Empty all = 1;
+
+    // MessageTypes selects only the listed message type IDs.
+    MessageTypes message_types = 2;
+  }
+}

@@ -31,9 +31,8 @@ const (
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIClient interface {
 	// WatchEvents delivers matching events as they are appended to any event
-	// stream offered by the server, for as long as the call is open. An event
-	// matches if its message type ID is included in the request's list of message
-	// type IDs, or if that list is empty.
+	// stream offered by the server, for as long as the call is open. Matching
+	// events are selected by the request's message type filter.
 	//
 	// The feed starts at the tail of each stream. Every offered stream that
 	// already contains matching events is represented by at least one segment.
@@ -47,11 +46,12 @@ type EventStreamConsumerAPIClient interface {
 	// [EventStreamConsumerTooSlow] value identifying the affected stream. This
 	// can occur when events are appended faster than they can be delivered to the
 	// client. See [EventStreamConsumerTooSlowError].
+	//
+	// A missing or invalid message type filter results in INVALID_ARGUMENT.
 	WatchEvents(ctx context.Context, in *WatchEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
 	// ReadEvents delivers matching events from a single event stream, in order,
-	// beginning at the requested offset. An event matches if its message type ID
-	// is included in the request's list of message type IDs, or if that list is
-	// empty.
+	// beginning at the requested offset. Matching events are selected by the
+	// request's message type filter.
 	//
 	// The first segment begins at the requested offset. Each subsequent segment
 	// begins at the end offset of the previous segment. Delivery ends when the
@@ -62,6 +62,8 @@ type EventStreamConsumerAPIClient interface {
 	//
 	// A requested offset greater than the offset that the next event appended to
 	// the stream will have results in OUT_OF_RANGE.
+	//
+	// A missing or invalid message type filter results in INVALID_ARGUMENT.
 	ReadEvents(ctx context.Context, in *ReadEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
 }
 
@@ -119,9 +121,8 @@ type EventStreamConsumerAPI_ReadEventsClient = grpc.ServerStreamingClient[EventS
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIServer interface {
 	// WatchEvents delivers matching events as they are appended to any event
-	// stream offered by the server, for as long as the call is open. An event
-	// matches if its message type ID is included in the request's list of message
-	// type IDs, or if that list is empty.
+	// stream offered by the server, for as long as the call is open. Matching
+	// events are selected by the request's message type filter.
 	//
 	// The feed starts at the tail of each stream. Every offered stream that
 	// already contains matching events is represented by at least one segment.
@@ -135,11 +136,12 @@ type EventStreamConsumerAPIServer interface {
 	// [EventStreamConsumerTooSlow] value identifying the affected stream. This
 	// can occur when events are appended faster than they can be delivered to the
 	// client. See [EventStreamConsumerTooSlowError].
+	//
+	// A missing or invalid message type filter results in INVALID_ARGUMENT.
 	WatchEvents(*WatchEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
 	// ReadEvents delivers matching events from a single event stream, in order,
-	// beginning at the requested offset. An event matches if its message type ID
-	// is included in the request's list of message type IDs, or if that list is
-	// empty.
+	// beginning at the requested offset. Matching events are selected by the
+	// request's message type filter.
 	//
 	// The first segment begins at the requested offset. Each subsequent segment
 	// begins at the end offset of the previous segment. Delivery ends when the
@@ -150,6 +152,8 @@ type EventStreamConsumerAPIServer interface {
 	//
 	// A requested offset greater than the offset that the next event appended to
 	// the stream will have results in OUT_OF_RANGE.
+	//
+	// A missing or invalid message type filter results in INVALID_ARGUMENT.
 	ReadEvents(*ReadEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
 }
 

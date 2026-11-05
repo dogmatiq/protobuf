@@ -8,13 +8,15 @@ import type { MultiEnvelope } from "../envelopepb/envelope_pb.js";
 import { file_github_com_dogmatiq_protobuf_envelopepb_envelope } from "../envelopepb/envelope_pb.js";
 import type { UUID } from "../uuidpb/uuid_pb.js";
 import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
+import type { MessageTypeFilter } from "./messagetypefilter_pb.js";
+import { file_github_com_dogmatiq_protobuf_messaginggrpc_messagetypefilter } from "./messagetypefilter_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer: GenFile = /*@__PURE__*/
-  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxChBtZXNzYWdlX3R5cGVfaWRzGAEgAygLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKEG1lc3NhZ2VfdHlwZV9pZHMYAyADKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIrMBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEjMKCWVudmVsb3BlcxgEIAMoCzIgLmRvZ21hLnByb3RvYnVmLnYxLk11bHRpRW52ZWxvcGUy2AEKFkV2ZW50U3RyZWFtQ29uc3VtZXJBUEkSXwoLV2F0Y2hFdmVudHMSJi5kb2dtYS5tZXNzYWdpbmcudjEuV2F0Y2hFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABEl0KClJlYWRFdmVudHMSJS5kb2dtYS5tZXNzYWdpbmcudjEuUmVhZEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAFCLFoqZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXNzYWdpbmdncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIlgKEldhdGNoRXZlbnRzUmVxdWVzdBJCChNtZXNzYWdlX3R5cGVfZmlsdGVyGAEgASgLMiUuZG9nbWEubWVzc2FnaW5nLnYxLk1lc3NhZ2VUeXBlRmlsdGVyIqYBChFSZWFkRXZlbnRzUmVxdWVzdBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhsKDGJlZ2luX29mZnNldBgCIAEoBEIFqgECCAISQgoTbWVzc2FnZV90eXBlX2ZpbHRlchgDIAEoCzIlLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlVHlwZUZpbHRlciKzAQoSRXZlbnRTdHJlYW1TZWdtZW50EjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSGwoMYmVnaW5fb2Zmc2V0GAIgASgEQgWqAQIIAhIZCgplbmRfb2Zmc2V0GAMgASgEQgWqAQIIAhIzCgllbnZlbG9wZXMYBCADKAsyIC5kb2dtYS5wcm90b2J1Zi52MS5NdWx0aUVudmVsb3BlMtgBChZFdmVudFN0cmVhbUNvbnN1bWVyQVBJEl8KC1dhdGNoRXZlbnRzEiYuZG9nbWEubWVzc2FnaW5nLnYxLldhdGNoRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwARJdCgpSZWFkRXZlbnRzEiUuZG9nbWEubWVzc2FnaW5nLnYxLlJlYWRFdmVudHNSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudDABQixaKmdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWVzc2FnaW5nZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_messagetypefilter]);
 
 /**
  * WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
@@ -24,12 +26,13 @@ export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer
  */
 export type WatchEventsRequest = Message<"dogma.messaging.v1.WatchEventsRequest"> & {
   /**
-   * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments. An empty set matches every event.
+   * MessageTypeFilter selects the event types to include in the segments.
+   * The filter is required and has either an explicit all-types selection or
+   * a non-empty list of specific message type IDs.
    *
-   * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 1;
+   * @generated from field: dogma.messaging.v1.MessageTypeFilter message_type_filter = 1;
    */
-  messageTypeIds: UUID[];
+  messageTypeFilter?: MessageTypeFilter | undefined;
 };
 
 /**
@@ -63,12 +66,13 @@ export type ReadEventsRequest = Message<"dogma.messaging.v1.ReadEventsRequest"> 
   beginOffset: bigint;
 
   /**
-   * MessageTypeIds is the set of message type IDs of the event types to
-   * include in the segments. An empty set matches every event.
+   * MessageTypeFilter selects the event types to include in the segments.
+   * The filter is required and has either an explicit all-types selection or
+   * a non-empty list of specific message type IDs.
    *
-   * @generated from field: repeated dogma.protobuf.v1.UUID message_type_ids = 3;
+   * @generated from field: dogma.messaging.v1.MessageTypeFilter message_type_filter = 3;
    */
-  messageTypeIds: UUID[];
+  messageTypeFilter?: MessageTypeFilter | undefined;
 };
 
 /**
@@ -145,9 +149,8 @@ export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PUR
 export const EventStreamConsumerAPI: GenService<{
   /**
    * WatchEvents delivers matching events as they are appended to any event
-   * stream offered by the server, for as long as the call is open. An event
-   * matches if its message type ID is included in the request's list of message
-   * type IDs, or if that list is empty.
+   * stream offered by the server, for as long as the call is open. Matching
+   * events are selected by the request's message type filter.
    *
    * The feed starts at the tail of each stream. Every offered stream that
    * already contains matching events is represented by at least one segment.
@@ -162,6 +165,8 @@ export const EventStreamConsumerAPI: GenService<{
    * can occur when events are appended faster than they can be delivered to the
    * client. See [EventStreamConsumerTooSlowError].
    *
+   * A missing or invalid message type filter results in INVALID_ARGUMENT.
+   *
    * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents
    */
   watchEvents: {
@@ -171,9 +176,8 @@ export const EventStreamConsumerAPI: GenService<{
   },
   /**
    * ReadEvents delivers matching events from a single event stream, in order,
-   * beginning at the requested offset. An event matches if its message type ID
-   * is included in the request's list of message type IDs, or if that list is
-   * empty.
+   * beginning at the requested offset. Matching events are selected by the
+   * request's message type filter.
    *
    * The first segment begins at the requested offset. Each subsequent segment
    * begins at the end offset of the previous segment. Delivery ends when the
@@ -184,6 +188,8 @@ export const EventStreamConsumerAPI: GenService<{
    *
    * A requested offset greater than the offset that the next event appended to
    * the stream will have results in OUT_OF_RANGE.
+   *
+   * A missing or invalid message type filter results in INVALID_ARGUMENT.
    *
    * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents
    */
