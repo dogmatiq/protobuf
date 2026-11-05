@@ -7,9 +7,11 @@ import type { Envelope, MultiEnvelope } from "./envelope_pb.js";
  * {@link tryAppendEnvelope}, including unknown fields.
  *
  * The iterator is lazy. It reads one envelope ahead to find each group boundary
- * and stops reading when iteration stops. Empty input yields nothing. A run
- * with the same header is buffered until its end; use finite inputs to bound
- * batch sizes.
+ * and stops reading when iteration stops. Empty input yields nothing.
+ *
+ * A group is emitted when the header changes or the input ends. All bodies in
+ * the current group are held in memory; an endless input with equivalent
+ * headers keeps growing that group without emitting it.
  *
  * Each output has a new bodies array but shares its header and bodies with the
  * input. Inputs are not modified and must not be mutated during iteration.
@@ -20,7 +22,7 @@ import type { Envelope, MultiEnvelope } from "./envelope_pb.js";
  *
  * @example
  * // Envelopes that already exist:
- * const batches = [...groupEnvelopes(envelopes)];
+ * const batches = [...groupIntoMultiEnvelopes(envelopes)];
  *
  * // A packer with a known header can build a batch directly:
  * const batch = create(MultiEnvelopeSchema, { header, bodies });
@@ -28,7 +30,7 @@ import type { Envelope, MultiEnvelope } from "./envelope_pb.js";
  * @throws {Error} During iteration if an envelope has no body. No other
  * validation or metadata transformation is performed.
  */
-export function* groupEnvelopes(
+export function* groupIntoMultiEnvelopes(
   envelopes: Iterable<Envelope>,
 ): Generator<MultiEnvelope, void, unknown> {
   let group: MultiEnvelope | undefined;

@@ -5,7 +5,7 @@ import {
   EnvelopeSchema,
   HeaderSchema,
   expandMultiEnvelope,
-  groupEnvelopes,
+  groupIntoMultiEnvelopes,
   type Envelope,
   type Header,
 } from "./index.js";
@@ -15,7 +15,7 @@ const cases: { name: string; headers: (string | null)[]; sizes: number[] }[] =
     readFileSync(new URL("./testdata/groups.json", import.meta.url), "utf8"),
   );
 
-describe("groupEnvelopes", () => {
+describe("groupIntoMultiEnvelopes", () => {
   it.each(cases)("$name", ({ headers, sizes }) => {
     const input = headers.map((key, index) =>
       create(EnvelopeSchema, {
@@ -29,7 +29,7 @@ describe("groupEnvelopes", () => {
       }),
     );
     const before = input.map((env) => toBinary(EnvelopeSchema, env));
-    const groups = [...groupEnvelopes(input)];
+    const groups = [...groupIntoMultiEnvelopes(input)];
     expect(groups.map((group) => group.bodies.length)).toEqual(sizes);
     const output = groups.flatMap(expandMultiEnvelope);
     expect(output.map((env) => toBinary(EnvelopeSchema, env))).toEqual(before);
@@ -105,7 +105,7 @@ describe("groupEnvelopes", () => {
     const b = clone(EnvelopeSchema, a);
     change(b.header!);
     const input = [a, clone(EnvelopeSchema, a), b, clone(EnvelopeSchema, b)];
-    const groups = [...groupEnvelopes(input)];
+    const groups = [...groupIntoMultiEnvelopes(input)];
     expect(groups.map((group) => group.bodies.length)).toEqual([2, 2]);
     expect(groups.flatMap(expandMultiEnvelope)).toEqual(input);
   });
@@ -115,7 +115,7 @@ describe("groupEnvelopes", () => {
     const b = clone(EnvelopeSchema, a);
     b.header = fromBinary(HeaderSchema, new Uint8Array([0x98, 0x06, 1]));
     const input = [a, clone(EnvelopeSchema, a), b, clone(EnvelopeSchema, b)];
-    const groups = [...groupEnvelopes(input)];
+    const groups = [...groupIntoMultiEnvelopes(input)];
     expect(groups.map((group) => group.bodies.length)).toEqual([2, 2]);
     expect(
       groups
@@ -140,7 +140,7 @@ describe("groupEnvelopes", () => {
         closed = true;
       }
     }
-    const groups = groupEnvelopes(source());
+    const groups = groupIntoMultiEnvelopes(source());
     expect(reads).toBe(0);
     for (const _group of groups) {
       break;
@@ -156,7 +156,7 @@ describe("groupEnvelopes", () => {
         body: {},
       }),
     );
-    const iterator = groupEnvelopes(input);
+    const iterator = groupIntoMultiEnvelopes(input);
     const first = iterator.next().value!;
     const before = first.bodies.slice();
     iterator.next();
@@ -165,7 +165,7 @@ describe("groupEnvelopes", () => {
   });
 
   it("throws during iteration for an envelope without a body", () => {
-    const iterator = groupEnvelopes([create(EnvelopeSchema, {})]);
+    const iterator = groupIntoMultiEnvelopes([create(EnvelopeSchema, {})]);
     expect(() => iterator.next()).toThrow("envelope must have a body");
   });
 });

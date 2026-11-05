@@ -7,13 +7,13 @@ import (
 	. "github.com/dogmatiq/protobuf/envelopepb"
 )
 
-func ExampleGroupEnvelopes() {
+func ExampleGroupIntoMultiEnvelopes() {
 	header := NewHeaderBuilder().WithSource(NewSourceBuilder().WithInstanceId("source").Build()).Build()
 	first := NewEnvelopeBuilder().WithHeader(header).WithBody(NewBodyBuilder().WithIdempotencyKey("first").Build()).Build()
 	second := NewEnvelopeBuilder().WithHeader(header).WithBody(NewBodyBuilder().WithIdempotencyKey("second").Build()).Build()
 
 	// Group envelopes that already exist, without cloning their metadata.
-	for group := range GroupEnvelopes(slices.Values([]*Envelope{first, second})) {
+	for group := range GroupIntoMultiEnvelopes(slices.Values([]*Envelope{first, second})) {
 		fmt.Println(len(group.GetBodies()))
 	}
 	// Output: 2

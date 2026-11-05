@@ -6,14 +6,15 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-// GroupEnvelopes groups consecutive envelopes with equivalent headers into
+// GroupIntoMultiEnvelopes groups consecutive envelopes with equivalent headers into
 // multi-envelopes, preserving message order. Header equivalence is the same as
 // for [MultiEnvelope.TryAppendEnvelope], including unknown fields.
 //
 // The returned sequence is lazy. It reads one envelope ahead to find each group
 // boundary, and stops reading when iteration stops. Empty input yields nothing.
-// A run with the same header is buffered until its end; use finite inputs to
-// bound batch sizes.
+// A group is emitted when the header changes or the input ends. All bodies
+// in the current group are held in memory; an endless input with equivalent
+// headers keeps growing that group without emitting it.
 //
 // Each output has a new body slice but shares its header and bodies with the
 // input. Inputs are not modified and must not be mutated during iteration.
@@ -24,7 +25,7 @@ import (
 //
 // It panics during iteration if an envelope is nil or has no body. It does not
 // otherwise validate envelopes or change their metadata.
-func GroupEnvelopes(envelopes iter.Seq[*Envelope]) iter.Seq[*MultiEnvelope] {
+func GroupIntoMultiEnvelopes(envelopes iter.Seq[*Envelope]) iter.Seq[*MultiEnvelope] {
 	return func(yield func(*MultiEnvelope) bool) {
 		var header *Header
 		var bodies []*Body

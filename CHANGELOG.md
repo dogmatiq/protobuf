@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ### Added
 
-- Added Go `GroupEnvelopes()` and TypeScript `groupEnvelopes()` to group
+- Added Go `GroupIntoMultiEnvelopes()` and TypeScript `groupIntoMultiEnvelopes()` to group
   consecutive envelopes with equivalent headers into multi-envelopes while
   preserving message order.
 

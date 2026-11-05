@@ -25,7 +25,7 @@ func BenchmarkEnvelopeBatching(b *testing.B) {
 			b.Run("existing-envelopes", func(b *testing.B) {
 				b.ReportAllocs()
 				for b.Loop() {
-					for group := range GroupEnvelopes(slices.Values(envelopes)) {
+					for group := range GroupIntoMultiEnvelopes(slices.Values(envelopes)) {
 						benchmarkMultiEnvelope = group
 					}
 				}
@@ -56,7 +56,7 @@ func BenchmarkEnvelopeBatching(b *testing.B) {
 							}
 						}
 					}
-					for group := range GroupEnvelopes(input) {
+					for group := range GroupIntoMultiEnvelopes(input) {
 						benchmarkMultiEnvelope = group
 					}
 				}
