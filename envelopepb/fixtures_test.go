@@ -18,14 +18,14 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-var updateFixtures = flag.Bool("update-fixtures", false, "regenerate the golden MultiEnvelope fixtures in envelopepb/testdata")
+var updateFixtures = flag.Bool("update-fixtures", false, "regenerate the golden Envelope fixtures in envelopepb/testdata")
 
-// fixtureDir is the directory containing the golden MultiEnvelope fixtures
+// fixtureDir is the directory containing the golden Envelope fixtures
 // that are shared with the TypeScript tests.
 const fixtureDir = "testdata"
 
 // fixtureExpectation describes the extension and baggage values that are
-// expected to be found for a single body within a fixture.
+// expected to be found for a single envelope in a fixture.
 //
 // The values are the offsets of the [EventStreamPosition] values that are
 // found, or nil if no value is expected.
@@ -36,12 +36,12 @@ type fixtureExpectation struct {
 
 // fixtureCase is a single entry in the fixture expectations file.
 type fixtureCase struct {
-	File        string               `json:"file"`
-	Description string               `json:"description"`
-	Bodies      []fixtureExpectation `json:"bodies"`
+	File        string             `json:"file"`
+	Description string             `json:"description"`
+	Values      fixtureExpectation `json:"values"`
 }
 
-func TestMultiEnvelopeFixtures(t *testing.T) {
+func TestEnvelopeFixtures(t *testing.T) {
 	if *updateFixtures {
 		writeFixtures(t)
 	}
@@ -63,35 +63,30 @@ func TestMultiEnvelopeFixtures(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			multi := &MultiEnvelope{}
-			if err := proto.Unmarshal(data, multi); err != nil {
+			env := &Envelope{}
+			if err := proto.Unmarshal(data, env); err != nil {
 				t.Fatal(err)
 			}
 
-			var got []fixtureExpectation
-			for env := range multi.All() {
-				var e fixtureExpectation
+			var got fixtureExpectation
 
-				if x, ok, err := GetExtension[*EventStreamPosition](env); err != nil {
-					t.Fatal(err)
-				} else if ok {
-					e.ExtensionOffset = new(x.GetOffset())
-				}
+			if x, ok, err := GetExtension[*EventStreamPosition](env); err != nil {
+				t.Fatal(err)
+			} else if ok {
+				got.ExtensionOffset = new(x.GetOffset())
+			}
 
-				if x, ok, err := GetBaggage[*EventStreamPosition](env); err != nil {
-					t.Fatal(err)
-				} else if ok {
-					e.BaggageOffset = new(x.GetOffset())
-				}
-
-				got = append(got, e)
+			if x, ok, err := GetBaggage[*EventStreamPosition](env); err != nil {
+				t.Fatal(err)
+			} else if ok {
+				got.BaggageOffset = new(x.GetOffset())
 			}
 
 			Expect(
 				t,
 				"unexpected extension and baggage values",
 				got,
-				c.Bodies,
+				c.Values,
 			)
 		})
 	}
@@ -151,43 +146,27 @@ func writeFixtures(t *testing.T) {
 			Build()
 	}
 
-	fixtures := map[string]*MultiEnvelope{
-		"absent.binpb": NewMultiEnvelopeBuilder().
+	fixtures := map[string]*Envelope{
+		"absent.binpb": NewEnvelopeBuilder().
 			WithHeader(header(nil, nil)).
-			WithBodies([]*Body{
-				body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", []*anypb.Any{unrelated}, []*anypb.Any{unrelated}),
-			}).
+			WithBody(body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", []*anypb.Any{unrelated}, []*anypb.Any{unrelated})).
 			Build(),
-		"header-only.binpb": NewMultiEnvelopeBuilder().
+		"header-only.binpb": NewEnvelopeBuilder().
 			WithHeader(header([]*anypb.Any{unrelated, position(1)}, []*anypb.Any{unrelated, position(2)})).
-			WithBodies([]*Body{
-				body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", nil, nil),
-			}).
+			WithBody(body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", nil, nil)).
 			Build(),
-		"body-only.binpb": NewMultiEnvelopeBuilder().
+		"body-only.binpb": NewEnvelopeBuilder().
 			WithHeader(header(nil, nil)).
-			WithBodies([]*Body{
-				body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", []*anypb.Any{unrelated, position(3)}, []*anypb.Any{unrelated, position(4)}),
-			}).
+			WithBody(body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", []*anypb.Any{unrelated, position(3)}, []*anypb.Any{unrelated, position(4)})).
 			Build(),
-		"conflicting.binpb": NewMultiEnvelopeBuilder().
+		"conflicting.binpb": NewEnvelopeBuilder().
 			WithHeader(header([]*anypb.Any{position(1)}, []*anypb.Any{position(2)})).
-			WithBodies([]*Body{
-				body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", []*anypb.Any{position(3)}, []*anypb.Any{position(4)}),
-			}).
-			Build(),
-		"mixed.binpb": NewMultiEnvelopeBuilder().
-			WithHeader(header([]*anypb.Any{position(1)}, []*anypb.Any{position(2)})).
-			WithBodies([]*Body{
-				body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", nil, nil),
-				body("e2f3a4b5-c6d7-4e8f-90a1-b2c3d4e5f6a7", []*anypb.Any{position(3)}, nil),
-				body("f3a4b5c6-d7e8-4f90-a1b2-c3d4e5f6a7b8", nil, []*anypb.Any{position(4)}),
-			}).
+			WithBody(body("d1e2f3a4-b5c6-4d7e-8f90-a1b2c3d4e5f6", []*anypb.Any{position(3)}, []*anypb.Any{position(4)})).
 			Build(),
 	}
 
-	for file, multi := range fixtures {
-		data, err := proto.MarshalOptions{Deterministic: true}.Marshal(multi)
+	for file, env := range fixtures {
+		data, err := proto.MarshalOptions{Deterministic: true}.Marshal(env)
 		if err != nil {
 			t.Fatal(err)
 		}

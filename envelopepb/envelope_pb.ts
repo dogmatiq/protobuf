@@ -16,12 +16,10 @@ import type { Message as Message$1 } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/envelopepb/envelope.proto.
  */
 export const file_github_com_dogmatiq_protobuf_envelopepb_envelope: GenFile = /*@__PURE__*/
-  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VudmVsb3BlcGIvZW52ZWxvcGUucHJvdG8SEWRvZ21hLnByb3RvYnVmLnYxIlwKCEVudmVsb3BlEikKBmhlYWRlchgBIAEoCzIZLmRvZ21hLnByb3RvYnVmLnYxLkhlYWRlchIlCgRib2R5GAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuQm9keSJjCg1NdWx0aUVudmVsb3BlEikKBmhlYWRlchgBIAEoCzIZLmRvZ21hLnByb3RvYnVmLnYxLkhlYWRlchInCgZib2RpZXMYAiADKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5Cb2R5Iq8BCgZTb3VyY2USKQoEc2l0ZRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EjAKC2FwcGxpY2F0aW9uGAIgASgLMhsuZG9nbWEucHJvdG9idWYudjEuSWRlbnRpdHkSLAoHaGFuZGxlchgDIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhoKC2luc3RhbmNlX2lkGAQgASgJQgWqAQIIAiJkCgdNZXNzYWdlEigKB3R5cGVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhoKC2Rlc2NyaXB0aW9uGAIgASgJQgWqAQIIAhITCgRkYXRhGAMgASgMQgWqAQIIAiLkAQoGSGVhZGVyEi0KDGNhdXNhdGlvbl9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSLwoOY29ycmVsYXRpb25faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEikKBnNvdXJjZRgDIAEoCzIZLmRvZ21hLnByb3RvYnVmLnYxLlNvdXJjZRIoCgpleHRlbnNpb25zGAQgAygLMhQuZ29vZ2xlLnByb3RvYnVmLkFueRIlCgdiYWdnYWdlGAUgAygLMhQuZ29vZ2xlLnByb3RvYnVmLkFueSK0AgoEQm9keRIrCgptZXNzYWdlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIeCg9pZGVtcG90ZW5jeV9rZXkYAiABKAlCBaoBAggCEi4KCmNyZWF0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjEKDXNjaGVkdWxlZF9mb3IYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEisKB21lc3NhZ2UYBSABKAsyGi5kb2dtYS5wcm90b2J1Zi52MS5NZXNzYWdlEigKCmV4dGVuc2lvbnMYBiADKAsyFC5nb29nbGUucHJvdG9idWYuQW55EiUKB2JhZ2dhZ2UYByADKAsyFC5nb29nbGUucHJvdG9idWYuQW55QilaJ2dpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvZW52ZWxvcGVwYmIIZWRpdGlvbnNw6Qc", [file_google_protobuf_timestamp, file_google_protobuf_any, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VudmVsb3BlcGIvZW52ZWxvcGUucHJvdG8SEWRvZ21hLnByb3RvYnVmLnYxIlwKCEVudmVsb3BlEikKBmhlYWRlchgBIAEoCzIZLmRvZ21hLnByb3RvYnVmLnYxLkhlYWRlchIlCgRib2R5GAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuQm9keSKvAQoGU291cmNlEikKBHNpdGUYASABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRIwCgthcHBsaWNhdGlvbhgCIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EiwKB2hhbmRsZXIYAyABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRIaCgtpbnN0YW5jZV9pZBgEIAEoCUIFqgECCAIiZAoHTWVzc2FnZRIoCgd0eXBlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIaCgtkZXNjcmlwdGlvbhgCIAEoCUIFqgECCAISEwoEZGF0YRgDIAEoDEIFqgECCAIi5AEKBkhlYWRlchItCgxjYXVzYXRpb25faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEi8KDmNvcnJlbGF0aW9uX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIpCgZzb3VyY2UYAyABKAsyGS5kb2dtYS5wcm90b2J1Zi52MS5Tb3VyY2USKAoKZXh0ZW5zaW9ucxgEIAMoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkSJQoHYmFnZ2FnZRgFIAMoCzIULmdvb2dsZS5wcm90b2J1Zi5BbnkitAIKBEJvZHkSKwoKbWVzc2FnZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHgoPaWRlbXBvdGVuY3lfa2V5GAIgASgJQgWqAQIIAhIuCgpjcmVhdGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIxCg1zY2hlZHVsZWRfZm9yGAQgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIrCgdtZXNzYWdlGAUgASgLMhouZG9nbWEucHJvdG9idWYudjEuTWVzc2FnZRIoCgpleHRlbnNpb25zGAYgAygLMhQuZ29vZ2xlLnByb3RvYnVmLkFueRIlCgdiYWdnYWdlGAcgAygLMhQuZ29vZ2xlLnByb3RvYnVmLkFueUIpWidnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VudmVsb3BlcGJiCGVkaXRpb25zcOkH", [file_google_protobuf_timestamp, file_google_protobuf_any, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * Envelope is a container for a Dogma message and its meta-data.
- *
- * It is wire-compatible with [MultiEnvelope].
  *
  * @generated from message dogma.protobuf.v1.Envelope
  */
@@ -43,32 +41,6 @@ export type Envelope = Message$1<"dogma.protobuf.v1.Envelope"> & {
  */
 export const EnvelopeSchema: GenMessage<Envelope> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 0);
-
-/**
- * MultiEnvelope is an efficient encoding of an ordered sequence of [Envelope]
- * values that share common header context.
- *
- *
- * @generated from message dogma.protobuf.v1.MultiEnvelope
- */
-export type MultiEnvelope = Message$1<"dogma.protobuf.v1.MultiEnvelope"> & {
-  /**
-   * @generated from field: dogma.protobuf.v1.Header header = 1;
-   */
-  header?: Header | undefined;
-
-  /**
-   * @generated from field: repeated dogma.protobuf.v1.Body bodies = 2;
-   */
-  bodies: Body[];
-};
-
-/**
- * Describes the message dogma.protobuf.v1.MultiEnvelope.
- * Use `create(MultiEnvelopeSchema)` to create a new message.
- */
-export const MultiEnvelopeSchema: GenMessage<MultiEnvelope> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 1);
 
 /**
  * Source identifies where a message originated.
@@ -121,7 +93,7 @@ export type Source = Message$1<"dogma.protobuf.v1.Source"> & {
  * Use `create(SourceSchema)` to create a new message.
  */
 export const SourceSchema: GenMessage<Source> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 1);
 
 /**
  * Message is the serialized representation of a Dogma message.
@@ -167,7 +139,7 @@ export type Message = Message$1<"dogma.protobuf.v1.Message"> & {
  * Use `create(MessageSchema)` to create a new message.
  */
 export const MessageSchema: GenMessage<Message> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 3);
+  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 2);
 
 /**
  * @generated from message dogma.protobuf.v1.Header
@@ -175,7 +147,7 @@ export const MessageSchema: GenMessage<Message> = /*@__PURE__*/
 export type Header = Message$1<"dogma.protobuf.v1.Header"> & {
   /**
    * CausationId is the ID of the message that was the direct cause of the
-   * messages.
+   * message.
    *
    * It is required. A message that was not caused by any other message is its
    * own cause, so its causation ID is its own message ID.
@@ -185,9 +157,9 @@ export type Header = Message$1<"dogma.protobuf.v1.Header"> & {
   causationId?: UUID | undefined;
 
   /**
-   * CorrelationId is the ID of the first ancestor of the messages that was
+   * CorrelationId is the ID of the first ancestor of the message that was
    * itself not caused by another message, that is, it's the root of the message
-   * chain that ultimately resulted in these messages.
+   * chain that ultimately resulted in this message.
    *
    * It is required. A message that was not caused by any other message is the
    * root of its own chain, so its correlation ID is its own message ID.
@@ -197,15 +169,15 @@ export type Header = Message$1<"dogma.protobuf.v1.Header"> & {
   correlationId?: UUID | undefined;
 
   /**
-   * Source identifies the origin of the messages.
+   * Source identifies the origin of the message.
    *
    * @generated from field: dogma.protobuf.v1.Source source = 3;
    */
   source?: Source | undefined;
 
   /**
-   * Extensions is a set of extension values associated with the messages,
-   * their causal chain, or the envelope itself.
+   * Extensions is a set of extension values associated with the message,
+   * its causal chain, or the envelope itself.
    *
    * @generated from field: repeated google.protobuf.Any extensions = 4;
    */
@@ -225,11 +197,11 @@ export type Header = Message$1<"dogma.protobuf.v1.Header"> & {
  * Use `create(HeaderSchema)` to create a new message.
  */
 export const HeaderSchema: GenMessage<Header> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 4);
+  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 3);
 
 /**
  * Body contains the metadata and encoded form of a single message in an
- * [Envelope] or [MultiEnvelope].
+ * [Envelope].
  *
  * @generated from message dogma.protobuf.v1.Body
  */
@@ -304,5 +276,5 @@ export type Body = Message$1<"dogma.protobuf.v1.Body"> & {
  * Use `create(BodySchema)` to create a new message.
  */
 export const BodySchema: GenMessage<Body> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 5);
+  messageDesc(file_github_com_dogmatiq_protobuf_envelopepb_envelope, 4);
 

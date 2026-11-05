@@ -213,27 +213,6 @@ func TestGetExtension(t *testing.T) {
 		})
 	})
 
-	t.Run("when the envelope was obtained from a multi-envelope", func(t *testing.T) {
-		t.Run("it returns values from the shared header", func(t *testing.T) {
-			multi := NewMultiEnvelopeBuilder().
-				WithHeader(NewHeaderBuilder().Build()).
-				Build()
-			multi.GetHeader().SetExtensions([]*anypb.Any{
-				mustMarshalAny(t, wrapperspb.String("shared")),
-			})
-			multi.AppendBodies(NewBodyBuilder().Build())
-
-			for env := range multi.All() {
-				Expect(
-					t,
-					"unexpected extension value",
-					MustGetExtension[*wrapperspb.StringValue](env),
-					wrapperspb.String("shared"),
-				)
-			}
-		})
-	})
-
 	t.Run("when no extensions are present", func(t *testing.T) {
 		t.Run("it returns false", func(t *testing.T) {
 			env := newEmptyEnvelope()

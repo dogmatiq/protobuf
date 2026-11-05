@@ -3,9 +3,7 @@ package envelopepb
 import (
 	"errors"
 	"fmt"
-	"iter"
 
-	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
@@ -36,86 +34,6 @@ func (x *Envelope) Validate() error {
 	}
 
 	return nil
-}
-
-// AsMultiEnvelope returns a [MultiEnvelope] that contains the same header and
-// body as x.
-//
-// This is a convenience method for when you want to treat a single-envelope
-// message as a multi-envelope message.
-func (x *Envelope) AsMultiEnvelope() *MultiEnvelope {
-	return NewMultiEnvelopeBuilder().
-		WithHeader(x.GetHeader()).
-		WithBodies([]*Body{x.GetBody()}).
-		Build()
-}
-
-// Validate returns an error if x is not well-formed.
-//
-// Well-formedness means that all compulsory fields are populated and that no
-// incompatible fields are populated.
-//
-// It is intentionally fairly permissive, so that message meta-data can be
-// obtained even if the message is unable to be handled.
-//
-// It does not perform "deep" validation, such as ensuring messages, times, etc
-// can be unmarshaled.
-func (x *MultiEnvelope) Validate() error {
-	if x == nil {
-		return errors.New("must not be nil")
-	}
-
-	header := x.GetHeader()
-
-	if err := header.Validate(); err != nil {
-		return fmt.Errorf("invalid header: %w", err)
-	}
-
-	for i, b := range x.GetBodies() {
-		if err := b.Validate(header); err != nil {
-			return fmt.Errorf("invalid body at index %d: %w", i, err)
-		}
-	}
-
-	return nil
-}
-
-// All returns an iterator over each message in x as a standalone [Envelope].
-func (x *MultiEnvelope) All() iter.Seq[*Envelope] {
-	return func(yield func(*Envelope) bool) {
-		for _, b := range x.GetBodies() {
-			env := NewEnvelopeBuilder().
-				WithHeader(x.GetHeader()).
-				WithBody(b).
-				Build()
-
-			if !yield(env) {
-				return
-			}
-		}
-	}
-}
-
-// AppendBodies appends the given bodies to x.
-func (x *MultiEnvelope) AppendBodies(bodies ...*Body) {
-	x.SetBodies(
-		append(
-			x.GetBodies(),
-			bodies...,
-		),
-	)
-}
-
-// TryAppendEnvelope attempts to append the body from the given envelope to x.
-//
-// It requires that x and env share equivalent headers. If they do not, it
-// returns false and does not modify x.
-func (x *MultiEnvelope) TryAppendEnvelope(env *Envelope) bool {
-	if proto.Equal(x.GetHeader(), env.GetHeader()) {
-		x.AppendBodies(env.GetBody())
-		return true
-	}
-	return false
 }
 
 // validate returns an error if x is not well-formed.
