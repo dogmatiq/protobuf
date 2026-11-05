@@ -36,6 +36,11 @@ The format is based on [Keep a Changelog], and this project adheres to
   `EventStreamConsumerTooSlow` detail when a client cannot keep up and delivery
   can no longer continue contiguously.
 
+### Removed
+
+- **[BC]** Removed `MultiEnvelope` and its Go and TypeScript batching,
+  expansion and validation helpers. Use individual `Envelope` values instead.
+
 ### Fixed
 
 - Fixed TypeScript `validateUUID()` accepting negative or overflowing UUID

@@ -9,19 +9,9 @@ import "github.com/dogmatiq/protobuf/identitypb/identity.proto";
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
 // Envelope is a container for a Dogma message and its meta-data.
-//
-// It is wire-compatible with [MultiEnvelope].
 message Envelope {
   Header header = 1;
   Body   body   = 2;
-}
-
-// MultiEnvelope is an efficient encoding of an ordered sequence of [Envelope]
-// values that share common header context.
-//
-message MultiEnvelope {
-  Header        header = 1;
-  repeated Body bodies = 2;
 }
 
 // Source identifies where a message originated.
@@ -73,27 +63,32 @@ message Message {
   bytes data = 3 [features.field_presence = IMPLICIT];
 }
 
+// Header contains origin and causal context that can be common to messages
+// produced by the same cause.
+//
+// Extensions and baggage from the header and body are combined by message
+// type. Body values take precedence over header values of the same type.
 message Header {
   // CausationId is the ID of the message that was the direct cause of the
-  // messages.
+  // message.
   //
   // It is required. A message that was not caused by any other message is its
   // own cause, so its causation ID is its own message ID.
   UUID causation_id = 1;
 
-  // CorrelationId is the ID of the first ancestor of the messages that was
+  // CorrelationId is the ID of the first ancestor of the message that was
   // itself not caused by another message, that is, it's the root of the message
-  // chain that ultimately resulted in these messages.
+  // chain that ultimately resulted in this message.
   //
   // It is required. A message that was not caused by any other message is the
   // root of its own chain, so its correlation ID is its own message ID.
   UUID correlation_id = 2;
 
-  // Source identifies the origin of the messages.
+  // Source identifies the origin of the message.
   Source source = 3;
 
-  // Extensions is a set of extension values associated with the messages,
-  // their causal chain, or the envelope itself.
+  // Extensions is a set of extension values associated with the message,
+  // its causal chain, or the envelope itself.
   repeated google.protobuf.Any extensions = 4;
 
   // Baggage is a set of extension values that are propagated through the
@@ -102,7 +97,7 @@ message Header {
 }
 
 // Body contains the metadata and encoded form of a single message in an
-// [Envelope] or [MultiEnvelope].
+// [Envelope].
 message Body {
   // MessageId is a unique identifier for the message in this envelope.
   UUID message_id = 1;

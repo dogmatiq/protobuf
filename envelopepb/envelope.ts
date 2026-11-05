@@ -1,76 +1,10 @@
-import { create, createRegistry, equals } from "@bufbuild/protobuf";
+import { create } from "@bufbuild/protobuf";
 import type { Any, Timestamp } from "@bufbuild/protobuf/wkt";
 import { IdentitySchema, type Identity } from "../identitypb/identity_pb.js";
 import { identityToString, validateIdentity } from "../identitypb/identity.js";
 import { UUIDSchema, type UUID } from "../uuidpb/uuid_pb.js";
 import { uuidToString, validateUUID } from "../uuidpb/uuid.js";
-import {
-  EnvelopeSchema,
-  HeaderSchema,
-  MultiEnvelopeSchema,
-  type Body,
-  type Envelope,
-  type Header,
-  type Message,
-  type MultiEnvelope,
-  type Source,
-} from "./envelope_pb.js";
-
-/**
- * Returns each message in a {@link MultiEnvelope} as a standalone
- * {@link Envelope}.
- *
- * The returned envelopes share the multi-envelope's header.
- */
-export function expandMultiEnvelope(x: MultiEnvelope): Envelope[] {
-  return x.bodies.map((body) =>
-    create(EnvelopeSchema, { header: x.header, body }),
-  );
-}
-
-/**
- * Returns a {@link MultiEnvelope} that contains the same header and body as
- * env.
- *
- * The multi-envelope shares the envelope's header and body.
- *
- * @throws {Error} If env has no body.
- */
-export function asMultiEnvelope(env: Envelope): MultiEnvelope {
-  if (!env.body) {
-    throw new Error("envelope must have a body");
-  }
-
-  return create(MultiEnvelopeSchema, {
-    header: env.header,
-    bodies: [env.body],
-  });
-}
-
-/**
- * Appends the body of env to x if they have equivalent headers.
- *
- * It returns false, and does not modify x, if the headers differ.
- *
- * @throws {Error} If env has no body.
- */
-export function tryAppendEnvelope(x: MultiEnvelope, env: Envelope): boolean {
-  if (!env.body) {
-    throw new Error("envelope must have a body");
-  }
-
-  const a = x.header;
-  const b = env.header;
-  const same = a && b ? headersEqual(a, b) : a === b;
-
-  if (!same) {
-    return false;
-  }
-
-  x.bodies.push(env.body);
-
-  return true;
-}
+import type { Body, Envelope, Header, Message, Source } from "./envelope_pb.js";
 
 /**
  * Throws an error if env is not well-formed.
@@ -86,19 +20,6 @@ export function tryAppendEnvelope(x: MultiEnvelope, env: Envelope): boolean {
 export function validateEnvelope(env: Envelope): void {
   check("invalid header", () => validateHeader(env.header));
   check("invalid body", () => validateBody(env.body, env.header));
-}
-
-/**
- * Throws an error if x is not well-formed.
- *
- * See {@link validateEnvelope} for what well-formedness means.
- */
-export function validateMultiEnvelope(x: MultiEnvelope): void {
-  check("invalid header", () => validateHeader(x.header));
-
-  x.bodies.forEach((body, i) =>
-    check(`invalid body at index ${i}`, () => validateBody(body, x.header)),
-  );
 }
 
 /**
@@ -260,22 +181,3 @@ function check(prefix: string, fn: () => void): void {
     throw new Error(`${prefix}: ${(cause as Error).message}`, { cause });
   }
 }
-
-// headersEqual returns true if a and b are equivalent, including any unknown
-// fields, as Go's proto.Equal() does. The equals() function from protobuf-es
-// ignores unknown fields unless the "unknown" option is set.
-//
-// Unlike proto.Equal(), it compares unknown fields in the order they were
-// decoded, rather than grouped by field number, so headers whose unknown fields
-// arrived in a different order are not equal.
-//
-// The "unknown" option is marked as experimental by protobuf-es, so it may
-// change in a later release. A test covers it, so that such a change is
-// noticed.
-function headersEqual(a: Header, b: Header): boolean {
-  return equals(HeaderSchema, a, b, { registry: REGISTRY, unknown: true });
-}
-
-// REGISTRY is the registry passed to equals(). It's empty because Header has no
-// extensions, so every unknown field is genuinely unknown.
-const REGISTRY = createRegistry();
