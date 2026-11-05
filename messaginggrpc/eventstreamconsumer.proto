@@ -14,20 +14,18 @@ service EventStreamConsumerAPI {
   // matches if its message type ID is included in the request's list of message
   // type IDs, or if that list is empty.
   //
-  // The feed starts at the tail of each stream. The first [EventStreamSegment]
-  // the client receives for a stream tells the client that the stream exists
-  // and the offset at which delivery begins. Each subsequent segment for that
-  // stream MUST begin at the end offset of the previous segment.
+  // The feed starts at the tail of each stream. Every offered stream that
+  // already contains matching events is represented by at least one segment.
+  // The first [EventStreamSegment] received for a stream may be empty, but it
+  // tells the client that the stream exists and the offset at which delivery
+  // begins. Each subsequent segment for that stream begins at the end offset
+  // of the previous segment.
   //
-  // The server MUST send at least one segment for every stream it offers that
-  // already contains matching events, even if the segment is empty, as it still
-  // tells the client where delivery begins.
-  //
-  // If the server can no longer deliver a stream contiguously because the
-  // client cannot keep up, it MUST close the call with RESOURCE_EXHAUSTED and
-  // an attached [EventStreamConsumerTooSlow] value identifying the affected
-  // stream. This can occur when events are appended faster than they can be
-  // delivered to the client. See [EventStreamConsumerTooSlowError].
+  // If the client cannot keep up and the server can no longer deliver a stream
+  // contiguously, the call ends with RESOURCE_EXHAUSTED and an attached
+  // [EventStreamConsumerTooSlow] value identifying the affected stream. This
+  // can occur when events are appended faster than they can be delivered to the
+  // client. See [EventStreamConsumerTooSlowError].
   rpc WatchEvents(WatchEventsRequest) returns (stream EventStreamSegment);
 
   // ReadEvents delivers matching events from a single event stream, in order,
@@ -35,18 +33,15 @@ service EventStreamConsumerAPI {
   // is included in the request's list of message type IDs, or if that list is
   // empty.
   //
-  // Delivery ends when the server reaches the end of the stream, at which point
-  // it closes the call.
+  // The first segment begins at the requested offset. Each subsequent segment
+  // begins at the end offset of the previous segment. Delivery ends when the
+  // server reaches the end of the stream, at which point it closes the call.
   //
-  // The first segment MUST begin at the requested offset. Each subsequent
-  // segment MUST begin at the end offset of the previous segment.
+  // An unrecognized stream ID results in NOT_FOUND with an attached
+  // [UnrecognizedEventStream] value. See [UnrecognizedEventStreamError].
   //
-  // If the requested stream ID is not recognized, the server MUST return
-  // NOT_FOUND with an attached [UnrecognizedEventStream] value. See
-  // [UnrecognizedEventStreamError].
-  //
-  // If the requested offset is greater than the offset that the next event
-  // appended to the stream will have, the server MUST return OUT_OF_RANGE.
+  // A requested offset greater than the offset that the next event appended to
+  // the stream will have results in OUT_OF_RANGE.
   rpc ReadEvents(ReadEventsRequest) returns (stream EventStreamSegment);
 }
 
