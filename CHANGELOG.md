@@ -26,7 +26,6 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 - **[BC]** Changed `EventStreamSegment.envelopes` to contain individual
   `Envelope` values instead of `MultiEnvelope` values.
-
 - **[BC]** Replaced `message_type_ids` in `WatchEventsRequest` and
   `ReadEventsRequest` with a required `filter`. Missing filters,
   filters with no selection, and empty specific-type selections are invalid
