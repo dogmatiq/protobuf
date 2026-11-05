@@ -27,12 +27,16 @@ import (
 // otherwise validate envelopes or change their metadata.
 func AsMultiEnvelopes(envelopes iter.Seq[*Envelope]) iter.Seq[*MultiEnvelope] {
 	return func(yield func(*MultiEnvelope) bool) {
-		var header *Header
-		var bodies []*Body
+		var (
+			header *Header
+			bodies []*Body
+		)
+
 		for env := range envelopes {
 			if env.GetBody() == nil {
 				panic("envelope must have a body")
 			}
+
 			if len(bodies) != 0 && !proto.Equal(header, env.GetHeader()) {
 				if !yield(
 					NewMultiEnvelopeBuilder().
@@ -42,15 +46,19 @@ func AsMultiEnvelopes(envelopes iter.Seq[*Envelope]) iter.Seq[*MultiEnvelope] {
 				) {
 					return
 				}
+
 				bodies = nil
 			}
+
 			if len(bodies) == 0 {
 				header = env.GetHeader()
 			}
+
 			// Keep the growing slice outside the protobuf message: SetBodies()
 			// stores a pointer to its argument, allocating a slice header per call.
 			bodies = append(bodies, env.GetBody())
 		}
+
 		if len(bodies) != 0 {
 			yield(
 				NewMultiEnvelopeBuilder().

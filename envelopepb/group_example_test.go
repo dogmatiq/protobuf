@@ -36,6 +36,7 @@ func ExampleAsMultiEnvelopes() {
 	for group := range AsMultiEnvelopes(slices.Values([]*Envelope{first, second})) {
 		fmt.Println(len(group.GetBodies()))
 	}
+
 	// Output: 2
 }
 
