@@ -14,6 +14,17 @@ import type { Envelope, MultiEnvelope } from "./envelope_pb.js";
  * Each output has a new bodies array but shares its header and bodies with the
  * input. Inputs are not modified and must not be mutated during iteration.
  *
+ * When the header is already known, create a MultiEnvelope with that header
+ * and accumulate its bodies directly rather than constructing temporary
+ * envelopes for this function. This avoids wrappers and header comparisons.
+ *
+ * @example
+ * // Envelopes that already exist:
+ * const batches = [...groupEnvelopes(envelopes)];
+ *
+ * // A packer with a known header can build a batch directly:
+ * const batch = create(MultiEnvelopeSchema, { header, bodies });
+ *
  * @throws {Error} During iteration if an envelope has no body. No other
  * validation or metadata transformation is performed.
  */

@@ -1,6 +1,10 @@
 package envelopepb
 
-import "iter"
+import (
+	"iter"
+
+	"google.golang.org/protobuf/proto"
+)
 
 // GroupEnvelopes groups consecutive envelopes with equivalent headers into
 // multi-envelopes, preserving message order. Header equivalence is the same as
@@ -14,27 +18,35 @@ import "iter"
 // Each output has a new body slice but shares its header and bodies with the
 // input. Inputs are not modified and must not be mutated during iteration.
 //
+// When the header is already known, accumulate bodies directly and pass the
+// slice to [MultiEnvelopeBuilder.WithBodies] instead of constructing temporary
+// envelopes to use this function. This avoids wrappers and header comparisons.
+//
 // It panics during iteration if an envelope is nil or has no body. It does not
 // otherwise validate envelopes or change their metadata.
 func GroupEnvelopes(envelopes iter.Seq[*Envelope]) iter.Seq[*MultiEnvelope] {
 	return func(yield func(*MultiEnvelope) bool) {
-		var group *MultiEnvelope
+		var header *Header
+		var bodies []*Body
 		for env := range envelopes {
 			if env.GetBody() == nil {
 				panic("envelope must have a body")
 			}
-			if group != nil {
-				if group.TryAppendEnvelope(env) {
-					continue
-				}
-				if !yield(group) {
+			if len(bodies) != 0 && !proto.Equal(header, env.GetHeader()) {
+				if !yield(NewMultiEnvelopeBuilder().WithHeader(header).WithBodies(bodies).Build()) {
 					return
 				}
+				bodies = nil
 			}
-			group = env.AsMultiEnvelope()
+			if len(bodies) == 0 {
+				header = env.GetHeader()
+			}
+			// Keep the growing slice outside the protobuf message: SetBodies()
+			// stores a pointer to its argument, allocating a slice header per call.
+			bodies = append(bodies, env.GetBody())
 		}
-		if group != nil {
-			yield(group)
+		if len(bodies) != 0 {
+			yield(NewMultiEnvelopeBuilder().WithHeader(header).WithBodies(bodies).Build())
 		}
 	}
 }
