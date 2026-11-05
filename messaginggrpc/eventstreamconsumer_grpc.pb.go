@@ -31,10 +31,10 @@ const (
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIClient interface {
 	// WatchEvents delivers events that match the request's filter as they are
-	// appended to any event stream offered by the server, for as long as the call
-	// is open.
+	// appended to any event stream available from the server, for as long as the
+	// call is open.
 	//
-	// The feed starts at the tail of each stream. Every offered stream that
+	// The feed starts at the tail of each stream. Every available stream that
 	// already contains matching events is represented by at least one segment.
 	// The first [EventStreamSegment] received for a stream may be empty, but it
 	// tells the client that the stream exists and the offset at which delivery
@@ -43,9 +43,7 @@ type EventStreamConsumerAPIClient interface {
 	//
 	// If the client cannot keep up and the server can no longer deliver a stream
 	// contiguously, the call ends with RESOURCE_EXHAUSTED and an attached
-	// [EventStreamConsumerTooSlow] value identifying the affected stream. This
-	// can occur when events are appended faster than they can be delivered to the
-	// client. See [EventStreamConsumerTooSlowError].
+	// [EventStreamConsumerTooSlow] value identifying the affected stream.
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	WatchEvents(ctx context.Context, in *WatchEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
@@ -59,8 +57,8 @@ type EventStreamConsumerAPIClient interface {
 	// An unrecognized stream ID results in NOT_FOUND with an attached
 	// [UnrecognizedEventStream] value. See [UnrecognizedEventStreamError].
 	//
-	// A requested offset greater than the offset that the next event appended to
-	// the stream will have results in OUT_OF_RANGE.
+	// A requested offset beyond the end of the stream results in OUT_OF_RANGE.
+	// An offset equal to the end of the stream is valid and returns no events.
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	ReadEvents(ctx context.Context, in *ReadEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
@@ -120,10 +118,10 @@ type EventStreamConsumerAPI_ReadEventsClient = grpc.ServerStreamingClient[EventS
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIServer interface {
 	// WatchEvents delivers events that match the request's filter as they are
-	// appended to any event stream offered by the server, for as long as the call
-	// is open.
+	// appended to any event stream available from the server, for as long as the
+	// call is open.
 	//
-	// The feed starts at the tail of each stream. Every offered stream that
+	// The feed starts at the tail of each stream. Every available stream that
 	// already contains matching events is represented by at least one segment.
 	// The first [EventStreamSegment] received for a stream may be empty, but it
 	// tells the client that the stream exists and the offset at which delivery
@@ -132,9 +130,7 @@ type EventStreamConsumerAPIServer interface {
 	//
 	// If the client cannot keep up and the server can no longer deliver a stream
 	// contiguously, the call ends with RESOURCE_EXHAUSTED and an attached
-	// [EventStreamConsumerTooSlow] value identifying the affected stream. This
-	// can occur when events are appended faster than they can be delivered to the
-	// client. See [EventStreamConsumerTooSlowError].
+	// [EventStreamConsumerTooSlow] value identifying the affected stream.
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	WatchEvents(*WatchEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
@@ -148,8 +144,8 @@ type EventStreamConsumerAPIServer interface {
 	// An unrecognized stream ID results in NOT_FOUND with an attached
 	// [UnrecognizedEventStream] value. See [UnrecognizedEventStreamError].
 	//
-	// A requested offset greater than the offset that the next event appended to
-	// the stream will have results in OUT_OF_RANGE.
+	// A requested offset beyond the end of the stream results in OUT_OF_RANGE.
+	// An offset equal to the end of the stream is valid and returns no events.
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	ReadEvents(*ReadEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
