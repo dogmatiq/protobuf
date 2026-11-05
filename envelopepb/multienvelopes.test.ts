@@ -12,7 +12,10 @@ import {
 
 const cases: { name: string; headers: (string | null)[]; sizes: number[] }[] =
   JSON.parse(
-    readFileSync(new URL("./testdata/groups.json", import.meta.url), "utf8"),
+    readFileSync(
+      new URL("./testdata/multienvelopes.json", import.meta.url),
+      "utf8",
+    ),
   );
 
 describe("asMultiEnvelopes", () => {

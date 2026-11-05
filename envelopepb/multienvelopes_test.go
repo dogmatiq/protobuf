@@ -20,7 +20,7 @@ func TestAsMultiEnvelopesFixtures(t *testing.T) {
 		Sizes   []int     `json:"sizes"`
 	}
 
-	data, err := os.ReadFile("testdata/groups.json")
+	data, err := os.ReadFile("testdata/multienvelopes.json")
 
 	if err != nil {
 		t.Fatal(err)
