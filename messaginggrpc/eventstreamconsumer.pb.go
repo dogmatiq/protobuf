@@ -214,11 +214,11 @@ func (b0 ReadEventsRequest_builder) Build() *ReadEventsRequest {
 // It is the (streaming) output of both [EventStreamConsumerAPI.WatchEvents]
 // and [EventStreamConsumerAPI.ReadEvents].
 type EventStreamSegment struct {
-	state                    protoimpl.MessageState       `protogen:"opaque.v1"`
-	xxx_hidden_EventStreamId *uuidpb.UUID                 `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
-	xxx_hidden_BeginOffset   uint64                       `protobuf:"varint,2,opt,name=begin_offset,json=beginOffset"`
-	xxx_hidden_EndOffset     uint64                       `protobuf:"varint,3,opt,name=end_offset,json=endOffset"`
-	xxx_hidden_Envelopes     *[]*envelopepb.MultiEnvelope `protobuf:"bytes,4,rep,name=envelopes"`
+	state                    protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_EventStreamId *uuidpb.UUID            `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
+	xxx_hidden_BeginOffset   uint64                  `protobuf:"varint,2,opt,name=begin_offset,json=beginOffset"`
+	xxx_hidden_EndOffset     uint64                  `protobuf:"varint,3,opt,name=end_offset,json=endOffset"`
+	xxx_hidden_Envelopes     *[]*envelopepb.Envelope `protobuf:"bytes,4,rep,name=envelopes"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -269,7 +269,7 @@ func (x *EventStreamSegment) GetEndOffset() uint64 {
 	return 0
 }
 
-func (x *EventStreamSegment) GetEnvelopes() []*envelopepb.MultiEnvelope {
+func (x *EventStreamSegment) GetEnvelopes() []*envelopepb.Envelope {
 	if x != nil {
 		if x.xxx_hidden_Envelopes != nil {
 			return *x.xxx_hidden_Envelopes
@@ -290,7 +290,7 @@ func (x *EventStreamSegment) SetEndOffset(v uint64) {
 	x.xxx_hidden_EndOffset = v
 }
 
-func (x *EventStreamSegment) SetEnvelopes(v []*envelopepb.MultiEnvelope) {
+func (x *EventStreamSegment) SetEnvelopes(v []*envelopepb.Envelope) {
 	x.xxx_hidden_Envelopes = &v
 }
 
@@ -317,16 +317,15 @@ type EventStreamSegment_builder struct {
 	BeginOffset uint64
 	// EndOffset is the offset immediately after the range, exclusive.
 	EndOffset uint64
-	// Envelopes is a (possibly empty) list of multi-envelopes containing the
+	// Envelopes is a (possibly empty) list of envelopes containing the
 	// events in the range that match the requested message types.
 	//
 	// Each envelope includes the [envelopepb.EventStreamPosition] extension.
 	//
-	// The events appear in ascending offset order, both within each
-	// multi-envelope and across the list. Their offsets may have gaps, because
-	// events of other types are omitted. There is no additional relationship
-	// implied between envelopes that appear in the same segment.
-	Envelopes []*envelopepb.MultiEnvelope
+	// The events appear in ascending offset order. Their offsets may have gaps,
+	// because events of other types are omitted. There is no additional
+	// relationship implied between envelopes that appear in the same segment.
+	Envelopes []*envelopepb.Envelope
 }
 
 func (b0 EventStreamSegment_builder) Build() *EventStreamSegment {
@@ -350,13 +349,13 @@ const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_
 	"\x11ReadEventsRequest\x12?\n" +
 	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12(\n" +
 	"\fbegin_offset\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\vbeginOffset\x129\n" +
-	"\x06filter\x18\x03 \x01(\v2!.dogma.messaging.v1.MessageFilterR\x06filter\"\xe5\x01\n" +
+	"\x06filter\x18\x03 \x01(\v2!.dogma.messaging.v1.MessageFilterR\x06filter\"\xe0\x01\n" +
 	"\x12EventStreamSegment\x12?\n" +
 	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12(\n" +
 	"\fbegin_offset\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\vbeginOffset\x12$\n" +
 	"\n" +
-	"end_offset\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\tendOffset\x12>\n" +
-	"\tenvelopes\x18\x04 \x03(\v2 .dogma.protobuf.v1.MultiEnvelopeR\tenvelopes2\xd8\x01\n" +
+	"end_offset\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\tendOffset\x129\n" +
+	"\tenvelopes\x18\x04 \x03(\v2\x1b.dogma.protobuf.v1.EnvelopeR\tenvelopes2\xd8\x01\n" +
 	"\x16EventStreamConsumerAPI\x12_\n" +
 	"\vWatchEvents\x12&.dogma.messaging.v1.WatchEventsRequest\x1a&.dogma.messaging.v1.EventStreamSegment0\x01\x12]\n" +
 	"\n" +
@@ -364,19 +363,19 @@ const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_
 
 var file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_goTypes = []any{
-	(*WatchEventsRequest)(nil),       // 0: dogma.messaging.v1.WatchEventsRequest
-	(*ReadEventsRequest)(nil),        // 1: dogma.messaging.v1.ReadEventsRequest
-	(*EventStreamSegment)(nil),       // 2: dogma.messaging.v1.EventStreamSegment
-	(*MessageFilter)(nil),            // 3: dogma.messaging.v1.MessageFilter
-	(*uuidpb.UUID)(nil),              // 4: dogma.protobuf.v1.UUID
-	(*envelopepb.MultiEnvelope)(nil), // 5: dogma.protobuf.v1.MultiEnvelope
+	(*WatchEventsRequest)(nil),  // 0: dogma.messaging.v1.WatchEventsRequest
+	(*ReadEventsRequest)(nil),   // 1: dogma.messaging.v1.ReadEventsRequest
+	(*EventStreamSegment)(nil),  // 2: dogma.messaging.v1.EventStreamSegment
+	(*MessageFilter)(nil),       // 3: dogma.messaging.v1.MessageFilter
+	(*uuidpb.UUID)(nil),         // 4: dogma.protobuf.v1.UUID
+	(*envelopepb.Envelope)(nil), // 5: dogma.protobuf.v1.Envelope
 }
 var file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_depIdxs = []int32{
 	3, // 0: dogma.messaging.v1.WatchEventsRequest.filter:type_name -> dogma.messaging.v1.MessageFilter
 	4, // 1: dogma.messaging.v1.ReadEventsRequest.event_stream_id:type_name -> dogma.protobuf.v1.UUID
 	3, // 2: dogma.messaging.v1.ReadEventsRequest.filter:type_name -> dogma.messaging.v1.MessageFilter
 	4, // 3: dogma.messaging.v1.EventStreamSegment.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	5, // 4: dogma.messaging.v1.EventStreamSegment.envelopes:type_name -> dogma.protobuf.v1.MultiEnvelope
+	5, // 4: dogma.messaging.v1.EventStreamSegment.envelopes:type_name -> dogma.protobuf.v1.Envelope
 	0, // 5: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:input_type -> dogma.messaging.v1.WatchEventsRequest
 	1, // 6: dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents:input_type -> dogma.messaging.v1.ReadEventsRequest
 	2, // 7: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:output_type -> dogma.messaging.v1.EventStreamSegment
