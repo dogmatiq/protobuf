@@ -9,41 +9,44 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 // EventStreamConsumerAPI is a service for consuming event messages from
 // offset-based, ordered event streams.
 service EventStreamConsumerAPI {
-  // WatchEvents delivers events of the requested message types as they are
-  // appended to any event stream offered by the server, for as long as the call
-  // is open.
+  // WatchEvents delivers matching events as they are appended to any event
+  // stream offered by the server, for as long as the call is open. An event
+  // matches if its message type ID is included in the request's list of message
+  // type IDs, or if that list is empty.
   //
   // The feed starts at the tail of each stream. The first [EventStreamSegment]
-  // the client receives for a stream tells it that the stream exists and where
-  // in the stream the feed begins. After this first segment, each subsequent
-  // segment for the same stream begins at the end offset of the one before it.
+  // the client receives for a stream tells the client that the stream exists
+  // and the offset at which delivery begins. Each subsequent segment for that
+  // stream MUST begin at the end offset of the previous segment.
   //
-  // The server MAY send a first segment for every stream it offers, or only for
-  // those streams that contain events of a requested type. In the latter case
-  // the server MUST decide from the events in the stream, not from the types
-  // that the server is able to record.
+  // The server MUST send at least one segment for every stream it offers that
+  // already contains matching events, even if the segment is empty, as it still
+  // tells the client where delivery begins.
   //
-  // If the server can no longer deliver a stream contiguously, for example
-  // because the client has fallen too far behind, it closes the call. A client
-  // that reconnects MUST expect to have missed events. On the new call, the
-  // first segment it receives for each stream again tells it where the feed
-  // begins, which is not necessarily where the previous call left off.
+  // If the server can no longer deliver a stream contiguously because the
+  // client cannot keep up, it MUST close the call with RESOURCE_EXHAUSTED and
+  // an attached [EventStreamConsumerTooSlow] value identifying the affected
+  // stream. This can occur when events are appended faster than they can be
+  // delivered to the client. See [EventStreamConsumerTooSlowError].
   rpc WatchEvents(WatchEventsRequest) returns (stream EventStreamSegment);
 
-  // ReadEvents delivers the events of the requested message types from a
-  // single stream, in order, starting at a specific offset and ending at the
-  // end of the stream as it stands when the server reaches it.
+  // ReadEvents delivers matching events from a single event stream, in order,
+  // beginning at the requested offset. An event matches if its message type ID
+  // is included in the request's list of message type IDs, or if that list is
+  // empty.
   //
-  // It is intended for a consumer whose checkpoint is behind the offset at
-  // which [EventStreamConsumerAPI.WatchEvents] began delivering the stream.
-  // It delivers what the caller has missed, then the server closes the call.
+  // Delivery ends when the server reaches the end of the stream, at which point
+  // it closes the call.
   //
-  // If the requested stream ID is not recognized the server MUST return a
-  // NOT_FOUND error with an attached [UnrecognizedEventStream] value. See
+  // The first segment MUST begin at the requested offset. Each subsequent
+  // segment MUST begin at the end offset of the previous segment.
+  //
+  // If the requested stream ID is not recognized, the server MUST return
+  // NOT_FOUND with an attached [UnrecognizedEventStream] value. See
   // [UnrecognizedEventStreamError].
   //
   // If the requested offset is greater than the offset that the next event
-  // appended to the stream will have, an OUT_OF_RANGE error occurs.
+  // appended to the stream will have, the server MUST return OUT_OF_RANGE.
   rpc ReadEvents(ReadEventsRequest) returns (stream EventStreamSegment);
 }
 

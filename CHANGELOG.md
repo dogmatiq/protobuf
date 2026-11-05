@@ -11,6 +11,23 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Added
+
+- Added `EventStreamConsumerTooSlow` and the Go helper
+  `EventStreamConsumerTooSlowError()` for `RESOURCE_EXHAUSTED` errors when a
+  client cannot keep up and event stream delivery can no longer continue
+  contiguously.
+
+### Changed
+
+- Clarified event matching, stream discovery and segment continuity requirements
+  for `WatchEvents` and `ReadEvents`.
+- `WatchEvents` now requires `RESOURCE_EXHAUSTED` with an attached
+  `EventStreamConsumerTooSlow` detail when a client cannot keep up and delivery
+  can no longer continue contiguously.
+
 ## [0.4.1] - 2026-11-04
 
 ### Added

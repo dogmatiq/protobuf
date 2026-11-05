@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/errors.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_errors: GenFile = /*@__PURE__*/
-  fileDesc("CjdnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXJyb3JzLnByb3RvEhJkb2dtYS5tZXNzYWdpbmcudjEiSwoXVW5yZWNvZ25pemVkRXZlbnRTdHJlYW0SMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJREIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjdnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXJyb3JzLnByb3RvEhJkb2dtYS5tZXNzYWdpbmcudjEiSwoXVW5yZWNvZ25pemVkRXZlbnRTdHJlYW0SMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCJOChpFdmVudFN0cmVhbUNvbnN1bWVyVG9vU2xvdxIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEQixaKmdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWVzc2FnaW5nZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * UnrecognizedEventStream is an error-details value for NOT_FOUND errors that
@@ -35,4 +35,31 @@ export type UnrecognizedEventStream = Message<"dogma.messaging.v1.UnrecognizedEv
  */
 export const UnrecognizedEventStreamSchema: GenMessage<UnrecognizedEventStream> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 0);
+
+/**
+ * EventStreamConsumerTooSlow is an error-details value for RESOURCE_EXHAUSTED
+ * errors from WatchEvents that occurred because the server could no longer
+ * deliver a stream contiguously because the client could not keep up.
+ *
+ * A client that is behind the tail does not cause this error while contiguous
+ * delivery remains possible.
+ *
+ * @generated from message dogma.messaging.v1.EventStreamConsumerTooSlow
+ */
+export type EventStreamConsumerTooSlow = Message<"dogma.messaging.v1.EventStreamConsumerTooSlow"> & {
+  /**
+   * EventStreamId is the ID of the stream that could no longer be delivered
+   * contiguously.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
+   */
+  eventStreamId?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.EventStreamConsumerTooSlow.
+ * Use `create(EventStreamConsumerTooSlowSchema)` to create a new message.
+ */
+export const EventStreamConsumerTooSlowSchema: GenMessage<EventStreamConsumerTooSlow> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_errors, 1);
 
