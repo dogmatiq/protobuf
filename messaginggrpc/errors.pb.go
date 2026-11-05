@@ -93,8 +93,8 @@ func (b0 UnrecognizedEventStream_builder) Build() *UnrecognizedEventStream {
 }
 
 // EventStreamConsumerTooSlow is an error-details value for RESOURCE_EXHAUSTED
-// errors from WatchEvents that occurred because the server could no longer
-// deliver a stream contiguously because the client could not keep up.
+// errors returned by WatchEvents when a client cannot keep up and the server
+// can no longer deliver a stream contiguously.
 //
 // A client that is behind the tail does not cause this error while contiguous
 // delivery remains possible.
