@@ -22,7 +22,7 @@ import type { Envelope, MultiEnvelope } from "./envelope_pb.js";
  *
  * @example
  * // Envelopes that already exist:
- * const batches = [...groupIntoMultiEnvelopes(envelopes)];
+ * const batches = [...asMultiEnvelopes(envelopes)];
  *
  * // A packer with a known header can build a batch directly:
  * const batch = create(MultiEnvelopeSchema, { header, bodies });
@@ -30,7 +30,7 @@ import type { Envelope, MultiEnvelope } from "./envelope_pb.js";
  * @throws {Error} During iteration if an envelope has no body. No other
  * validation or metadata transformation is performed.
  */
-export function* groupIntoMultiEnvelopes(
+export function* asMultiEnvelopes(
   envelopes: Iterable<Envelope>,
 ): Generator<MultiEnvelope, void, unknown> {
   let group: MultiEnvelope | undefined;

@@ -13,7 +13,7 @@ import (
 	"google.golang.org/protobuf/types/known/anypb"
 )
 
-func TestGroupIntoMultiEnvelopesFixtures(t *testing.T) {
+func TestAsMultiEnvelopesFixtures(t *testing.T) {
 	var cases []struct {
 		Name    string    `json:"name"`
 		Headers []*string `json:"headers"`
@@ -42,7 +42,7 @@ func TestGroupIntoMultiEnvelopesFixtures(t *testing.T) {
 				input = append(input, env)
 				before = append(before, proto.Clone(env).(*Envelope))
 			}
-			groups := slices.Collect(GroupIntoMultiEnvelopes(slices.Values(input)))
+			groups := slices.Collect(AsMultiEnvelopes(slices.Values(input)))
 			if len(groups) != len(c.Sizes) {
 				t.Fatalf("group count: got %d, want %d", len(groups), len(c.Sizes))
 			}
@@ -76,7 +76,7 @@ func TestGroupIntoMultiEnvelopesFixtures(t *testing.T) {
 	}
 }
 
-func TestGroupIntoMultiEnvelopesHeaderContext(t *testing.T) {
+func TestAsMultiEnvelopesHeaderContext(t *testing.T) {
 	for _, c := range []struct {
 		name   string
 		change func(*Header)
@@ -97,7 +97,7 @@ func TestGroupIntoMultiEnvelopesHeaderContext(t *testing.T) {
 			for i, env := range input {
 				before[i] = proto.Clone(env).(*Envelope)
 			}
-			groups := slices.Collect(GroupIntoMultiEnvelopes(slices.Values(input)))
+			groups := slices.Collect(AsMultiEnvelopes(slices.Values(input)))
 			if len(groups) != 2 || len(groups[0].GetBodies()) != 2 || len(groups[1].GetBodies()) != 2 {
 				t.Fatal("different header context was combined or equivalent headers were split")
 			}
@@ -114,7 +114,7 @@ func TestGroupIntoMultiEnvelopesHeaderContext(t *testing.T) {
 	}
 }
 
-func TestGroupIntoMultiEnvelopesEarlyStop(t *testing.T) {
+func TestAsMultiEnvelopesEarlyStop(t *testing.T) {
 	input := []*Envelope{newEnvelope(), newEnvelope(), newEnvelope()}
 	reads := 0
 	closed := false
@@ -127,7 +127,7 @@ func TestGroupIntoMultiEnvelopesEarlyStop(t *testing.T) {
 			}
 		}
 	}
-	groups := GroupIntoMultiEnvelopes(source)
+	groups := AsMultiEnvelopes(source)
 	if reads != 0 {
 		t.Fatal("source read before iteration")
 	}
@@ -139,7 +139,7 @@ func TestGroupIntoMultiEnvelopesEarlyStop(t *testing.T) {
 	}
 }
 
-func TestGroupIntoMultiEnvelopesMissingBody(t *testing.T) {
+func TestAsMultiEnvelopesMissingBody(t *testing.T) {
 	for _, env := range []*Envelope{nil, {}} {
 		t.Run(fmt.Sprint(env == nil), func(t *testing.T) {
 			defer func() {
@@ -147,7 +147,7 @@ func TestGroupIntoMultiEnvelopesMissingBody(t *testing.T) {
 					t.Error("missing body did not panic")
 				}
 			}()
-			slices.Collect(GroupIntoMultiEnvelopes(slices.Values([]*Envelope{env})))
+			slices.Collect(AsMultiEnvelopes(slices.Values([]*Envelope{env})))
 		})
 	}
 }
