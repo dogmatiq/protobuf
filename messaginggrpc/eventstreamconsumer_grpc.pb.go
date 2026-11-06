@@ -53,7 +53,8 @@ type EventStreamConsumerAPIClient interface {
 	// begins at the end offset of the previous segment. Delivery ends when the
 	// server reaches the end of the stream, at which point it closes the call.
 	//
-	// An unrecognized stream ID results in NOT_FOUND.
+	// A missing or invalid stream ID results in INVALID_ARGUMENT, and an
+	// unrecognized one results in NOT_FOUND.
 	//
 	// A requested offset beyond the end of the stream results in OUT_OF_RANGE.
 	// An offset equal to the end of the stream is valid and returns no events.
@@ -138,7 +139,8 @@ type EventStreamConsumerAPIServer interface {
 	// begins at the end offset of the previous segment. Delivery ends when the
 	// server reaches the end of the stream, at which point it closes the call.
 	//
-	// An unrecognized stream ID results in NOT_FOUND.
+	// A missing or invalid stream ID results in INVALID_ARGUMENT, and an
+	// unrecognized one results in NOT_FOUND.
 	//
 	// A requested offset beyond the end of the stream results in OUT_OF_RANGE.
 	// An offset equal to the end of the stream is valid and returns no events.
