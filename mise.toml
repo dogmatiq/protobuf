@@ -2,5 +2,6 @@
 idiomatic_version_file_enable_tools = ["node", "pnpm"]
 
 [tools]
+apm = "0"
 clang-format = "23.1.4"
 protoc = "36.2"
