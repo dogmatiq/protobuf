@@ -1,6 +1,6 @@
 module github.com/dogmatiq/protobuf
 
-go 1.26.0
+go 1.27.0
 
 require (
 	github.com/dogmatiq/dapper v0.7.0

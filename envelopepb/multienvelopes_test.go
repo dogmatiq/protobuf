@@ -196,7 +196,7 @@ func TestAsMultiEnvelopesMissingBody(t *testing.T) {
 					t.Error("missing body did not panic")
 				}
 			}()
-			slices.Collect(AsMultiEnvelopes(slices.Values([]*Envelope{env})))
+			_ = slices.Collect(AsMultiEnvelopes(slices.Values([]*Envelope{env})))
 		})
 	}
 }

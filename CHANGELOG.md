@@ -13,8 +13,14 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added Go `uuidpb.FromStd()` and `UUID.AsStd()` to convert between
+  `*uuidpb.UUID` and `uuid.UUID` from Go's standard library.
+
 ### Changed
 
+- **[BC]** The minimum supported Go version is now v1.27.
 - Documented that `ReadEvents` returns `INVALID_ARGUMENT` for a missing or
   invalid stream ID.
 

@@ -5,6 +5,7 @@ import (
 	"crypto/sha1"
 	"errors"
 	"fmt"
+	stduuid "uuid"
 )
 
 // Generate returns a new randomly generated (v4) UUID.
@@ -247,6 +248,12 @@ func FromByteArray[T ~[16]B, B byte](data T) *UUID {
 		Build()
 }
 
+// FromStd returns a [UUID] with the same 16 bytes as id, which is a
+// [stduuid.UUID] from Go's standard library.
+func FromStd(id stduuid.UUID) *UUID {
+	return FromByteArray(id)
+}
+
 // AsByteArray returns the UUID as a byte array.
 func AsByteArray[T ~[16]B, B ~byte](x *UUID) T {
 	var data T
@@ -295,6 +302,12 @@ func (x *UUID) AsBytes() []byte {
 // AsByteArray returns the UUID as a byte array.
 func (x *UUID) AsByteArray() [16]byte {
 	return AsByteArray[[16]byte](x)
+}
+
+// AsStd returns x as a [stduuid.UUID], the UUID type in Go's standard library.
+// If x is nil, it returns [stduuid.Nil].
+func (x *UUID) AsStd() stduuid.UUID {
+	return AsByteArray[stduuid.UUID](x)
 }
 
 // AsString returns the UUID as an RFC 9562 string.

@@ -3,6 +3,7 @@ package uuidpb_test
 import (
 	"bytes"
 	"testing"
+	stduuid "uuid"
 
 	"github.com/dogmatiq/dapper"
 	. "github.com/dogmatiq/protobuf/uuidpb"
@@ -524,6 +525,27 @@ func TestFromByteArray(t *testing.T) {
 	}
 }
 
+func TestFromStd(t *testing.T) {
+	t.Parallel()
+
+	subject := stduuid.UUID{
+		0xa9, 0x67, 0xa8, 0xb9,
+		0x3f, 0x9c, 0x49, 0x18,
+		0x9a, 0x41, 0x19, 0x57,
+		0x7b, 0xe5, 0xfe, 0xc5,
+	}
+
+	actual := FromStd(subject)
+	expect := NewUUIDBuilder().
+		WithUpper(0xa967a8b93f9c4918).
+		WithLower(0x9a4119577be5fec5).
+		Build()
+
+	if !proto.Equal(actual, expect) {
+		t.Fatalf("got %s, want %s", actual, expect)
+	}
+}
+
 func TestAsByteArray(t *testing.T) {
 	t.Parallel()
 
@@ -646,6 +668,47 @@ func TestUUID_AsBytesAndAsByteArray(t *testing.T) {
 			array := c.Subject.AsByteArray()
 			if !bytes.Equal(array[:], c.Expect) {
 				t.Fatalf("got %q, want %q", array, c.Expect)
+			}
+		})
+	}
+}
+
+func TestUUID_AsStd(t *testing.T) {
+	t.Parallel()
+
+	cases := []struct {
+		Desc    string
+		Subject *UUID
+		Expect  stduuid.UUID
+	}{
+		{
+			"nil",
+			nil,
+			stduuid.Nil(),
+		},
+		{
+			"non-zero",
+			NewUUIDBuilder().
+				WithUpper(0xa967a8b93f9c4918).
+				WithLower(0x9a4119577be5fec5).
+				Build(),
+			stduuid.UUID{
+				0xa9, 0x67, 0xa8, 0xb9,
+				0x3f, 0x9c, 0x49, 0x18,
+				0x9a, 0x41, 0x19, 0x57,
+				0x7b, 0xe5, 0xfe, 0xc5,
+			},
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(c.Desc, func(t *testing.T) {
+			t.Parallel()
+
+			actual := c.Subject.AsStd()
+
+			if actual != c.Expect {
+				t.Fatalf("got %s, want %s", actual, c.Expect)
 			}
 		})
 	}
