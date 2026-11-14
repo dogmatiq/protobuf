@@ -11,6 +11,18 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Added
+
+- Added the `configpb` package, which describes an application and its handlers.
+  It is at the unstable `dogma.config.v1alpha1` Protocol Buffers package and was
+  previously in enginekit.
+
+### Changed
+
+- **[BC]** The minimum supported version of `@bufbuild/protobuf` is now v2.17.0.
+
 ## [0.8.0] - 2026-11-13
 
 ### Added
