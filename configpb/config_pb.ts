@@ -153,7 +153,8 @@ export enum MessageKind {
   UNSPECIFIED = 0,
 
   /**
-   * MESSAGE_KIND_COMMAND is the kind of message that implements [dogma.Command].
+   * MESSAGE_KIND_COMMAND is the kind of message that implements
+   * [dogma.Command].
    *
    * @generated from enum value: MESSAGE_KIND_COMMAND = 1;
    */
@@ -167,7 +168,8 @@ export enum MessageKind {
   EVENT = 2,
 
   /**
-   * MESSAGE_KIND_DEADLINE is the kind of message that implements [dogma.Deadline].
+   * MESSAGE_KIND_DEADLINE is the kind of message that implements
+   * [dogma.Deadline].
    *
    * @generated from enum value: MESSAGE_KIND_DEADLINE = 3;
    */

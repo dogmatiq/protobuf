@@ -28,11 +28,13 @@ type MessageKind int32
 const (
 	// MESSAGE_KIND_UNSPECIFIED is the zero-value. It is not a valid message kind.
 	MessageKind_MESSAGE_KIND_UNSPECIFIED MessageKind = 0
-	// MESSAGE_KIND_COMMAND is the kind of message that implements [dogma.Command].
+	// MESSAGE_KIND_COMMAND is the kind of message that implements
+	// [dogma.Command].
 	MessageKind_MESSAGE_KIND_COMMAND MessageKind = 1
 	// MESSAGE_KIND_EVENT is the kind of message that implements [dogma.Event].
 	MessageKind_MESSAGE_KIND_EVENT MessageKind = 2
-	// MESSAGE_KIND_DEADLINE is the kind of message that implements [dogma.Deadline].
+	// MESSAGE_KIND_DEADLINE is the kind of message that implements
+	// [dogma.Deadline].
 	MessageKind_MESSAGE_KIND_DEADLINE MessageKind = 3
 )
 
