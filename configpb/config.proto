@@ -1,0 +1,94 @@
+edition = "2024";
+package dogma.config.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/configpb";
+
+import "github.com/dogmatiq/protobuf/identitypb/identity.proto";
+
+// MessageKind is an enumeration of the kinds of message, represented by the
+// [dogma.Command], [dogma.Event], and [dogma.Deadline] interfaces.
+enum MessageKind {
+  // MESSAGE_KIND_UNSPECIFIED is the zero-value. It is not a valid message kind.
+  MESSAGE_KIND_UNSPECIFIED = 0;
+
+  // MESSAGE_KIND_COMMAND is the kind of message that implements
+  // [dogma.Command].
+  MESSAGE_KIND_COMMAND = 1;
+
+  // MESSAGE_KIND_EVENT is the kind of message that implements [dogma.Event].
+  MESSAGE_KIND_EVENT = 2;
+
+  // MESSAGE_KIND_DEADLINE is the kind of message that implements
+  // [dogma.Deadline].
+  MESSAGE_KIND_DEADLINE = 3;
+}
+
+// HandlerType is an enumeration of the types of handlers that an application
+// can contain.
+enum HandlerType {
+  // HANDLER_TYPE_UNSPECIFIED is the zero-value. It is not a valid handler type.
+  HANDLER_TYPE_UNSPECIFIED = 0;
+
+  // HANDLER_TYPE_AGGREGATE is the type of handler that implements
+  // [dogma.AggregateMessageHandler].
+  HANDLER_TYPE_AGGREGATE = 1;
+
+  // HANDLER_TYPE_PROCESS is the type of handler that implements
+  // [dogma.ProcessMessageHandler].
+  HANDLER_TYPE_PROCESS = 2;
+
+  // HANDLER_TYPE_INTEGRATION is the type of handler that implements
+  // [dogma.IntegrationMessageHandler].
+  HANDLER_TYPE_INTEGRATION = 3;
+
+  // HANDLER_TYPE_PROJECTION is the type of handler that implements
+  // [dogma.ProjectionMessageHandler].
+  HANDLER_TYPE_PROJECTION = 4;
+}
+
+// Application represents a Dogma application hosted by the engine on the
+// server.
+message Application {
+  // Identity is the application's identity.
+  dogma.protobuf.v1.Identity identity = 1;
+
+  // GoType is the fully-qualified name of the Go type that provides the
+  // application's implementation.
+  string go_type = 2 [features.field_presence = IMPLICIT];
+
+  // Handlers is the set of handlers within the application.
+  repeated Handler handlers = 3;
+
+  // Messages is a map of each message type's fully-qualified Go type to the
+  // kind of message that the type implements.
+  map<string, MessageKind> messages = 4;
+}
+
+// Handler is a message handler within an application.
+message Handler {
+  // Identity is the handler's identity.
+  dogma.protobuf.v1.Identity identity = 1;
+
+  // GoType is the fully-qualified name of the Go type that provides the
+  // handler's implementation.
+  string go_type = 2 [features.field_presence = IMPLICIT];
+
+  // Type is the handler's type.
+  HandlerType type = 3 [features.field_presence = IMPLICIT];
+
+  // Messages is a map of each message type's fully-qualified Go type to the way
+  // that this handler uses messages of that type.
+  map<string, MessageUsage> messages = 4;
+
+  // IsDisabled indicates whether the handler is disabled.
+  bool is_disabled = 5 [features.field_presence = IMPLICIT];
+}
+
+// MessageUsage describes how a handler uses a message type.
+message MessageUsage {
+  // IsProduced indicates whether the message is produced by the handler.
+  bool is_produced = 1 [features.field_presence = IMPLICIT];
+
+  // IsConsumed indicates whether the message is consumed by the handler.
+  bool is_consumed = 2 [features.field_presence = IMPLICIT];
+}

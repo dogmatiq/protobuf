@@ -33,6 +33,7 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 | Package         | Protocol Buffers package | Contents                                   |
 | --------------- | ------------------------ | ------------------------------------------ |
 | `uuidpb`        | `dogma.protobuf.v1`      | `UUID`                                     |
+| `configpb`      | `dogma.config.v1alpha1`  | `Application`, `Handler` (unstable)        |
 | `identitypb`    | `dogma.protobuf.v1`      | `Identity`                                 |
 | `envelopepb`    | `dogma.protobuf.v1`      | `Envelope`, `MultiEnvelope` and extensions |
 | `messaginggrpc` | `dogma.messaging.v1`     | The event stream consumer API              |
