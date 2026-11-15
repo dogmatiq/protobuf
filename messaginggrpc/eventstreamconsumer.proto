@@ -24,6 +24,10 @@ service EventStreamConsumerAPI {
   // If the client cannot keep up and the server can no longer deliver a stream
   // contiguously, the call ends with ABORTED.
   //
+  // While a stream has no new events, the server may send further empty
+  // segments with a begin_offset equal to the end_offset, to tell the client
+  // that nothing has been appended to the stream beyond that offset.
+  //
   // A missing or invalid message filter results in INVALID_ARGUMENT.
   rpc WatchEvents(WatchEventsRequest) returns (stream EventStreamSegment);
 

@@ -44,6 +44,10 @@ type EventStreamConsumerAPIClient interface {
 	// If the client cannot keep up and the server can no longer deliver a stream
 	// contiguously, the call ends with ABORTED.
 	//
+	// While a stream has no new events, the server may send further empty
+	// segments with a begin_offset equal to the end_offset, to tell the client
+	// that nothing has been appended to the stream beyond that offset.
+	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	WatchEvents(ctx context.Context, in *WatchEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
 	// ReadEvents delivers events that match the request's filter from a single
@@ -129,6 +133,10 @@ type EventStreamConsumerAPIServer interface {
 	//
 	// If the client cannot keep up and the server can no longer deliver a stream
 	// contiguously, the call ends with ABORTED.
+	//
+	// While a stream has no new events, the server may send further empty
+	// segments with a begin_offset equal to the end_offset, to tell the client
+	// that nothing has been appended to the stream beyond that offset.
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	WatchEvents(*WatchEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error

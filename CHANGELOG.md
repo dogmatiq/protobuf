@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog], and this project adheres to
 ### Changed
 
 - **[BC]** The minimum supported version of `@bufbuild/protobuf` is now v2.17.0.
+- Documented that `WatchEvents` may send empty segments, with equal begin and end
+  offsets, to tell the client that no new events have been appended to a stream.
 
 ## [0.8.0] - 2026-11-13
 
