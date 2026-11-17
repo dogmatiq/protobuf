@@ -16,6 +16,7 @@ describe("package indexes", () => {
   it("finds the packages", () => {
     expect(packages).toEqual([
       "configpb",
+      "enginegrpc",
       "envelopepb",
       "identitypb",
       "messaginggrpc",

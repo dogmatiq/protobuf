@@ -1,0 +1,143 @@
+edition = "2024";
+package dogma.engine.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/enginegrpc";
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "github.com/dogmatiq/protobuf/configpb/config.proto";
+import "github.com/dogmatiq/protobuf/identitypb/identity.proto";
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// EngineAPI is a service that reports what an engine is and what it is doing.
+//
+// A node is one running process of an engine. A cluster is the set of nodes
+// that share the work of one application between them. An engine that runs as a
+// single process is a cluster of one node. A heartbeat is a signal that a node
+// sends repeatedly to show that it is running.
+//
+// Every node serves this API. The node that serves a call reports what it is,
+// and what it believes about its cluster.
+service EngineAPI {
+  // WatchEngine reports what the engine is and what it is doing.
+  //
+  // The first message in the response contains a WatchEngineResponse.Preamble,
+  // which describes the node that serves the call.
+  //
+  // Subsequent messages in the response contain a LiveNodes, which reports the
+  // nodes that the node believes are live, a Workloads, which reports the
+  // workloads that the node believes it owns, or a
+  // WatchEngineResponse.Heartbeat, which reports one heartbeat of the node.
+  //
+  // If the node can't report what it believes about its cluster, it fails the
+  // call with the UNAVAILABLE status code. The message of the status is for a
+  // person to read. It may be shown to anyone who can call the API, so it must
+  // not contain secrets such as passwords.
+  rpc WatchEngine(WatchEngineRequest) returns (stream WatchEngineResponse);
+}
+
+// WatchEngineRequest is the input to the EngineAPI.WatchEngine method.
+message WatchEngineRequest {}
+
+// WatchEngineResponse is the (streaming) output of the EngineAPI.WatchEngine
+// method.
+message WatchEngineResponse {
+  // Preamble describes the node that serves the call. The description stays
+  // the same for the whole response stream.
+  //
+  // The nodes of one cluster may describe themselves differently, for example
+  // while a new version of the application is deployed.
+  message Preamble {
+    // NodeId is the ID of the node that serves the call. A node has the same
+    // ID in every API that it serves. Each node has a different ID.
+    dogma.protobuf.v1.UUID node_id = 1;
+
+    // ClusterId is the ID of the node's cluster. Nodes of the same cluster give
+    // the same cluster ID, in every API that they serve. Each cluster has a
+    // different ID.
+    dogma.protobuf.v1.UUID cluster_id = 2;
+
+    // Site is the identity of the site that the node is deployed to, which is
+    // one installation of the application. It is the same identity that the
+    // node records as the site of the source of each message that it produces.
+    // It is present only if the node is configured with a site.
+    dogma.protobuf.v1.Identity site = 3;
+
+    // Application describes the version of the application that the node runs.
+    // It is required.
+    dogma.config.v1alpha1.Application application = 4;
+
+    // HeartbeatInterval is how long the node aims to wait between two of its
+    // own heartbeats. It is greater than zero. It is present only if the node
+    // heartbeats.
+    google.protobuf.Duration heartbeat_interval = 5;
+
+    // HeartbeatTimeout is the longest time that the node waits for the next
+    // heartbeat of a node of its cluster before it stops treating that node as
+    // live. It is greater than zero. It is present only if the node uses such
+    // a timeout.
+    google.protobuf.Duration heartbeat_timeout = 6;
+  }
+
+  // Heartbeat reports that the node has sent a heartbeat.
+  //
+  // A node that heartbeats sends a Heartbeat each time it does. It reports only
+  // its own heartbeats.
+  message Heartbeat {
+    // SentAt is the time at which the node sent this heartbeat, by the node's
+    // own clock. It is required.
+    google.protobuf.Timestamp sent_at = 1;
+
+    // Expiry is the time by which the node sends its next heartbeat, if it is
+    // still running. It is present only if the node gives its heartbeats an
+    // expiry.
+    oneof expiry {
+      // ExpiresAt is that time, by the same clock.
+      google.protobuf.Timestamp expires_at = 2;
+
+      // ExpiresAfter is that time, as the length of time after the node sent
+      // this heartbeat. It is greater than zero.
+      google.protobuf.Duration expires_after = 3;
+    }
+  }
+
+  // Payload is the Preamble in the first response on a stream, and a LiveNodes,
+  // a Workloads or a Heartbeat in every other.
+  //
+  // The node sends a LiveNodes and a Workloads straight after the Preamble, and
+  // another of each whenever its set changes. Each one replaces any earlier one
+  // of its kind on the same response stream.
+  oneof payload {
+    Preamble  preamble   = 1;
+    LiveNodes live_nodes = 2;
+    Workloads workloads  = 3;
+    Heartbeat heartbeat  = 4;
+  }
+}
+
+// LiveNodes is the set of nodes that a node believes are live. It includes the
+// node itself only while the node believes that it is live.
+message LiveNodes {
+  // NodeIds holds the ID of each of those nodes once, in any order.
+  //
+  // A node whose cluster has no other nodes reports only its own ID.
+  repeated dogma.protobuf.v1.UUID node_ids = 1;
+}
+
+// Workloads is the set of workloads that a node believes it owns.
+//
+// While ownership moves from one node to another, both nodes may report the
+// same workload, or neither may. The set is empty for an engine that doesn't
+// divide its work into workloads.
+message Workloads {
+  // Workloads holds each of those workloads once, in any order.
+  repeated Workload workloads = 1;
+}
+
+// Workload is one unit of the work that the nodes of a cluster share between
+// them, such as delivering the messages in one queue. At most one node owns
+// each workload at a time.
+message Workload {
+  // Key identifies the workload within its cluster.
+  dogma.protobuf.v1.UUID key = 1;
+}

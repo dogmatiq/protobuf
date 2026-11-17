@@ -38,6 +38,7 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 | `envelopepb`    | `dogma.protobuf.v1`      | `Envelope`, `MultiEnvelope` and extensions |
 | `messaginggrpc` | `dogma.messaging.v1`     | The event stream consumer API              |
 | `metricsgrpc`   | `dogma.metrics.v1alpha1` | The metrics API (unstable)                 |
+| `enginegrpc`    | `dogma.engine.v1alpha1`  | The engine API (unstable)                  |
 
 ## Message data
 

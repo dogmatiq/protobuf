@@ -20,6 +20,8 @@ The format is based on [Keep a Changelog], and this project adheres to
   previously in enginekit.
 - Added the `metricsgrpc` package, which defines a service for reading engine
   metrics.
+- Added the `enginegrpc` package, which defines a service that reports what an
+  engine is and what it is doing.
 
 ### Changed
 

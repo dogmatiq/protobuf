@@ -30,6 +30,10 @@
       "types": "./artifacts/dist/configpb/index.d.ts",
       "default": "./artifacts/dist/configpb/index.js"
     },
+    "./enginegrpc": {
+      "types": "./artifacts/dist/enginegrpc/index.d.ts",
+      "default": "./artifacts/dist/enginegrpc/index.js"
+    },
     "./envelopepb": {
       "types": "./artifacts/dist/envelopepb/index.d.ts",
       "default": "./artifacts/dist/envelopepb/index.js"
