@@ -470,10 +470,11 @@ func (b0 Workloads_builder) Build() *Workloads {
 // them, such as delivering the messages in one queue. At most one node owns
 // each workload at a time.
 type Workload struct {
-	state          protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Key *uuidpb.UUID           `protobuf:"bytes,1,opt,name=key"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Key         *uuidpb.UUID           `protobuf:"bytes,1,opt,name=key"`
+	xxx_hidden_Description string                 `protobuf:"bytes,2,opt,name=description"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Workload) Reset() {
@@ -508,8 +509,19 @@ func (x *Workload) GetKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *Workload) GetDescription() string {
+	if x != nil {
+		return x.xxx_hidden_Description
+	}
+	return ""
+}
+
 func (x *Workload) SetKey(v *uuidpb.UUID) {
 	x.xxx_hidden_Key = v
+}
+
+func (x *Workload) SetDescription(v string) {
+	x.xxx_hidden_Description = v
 }
 
 func (x *Workload) HasKey() bool {
@@ -528,6 +540,9 @@ type Workload_builder struct {
 
 	// Key identifies the workload within its cluster.
 	Key *uuidpb.UUID
+	// Description is an optional human-readable description of the workload,
+	// such as the queue whose messages it delivers.
+	Description string
 }
 
 func (b0 Workload_builder) Build() *Workload {
@@ -535,6 +550,7 @@ func (b0 Workload_builder) Build() *Workload {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Key = b.Key
+	x.xxx_hidden_Description = b.Description
 	return m0
 }
 
@@ -551,6 +567,7 @@ type WatchEngineResponse_Preamble struct {
 	xxx_hidden_Application       *configpb.Application  `protobuf:"bytes,4,opt,name=application"`
 	xxx_hidden_HeartbeatInterval *durationpb.Duration   `protobuf:"bytes,5,opt,name=heartbeat_interval,json=heartbeatInterval"`
 	xxx_hidden_HeartbeatTimeout  *durationpb.Duration   `protobuf:"bytes,6,opt,name=heartbeat_timeout,json=heartbeatTimeout"`
+	xxx_hidden_Description       string                 `protobuf:"bytes,7,opt,name=description"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -622,6 +639,13 @@ func (x *WatchEngineResponse_Preamble) GetHeartbeatTimeout() *durationpb.Duratio
 	return nil
 }
 
+func (x *WatchEngineResponse_Preamble) GetDescription() string {
+	if x != nil {
+		return x.xxx_hidden_Description
+	}
+	return ""
+}
+
 func (x *WatchEngineResponse_Preamble) SetNodeId(v *uuidpb.UUID) {
 	x.xxx_hidden_NodeId = v
 }
@@ -644,6 +668,10 @@ func (x *WatchEngineResponse_Preamble) SetHeartbeatInterval(v *durationpb.Durati
 
 func (x *WatchEngineResponse_Preamble) SetHeartbeatTimeout(v *durationpb.Duration) {
 	x.xxx_hidden_HeartbeatTimeout = v
+}
+
+func (x *WatchEngineResponse_Preamble) SetDescription(v string) {
+	x.xxx_hidden_Description = v
 }
 
 func (x *WatchEngineResponse_Preamble) HasNodeId() bool {
@@ -739,6 +767,9 @@ type WatchEngineResponse_Preamble_builder struct {
 	// live. It is greater than zero. It is present only if the node uses such
 	// a timeout.
 	HeartbeatTimeout *durationpb.Duration
+	// Description is an optional human-readable description of the node, such
+	// as its host name.
+	Description string
 }
 
 func (b0 WatchEngineResponse_Preamble_builder) Build() *WatchEngineResponse_Preamble {
@@ -751,6 +782,7 @@ func (b0 WatchEngineResponse_Preamble_builder) Build() *WatchEngineResponse_Prea
 	x.xxx_hidden_Application = b.Application
 	x.xxx_hidden_HeartbeatInterval = b.HeartbeatInterval
 	x.xxx_hidden_HeartbeatTimeout = b.HeartbeatTimeout
+	x.xxx_hidden_Description = b.Description
 	return m0
 }
 
@@ -971,13 +1003,13 @@ var File_github_com_dogmatiq_protobuf_enginegrpc_engine_proto protoreflect.FileD
 const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\n" +
 	"4github.com/dogmatiq/protobuf/enginegrpc/engine.proto\x12\x15dogma.engine.v1alpha1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x14\n" +
-	"\x12WatchEngineRequest\"\x9a\a\n" +
+	"\x12WatchEngineRequest\"\xc3\a\n" +
 	"\x13WatchEngineResponse\x12Q\n" +
 	"\bpreamble\x18\x01 \x01(\v23.dogma.engine.v1alpha1.WatchEngineResponse.PreambleH\x00R\bpreamble\x12A\n" +
 	"\n" +
 	"live_nodes\x18\x02 \x01(\v2 .dogma.engine.v1alpha1.LiveNodesH\x00R\tliveNodes\x12@\n" +
 	"\tworkloads\x18\x03 \x01(\v2 .dogma.engine.v1alpha1.WorkloadsH\x00R\tworkloads\x12T\n" +
-	"\theartbeat\x18\x04 \x01(\v24.dogma.engine.v1alpha1.WatchEngineResponse.HeartbeatH\x00R\theartbeat\x1a\xfd\x02\n" +
+	"\theartbeat\x18\x04 \x01(\v24.dogma.engine.v1alpha1.WatchEngineResponse.HeartbeatH\x00R\theartbeat\x1a\xa6\x03\n" +
 	"\bPreamble\x120\n" +
 	"\anode_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x06nodeId\x126\n" +
 	"\n" +
@@ -985,7 +1017,8 @@ const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\x04site\x18\x03 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\x04site\x12D\n" +
 	"\vapplication\x18\x04 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12H\n" +
 	"\x12heartbeat_interval\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\x11heartbeatInterval\x12F\n" +
-	"\x11heartbeat_timeout\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\x10heartbeatTimeout\x1a\xc9\x01\n" +
+	"\x11heartbeat_timeout\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\x10heartbeatTimeout\x12'\n" +
+	"\vdescription\x18\a \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription\x1a\xc9\x01\n" +
 	"\tHeartbeat\x123\n" +
 	"\asent_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x06sentAt\x12;\n" +
 	"\n" +
@@ -996,9 +1029,10 @@ const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\tLiveNodes\x122\n" +
 	"\bnode_ids\x18\x01 \x03(\v2\x17.dogma.protobuf.v1.UUIDR\anodeIds\"J\n" +
 	"\tWorkloads\x12=\n" +
-	"\tworkloads\x18\x01 \x03(\v2\x1f.dogma.engine.v1alpha1.WorkloadR\tworkloads\"5\n" +
+	"\tworkloads\x18\x01 \x03(\v2\x1f.dogma.engine.v1alpha1.WorkloadR\tworkloads\"^\n" +
 	"\bWorkload\x12)\n" +
-	"\x03key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x03key2s\n" +
+	"\x03key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x03key\x12'\n" +
+	"\vdescription\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription2s\n" +
 	"\tEngineAPI\x12f\n" +
 	"\vWatchEngine\x12).dogma.engine.v1alpha1.WatchEngineRequest\x1a*.dogma.engine.v1alpha1.WatchEngineResponse0\x01B)Z'github.com/dogmatiq/protobuf/enginegrpcb\beditionsp\xe9\a"
 

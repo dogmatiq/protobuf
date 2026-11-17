@@ -77,6 +77,10 @@ message WatchEngineResponse {
     // live. It is greater than zero. It is present only if the node uses such
     // a timeout.
     google.protobuf.Duration heartbeat_timeout = 6;
+
+    // Description is an optional human-readable description of the node, such
+    // as its host name.
+    string description = 7 [features.field_presence = IMPLICIT];
   }
 
   // Heartbeat reports that the node has sent a heartbeat.
@@ -140,4 +144,8 @@ message Workloads {
 message Workload {
   // Key identifies the workload within its cluster.
   dogma.protobuf.v1.UUID key = 1;
+
+  // Description is an optional human-readable description of the workload,
+  // such as the queue whose messages it delivers.
+  string description = 2 [features.field_presence = IMPLICIT];
 }

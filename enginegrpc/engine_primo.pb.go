@@ -216,6 +216,7 @@ func (b *WatchEngineResponse_PreambleBuilder) From(x *WatchEngineResponse_Preamb
 	if x.HasHeartbeatTimeout() {
 		b.prototype.SetHeartbeatTimeout(x.GetHeartbeatTimeout())
 	}
+	b.prototype.SetDescription(x.GetDescription())
 	return b
 }
 
@@ -243,6 +244,7 @@ func (b *WatchEngineResponse_PreambleBuilder) Build() *WatchEngineResponse_Pream
 	if b.prototype.HasHeartbeatTimeout() {
 		m.SetHeartbeatTimeout(b.prototype.GetHeartbeatTimeout())
 	}
+	m.SetDescription(b.prototype.GetDescription())
 	return m
 }
 
@@ -285,6 +287,13 @@ func (b *WatchEngineResponse_PreambleBuilder) WithHeartbeatInterval(v *durationp
 // then returns b.
 func (b *WatchEngineResponse_PreambleBuilder) WithHeartbeatTimeout(v *durationpb.Duration) *WatchEngineResponse_PreambleBuilder {
 	b.prototype.SetHeartbeatTimeout(v)
+	return b
+}
+
+// WithDescription configures the builder to set the Description field to v,
+// then returns b.
+func (b *WatchEngineResponse_PreambleBuilder) WithDescription(v string) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetDescription(v)
 	return b
 }
 
@@ -448,6 +457,7 @@ func (b *WorkloadBuilder) From(x *Workload) *WorkloadBuilder {
 	if x.HasKey() {
 		b.prototype.SetKey(x.GetKey())
 	}
+	b.prototype.SetDescription(x.GetDescription())
 	return b
 }
 
@@ -460,6 +470,7 @@ func (b *WorkloadBuilder) Build() *Workload {
 	if b.prototype.HasKey() {
 		m.SetKey(b.prototype.GetKey())
 	}
+	m.SetDescription(b.prototype.GetDescription())
 	return m
 }
 
@@ -467,6 +478,13 @@ func (b *WorkloadBuilder) Build() *Workload {
 // then returns b.
 func (b *WorkloadBuilder) WithKey(v *uuidpb.UUID) *WorkloadBuilder {
 	b.prototype.SetKey(v)
+	return b
+}
+
+// WithDescription configures the builder to set the Description field to v,
+// then returns b.
+func (b *WorkloadBuilder) WithDescription(v string) *WorkloadBuilder {
+	b.prototype.SetDescription(v)
 	return b
 }
 
