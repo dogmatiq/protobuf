@@ -42,6 +42,10 @@
       "types": "./artifacts/dist/messaginggrpc/index.d.ts",
       "default": "./artifacts/dist/messaginggrpc/index.js"
     },
+    "./metricsgrpc": {
+      "types": "./artifacts/dist/metricsgrpc/index.d.ts",
+      "default": "./artifacts/dist/metricsgrpc/index.js"
+    },
     "./uuidpb": {
       "types": "./artifacts/dist/uuidpb/index.d.ts",
       "default": "./artifacts/dist/uuidpb/index.js"

@@ -1,0 +1,174 @@
+edition = "2024";
+package dogma.metrics.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
+
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// AggregateInstancesInMemory is the number of an aggregate handler's instances
+// that the node holds in memory, so that it can handle commands for them
+// without loading them from storage. A node sends it only for aggregate
+// handlers.
+message AggregateInstancesInMemory {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of instances that the node holds in memory.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// ProcessInstancesInMemory is the number of a process handler's instances that
+// the node holds in memory, so that it can handle events and deadlines for them
+// without loading them from storage. A node sends it only for process handlers.
+message ProcessInstancesInMemory {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of instances that the node holds in memory.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerCommandsPending is the number of commands for one handler that are
+// waiting to be delivered. A node sends it only for aggregate and integration
+// handlers.
+message HandlerCommandsPending {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of commands.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerCommandsDue is the number of commands for one handler that are ready
+// to be delivered now. A node sends it only for aggregate and integration
+// handlers.
+message HandlerCommandsDue {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of commands that are ready.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerCommandsFailing is the number of commands for one handler that are
+// waiting to be delivered and whose most recent delivery attempt failed. A node
+// sends it only for aggregate and integration handlers.
+message HandlerCommandsFailing {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of failing commands.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerCommandsHandled is the running total of the commands that one handler
+// has handled successfully. A node sends it only for aggregate and integration
+// handlers.
+message HandlerCommandsHandled {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of commands that the handler has handled
+  // successfully.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerDeadlinesPending is the number of deadlines for one handler that are
+// waiting to be delivered. A node sends it only for process handlers.
+message HandlerDeadlinesPending {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of deadlines.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerDeadlinesDue is the number of deadlines for one handler that are ready
+// to be delivered now. A node sends it only for process handlers.
+message HandlerDeadlinesDue {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of deadlines that are ready.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerDeadlinesFailing is the number of deadlines for one handler that are
+// waiting to be delivered and whose most recent delivery attempt failed. A node
+// sends it only for process handlers.
+message HandlerDeadlinesFailing {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of failing deadlines.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerDeadlinesHandled is the running total of the deadlines that one
+// handler has handled successfully. A node sends it only for process handlers.
+message HandlerDeadlinesHandled {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of deadlines that the handler has handled
+  // successfully.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerDeadlinesCanceled is the running total of the deadlines of one handler
+// that were canceled before they were handled, such as when the process
+// instance that scheduled them ended. A node sends it only for process
+// handlers.
+message HandlerDeadlinesCanceled {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of deadlines that were canceled.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerEventsRecorded is the running total of the events that one handler has
+// recorded. A node sends it only for aggregate and integration handlers, and
+// not for an integration handler that records no events.
+message HandlerEventsRecorded {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of events that the handler has recorded.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerEventsHandled is the running total of the events that one handler has
+// handled. A node sends it only for process and projection handlers.
+message HandlerEventsHandled {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of events that the handler has handled.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// HandlerEventsPending is the number of events that one handler handles and
+// hasn't handled yet, on the event streams of the handler's cluster. A node
+// sends it only for process and projection handlers.
+message HandlerEventsPending {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of events that haven't been handled.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}

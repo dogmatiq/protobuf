@@ -1,0 +1,41 @@
+edition = "2024";
+package dogma.metrics.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
+
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// EventStreamLength is the number of events on one event stream, which is an
+// ordered sequence of events in which each event has an offset. The first
+// event's offset is 0.
+message EventStreamLength {
+  // EventStreamId is the ID of the event stream.
+  dogma.protobuf.v1.UUID event_stream_id = 1;
+
+  // Value is the number of events on the stream, which is also the offset at
+  // which the next event will be appended. It never decreases.
+  //
+  // While ownership of the stream moves from one node to another, both may
+  // report it. Both counts are positions on the same stream, and the greater
+  // one is the more recent.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
+// AggregateInstanceEventStreamBindings is the number of an aggregate handler's
+// instances that are bound to one event stream, which is the stream that their
+// events are appended to. A node sends it only for aggregate handlers.
+//
+// The number of the handler's instances is the total across the event streams.
+message AggregateInstanceEventStreamBindings {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // EventStreamId is the ID of the event stream that the instances are bound
+  // to. It is required.
+  dogma.protobuf.v1.UUID event_stream_id = 2;
+
+  // Value is the number of instances bound to the event stream. It is zero if
+  // the instances that were bound to it have gone.
+  uint64 value = 3 [features.field_presence = IMPLICIT];
+}

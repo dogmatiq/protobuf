@@ -1,0 +1,177 @@
+edition = "2024";
+package dogma.metrics.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
+
+import "github.com/dogmatiq/protobuf/configpb/config.proto";
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// MetricsAPI is a service that reports metrics about an engine, such as the
+// number of messages waiting in queues.
+//
+// A node is one running process of an engine. A cluster is the set of nodes
+// that share the work of one application between them.
+//
+// A node that doesn't report metrics doesn't serve this API, so a call to it
+// fails with the UNIMPLEMENTED status code.
+service MetricsAPI {
+  // WatchMetrics reports metrics about the engine, such as the number of
+  // messages waiting in queues.
+  //
+  // The first message in the response contains a WatchMetricsResponse.Preamble,
+  // which lists the metrics that the engine supports.
+  //
+  // Subsequent messages in the response contain a WatchMetricsResponse.Sample,
+  // which reports one metric.
+  //
+  // If the node can't measure a metric that it lists, it fails the call with
+  // the UNAVAILABLE status code. Another node of the same cluster may still be
+  // able to answer. The message of the status is for a person to read. It may
+  // be shown to anyone who can call the API, so it must not contain secrets
+  // such as passwords.
+  rpc WatchMetrics(WatchMetricsRequest) returns (stream WatchMetricsResponse);
+}
+
+// WatchMetricsRequest is the input to the MetricsAPI.WatchMetrics method.
+message WatchMetricsRequest {}
+
+// WatchMetricsResponse is the (streaming) output of the
+// MetricsAPI.WatchMetrics method.
+message WatchMetricsResponse {
+  // Preamble describes the metrics that the engine supports, and whether the
+  // node reports each one for the entire cluster, or only for the work that the
+  // node owns.
+  message Preamble {
+    // NodeId is the ID of the node that serves the call. A node has the same
+    // ID in every API that it serves.
+    dogma.protobuf.v1.UUID node_id = 1;
+
+    // ClusterId is the ID of the node's cluster. Nodes of the same cluster give
+    // the same cluster ID, in every API that they serve.
+    dogma.protobuf.v1.UUID cluster_id = 2;
+
+    // Application describes the version of the application that the node runs.
+    dogma.config.v1alpha1.Application application = 3;
+
+    // SupportedMetrics is the list of the metrics that the node's engine
+    // supports. Each metric appears once.
+    //
+    // Each Sample identifies the metric that it measures by a zero-based index
+    // into this list, in Sample.metric_index. The indexes apply only to the
+    // subsequent responses on this stream.
+    repeated SupportedMetric supported_metrics = 4;
+  }
+
+  // Sample is a measurement of one metric, such as the number of messages in
+  // one queue. This API defines the metrics listed below, and an engine may
+  // define its own.
+  //
+  // A Sample replaces any earlier Sample of the same metric that has the same
+  // subject. The node chooses when to send samples, for example at a regular
+  // interval, or when a value changes.
+  //
+  // Some metrics report a running total, such as the number of events that a
+  // handler has recorded since the node started counting. The doc of each says
+  // so. Within one response stream, a node lowers a total only by starting
+  // again from zero.
+  //
+  // The metrics that this API defines are:
+  //
+  // - AggregateInstanceEventStreamBindings
+  // - AggregateInstancesInMemory
+  // - EventStreamLength
+  // - HandlerCommandsDue
+  // - HandlerCommandsFailing
+  // - HandlerCommandsHandled
+  // - HandlerCommandsPending
+  // - HandlerDeadlinesCanceled
+  // - HandlerDeadlinesDue
+  // - HandlerDeadlinesFailing
+  // - HandlerDeadlinesHandled
+  // - HandlerDeadlinesPending
+  // - HandlerEventsHandled
+  // - HandlerEventsPending
+  // - HandlerEventsRecorded
+  // - ProcessInstanceQueueBindings
+  // - ProcessInstancesInMemory
+  // - QueueCommandsDue
+  // - QueueCommandsFailing
+  // - QueueCommandsPending
+  // - QueueCommandsRemoved
+  // - QueueDeadlinesDue
+  // - QueueDeadlinesFailing
+  // - QueueDeadlinesPending
+  // - QueueDeadlinesRemoved
+  message Sample {
+    // MetricIndex identifies the metric that this sample measures. It is a
+    // zero-based index into the supported_metrics of the Preamble on the same
+    // response stream.
+    uint32 metric_index = 1 [features.field_presence = IMPLICIT];
+
+    // Subject identifies what this sample describes, such as one queue.
+    //
+    // On one response stream, two samples of the same metric have equal
+    // subjects if and only if they describe the same queue, handler or other
+    // part of the system. The node chooses what a subject holds, such as the
+    // queue's ID. Subjects on different response streams are unrelated.
+    bytes subject = 2 [features.field_presence = IMPLICIT];
+
+    // Value is the content of the sample: a Protocol Buffers message,
+    // serialized in the binary format. The message's full name is the
+    // message_name of the sample's metric in Preamble.supported_metrics.
+    bytes value = 3 [features.field_presence = IMPLICIT];
+
+    // Revision is a comparable value that describes when this sample was
+    // measured, relative to other samples of the same subject from the same
+    // cluster. The sample with the greatest revision is the most recent, and
+    // replaces the others.
+    //
+    // Two revisions are compared in lexicographic order, as strings of unsigned
+    // bytes. For example, a node can use a timestamp, encoded as a fixed-width
+    // big-endian integer.
+    //
+    // The nodes of a cluster should produce revisions that compare correctly
+    // with each other, for example by using timestamps from synchronized
+    // clocks. The order of samples from different nodes is a best effort.
+    //
+    // A node should give the same revision to every sample from one
+    // measurement.
+    bytes revision = 4 [features.field_presence = IMPLICIT];
+  }
+
+  // Payload is the Preamble in the first response on a stream, and a Sample in
+  // every other.
+  oneof payload {
+    Preamble preamble = 1;
+    Sample   sample   = 2;
+  }
+}
+
+// SupportedMetric describes a metric that the node's engine supports.
+message SupportedMetric {
+  // MessageName is the full name of the Protocol Buffers message that holds
+  // this metric's samples, such as
+  // "dogma.metrics.v1alpha1.QueueCommandsPending".
+  string message_name = 1 [features.field_presence = IMPLICIT];
+
+  // Reach indicates whether the node's samples of this metric describe the
+  // whole cluster, or only the work that the node owns.
+  Reach reach = 2;
+}
+
+// Reach indicates what a node's samples of one metric describe: the whole
+// cluster, or only the work that the node owns.
+enum Reach {
+  // REACH_UNSPECIFIED is the zero-value. A node never uses it.
+  REACH_UNSPECIFIED = 0;
+
+  // REACH_CLUSTER means that the samples describe the whole cluster.
+  REACH_CLUSTER = 1;
+
+  // REACH_NODE means that the samples describe only the work that the node
+  // owns, so a count is only the node's own share. A running total counts the
+  // occurrences on this node, so it keeps growing when ownership of the work
+  // moves to another node. A count falls to zero when the work moves to
+  // another node, because the node's share is then zero.
+  REACH_NODE = 2;
+}

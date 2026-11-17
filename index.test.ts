@@ -19,6 +19,7 @@ describe("package indexes", () => {
       "envelopepb",
       "identitypb",
       "messaginggrpc",
+      "metricsgrpc",
       "uuidpb",
     ]);
   });
