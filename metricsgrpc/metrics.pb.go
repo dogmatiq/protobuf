@@ -545,8 +545,10 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // define its own.
 //
 // A Sample replaces any earlier Sample of the same metric that has the same
-// subject. The node chooses when to send samples, for example at a regular
-// interval, or when a value changes.
+// subject. The node chooses how often it measures each metric. Once it has
+// sent a Sample on a response stream, it keeps it current: each time it
+// measures a different value for the same metric and subject, including
+// zero, it sends a new Sample.
 //
 // Some metrics report a running total, such as the number of events that a
 // handler has recorded since the node started counting. The doc of each says
