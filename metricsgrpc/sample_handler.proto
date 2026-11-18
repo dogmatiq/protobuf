@@ -174,8 +174,7 @@ message HandlerEventsPending {
 }
 
 // ProcessInstancesEnded is the running total of the instances of one process
-// handler that have ended. When an instance ends, the engine discards its state
-// and cancels its pending deadlines.
+// handler that have ended.
 message ProcessInstancesEnded {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
