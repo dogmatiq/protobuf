@@ -450,8 +450,8 @@ export const HandlerEventsPendingSchema: GenMessage<HandlerEventsPending> = /*@_
 
 /**
  * ProcessInstancesEnded is the running total of the instances of one process
- * handler that have ended. A process instance ends when its process decides
- * that it is finished. A node sends it only for process handlers.
+ * handler that have ended. When an instance ends, the engine discards its state
+ * and cancels its pending deadlines.
  *
  * @generated from message dogma.metrics.v1alpha1.ProcessInstancesEnded
  */

@@ -439,8 +439,8 @@ type Handler_builder struct {
 	Messages map[string]*MessageUsage
 	// IsDisabled indicates whether the handler is disabled.
 	IsDisabled bool
-	// ConcurrencyPreference is the handler's hint to the engine as to the best way
-	// to handle concurrent messages for it.
+	// ConcurrencyPreference is the handler's hint to the engine as to the best
+	// way to handle concurrent messages for it.
 	//
 	// Only integration and projection handlers have a concurrency preference, and
 	// the default is CONCURRENCY_PREFERENCE_MAXIMIZE. For the other types of

@@ -1254,8 +1254,8 @@ func (b0 HandlerEventsPending_builder) Build() *HandlerEventsPending {
 }
 
 // ProcessInstancesEnded is the running total of the instances of one process
-// handler that have ended. A process instance ends when its process decides
-// that it is finished. A node sends it only for process handlers.
+// handler that have ended. When an instance ends, the engine discards its state
+// and cancels its pending deadlines.
 type ProcessInstancesEnded struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
