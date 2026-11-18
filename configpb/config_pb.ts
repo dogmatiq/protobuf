@@ -103,8 +103,8 @@ export type Handler = Message<"dogma.config.v1alpha1.Handler"> & {
   isDisabled: boolean;
 
   /**
-   * ConcurrencyPreference is the handler's hint to the engine as to the best
-   * way to handle concurrent messages for it.
+   * ConcurrencyPreference is a hint to the engine as to the best way to handle
+   * concurrent messages for this handler.
    *
    * Only integration and projection handlers have a concurrency preference, and
    * the default is CONCURRENCY_PREFERENCE_MAXIMIZE. For the other types of
