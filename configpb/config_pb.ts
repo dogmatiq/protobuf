@@ -103,8 +103,12 @@ export type Handler = Message<"dogma.config.v1alpha1.Handler"> & {
   isDisabled: boolean;
 
   /**
-   * ConcurrencyPreference is how concurrently the handler asks the engine to
-   * handle its messages.
+   * ConcurrencyPreference is the handler's hint to the engine as to the best way
+   * to handle concurrent messages for it.
+   *
+   * Only integration and projection handlers have a concurrency preference, and
+   * the default is CONCURRENCY_PREFERENCE_MAXIMIZE. For the other types of
+   * handler it is CONCURRENCY_PREFERENCE_UNSPECIFIED.
    *
    * @generated from field: dogma.config.v1alpha1.ConcurrencyPreference concurrency_preference = 6 [features.field_presence = IMPLICIT];
    */
@@ -244,8 +248,8 @@ export const HandlerTypeSchema: GenEnum<HandlerType> = /*@__PURE__*/
   enumDesc(file_github_com_dogmatiq_protobuf_configpb_config, 1);
 
 /**
- * ConcurrencyPreference is an enumeration of the ways in which a handler can ask
- * the engine to handle its messages concurrently.
+ * ConcurrencyPreference is a hint to the engine as to the best way to handle
+ * concurrent messages for a message handler.
  *
  * @generated from enum dogma.config.v1alpha1.ConcurrencyPreference
  */
@@ -259,16 +263,16 @@ export enum ConcurrencyPreference {
   UNSPECIFIED = 0,
 
   /**
-   * CONCURRENCY_PREFERENCE_MAXIMIZE is the preference to handle messages as
-   * concurrently as the engine can.
+   * CONCURRENCY_PREFERENCE_MAXIMIZE instructs the engine to process as many
+   * messages concurrently as possible, maximizing throughput.
    *
    * @generated from enum value: CONCURRENCY_PREFERENCE_MAXIMIZE = 1;
    */
   MAXIMIZE = 1,
 
   /**
-   * CONCURRENCY_PREFERENCE_MINIMIZE is the preference to handle messages one at
-   * a time where the engine can, so that they conflict with each other less.
+   * CONCURRENCY_PREFERENCE_MINIMIZE instructs the engine to attempt to process
+   * messages one at a time, minimizing conflicts and/or contention.
    *
    * @generated from enum value: CONCURRENCY_PREFERENCE_MINIMIZE = 2;
    */
