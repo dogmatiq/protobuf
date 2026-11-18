@@ -692,8 +692,8 @@ type WatchMetricsResponse_Sample_builder struct {
 	Value []byte
 	// Revision is a comparable value that describes when this sample was
 	// measured, relative to other samples of the same metric and subject from
-	// the same cluster. The sample with the greatest revision is the most recent, and
-	// replaces the others.
+	// the same cluster. The sample with the greatest revision is the most
+	// recent, and replaces the others.
 	//
 	// Two revisions are compared in lexicographic order, as strings of unsigned
 	// bytes. For example, a node can use a timestamp, encoded as a fixed-width
