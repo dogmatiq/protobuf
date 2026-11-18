@@ -95,6 +95,7 @@ message WatchMetricsResponse {
   // - HandlerEventsPending
   // - HandlerEventsRecorded
   // - ProcessInstanceQueueBindings
+  // - ProcessInstancesEnded
   // - ProcessInstancesInMemory
   // - QueueCommandsDue
   // - QueueCommandsFailing

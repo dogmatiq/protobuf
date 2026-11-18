@@ -151,6 +151,7 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * - HandlerEventsPending
  * - HandlerEventsRecorded
  * - ProcessInstanceQueueBindings
+ * - ProcessInstancesEnded
  * - ProcessInstancesInMemory
  * - QueueCommandsDue
  * - QueueCommandsFailing

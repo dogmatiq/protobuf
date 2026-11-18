@@ -575,6 +575,7 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // - HandlerEventsPending
 // - HandlerEventsRecorded
 // - ProcessInstanceQueueBindings
+// - ProcessInstancesEnded
 // - ProcessInstancesInMemory
 // - QueueCommandsDue
 // - QueueCommandsFailing

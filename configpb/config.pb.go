@@ -137,6 +137,58 @@ func (x HandlerType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
+// ConcurrencyPreference is an enumeration of the ways in which a handler can ask
+// the engine to handle its messages concurrently.
+type ConcurrencyPreference int32
+
+const (
+	// CONCURRENCY_PREFERENCE_UNSPECIFIED is the zero-value. It is not a valid
+	// concurrency preference.
+	ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED ConcurrencyPreference = 0
+	// CONCURRENCY_PREFERENCE_MAXIMIZE is the preference to handle messages as
+	// concurrently as the engine can.
+	ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE ConcurrencyPreference = 1
+	// CONCURRENCY_PREFERENCE_MINIMIZE is the preference to handle messages one at
+	// a time where the engine can, so that they conflict with each other less.
+	ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE ConcurrencyPreference = 2
+)
+
+// Enum value maps for ConcurrencyPreference.
+var (
+	ConcurrencyPreference_name = map[int32]string{
+		0: "CONCURRENCY_PREFERENCE_UNSPECIFIED",
+		1: "CONCURRENCY_PREFERENCE_MAXIMIZE",
+		2: "CONCURRENCY_PREFERENCE_MINIMIZE",
+	}
+	ConcurrencyPreference_value = map[string]int32{
+		"CONCURRENCY_PREFERENCE_UNSPECIFIED": 0,
+		"CONCURRENCY_PREFERENCE_MAXIMIZE":    1,
+		"CONCURRENCY_PREFERENCE_MINIMIZE":    2,
+	}
+)
+
+func (x ConcurrencyPreference) Enum() *ConcurrencyPreference {
+	p := new(ConcurrencyPreference)
+	*p = x
+	return p
+}
+
+func (x ConcurrencyPreference) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ConcurrencyPreference) Descriptor() protoreflect.EnumDescriptor {
+	return file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[2].Descriptor()
+}
+
+func (ConcurrencyPreference) Type() protoreflect.EnumType {
+	return &file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[2]
+}
+
+func (x ConcurrencyPreference) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // Application represents a Dogma application hosted by the engine on the
 // server.
 type Application struct {
@@ -259,14 +311,15 @@ func (b0 Application_builder) Build() *Application {
 
 // Handler is a message handler within an application.
 type Handler struct {
-	state                 protoimpl.MessageState   `protogen:"opaque.v1"`
-	xxx_hidden_Identity   *identitypb.Identity     `protobuf:"bytes,1,opt,name=identity"`
-	xxx_hidden_GoType     string                   `protobuf:"bytes,2,opt,name=go_type,json=goType"`
-	xxx_hidden_Type       HandlerType              `protobuf:"varint,3,opt,name=type,enum=dogma.config.v1alpha1.HandlerType"`
-	xxx_hidden_Messages   map[string]*MessageUsage `protobuf:"bytes,4,rep,name=messages" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_IsDisabled bool                     `protobuf:"varint,5,opt,name=is_disabled,json=isDisabled"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                            protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Identity              *identitypb.Identity     `protobuf:"bytes,1,opt,name=identity"`
+	xxx_hidden_GoType                string                   `protobuf:"bytes,2,opt,name=go_type,json=goType"`
+	xxx_hidden_Type                  HandlerType              `protobuf:"varint,3,opt,name=type,enum=dogma.config.v1alpha1.HandlerType"`
+	xxx_hidden_Messages              map[string]*MessageUsage `protobuf:"bytes,4,rep,name=messages" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_IsDisabled            bool                     `protobuf:"varint,5,opt,name=is_disabled,json=isDisabled"`
+	xxx_hidden_ConcurrencyPreference ConcurrencyPreference    `protobuf:"varint,6,opt,name=concurrency_preference,json=concurrencyPreference,enum=dogma.config.v1alpha1.ConcurrencyPreference"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *Handler) Reset() {
@@ -329,6 +382,13 @@ func (x *Handler) GetIsDisabled() bool {
 	return false
 }
 
+func (x *Handler) GetConcurrencyPreference() ConcurrencyPreference {
+	if x != nil {
+		return x.xxx_hidden_ConcurrencyPreference
+	}
+	return ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED
+}
+
 func (x *Handler) SetIdentity(v *identitypb.Identity) {
 	x.xxx_hidden_Identity = v
 }
@@ -347,6 +407,10 @@ func (x *Handler) SetMessages(v map[string]*MessageUsage) {
 
 func (x *Handler) SetIsDisabled(v bool) {
 	x.xxx_hidden_IsDisabled = v
+}
+
+func (x *Handler) SetConcurrencyPreference(v ConcurrencyPreference) {
+	x.xxx_hidden_ConcurrencyPreference = v
 }
 
 func (x *Handler) HasIdentity() bool {
@@ -375,6 +439,9 @@ type Handler_builder struct {
 	Messages map[string]*MessageUsage
 	// IsDisabled indicates whether the handler is disabled.
 	IsDisabled bool
+	// ConcurrencyPreference is how concurrently the handler asks the engine to
+	// handle its messages.
+	ConcurrencyPreference ConcurrencyPreference
 }
 
 func (b0 Handler_builder) Build() *Handler {
@@ -386,6 +453,7 @@ func (b0 Handler_builder) Build() *Handler {
 	x.xxx_hidden_Type = b.Type
 	x.xxx_hidden_Messages = b.Messages
 	x.xxx_hidden_IsDisabled = b.IsDisabled
+	x.xxx_hidden_ConcurrencyPreference = b.ConcurrencyPreference
 	return m0
 }
 
@@ -475,14 +543,15 @@ const file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc = "" +
 	"\bmessages\x18\x04 \x03(\v20.dogma.config.v1alpha1.Application.MessagesEntryR\bmessages\x1a_\n" +
 	"\rMessagesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
-	"\x05value\x18\x02 \x01(\x0e2\".dogma.config.v1alpha1.MessageKindR\x05value:\x028\x01\"\xf5\x02\n" +
+	"\x05value\x18\x02 \x01(\x0e2\".dogma.config.v1alpha1.MessageKindR\x05value:\x028\x01\"\xe1\x03\n" +
 	"\aHandler\x127\n" +
 	"\bidentity\x18\x01 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\bidentity\x12\x1e\n" +
 	"\ago_type\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\x06goType\x12=\n" +
 	"\x04type\x18\x03 \x01(\x0e2\".dogma.config.v1alpha1.HandlerTypeB\x05\xaa\x01\x02\b\x02R\x04type\x12H\n" +
 	"\bmessages\x18\x04 \x03(\v2,.dogma.config.v1alpha1.Handler.MessagesEntryR\bmessages\x12&\n" +
 	"\vis_disabled\x18\x05 \x01(\bB\x05\xaa\x01\x02\b\x02R\n" +
-	"isDisabled\x1a`\n" +
+	"isDisabled\x12j\n" +
+	"\x16concurrency_preference\x18\x06 \x01(\x0e2,.dogma.config.v1alpha1.ConcurrencyPreferenceB\x05\xaa\x01\x02\b\x02R\x15concurrencyPreference\x1a`\n" +
 	"\rMessagesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
 	"\x05value\x18\x02 \x01(\v2#.dogma.config.v1alpha1.MessageUsageR\x05value:\x028\x01\"^\n" +
@@ -501,34 +570,40 @@ const file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc = "" +
 	"\x16HANDLER_TYPE_AGGREGATE\x10\x01\x12\x18\n" +
 	"\x14HANDLER_TYPE_PROCESS\x10\x02\x12\x1c\n" +
 	"\x18HANDLER_TYPE_INTEGRATION\x10\x03\x12\x1b\n" +
-	"\x17HANDLER_TYPE_PROJECTION\x10\x04B'Z%github.com/dogmatiq/protobuf/configpbb\beditionsp\xe9\a"
+	"\x17HANDLER_TYPE_PROJECTION\x10\x04*\x89\x01\n" +
+	"\x15ConcurrencyPreference\x12&\n" +
+	"\"CONCURRENCY_PREFERENCE_UNSPECIFIED\x10\x00\x12#\n" +
+	"\x1fCONCURRENCY_PREFERENCE_MAXIMIZE\x10\x01\x12#\n" +
+	"\x1fCONCURRENCY_PREFERENCE_MINIMIZE\x10\x02B'Z%github.com/dogmatiq/protobuf/configpbb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_github_com_dogmatiq_protobuf_configpb_config_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_github_com_dogmatiq_protobuf_configpb_config_proto_goTypes = []any{
 	(MessageKind)(0),            // 0: dogma.config.v1alpha1.MessageKind
 	(HandlerType)(0),            // 1: dogma.config.v1alpha1.HandlerType
-	(*Application)(nil),         // 2: dogma.config.v1alpha1.Application
-	(*Handler)(nil),             // 3: dogma.config.v1alpha1.Handler
-	(*MessageUsage)(nil),        // 4: dogma.config.v1alpha1.MessageUsage
-	nil,                         // 5: dogma.config.v1alpha1.Application.MessagesEntry
-	nil,                         // 6: dogma.config.v1alpha1.Handler.MessagesEntry
-	(*identitypb.Identity)(nil), // 7: dogma.protobuf.v1.Identity
+	(ConcurrencyPreference)(0),  // 2: dogma.config.v1alpha1.ConcurrencyPreference
+	(*Application)(nil),         // 3: dogma.config.v1alpha1.Application
+	(*Handler)(nil),             // 4: dogma.config.v1alpha1.Handler
+	(*MessageUsage)(nil),        // 5: dogma.config.v1alpha1.MessageUsage
+	nil,                         // 6: dogma.config.v1alpha1.Application.MessagesEntry
+	nil,                         // 7: dogma.config.v1alpha1.Handler.MessagesEntry
+	(*identitypb.Identity)(nil), // 8: dogma.protobuf.v1.Identity
 }
 var file_github_com_dogmatiq_protobuf_configpb_config_proto_depIdxs = []int32{
-	7, // 0: dogma.config.v1alpha1.Application.identity:type_name -> dogma.protobuf.v1.Identity
-	3, // 1: dogma.config.v1alpha1.Application.handlers:type_name -> dogma.config.v1alpha1.Handler
-	5, // 2: dogma.config.v1alpha1.Application.messages:type_name -> dogma.config.v1alpha1.Application.MessagesEntry
-	7, // 3: dogma.config.v1alpha1.Handler.identity:type_name -> dogma.protobuf.v1.Identity
+	8, // 0: dogma.config.v1alpha1.Application.identity:type_name -> dogma.protobuf.v1.Identity
+	4, // 1: dogma.config.v1alpha1.Application.handlers:type_name -> dogma.config.v1alpha1.Handler
+	6, // 2: dogma.config.v1alpha1.Application.messages:type_name -> dogma.config.v1alpha1.Application.MessagesEntry
+	8, // 3: dogma.config.v1alpha1.Handler.identity:type_name -> dogma.protobuf.v1.Identity
 	1, // 4: dogma.config.v1alpha1.Handler.type:type_name -> dogma.config.v1alpha1.HandlerType
-	6, // 5: dogma.config.v1alpha1.Handler.messages:type_name -> dogma.config.v1alpha1.Handler.MessagesEntry
-	0, // 6: dogma.config.v1alpha1.Application.MessagesEntry.value:type_name -> dogma.config.v1alpha1.MessageKind
-	4, // 7: dogma.config.v1alpha1.Handler.MessagesEntry.value:type_name -> dogma.config.v1alpha1.MessageUsage
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	7, // 5: dogma.config.v1alpha1.Handler.messages:type_name -> dogma.config.v1alpha1.Handler.MessagesEntry
+	2, // 6: dogma.config.v1alpha1.Handler.concurrency_preference:type_name -> dogma.config.v1alpha1.ConcurrencyPreference
+	0, // 7: dogma.config.v1alpha1.Application.MessagesEntry.value:type_name -> dogma.config.v1alpha1.MessageKind
+	5, // 8: dogma.config.v1alpha1.Handler.MessagesEntry.value:type_name -> dogma.config.v1alpha1.MessageUsage
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_configpb_config_proto_init() }
@@ -541,7 +616,7 @@ func file_github_com_dogmatiq_protobuf_configpb_config_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,

@@ -172,3 +172,15 @@ message HandlerEventsPending {
   // Value is the number of events that haven't been handled.
   uint64 value = 2 [features.field_presence = IMPLICIT];
 }
+
+// ProcessInstancesEnded is the running total of the instances of one process
+// handler that have ended. A process instance ends when its process decides
+// that it is finished. A node sends it only for process handlers.
+message ProcessInstancesEnded {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of instances that have ended.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}

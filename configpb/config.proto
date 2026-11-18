@@ -46,6 +46,22 @@ enum HandlerType {
   HANDLER_TYPE_PROJECTION = 4;
 }
 
+// ConcurrencyPreference is an enumeration of the ways in which a handler can
+// ask the engine to handle its messages concurrently.
+enum ConcurrencyPreference {
+  // CONCURRENCY_PREFERENCE_UNSPECIFIED is the zero-value. It is not a valid
+  // concurrency preference.
+  CONCURRENCY_PREFERENCE_UNSPECIFIED = 0;
+
+  // CONCURRENCY_PREFERENCE_MAXIMIZE is the preference to handle messages as
+  // concurrently as the engine can.
+  CONCURRENCY_PREFERENCE_MAXIMIZE = 1;
+
+  // CONCURRENCY_PREFERENCE_MINIMIZE is the preference to handle messages one at
+  // a time where the engine can, so that they conflict with each other less.
+  CONCURRENCY_PREFERENCE_MINIMIZE = 2;
+}
+
 // Application represents a Dogma application hosted by the engine on the
 // server.
 message Application {
@@ -82,6 +98,11 @@ message Handler {
 
   // IsDisabled indicates whether the handler is disabled.
   bool is_disabled = 5 [features.field_presence = IMPLICIT];
+
+  // ConcurrencyPreference is how concurrently the handler asks the engine to
+  // handle its messages.
+  ConcurrencyPreference concurrency_preference = 6
+      [features.field_presence = IMPLICIT];
 }
 
 // MessageUsage describes how a handler uses a message type.
