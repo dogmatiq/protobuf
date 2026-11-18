@@ -35,7 +35,9 @@ const (
 	// owns, so a count is only the node's own share. A running total counts the
 	// occurrences on this node, so it keeps growing when ownership of the work
 	// moves to another node. A count falls to zero when the work moves to
-	// another node, because the node's share is then zero.
+	// another node, because the node's share is then zero. The samples of one
+	// subject from every node of the cluster add up to the value for the whole
+	// cluster.
 	Reach_REACH_NODE Reach = 2
 )
 
@@ -679,19 +681,19 @@ type WatchMetricsResponse_Sample_builder struct {
 	MetricIndex uint32
 	// Subject identifies what this sample describes, such as one queue.
 	//
-	// On one response stream, two samples of the same metric have equal
+	// Two samples of the same metric, from any nodes of one cluster, have equal
 	// subjects if and only if they describe the same queue, handler or other
-	// part of the system. The node chooses what a subject holds, such as the
-	// queue's ID. Subjects on different response streams are unrelated.
+	// part of the system. A subject holds what every node of the cluster knows
+	// about the thing that it describes, such as a queue's ID.
 	Subject []byte
 	// Value is the content of the sample: a Protocol Buffers message,
 	// serialized in the binary format. The message's full name is the
 	// message_name of the sample's metric in Preamble.supported_metrics.
 	Value []byte
 	// Revision is a comparable value that describes when this sample was
-	// measured, relative to other samples of the same subject from the same
-	// cluster. The sample with the greatest revision is the most recent, and
-	// replaces the others.
+	// measured, relative to other samples of the same metric and subject from
+	// the same cluster. The sample with the greatest revision is the most
+	// recent, and replaces the others.
 	//
 	// Two revisions are compared in lexicographic order, as strings of unsigned
 	// bytes. For example, a node can use a timestamp, encoded as a fixed-width
