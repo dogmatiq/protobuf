@@ -1253,6 +1253,93 @@ func (b0 HandlerEventsPending_builder) Build() *HandlerEventsPending {
 	return m0
 }
 
+// ProcessInstancesEnded is the running total of the instances of one process
+// handler that have ended.
+type ProcessInstancesEnded struct {
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Value      uint64                 `protobuf:"varint,2,opt,name=value"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ProcessInstancesEnded) Reset() {
+	*x = ProcessInstancesEnded{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProcessInstancesEnded) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProcessInstancesEnded) ProtoMessage() {}
+
+func (x *ProcessInstancesEnded) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProcessInstancesEnded) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ProcessInstancesEnded) GetValue() uint64 {
+	if x != nil {
+		return x.xxx_hidden_Value
+	}
+	return 0
+}
+
+func (x *ProcessInstancesEnded) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ProcessInstancesEnded) SetValue(v uint64) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *ProcessInstancesEnded) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ProcessInstancesEnded) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+type ProcessInstancesEnded_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the key of the handler's identity, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Value is the number of instances that have ended.
+	Value uint64
+}
+
+func (b0 ProcessInstancesEnded_builder) Build() *ProcessInstancesEnded {
+	m0 := &ProcessInstancesEnded{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc = "" +
@@ -1313,9 +1400,13 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc
 	"\x14HandlerEventsPending\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"n\n" +
+	"\x15ProcessInstancesEnded\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12\x1b\n" +
 	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05valueB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes = []any{
 	(*AggregateInstancesInMemory)(nil), // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory
 	(*ProcessInstancesInMemory)(nil),   // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory
@@ -1331,28 +1422,30 @@ var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes =
 	(*HandlerEventsRecorded)(nil),      // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded
 	(*HandlerEventsHandled)(nil),       // 12: dogma.metrics.v1alpha1.HandlerEventsHandled
 	(*HandlerEventsPending)(nil),       // 13: dogma.metrics.v1alpha1.HandlerEventsPending
-	(*uuidpb.UUID)(nil),                // 14: dogma.protobuf.v1.UUID
+	(*ProcessInstancesEnded)(nil),      // 14: dogma.metrics.v1alpha1.ProcessInstancesEnded
+	(*uuidpb.UUID)(nil),                // 15: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_depIdxs = []int32{
-	14, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	15, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // 14: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() }
@@ -1366,7 +1459,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

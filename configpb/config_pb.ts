@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/configpb/config.proto.
  */
 export const file_github_com_dogmatiq_protobuf_configpb_config: GenFile = /*@__PURE__*/
-  fileDesc("CjJnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiL2NvbmZpZy5wcm90bxIVZG9nbWEuY29uZmlnLnYxYWxwaGExIp8CCgtBcHBsaWNhdGlvbhItCghpZGVudGl0eRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhYKB2dvX3R5cGUYAiABKAlCBaoBAggCEjAKCGhhbmRsZXJzGAMgAygLMh4uZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXISQgoIbWVzc2FnZXMYBCADKAsyMC5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24uTWVzc2FnZXNFbnRyeRpTCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoDjIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlS2luZDoCOAEiuwIKB0hhbmRsZXISLQoIaWRlbnRpdHkYASABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRIWCgdnb190eXBlGAIgASgJQgWqAQIIAhI3CgR0eXBlGAMgASgOMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXJUeXBlQgWqAQIIAhI+CghtZXNzYWdlcxgEIAMoCzIsLmRvZ21hLmNvbmZpZy52MWFscGhhMS5IYW5kbGVyLk1lc3NhZ2VzRW50cnkSGgoLaXNfZGlzYWJsZWQYBSABKAhCBaoBAggCGlQKDU1lc3NhZ2VzRW50cnkSCwoDa2V5GAEgASgJEjIKBXZhbHVlGAIgASgLMiMuZG9nbWEuY29uZmlnLnYxYWxwaGExLk1lc3NhZ2VVc2FnZToCOAEiRgoMTWVzc2FnZVVzYWdlEhoKC2lzX3Byb2R1Y2VkGAEgASgIQgWqAQIIAhIaCgtpc19jb25zdW1lZBgCIAEoCEIFqgECCAIqeAoLTWVzc2FnZUtpbmQSHAoYTUVTU0FHRV9LSU5EX1VOU1BFQ0lGSUVEEAASGAoUTUVTU0FHRV9LSU5EX0NPTU1BTkQQARIWChJNRVNTQUdFX0tJTkRfRVZFTlQQAhIZChVNRVNTQUdFX0tJTkRfREVBRExJTkUQAyqcAQoLSGFuZGxlclR5cGUSHAoYSEFORExFUl9UWVBFX1VOU1BFQ0lGSUVEEAASGgoWSEFORExFUl9UWVBFX0FHR1JFR0FURRABEhgKFEhBTkRMRVJfVFlQRV9QUk9DRVNTEAISHAoYSEFORExFUl9UWVBFX0lOVEVHUkFUSU9OEAMSGwoXSEFORExFUl9UWVBFX1BST0pFQ1RJT04QBEInWiVnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_identitypb_identity]);
+  fileDesc("CjJnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiL2NvbmZpZy5wcm90bxIVZG9nbWEuY29uZmlnLnYxYWxwaGExIp8CCgtBcHBsaWNhdGlvbhItCghpZGVudGl0eRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhYKB2dvX3R5cGUYAiABKAlCBaoBAggCEjAKCGhhbmRsZXJzGAMgAygLMh4uZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXISQgoIbWVzc2FnZXMYBCADKAsyMC5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24uTWVzc2FnZXNFbnRyeRpTCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoDjIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlS2luZDoCOAEikAMKB0hhbmRsZXISLQoIaWRlbnRpdHkYASABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRIWCgdnb190eXBlGAIgASgJQgWqAQIIAhI3CgR0eXBlGAMgASgOMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXJUeXBlQgWqAQIIAhI+CghtZXNzYWdlcxgEIAMoCzIsLmRvZ21hLmNvbmZpZy52MWFscGhhMS5IYW5kbGVyLk1lc3NhZ2VzRW50cnkSGgoLaXNfZGlzYWJsZWQYBSABKAhCBaoBAggCElMKFmNvbmN1cnJlbmN5X3ByZWZlcmVuY2UYBiABKA4yLC5kb2dtYS5jb25maWcudjFhbHBoYTEuQ29uY3VycmVuY3lQcmVmZXJlbmNlQgWqAQIIAhpUCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgCIAEoCzIjLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlVXNhZ2U6AjgBIkYKDE1lc3NhZ2VVc2FnZRIaCgtpc19wcm9kdWNlZBgBIAEoCEIFqgECCAISGgoLaXNfY29uc3VtZWQYAiABKAhCBaoBAggCKngKC01lc3NhZ2VLaW5kEhwKGE1FU1NBR0VfS0lORF9VTlNQRUNJRklFRBAAEhgKFE1FU1NBR0VfS0lORF9DT01NQU5EEAESFgoSTUVTU0FHRV9LSU5EX0VWRU5UEAISGQoVTUVTU0FHRV9LSU5EX0RFQURMSU5FEAMqnAEKC0hhbmRsZXJUeXBlEhwKGEhBTkRMRVJfVFlQRV9VTlNQRUNJRklFRBAAEhoKFkhBTkRMRVJfVFlQRV9BR0dSRUdBVEUQARIYChRIQU5ETEVSX1RZUEVfUFJPQ0VTUxACEhwKGEhBTkRMRVJfVFlQRV9JTlRFR1JBVElPThADEhsKF0hBTkRMRVJfVFlQRV9QUk9KRUNUSU9OEAQqiQEKFUNvbmN1cnJlbmN5UHJlZmVyZW5jZRImCiJDT05DVVJSRU5DWV9QUkVGRVJFTkNFX1VOU1BFQ0lGSUVEEAASIwofQ09OQ1VSUkVOQ1lfUFJFRkVSRU5DRV9NQVhJTUlaRRABEiMKH0NPTkNVUlJFTkNZX1BSRUZFUkVOQ0VfTUlOSU1JWkUQAkInWiVnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_identitypb_identity]);
 
 /**
  * Application represents a Dogma application hosted by the engine on the
@@ -101,6 +101,18 @@ export type Handler = Message<"dogma.config.v1alpha1.Handler"> & {
    * @generated from field: bool is_disabled = 5 [features.field_presence = IMPLICIT];
    */
   isDisabled: boolean;
+
+  /**
+   * ConcurrencyPreference is a hint to the engine as to the best way to handle
+   * concurrent messages for this handler.
+   *
+   * Only integration and projection handlers have a concurrency preference, and
+   * the default is CONCURRENCY_PREFERENCE_MAXIMIZE. For the other types of
+   * handler it is CONCURRENCY_PREFERENCE_UNSPECIFIED.
+   *
+   * @generated from field: dogma.config.v1alpha1.ConcurrencyPreference concurrency_preference = 6 [features.field_presence = IMPLICIT];
+   */
+  concurrencyPreference: ConcurrencyPreference;
 };
 
 /**
@@ -234,4 +246,42 @@ export enum HandlerType {
  */
 export const HandlerTypeSchema: GenEnum<HandlerType> = /*@__PURE__*/
   enumDesc(file_github_com_dogmatiq_protobuf_configpb_config, 1);
+
+/**
+ * ConcurrencyPreference is a hint to the engine as to the best way to handle
+ * concurrent messages for a message handler.
+ *
+ * @generated from enum dogma.config.v1alpha1.ConcurrencyPreference
+ */
+export enum ConcurrencyPreference {
+  /**
+   * CONCURRENCY_PREFERENCE_UNSPECIFIED is the zero-value. It is not a valid
+   * concurrency preference.
+   *
+   * @generated from enum value: CONCURRENCY_PREFERENCE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * CONCURRENCY_PREFERENCE_MAXIMIZE instructs the engine to process as many
+   * messages concurrently as possible, maximizing throughput.
+   *
+   * @generated from enum value: CONCURRENCY_PREFERENCE_MAXIMIZE = 1;
+   */
+  MAXIMIZE = 1,
+
+  /**
+   * CONCURRENCY_PREFERENCE_MINIMIZE instructs the engine to attempt to process
+   * messages one at a time, minimizing conflicts and/or contention.
+   *
+   * @generated from enum value: CONCURRENCY_PREFERENCE_MINIMIZE = 2;
+   */
+  MINIMIZE = 2,
+}
+
+/**
+ * Describes the enum dogma.config.v1alpha1.ConcurrencyPreference.
+ */
+export const ConcurrencyPreferenceSchema: GenEnum<ConcurrencyPreference> = /*@__PURE__*/
+  enumDesc(file_github_com_dogmatiq_protobuf_configpb_config, 2);
 

@@ -103,6 +103,7 @@ func (b *HandlerBuilder) From(x *Handler) *HandlerBuilder {
 	b.prototype.SetType(x.GetType())
 	b.prototype.SetMessages(x.GetMessages())
 	b.prototype.SetIsDisabled(x.GetIsDisabled())
+	b.prototype.SetConcurrencyPreference(x.GetConcurrencyPreference())
 	return b
 }
 
@@ -119,6 +120,7 @@ func (b *HandlerBuilder) Build() *Handler {
 	m.SetType(b.prototype.GetType())
 	m.SetMessages(b.prototype.GetMessages())
 	m.SetIsDisabled(b.prototype.GetIsDisabled())
+	m.SetConcurrencyPreference(b.prototype.GetConcurrencyPreference())
 	return m
 }
 
@@ -154,6 +156,13 @@ func (b *HandlerBuilder) WithMessages(v map[string]*MessageUsage) *HandlerBuilde
 // then returns b.
 func (b *HandlerBuilder) WithIsDisabled(v bool) *HandlerBuilder {
 	b.prototype.SetIsDisabled(v)
+	return b
+}
+
+// WithConcurrencyPreference configures the builder to set the ConcurrencyPreference field to v,
+// then returns b.
+func (b *HandlerBuilder) WithConcurrencyPreference(v ConcurrencyPreference) *HandlerBuilder {
+	b.prototype.SetConcurrencyPreference(v)
 	return b
 }
 
@@ -341,6 +350,63 @@ func Map_HandlerType[T any](
 		return caseHANDLER_TYPE_PROJECTION(HandlerType_HANDLER_TYPE_PROJECTION_Case{})
 	default:
 		panic(fmt.Sprintf("Map_HandlerType: %d is not a valid HandlerType", v))
+	}
+}
+
+type (
+	// ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED_Case is a type that statically associates a function
+	// with a [ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED] value.
+	ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED_Case struct{}
+	// ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE_Case is a type that statically associates a function
+	// with a [ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE] value.
+	ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE_Case struct{}
+	// ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE_Case is a type that statically associates a function
+	// with a [ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE] value.
+	ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE_Case struct{}
+)
+
+// Switch_ConcurrencyPreference dispatches to a function based on the value of v.
+//
+// It invokes the function that corresponds to v. It panics if v is not a
+// recognized [ConcurrencyPreference] value.
+func Switch_ConcurrencyPreference(
+	v ConcurrencyPreference,
+	caseCONCURRENCY_PREFERENCE_UNSPECIFIED func(ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED_Case),
+	caseCONCURRENCY_PREFERENCE_MAXIMIZE func(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE_Case),
+	caseCONCURRENCY_PREFERENCE_MINIMIZE func(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE_Case),
+) {
+	switch v {
+	case ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED:
+		caseCONCURRENCY_PREFERENCE_UNSPECIFIED(ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED_Case{})
+	case ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE:
+		caseCONCURRENCY_PREFERENCE_MAXIMIZE(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE_Case{})
+	case ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE:
+		caseCONCURRENCY_PREFERENCE_MINIMIZE(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE_Case{})
+	default:
+		panic(fmt.Sprintf("Switch_ConcurrencyPreference: %d is not a valid ConcurrencyPreference", v))
+	}
+}
+
+// Map_ConcurrencyPreference maps a member of the [ConcurrencyPreference] enumeration to a
+// value of type T.
+//
+// It invokes the function that corresponds to v, and returns that function's
+// result. It panics if v is not a recognized [ConcurrencyPreference] value.
+func Map_ConcurrencyPreference[T any](
+	v ConcurrencyPreference,
+	caseCONCURRENCY_PREFERENCE_UNSPECIFIED func(ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED_Case) T,
+	caseCONCURRENCY_PREFERENCE_MAXIMIZE func(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE_Case) T,
+	caseCONCURRENCY_PREFERENCE_MINIMIZE func(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE_Case) T,
+) T {
+	switch v {
+	case ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED:
+		return caseCONCURRENCY_PREFERENCE_UNSPECIFIED(ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED_Case{})
+	case ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE:
+		return caseCONCURRENCY_PREFERENCE_MAXIMIZE(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MAXIMIZE_Case{})
+	case ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE:
+		return caseCONCURRENCY_PREFERENCE_MINIMIZE(ConcurrencyPreference_CONCURRENCY_PREFERENCE_MINIMIZE_Case{})
+	default:
+		panic(fmt.Sprintf("Map_ConcurrencyPreference: %d is not a valid ConcurrencyPreference", v))
 	}
 }
 
