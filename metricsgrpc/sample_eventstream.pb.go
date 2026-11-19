@@ -115,7 +115,7 @@ func (b0 EventStreamLength_builder) Build() *EventStreamLength {
 
 // AggregateInstanceEventStreamBindings is the number of an aggregate handler's
 // instances that are bound to one event stream, which is the stream that their
-// events are appended to. A node sends it only for aggregate handlers.
+// events are appended to.
 //
 // The number of the handler's instances is the total across the event streams.
 type AggregateInstanceEventStreamBindings struct {

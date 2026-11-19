@@ -16,8 +16,7 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue: GenFile
 
 /**
  * QueueCommandsPending is the number of commands in a single logical queue that
- * are waiting to be delivered. A node sends it only for queues that hold
- * commands.
+ * are waiting to be delivered.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueCommandsPending
  */
@@ -46,8 +45,7 @@ export const QueueCommandsPendingSchema: GenMessage<QueueCommandsPending> = /*@_
 
 /**
  * QueueDeadlinesPending is the number of deadlines in a single logical queue
- * that are waiting to be delivered. A node sends it only for queues that hold
- * deadlines.
+ * that are waiting to be delivered.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesPending
  */
@@ -76,8 +74,7 @@ export const QueueDeadlinesPendingSchema: GenMessage<QueueDeadlinesPending> = /*
 
 /**
  * QueueCommandsDue is the number of commands in a single logical queue that are
- * ready to be delivered now. A node sends it only for queues that hold
- * commands.
+ * ready to be delivered now.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueCommandsDue
  */
@@ -106,8 +103,7 @@ export const QueueCommandsDueSchema: GenMessage<QueueCommandsDue> = /*@__PURE__*
 
 /**
  * QueueDeadlinesDue is the number of deadlines in a single logical queue that
- * are ready to be delivered now. A node sends it only for queues that hold
- * deadlines.
+ * are ready to be delivered now.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesDue
  */
@@ -136,8 +132,7 @@ export const QueueDeadlinesDueSchema: GenMessage<QueueDeadlinesDue> = /*@__PURE_
 
 /**
  * QueueCommandsFailing is the number of commands in a single logical queue
- * whose most recent delivery attempt failed. A node sends it only for queues
- * that hold commands.
+ * whose most recent delivery attempt failed.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueCommandsFailing
  */
@@ -166,8 +161,7 @@ export const QueueCommandsFailingSchema: GenMessage<QueueCommandsFailing> = /*@_
 
 /**
  * QueueDeadlinesFailing is the number of deadlines in a single logical queue
- * whose most recent delivery attempt failed. A node sends it only for queues
- * that hold deadlines.
+ * whose most recent delivery attempt failed.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesFailing
  */
@@ -197,7 +191,7 @@ export const QueueDeadlinesFailingSchema: GenMessage<QueueDeadlinesFailing> = /*
 /**
  * QueueCommandsRemoved is the running total of the commands that have been
  * removed from a single logical queue, because they were delivered or for any
- * other reason. A node sends it only for queues that hold commands.
+ * other reason.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueCommandsRemoved
  */
@@ -227,7 +221,7 @@ export const QueueCommandsRemovedSchema: GenMessage<QueueCommandsRemoved> = /*@_
 /**
  * QueueDeadlinesRemoved is the running total of the deadlines that have been
  * removed from a single logical queue, because they were delivered or for any
- * other reason. A node sends it only for queues that hold deadlines.
+ * other reason.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesRemoved
  */
@@ -257,8 +251,8 @@ export const QueueDeadlinesRemovedSchema: GenMessage<QueueDeadlinesRemoved> = /*
 /**
  * ProcessInstanceQueueBindings is the number of a process handler's instances
  * that are in progress and bound to one queue, or to none, which is the queue
- * that holds their deadlines. A node sends it only for process handlers, and
- * only if its engine keeps each instance's deadlines in a queue.
+ * that holds their deadlines. A node sends it only if its engine keeps each
+ * instance's deadlines in a queue.
  *
  * An instance is in progress until it ends, even while it waits for a deadline.
  * The number of the handler's instances that are in progress is the total

@@ -9,8 +9,7 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
 // AggregateInstancesInMemory is the number of an aggregate handler's instances
 // that the node holds in memory, so that it can handle commands for them
-// without loading them from storage. A node sends it only for aggregate
-// handlers.
+// without loading them from storage.
 message AggregateInstancesInMemory {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -22,7 +21,7 @@ message AggregateInstancesInMemory {
 
 // ProcessInstancesInMemory is the number of a process handler's instances that
 // the node holds in memory, so that it can handle events and deadlines for them
-// without loading them from storage. A node sends it only for process handlers.
+// without loading them from storage.
 message ProcessInstancesInMemory {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.

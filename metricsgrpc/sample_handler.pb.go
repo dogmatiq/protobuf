@@ -24,8 +24,7 @@ const (
 
 // AggregateInstancesInMemory is the number of an aggregate handler's instances
 // that the node holds in memory, so that it can handle commands for them
-// without loading them from storage. A node sends it only for aggregate
-// handlers.
+// without loading them from storage.
 type AggregateInstancesInMemory struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -113,7 +112,7 @@ func (b0 AggregateInstancesInMemory_builder) Build() *AggregateInstancesInMemory
 
 // ProcessInstancesInMemory is the number of a process handler's instances that
 // the node holds in memory, so that it can handle events and deadlines for them
-// without loading them from storage. A node sends it only for process handlers.
+// without loading them from storage.
 type ProcessInstancesInMemory struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`

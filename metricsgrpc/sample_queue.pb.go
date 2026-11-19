@@ -22,8 +22,7 @@ const (
 )
 
 // QueueCommandsPending is the number of commands in a single logical queue that
-// are waiting to be delivered. A node sends it only for queues that hold
-// commands.
+// are waiting to be delivered.
 type QueueCommandsPending struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -109,8 +108,7 @@ func (b0 QueueCommandsPending_builder) Build() *QueueCommandsPending {
 }
 
 // QueueDeadlinesPending is the number of deadlines in a single logical queue
-// that are waiting to be delivered. A node sends it only for queues that hold
-// deadlines.
+// that are waiting to be delivered.
 type QueueDeadlinesPending struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -196,8 +194,7 @@ func (b0 QueueDeadlinesPending_builder) Build() *QueueDeadlinesPending {
 }
 
 // QueueCommandsDue is the number of commands in a single logical queue that are
-// ready to be delivered now. A node sends it only for queues that hold
-// commands.
+// ready to be delivered now.
 type QueueCommandsDue struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -283,8 +280,7 @@ func (b0 QueueCommandsDue_builder) Build() *QueueCommandsDue {
 }
 
 // QueueDeadlinesDue is the number of deadlines in a single logical queue that
-// are ready to be delivered now. A node sends it only for queues that hold
-// deadlines.
+// are ready to be delivered now.
 type QueueDeadlinesDue struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -370,8 +366,7 @@ func (b0 QueueDeadlinesDue_builder) Build() *QueueDeadlinesDue {
 }
 
 // QueueCommandsFailing is the number of commands in a single logical queue
-// whose most recent delivery attempt failed. A node sends it only for queues
-// that hold commands.
+// whose most recent delivery attempt failed.
 type QueueCommandsFailing struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -457,8 +452,7 @@ func (b0 QueueCommandsFailing_builder) Build() *QueueCommandsFailing {
 }
 
 // QueueDeadlinesFailing is the number of deadlines in a single logical queue
-// whose most recent delivery attempt failed. A node sends it only for queues
-// that hold deadlines.
+// whose most recent delivery attempt failed.
 type QueueDeadlinesFailing struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -545,7 +539,7 @@ func (b0 QueueDeadlinesFailing_builder) Build() *QueueDeadlinesFailing {
 
 // QueueCommandsRemoved is the running total of the commands that have been
 // removed from a single logical queue, because they were delivered or for any
-// other reason. A node sends it only for queues that hold commands.
+// other reason.
 type QueueCommandsRemoved struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -632,7 +626,7 @@ func (b0 QueueCommandsRemoved_builder) Build() *QueueCommandsRemoved {
 
 // QueueDeadlinesRemoved is the running total of the deadlines that have been
 // removed from a single logical queue, because they were delivered or for any
-// other reason. A node sends it only for queues that hold deadlines.
+// other reason.
 type QueueDeadlinesRemoved struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -719,8 +713,8 @@ func (b0 QueueDeadlinesRemoved_builder) Build() *QueueDeadlinesRemoved {
 
 // ProcessInstanceQueueBindings is the number of a process handler's instances
 // that are in progress and bound to one queue, or to none, which is the queue
-// that holds their deadlines. A node sends it only for process handlers, and
-// only if its engine keeps each instance's deadlines in a queue.
+// that holds their deadlines. A node sends it only if its engine keeps each
+// instance's deadlines in a queue.
 //
 // An instance is in progress until it ends, even while it waits for a deadline.
 // The number of the handler's instances that are in progress is the total

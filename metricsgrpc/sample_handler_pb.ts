@@ -21,8 +21,7 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFi
 /**
  * AggregateInstancesInMemory is the number of an aggregate handler's instances
  * that the node holds in memory, so that it can handle commands for them
- * without loading them from storage. A node sends it only for aggregate
- * handlers.
+ * without loading them from storage.
  *
  * @generated from message dogma.metrics.v1alpha1.AggregateInstancesInMemory
  */
@@ -53,7 +52,7 @@ export const AggregateInstancesInMemorySchema: GenMessage<AggregateInstancesInMe
 /**
  * ProcessInstancesInMemory is the number of a process handler's instances that
  * the node holds in memory, so that it can handle events and deadlines for them
- * without loading them from storage. A node sends it only for process handlers.
+ * without loading them from storage.
  *
  * @generated from message dogma.metrics.v1alpha1.ProcessInstancesInMemory
  */
