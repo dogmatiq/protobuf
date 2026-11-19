@@ -154,6 +154,11 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * - ProcessInstanceQueueBindings
  * - ProcessInstancesEnded
  * - ProcessInstancesInMemory
+ * - ProjectionCompactionState
+ * - ProjectionCompactionsCanceled
+ * - ProjectionCompactionsCompleted
+ * - ProjectionCompactionsDeadlineExceeded
+ * - ProjectionCompactionsFailed
  * - QueueCommandsDue
  * - QueueCommandsFailing
  * - QueueCommandsPending

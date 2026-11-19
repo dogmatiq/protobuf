@@ -98,6 +98,11 @@ message WatchMetricsResponse {
   // - ProcessInstanceQueueBindings
   // - ProcessInstancesEnded
   // - ProcessInstancesInMemory
+  // - ProjectionCompactionState
+  // - ProjectionCompactionsCanceled
+  // - ProjectionCompactionsCompleted
+  // - ProjectionCompactionsDeadlineExceeded
+  // - ProjectionCompactionsFailed
   // - QueueCommandsDue
   // - QueueCommandsFailing
   // - QueueCommandsPending

@@ -4,6 +4,10 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { Interval } from "./interval_pb.js";
+import { file_github_com_dogmatiq_protobuf_metricsgrpc_interval } from "./interval_pb.js";
 import type { UUID } from "../uuidpb/uuid_pb.js";
 import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -12,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFile = /*@__PURE__*/
-  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImAKGkFnZ3JlZ2F0ZUluc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXgoYUHJvY2Vzc0luc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXAoWSGFuZGxlckNvbW1hbmRzUGVuZGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlgKEkhhbmRsZXJDb21tYW5kc0R1ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlwKFkhhbmRsZXJDb21tYW5kc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJcChZIYW5kbGVyQ29tbWFuZHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJZChNIYW5kbGVyRGVhZGxpbmVzRHVlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJdChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIl4KGEhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFUhhbmRsZXJFdmVudHNSZWNvcmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIloKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiWgoUSGFuZGxlckV2ZW50c1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJaChRIYW5kbGVyRXZlbnRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFVByb2Nlc3NJbnN0YW5jZXNFbmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCQipaKGdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWV0cmljc2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImAKGkFnZ3JlZ2F0ZUluc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXgoYUHJvY2Vzc0luc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXAoWSGFuZGxlckNvbW1hbmRzUGVuZGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlgKEkhhbmRsZXJDb21tYW5kc0R1ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlwKFkhhbmRsZXJDb21tYW5kc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJcChZIYW5kbGVyQ29tbWFuZHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJZChNIYW5kbGVyRGVhZGxpbmVzRHVlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJdChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIl4KGEhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFUhhbmRsZXJFdmVudHNSZWNvcmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIloKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiWgoUSGFuZGxlckV2ZW50c1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJaChRIYW5kbGVyRXZlbnRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFVByb2Nlc3NJbnN0YW5jZXNFbmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIpQHChlQcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBJKCgdjdXJyZW50GAIgASgLMjkuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLlJ1bm5pbmcSSQoIcHJldmlvdXMYAyABKAsyNy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uU3RhdGUuRW5kZWQSRwoEbmV4dBgEIAEoCzI5LmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25TdGF0ZS5QbGFubmVkGjkKB1J1bm5pbmcSLgoKc3RhcnRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAa8wMKBUVuZGVkElIKB3N1Y2Nlc3MYASABKAsyPy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uU3RhdGUuRW5kZWQuU3VjY2Vzc0gAEk4KBWVycm9yGAIgASgLMj0uZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLkVuZGVkLkVycm9ySAASZQoRZGVhZGxpbmVfZXhjZWVkZWQYAyABKAsySC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uU3RhdGUuRW5kZWQuRGVhZGxpbmVFeGNlZWRlZEgAElQKCGNhbmNlbGVkGAQgASgLMkAuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLkVuZGVkLkNhbmNlbGVkSAASMgoIaW50ZXJ2YWwYBSABKAsyIC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkludGVydmFsGgkKB1N1Y2Nlc3MaHwoFRXJyb3ISFgoHbWVzc2FnZRgBIAEoCUIFqgECCAIaEgoQRGVhZGxpbmVFeGNlZWRlZBoKCghDYW5jZWxlZEIJCgdvdXRjb21lGjgKB1BsYW5uZWQSLQoJc3RhcnRzX2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJjCh1Qcm9qZWN0aW9uQ29tcGFjdGlvbnNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCImQKHlByb2plY3Rpb25Db21wYWN0aW9uc0NvbXBsZXRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCImsKJVByb2plY3Rpb25Db21wYWN0aW9uc0RlYWRsaW5lRXhjZWVkZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJhChtQcm9qZWN0aW9uQ29tcGFjdGlvbnNGYWlsZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_metricsgrpc_interval, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * AggregateInstancesInMemory is the number of an aggregate handler's instances
@@ -508,4 +512,367 @@ export type ProcessInstancesEnded = Message<"dogma.metrics.v1alpha1.ProcessInsta
  */
 export const ProcessInstancesEndedSchema: GenMessage<ProcessInstancesEnded> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15);
+
+/**
+ * ProjectionCompactionState is the state of compaction for one projection
+ * handler.
+ *
+ * It describes the compaction that is running now, the most recent one that
+ * ended, and the one that the node plans to start next.
+ *
+ * ProjectionCompactionState describes one compaction at a time. A node isn't
+ * expected to compact a handler more than once at a time, because the
+ * compactions would repeat each other's work. A node that does so should not
+ * send ProjectionCompactionState.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState
+ */
+export type ProjectionCompactionState = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState"> & {
+  /**
+   * HandlerKey is the key of the handler's identity, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * Current is the compaction that is running now. It is absent if none is
+   * running.
+   *
+   * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Running current = 2;
+   */
+  current?: ProjectionCompactionState_Running | undefined;
+
+  /**
+   * Previous is the most recent compaction that has ended. It is absent if none
+   * has ended, or if the node doesn't report it.
+   *
+   * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended previous = 3;
+   */
+  previous?: ProjectionCompactionState_Ended | undefined;
+
+  /**
+   * Next is the compaction that the node plans to start next. It is absent if
+   * the node doesn't plan to compact the handler again.
+   *
+   * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned next = 4;
+   */
+  next?: ProjectionCompactionState_Planned | undefined;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.
+ * Use `create(ProjectionCompactionStateSchema)` to create a new message.
+ */
+export const ProjectionCompactionStateSchema: GenMessage<ProjectionCompactionState> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16);
+
+/**
+ * Running is a compaction that is running.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Running
+ */
+export type ProjectionCompactionState_Running = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Running"> & {
+  /**
+   * StartedAt is the time at which the compaction started, by the node's own
+   * clock. It is required.
+   *
+   * @generated from field: google.protobuf.Timestamp started_at = 1;
+   */
+  startedAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.Running.
+ * Use `create(ProjectionCompactionState_RunningSchema)` to create a new message.
+ */
+export const ProjectionCompactionState_RunningSchema: GenMessage<ProjectionCompactionState_Running> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 0);
+
+/**
+ * Ended is a compaction that has ended.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended
+ */
+export type ProjectionCompactionState_Ended = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Ended"> & {
+  /**
+   * Outcome is how the compaction ended. It is required.
+   *
+   * @generated from oneof dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.outcome
+   */
+  outcome: {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success success = 1;
+     */
+    value: ProjectionCompactionState_Ended_Success;
+    case: "success";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error error = 2;
+     */
+    value: ProjectionCompactionState_Ended_Error;
+    case: "error";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded deadline_exceeded = 3;
+     */
+    value: ProjectionCompactionState_Ended_DeadlineExceeded;
+    case: "deadlineExceeded";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled canceled = 4;
+     */
+    value: ProjectionCompactionState_Ended_Canceled;
+    case: "canceled";
+  } | { case: undefined; value?: undefined };
+
+  /**
+   * Interval is the time during which the compaction ran. It is absent if
+   * the node reports nothing about when the compaction ran.
+   *
+   * @generated from field: dogma.metrics.v1alpha1.Interval interval = 5;
+   */
+  interval?: Interval | undefined;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.
+ * Use `create(ProjectionCompactionState_EndedSchema)` to create a new message.
+ */
+export const ProjectionCompactionState_EndedSchema: GenMessage<ProjectionCompactionState_Ended> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1);
+
+/**
+ * Success is the outcome of a compaction that the handler completed without
+ * reporting an error.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success
+ */
+export type ProjectionCompactionState_Ended_Success = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success"> & {
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success.
+ * Use `create(ProjectionCompactionState_Ended_SuccessSchema)` to create a new message.
+ */
+export const ProjectionCompactionState_Ended_SuccessSchema: GenMessage<ProjectionCompactionState_Ended_Success> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 0);
+
+/**
+ * Error is the outcome of a compaction that stopped because the handler
+ * reported an error.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error
+ */
+export type ProjectionCompactionState_Ended_Error = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error"> & {
+  /**
+   * Message is the text of the error, for a person to read.
+   *
+   * @generated from field: string message = 1 [features.field_presence = IMPLICIT];
+   */
+  message: string;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error.
+ * Use `create(ProjectionCompactionState_Ended_ErrorSchema)` to create a new message.
+ */
+export const ProjectionCompactionState_Ended_ErrorSchema: GenMessage<ProjectionCompactionState_Ended_Error> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 1);
+
+/**
+ * DeadlineExceeded is the outcome of a compaction that stopped because its
+ * deadline passed.
+ *
+ * A handler is asked to compact in small steps, so that it makes some
+ * progress even if the deadline passes. This outcome is therefore not a
+ * failure.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded
+ */
+export type ProjectionCompactionState_Ended_DeadlineExceeded = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded"> & {
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded.
+ * Use `create(ProjectionCompactionState_Ended_DeadlineExceededSchema)` to create a new message.
+ */
+export const ProjectionCompactionState_Ended_DeadlineExceededSchema: GenMessage<ProjectionCompactionState_Ended_DeadlineExceeded> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 2);
+
+/**
+ * Canceled is the outcome of a compaction that stopped because it was
+ * canceled.
+ *
+ * This outcome is not a failure, because the compaction was stopped on
+ * request.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled
+ */
+export type ProjectionCompactionState_Ended_Canceled = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled"> & {
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled.
+ * Use `create(ProjectionCompactionState_Ended_CanceledSchema)` to create a new message.
+ */
+export const ProjectionCompactionState_Ended_CanceledSchema: GenMessage<ProjectionCompactionState_Ended_Canceled> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 3);
+
+/**
+ * Planned is a compaction that the node plans to start.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
+ */
+export type ProjectionCompactionState_Planned = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Planned"> & {
+  /**
+   * StartsAt is the time at which the node plans to start the compaction, by
+   * the node's own clock.
+   *
+   * It is absent if the node plans to start the compaction but can't tell
+   * when.
+   *
+   * @generated from field: google.protobuf.Timestamp starts_at = 1;
+   */
+  startsAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionState.Planned.
+ * Use `create(ProjectionCompactionState_PlannedSchema)` to create a new message.
+ */
+export const ProjectionCompactionState_PlannedSchema: GenMessage<ProjectionCompactionState_Planned> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 2);
+
+/**
+ * ProjectionCompactionsCanceled is the running total of the compactions of one
+ * projection handler that have ended with the Canceled outcome.
+ *
+ * ProjectionCompactionState.Ended.canceled describes that outcome.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsCanceled
+ */
+export type ProjectionCompactionsCanceled = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsCanceled"> & {
+  /**
+   * HandlerKey is the key of the handler's identity, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * Value is the number of compactions that have ended with the Canceled
+   * outcome.
+   *
+   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   */
+  value: bigint;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionsCanceled.
+ * Use `create(ProjectionCompactionsCanceledSchema)` to create a new message.
+ */
+export const ProjectionCompactionsCanceledSchema: GenMessage<ProjectionCompactionsCanceled> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 17);
+
+/**
+ * ProjectionCompactionsCompleted is the running total of the compactions of one
+ * projection handler that have ended with the Success outcome.
+ *
+ * ProjectionCompactionState.Ended.success describes that outcome.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsCompleted
+ */
+export type ProjectionCompactionsCompleted = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsCompleted"> & {
+  /**
+   * HandlerKey is the key of the handler's identity, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * Value is the number of compactions that have ended with the Success
+   * outcome.
+   *
+   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   */
+  value: bigint;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionsCompleted.
+ * Use `create(ProjectionCompactionsCompletedSchema)` to create a new message.
+ */
+export const ProjectionCompactionsCompletedSchema: GenMessage<ProjectionCompactionsCompleted> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 18);
+
+/**
+ * ProjectionCompactionsDeadlineExceeded is the running total of the compactions
+ * of one projection handler that have ended with the DeadlineExceeded outcome.
+ *
+ * ProjectionCompactionState.Ended.deadline_exceeded describes that outcome.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded
+ */
+export type ProjectionCompactionsDeadlineExceeded = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded"> & {
+  /**
+   * HandlerKey is the key of the handler's identity, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * Value is the number of compactions that have ended with the
+   * DeadlineExceeded outcome.
+   *
+   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   */
+  value: bigint;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded.
+ * Use `create(ProjectionCompactionsDeadlineExceededSchema)` to create a new message.
+ */
+export const ProjectionCompactionsDeadlineExceededSchema: GenMessage<ProjectionCompactionsDeadlineExceeded> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 19);
+
+/**
+ * ProjectionCompactionsFailed is the running total of the compactions of one
+ * projection handler that have ended with the Error outcome.
+ *
+ * ProjectionCompactionState.Ended.error describes that outcome.
+ *
+ * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsFailed
+ */
+export type ProjectionCompactionsFailed = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsFailed"> & {
+  /**
+   * HandlerKey is the key of the handler's identity, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * Value is the number of compactions that have ended with the Error outcome.
+   *
+   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   */
+  value: bigint;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.ProjectionCompactionsFailed.
+ * Use `create(ProjectionCompactionsFailedSchema)` to create a new message.
+ */
+export const ProjectionCompactionsFailedSchema: GenMessage<ProjectionCompactionsFailed> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20);
 

@@ -10,6 +10,7 @@ import (
 	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -1428,11 +1429,1168 @@ func (b0 ProcessInstancesEnded_builder) Build() *ProcessInstancesEnded {
 	return m0
 }
 
+// ProjectionCompactionState is the state of compaction for one projection
+// handler.
+//
+// It describes the compaction that is running now, the most recent one that
+// ended, and the one that the node plans to start next.
+//
+// ProjectionCompactionState describes one compaction at a time. A node isn't
+// expected to compact a handler more than once at a time, because the
+// compactions would repeat each other's work. A node that does so should not
+// send ProjectionCompactionState.
+type ProjectionCompactionState struct {
+	state                 protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID                       `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Current    *ProjectionCompactionState_Running `protobuf:"bytes,2,opt,name=current"`
+	xxx_hidden_Previous   *ProjectionCompactionState_Ended   `protobuf:"bytes,3,opt,name=previous"`
+	xxx_hidden_Next       *ProjectionCompactionState_Planned `protobuf:"bytes,4,opt,name=next"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState) Reset() {
+	*x = ProjectionCompactionState{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState) ProtoMessage() {}
+
+func (x *ProjectionCompactionState) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionState) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState) GetCurrent() *ProjectionCompactionState_Running {
+	if x != nil {
+		return x.xxx_hidden_Current
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState) GetPrevious() *ProjectionCompactionState_Ended {
+	if x != nil {
+		return x.xxx_hidden_Previous
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState) GetNext() *ProjectionCompactionState_Planned {
+	if x != nil {
+		return x.xxx_hidden_Next
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ProjectionCompactionState) SetCurrent(v *ProjectionCompactionState_Running) {
+	x.xxx_hidden_Current = v
+}
+
+func (x *ProjectionCompactionState) SetPrevious(v *ProjectionCompactionState_Ended) {
+	x.xxx_hidden_Previous = v
+}
+
+func (x *ProjectionCompactionState) SetNext(v *ProjectionCompactionState_Planned) {
+	x.xxx_hidden_Next = v
+}
+
+func (x *ProjectionCompactionState) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ProjectionCompactionState) HasCurrent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Current != nil
+}
+
+func (x *ProjectionCompactionState) HasPrevious() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Previous != nil
+}
+
+func (x *ProjectionCompactionState) HasNext() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Next != nil
+}
+
+func (x *ProjectionCompactionState) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *ProjectionCompactionState) ClearCurrent() {
+	x.xxx_hidden_Current = nil
+}
+
+func (x *ProjectionCompactionState) ClearPrevious() {
+	x.xxx_hidden_Previous = nil
+}
+
+func (x *ProjectionCompactionState) ClearNext() {
+	x.xxx_hidden_Next = nil
+}
+
+type ProjectionCompactionState_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the key of the handler's identity, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Current is the compaction that is running now. It is absent if none is
+	// running.
+	Current *ProjectionCompactionState_Running
+	// Previous is the most recent compaction that has ended. It is absent if none
+	// has ended, or if the node doesn't report it.
+	Previous *ProjectionCompactionState_Ended
+	// Next is the compaction that the node plans to start next. It is absent if
+	// the node doesn't plan to compact the handler again.
+	Next *ProjectionCompactionState_Planned
+}
+
+func (b0 ProjectionCompactionState_builder) Build() *ProjectionCompactionState {
+	m0 := &ProjectionCompactionState{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Current = b.Current
+	x.xxx_hidden_Previous = b.Previous
+	x.xxx_hidden_Next = b.Next
+	return m0
+}
+
+// ProjectionCompactionsCanceled is the running total of the compactions of one
+// projection handler that have ended with the Canceled outcome.
+//
+// ProjectionCompactionState.Ended.canceled describes that outcome.
+type ProjectionCompactionsCanceled struct {
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Value      uint64                 `protobuf:"varint,2,opt,name=value"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionsCanceled) Reset() {
+	*x = ProjectionCompactionsCanceled{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionsCanceled) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionsCanceled) ProtoMessage() {}
+
+func (x *ProjectionCompactionsCanceled) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionsCanceled) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionsCanceled) GetValue() uint64 {
+	if x != nil {
+		return x.xxx_hidden_Value
+	}
+	return 0
+}
+
+func (x *ProjectionCompactionsCanceled) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ProjectionCompactionsCanceled) SetValue(v uint64) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *ProjectionCompactionsCanceled) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ProjectionCompactionsCanceled) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+type ProjectionCompactionsCanceled_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the key of the handler's identity, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Value is the number of compactions that have ended with the Canceled
+	// outcome.
+	Value uint64
+}
+
+func (b0 ProjectionCompactionsCanceled_builder) Build() *ProjectionCompactionsCanceled {
+	m0 := &ProjectionCompactionsCanceled{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
+// ProjectionCompactionsCompleted is the running total of the compactions of one
+// projection handler that have ended with the Success outcome.
+//
+// ProjectionCompactionState.Ended.success describes that outcome.
+type ProjectionCompactionsCompleted struct {
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Value      uint64                 `protobuf:"varint,2,opt,name=value"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionsCompleted) Reset() {
+	*x = ProjectionCompactionsCompleted{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionsCompleted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionsCompleted) ProtoMessage() {}
+
+func (x *ProjectionCompactionsCompleted) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionsCompleted) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionsCompleted) GetValue() uint64 {
+	if x != nil {
+		return x.xxx_hidden_Value
+	}
+	return 0
+}
+
+func (x *ProjectionCompactionsCompleted) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ProjectionCompactionsCompleted) SetValue(v uint64) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *ProjectionCompactionsCompleted) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ProjectionCompactionsCompleted) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+type ProjectionCompactionsCompleted_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the key of the handler's identity, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Value is the number of compactions that have ended with the Success
+	// outcome.
+	Value uint64
+}
+
+func (b0 ProjectionCompactionsCompleted_builder) Build() *ProjectionCompactionsCompleted {
+	m0 := &ProjectionCompactionsCompleted{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
+// ProjectionCompactionsDeadlineExceeded is the running total of the compactions
+// of one projection handler that have ended with the DeadlineExceeded outcome.
+//
+// ProjectionCompactionState.Ended.deadline_exceeded describes that outcome.
+type ProjectionCompactionsDeadlineExceeded struct {
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Value      uint64                 `protobuf:"varint,2,opt,name=value"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) Reset() {
+	*x = ProjectionCompactionsDeadlineExceeded{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionsDeadlineExceeded) ProtoMessage() {}
+
+func (x *ProjectionCompactionsDeadlineExceeded) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) GetValue() uint64 {
+	if x != nil {
+		return x.xxx_hidden_Value
+	}
+	return 0
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) SetValue(v uint64) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ProjectionCompactionsDeadlineExceeded) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+type ProjectionCompactionsDeadlineExceeded_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the key of the handler's identity, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Value is the number of compactions that have ended with the
+	// DeadlineExceeded outcome.
+	Value uint64
+}
+
+func (b0 ProjectionCompactionsDeadlineExceeded_builder) Build() *ProjectionCompactionsDeadlineExceeded {
+	m0 := &ProjectionCompactionsDeadlineExceeded{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
+// ProjectionCompactionsFailed is the running total of the compactions of one
+// projection handler that have ended with the Error outcome.
+//
+// ProjectionCompactionState.Ended.error describes that outcome.
+type ProjectionCompactionsFailed struct {
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Value      uint64                 `protobuf:"varint,2,opt,name=value"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionsFailed) Reset() {
+	*x = ProjectionCompactionsFailed{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionsFailed) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionsFailed) ProtoMessage() {}
+
+func (x *ProjectionCompactionsFailed) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionsFailed) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionsFailed) GetValue() uint64 {
+	if x != nil {
+		return x.xxx_hidden_Value
+	}
+	return 0
+}
+
+func (x *ProjectionCompactionsFailed) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ProjectionCompactionsFailed) SetValue(v uint64) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *ProjectionCompactionsFailed) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ProjectionCompactionsFailed) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+type ProjectionCompactionsFailed_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the key of the handler's identity, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Value is the number of compactions that have ended with the Error outcome.
+	Value uint64
+}
+
+func (b0 ProjectionCompactionsFailed_builder) Build() *ProjectionCompactionsFailed {
+	m0 := &ProjectionCompactionsFailed{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
+// Running is a compaction that is running.
+type ProjectionCompactionState_Running struct {
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StartedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=started_at,json=startedAt"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState_Running) Reset() {
+	*x = ProjectionCompactionState_Running{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState_Running) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState_Running) ProtoMessage() {}
+
+func (x *ProjectionCompactionState_Running) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionState_Running) GetStartedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_StartedAt
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState_Running) SetStartedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartedAt = v
+}
+
+func (x *ProjectionCompactionState_Running) HasStartedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartedAt != nil
+}
+
+func (x *ProjectionCompactionState_Running) ClearStartedAt() {
+	x.xxx_hidden_StartedAt = nil
+}
+
+type ProjectionCompactionState_Running_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// StartedAt is the time at which the compaction started, by the node's own
+	// clock. It is required.
+	StartedAt *timestamppb.Timestamp
+}
+
+func (b0 ProjectionCompactionState_Running_builder) Build() *ProjectionCompactionState_Running {
+	m0 := &ProjectionCompactionState_Running{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StartedAt = b.StartedAt
+	return m0
+}
+
+// Ended is a compaction that has ended.
+type ProjectionCompactionState_Ended struct {
+	state               protoimpl.MessageState                    `protogen:"opaque.v1"`
+	xxx_hidden_Outcome  isProjectionCompactionState_Ended_Outcome `protobuf_oneof:"outcome"`
+	xxx_hidden_Interval *Interval                                 `protobuf:"bytes,5,opt,name=interval"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState_Ended) Reset() {
+	*x = ProjectionCompactionState_Ended{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState_Ended) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState_Ended) ProtoMessage() {}
+
+func (x *ProjectionCompactionState_Ended) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionState_Ended) GetSuccess() *ProjectionCompactionState_Ended_Success {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Success_); ok {
+			return x.Success
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState_Ended) GetError() *ProjectionCompactionState_Ended_Error {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Error_); ok {
+			return x.Error
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState_Ended) GetDeadlineExceeded() *ProjectionCompactionState_Ended_DeadlineExceeded {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_DeadlineExceeded_); ok {
+			return x.DeadlineExceeded
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState_Ended) GetCanceled() *ProjectionCompactionState_Ended_Canceled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Canceled_); ok {
+			return x.Canceled
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState_Ended) GetInterval() *Interval {
+	if x != nil {
+		return x.xxx_hidden_Interval
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState_Ended) SetSuccess(v *ProjectionCompactionState_Ended_Success) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionCompactionState_Ended_Success_{v}
+}
+
+func (x *ProjectionCompactionState_Ended) SetError(v *ProjectionCompactionState_Ended_Error) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionCompactionState_Ended_Error_{v}
+}
+
+func (x *ProjectionCompactionState_Ended) SetDeadlineExceeded(v *ProjectionCompactionState_Ended_DeadlineExceeded) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionCompactionState_Ended_DeadlineExceeded_{v}
+}
+
+func (x *ProjectionCompactionState_Ended) SetCanceled(v *ProjectionCompactionState_Ended_Canceled) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionCompactionState_Ended_Canceled_{v}
+}
+
+func (x *ProjectionCompactionState_Ended) SetInterval(v *Interval) {
+	x.xxx_hidden_Interval = v
+}
+
+func (x *ProjectionCompactionState_Ended) HasOutcome() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Outcome != nil
+}
+
+func (x *ProjectionCompactionState_Ended) HasSuccess() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Success_)
+	return ok
+}
+
+func (x *ProjectionCompactionState_Ended) HasError() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Error_)
+	return ok
+}
+
+func (x *ProjectionCompactionState_Ended) HasDeadlineExceeded() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_DeadlineExceeded_)
+	return ok
+}
+
+func (x *ProjectionCompactionState_Ended) HasCanceled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Canceled_)
+	return ok
+}
+
+func (x *ProjectionCompactionState_Ended) HasInterval() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Interval != nil
+}
+
+func (x *ProjectionCompactionState_Ended) ClearOutcome() {
+	x.xxx_hidden_Outcome = nil
+}
+
+func (x *ProjectionCompactionState_Ended) ClearSuccess() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Success_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionCompactionState_Ended) ClearError() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Error_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionCompactionState_Ended) ClearDeadlineExceeded() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_DeadlineExceeded_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionCompactionState_Ended) ClearCanceled() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionCompactionState_Ended_Canceled_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionCompactionState_Ended) ClearInterval() {
+	x.xxx_hidden_Interval = nil
+}
+
+const ProjectionCompactionState_Ended_Outcome_not_set_case case_ProjectionCompactionState_Ended_Outcome = 0
+const ProjectionCompactionState_Ended_Success_case case_ProjectionCompactionState_Ended_Outcome = 1
+const ProjectionCompactionState_Ended_Error_case case_ProjectionCompactionState_Ended_Outcome = 2
+const ProjectionCompactionState_Ended_DeadlineExceeded_case case_ProjectionCompactionState_Ended_Outcome = 3
+const ProjectionCompactionState_Ended_Canceled_case case_ProjectionCompactionState_Ended_Outcome = 4
+
+func (x *ProjectionCompactionState_Ended) WhichOutcome() case_ProjectionCompactionState_Ended_Outcome {
+	if x == nil {
+		return ProjectionCompactionState_Ended_Outcome_not_set_case
+	}
+	switch x.xxx_hidden_Outcome.(type) {
+	case *projectionCompactionState_Ended_Success_:
+		return ProjectionCompactionState_Ended_Success_case
+	case *projectionCompactionState_Ended_Error_:
+		return ProjectionCompactionState_Ended_Error_case
+	case *projectionCompactionState_Ended_DeadlineExceeded_:
+		return ProjectionCompactionState_Ended_DeadlineExceeded_case
+	case *projectionCompactionState_Ended_Canceled_:
+		return ProjectionCompactionState_Ended_Canceled_case
+	default:
+		return ProjectionCompactionState_Ended_Outcome_not_set_case
+	}
+}
+
+type ProjectionCompactionState_Ended_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Outcome is how the compaction ended. It is required.
+
+	// Fields of oneof xxx_hidden_Outcome:
+	Success          *ProjectionCompactionState_Ended_Success
+	Error            *ProjectionCompactionState_Ended_Error
+	DeadlineExceeded *ProjectionCompactionState_Ended_DeadlineExceeded
+	Canceled         *ProjectionCompactionState_Ended_Canceled
+	// -- end of xxx_hidden_Outcome
+	// Interval is the time during which the compaction ran. It is absent if
+	// the node reports nothing about when the compaction ran.
+	Interval *Interval
+}
+
+func (b0 ProjectionCompactionState_Ended_builder) Build() *ProjectionCompactionState_Ended {
+	m0 := &ProjectionCompactionState_Ended{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Success != nil {
+		x.xxx_hidden_Outcome = &projectionCompactionState_Ended_Success_{b.Success}
+	}
+	if b.Error != nil {
+		x.xxx_hidden_Outcome = &projectionCompactionState_Ended_Error_{b.Error}
+	}
+	if b.DeadlineExceeded != nil {
+		x.xxx_hidden_Outcome = &projectionCompactionState_Ended_DeadlineExceeded_{b.DeadlineExceeded}
+	}
+	if b.Canceled != nil {
+		x.xxx_hidden_Outcome = &projectionCompactionState_Ended_Canceled_{b.Canceled}
+	}
+	x.xxx_hidden_Interval = b.Interval
+	return m0
+}
+
+type case_ProjectionCompactionState_Ended_Outcome protoreflect.FieldNumber
+
+func (x case_ProjectionCompactionState_Ended_Outcome) String() string {
+	md := file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isProjectionCompactionState_Ended_Outcome interface {
+	isProjectionCompactionState_Ended_Outcome()
+}
+
+type projectionCompactionState_Ended_Success_ struct {
+	Success *ProjectionCompactionState_Ended_Success `protobuf:"bytes,1,opt,name=success,oneof"`
+}
+
+type projectionCompactionState_Ended_Error_ struct {
+	Error *ProjectionCompactionState_Ended_Error `protobuf:"bytes,2,opt,name=error,oneof"`
+}
+
+type projectionCompactionState_Ended_DeadlineExceeded_ struct {
+	DeadlineExceeded *ProjectionCompactionState_Ended_DeadlineExceeded `protobuf:"bytes,3,opt,name=deadline_exceeded,json=deadlineExceeded,oneof"`
+}
+
+type projectionCompactionState_Ended_Canceled_ struct {
+	Canceled *ProjectionCompactionState_Ended_Canceled `protobuf:"bytes,4,opt,name=canceled,oneof"`
+}
+
+func (*projectionCompactionState_Ended_Success_) isProjectionCompactionState_Ended_Outcome() {}
+
+func (*projectionCompactionState_Ended_Error_) isProjectionCompactionState_Ended_Outcome() {}
+
+func (*projectionCompactionState_Ended_DeadlineExceeded_) isProjectionCompactionState_Ended_Outcome() {
+}
+
+func (*projectionCompactionState_Ended_Canceled_) isProjectionCompactionState_Ended_Outcome() {}
+
+// Planned is a compaction that the node plans to start.
+type ProjectionCompactionState_Planned struct {
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StartsAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=starts_at,json=startsAt"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState_Planned) Reset() {
+	*x = ProjectionCompactionState_Planned{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState_Planned) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState_Planned) ProtoMessage() {}
+
+func (x *ProjectionCompactionState_Planned) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionState_Planned) GetStartsAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_StartsAt
+	}
+	return nil
+}
+
+func (x *ProjectionCompactionState_Planned) SetStartsAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartsAt = v
+}
+
+func (x *ProjectionCompactionState_Planned) HasStartsAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartsAt != nil
+}
+
+func (x *ProjectionCompactionState_Planned) ClearStartsAt() {
+	x.xxx_hidden_StartsAt = nil
+}
+
+type ProjectionCompactionState_Planned_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// StartsAt is the time at which the node plans to start the compaction, by
+	// the node's own clock.
+	//
+	// It is absent if the node plans to start the compaction but can't tell
+	// when.
+	StartsAt *timestamppb.Timestamp
+}
+
+func (b0 ProjectionCompactionState_Planned_builder) Build() *ProjectionCompactionState_Planned {
+	m0 := &ProjectionCompactionState_Planned{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StartsAt = b.StartsAt
+	return m0
+}
+
+// Success is the outcome of a compaction that the handler completed without
+// reporting an error.
+type ProjectionCompactionState_Ended_Success struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState_Ended_Success) Reset() {
+	*x = ProjectionCompactionState_Ended_Success{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState_Ended_Success) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState_Ended_Success) ProtoMessage() {}
+
+func (x *ProjectionCompactionState_Ended_Success) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ProjectionCompactionState_Ended_Success_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ProjectionCompactionState_Ended_Success_builder) Build() *ProjectionCompactionState_Ended_Success {
+	m0 := &ProjectionCompactionState_Ended_Success{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+// Error is the outcome of a compaction that stopped because the handler
+// reported an error.
+type ProjectionCompactionState_Ended_Error struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Message string                 `protobuf:"bytes,1,opt,name=message"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState_Ended_Error) Reset() {
+	*x = ProjectionCompactionState_Ended_Error{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState_Ended_Error) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState_Ended_Error) ProtoMessage() {}
+
+func (x *ProjectionCompactionState_Ended_Error) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionCompactionState_Ended_Error) GetMessage() string {
+	if x != nil {
+		return x.xxx_hidden_Message
+	}
+	return ""
+}
+
+func (x *ProjectionCompactionState_Ended_Error) SetMessage(v string) {
+	x.xxx_hidden_Message = v
+}
+
+type ProjectionCompactionState_Ended_Error_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Message is the text of the error, for a person to read.
+	Message string
+}
+
+func (b0 ProjectionCompactionState_Ended_Error_builder) Build() *ProjectionCompactionState_Ended_Error {
+	m0 := &ProjectionCompactionState_Ended_Error{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Message = b.Message
+	return m0
+}
+
+// DeadlineExceeded is the outcome of a compaction that stopped because its
+// deadline passed.
+//
+// A handler is asked to compact in small steps, so that it makes some
+// progress even if the deadline passes. This outcome is therefore not a
+// failure.
+type ProjectionCompactionState_Ended_DeadlineExceeded struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState_Ended_DeadlineExceeded) Reset() {
+	*x = ProjectionCompactionState_Ended_DeadlineExceeded{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState_Ended_DeadlineExceeded) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState_Ended_DeadlineExceeded) ProtoMessage() {}
+
+func (x *ProjectionCompactionState_Ended_DeadlineExceeded) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ProjectionCompactionState_Ended_DeadlineExceeded_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ProjectionCompactionState_Ended_DeadlineExceeded_builder) Build() *ProjectionCompactionState_Ended_DeadlineExceeded {
+	m0 := &ProjectionCompactionState_Ended_DeadlineExceeded{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+// Canceled is the outcome of a compaction that stopped because it was
+// canceled.
+//
+// This outcome is not a failure, because the compaction was stopped on
+// request.
+type ProjectionCompactionState_Ended_Canceled struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProjectionCompactionState_Ended_Canceled) Reset() {
+	*x = ProjectionCompactionState_Ended_Canceled{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionCompactionState_Ended_Canceled) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionCompactionState_Ended_Canceled) ProtoMessage() {}
+
+func (x *ProjectionCompactionState_Ended_Canceled) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ProjectionCompactionState_Ended_Canceled_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ProjectionCompactionState_Ended_Canceled_builder) Build() *ProjectionCompactionState_Ended_Canceled {
+	m0 := &ProjectionCompactionState_Ended_Canceled{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc = "" +
 	"\n" +
-	"=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"s\n" +
+	"=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x12\x16dogma.metrics.v1alpha1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a7github.com/dogmatiq/protobuf/metricsgrpc/interval.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"s\n" +
 	"\x1aAggregateInstancesInMemory\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12\x1b\n" +
@@ -1496,50 +2654,119 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc
 	"\x15ProcessInstancesEnded\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"\x8d\b\n" +
+	"\x19ProjectionCompactionState\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12S\n" +
+	"\acurrent\x18\x02 \x01(\v29.dogma.metrics.v1alpha1.ProjectionCompactionState.RunningR\acurrent\x12S\n" +
+	"\bprevious\x18\x03 \x01(\v27.dogma.metrics.v1alpha1.ProjectionCompactionState.EndedR\bprevious\x12M\n" +
+	"\x04next\x18\x04 \x01(\v29.dogma.metrics.v1alpha1.ProjectionCompactionState.PlannedR\x04next\x1aD\n" +
+	"\aRunning\x129\n" +
+	"\n" +
+	"started_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x1a\xb2\x04\n" +
+	"\x05Ended\x12[\n" +
+	"\asuccess\x18\x01 \x01(\v2?.dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.SuccessH\x00R\asuccess\x12U\n" +
+	"\x05error\x18\x02 \x01(\v2=.dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.ErrorH\x00R\x05error\x12w\n" +
+	"\x11deadline_exceeded\x18\x03 \x01(\v2H.dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceededH\x00R\x10deadlineExceeded\x12^\n" +
+	"\bcanceled\x18\x04 \x01(\v2@.dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.CanceledH\x00R\bcanceled\x12<\n" +
+	"\binterval\x18\x05 \x01(\v2 .dogma.metrics.v1alpha1.IntervalR\binterval\x1a\t\n" +
+	"\aSuccess\x1a(\n" +
+	"\x05Error\x12\x1f\n" +
+	"\amessage\x18\x01 \x01(\tB\x05\xaa\x01\x02\b\x02R\amessage\x1a\x12\n" +
+	"\x10DeadlineExceeded\x1a\n" +
+	"\n" +
+	"\bCanceledB\t\n" +
+	"\aoutcome\x1aB\n" +
+	"\aPlanned\x127\n" +
+	"\tstarts_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\bstartsAt\"v\n" +
+	"\x1dProjectionCompactionsCanceled\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"w\n" +
+	"\x1eProjectionCompactionsCompleted\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"~\n" +
+	"%ProjectionCompactionsDeadlineExceeded\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"t\n" +
+	"\x1bProjectionCompactionsFailed\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12\x1b\n" +
 	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05valueB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes = []any{
-	(*AggregateInstancesInMemory)(nil), // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory
-	(*ProcessInstancesInMemory)(nil),   // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory
-	(*HandlerCommandsPending)(nil),     // 2: dogma.metrics.v1alpha1.HandlerCommandsPending
-	(*HandlerCommandsDue)(nil),         // 3: dogma.metrics.v1alpha1.HandlerCommandsDue
-	(*HandlerCommandsFailing)(nil),     // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing
-	(*HandlerCommandsHandled)(nil),     // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled
-	(*HandlerDeadlinesPending)(nil),    // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending
-	(*HandlerDeadlinesDue)(nil),        // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue
-	(*HandlerDeadlinesFailing)(nil),    // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing
-	(*HandlerDeadlinesHandled)(nil),    // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled
-	(*HandlerDeadlinesCanceled)(nil),   // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
-	(*HandlerEventsRecorded)(nil),      // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded
-	(*HandlerEventsHandled)(nil),       // 12: dogma.metrics.v1alpha1.HandlerEventsHandled
-	(*HandlerEventsPending)(nil),       // 13: dogma.metrics.v1alpha1.HandlerEventsPending
-	(*HandlerEventsFailing)(nil),       // 14: dogma.metrics.v1alpha1.HandlerEventsFailing
-	(*ProcessInstancesEnded)(nil),      // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded
-	(*uuidpb.UUID)(nil),                // 16: dogma.protobuf.v1.UUID
+	(*AggregateInstancesInMemory)(nil),                       // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory
+	(*ProcessInstancesInMemory)(nil),                         // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory
+	(*HandlerCommandsPending)(nil),                           // 2: dogma.metrics.v1alpha1.HandlerCommandsPending
+	(*HandlerCommandsDue)(nil),                               // 3: dogma.metrics.v1alpha1.HandlerCommandsDue
+	(*HandlerCommandsFailing)(nil),                           // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing
+	(*HandlerCommandsHandled)(nil),                           // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled
+	(*HandlerDeadlinesPending)(nil),                          // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending
+	(*HandlerDeadlinesDue)(nil),                              // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue
+	(*HandlerDeadlinesFailing)(nil),                          // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing
+	(*HandlerDeadlinesHandled)(nil),                          // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled
+	(*HandlerDeadlinesCanceled)(nil),                         // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
+	(*HandlerEventsRecorded)(nil),                            // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded
+	(*HandlerEventsHandled)(nil),                             // 12: dogma.metrics.v1alpha1.HandlerEventsHandled
+	(*HandlerEventsPending)(nil),                             // 13: dogma.metrics.v1alpha1.HandlerEventsPending
+	(*HandlerEventsFailing)(nil),                             // 14: dogma.metrics.v1alpha1.HandlerEventsFailing
+	(*ProcessInstancesEnded)(nil),                            // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded
+	(*ProjectionCompactionState)(nil),                        // 16: dogma.metrics.v1alpha1.ProjectionCompactionState
+	(*ProjectionCompactionsCanceled)(nil),                    // 17: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled
+	(*ProjectionCompactionsCompleted)(nil),                   // 18: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted
+	(*ProjectionCompactionsDeadlineExceeded)(nil),            // 19: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded
+	(*ProjectionCompactionsFailed)(nil),                      // 20: dogma.metrics.v1alpha1.ProjectionCompactionsFailed
+	(*ProjectionCompactionState_Running)(nil),                // 21: dogma.metrics.v1alpha1.ProjectionCompactionState.Running
+	(*ProjectionCompactionState_Ended)(nil),                  // 22: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended
+	(*ProjectionCompactionState_Planned)(nil),                // 23: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
+	(*ProjectionCompactionState_Ended_Success)(nil),          // 24: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success
+	(*ProjectionCompactionState_Ended_Error)(nil),            // 25: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error
+	(*ProjectionCompactionState_Ended_DeadlineExceeded)(nil), // 26: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded
+	(*ProjectionCompactionState_Ended_Canceled)(nil),         // 27: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled
+	(*uuidpb.UUID)(nil),                                      // 28: dogma.protobuf.v1.UUID
+	(*timestamppb.Timestamp)(nil),                            // 29: google.protobuf.Timestamp
+	(*Interval)(nil),                                         // 30: dogma.metrics.v1alpha1.Interval
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_depIdxs = []int32{
-	16, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 14: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	28, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 14: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 16: dogma.metrics.v1alpha1.ProjectionCompactionState.handler_key:type_name -> dogma.protobuf.v1.UUID
+	21, // 17: dogma.metrics.v1alpha1.ProjectionCompactionState.current:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Running
+	22, // 18: dogma.metrics.v1alpha1.ProjectionCompactionState.previous:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended
+	23, // 19: dogma.metrics.v1alpha1.ProjectionCompactionState.next:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
+	28, // 20: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 21: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 22: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	28, // 23: dogma.metrics.v1alpha1.ProjectionCompactionsFailed.handler_key:type_name -> dogma.protobuf.v1.UUID
+	29, // 24: dogma.metrics.v1alpha1.ProjectionCompactionState.Running.started_at:type_name -> google.protobuf.Timestamp
+	24, // 25: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.success:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success
+	25, // 26: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.error:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error
+	26, // 27: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.deadline_exceeded:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded
+	27, // 28: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.canceled:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled
+	30, // 29: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.interval:type_name -> dogma.metrics.v1alpha1.Interval
+	29, // 30: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned.starts_at:type_name -> google.protobuf.Timestamp
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() }
@@ -1547,13 +2774,20 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() {
 	if File_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto != nil {
 		return
 	}
+	file_github_com_dogmatiq_protobuf_metricsgrpc_interval_proto_init()
+	file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22].OneofWrappers = []any{
+		(*projectionCompactionState_Ended_Success_)(nil),
+		(*projectionCompactionState_Ended_Error_)(nil),
+		(*projectionCompactionState_Ended_DeadlineExceeded_)(nil),
+		(*projectionCompactionState_Ended_Canceled_)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

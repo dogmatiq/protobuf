@@ -1,3 +1,4 @@
+export * from "./interval_pb.js";
 export * from "./metrics_pb.js";
 export * from "./revision.js";
 export * from "./sample_eventstream_pb.js";

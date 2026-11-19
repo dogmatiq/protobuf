@@ -1,0 +1,37 @@
+edition = "2024";
+package dogma.metrics.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+// Interval is a span of time.
+//
+// A node reports an interval either as the times at which it began and ended,
+// or only as how long it lasted.
+message Interval {
+  // Bounds is an interval reported as the times at which it began and ended.
+  message Bounds {
+    // Start is the time at which the interval began, by the node's own clock.
+    // It is required.
+    google.protobuf.Timestamp start = 1;
+
+    // End is the time at which the interval ended, by the same clock. It is
+    // required.
+    google.protobuf.Timestamp end = 2;
+  }
+
+  // Length is an interval reported only as how long it lasted.
+  message Length {
+    // Duration is how long the interval lasted, as the node measured it. It is
+    // required.
+    google.protobuf.Duration duration = 1;
+  }
+
+  // Form is how the node reports the interval. It is required.
+  oneof form {
+    Bounds bounds = 1;
+    Length length = 2;
+  }
+}
