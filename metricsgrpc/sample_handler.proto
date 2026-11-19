@@ -173,6 +173,18 @@ message HandlerEventsPending {
   uint64 value = 2 [features.field_presence = IMPLICIT];
 }
 
+// HandlerEventsFailing is the number of events for one handler that haven't
+// been handled yet and whose most recent delivery attempt failed. A node sends
+// it only for process and projection handlers.
+message HandlerEventsFailing {
+  // HandlerKey is the key of the handler's identity, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Value is the number of failing events.
+  uint64 value = 2 [features.field_presence = IMPLICIT];
+}
+
 // ProcessInstancesEnded is the running total of the instances of one process
 // handler that have ended.
 message ProcessInstancesEnded {

@@ -1253,6 +1253,94 @@ func (b0 HandlerEventsPending_builder) Build() *HandlerEventsPending {
 	return m0
 }
 
+// HandlerEventsFailing is the number of events for one handler that haven't
+// been handled yet and whose most recent delivery attempt failed. A node sends
+// it only for process and projection handlers.
+type HandlerEventsFailing struct {
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Value      uint64                 `protobuf:"varint,2,opt,name=value"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *HandlerEventsFailing) Reset() {
+	*x = HandlerEventsFailing{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HandlerEventsFailing) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HandlerEventsFailing) ProtoMessage() {}
+
+func (x *HandlerEventsFailing) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *HandlerEventsFailing) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *HandlerEventsFailing) GetValue() uint64 {
+	if x != nil {
+		return x.xxx_hidden_Value
+	}
+	return 0
+}
+
+func (x *HandlerEventsFailing) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerEventsFailing) SetValue(v uint64) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *HandlerEventsFailing) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *HandlerEventsFailing) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+type HandlerEventsFailing_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the key of the handler's identity, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Value is the number of failing events.
+	Value uint64
+}
+
+func (b0 HandlerEventsFailing_builder) Build() *HandlerEventsFailing {
+	m0 := &HandlerEventsFailing{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
 // ProcessInstancesEnded is the running total of the instances of one process
 // handler that have ended.
 type ProcessInstancesEnded struct {
@@ -1265,7 +1353,7 @@ type ProcessInstancesEnded struct {
 
 func (x *ProcessInstancesEnded) Reset() {
 	*x = ProcessInstancesEnded{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1277,7 +1365,7 @@ func (x *ProcessInstancesEnded) String() string {
 func (*ProcessInstancesEnded) ProtoMessage() {}
 
 func (x *ProcessInstancesEnded) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1400,13 +1488,17 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc
 	"\x14HandlerEventsPending\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12\x1b\n" +
+	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"m\n" +
+	"\x14HandlerEventsFailing\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12\x1b\n" +
 	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"n\n" +
 	"\x15ProcessInstancesEnded\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12\x1b\n" +
 	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05valueB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes = []any{
 	(*AggregateInstancesInMemory)(nil), // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory
 	(*ProcessInstancesInMemory)(nil),   // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory
@@ -1422,30 +1514,32 @@ var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes =
 	(*HandlerEventsRecorded)(nil),      // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded
 	(*HandlerEventsHandled)(nil),       // 12: dogma.metrics.v1alpha1.HandlerEventsHandled
 	(*HandlerEventsPending)(nil),       // 13: dogma.metrics.v1alpha1.HandlerEventsPending
-	(*ProcessInstancesEnded)(nil),      // 14: dogma.metrics.v1alpha1.ProcessInstancesEnded
-	(*uuidpb.UUID)(nil),                // 15: dogma.protobuf.v1.UUID
+	(*HandlerEventsFailing)(nil),       // 14: dogma.metrics.v1alpha1.HandlerEventsFailing
+	(*ProcessInstancesEnded)(nil),      // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded
+	(*uuidpb.UUID)(nil),                // 16: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_depIdxs = []int32{
-	15, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // 14: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	16, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 14: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	16, // [16:16] is the sub-list for method output_type
+	16, // [16:16] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() }
@@ -1459,7 +1553,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

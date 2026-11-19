@@ -91,6 +91,7 @@ message WatchMetricsResponse {
   // - HandlerDeadlinesFailing
   // - HandlerDeadlinesHandled
   // - HandlerDeadlinesPending
+  // - HandlerEventsFailing
   // - HandlerEventsHandled
   // - HandlerEventsPending
   // - HandlerEventsRecorded
