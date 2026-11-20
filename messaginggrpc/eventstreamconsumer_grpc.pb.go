@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	EventStreamConsumerAPI_WatchEvents_FullMethodName = "/dogma.messaging.v1.EventStreamConsumerAPI/WatchEvents"
-	EventStreamConsumerAPI_ReadEvents_FullMethodName  = "/dogma.messaging.v1.EventStreamConsumerAPI/ReadEvents"
+	EventStreamConsumerAPI_WatchEvents_FullMethodName      = "/dogma.messaging.v1.EventStreamConsumerAPI/WatchEvents"
+	EventStreamConsumerAPI_ReadEvents_FullMethodName       = "/dogma.messaging.v1.EventStreamConsumerAPI/ReadEvents"
+	EventStreamConsumerAPI_ListEventStreams_FullMethodName = "/dogma.messaging.v1.EventStreamConsumerAPI/ListEventStreams"
+	EventStreamConsumerAPI_ReadEventSegment_FullMethodName = "/dogma.messaging.v1.EventStreamConsumerAPI/ReadEventSegment"
 )
 
 // EventStreamConsumerAPIClient is the client API for EventStreamConsumerAPI service.
@@ -36,17 +38,17 @@ type EventStreamConsumerAPIClient interface {
 	//
 	// The feed starts at the tail of each stream. Every available stream that
 	// already contains matching events is represented by at least one segment.
-	// The first [EventStreamSegment] received for a stream may be empty, but it
-	// tells the client that the stream exists and the offset at which delivery
-	// begins. Each subsequent segment for that stream begins at the end offset
-	// of the previous segment.
+	// The first [EventStreamSegment] received for a stream may carry no events,
+	// but it tells the client that the stream exists and the offset at which
+	// delivery begins. Each subsequent segment for that stream begins at the end
+	// offset of the previous segment.
 	//
 	// If the client cannot keep up and the server can no longer deliver a stream
 	// contiguously, the call ends with ABORTED.
 	//
-	// While a stream has no new events, the server may send further empty
-	// segments with a begin_offset equal to the end_offset, to tell the client
-	// that nothing has been appended to the stream beyond that offset.
+	// While a stream has no new events, the server may send further segments
+	// with an empty range, whose begin_offset equals its end_offset, to tell the
+	// client that nothing has been appended to the stream beyond that offset.
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	WatchEvents(ctx context.Context, in *WatchEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
@@ -65,6 +67,39 @@ type EventStreamConsumerAPIClient interface {
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	ReadEvents(ctx context.Context, in *ReadEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
+	// ListEventStreams returns the event streams available from the server, and
+	// the length of each. It lists every stream that the caller may read,
+	// including streams that have no events.
+	//
+	// Each length is the stream's length at some moment during the call, and the
+	// server may observe different streams at different moments. A stream may
+	// have grown by the time the client receives the response.
+	ListEventStreams(ctx context.Context, in *ListEventStreamsRequest, opts ...grpc.CallOption) (*ListEventStreamsResponse, error)
+	// ReadEventSegment returns one segment of a single event stream, which
+	// carries the events within its range that match the request's filter.
+	//
+	// The segment's range begins at the requested begin offset. It ends at the
+	// requested end offset, or at the end of the stream if the request has no end
+	// offset.
+	//
+	// The server limits how large a segment's range can be, so it may end the
+	// range before the requested end. The client then reads the rest from the
+	// segment's end offset.
+	//
+	// The segment's range is empty only if the requested range is empty. A
+	// segment with a non-empty range may still carry no events, because it
+	// carries only the events that match the filter.
+	//
+	// A missing or invalid stream ID results in INVALID_ARGUMENT, and an
+	// unrecognized one results in NOT_FOUND.
+	//
+	// A begin or end offset beyond the end of the stream results in OUT_OF_RANGE.
+	// A begin offset greater than the end offset results in INVALID_ARGUMENT. A
+	// range that begins and ends at the same offset is valid and returns no
+	// events.
+	//
+	// A missing or invalid message filter results in INVALID_ARGUMENT.
+	ReadEventSegment(ctx context.Context, in *ReadEventSegmentRequest, opts ...grpc.CallOption) (*EventStreamSegment, error)
 }
 
 type eventStreamConsumerAPIClient struct {
@@ -113,6 +148,26 @@ func (c *eventStreamConsumerAPIClient) ReadEvents(ctx context.Context, in *ReadE
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type EventStreamConsumerAPI_ReadEventsClient = grpc.ServerStreamingClient[EventStreamSegment]
 
+func (c *eventStreamConsumerAPIClient) ListEventStreams(ctx context.Context, in *ListEventStreamsRequest, opts ...grpc.CallOption) (*ListEventStreamsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListEventStreamsResponse)
+	err := c.cc.Invoke(ctx, EventStreamConsumerAPI_ListEventStreams_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eventStreamConsumerAPIClient) ReadEventSegment(ctx context.Context, in *ReadEventSegmentRequest, opts ...grpc.CallOption) (*EventStreamSegment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EventStreamSegment)
+	err := c.cc.Invoke(ctx, EventStreamConsumerAPI_ReadEventSegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EventStreamConsumerAPIServer is the server API for EventStreamConsumerAPI service.
 // All implementations should embed UnimplementedEventStreamConsumerAPIServer
 // for forward compatibility.
@@ -126,17 +181,17 @@ type EventStreamConsumerAPIServer interface {
 	//
 	// The feed starts at the tail of each stream. Every available stream that
 	// already contains matching events is represented by at least one segment.
-	// The first [EventStreamSegment] received for a stream may be empty, but it
-	// tells the client that the stream exists and the offset at which delivery
-	// begins. Each subsequent segment for that stream begins at the end offset
-	// of the previous segment.
+	// The first [EventStreamSegment] received for a stream may carry no events,
+	// but it tells the client that the stream exists and the offset at which
+	// delivery begins. Each subsequent segment for that stream begins at the end
+	// offset of the previous segment.
 	//
 	// If the client cannot keep up and the server can no longer deliver a stream
 	// contiguously, the call ends with ABORTED.
 	//
-	// While a stream has no new events, the server may send further empty
-	// segments with a begin_offset equal to the end_offset, to tell the client
-	// that nothing has been appended to the stream beyond that offset.
+	// While a stream has no new events, the server may send further segments
+	// with an empty range, whose begin_offset equals its end_offset, to tell the
+	// client that nothing has been appended to the stream beyond that offset.
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	WatchEvents(*WatchEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
@@ -155,6 +210,39 @@ type EventStreamConsumerAPIServer interface {
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	ReadEvents(*ReadEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
+	// ListEventStreams returns the event streams available from the server, and
+	// the length of each. It lists every stream that the caller may read,
+	// including streams that have no events.
+	//
+	// Each length is the stream's length at some moment during the call, and the
+	// server may observe different streams at different moments. A stream may
+	// have grown by the time the client receives the response.
+	ListEventStreams(context.Context, *ListEventStreamsRequest) (*ListEventStreamsResponse, error)
+	// ReadEventSegment returns one segment of a single event stream, which
+	// carries the events within its range that match the request's filter.
+	//
+	// The segment's range begins at the requested begin offset. It ends at the
+	// requested end offset, or at the end of the stream if the request has no end
+	// offset.
+	//
+	// The server limits how large a segment's range can be, so it may end the
+	// range before the requested end. The client then reads the rest from the
+	// segment's end offset.
+	//
+	// The segment's range is empty only if the requested range is empty. A
+	// segment with a non-empty range may still carry no events, because it
+	// carries only the events that match the filter.
+	//
+	// A missing or invalid stream ID results in INVALID_ARGUMENT, and an
+	// unrecognized one results in NOT_FOUND.
+	//
+	// A begin or end offset beyond the end of the stream results in OUT_OF_RANGE.
+	// A begin offset greater than the end offset results in INVALID_ARGUMENT. A
+	// range that begins and ends at the same offset is valid and returns no
+	// events.
+	//
+	// A missing or invalid message filter results in INVALID_ARGUMENT.
+	ReadEventSegment(context.Context, *ReadEventSegmentRequest) (*EventStreamSegment, error)
 }
 
 // UnimplementedEventStreamConsumerAPIServer should be embedded to have
@@ -169,6 +257,12 @@ func (UnimplementedEventStreamConsumerAPIServer) WatchEvents(*WatchEventsRequest
 }
 func (UnimplementedEventStreamConsumerAPIServer) ReadEvents(*ReadEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error {
 	return status.Error(codes.Unimplemented, "method ReadEvents not implemented")
+}
+func (UnimplementedEventStreamConsumerAPIServer) ListEventStreams(context.Context, *ListEventStreamsRequest) (*ListEventStreamsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListEventStreams not implemented")
+}
+func (UnimplementedEventStreamConsumerAPIServer) ReadEventSegment(context.Context, *ReadEventSegmentRequest) (*EventStreamSegment, error) {
+	return nil, status.Error(codes.Unimplemented, "method ReadEventSegment not implemented")
 }
 func (UnimplementedEventStreamConsumerAPIServer) testEmbeddedByValue() {}
 
@@ -212,13 +306,58 @@ func _EventStreamConsumerAPI_ReadEvents_Handler(srv interface{}, stream grpc.Ser
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type EventStreamConsumerAPI_ReadEventsServer = grpc.ServerStreamingServer[EventStreamSegment]
 
+func _EventStreamConsumerAPI_ListEventStreams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEventStreamsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventStreamConsumerAPIServer).ListEventStreams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EventStreamConsumerAPI_ListEventStreams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventStreamConsumerAPIServer).ListEventStreams(ctx, req.(*ListEventStreamsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EventStreamConsumerAPI_ReadEventSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadEventSegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventStreamConsumerAPIServer).ReadEventSegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EventStreamConsumerAPI_ReadEventSegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventStreamConsumerAPIServer).ReadEventSegment(ctx, req.(*ReadEventSegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EventStreamConsumerAPI_ServiceDesc is the grpc.ServiceDesc for EventStreamConsumerAPI service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var EventStreamConsumerAPI_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "dogma.messaging.v1.EventStreamConsumerAPI",
 	HandlerType: (*EventStreamConsumerAPIServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListEventStreams",
+			Handler:    _EventStreamConsumerAPI_ListEventStreams_Handler,
+		},
+		{
+			MethodName: "ReadEventSegment",
+			Handler:    _EventStreamConsumerAPI_ReadEventSegment_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "WatchEvents",

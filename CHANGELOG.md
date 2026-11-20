@@ -24,6 +24,12 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added the optional `stream_length` field to `EventStreamSegment`, which tells
   a consumer where the end of the stream is, so that it can see how far behind
   it is.
+- Added `ListEventStreams` to `EventStreamConsumerAPI`, which lists the event
+  streams that a server offers and the length of each, without delivering any
+  events.
+- Added `ReadEventSegment` to `EventStreamConsumerAPI`, which returns the events
+  in one range of a stream as a single segment. The end of the range is
+  optional, and the server may return less than the whole range.
 
 ### Changed
 

@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer: GenFile = /*@__PURE__*/
-  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIsoBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEhUKDXN0cmVhbV9sZW5ndGgYByABKAQSMwoJZW52ZWxvcGVzGAQgAygLMiAuZG9nbWEucHJvdG9idWYudjEuTXVsdGlFbnZlbG9wZTLYAQoWRXZlbnRTdHJlYW1Db25zdW1lckFQSRJfCgtXYXRjaEV2ZW50cxImLmRvZ21hLm1lc3NhZ2luZy52MS5XYXRjaEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAESXQoKUmVhZEV2ZW50cxIlLmRvZ21hLm1lc3NhZ2luZy52MS5SZWFkRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwAUIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
+  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIhkKF0xpc3RFdmVudFN0cmVhbXNSZXF1ZXN0IlIKGExpc3RFdmVudFN0cmVhbXNSZXNwb25zZRI2Cg1ldmVudF9zdHJlYW1zGAEgAygLMh8uZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtIlYKC0V2ZW50U3RyZWFtEjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFQoGbGVuZ3RoGAIgASgEQgWqAQIIAiK2AQoXUmVhZEV2ZW50U2VnbWVudFJlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggBEjEKBmZpbHRlchgEIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIsoBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEhUKDXN0cmVhbV9sZW5ndGgYByABKAQSMwoJZW52ZWxvcGVzGAQgAygLMiAuZG9nbWEucHJvdG9idWYudjEuTXVsdGlFbnZlbG9wZTKwAwoWRXZlbnRTdHJlYW1Db25zdW1lckFQSRJfCgtXYXRjaEV2ZW50cxImLmRvZ21hLm1lc3NhZ2luZy52MS5XYXRjaEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAESXQoKUmVhZEV2ZW50cxIlLmRvZ21hLm1lc3NhZ2luZy52MS5SZWFkRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwARJtChBMaXN0RXZlbnRTdHJlYW1zEisuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXF1ZXN0GiwuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXNwb25zZRJnChBSZWFkRXZlbnRTZWdtZW50EisuZG9nbWEubWVzc2FnaW5nLnYxLlJlYWRFdmVudFNlZ21lbnRSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudEIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
 
 /**
  * WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
@@ -79,12 +79,125 @@ export const ReadEventsRequestSchema: GenMessage<ReadEventsRequest> = /*@__PURE_
   messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 1);
 
 /**
+ * ListEventStreamsRequest is the input to the
+ * [EventStreamConsumerAPI.ListEventStreams] method.
+ *
+ * @generated from message dogma.messaging.v1.ListEventStreamsRequest
+ */
+export type ListEventStreamsRequest = Message<"dogma.messaging.v1.ListEventStreamsRequest"> & {
+};
+
+/**
+ * Describes the message dogma.messaging.v1.ListEventStreamsRequest.
+ * Use `create(ListEventStreamsRequestSchema)` to create a new message.
+ */
+export const ListEventStreamsRequestSchema: GenMessage<ListEventStreamsRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 2);
+
+/**
+ * ListEventStreamsResponse is the output of the
+ * [EventStreamConsumerAPI.ListEventStreams] method.
+ *
+ * @generated from message dogma.messaging.v1.ListEventStreamsResponse
+ */
+export type ListEventStreamsResponse = Message<"dogma.messaging.v1.ListEventStreamsResponse"> & {
+  /**
+   * EventStreams holds each stream once, in any order.
+   *
+   * @generated from field: repeated dogma.messaging.v1.EventStream event_streams = 1;
+   */
+  eventStreams: EventStream[];
+};
+
+/**
+ * Describes the message dogma.messaging.v1.ListEventStreamsResponse.
+ * Use `create(ListEventStreamsResponseSchema)` to create a new message.
+ */
+export const ListEventStreamsResponseSchema: GenMessage<ListEventStreamsResponse> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 3);
+
+/**
+ * EventStream describes one event stream.
+ *
+ * @generated from message dogma.messaging.v1.EventStream
+ */
+export type EventStream = Message<"dogma.messaging.v1.EventStream"> & {
+  /**
+   * EventStreamId is the ID of the stream.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
+   */
+  eventStreamId?: UUID | undefined;
+
+  /**
+   * Length is the number of events in the stream, which is also the offset at
+   * which the next event will be appended. It is zero if the stream has no
+   * events.
+   *
+   * @generated from field: uint64 length = 2 [features.field_presence = IMPLICIT];
+   */
+  length: bigint;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.EventStream.
+ * Use `create(EventStreamSchema)` to create a new message.
+ */
+export const EventStreamSchema: GenMessage<EventStream> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 4);
+
+/**
+ * ReadEventSegmentRequest is the input to the
+ * [EventStreamConsumerAPI.ReadEventSegment] method.
+ *
+ * @generated from message dogma.messaging.v1.ReadEventSegmentRequest
+ */
+export type ReadEventSegmentRequest = Message<"dogma.messaging.v1.ReadEventSegmentRequest"> & {
+  /**
+   * EventStreamId is the ID of the stream from which events are read.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
+   */
+  eventStreamId?: UUID | undefined;
+
+  /**
+   * BeginOffset is the offset at which the segment begins.
+   *
+   * @generated from field: uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
+   */
+  beginOffset: bigint;
+
+  /**
+   * EndOffset is the offset immediately after the requested range, exclusive.
+   * If it is absent, the range ends at the end of the stream.
+   *
+   * @generated from field: uint64 end_offset = 3 [features.field_presence = EXPLICIT];
+   */
+  endOffset: bigint;
+
+  /**
+   * Filter describes the events to include.
+   *
+   * @generated from field: dogma.messaging.v1.MessageFilter filter = 4;
+   */
+  filter?: MessageFilter | undefined;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.ReadEventSegmentRequest.
+ * Use `create(ReadEventSegmentRequestSchema)` to create a new message.
+ */
+export const ReadEventSegmentRequestSchema: GenMessage<ReadEventSegmentRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 5);
+
+/**
  * EventStreamSegment is a contiguous piece of one event stream, the half-open
  * range [begin_offset, end_offset). It carries the events in that range that
  * match the requested message types.
  *
  * It is the (streaming) output of both [EventStreamConsumerAPI.WatchEvents]
- * and [EventStreamConsumerAPI.ReadEvents].
+ * and [EventStreamConsumerAPI.ReadEvents], and the output of
+ * [EventStreamConsumerAPI.ReadEventSegment].
  *
  * @generated from message dogma.messaging.v1.EventStreamSegment
  */
@@ -149,7 +262,7 @@ export type EventStreamSegment = Message<"dogma.messaging.v1.EventStreamSegment"
  * Use `create(EventStreamSegmentSchema)` to create a new message.
  */
 export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 6);
 
 /**
  * EventStreamConsumerAPI is a service for consuming event messages from
@@ -165,17 +278,17 @@ export const EventStreamConsumerAPI: GenService<{
    *
    * The feed starts at the tail of each stream. Every available stream that
    * already contains matching events is represented by at least one segment.
-   * The first [EventStreamSegment] received for a stream may be empty, but it
-   * tells the client that the stream exists and the offset at which delivery
-   * begins. Each subsequent segment for that stream begins at the end offset
-   * of the previous segment.
+   * The first [EventStreamSegment] received for a stream may carry no events,
+   * but it tells the client that the stream exists and the offset at which
+   * delivery begins. Each subsequent segment for that stream begins at the end
+   * offset of the previous segment.
    *
    * If the client cannot keep up and the server can no longer deliver a stream
    * contiguously, the call ends with ABORTED.
    *
-   * While a stream has no new events, the server may send further empty
-   * segments with a begin_offset equal to the end_offset, to tell the client
-   * that nothing has been appended to the stream beyond that offset.
+   * While a stream has no new events, the server may send further segments
+   * with an empty range, whose begin_offset equals its end_offset, to tell the
+   * client that nothing has been appended to the stream beyond that offset.
    *
    * A missing or invalid message filter results in INVALID_ARGUMENT.
    *
@@ -207,6 +320,55 @@ export const EventStreamConsumerAPI: GenService<{
   readEvents: {
     methodKind: "server_streaming";
     input: typeof ReadEventsRequestSchema;
+    output: typeof EventStreamSegmentSchema;
+  },
+  /**
+   * ListEventStreams returns the event streams available from the server, and
+   * the length of each. It lists every stream that the caller may read,
+   * including streams that have no events.
+   *
+   * Each length is the stream's length at some moment during the call, and the
+   * server may observe different streams at different moments. A stream may
+   * have grown by the time the client receives the response.
+   *
+   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams
+   */
+  listEventStreams: {
+    methodKind: "unary";
+    input: typeof ListEventStreamsRequestSchema;
+    output: typeof ListEventStreamsResponseSchema;
+  },
+  /**
+   * ReadEventSegment returns one segment of a single event stream, which
+   * carries the events within its range that match the request's filter.
+   *
+   * The segment's range begins at the requested begin offset. It ends at the
+   * requested end offset, or at the end of the stream if the request has no end
+   * offset.
+   *
+   * The server limits how large a segment's range can be, so it may end the
+   * range before the requested end. The client then reads the rest from the
+   * segment's end offset.
+   *
+   * The segment's range is empty only if the requested range is empty. A
+   * segment with a non-empty range may still carry no events, because it
+   * carries only the events that match the filter.
+   *
+   * A missing or invalid stream ID results in INVALID_ARGUMENT, and an
+   * unrecognized one results in NOT_FOUND.
+   *
+   * A begin or end offset beyond the end of the stream results in OUT_OF_RANGE.
+   * A begin offset greater than the end offset results in INVALID_ARGUMENT. A
+   * range that begins and ends at the same offset is valid and returns no
+   * events.
+   *
+   * A missing or invalid message filter results in INVALID_ARGUMENT.
+   *
+   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ReadEventSegment
+   */
+  readEventSegment: {
+    methodKind: "unary";
+    input: typeof ReadEventSegmentRequestSchema;
     output: typeof EventStreamSegmentSchema;
   },
 }> = /*@__PURE__*/

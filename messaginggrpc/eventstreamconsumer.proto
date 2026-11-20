@@ -16,17 +16,17 @@ service EventStreamConsumerAPI {
   //
   // The feed starts at the tail of each stream. Every available stream that
   // already contains matching events is represented by at least one segment.
-  // The first [EventStreamSegment] received for a stream may be empty, but it
-  // tells the client that the stream exists and the offset at which delivery
-  // begins. Each subsequent segment for that stream begins at the end offset
-  // of the previous segment.
+  // The first [EventStreamSegment] received for a stream may carry no events,
+  // but it tells the client that the stream exists and the offset at which
+  // delivery begins. Each subsequent segment for that stream begins at the end
+  // offset of the previous segment.
   //
   // If the client cannot keep up and the server can no longer deliver a stream
   // contiguously, the call ends with ABORTED.
   //
-  // While a stream has no new events, the server may send further empty
-  // segments with a begin_offset equal to the end_offset, to tell the client
-  // that nothing has been appended to the stream beyond that offset.
+  // While a stream has no new events, the server may send further segments
+  // with an empty range, whose begin_offset equals its end_offset, to tell the
+  // client that nothing has been appended to the stream beyond that offset.
   //
   // A missing or invalid message filter results in INVALID_ARGUMENT.
   rpc WatchEvents(WatchEventsRequest) returns (stream EventStreamSegment);
@@ -46,6 +46,42 @@ service EventStreamConsumerAPI {
   //
   // A missing or invalid message filter results in INVALID_ARGUMENT.
   rpc ReadEvents(ReadEventsRequest) returns (stream EventStreamSegment);
+
+  // ListEventStreams returns the event streams available from the server, and
+  // the length of each. It lists every stream that the caller may read,
+  // including streams that have no events.
+  //
+  // Each length is the stream's length at some moment during the call, and the
+  // server may observe different streams at different moments. A stream may
+  // have grown by the time the client receives the response.
+  rpc ListEventStreams(ListEventStreamsRequest)
+      returns (ListEventStreamsResponse);
+
+  // ReadEventSegment returns one segment of a single event stream, which
+  // carries the events within its range that match the request's filter.
+  //
+  // The segment's range begins at the requested begin offset. It ends at the
+  // requested end offset, or at the end of the stream if the request has no end
+  // offset.
+  //
+  // The server limits how large a segment's range can be, so it may end the
+  // range before the requested end. The client then reads the rest from the
+  // segment's end offset.
+  //
+  // The segment's range is empty only if the requested range is empty. A
+  // segment with a non-empty range may still carry no events, because it
+  // carries only the events that match the filter.
+  //
+  // A missing or invalid stream ID results in INVALID_ARGUMENT, and an
+  // unrecognized one results in NOT_FOUND.
+  //
+  // A begin or end offset beyond the end of the stream results in OUT_OF_RANGE.
+  // A begin offset greater than the end offset results in INVALID_ARGUMENT. A
+  // range that begins and ends at the same offset is valid and returns no
+  // events.
+  //
+  // A missing or invalid message filter results in INVALID_ARGUMENT.
+  rpc ReadEventSegment(ReadEventSegmentRequest) returns (EventStreamSegment);
 }
 
 // WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
@@ -70,12 +106,52 @@ message ReadEventsRequest {
   MessageFilter filter = 3;
 }
 
+// ListEventStreamsRequest is the input to the
+// [EventStreamConsumerAPI.ListEventStreams] method.
+message ListEventStreamsRequest {}
+
+// ListEventStreamsResponse is the output of the
+// [EventStreamConsumerAPI.ListEventStreams] method.
+message ListEventStreamsResponse {
+  // EventStreams holds each stream once, in any order.
+  repeated EventStream event_streams = 1;
+}
+
+// EventStream describes one event stream.
+message EventStream {
+  // EventStreamId is the ID of the stream.
+  dogma.protobuf.v1.UUID event_stream_id = 1;
+
+  // Length is the number of events in the stream, which is also the offset at
+  // which the next event will be appended. It is zero if the stream has no
+  // events.
+  uint64 length = 2 [features.field_presence = IMPLICIT];
+}
+
+// ReadEventSegmentRequest is the input to the
+// [EventStreamConsumerAPI.ReadEventSegment] method.
+message ReadEventSegmentRequest {
+  // EventStreamId is the ID of the stream from which events are read.
+  dogma.protobuf.v1.UUID event_stream_id = 1;
+
+  // BeginOffset is the offset at which the segment begins.
+  uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
+
+  // EndOffset is the offset immediately after the requested range, exclusive.
+  // If it is absent, the range ends at the end of the stream.
+  uint64 end_offset = 3 [features.field_presence = EXPLICIT];
+
+  // Filter describes the events to include.
+  MessageFilter filter = 4;
+}
+
 // EventStreamSegment is a contiguous piece of one event stream, the half-open
 // range [begin_offset, end_offset). It carries the events in that range that
 // match the requested message types.
 //
 // It is the (streaming) output of both [EventStreamConsumerAPI.WatchEvents]
-// and [EventStreamConsumerAPI.ReadEvents].
+// and [EventStreamConsumerAPI.ReadEvents], and the output of
+// [EventStreamConsumerAPI.ReadEventSegment].
 message EventStreamSegment {
   // EventStreamId is the ID of the stream that this is a segment of.
   dogma.protobuf.v1.UUID event_stream_id = 1;
