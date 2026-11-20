@@ -59,6 +59,21 @@ message WatchEngineResponse {
   // The nodes of one cluster may describe themselves differently, for example
   // while a new version of the application is deployed.
   message Preamble {
+    // Implementation describes the software that implements an engine: its name
+    // and its version.
+    message Implementation {
+      // Name is the name of the engine software. It is required.
+      string name = 1 [features.field_presence = IMPLICIT];
+
+      // Version is the version of the engine software, as a semantic version
+      // such as "1.4.2" or "2.0.0-rc.1", as defined by Semantic Versioning
+      // 2.0.0 (https://semver.org/spec/v2.0.0.html). A client can compare two
+      // versions using that specification's rules for precedence.
+      //
+      // It is empty if the engine doesn't know its version.
+      string version = 2 [features.field_presence = IMPLICIT];
+    }
+
     // Cluster describes the cluster that the engine runs as.
     message Cluster {
       // Id is the ID of the cluster. Nodes of the same cluster give the same
@@ -89,15 +104,18 @@ message WatchEngineResponse {
     // such as its host name.
     string description = 2 [features.field_presence = IMPLICIT];
 
+    // Implementation describes the software that implements the engine.
+    Implementation implementation = 3;
+
     // Site is the identity of the site that the engine is deployed to, which is
     // one installation of the application. It is the same identity that the
     // engine records as the site of the source of each message that it
     // produces. It is present only if the engine is configured with a site.
-    dogma.protobuf.v1.Identity site = 3;
+    dogma.protobuf.v1.Identity site = 4;
 
-    // Application describes the version of the application that the engine
-    // runs. It is required.
-    dogma.config.v1alpha1.Application application = 4;
+    // Application describes the application that the engine runs, in the
+    // version that it runs. It is required.
+    dogma.config.v1alpha1.Application application = 5;
 
     // HeartbeatInterval is how long the engine aims to wait between two of the
     // heartbeats that it sends on this response stream. It is greater than
@@ -105,17 +123,17 @@ message WatchEngineResponse {
     //
     // These heartbeats may or may not be the same as any heartbeats that the
     // nodes of a cluster send to each other.
-    google.protobuf.Duration heartbeat_interval = 5;
+    google.protobuf.Duration heartbeat_interval = 6;
 
     // Cluster describes the engine's cluster. It is present only if the engine
     // runs as a cluster.
-    Cluster cluster = 6;
+    Cluster cluster = 7;
 
     // QueueModel is the model by which the engine uses queues.
-    QueueModel queue_model = 7;
+    QueueModel queue_model = 8;
 
     // EventStreamModel is the model by which the engine uses event streams.
-    EventStreamModel event_stream_model = 8;
+    EventStreamModel event_stream_model = 9;
   }
 
   // Heartbeat reports that the engine has sent a heartbeat, which is a signal

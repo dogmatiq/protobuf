@@ -31,6 +31,7 @@ func (b *ApplicationBuilder) From(x *Application) *ApplicationBuilder {
 	if x.HasIdentity() {
 		b.prototype.SetIdentity(x.GetIdentity())
 	}
+	b.prototype.SetVersion(x.GetVersion())
 	b.prototype.SetGoType(x.GetGoType())
 	b.prototype.SetHandlers(x.GetHandlers())
 	b.prototype.SetMessages(x.GetMessages())
@@ -46,6 +47,7 @@ func (b *ApplicationBuilder) Build() *Application {
 	if b.prototype.HasIdentity() {
 		m.SetIdentity(b.prototype.GetIdentity())
 	}
+	m.SetVersion(b.prototype.GetVersion())
 	m.SetGoType(b.prototype.GetGoType())
 	m.SetHandlers(b.prototype.GetHandlers())
 	m.SetMessages(b.prototype.GetMessages())
@@ -56,6 +58,13 @@ func (b *ApplicationBuilder) Build() *Application {
 // then returns b.
 func (b *ApplicationBuilder) WithIdentity(v *identitypb.Identity) *ApplicationBuilder {
 	b.prototype.SetIdentity(v)
+	return b
+}
+
+// WithVersion configures the builder to set the Version field to v,
+// then returns b.
+func (b *ApplicationBuilder) WithVersion(v string) *ApplicationBuilder {
+	b.prototype.SetVersion(v)
 	return b
 }
 

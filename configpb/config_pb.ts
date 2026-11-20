@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/configpb/config.proto.
  */
 export const file_github_com_dogmatiq_protobuf_configpb_config: GenFile = /*@__PURE__*/
-  fileDesc("CjJnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiL2NvbmZpZy5wcm90bxIVZG9nbWEuY29uZmlnLnYxYWxwaGExIp8CCgtBcHBsaWNhdGlvbhItCghpZGVudGl0eRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhYKB2dvX3R5cGUYAiABKAlCBaoBAggCEjAKCGhhbmRsZXJzGAMgAygLMh4uZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXISQgoIbWVzc2FnZXMYBCADKAsyMC5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24uTWVzc2FnZXNFbnRyeRpTCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoDjIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlS2luZDoCOAEikAMKB0hhbmRsZXISLQoIaWRlbnRpdHkYASABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRIWCgdnb190eXBlGAIgASgJQgWqAQIIAhI3CgR0eXBlGAMgASgOMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXJUeXBlQgWqAQIIAhI+CghtZXNzYWdlcxgEIAMoCzIsLmRvZ21hLmNvbmZpZy52MWFscGhhMS5IYW5kbGVyLk1lc3NhZ2VzRW50cnkSGgoLaXNfZGlzYWJsZWQYBSABKAhCBaoBAggCElMKFmNvbmN1cnJlbmN5X3ByZWZlcmVuY2UYBiABKA4yLC5kb2dtYS5jb25maWcudjFhbHBoYTEuQ29uY3VycmVuY3lQcmVmZXJlbmNlQgWqAQIIAhpUCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgCIAEoCzIjLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlVXNhZ2U6AjgBIkYKDE1lc3NhZ2VVc2FnZRIaCgtpc19wcm9kdWNlZBgBIAEoCEIFqgECCAISGgoLaXNfY29uc3VtZWQYAiABKAhCBaoBAggCKngKC01lc3NhZ2VLaW5kEhwKGE1FU1NBR0VfS0lORF9VTlNQRUNJRklFRBAAEhgKFE1FU1NBR0VfS0lORF9DT01NQU5EEAESFgoSTUVTU0FHRV9LSU5EX0VWRU5UEAISGQoVTUVTU0FHRV9LSU5EX0RFQURMSU5FEAMqnAEKC0hhbmRsZXJUeXBlEhwKGEhBTkRMRVJfVFlQRV9VTlNQRUNJRklFRBAAEhoKFkhBTkRMRVJfVFlQRV9BR0dSRUdBVEUQARIYChRIQU5ETEVSX1RZUEVfUFJPQ0VTUxACEhwKGEhBTkRMRVJfVFlQRV9JTlRFR1JBVElPThADEhsKF0hBTkRMRVJfVFlQRV9QUk9KRUNUSU9OEAQqiQEKFUNvbmN1cnJlbmN5UHJlZmVyZW5jZRImCiJDT05DVVJSRU5DWV9QUkVGRVJFTkNFX1VOU1BFQ0lGSUVEEAASIwofQ09OQ1VSUkVOQ1lfUFJFRkVSRU5DRV9NQVhJTUlaRRABEiMKH0NPTkNVUlJFTkNZX1BSRUZFUkVOQ0VfTUlOSU1JWkUQAkInWiVnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_identitypb_identity]);
+  fileDesc("CjJnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiL2NvbmZpZy5wcm90bxIVZG9nbWEuY29uZmlnLnYxYWxwaGExIrcCCgtBcHBsaWNhdGlvbhItCghpZGVudGl0eRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhYKB3ZlcnNpb24YAiABKAlCBaoBAggCEhYKB2dvX3R5cGUYAyABKAlCBaoBAggCEjAKCGhhbmRsZXJzGAQgAygLMh4uZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXISQgoIbWVzc2FnZXMYBSADKAsyMC5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24uTWVzc2FnZXNFbnRyeRpTCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoDjIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlS2luZDoCOAEikAMKB0hhbmRsZXISLQoIaWRlbnRpdHkYASABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRIWCgdnb190eXBlGAIgASgJQgWqAQIIAhI3CgR0eXBlGAMgASgOMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXJUeXBlQgWqAQIIAhI+CghtZXNzYWdlcxgEIAMoCzIsLmRvZ21hLmNvbmZpZy52MWFscGhhMS5IYW5kbGVyLk1lc3NhZ2VzRW50cnkSGgoLaXNfZGlzYWJsZWQYBSABKAhCBaoBAggCElMKFmNvbmN1cnJlbmN5X3ByZWZlcmVuY2UYBiABKA4yLC5kb2dtYS5jb25maWcudjFhbHBoYTEuQ29uY3VycmVuY3lQcmVmZXJlbmNlQgWqAQIIAhpUCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIyCgV2YWx1ZRgCIAEoCzIjLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlVXNhZ2U6AjgBIkYKDE1lc3NhZ2VVc2FnZRIaCgtpc19wcm9kdWNlZBgBIAEoCEIFqgECCAISGgoLaXNfY29uc3VtZWQYAiABKAhCBaoBAggCKngKC01lc3NhZ2VLaW5kEhwKGE1FU1NBR0VfS0lORF9VTlNQRUNJRklFRBAAEhgKFE1FU1NBR0VfS0lORF9DT01NQU5EEAESFgoSTUVTU0FHRV9LSU5EX0VWRU5UEAISGQoVTUVTU0FHRV9LSU5EX0RFQURMSU5FEAMqnAEKC0hhbmRsZXJUeXBlEhwKGEhBTkRMRVJfVFlQRV9VTlNQRUNJRklFRBAAEhoKFkhBTkRMRVJfVFlQRV9BR0dSRUdBVEUQARIYChRIQU5ETEVSX1RZUEVfUFJPQ0VTUxACEhwKGEhBTkRMRVJfVFlQRV9JTlRFR1JBVElPThADEhsKF0hBTkRMRVJfVFlQRV9QUk9KRUNUSU9OEAQqiQEKFUNvbmN1cnJlbmN5UHJlZmVyZW5jZRImCiJDT05DVVJSRU5DWV9QUkVGRVJFTkNFX1VOU1BFQ0lGSUVEEAASIwofQ09OQ1VSUkVOQ1lfUFJFRkVSRU5DRV9NQVhJTUlaRRABEiMKH0NPTkNVUlJFTkNZX1BSRUZFUkVOQ0VfTUlOSU1JWkUQAkInWiVnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_identitypb_identity]);
 
 /**
  * Application represents a Dogma application hosted by the engine on the
@@ -29,17 +29,29 @@ export type Application = Message<"dogma.config.v1alpha1.Application"> & {
   identity?: Identity | undefined;
 
   /**
+   * Version is the version of the application, such as its release number or
+   * the commit that it was built from. It is empty if the engine doesn't know
+   * it.
+   *
+   * Its format is up to the application, so a client can tell whether two
+   * versions are the same, but not which is newer.
+   *
+   * @generated from field: string version = 2 [features.field_presence = IMPLICIT];
+   */
+  version: string;
+
+  /**
    * GoType is the fully-qualified name of the Go type that provides the
    * application's implementation.
    *
-   * @generated from field: string go_type = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: string go_type = 3 [features.field_presence = IMPLICIT];
    */
   goType: string;
 
   /**
    * Handlers is the set of handlers within the application.
    *
-   * @generated from field: repeated dogma.config.v1alpha1.Handler handlers = 3;
+   * @generated from field: repeated dogma.config.v1alpha1.Handler handlers = 4;
    */
   handlers: Handler[];
 
@@ -47,7 +59,7 @@ export type Application = Message<"dogma.config.v1alpha1.Application"> & {
    * Messages is a map of each message type's fully-qualified Go type to the
    * kind of message that the type implements.
    *
-   * @generated from field: map<string, dogma.config.v1alpha1.MessageKind> messages = 4;
+   * @generated from field: map<string, dogma.config.v1alpha1.MessageKind> messages = 5;
    */
   messages: { [key: string]: MessageKind };
 };

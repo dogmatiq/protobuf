@@ -194,9 +194,10 @@ func (x ConcurrencyPreference) Number() protoreflect.EnumNumber {
 type Application struct {
 	state               protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Identity *identitypb.Identity   `protobuf:"bytes,1,opt,name=identity"`
-	xxx_hidden_GoType   string                 `protobuf:"bytes,2,opt,name=go_type,json=goType"`
-	xxx_hidden_Handlers *[]*Handler            `protobuf:"bytes,3,rep,name=handlers"`
-	xxx_hidden_Messages map[string]MessageKind `protobuf:"bytes,4,rep,name=messages" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=dogma.config.v1alpha1.MessageKind"`
+	xxx_hidden_Version  string                 `protobuf:"bytes,2,opt,name=version"`
+	xxx_hidden_GoType   string                 `protobuf:"bytes,3,opt,name=go_type,json=goType"`
+	xxx_hidden_Handlers *[]*Handler            `protobuf:"bytes,4,rep,name=handlers"`
+	xxx_hidden_Messages map[string]MessageKind `protobuf:"bytes,5,rep,name=messages" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=dogma.config.v1alpha1.MessageKind"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -233,6 +234,13 @@ func (x *Application) GetIdentity() *identitypb.Identity {
 	return nil
 }
 
+func (x *Application) GetVersion() string {
+	if x != nil {
+		return x.xxx_hidden_Version
+	}
+	return ""
+}
+
 func (x *Application) GetGoType() string {
 	if x != nil {
 		return x.xxx_hidden_GoType
@@ -258,6 +266,10 @@ func (x *Application) GetMessages() map[string]MessageKind {
 
 func (x *Application) SetIdentity(v *identitypb.Identity) {
 	x.xxx_hidden_Identity = v
+}
+
+func (x *Application) SetVersion(v string) {
+	x.xxx_hidden_Version = v
 }
 
 func (x *Application) SetGoType(v string) {
@@ -288,6 +300,13 @@ type Application_builder struct {
 
 	// Identity is the application's identity.
 	Identity *identitypb.Identity
+	// Version is the version of the application, such as its release number or
+	// the commit that it was built from. It is empty if the engine doesn't know
+	// it.
+	//
+	// Its format is up to the application, so a client can tell whether two
+	// versions are the same, but not which is newer.
+	Version string
 	// GoType is the fully-qualified name of the Go type that provides the
 	// application's implementation.
 	GoType string
@@ -303,6 +322,7 @@ func (b0 Application_builder) Build() *Application {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Identity = b.Identity
+	x.xxx_hidden_Version = b.Version
 	x.xxx_hidden_GoType = b.GoType
 	x.xxx_hidden_Handlers = &b.Handlers
 	x.xxx_hidden_Messages = b.Messages
@@ -539,12 +559,13 @@ var File_github_com_dogmatiq_protobuf_configpb_config_proto protoreflect.FileDes
 
 const file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc = "" +
 	"\n" +
-	"2github.com/dogmatiq/protobuf/configpb/config.proto\x12\x15dogma.config.v1alpha1\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\"\xd1\x02\n" +
+	"2github.com/dogmatiq/protobuf/configpb/config.proto\x12\x15dogma.config.v1alpha1\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\"\xf2\x02\n" +
 	"\vApplication\x127\n" +
-	"\bidentity\x18\x01 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\bidentity\x12\x1e\n" +
-	"\ago_type\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\x06goType\x12:\n" +
-	"\bhandlers\x18\x03 \x03(\v2\x1e.dogma.config.v1alpha1.HandlerR\bhandlers\x12L\n" +
-	"\bmessages\x18\x04 \x03(\v20.dogma.config.v1alpha1.Application.MessagesEntryR\bmessages\x1a_\n" +
+	"\bidentity\x18\x01 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\bidentity\x12\x1f\n" +
+	"\aversion\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\aversion\x12\x1e\n" +
+	"\ago_type\x18\x03 \x01(\tB\x05\xaa\x01\x02\b\x02R\x06goType\x12:\n" +
+	"\bhandlers\x18\x04 \x03(\v2\x1e.dogma.config.v1alpha1.HandlerR\bhandlers\x12L\n" +
+	"\bmessages\x18\x05 \x03(\v20.dogma.config.v1alpha1.Application.MessagesEntryR\bmessages\x1a_\n" +
 	"\rMessagesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
 	"\x05value\x18\x02 \x01(\x0e2\".dogma.config.v1alpha1.MessageKindR\x05value:\x028\x01\"\xe1\x03\n" +

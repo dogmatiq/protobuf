@@ -525,8 +525,8 @@ type WatchMetricsResponse_Preamble_builder struct {
 	// engine runs as a cluster. Nodes of the same cluster give the same cluster
 	// ID, in every API that they serve.
 	ClusterId *uuidpb.UUID
-	// Application describes the version of the application that the engine
-	// runs.
+	// Application describes the application that the engine runs, in the
+	// version that it runs.
 	Application *configpb.Application
 	// SupportedMetrics is the list of the metrics that the engine supports.
 	// Each metric appears once.

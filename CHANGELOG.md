@@ -16,8 +16,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 ### Added
 
 - Added the `configpb` package, which describes an application and its handlers.
-  It is at the unstable `dogma.config.v1alpha1` Protocol Buffers package and was
-  previously in enginekit.
+  It is at the unstable `dogma.config.v1alpha1` Protocol Buffers package.
 - Added the `metricsgrpc` package, which defines a service for reading engine
   metrics.
 - Added the `enginegrpc` package, which defines a service that reports what an

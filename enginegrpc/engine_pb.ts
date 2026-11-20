@@ -24,7 +24,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/enginegrpc/engine.proto.
  */
 export const file_github_com_dogmatiq_protobuf_enginegrpc_engine: GenFile = /*@__PURE__*/
-  fileDesc("CjRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvZW5naW5lLnByb3RvEhVkb2dtYS5lbmdpbmUudjFhbHBoYTEiFAoSV2F0Y2hFbmdpbmVSZXF1ZXN0IsoIChNXYXRjaEVuZ2luZVJlc3BvbnNlEkcKCHByZWFtYmxlGAEgASgLMjMuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGVIABJJCgloZWFydGJlYXQYAiABKAsyNC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5IZWFydGJlYXRIABJFChJsaXZlX2NsdXN0ZXJfbm9kZXMYAyABKAsyJy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuTGl2ZUNsdXN0ZXJOb2Rlc0gAEkQKEWNsdXN0ZXJfd29ya2xvYWRzGAQgASgLMicuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJXb3JrbG9hZHNIABrbBAoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhoKC2Rlc2NyaXB0aW9uGAIgASgJQgWqAQIIAhIpCgRzaXRlGAMgASgLMhsuZG9nbWEucHJvdG9idWYudjEuSWRlbnRpdHkSNwoLYXBwbGljYXRpb24YBCABKAsyIi5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24SNQoSaGVhcnRiZWF0X2ludGVydmFsGAUgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uEkwKB2NsdXN0ZXIYBiABKAsyOy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5QcmVhbWJsZS5DbHVzdGVyEjYKC3F1ZXVlX21vZGVsGAcgASgLMiEuZG9nbWEuZW5naW5lLnYxYWxwaGExLlF1ZXVlTW9kZWwSQwoSZXZlbnRfc3RyZWFtX21vZGVsGAggASgLMicuZG9nbWEuZW5naW5lLnYxYWxwaGExLkV2ZW50U3RyZWFtTW9kZWwapwEKB0NsdXN0ZXISIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjIKBW1vZGVsGAIgASgLMiMuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJNb2RlbBIhChJyZXBvcnRzX2xpdmVfbm9kZXMYAyABKAhCBaoBAggCEiAKEXJlcG9ydHNfd29ya2xvYWRzGAQgASgIQgWqAQIIAhqoAQoJSGVhcnRiZWF0EisKB3NlbnRfYXQYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjAKCmV4cGlyZXNfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAASMgoNZXhwaXJlc19hZnRlchgDIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbkgAQggKBmV4cGlyeUIJCgdwYXlsb2FkMnMKCUVuZ2luZUFQSRJmCgtXYXRjaEVuZ2luZRIpLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlcXVlc3QaKi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZTABQilaJ2dpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvZW5naW5lZ3JwY2IIZWRpdGlvbnNw6Qc", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_enginegrpc_cluster, file_github_com_dogmatiq_protobuf_enginegrpc_eventstream, file_github_com_dogmatiq_protobuf_enginegrpc_queue, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvZW5naW5lLnByb3RvEhVkb2dtYS5lbmdpbmUudjFhbHBoYTEiFAoSV2F0Y2hFbmdpbmVSZXF1ZXN0IuUJChNXYXRjaEVuZ2luZVJlc3BvbnNlEkcKCHByZWFtYmxlGAEgASgLMjMuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGVIABJJCgloZWFydGJlYXQYAiABKAsyNC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5IZWFydGJlYXRIABJFChJsaXZlX2NsdXN0ZXJfbm9kZXMYAyABKAsyJy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuTGl2ZUNsdXN0ZXJOb2Rlc0gAEkQKEWNsdXN0ZXJfd29ya2xvYWRzGAQgASgLMicuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJXb3JrbG9hZHNIABr2BQoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhoKC2Rlc2NyaXB0aW9uGAIgASgJQgWqAQIIAhJaCg5pbXBsZW1lbnRhdGlvbhgDIAEoCzJCLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlc3BvbnNlLlByZWFtYmxlLkltcGxlbWVudGF0aW9uEikKBHNpdGUYBCABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRI3CgthcHBsaWNhdGlvbhgFIAEoCzIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5BcHBsaWNhdGlvbhI1ChJoZWFydGJlYXRfaW50ZXJ2YWwYBiABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb24STAoHY2x1c3RlchgHIAEoCzI7LmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlc3BvbnNlLlByZWFtYmxlLkNsdXN0ZXISNgoLcXVldWVfbW9kZWwYCCABKAsyIS5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUXVldWVNb2RlbBJDChJldmVudF9zdHJlYW1fbW9kZWwYCSABKAsyJy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuRXZlbnRTdHJlYW1Nb2RlbBo9Cg5JbXBsZW1lbnRhdGlvbhITCgRuYW1lGAEgASgJQgWqAQIIAhIWCgd2ZXJzaW9uGAIgASgJQgWqAQIIAhqnAQoHQ2x1c3RlchIjCgJpZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMgoFbW9kZWwYAiABKAsyIy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2x1c3Rlck1vZGVsEiEKEnJlcG9ydHNfbGl2ZV9ub2RlcxgDIAEoCEIFqgECCAISIAoRcmVwb3J0c193b3JrbG9hZHMYBCABKAhCBaoBAggCGqgBCglIZWFydGJlYXQSKwoHc2VudF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMAoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIABIyCg1leHBpcmVzX2FmdGVyGAMgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uSABCCAoGZXhwaXJ5QgkKB3BheWxvYWQycwoJRW5naW5lQVBJEmYKC1dhdGNoRW5naW5lEikuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVxdWVzdBoqLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlc3BvbnNlMAFCKVonZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9lbmdpbmVncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_enginegrpc_cluster, file_github_com_dogmatiq_protobuf_enginegrpc_eventstream, file_github_com_dogmatiq_protobuf_enginegrpc_queue, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * WatchEngineRequest is the input to the EngineAPI.WatchEngine method.
@@ -126,20 +126,27 @@ export type WatchEngineResponse_Preamble = Message<"dogma.engine.v1alpha1.WatchE
   description: string;
 
   /**
+   * Implementation describes the software that implements the engine.
+   *
+   * @generated from field: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation implementation = 3;
+   */
+  implementation?: WatchEngineResponse_Preamble_Implementation | undefined;
+
+  /**
    * Site is the identity of the site that the engine is deployed to, which is
    * one installation of the application. It is the same identity that the
    * engine records as the site of the source of each message that it
    * produces. It is present only if the engine is configured with a site.
    *
-   * @generated from field: dogma.protobuf.v1.Identity site = 3;
+   * @generated from field: dogma.protobuf.v1.Identity site = 4;
    */
   site?: Identity | undefined;
 
   /**
-   * Application describes the version of the application that the engine
-   * runs. It is required.
+   * Application describes the application that the engine runs, in the
+   * version that it runs. It is required.
    *
-   * @generated from field: dogma.config.v1alpha1.Application application = 4;
+   * @generated from field: dogma.config.v1alpha1.Application application = 5;
    */
   application?: Application | undefined;
 
@@ -151,7 +158,7 @@ export type WatchEngineResponse_Preamble = Message<"dogma.engine.v1alpha1.WatchE
    * These heartbeats may or may not be the same as any heartbeats that the
    * nodes of a cluster send to each other.
    *
-   * @generated from field: google.protobuf.Duration heartbeat_interval = 5;
+   * @generated from field: google.protobuf.Duration heartbeat_interval = 6;
    */
   heartbeatInterval?: Duration | undefined;
 
@@ -159,21 +166,21 @@ export type WatchEngineResponse_Preamble = Message<"dogma.engine.v1alpha1.WatchE
    * Cluster describes the engine's cluster. It is present only if the engine
    * runs as a cluster.
    *
-   * @generated from field: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster cluster = 6;
+   * @generated from field: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster cluster = 7;
    */
   cluster?: WatchEngineResponse_Preamble_Cluster | undefined;
 
   /**
    * QueueModel is the model by which the engine uses queues.
    *
-   * @generated from field: dogma.engine.v1alpha1.QueueModel queue_model = 7;
+   * @generated from field: dogma.engine.v1alpha1.QueueModel queue_model = 8;
    */
   queueModel?: QueueModel | undefined;
 
   /**
    * EventStreamModel is the model by which the engine uses event streams.
    *
-   * @generated from field: dogma.engine.v1alpha1.EventStreamModel event_stream_model = 8;
+   * @generated from field: dogma.engine.v1alpha1.EventStreamModel event_stream_model = 9;
    */
   eventStreamModel?: EventStreamModel | undefined;
 };
@@ -184,6 +191,40 @@ export type WatchEngineResponse_Preamble = Message<"dogma.engine.v1alpha1.WatchE
  */
 export const WatchEngineResponse_PreambleSchema: GenMessage<WatchEngineResponse_Preamble> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0);
+
+/**
+ * Implementation describes the software that implements an engine: its name
+ * and its version.
+ *
+ * @generated from message dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation
+ */
+export type WatchEngineResponse_Preamble_Implementation = Message<"dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation"> & {
+  /**
+   * Name is the name of the engine software. It is required.
+   *
+   * @generated from field: string name = 1 [features.field_presence = IMPLICIT];
+   */
+  name: string;
+
+  /**
+   * Version is the version of the engine software, as a semantic version
+   * such as "1.4.2" or "2.0.0-rc.1", as defined by Semantic Versioning
+   * 2.0.0 (https://semver.org/spec/v2.0.0.html). A client can compare two
+   * versions using that specification's rules for precedence.
+   *
+   * It is empty if the engine doesn't know its version.
+   *
+   * @generated from field: string version = 2 [features.field_presence = IMPLICIT];
+   */
+  version: string;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation.
+ * Use `create(WatchEngineResponse_Preamble_ImplementationSchema)` to create a new message.
+ */
+export const WatchEngineResponse_Preamble_ImplementationSchema: GenMessage<WatchEngineResponse_Preamble_Implementation> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0, 0);
 
 /**
  * Cluster describes the cluster that the engine runs as.
@@ -229,7 +270,7 @@ export type WatchEngineResponse_Preamble_Cluster = Message<"dogma.engine.v1alpha
  * Use `create(WatchEngineResponse_Preamble_ClusterSchema)` to create a new message.
  */
 export const WatchEngineResponse_Preamble_ClusterSchema: GenMessage<WatchEngineResponse_Preamble_Cluster> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0, 1);
 
 /**
  * Heartbeat reports that the engine has sent a heartbeat, which is a signal

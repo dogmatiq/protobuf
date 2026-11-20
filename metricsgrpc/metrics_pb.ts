@@ -95,8 +95,8 @@ export type WatchMetricsResponse_Preamble = Message<"dogma.metrics.v1alpha1.Watc
   clusterId?: UUID | undefined;
 
   /**
-   * Application describes the version of the application that the engine
-   * runs.
+   * Application describes the application that the engine runs, in the
+   * version that it runs.
    *
    * @generated from field: dogma.config.v1alpha1.Application application = 3;
    */

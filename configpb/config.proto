@@ -68,16 +68,24 @@ message Application {
   // Identity is the application's identity.
   dogma.protobuf.v1.Identity identity = 1;
 
+  // Version is the version of the application, such as its release number or
+  // the commit that it was built from. It is empty if the engine doesn't know
+  // it.
+  //
+  // Its format is up to the application, so a client can tell whether two
+  // versions are the same, but not which is newer.
+  string version = 2 [features.field_presence = IMPLICIT];
+
   // GoType is the fully-qualified name of the Go type that provides the
   // application's implementation.
-  string go_type = 2 [features.field_presence = IMPLICIT];
+  string go_type = 3 [features.field_presence = IMPLICIT];
 
   // Handlers is the set of handlers within the application.
-  repeated Handler handlers = 3;
+  repeated Handler handlers = 4;
 
   // Messages is a map of each message type's fully-qualified Go type to the
   // kind of message that the type implements.
-  map<string, MessageKind> messages = 4;
+  map<string, MessageKind> messages = 5;
 }
 
 // Handler is a message handler within an application.

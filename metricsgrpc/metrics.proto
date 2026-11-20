@@ -53,8 +53,8 @@ message WatchMetricsResponse {
     // ID, in every API that they serve.
     dogma.protobuf.v1.UUID cluster_id = 2;
 
-    // Application describes the version of the application that the engine
-    // runs.
+    // Application describes the application that the engine runs, in the
+    // version that it runs.
     dogma.config.v1alpha1.Application application = 3;
 
     // SupportedMetrics is the list of the metrics that the engine supports.

@@ -347,15 +347,16 @@ func (*watchEngineResponse_ClusterWorkloads) isWatchEngineResponse_Payload() {}
 // The nodes of one cluster may describe themselves differently, for example
 // while a new version of the application is deployed.
 type WatchEngineResponse_Preamble struct {
-	state                        protoimpl.MessageState                `protogen:"opaque.v1"`
-	xxx_hidden_Id                *uuidpb.UUID                          `protobuf:"bytes,1,opt,name=id"`
-	xxx_hidden_Description       string                                `protobuf:"bytes,2,opt,name=description"`
-	xxx_hidden_Site              *identitypb.Identity                  `protobuf:"bytes,3,opt,name=site"`
-	xxx_hidden_Application       *configpb.Application                 `protobuf:"bytes,4,opt,name=application"`
-	xxx_hidden_HeartbeatInterval *durationpb.Duration                  `protobuf:"bytes,5,opt,name=heartbeat_interval,json=heartbeatInterval"`
-	xxx_hidden_Cluster           *WatchEngineResponse_Preamble_Cluster `protobuf:"bytes,6,opt,name=cluster"`
-	xxx_hidden_QueueModel        *QueueModel                           `protobuf:"bytes,7,opt,name=queue_model,json=queueModel"`
-	xxx_hidden_EventStreamModel  *EventStreamModel                     `protobuf:"bytes,8,opt,name=event_stream_model,json=eventStreamModel"`
+	state                        protoimpl.MessageState                       `protogen:"opaque.v1"`
+	xxx_hidden_Id                *uuidpb.UUID                                 `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Description       string                                       `protobuf:"bytes,2,opt,name=description"`
+	xxx_hidden_Implementation    *WatchEngineResponse_Preamble_Implementation `protobuf:"bytes,3,opt,name=implementation"`
+	xxx_hidden_Site              *identitypb.Identity                         `protobuf:"bytes,4,opt,name=site"`
+	xxx_hidden_Application       *configpb.Application                        `protobuf:"bytes,5,opt,name=application"`
+	xxx_hidden_HeartbeatInterval *durationpb.Duration                         `protobuf:"bytes,6,opt,name=heartbeat_interval,json=heartbeatInterval"`
+	xxx_hidden_Cluster           *WatchEngineResponse_Preamble_Cluster        `protobuf:"bytes,7,opt,name=cluster"`
+	xxx_hidden_QueueModel        *QueueModel                                  `protobuf:"bytes,8,opt,name=queue_model,json=queueModel"`
+	xxx_hidden_EventStreamModel  *EventStreamModel                            `protobuf:"bytes,9,opt,name=event_stream_model,json=eventStreamModel"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -397,6 +398,13 @@ func (x *WatchEngineResponse_Preamble) GetDescription() string {
 		return x.xxx_hidden_Description
 	}
 	return ""
+}
+
+func (x *WatchEngineResponse_Preamble) GetImplementation() *WatchEngineResponse_Preamble_Implementation {
+	if x != nil {
+		return x.xxx_hidden_Implementation
+	}
+	return nil
 }
 
 func (x *WatchEngineResponse_Preamble) GetSite() *identitypb.Identity {
@@ -449,6 +457,10 @@ func (x *WatchEngineResponse_Preamble) SetDescription(v string) {
 	x.xxx_hidden_Description = v
 }
 
+func (x *WatchEngineResponse_Preamble) SetImplementation(v *WatchEngineResponse_Preamble_Implementation) {
+	x.xxx_hidden_Implementation = v
+}
+
 func (x *WatchEngineResponse_Preamble) SetSite(v *identitypb.Identity) {
 	x.xxx_hidden_Site = v
 }
@@ -478,6 +490,13 @@ func (x *WatchEngineResponse_Preamble) HasId() bool {
 		return false
 	}
 	return x.xxx_hidden_Id != nil
+}
+
+func (x *WatchEngineResponse_Preamble) HasImplementation() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Implementation != nil
 }
 
 func (x *WatchEngineResponse_Preamble) HasSite() bool {
@@ -526,6 +545,10 @@ func (x *WatchEngineResponse_Preamble) ClearId() {
 	x.xxx_hidden_Id = nil
 }
 
+func (x *WatchEngineResponse_Preamble) ClearImplementation() {
+	x.xxx_hidden_Implementation = nil
+}
+
 func (x *WatchEngineResponse_Preamble) ClearSite() {
 	x.xxx_hidden_Site = nil
 }
@@ -562,13 +585,15 @@ type WatchEngineResponse_Preamble_builder struct {
 	// Description is an optional human-readable description of the engine,
 	// such as its host name.
 	Description string
+	// Implementation describes the software that implements the engine.
+	Implementation *WatchEngineResponse_Preamble_Implementation
 	// Site is the identity of the site that the engine is deployed to, which is
 	// one installation of the application. It is the same identity that the
 	// engine records as the site of the source of each message that it
 	// produces. It is present only if the engine is configured with a site.
 	Site *identitypb.Identity
-	// Application describes the version of the application that the engine
-	// runs. It is required.
+	// Application describes the application that the engine runs, in the
+	// version that it runs. It is required.
 	Application *configpb.Application
 	// HeartbeatInterval is how long the engine aims to wait between two of the
 	// heartbeats that it sends on this response stream. It is greater than
@@ -592,6 +617,7 @@ func (b0 WatchEngineResponse_Preamble_builder) Build() *WatchEngineResponse_Prea
 	_, _ = b, x
 	x.xxx_hidden_Id = b.Id
 	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_Implementation = b.Implementation
 	x.xxx_hidden_Site = b.Site
 	x.xxx_hidden_Application = b.Application
 	x.xxx_hidden_HeartbeatInterval = b.HeartbeatInterval
@@ -812,6 +838,86 @@ func (*watchEngineResponse_Heartbeat_ExpiresAt) isWatchEngineResponse_Heartbeat_
 
 func (*watchEngineResponse_Heartbeat_ExpiresAfter) isWatchEngineResponse_Heartbeat_Expiry() {}
 
+// Implementation describes the software that implements an engine: its name
+// and its version.
+type WatchEngineResponse_Preamble_Implementation struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name    string                 `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Version string                 `protobuf:"bytes,2,opt,name=version"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *WatchEngineResponse_Preamble_Implementation) Reset() {
+	*x = WatchEngineResponse_Preamble_Implementation{}
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WatchEngineResponse_Preamble_Implementation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WatchEngineResponse_Preamble_Implementation) ProtoMessage() {}
+
+func (x *WatchEngineResponse_Preamble_Implementation) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *WatchEngineResponse_Preamble_Implementation) GetName() string {
+	if x != nil {
+		return x.xxx_hidden_Name
+	}
+	return ""
+}
+
+func (x *WatchEngineResponse_Preamble_Implementation) GetVersion() string {
+	if x != nil {
+		return x.xxx_hidden_Version
+	}
+	return ""
+}
+
+func (x *WatchEngineResponse_Preamble_Implementation) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *WatchEngineResponse_Preamble_Implementation) SetVersion(v string) {
+	x.xxx_hidden_Version = v
+}
+
+type WatchEngineResponse_Preamble_Implementation_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Name is the name of the engine software. It is required.
+	Name string
+	// Version is the version of the engine software, as a semantic version
+	// such as "1.4.2" or "2.0.0-rc.1", as defined by Semantic Versioning
+	// 2.0.0 (https://semver.org/spec/v2.0.0.html). A client can compare two
+	// versions using that specification's rules for precedence.
+	//
+	// It is empty if the engine doesn't know its version.
+	Version string
+}
+
+func (b0 WatchEngineResponse_Preamble_Implementation_builder) Build() *WatchEngineResponse_Preamble_Implementation {
+	m0 := &WatchEngineResponse_Preamble_Implementation{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_Version = b.Version
+	return m0
+}
+
 // Cluster describes the cluster that the engine runs as.
 type WatchEngineResponse_Preamble_Cluster struct {
 	state                       protoimpl.MessageState `protogen:"opaque.v1"`
@@ -825,7 +931,7 @@ type WatchEngineResponse_Preamble_Cluster struct {
 
 func (x *WatchEngineResponse_Preamble_Cluster) Reset() {
 	*x = WatchEngineResponse_Preamble_Cluster{}
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -837,7 +943,7 @@ func (x *WatchEngineResponse_Preamble_Cluster) String() string {
 func (*WatchEngineResponse_Preamble_Cluster) ProtoMessage() {}
 
 func (x *WatchEngineResponse_Preamble_Cluster) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -947,23 +1053,26 @@ var File_github_com_dogmatiq_protobuf_enginegrpc_engine_proto protoreflect.FileD
 const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\n" +
 	"4github.com/dogmatiq/protobuf/enginegrpc/engine.proto\x12\x15dogma.engine.v1alpha1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a5github.com/dogmatiq/protobuf/enginegrpc/cluster.proto\x1a9github.com/dogmatiq/protobuf/enginegrpc/eventstream.proto\x1a3github.com/dogmatiq/protobuf/enginegrpc/queue.proto\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x14\n" +
-	"\x12WatchEngineRequest\"\xb1\n" +
-	"\n" +
+	"\x12WatchEngineRequest\"\xeb\v\n" +
 	"\x13WatchEngineResponse\x12Q\n" +
 	"\bpreamble\x18\x01 \x01(\v23.dogma.engine.v1alpha1.WatchEngineResponse.PreambleH\x00R\bpreamble\x12T\n" +
 	"\theartbeat\x18\x02 \x01(\v24.dogma.engine.v1alpha1.WatchEngineResponse.HeartbeatH\x00R\theartbeat\x12W\n" +
 	"\x12live_cluster_nodes\x18\x03 \x01(\v2'.dogma.engine.v1alpha1.LiveClusterNodesH\x00R\x10liveClusterNodes\x12V\n" +
-	"\x11cluster_workloads\x18\x04 \x01(\v2'.dogma.engine.v1alpha1.ClusterWorkloadsH\x00R\x10clusterWorkloads\x1a\xe8\x05\n" +
+	"\x11cluster_workloads\x18\x04 \x01(\v2'.dogma.engine.v1alpha1.ClusterWorkloadsH\x00R\x10clusterWorkloads\x1a\xa2\a\n" +
 	"\bPreamble\x12'\n" +
 	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x12'\n" +
-	"\vdescription\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription\x12/\n" +
-	"\x04site\x18\x03 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\x04site\x12D\n" +
-	"\vapplication\x18\x04 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12H\n" +
-	"\x12heartbeat_interval\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\x11heartbeatInterval\x12U\n" +
-	"\acluster\x18\x06 \x01(\v2;.dogma.engine.v1alpha1.WatchEngineResponse.Preamble.ClusterR\acluster\x12B\n" +
-	"\vqueue_model\x18\a \x01(\v2!.dogma.engine.v1alpha1.QueueModelR\n" +
+	"\vdescription\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription\x12j\n" +
+	"\x0eimplementation\x18\x03 \x01(\v2B.dogma.engine.v1alpha1.WatchEngineResponse.Preamble.ImplementationR\x0eimplementation\x12/\n" +
+	"\x04site\x18\x04 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\x04site\x12D\n" +
+	"\vapplication\x18\x05 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12H\n" +
+	"\x12heartbeat_interval\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\x11heartbeatInterval\x12U\n" +
+	"\acluster\x18\a \x01(\v2;.dogma.engine.v1alpha1.WatchEngineResponse.Preamble.ClusterR\acluster\x12B\n" +
+	"\vqueue_model\x18\b \x01(\v2!.dogma.engine.v1alpha1.QueueModelR\n" +
 	"queueModel\x12U\n" +
-	"\x12event_stream_model\x18\b \x01(\v2'.dogma.engine.v1alpha1.EventStreamModelR\x10eventStreamModel\x1a\xd6\x01\n" +
+	"\x12event_stream_model\x18\t \x01(\v2'.dogma.engine.v1alpha1.EventStreamModelR\x10eventStreamModel\x1aL\n" +
+	"\x0eImplementation\x12\x19\n" +
+	"\x04name\x18\x01 \x01(\tB\x05\xaa\x01\x02\b\x02R\x04name\x12\x1f\n" +
+	"\aversion\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\aversion\x1a\xd6\x01\n" +
 	"\aCluster\x12'\n" +
 	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x129\n" +
 	"\x05model\x18\x02 \x01(\v2#.dogma.engine.v1alpha1.ClusterModelR\x05model\x123\n" +
@@ -979,48 +1088,50 @@ const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\tEngineAPI\x12f\n" +
 	"\vWatchEngine\x12).dogma.engine.v1alpha1.WatchEngineRequest\x1a*.dogma.engine.v1alpha1.WatchEngineResponse0\x01B)Z'github.com/dogmatiq/protobuf/enginegrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_goTypes = []any{
-	(*WatchEngineRequest)(nil),                   // 0: dogma.engine.v1alpha1.WatchEngineRequest
-	(*WatchEngineResponse)(nil),                  // 1: dogma.engine.v1alpha1.WatchEngineResponse
-	(*WatchEngineResponse_Preamble)(nil),         // 2: dogma.engine.v1alpha1.WatchEngineResponse.Preamble
-	(*WatchEngineResponse_Heartbeat)(nil),        // 3: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
-	(*WatchEngineResponse_Preamble_Cluster)(nil), // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
-	(*LiveClusterNodes)(nil),                     // 5: dogma.engine.v1alpha1.LiveClusterNodes
-	(*ClusterWorkloads)(nil),                     // 6: dogma.engine.v1alpha1.ClusterWorkloads
-	(*uuidpb.UUID)(nil),                          // 7: dogma.protobuf.v1.UUID
-	(*identitypb.Identity)(nil),                  // 8: dogma.protobuf.v1.Identity
-	(*configpb.Application)(nil),                 // 9: dogma.config.v1alpha1.Application
-	(*durationpb.Duration)(nil),                  // 10: google.protobuf.Duration
-	(*QueueModel)(nil),                           // 11: dogma.engine.v1alpha1.QueueModel
-	(*EventStreamModel)(nil),                     // 12: dogma.engine.v1alpha1.EventStreamModel
-	(*timestamppb.Timestamp)(nil),                // 13: google.protobuf.Timestamp
-	(*ClusterModel)(nil),                         // 14: dogma.engine.v1alpha1.ClusterModel
+	(*WatchEngineRequest)(nil),                          // 0: dogma.engine.v1alpha1.WatchEngineRequest
+	(*WatchEngineResponse)(nil),                         // 1: dogma.engine.v1alpha1.WatchEngineResponse
+	(*WatchEngineResponse_Preamble)(nil),                // 2: dogma.engine.v1alpha1.WatchEngineResponse.Preamble
+	(*WatchEngineResponse_Heartbeat)(nil),               // 3: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
+	(*WatchEngineResponse_Preamble_Implementation)(nil), // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation
+	(*WatchEngineResponse_Preamble_Cluster)(nil),        // 5: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
+	(*LiveClusterNodes)(nil),                            // 6: dogma.engine.v1alpha1.LiveClusterNodes
+	(*ClusterWorkloads)(nil),                            // 7: dogma.engine.v1alpha1.ClusterWorkloads
+	(*uuidpb.UUID)(nil),                                 // 8: dogma.protobuf.v1.UUID
+	(*identitypb.Identity)(nil),                         // 9: dogma.protobuf.v1.Identity
+	(*configpb.Application)(nil),                        // 10: dogma.config.v1alpha1.Application
+	(*durationpb.Duration)(nil),                         // 11: google.protobuf.Duration
+	(*QueueModel)(nil),                                  // 12: dogma.engine.v1alpha1.QueueModel
+	(*EventStreamModel)(nil),                            // 13: dogma.engine.v1alpha1.EventStreamModel
+	(*timestamppb.Timestamp)(nil),                       // 14: google.protobuf.Timestamp
+	(*ClusterModel)(nil),                                // 15: dogma.engine.v1alpha1.ClusterModel
 }
 var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_depIdxs = []int32{
 	2,  // 0: dogma.engine.v1alpha1.WatchEngineResponse.preamble:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble
 	3,  // 1: dogma.engine.v1alpha1.WatchEngineResponse.heartbeat:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
-	5,  // 2: dogma.engine.v1alpha1.WatchEngineResponse.live_cluster_nodes:type_name -> dogma.engine.v1alpha1.LiveClusterNodes
-	6,  // 3: dogma.engine.v1alpha1.WatchEngineResponse.cluster_workloads:type_name -> dogma.engine.v1alpha1.ClusterWorkloads
-	7,  // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
-	8,  // 5: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.site:type_name -> dogma.protobuf.v1.Identity
-	9,  // 6: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
-	10, // 7: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.heartbeat_interval:type_name -> google.protobuf.Duration
-	4,  // 8: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.cluster:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
-	11, // 9: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.queue_model:type_name -> dogma.engine.v1alpha1.QueueModel
-	12, // 10: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.event_stream_model:type_name -> dogma.engine.v1alpha1.EventStreamModel
-	13, // 11: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.sent_at:type_name -> google.protobuf.Timestamp
-	13, // 12: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_at:type_name -> google.protobuf.Timestamp
-	10, // 13: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_after:type_name -> google.protobuf.Duration
-	7,  // 14: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.id:type_name -> dogma.protobuf.v1.UUID
-	14, // 15: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.model:type_name -> dogma.engine.v1alpha1.ClusterModel
-	0,  // 16: dogma.engine.v1alpha1.EngineAPI.WatchEngine:input_type -> dogma.engine.v1alpha1.WatchEngineRequest
-	1,  // 17: dogma.engine.v1alpha1.EngineAPI.WatchEngine:output_type -> dogma.engine.v1alpha1.WatchEngineResponse
-	17, // [17:18] is the sub-list for method output_type
-	16, // [16:17] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	6,  // 2: dogma.engine.v1alpha1.WatchEngineResponse.live_cluster_nodes:type_name -> dogma.engine.v1alpha1.LiveClusterNodes
+	7,  // 3: dogma.engine.v1alpha1.WatchEngineResponse.cluster_workloads:type_name -> dogma.engine.v1alpha1.ClusterWorkloads
+	8,  // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
+	4,  // 5: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.implementation:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation
+	9,  // 6: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.site:type_name -> dogma.protobuf.v1.Identity
+	10, // 7: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
+	11, // 8: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.heartbeat_interval:type_name -> google.protobuf.Duration
+	5,  // 9: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.cluster:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
+	12, // 10: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.queue_model:type_name -> dogma.engine.v1alpha1.QueueModel
+	13, // 11: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.event_stream_model:type_name -> dogma.engine.v1alpha1.EventStreamModel
+	14, // 12: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.sent_at:type_name -> google.protobuf.Timestamp
+	14, // 13: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_at:type_name -> google.protobuf.Timestamp
+	11, // 14: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_after:type_name -> google.protobuf.Duration
+	8,  // 15: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.id:type_name -> dogma.protobuf.v1.UUID
+	15, // 16: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.model:type_name -> dogma.engine.v1alpha1.ClusterModel
+	0,  // 17: dogma.engine.v1alpha1.EngineAPI.WatchEngine:input_type -> dogma.engine.v1alpha1.WatchEngineRequest
+	1,  // 18: dogma.engine.v1alpha1.EngineAPI.WatchEngine:output_type -> dogma.engine.v1alpha1.WatchEngineResponse
+	18, // [18:19] is the sub-list for method output_type
+	17, // [17:18] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_init() }
@@ -1047,7 +1158,7 @@ func file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

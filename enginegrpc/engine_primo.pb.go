@@ -202,6 +202,9 @@ func (b *WatchEngineResponse_PreambleBuilder) From(x *WatchEngineResponse_Preamb
 		b.prototype.SetId(x.GetId())
 	}
 	b.prototype.SetDescription(x.GetDescription())
+	if x.HasImplementation() {
+		b.prototype.SetImplementation(x.GetImplementation())
+	}
 	if x.HasSite() {
 		b.prototype.SetSite(x.GetSite())
 	}
@@ -233,6 +236,9 @@ func (b *WatchEngineResponse_PreambleBuilder) Build() *WatchEngineResponse_Pream
 		m.SetId(b.prototype.GetId())
 	}
 	m.SetDescription(b.prototype.GetDescription())
+	if b.prototype.HasImplementation() {
+		m.SetImplementation(b.prototype.GetImplementation())
+	}
 	if b.prototype.HasSite() {
 		m.SetSite(b.prototype.GetSite())
 	}
@@ -265,6 +271,13 @@ func (b *WatchEngineResponse_PreambleBuilder) WithId(v *uuidpb.UUID) *WatchEngin
 // then returns b.
 func (b *WatchEngineResponse_PreambleBuilder) WithDescription(v string) *WatchEngineResponse_PreambleBuilder {
 	b.prototype.SetDescription(v)
+	return b
+}
+
+// WithImplementation configures the builder to set the Implementation field to v,
+// then returns b.
+func (b *WatchEngineResponse_PreambleBuilder) WithImplementation(v *WatchEngineResponse_Preamble_Implementation) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetImplementation(v)
 	return b
 }
 
@@ -307,6 +320,52 @@ func (b *WatchEngineResponse_PreambleBuilder) WithQueueModel(v *QueueModel) *Wat
 // then returns b.
 func (b *WatchEngineResponse_PreambleBuilder) WithEventStreamModel(v *EventStreamModel) *WatchEngineResponse_PreambleBuilder {
 	b.prototype.SetEventStreamModel(v)
+	return b
+}
+
+type WatchEngineResponse_Preamble_ImplementationBuilder struct {
+	prototype WatchEngineResponse_Preamble_Implementation
+}
+
+// NewWatchEngineResponse_Preamble_ImplementationBuilder returns a builder that constructs [WatchEngineResponse_Preamble_Implementation] messages.
+func NewWatchEngineResponse_Preamble_ImplementationBuilder() *WatchEngineResponse_Preamble_ImplementationBuilder {
+	return &WatchEngineResponse_Preamble_ImplementationBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *WatchEngineResponse_Preamble_ImplementationBuilder) From(x *WatchEngineResponse_Preamble_Implementation) *WatchEngineResponse_Preamble_ImplementationBuilder {
+	proto.Reset(&b.prototype)
+	b.prototype.SetName(x.GetName())
+	b.prototype.SetVersion(x.GetVersion())
+	return b
+}
+
+// Build returns a new [WatchEngineResponse_Preamble_Implementation] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *WatchEngineResponse_Preamble_ImplementationBuilder) Build() *WatchEngineResponse_Preamble_Implementation {
+	m := &WatchEngineResponse_Preamble_Implementation{}
+	m.SetName(b.prototype.GetName())
+	m.SetVersion(b.prototype.GetVersion())
+	return m
+}
+
+// WithName configures the builder to set the Name field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ImplementationBuilder) WithName(v string) *WatchEngineResponse_Preamble_ImplementationBuilder {
+	b.prototype.SetName(v)
+	return b
+}
+
+// WithVersion configures the builder to set the Version field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ImplementationBuilder) WithVersion(v string) *WatchEngineResponse_Preamble_ImplementationBuilder {
+	b.prototype.SetVersion(v)
 	return b
 }
 
@@ -865,6 +924,79 @@ func (x *WatchEngineResponse_Preamble) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
+func (x *WatchEngineResponse_Preamble_Implementation) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = WatchEngineResponse_Preamble_Implementation
+	type WatchEngineResponse_Preamble_Implementation realType
+	fmt.Fprintf(f, format, (*WatchEngineResponse_Preamble_Implementation)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
 func (x *WatchEngineResponse_Preamble_Cluster) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
@@ -1059,6 +1191,22 @@ func (x *WatchEngineResponse_Preamble) MarshalBinary() ([]byte, error) {
 //
 // It allows [*WatchEngineResponse_Preamble] to implement [encoding.BinaryUnmarshaler].
 func (x *WatchEngineResponse_Preamble) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*WatchEngineResponse_Preamble_Implementation] to implement [encoding.BinaryMarshaler].
+func (x *WatchEngineResponse_Preamble_Implementation) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*WatchEngineResponse_Preamble_Implementation] to implement [encoding.BinaryUnmarshaler].
+func (x *WatchEngineResponse_Preamble_Implementation) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
