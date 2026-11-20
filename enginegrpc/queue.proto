@@ -1,0 +1,32 @@
+edition = "2024";
+package dogma.engine.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/enginegrpc";
+
+// QueueModel describes the way that an engine holds the messages that are
+// waiting to be delivered to handlers, such as commands and deadlines, in one
+// or more queues.
+message QueueModel {
+  // SingleQueue is the model of an engine that delivers every message through
+  // one queue. Every metric that describes a queue, such as
+  // dogma.metrics.v1alpha1.QueueCommandsPending, gives the same queue ID.
+  //
+  // Every engine has at least one queue, even if no part of the engine is
+  // called a queue. A deadline waits until the time that it is scheduled for,
+  // and a command or event that a handler produces waits until the engine
+  // delivers it to each handler that it is routed to. Whatever holds these
+  // messages while they wait is a queue. An engine that holds them all in one
+  // place, such as a single list in memory, uses this model.
+  message SingleQueue {}
+
+  // MultipleQueues is the model of an engine that may deliver messages through
+  // more than one queue, each with its own queue ID.
+  message MultipleQueues {}
+
+  // Model is the model that the engine uses. It is not set if the engine
+  // doesn't say, or if the client doesn't know the model.
+  oneof model {
+    SingleQueue    single_queue    = 1;
+    MultipleQueues multiple_queues = 2;
+  }
+}

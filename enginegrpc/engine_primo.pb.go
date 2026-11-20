@@ -29,29 +29,29 @@ func (x *WatchEngineResponse) TryGetPreamble() (v *WatchEngineResponse_Preamble,
 	return v, false
 }
 
-// TryGetLiveNodes returns the LiveNodes value if x.Payload is set to LiveNodes.
-// Otherwise, ok is false and v is the zero-value.
-func (x *WatchEngineResponse) TryGetLiveNodes() (v *LiveNodes, ok bool) {
-	if x.HasLiveNodes() {
-		return x.GetLiveNodes(), true
-	}
-	return v, false
-}
-
-// TryGetWorkloads returns the Workloads value if x.Payload is set to Workloads.
-// Otherwise, ok is false and v is the zero-value.
-func (x *WatchEngineResponse) TryGetWorkloads() (v *Workloads, ok bool) {
-	if x.HasWorkloads() {
-		return x.GetWorkloads(), true
-	}
-	return v, false
-}
-
 // TryGetHeartbeat returns the Heartbeat value if x.Payload is set to Heartbeat.
 // Otherwise, ok is false and v is the zero-value.
 func (x *WatchEngineResponse) TryGetHeartbeat() (v *WatchEngineResponse_Heartbeat, ok bool) {
 	if x.HasHeartbeat() {
 		return x.GetHeartbeat(), true
+	}
+	return v, false
+}
+
+// TryGetLiveClusterNodes returns the LiveClusterNodes value if x.Payload is set to LiveClusterNodes.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchEngineResponse) TryGetLiveClusterNodes() (v *LiveClusterNodes, ok bool) {
+	if x.HasLiveClusterNodes() {
+		return x.GetLiveClusterNodes(), true
+	}
+	return v, false
+}
+
+// TryGetClusterWorkloads returns the ClusterWorkloads value if x.Payload is set to ClusterWorkloads.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchEngineResponse) TryGetClusterWorkloads() (v *ClusterWorkloads, ok bool) {
+	if x.HasClusterWorkloads() {
+		return x.GetClusterWorkloads(), true
 	}
 	return v, false
 }
@@ -121,14 +121,14 @@ func (b *WatchEngineResponseBuilder) From(x *WatchEngineResponse) *WatchEngineRe
 	if x.HasPreamble() {
 		b.prototype.SetPreamble(x.GetPreamble())
 	}
-	if x.HasLiveNodes() {
-		b.prototype.SetLiveNodes(x.GetLiveNodes())
-	}
-	if x.HasWorkloads() {
-		b.prototype.SetWorkloads(x.GetWorkloads())
-	}
 	if x.HasHeartbeat() {
 		b.prototype.SetHeartbeat(x.GetHeartbeat())
+	}
+	if x.HasLiveClusterNodes() {
+		b.prototype.SetLiveClusterNodes(x.GetLiveClusterNodes())
+	}
+	if x.HasClusterWorkloads() {
+		b.prototype.SetClusterWorkloads(x.GetClusterWorkloads())
 	}
 	return b
 }
@@ -142,14 +142,14 @@ func (b *WatchEngineResponseBuilder) Build() *WatchEngineResponse {
 	if b.prototype.HasPreamble() {
 		m.SetPreamble(b.prototype.GetPreamble())
 	}
-	if b.prototype.HasLiveNodes() {
-		m.SetLiveNodes(b.prototype.GetLiveNodes())
-	}
-	if b.prototype.HasWorkloads() {
-		m.SetWorkloads(b.prototype.GetWorkloads())
-	}
 	if b.prototype.HasHeartbeat() {
 		m.SetHeartbeat(b.prototype.GetHeartbeat())
+	}
+	if b.prototype.HasLiveClusterNodes() {
+		m.SetLiveClusterNodes(b.prototype.GetLiveClusterNodes())
+	}
+	if b.prototype.HasClusterWorkloads() {
+		m.SetClusterWorkloads(b.prototype.GetClusterWorkloads())
 	}
 	return m
 }
@@ -161,24 +161,24 @@ func (b *WatchEngineResponseBuilder) WithPreamble(v *WatchEngineResponse_Preambl
 	return b
 }
 
-// WithLiveNodes configures the builder to set the LiveNodes field to v,
-// then returns b.
-func (b *WatchEngineResponseBuilder) WithLiveNodes(v *LiveNodes) *WatchEngineResponseBuilder {
-	b.prototype.SetLiveNodes(v)
-	return b
-}
-
-// WithWorkloads configures the builder to set the Workloads field to v,
-// then returns b.
-func (b *WatchEngineResponseBuilder) WithWorkloads(v *Workloads) *WatchEngineResponseBuilder {
-	b.prototype.SetWorkloads(v)
-	return b
-}
-
 // WithHeartbeat configures the builder to set the Heartbeat field to v,
 // then returns b.
 func (b *WatchEngineResponseBuilder) WithHeartbeat(v *WatchEngineResponse_Heartbeat) *WatchEngineResponseBuilder {
 	b.prototype.SetHeartbeat(v)
+	return b
+}
+
+// WithLiveClusterNodes configures the builder to set the LiveClusterNodes field to v,
+// then returns b.
+func (b *WatchEngineResponseBuilder) WithLiveClusterNodes(v *LiveClusterNodes) *WatchEngineResponseBuilder {
+	b.prototype.SetLiveClusterNodes(v)
+	return b
+}
+
+// WithClusterWorkloads configures the builder to set the ClusterWorkloads field to v,
+// then returns b.
+func (b *WatchEngineResponseBuilder) WithClusterWorkloads(v *ClusterWorkloads) *WatchEngineResponseBuilder {
+	b.prototype.SetClusterWorkloads(v)
 	return b
 }
 
@@ -198,12 +198,10 @@ func NewWatchEngineResponse_PreambleBuilder() *WatchEngineResponse_PreambleBuild
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *WatchEngineResponse_PreambleBuilder) From(x *WatchEngineResponse_Preamble) *WatchEngineResponse_PreambleBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasNodeId() {
-		b.prototype.SetNodeId(x.GetNodeId())
+	if x.HasId() {
+		b.prototype.SetId(x.GetId())
 	}
-	if x.HasClusterId() {
-		b.prototype.SetClusterId(x.GetClusterId())
-	}
+	b.prototype.SetDescription(x.GetDescription())
 	if x.HasSite() {
 		b.prototype.SetSite(x.GetSite())
 	}
@@ -213,10 +211,15 @@ func (b *WatchEngineResponse_PreambleBuilder) From(x *WatchEngineResponse_Preamb
 	if x.HasHeartbeatInterval() {
 		b.prototype.SetHeartbeatInterval(x.GetHeartbeatInterval())
 	}
-	if x.HasHeartbeatTimeout() {
-		b.prototype.SetHeartbeatTimeout(x.GetHeartbeatTimeout())
+	if x.HasCluster() {
+		b.prototype.SetCluster(x.GetCluster())
 	}
-	b.prototype.SetDescription(x.GetDescription())
+	if x.HasQueueModel() {
+		b.prototype.SetQueueModel(x.GetQueueModel())
+	}
+	if x.HasEventStreamModel() {
+		b.prototype.SetEventStreamModel(x.GetEventStreamModel())
+	}
 	return b
 }
 
@@ -226,12 +229,10 @@ func (b *WatchEngineResponse_PreambleBuilder) From(x *WatchEngineResponse_Preamb
 // not modify previously constructed messages.
 func (b *WatchEngineResponse_PreambleBuilder) Build() *WatchEngineResponse_Preamble {
 	m := &WatchEngineResponse_Preamble{}
-	if b.prototype.HasNodeId() {
-		m.SetNodeId(b.prototype.GetNodeId())
+	if b.prototype.HasId() {
+		m.SetId(b.prototype.GetId())
 	}
-	if b.prototype.HasClusterId() {
-		m.SetClusterId(b.prototype.GetClusterId())
-	}
+	m.SetDescription(b.prototype.GetDescription())
 	if b.prototype.HasSite() {
 		m.SetSite(b.prototype.GetSite())
 	}
@@ -241,24 +242,29 @@ func (b *WatchEngineResponse_PreambleBuilder) Build() *WatchEngineResponse_Pream
 	if b.prototype.HasHeartbeatInterval() {
 		m.SetHeartbeatInterval(b.prototype.GetHeartbeatInterval())
 	}
-	if b.prototype.HasHeartbeatTimeout() {
-		m.SetHeartbeatTimeout(b.prototype.GetHeartbeatTimeout())
+	if b.prototype.HasCluster() {
+		m.SetCluster(b.prototype.GetCluster())
 	}
-	m.SetDescription(b.prototype.GetDescription())
+	if b.prototype.HasQueueModel() {
+		m.SetQueueModel(b.prototype.GetQueueModel())
+	}
+	if b.prototype.HasEventStreamModel() {
+		m.SetEventStreamModel(b.prototype.GetEventStreamModel())
+	}
 	return m
 }
 
-// WithNodeId configures the builder to set the NodeId field to v,
+// WithId configures the builder to set the Id field to v,
 // then returns b.
-func (b *WatchEngineResponse_PreambleBuilder) WithNodeId(v *uuidpb.UUID) *WatchEngineResponse_PreambleBuilder {
-	b.prototype.SetNodeId(v)
+func (b *WatchEngineResponse_PreambleBuilder) WithId(v *uuidpb.UUID) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetId(v)
 	return b
 }
 
-// WithClusterId configures the builder to set the ClusterId field to v,
+// WithDescription configures the builder to set the Description field to v,
 // then returns b.
-func (b *WatchEngineResponse_PreambleBuilder) WithClusterId(v *uuidpb.UUID) *WatchEngineResponse_PreambleBuilder {
-	b.prototype.SetClusterId(v)
+func (b *WatchEngineResponse_PreambleBuilder) WithDescription(v string) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetDescription(v)
 	return b
 }
 
@@ -283,17 +289,96 @@ func (b *WatchEngineResponse_PreambleBuilder) WithHeartbeatInterval(v *durationp
 	return b
 }
 
-// WithHeartbeatTimeout configures the builder to set the HeartbeatTimeout field to v,
+// WithCluster configures the builder to set the Cluster field to v,
 // then returns b.
-func (b *WatchEngineResponse_PreambleBuilder) WithHeartbeatTimeout(v *durationpb.Duration) *WatchEngineResponse_PreambleBuilder {
-	b.prototype.SetHeartbeatTimeout(v)
+func (b *WatchEngineResponse_PreambleBuilder) WithCluster(v *WatchEngineResponse_Preamble_Cluster) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetCluster(v)
 	return b
 }
 
-// WithDescription configures the builder to set the Description field to v,
+// WithQueueModel configures the builder to set the QueueModel field to v,
 // then returns b.
-func (b *WatchEngineResponse_PreambleBuilder) WithDescription(v string) *WatchEngineResponse_PreambleBuilder {
-	b.prototype.SetDescription(v)
+func (b *WatchEngineResponse_PreambleBuilder) WithQueueModel(v *QueueModel) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetQueueModel(v)
+	return b
+}
+
+// WithEventStreamModel configures the builder to set the EventStreamModel field to v,
+// then returns b.
+func (b *WatchEngineResponse_PreambleBuilder) WithEventStreamModel(v *EventStreamModel) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetEventStreamModel(v)
+	return b
+}
+
+type WatchEngineResponse_Preamble_ClusterBuilder struct {
+	prototype WatchEngineResponse_Preamble_Cluster
+}
+
+// NewWatchEngineResponse_Preamble_ClusterBuilder returns a builder that constructs [WatchEngineResponse_Preamble_Cluster] messages.
+func NewWatchEngineResponse_Preamble_ClusterBuilder() *WatchEngineResponse_Preamble_ClusterBuilder {
+	return &WatchEngineResponse_Preamble_ClusterBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *WatchEngineResponse_Preamble_ClusterBuilder) From(x *WatchEngineResponse_Preamble_Cluster) *WatchEngineResponse_Preamble_ClusterBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasId() {
+		b.prototype.SetId(x.GetId())
+	}
+	if x.HasModel() {
+		b.prototype.SetModel(x.GetModel())
+	}
+	b.prototype.SetReportsLiveNodes(x.GetReportsLiveNodes())
+	b.prototype.SetReportsWorkloads(x.GetReportsWorkloads())
+	return b
+}
+
+// Build returns a new [WatchEngineResponse_Preamble_Cluster] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *WatchEngineResponse_Preamble_ClusterBuilder) Build() *WatchEngineResponse_Preamble_Cluster {
+	m := &WatchEngineResponse_Preamble_Cluster{}
+	if b.prototype.HasId() {
+		m.SetId(b.prototype.GetId())
+	}
+	if b.prototype.HasModel() {
+		m.SetModel(b.prototype.GetModel())
+	}
+	m.SetReportsLiveNodes(b.prototype.GetReportsLiveNodes())
+	m.SetReportsWorkloads(b.prototype.GetReportsWorkloads())
+	return m
+}
+
+// WithId configures the builder to set the Id field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ClusterBuilder) WithId(v *uuidpb.UUID) *WatchEngineResponse_Preamble_ClusterBuilder {
+	b.prototype.SetId(v)
+	return b
+}
+
+// WithModel configures the builder to set the Model field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ClusterBuilder) WithModel(v *ClusterModel) *WatchEngineResponse_Preamble_ClusterBuilder {
+	b.prototype.SetModel(v)
+	return b
+}
+
+// WithReportsLiveNodes configures the builder to set the ReportsLiveNodes field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ClusterBuilder) WithReportsLiveNodes(v bool) *WatchEngineResponse_Preamble_ClusterBuilder {
+	b.prototype.SetReportsLiveNodes(v)
+	return b
+}
+
+// WithReportsWorkloads configures the builder to set the ReportsWorkloads field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ClusterBuilder) WithReportsWorkloads(v bool) *WatchEngineResponse_Preamble_ClusterBuilder {
+	b.prototype.SetReportsWorkloads(v)
 	return b
 }
 
@@ -364,130 +449,6 @@ func (b *WatchEngineResponse_HeartbeatBuilder) WithExpiresAfter(v *durationpb.Du
 	return b
 }
 
-type LiveNodesBuilder struct {
-	prototype LiveNodes
-}
-
-// NewLiveNodesBuilder returns a builder that constructs [LiveNodes] messages.
-func NewLiveNodesBuilder() *LiveNodesBuilder {
-	return &LiveNodesBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *LiveNodesBuilder) From(x *LiveNodes) *LiveNodesBuilder {
-	proto.Reset(&b.prototype)
-	b.prototype.SetNodeIds(x.GetNodeIds())
-	return b
-}
-
-// Build returns a new [LiveNodes] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *LiveNodesBuilder) Build() *LiveNodes {
-	m := &LiveNodes{}
-	m.SetNodeIds(b.prototype.GetNodeIds())
-	return m
-}
-
-// WithNodeIds configures the builder to set the NodeIds field to v,
-// then returns b.
-func (b *LiveNodesBuilder) WithNodeIds(v []*uuidpb.UUID) *LiveNodesBuilder {
-	b.prototype.SetNodeIds(v)
-	return b
-}
-
-type WorkloadsBuilder struct {
-	prototype Workloads
-}
-
-// NewWorkloadsBuilder returns a builder that constructs [Workloads] messages.
-func NewWorkloadsBuilder() *WorkloadsBuilder {
-	return &WorkloadsBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *WorkloadsBuilder) From(x *Workloads) *WorkloadsBuilder {
-	proto.Reset(&b.prototype)
-	b.prototype.SetWorkloads(x.GetWorkloads())
-	return b
-}
-
-// Build returns a new [Workloads] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *WorkloadsBuilder) Build() *Workloads {
-	m := &Workloads{}
-	m.SetWorkloads(b.prototype.GetWorkloads())
-	return m
-}
-
-// WithWorkloads configures the builder to set the Workloads field to v,
-// then returns b.
-func (b *WorkloadsBuilder) WithWorkloads(v []*Workload) *WorkloadsBuilder {
-	b.prototype.SetWorkloads(v)
-	return b
-}
-
-type WorkloadBuilder struct {
-	prototype Workload
-}
-
-// NewWorkloadBuilder returns a builder that constructs [Workload] messages.
-func NewWorkloadBuilder() *WorkloadBuilder {
-	return &WorkloadBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *WorkloadBuilder) From(x *Workload) *WorkloadBuilder {
-	proto.Reset(&b.prototype)
-	if x.HasKey() {
-		b.prototype.SetKey(x.GetKey())
-	}
-	b.prototype.SetDescription(x.GetDescription())
-	return b
-}
-
-// Build returns a new [Workload] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *WorkloadBuilder) Build() *Workload {
-	m := &Workload{}
-	if b.prototype.HasKey() {
-		m.SetKey(b.prototype.GetKey())
-	}
-	m.SetDescription(b.prototype.GetDescription())
-	return m
-}
-
-// WithKey configures the builder to set the Key field to v,
-// then returns b.
-func (b *WorkloadBuilder) WithKey(v *uuidpb.UUID) *WorkloadBuilder {
-	b.prototype.SetKey(v)
-	return b
-}
-
-// WithDescription configures the builder to set the Description field to v,
-// then returns b.
-func (b *WorkloadBuilder) WithDescription(v string) *WorkloadBuilder {
-	b.prototype.SetDescription(v)
-	return b
-}
-
 // MustSwitch_WatchEngineResponse_Payload invokes one of the given functions based on
 // the value of x.Payload.
 //
@@ -495,19 +456,19 @@ func (b *WorkloadBuilder) WithDescription(v string) *WorkloadBuilder {
 func MustSwitch_WatchEngineResponse_Payload(
 	x *WatchEngineResponse,
 	casePreamble func(*WatchEngineResponse_Preamble),
-	caseLiveNodes func(*LiveNodes),
-	caseWorkloads func(*Workloads),
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat),
+	caseLiveClusterNodes func(*LiveClusterNodes),
+	caseClusterWorkloads func(*ClusterWorkloads),
 ) {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
 		casePreamble(x.GetPreamble())
-	case WatchEngineResponse_LiveNodes_case:
-		caseLiveNodes(x.GetLiveNodes())
-	case WatchEngineResponse_Workloads_case:
-		caseWorkloads(x.GetWorkloads())
 	case WatchEngineResponse_Heartbeat_case:
 		caseHeartbeat(x.GetHeartbeat())
+	case WatchEngineResponse_LiveClusterNodes_case:
+		caseLiveClusterNodes(x.GetLiveClusterNodes())
+	case WatchEngineResponse_ClusterWorkloads_case:
+		caseClusterWorkloads(x.GetClusterWorkloads())
 	default:
 		panic("MustSwitch_WatchEngineResponse_Payload: x.Payload is not set")
 	}
@@ -520,20 +481,20 @@ func MustSwitch_WatchEngineResponse_Payload(
 func Switch_WatchEngineResponse_Payload(
 	x *WatchEngineResponse,
 	casePreamble func(*WatchEngineResponse_Preamble),
-	caseLiveNodes func(*LiveNodes),
-	caseWorkloads func(*Workloads),
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat),
+	caseLiveClusterNodes func(*LiveClusterNodes),
+	caseClusterWorkloads func(*ClusterWorkloads),
 	none func(),
 ) {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
 		casePreamble(x.GetPreamble())
-	case WatchEngineResponse_LiveNodes_case:
-		caseLiveNodes(x.GetLiveNodes())
-	case WatchEngineResponse_Workloads_case:
-		caseWorkloads(x.GetWorkloads())
 	case WatchEngineResponse_Heartbeat_case:
 		caseHeartbeat(x.GetHeartbeat())
+	case WatchEngineResponse_LiveClusterNodes_case:
+		caseLiveClusterNodes(x.GetLiveClusterNodes())
+	case WatchEngineResponse_ClusterWorkloads_case:
+		caseClusterWorkloads(x.GetClusterWorkloads())
 	default:
 		none()
 	}
@@ -547,19 +508,19 @@ func Switch_WatchEngineResponse_Payload(
 func MustMap_WatchEngineResponse_Payload[T any](
 	x *WatchEngineResponse,
 	casePreamble func(*WatchEngineResponse_Preamble) T,
-	caseLiveNodes func(*LiveNodes) T,
-	caseWorkloads func(*Workloads) T,
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat) T,
+	caseLiveClusterNodes func(*LiveClusterNodes) T,
+	caseClusterWorkloads func(*ClusterWorkloads) T,
 ) T {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
 		return casePreamble(x.GetPreamble())
-	case WatchEngineResponse_LiveNodes_case:
-		return caseLiveNodes(x.GetLiveNodes())
-	case WatchEngineResponse_Workloads_case:
-		return caseWorkloads(x.GetWorkloads())
 	case WatchEngineResponse_Heartbeat_case:
 		return caseHeartbeat(x.GetHeartbeat())
+	case WatchEngineResponse_LiveClusterNodes_case:
+		return caseLiveClusterNodes(x.GetLiveClusterNodes())
+	case WatchEngineResponse_ClusterWorkloads_case:
+		return caseClusterWorkloads(x.GetClusterWorkloads())
 	default:
 		panic("MustMap_WatchEngineResponse_Payload: x.Payload is not set")
 	}
@@ -573,20 +534,20 @@ func MustMap_WatchEngineResponse_Payload[T any](
 func Map_WatchEngineResponse_Payload[T any](
 	x *WatchEngineResponse,
 	casePreamble func(*WatchEngineResponse_Preamble) T,
-	caseLiveNodes func(*LiveNodes) T,
-	caseWorkloads func(*Workloads) T,
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat) T,
+	caseLiveClusterNodes func(*LiveClusterNodes) T,
+	caseClusterWorkloads func(*ClusterWorkloads) T,
 	none func() T,
 ) T {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
 		return casePreamble(x.GetPreamble())
-	case WatchEngineResponse_LiveNodes_case:
-		return caseLiveNodes(x.GetLiveNodes())
-	case WatchEngineResponse_Workloads_case:
-		return caseWorkloads(x.GetWorkloads())
 	case WatchEngineResponse_Heartbeat_case:
 		return caseHeartbeat(x.GetHeartbeat())
+	case WatchEngineResponse_LiveClusterNodes_case:
+		return caseLiveClusterNodes(x.GetLiveClusterNodes())
+	case WatchEngineResponse_ClusterWorkloads_case:
+		return caseClusterWorkloads(x.GetClusterWorkloads())
 	default:
 		return none()
 	}
@@ -904,6 +865,79 @@ func (x *WatchEngineResponse_Preamble) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
+func (x *WatchEngineResponse_Preamble_Cluster) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = WatchEngineResponse_Preamble_Cluster
+	type WatchEngineResponse_Preamble_Cluster realType
+	fmt.Fprintf(f, format, (*WatchEngineResponse_Preamble_Cluster)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
 func (x *WatchEngineResponse_Heartbeat) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
@@ -962,225 +996,6 @@ func (x *WatchEngineResponse_Heartbeat) Format(f fmt.State, verb rune) {
 	type realType = WatchEngineResponse_Heartbeat
 	type WatchEngineResponse_Heartbeat realType
 	fmt.Fprintf(f, format, (*WatchEngineResponse_Heartbeat)(x))
-}
-
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *LiveNodes) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = LiveNodes
-	type LiveNodes realType
-	fmt.Fprintf(f, format, (*LiveNodes)(x))
-}
-
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *Workloads) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = Workloads
-	type Workloads realType
-	fmt.Fprintf(f, format, (*Workloads)(x))
-}
-
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *Workload) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = Workload
-	type Workload realType
-	fmt.Fprintf(f, format, (*Workload)(x))
 }
 
 // EngineAPIClientStub is a test implementation of the [EngineAPIClient] interface.
@@ -1250,6 +1065,22 @@ func (x *WatchEngineResponse_Preamble) UnmarshalBinary(data []byte) error {
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
+// It allows [*WatchEngineResponse_Preamble_Cluster] to implement [encoding.BinaryMarshaler].
+func (x *WatchEngineResponse_Preamble_Cluster) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*WatchEngineResponse_Preamble_Cluster] to implement [encoding.BinaryUnmarshaler].
+func (x *WatchEngineResponse_Preamble_Cluster) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
 // It allows [*WatchEngineResponse_Heartbeat] to implement [encoding.BinaryMarshaler].
 func (x *WatchEngineResponse_Heartbeat) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
@@ -1260,53 +1091,5 @@ func (x *WatchEngineResponse_Heartbeat) MarshalBinary() ([]byte, error) {
 //
 // It allows [*WatchEngineResponse_Heartbeat] to implement [encoding.BinaryUnmarshaler].
 func (x *WatchEngineResponse_Heartbeat) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*LiveNodes] to implement [encoding.BinaryMarshaler].
-func (x *LiveNodes) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*LiveNodes] to implement [encoding.BinaryUnmarshaler].
-func (x *LiveNodes) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*Workloads] to implement [encoding.BinaryMarshaler].
-func (x *Workloads) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*Workloads] to implement [encoding.BinaryUnmarshaler].
-func (x *Workloads) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*Workload] to implement [encoding.BinaryMarshaler].
-func (x *Workload) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*Workload] to implement [encoding.BinaryUnmarshaler].
-func (x *Workload) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }

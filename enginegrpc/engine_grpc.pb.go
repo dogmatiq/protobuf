@@ -28,28 +28,37 @@ const (
 //
 // EngineAPI is a service that reports what an engine is and what it is doing.
 //
-// A node is one running process of an engine. A cluster is the set of nodes
-// that share the work of one application between them. An engine that runs as a
-// single process is a cluster of one node. A heartbeat is a signal that a node
-// sends repeatedly to show that it is running.
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 //
-// Every node serves this API. The node that serves a call reports what it is,
-// and what it believes about its cluster.
+// A heartbeat is a signal that an engine sends repeatedly to show that it is
+// running.
+//
+// The engine serves this API. If it runs as a cluster, every node of the
+// cluster serves it, and also reports what it believes about the cluster.
 type EngineAPIClient interface {
 	// WatchEngine reports what the engine is and what it is doing.
 	//
 	// The first message in the response contains a WatchEngineResponse.Preamble,
-	// which describes the node that serves the call.
+	// which identifies the engine, the application it is running, and how it
+	// operates.
 	//
-	// Subsequent messages in the response contain a LiveNodes, which reports the
-	// nodes that the node believes are live, a Workloads, which reports the
-	// workloads that the node believes it owns, or a
-	// WatchEngineResponse.Heartbeat, which reports one heartbeat of the node.
+	// Each subsequent message in the response contains one of these:
 	//
-	// If the node can't report what it believes about its cluster, it fails the
-	// call with the UNAVAILABLE status code. The message of the status is for a
-	// person to read. It may be shown to anyone who can call the API, so it must
-	// not contain secrets such as passwords.
+	// - A Heartbeat, which shows that the engine is still running.
+	// - A LiveClusterNodes, which lists the nodes of the cluster that the node
+	//   serving the call considers to be running.
+	// - A ClusterWorkloads, which lists the units of the cluster's work that the
+	//   node serving the call currently owns.
+	//
+	// Only an engine that runs as a cluster sends LiveClusterNodes and
+	// ClusterWorkloads messages. The Preamble says which of the three kinds the
+	// engine sends.
+	//
+	// If the node that serves the call reports live nodes or workloads but can't
+	// currently determine them, it fails the call with the UNAVAILABLE status
+	// code.
 	WatchEngine(ctx context.Context, in *WatchEngineRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchEngineResponse], error)
 }
 
@@ -86,28 +95,37 @@ type EngineAPI_WatchEngineClient = grpc.ServerStreamingClient[WatchEngineRespons
 //
 // EngineAPI is a service that reports what an engine is and what it is doing.
 //
-// A node is one running process of an engine. A cluster is the set of nodes
-// that share the work of one application between them. An engine that runs as a
-// single process is a cluster of one node. A heartbeat is a signal that a node
-// sends repeatedly to show that it is running.
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 //
-// Every node serves this API. The node that serves a call reports what it is,
-// and what it believes about its cluster.
+// A heartbeat is a signal that an engine sends repeatedly to show that it is
+// running.
+//
+// The engine serves this API. If it runs as a cluster, every node of the
+// cluster serves it, and also reports what it believes about the cluster.
 type EngineAPIServer interface {
 	// WatchEngine reports what the engine is and what it is doing.
 	//
 	// The first message in the response contains a WatchEngineResponse.Preamble,
-	// which describes the node that serves the call.
+	// which identifies the engine, the application it is running, and how it
+	// operates.
 	//
-	// Subsequent messages in the response contain a LiveNodes, which reports the
-	// nodes that the node believes are live, a Workloads, which reports the
-	// workloads that the node believes it owns, or a
-	// WatchEngineResponse.Heartbeat, which reports one heartbeat of the node.
+	// Each subsequent message in the response contains one of these:
 	//
-	// If the node can't report what it believes about its cluster, it fails the
-	// call with the UNAVAILABLE status code. The message of the status is for a
-	// person to read. It may be shown to anyone who can call the API, so it must
-	// not contain secrets such as passwords.
+	// - A Heartbeat, which shows that the engine is still running.
+	// - A LiveClusterNodes, which lists the nodes of the cluster that the node
+	//   serving the call considers to be running.
+	// - A ClusterWorkloads, which lists the units of the cluster's work that the
+	//   node serving the call currently owns.
+	//
+	// Only an engine that runs as a cluster sends LiveClusterNodes and
+	// ClusterWorkloads messages. The Preamble says which of the three kinds the
+	// engine sends.
+	//
+	// If the node that serves the call reports live nodes or workloads but can't
+	// currently determine them, it fails the call with the UNAVAILABLE status
+	// code.
 	WatchEngine(*WatchEngineRequest, grpc.ServerStreamingServer[WatchEngineResponse]) error
 }
 

@@ -8,6 +8,12 @@ import type { Duration, Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_duration, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Application } from "../configpb/config_pb.js";
 import { file_github_com_dogmatiq_protobuf_configpb_config } from "../configpb/config_pb.js";
+import type { ClusterModel, ClusterWorkloads, LiveClusterNodes } from "./cluster_pb.js";
+import { file_github_com_dogmatiq_protobuf_enginegrpc_cluster } from "./cluster_pb.js";
+import type { EventStreamModel } from "./eventstream_pb.js";
+import { file_github_com_dogmatiq_protobuf_enginegrpc_eventstream } from "./eventstream_pb.js";
+import type { QueueModel } from "./queue_pb.js";
+import { file_github_com_dogmatiq_protobuf_enginegrpc_queue } from "./queue_pb.js";
 import type { Identity } from "../identitypb/identity_pb.js";
 import { file_github_com_dogmatiq_protobuf_identitypb_identity } from "../identitypb/identity_pb.js";
 import type { UUID } from "../uuidpb/uuid_pb.js";
@@ -18,7 +24,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/enginegrpc/engine.proto.
  */
 export const file_github_com_dogmatiq_protobuf_enginegrpc_engine: GenFile = /*@__PURE__*/
-  fileDesc("CjRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvZW5naW5lLnByb3RvEhVkb2dtYS5lbmdpbmUudjFhbHBoYTEiFAoSV2F0Y2hFbmdpbmVSZXF1ZXN0Ip8GChNXYXRjaEVuZ2luZVJlc3BvbnNlEkcKCHByZWFtYmxlGAEgASgLMjMuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGVIABI2CgpsaXZlX25vZGVzGAIgASgLMiAuZG9nbWEuZW5naW5lLnYxYWxwaGExLkxpdmVOb2Rlc0gAEjUKCXdvcmtsb2FkcxgDIAEoCzIgLmRvZ21hLmVuZ2luZS52MWFscGhhMS5Xb3JrbG9hZHNIABJJCgloZWFydGJlYXQYBCABKAsyNC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5IZWFydGJlYXRIABrOAgoIUHJlYW1ibGUSKAoHbm9kZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSKwoKY2x1c3Rlcl9pZBgCIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSKQoEc2l0ZRgDIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EjcKC2FwcGxpY2F0aW9uGAQgASgLMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkFwcGxpY2F0aW9uEjUKEmhlYXJ0YmVhdF9pbnRlcnZhbBgFIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbhI0ChFoZWFydGJlYXRfdGltZW91dBgGIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbhIaCgtkZXNjcmlwdGlvbhgHIAEoCUIFqgECCAIaqAEKCUhlYXJ0YmVhdBIrCgdzZW50X2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIwCgpleHBpcmVzX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgAEjIKDWV4cGlyZXNfYWZ0ZXIYAyABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb25IAEIICgZleHBpcnlCCQoHcGF5bG9hZCI2CglMaXZlTm9kZXMSKQoIbm9kZV9pZHMYASADKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIj8KCVdvcmtsb2FkcxIyCgl3b3JrbG9hZHMYASADKAsyHy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV29ya2xvYWQiTAoIV29ya2xvYWQSJAoDa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIaCgtkZXNjcmlwdGlvbhgCIAEoCUIFqgECCAIycwoJRW5naW5lQVBJEmYKC1dhdGNoRW5naW5lEikuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVxdWVzdBoqLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlc3BvbnNlMAFCKVonZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9lbmdpbmVncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvZW5naW5lLnByb3RvEhVkb2dtYS5lbmdpbmUudjFhbHBoYTEiFAoSV2F0Y2hFbmdpbmVSZXF1ZXN0IsoIChNXYXRjaEVuZ2luZVJlc3BvbnNlEkcKCHByZWFtYmxlGAEgASgLMjMuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGVIABJJCgloZWFydGJlYXQYAiABKAsyNC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5IZWFydGJlYXRIABJFChJsaXZlX2NsdXN0ZXJfbm9kZXMYAyABKAsyJy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuTGl2ZUNsdXN0ZXJOb2Rlc0gAEkQKEWNsdXN0ZXJfd29ya2xvYWRzGAQgASgLMicuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJXb3JrbG9hZHNIABrbBAoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhoKC2Rlc2NyaXB0aW9uGAIgASgJQgWqAQIIAhIpCgRzaXRlGAMgASgLMhsuZG9nbWEucHJvdG9idWYudjEuSWRlbnRpdHkSNwoLYXBwbGljYXRpb24YBCABKAsyIi5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24SNQoSaGVhcnRiZWF0X2ludGVydmFsGAUgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uEkwKB2NsdXN0ZXIYBiABKAsyOy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5QcmVhbWJsZS5DbHVzdGVyEjYKC3F1ZXVlX21vZGVsGAcgASgLMiEuZG9nbWEuZW5naW5lLnYxYWxwaGExLlF1ZXVlTW9kZWwSQwoSZXZlbnRfc3RyZWFtX21vZGVsGAggASgLMicuZG9nbWEuZW5naW5lLnYxYWxwaGExLkV2ZW50U3RyZWFtTW9kZWwapwEKB0NsdXN0ZXISIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjIKBW1vZGVsGAIgASgLMiMuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJNb2RlbBIhChJyZXBvcnRzX2xpdmVfbm9kZXMYAyABKAhCBaoBAggCEiAKEXJlcG9ydHNfd29ya2xvYWRzGAQgASgIQgWqAQIIAhqoAQoJSGVhcnRiZWF0EisKB3NlbnRfYXQYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjAKCmV4cGlyZXNfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAASMgoNZXhwaXJlc19hZnRlchgDIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbkgAQggKBmV4cGlyeUIJCgdwYXlsb2FkMnMKCUVuZ2luZUFQSRJmCgtXYXRjaEVuZ2luZRIpLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlcXVlc3QaKi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZTABQilaJ2dpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvZW5naW5lZ3JwY2IIZWRpdGlvbnNw6Qc", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_enginegrpc_cluster, file_github_com_dogmatiq_protobuf_enginegrpc_eventstream, file_github_com_dogmatiq_protobuf_enginegrpc_queue, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * WatchEngineRequest is the input to the EngineAPI.WatchEngine method.
@@ -43,12 +49,17 @@ export const WatchEngineRequestSchema: GenMessage<WatchEngineRequest> = /*@__PUR
  */
 export type WatchEngineResponse = Message<"dogma.engine.v1alpha1.WatchEngineResponse"> & {
   /**
-   * Payload is the Preamble in the first response on a stream, and a LiveNodes,
-   * a Workloads or a Heartbeat in every other.
+   * Payload is the Preamble in the first response on a stream, and a Heartbeat,
+   * a LiveClusterNodes or a ClusterWorkloads in every other.
    *
-   * The node sends a LiveNodes and a Workloads straight after the Preamble, and
-   * another of each whenever its set changes. Each one replaces any earlier one
-   * of its kind on the same response stream.
+   * If the Preamble has a heartbeat_interval, the engine sends a Heartbeat
+   * message each time it heartbeats.
+   *
+   * If the Preamble has a cluster, the node sends LiveClusterNodes messages if
+   * the cluster's reports_live_nodes is true, and ClusterWorkloads messages if
+   * its reports_workloads is true. For each kind, it sends a first message,
+   * then another whenever the set changes. Each message replaces the one before
+   * it of the same kind.
    *
    * @generated from oneof dogma.engine.v1alpha1.WatchEngineResponse.payload
    */
@@ -60,22 +71,22 @@ export type WatchEngineResponse = Message<"dogma.engine.v1alpha1.WatchEngineResp
     case: "preamble";
   } | {
     /**
-     * @generated from field: dogma.engine.v1alpha1.LiveNodes live_nodes = 2;
-     */
-    value: LiveNodes;
-    case: "liveNodes";
-  } | {
-    /**
-     * @generated from field: dogma.engine.v1alpha1.Workloads workloads = 3;
-     */
-    value: Workloads;
-    case: "workloads";
-  } | {
-    /**
-     * @generated from field: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat heartbeat = 4;
+     * @generated from field: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat heartbeat = 2;
      */
     value: WatchEngineResponse_Heartbeat;
     case: "heartbeat";
+  } | {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.LiveClusterNodes live_cluster_nodes = 3;
+     */
+    value: LiveClusterNodes;
+    case: "liveClusterNodes";
+  } | {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.ClusterWorkloads cluster_workloads = 4;
+     */
+    value: ClusterWorkloads;
+    case: "clusterWorkloads";
   } | { case: undefined; value?: undefined };
 };
 
@@ -87,8 +98,7 @@ export const WatchEngineResponseSchema: GenMessage<WatchEngineResponse> = /*@__P
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1);
 
 /**
- * Preamble describes the node that serves the call. The description stays
- * the same for the whole response stream.
+ * Preamble describes the engine that serves the call.
  *
  * The nodes of one cluster may describe themselves differently, for example
  * while a new version of the application is deployed.
@@ -97,66 +107,75 @@ export const WatchEngineResponseSchema: GenMessage<WatchEngineResponse> = /*@__P
  */
 export type WatchEngineResponse_Preamble = Message<"dogma.engine.v1alpha1.WatchEngineResponse.Preamble"> & {
   /**
-   * NodeId is the ID of the node that serves the call. A node has the same
-   * ID in every API that it serves. Each node has a different ID.
+   * Id is the ID of the engine that serves the call. An engine has the same
+   * ID in every API that it serves. Each engine has a different ID.
    *
-   * @generated from field: dogma.protobuf.v1.UUID node_id = 1;
+   * If the engine runs as a cluster, the ID identifies the node that serves
+   * the call, and each node of the cluster has a different ID.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID id = 1;
    */
-  nodeId?: UUID | undefined;
+  id?: UUID | undefined;
 
   /**
-   * ClusterId is the ID of the node's cluster. Nodes of the same cluster give
-   * the same cluster ID, in every API that they serve. Each cluster has a
-   * different ID.
+   * Description is an optional human-readable description of the engine,
+   * such as its host name.
    *
-   * @generated from field: dogma.protobuf.v1.UUID cluster_id = 2;
+   * @generated from field: string description = 2 [features.field_presence = IMPLICIT];
    */
-  clusterId?: UUID | undefined;
+  description: string;
 
   /**
-   * Site is the identity of the site that the node is deployed to, which is
+   * Site is the identity of the site that the engine is deployed to, which is
    * one installation of the application. It is the same identity that the
-   * node records as the site of the source of each message that it produces.
-   * It is present only if the node is configured with a site.
+   * engine records as the site of the source of each message that it
+   * produces. It is present only if the engine is configured with a site.
    *
    * @generated from field: dogma.protobuf.v1.Identity site = 3;
    */
   site?: Identity | undefined;
 
   /**
-   * Application describes the version of the application that the node runs.
-   * It is required.
+   * Application describes the version of the application that the engine
+   * runs. It is required.
    *
    * @generated from field: dogma.config.v1alpha1.Application application = 4;
    */
   application?: Application | undefined;
 
   /**
-   * HeartbeatInterval is how long the node aims to wait between two of its
-   * own heartbeats. It is greater than zero. It is present only if the node
-   * heartbeats.
+   * HeartbeatInterval is how long the engine aims to wait between two of the
+   * heartbeats that it sends on this response stream. It is greater than
+   * zero. It is present only if the engine heartbeats.
+   *
+   * These heartbeats may or may not be the same as any heartbeats that the
+   * nodes of a cluster send to each other.
    *
    * @generated from field: google.protobuf.Duration heartbeat_interval = 5;
    */
   heartbeatInterval?: Duration | undefined;
 
   /**
-   * HeartbeatTimeout is the longest time that the node waits for the next
-   * heartbeat of a node of its cluster before it stops treating that node as
-   * live. It is greater than zero. It is present only if the node uses such
-   * a timeout.
+   * Cluster describes the engine's cluster. It is present only if the engine
+   * runs as a cluster.
    *
-   * @generated from field: google.protobuf.Duration heartbeat_timeout = 6;
+   * @generated from field: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster cluster = 6;
    */
-  heartbeatTimeout?: Duration | undefined;
+  cluster?: WatchEngineResponse_Preamble_Cluster | undefined;
 
   /**
-   * Description is an optional human-readable description of the node, such
-   * as its host name.
+   * QueueModel is the model by which the engine uses queues.
    *
-   * @generated from field: string description = 7 [features.field_presence = IMPLICIT];
+   * @generated from field: dogma.engine.v1alpha1.QueueModel queue_model = 7;
    */
-  description: string;
+  queueModel?: QueueModel | undefined;
+
+  /**
+   * EventStreamModel is the model by which the engine uses event streams.
+   *
+   * @generated from field: dogma.engine.v1alpha1.EventStreamModel event_stream_model = 8;
+   */
+  eventStreamModel?: EventStreamModel | undefined;
 };
 
 /**
@@ -167,25 +186,70 @@ export const WatchEngineResponse_PreambleSchema: GenMessage<WatchEngineResponse_
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0);
 
 /**
- * Heartbeat reports that the node has sent a heartbeat.
+ * Cluster describes the cluster that the engine runs as.
  *
- * A node that heartbeats sends a Heartbeat each time it does. It reports only
- * its own heartbeats.
+ * @generated from message dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
+ */
+export type WatchEngineResponse_Preamble_Cluster = Message<"dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster"> & {
+  /**
+   * Id is the ID of the cluster. Nodes of the same cluster give the same
+   * cluster ID, in every API that they serve. Each cluster has a different
+   * ID.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID id = 1;
+   */
+  id?: UUID | undefined;
+
+  /**
+   * Model describes the way that the nodes of the cluster share its work.
+   *
+   * @generated from field: dogma.engine.v1alpha1.ClusterModel model = 2;
+   */
+  model?: ClusterModel | undefined;
+
+  /**
+   * ReportsLiveNodes is true if the node sends LiveClusterNodes messages,
+   * which list the nodes of the cluster that it considers to be running.
+   *
+   * @generated from field: bool reports_live_nodes = 3 [features.field_presence = IMPLICIT];
+   */
+  reportsLiveNodes: boolean;
+
+  /**
+   * ReportsWorkloads is true if the node sends ClusterWorkloads messages,
+   * which list the workloads that it owns.
+   *
+   * @generated from field: bool reports_workloads = 4 [features.field_presence = IMPLICIT];
+   */
+  reportsWorkloads: boolean;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.
+ * Use `create(WatchEngineResponse_Preamble_ClusterSchema)` to create a new message.
+ */
+export const WatchEngineResponse_Preamble_ClusterSchema: GenMessage<WatchEngineResponse_Preamble_Cluster> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0, 0);
+
+/**
+ * Heartbeat reports that the engine has sent a heartbeat, which is a signal
+ * that it sends repeatedly on the response stream to show that it is still
+ * running.
  *
  * @generated from message dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
  */
 export type WatchEngineResponse_Heartbeat = Message<"dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat"> & {
   /**
-   * SentAt is the time at which the node sent this heartbeat, by the node's
-   * own clock. It is required.
+   * SentAt is the time at which the engine sent this heartbeat, by the
+   * engine's own clock. It is required.
    *
    * @generated from field: google.protobuf.Timestamp sent_at = 1;
    */
   sentAt?: Timestamp | undefined;
 
   /**
-   * Expiry is the time by which the node sends its next heartbeat, if it is
-   * still running. It is present only if the node gives its heartbeats an
+   * Expiry is the time by which the engine sends its next heartbeat, if it is
+   * still running. It is present only if the engine gives its heartbeats an
    * expiry.
    *
    * @generated from oneof dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expiry
@@ -200,7 +264,7 @@ export type WatchEngineResponse_Heartbeat = Message<"dogma.engine.v1alpha1.Watch
     case: "expiresAt";
   } | {
     /**
-     * ExpiresAfter is that time, as the length of time after the node sent
+     * ExpiresAfter is that time, as the length of time after the engine sent
      * this heartbeat. It is greater than zero.
      *
      * @generated from field: google.protobuf.Duration expires_after = 3;
@@ -218,95 +282,17 @@ export const WatchEngineResponse_HeartbeatSchema: GenMessage<WatchEngineResponse
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 1);
 
 /**
- * LiveNodes is the set of nodes that a node believes are live. It includes the
- * node itself only while the node believes that it is live.
- *
- * @generated from message dogma.engine.v1alpha1.LiveNodes
- */
-export type LiveNodes = Message<"dogma.engine.v1alpha1.LiveNodes"> & {
-  /**
-   * NodeIds holds the ID of each of those nodes once, in any order.
-   *
-   * A node whose cluster has no other nodes reports only its own ID.
-   *
-   * @generated from field: repeated dogma.protobuf.v1.UUID node_ids = 1;
-   */
-  nodeIds: UUID[];
-};
-
-/**
- * Describes the message dogma.engine.v1alpha1.LiveNodes.
- * Use `create(LiveNodesSchema)` to create a new message.
- */
-export const LiveNodesSchema: GenMessage<LiveNodes> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 2);
-
-/**
- * Workloads is the set of workloads that a node believes it owns.
- *
- * While ownership moves from one node to another, both nodes may report the
- * same workload, or neither may. The set is empty for an engine that doesn't
- * divide its work into workloads.
- *
- * @generated from message dogma.engine.v1alpha1.Workloads
- */
-export type Workloads = Message<"dogma.engine.v1alpha1.Workloads"> & {
-  /**
-   * Workloads holds each of those workloads once, in any order.
-   *
-   * @generated from field: repeated dogma.engine.v1alpha1.Workload workloads = 1;
-   */
-  workloads: Workload[];
-};
-
-/**
- * Describes the message dogma.engine.v1alpha1.Workloads.
- * Use `create(WorkloadsSchema)` to create a new message.
- */
-export const WorkloadsSchema: GenMessage<Workloads> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 3);
-
-/**
- * Workload is one unit of the work that the nodes of a cluster share between
- * them, such as delivering the messages in one queue. At most one node owns
- * each workload at a time.
- *
- * @generated from message dogma.engine.v1alpha1.Workload
- */
-export type Workload = Message<"dogma.engine.v1alpha1.Workload"> & {
-  /**
-   * Key identifies the workload within its cluster.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID key = 1;
-   */
-  key?: UUID | undefined;
-
-  /**
-   * Description is an optional human-readable description of the workload,
-   * such as the queue whose messages it delivers.
-   *
-   * @generated from field: string description = 2 [features.field_presence = IMPLICIT];
-   */
-  description: string;
-};
-
-/**
- * Describes the message dogma.engine.v1alpha1.Workload.
- * Use `create(WorkloadSchema)` to create a new message.
- */
-export const WorkloadSchema: GenMessage<Workload> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 4);
-
-/**
  * EngineAPI is a service that reports what an engine is and what it is doing.
  *
- * A node is one running process of an engine. A cluster is the set of nodes
- * that share the work of one application between them. An engine that runs as a
- * single process is a cluster of one node. A heartbeat is a signal that a node
- * sends repeatedly to show that it is running.
+ * An engine may run as a cluster, which is a set of running instances of the
+ * engine that share the work of one application between them. Each instance is
+ * called a node, in that context.
  *
- * Every node serves this API. The node that serves a call reports what it is,
- * and what it believes about its cluster.
+ * A heartbeat is a signal that an engine sends repeatedly to show that it is
+ * running.
+ *
+ * The engine serves this API. If it runs as a cluster, every node of the
+ * cluster serves it, and also reports what it believes about the cluster.
  *
  * @generated from service dogma.engine.v1alpha1.EngineAPI
  */
@@ -315,17 +301,24 @@ export const EngineAPI: GenService<{
    * WatchEngine reports what the engine is and what it is doing.
    *
    * The first message in the response contains a WatchEngineResponse.Preamble,
-   * which describes the node that serves the call.
+   * which identifies the engine, the application it is running, and how it
+   * operates.
    *
-   * Subsequent messages in the response contain a LiveNodes, which reports the
-   * nodes that the node believes are live, a Workloads, which reports the
-   * workloads that the node believes it owns, or a
-   * WatchEngineResponse.Heartbeat, which reports one heartbeat of the node.
+   * Each subsequent message in the response contains one of these:
    *
-   * If the node can't report what it believes about its cluster, it fails the
-   * call with the UNAVAILABLE status code. The message of the status is for a
-   * person to read. It may be shown to anyone who can call the API, so it must
-   * not contain secrets such as passwords.
+   * - A Heartbeat, which shows that the engine is still running.
+   * - A LiveClusterNodes, which lists the nodes of the cluster that the node
+   *   serving the call considers to be running.
+   * - A ClusterWorkloads, which lists the units of the cluster's work that the
+   *   node serving the call currently owns.
+   *
+   * Only an engine that runs as a cluster sends LiveClusterNodes and
+   * ClusterWorkloads messages. The Preamble says which of the three kinds the
+   * engine sends.
+   *
+   * If the node that serves the call reports live nodes or workloads but can't
+   * currently determine them, it fails the call with the UNAVAILABLE status
+   * code.
    *
    * @generated from rpc dogma.engine.v1alpha1.EngineAPI.WatchEngine
    */

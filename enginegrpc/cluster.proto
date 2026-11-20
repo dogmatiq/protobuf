@@ -1,0 +1,68 @@
+edition = "2024";
+package dogma.engine.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/enginegrpc";
+
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// ClusterModel describes the way that the running instances of an engine
+// (nodes) in a cluster share its work.
+message ClusterModel {
+  // CompetingNodes is the model of a cluster whose nodes compete for each unit
+  // of work, such as the next command in a queue.
+  message CompetingNodes {}
+
+  // SelfAssigningNodes is the model of a cluster whose nodes divide its work
+  // into workloads, and in which each node works out for itself, from the set
+  // of live nodes, which workloads it owns.
+  message SelfAssigningNodes {}
+
+  // Model is the model that the cluster uses. It is not set if the node doesn't
+  // say, or if the client doesn't know the model.
+  oneof model {
+    CompetingNodes     competing_nodes      = 1;
+    SelfAssigningNodes self_assigning_nodes = 2;
+  }
+}
+
+// LiveClusterNodes is the set of nodes that a node believes are live. It
+// includes the node itself only while the node believes that it is live.
+message LiveClusterNodes {
+  // Nodes holds each of those nodes once, in any order.
+  //
+  // A node whose cluster has no other nodes reports only itself.
+  repeated ClusterNode nodes = 1;
+}
+
+// ClusterNode describes one running instance of an engine (a node) within a
+// cluster.
+message ClusterNode {
+  // Id is the ID of the node. It is the same ID that the node gives as the id
+  // of the Preamble on each call to EngineAPI.WatchEngine that it serves.
+  dogma.protobuf.v1.UUID id = 1;
+
+  // Description is an optional human-readable description of the node, such
+  // as its host name.
+  string description = 2 [features.field_presence = IMPLICIT];
+}
+
+// ClusterWorkloads is the set of workloads that a node believes it owns.
+//
+// While ownership moves from one node to another, both nodes may report the
+// same workload, or neither may.
+message ClusterWorkloads {
+  // Workloads holds each of those workloads once, in any order.
+  repeated ClusterWorkload workloads = 1;
+}
+
+// ClusterWorkload is one unit of the work that the nodes of a cluster share
+// between them, such as delivering the messages in one queue. At most one node
+// owns each workload at a time.
+message ClusterWorkload {
+  // Key identifies the workload within its cluster.
+  dogma.protobuf.v1.UUID key = 1;
+
+  // Description is an optional human-readable description of the workload,
+  // such as the queue whose messages it delivers.
+  string description = 2 [features.field_presence = IMPLICIT];
+}

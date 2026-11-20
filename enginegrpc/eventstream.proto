@@ -1,0 +1,23 @@
+edition = "2024";
+package dogma.engine.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/enginegrpc";
+
+// EventStreamModel describes the way that an engine stores the events that its
+// handlers record.
+message EventStreamModel {
+  // SingleEventStream is the model of an engine that appends every event to one
+  // event stream.
+  message SingleEventStream {}
+
+  // MultipleEventStreams is the model of an engine that may append events to
+  // more than one event stream.
+  message MultipleEventStreams {}
+
+  // Model is the model that the engine uses. It is not set if the engine
+  // doesn't say, or if the client doesn't know the model.
+  oneof model {
+    SingleEventStream    single_event_stream    = 1;
+    MultipleEventStreams multiple_event_streams = 2;
+  }
+}

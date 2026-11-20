@@ -112,28 +112,28 @@ func (x *WatchEngineResponse) GetPreamble() *WatchEngineResponse_Preamble {
 	return nil
 }
 
-func (x *WatchEngineResponse) GetLiveNodes() *LiveNodes {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Payload.(*watchEngineResponse_LiveNodes); ok {
-			return x.LiveNodes
-		}
-	}
-	return nil
-}
-
-func (x *WatchEngineResponse) GetWorkloads() *Workloads {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Payload.(*watchEngineResponse_Workloads); ok {
-			return x.Workloads
-		}
-	}
-	return nil
-}
-
 func (x *WatchEngineResponse) GetHeartbeat() *WatchEngineResponse_Heartbeat {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Payload.(*watchEngineResponse_Heartbeat_); ok {
 			return x.Heartbeat
+		}
+	}
+	return nil
+}
+
+func (x *WatchEngineResponse) GetLiveClusterNodes() *LiveClusterNodes {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*watchEngineResponse_LiveClusterNodes); ok {
+			return x.LiveClusterNodes
+		}
+	}
+	return nil
+}
+
+func (x *WatchEngineResponse) GetClusterWorkloads() *ClusterWorkloads {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ClusterWorkloads); ok {
+			return x.ClusterWorkloads
 		}
 	}
 	return nil
@@ -147,28 +147,28 @@ func (x *WatchEngineResponse) SetPreamble(v *WatchEngineResponse_Preamble) {
 	x.xxx_hidden_Payload = &watchEngineResponse_Preamble_{v}
 }
 
-func (x *WatchEngineResponse) SetLiveNodes(v *LiveNodes) {
-	if v == nil {
-		x.xxx_hidden_Payload = nil
-		return
-	}
-	x.xxx_hidden_Payload = &watchEngineResponse_LiveNodes{v}
-}
-
-func (x *WatchEngineResponse) SetWorkloads(v *Workloads) {
-	if v == nil {
-		x.xxx_hidden_Payload = nil
-		return
-	}
-	x.xxx_hidden_Payload = &watchEngineResponse_Workloads{v}
-}
-
 func (x *WatchEngineResponse) SetHeartbeat(v *WatchEngineResponse_Heartbeat) {
 	if v == nil {
 		x.xxx_hidden_Payload = nil
 		return
 	}
 	x.xxx_hidden_Payload = &watchEngineResponse_Heartbeat_{v}
+}
+
+func (x *WatchEngineResponse) SetLiveClusterNodes(v *LiveClusterNodes) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &watchEngineResponse_LiveClusterNodes{v}
+}
+
+func (x *WatchEngineResponse) SetClusterWorkloads(v *ClusterWorkloads) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &watchEngineResponse_ClusterWorkloads{v}
 }
 
 func (x *WatchEngineResponse) HasPayload() bool {
@@ -186,27 +186,27 @@ func (x *WatchEngineResponse) HasPreamble() bool {
 	return ok
 }
 
-func (x *WatchEngineResponse) HasLiveNodes() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Payload.(*watchEngineResponse_LiveNodes)
-	return ok
-}
-
-func (x *WatchEngineResponse) HasWorkloads() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Payload.(*watchEngineResponse_Workloads)
-	return ok
-}
-
 func (x *WatchEngineResponse) HasHeartbeat() bool {
 	if x == nil {
 		return false
 	}
 	_, ok := x.xxx_hidden_Payload.(*watchEngineResponse_Heartbeat_)
+	return ok
+}
+
+func (x *WatchEngineResponse) HasLiveClusterNodes() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*watchEngineResponse_LiveClusterNodes)
+	return ok
+}
+
+func (x *WatchEngineResponse) HasClusterWorkloads() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ClusterWorkloads)
 	return ok
 }
 
@@ -220,29 +220,29 @@ func (x *WatchEngineResponse) ClearPreamble() {
 	}
 }
 
-func (x *WatchEngineResponse) ClearLiveNodes() {
-	if _, ok := x.xxx_hidden_Payload.(*watchEngineResponse_LiveNodes); ok {
-		x.xxx_hidden_Payload = nil
-	}
-}
-
-func (x *WatchEngineResponse) ClearWorkloads() {
-	if _, ok := x.xxx_hidden_Payload.(*watchEngineResponse_Workloads); ok {
-		x.xxx_hidden_Payload = nil
-	}
-}
-
 func (x *WatchEngineResponse) ClearHeartbeat() {
 	if _, ok := x.xxx_hidden_Payload.(*watchEngineResponse_Heartbeat_); ok {
 		x.xxx_hidden_Payload = nil
 	}
 }
 
+func (x *WatchEngineResponse) ClearLiveClusterNodes() {
+	if _, ok := x.xxx_hidden_Payload.(*watchEngineResponse_LiveClusterNodes); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
+func (x *WatchEngineResponse) ClearClusterWorkloads() {
+	if _, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ClusterWorkloads); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
 const WatchEngineResponse_Payload_not_set_case case_WatchEngineResponse_Payload = 0
 const WatchEngineResponse_Preamble_case case_WatchEngineResponse_Payload = 1
-const WatchEngineResponse_LiveNodes_case case_WatchEngineResponse_Payload = 2
-const WatchEngineResponse_Workloads_case case_WatchEngineResponse_Payload = 3
-const WatchEngineResponse_Heartbeat_case case_WatchEngineResponse_Payload = 4
+const WatchEngineResponse_Heartbeat_case case_WatchEngineResponse_Payload = 2
+const WatchEngineResponse_LiveClusterNodes_case case_WatchEngineResponse_Payload = 3
+const WatchEngineResponse_ClusterWorkloads_case case_WatchEngineResponse_Payload = 4
 
 func (x *WatchEngineResponse) WhichPayload() case_WatchEngineResponse_Payload {
 	if x == nil {
@@ -251,12 +251,12 @@ func (x *WatchEngineResponse) WhichPayload() case_WatchEngineResponse_Payload {
 	switch x.xxx_hidden_Payload.(type) {
 	case *watchEngineResponse_Preamble_:
 		return WatchEngineResponse_Preamble_case
-	case *watchEngineResponse_LiveNodes:
-		return WatchEngineResponse_LiveNodes_case
-	case *watchEngineResponse_Workloads:
-		return WatchEngineResponse_Workloads_case
 	case *watchEngineResponse_Heartbeat_:
 		return WatchEngineResponse_Heartbeat_case
+	case *watchEngineResponse_LiveClusterNodes:
+		return WatchEngineResponse_LiveClusterNodes_case
+	case *watchEngineResponse_ClusterWorkloads:
+		return WatchEngineResponse_ClusterWorkloads_case
 	default:
 		return WatchEngineResponse_Payload_not_set_case
 	}
@@ -265,18 +265,23 @@ func (x *WatchEngineResponse) WhichPayload() case_WatchEngineResponse_Payload {
 type WatchEngineResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Payload is the Preamble in the first response on a stream, and a LiveNodes,
-	// a Workloads or a Heartbeat in every other.
+	// Payload is the Preamble in the first response on a stream, and a Heartbeat,
+	// a LiveClusterNodes or a ClusterWorkloads in every other.
 	//
-	// The node sends a LiveNodes and a Workloads straight after the Preamble, and
-	// another of each whenever its set changes. Each one replaces any earlier one
-	// of its kind on the same response stream.
+	// If the Preamble has a heartbeat_interval, the engine sends a Heartbeat
+	// message each time it heartbeats.
+	//
+	// If the Preamble has a cluster, the node sends LiveClusterNodes messages if
+	// the cluster's reports_live_nodes is true, and ClusterWorkloads messages if
+	// its reports_workloads is true. For each kind, it sends a first message,
+	// then another whenever the set changes. Each message replaces the one before
+	// it of the same kind.
 
 	// Fields of oneof xxx_hidden_Payload:
-	Preamble  *WatchEngineResponse_Preamble
-	LiveNodes *LiveNodes
-	Workloads *Workloads
-	Heartbeat *WatchEngineResponse_Heartbeat
+	Preamble         *WatchEngineResponse_Preamble
+	Heartbeat        *WatchEngineResponse_Heartbeat
+	LiveClusterNodes *LiveClusterNodes
+	ClusterWorkloads *ClusterWorkloads
 	// -- end of xxx_hidden_Payload
 }
 
@@ -287,14 +292,14 @@ func (b0 WatchEngineResponse_builder) Build() *WatchEngineResponse {
 	if b.Preamble != nil {
 		x.xxx_hidden_Payload = &watchEngineResponse_Preamble_{b.Preamble}
 	}
-	if b.LiveNodes != nil {
-		x.xxx_hidden_Payload = &watchEngineResponse_LiveNodes{b.LiveNodes}
-	}
-	if b.Workloads != nil {
-		x.xxx_hidden_Payload = &watchEngineResponse_Workloads{b.Workloads}
-	}
 	if b.Heartbeat != nil {
 		x.xxx_hidden_Payload = &watchEngineResponse_Heartbeat_{b.Heartbeat}
+	}
+	if b.LiveClusterNodes != nil {
+		x.xxx_hidden_Payload = &watchEngineResponse_LiveClusterNodes{b.LiveClusterNodes}
+	}
+	if b.ClusterWorkloads != nil {
+		x.xxx_hidden_Payload = &watchEngineResponse_ClusterWorkloads{b.ClusterWorkloads}
 	}
 	return m0
 }
@@ -317,264 +322,47 @@ type watchEngineResponse_Preamble_ struct {
 	Preamble *WatchEngineResponse_Preamble `protobuf:"bytes,1,opt,name=preamble,oneof"`
 }
 
-type watchEngineResponse_LiveNodes struct {
-	LiveNodes *LiveNodes `protobuf:"bytes,2,opt,name=live_nodes,json=liveNodes,oneof"`
-}
-
-type watchEngineResponse_Workloads struct {
-	Workloads *Workloads `protobuf:"bytes,3,opt,name=workloads,oneof"`
-}
-
 type watchEngineResponse_Heartbeat_ struct {
-	Heartbeat *WatchEngineResponse_Heartbeat `protobuf:"bytes,4,opt,name=heartbeat,oneof"`
+	Heartbeat *WatchEngineResponse_Heartbeat `protobuf:"bytes,2,opt,name=heartbeat,oneof"`
+}
+
+type watchEngineResponse_LiveClusterNodes struct {
+	LiveClusterNodes *LiveClusterNodes `protobuf:"bytes,3,opt,name=live_cluster_nodes,json=liveClusterNodes,oneof"`
+}
+
+type watchEngineResponse_ClusterWorkloads struct {
+	ClusterWorkloads *ClusterWorkloads `protobuf:"bytes,4,opt,name=cluster_workloads,json=clusterWorkloads,oneof"`
 }
 
 func (*watchEngineResponse_Preamble_) isWatchEngineResponse_Payload() {}
 
-func (*watchEngineResponse_LiveNodes) isWatchEngineResponse_Payload() {}
-
-func (*watchEngineResponse_Workloads) isWatchEngineResponse_Payload() {}
-
 func (*watchEngineResponse_Heartbeat_) isWatchEngineResponse_Payload() {}
 
-// LiveNodes is the set of nodes that a node believes are live. It includes the
-// node itself only while the node believes that it is live.
-type LiveNodes struct {
-	state              protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_NodeIds *[]*uuidpb.UUID        `protobuf:"bytes,1,rep,name=node_ids,json=nodeIds"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
+func (*watchEngineResponse_LiveClusterNodes) isWatchEngineResponse_Payload() {}
 
-func (x *LiveNodes) Reset() {
-	*x = LiveNodes{}
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
+func (*watchEngineResponse_ClusterWorkloads) isWatchEngineResponse_Payload() {}
 
-func (x *LiveNodes) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*LiveNodes) ProtoMessage() {}
-
-func (x *LiveNodes) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *LiveNodes) GetNodeIds() []*uuidpb.UUID {
-	if x != nil {
-		if x.xxx_hidden_NodeIds != nil {
-			return *x.xxx_hidden_NodeIds
-		}
-	}
-	return nil
-}
-
-func (x *LiveNodes) SetNodeIds(v []*uuidpb.UUID) {
-	x.xxx_hidden_NodeIds = &v
-}
-
-type LiveNodes_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// NodeIds holds the ID of each of those nodes once, in any order.
-	//
-	// A node whose cluster has no other nodes reports only its own ID.
-	NodeIds []*uuidpb.UUID
-}
-
-func (b0 LiveNodes_builder) Build() *LiveNodes {
-	m0 := &LiveNodes{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_NodeIds = &b.NodeIds
-	return m0
-}
-
-// Workloads is the set of workloads that a node believes it owns.
-//
-// While ownership moves from one node to another, both nodes may report the
-// same workload, or neither may. The set is empty for an engine that doesn't
-// divide its work into workloads.
-type Workloads struct {
-	state                protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Workloads *[]*Workload           `protobuf:"bytes,1,rep,name=workloads"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
-}
-
-func (x *Workloads) Reset() {
-	*x = Workloads{}
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Workloads) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Workloads) ProtoMessage() {}
-
-func (x *Workloads) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Workloads) GetWorkloads() []*Workload {
-	if x != nil {
-		if x.xxx_hidden_Workloads != nil {
-			return *x.xxx_hidden_Workloads
-		}
-	}
-	return nil
-}
-
-func (x *Workloads) SetWorkloads(v []*Workload) {
-	x.xxx_hidden_Workloads = &v
-}
-
-type Workloads_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Workloads holds each of those workloads once, in any order.
-	Workloads []*Workload
-}
-
-func (b0 Workloads_builder) Build() *Workloads {
-	m0 := &Workloads{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_Workloads = &b.Workloads
-	return m0
-}
-
-// Workload is one unit of the work that the nodes of a cluster share between
-// them, such as delivering the messages in one queue. At most one node owns
-// each workload at a time.
-type Workload struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Key         *uuidpb.UUID           `protobuf:"bytes,1,opt,name=key"`
-	xxx_hidden_Description string                 `protobuf:"bytes,2,opt,name=description"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *Workload) Reset() {
-	*x = Workload{}
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Workload) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Workload) ProtoMessage() {}
-
-func (x *Workload) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Workload) GetKey() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_Key
-	}
-	return nil
-}
-
-func (x *Workload) GetDescription() string {
-	if x != nil {
-		return x.xxx_hidden_Description
-	}
-	return ""
-}
-
-func (x *Workload) SetKey(v *uuidpb.UUID) {
-	x.xxx_hidden_Key = v
-}
-
-func (x *Workload) SetDescription(v string) {
-	x.xxx_hidden_Description = v
-}
-
-func (x *Workload) HasKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Key != nil
-}
-
-func (x *Workload) ClearKey() {
-	x.xxx_hidden_Key = nil
-}
-
-type Workload_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Key identifies the workload within its cluster.
-	Key *uuidpb.UUID
-	// Description is an optional human-readable description of the workload,
-	// such as the queue whose messages it delivers.
-	Description string
-}
-
-func (b0 Workload_builder) Build() *Workload {
-	m0 := &Workload{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_Key = b.Key
-	x.xxx_hidden_Description = b.Description
-	return m0
-}
-
-// Preamble describes the node that serves the call. The description stays
-// the same for the whole response stream.
+// Preamble describes the engine that serves the call.
 //
 // The nodes of one cluster may describe themselves differently, for example
 // while a new version of the application is deployed.
 type WatchEngineResponse_Preamble struct {
-	state                        protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_NodeId            *uuidpb.UUID           `protobuf:"bytes,1,opt,name=node_id,json=nodeId"`
-	xxx_hidden_ClusterId         *uuidpb.UUID           `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId"`
-	xxx_hidden_Site              *identitypb.Identity   `protobuf:"bytes,3,opt,name=site"`
-	xxx_hidden_Application       *configpb.Application  `protobuf:"bytes,4,opt,name=application"`
-	xxx_hidden_HeartbeatInterval *durationpb.Duration   `protobuf:"bytes,5,opt,name=heartbeat_interval,json=heartbeatInterval"`
-	xxx_hidden_HeartbeatTimeout  *durationpb.Duration   `protobuf:"bytes,6,opt,name=heartbeat_timeout,json=heartbeatTimeout"`
-	xxx_hidden_Description       string                 `protobuf:"bytes,7,opt,name=description"`
+	state                        protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_Id                *uuidpb.UUID                          `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Description       string                                `protobuf:"bytes,2,opt,name=description"`
+	xxx_hidden_Site              *identitypb.Identity                  `protobuf:"bytes,3,opt,name=site"`
+	xxx_hidden_Application       *configpb.Application                 `protobuf:"bytes,4,opt,name=application"`
+	xxx_hidden_HeartbeatInterval *durationpb.Duration                  `protobuf:"bytes,5,opt,name=heartbeat_interval,json=heartbeatInterval"`
+	xxx_hidden_Cluster           *WatchEngineResponse_Preamble_Cluster `protobuf:"bytes,6,opt,name=cluster"`
+	xxx_hidden_QueueModel        *QueueModel                           `protobuf:"bytes,7,opt,name=queue_model,json=queueModel"`
+	xxx_hidden_EventStreamModel  *EventStreamModel                     `protobuf:"bytes,8,opt,name=event_stream_model,json=eventStreamModel"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *WatchEngineResponse_Preamble) Reset() {
 	*x = WatchEngineResponse_Preamble{}
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[5]
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -586,7 +374,7 @@ func (x *WatchEngineResponse_Preamble) String() string {
 func (*WatchEngineResponse_Preamble) ProtoMessage() {}
 
 func (x *WatchEngineResponse_Preamble) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[5]
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -597,18 +385,18 @@ func (x *WatchEngineResponse_Preamble) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *WatchEngineResponse_Preamble) GetNodeId() *uuidpb.UUID {
+func (x *WatchEngineResponse_Preamble) GetId() *uuidpb.UUID {
 	if x != nil {
-		return x.xxx_hidden_NodeId
+		return x.xxx_hidden_Id
 	}
 	return nil
 }
 
-func (x *WatchEngineResponse_Preamble) GetClusterId() *uuidpb.UUID {
+func (x *WatchEngineResponse_Preamble) GetDescription() string {
 	if x != nil {
-		return x.xxx_hidden_ClusterId
+		return x.xxx_hidden_Description
 	}
-	return nil
+	return ""
 }
 
 func (x *WatchEngineResponse_Preamble) GetSite() *identitypb.Identity {
@@ -632,26 +420,33 @@ func (x *WatchEngineResponse_Preamble) GetHeartbeatInterval() *durationpb.Durati
 	return nil
 }
 
-func (x *WatchEngineResponse_Preamble) GetHeartbeatTimeout() *durationpb.Duration {
+func (x *WatchEngineResponse_Preamble) GetCluster() *WatchEngineResponse_Preamble_Cluster {
 	if x != nil {
-		return x.xxx_hidden_HeartbeatTimeout
+		return x.xxx_hidden_Cluster
 	}
 	return nil
 }
 
-func (x *WatchEngineResponse_Preamble) GetDescription() string {
+func (x *WatchEngineResponse_Preamble) GetQueueModel() *QueueModel {
 	if x != nil {
-		return x.xxx_hidden_Description
+		return x.xxx_hidden_QueueModel
 	}
-	return ""
+	return nil
 }
 
-func (x *WatchEngineResponse_Preamble) SetNodeId(v *uuidpb.UUID) {
-	x.xxx_hidden_NodeId = v
+func (x *WatchEngineResponse_Preamble) GetEventStreamModel() *EventStreamModel {
+	if x != nil {
+		return x.xxx_hidden_EventStreamModel
+	}
+	return nil
 }
 
-func (x *WatchEngineResponse_Preamble) SetClusterId(v *uuidpb.UUID) {
-	x.xxx_hidden_ClusterId = v
+func (x *WatchEngineResponse_Preamble) SetId(v *uuidpb.UUID) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *WatchEngineResponse_Preamble) SetDescription(v string) {
+	x.xxx_hidden_Description = v
 }
 
 func (x *WatchEngineResponse_Preamble) SetSite(v *identitypb.Identity) {
@@ -666,26 +461,23 @@ func (x *WatchEngineResponse_Preamble) SetHeartbeatInterval(v *durationpb.Durati
 	x.xxx_hidden_HeartbeatInterval = v
 }
 
-func (x *WatchEngineResponse_Preamble) SetHeartbeatTimeout(v *durationpb.Duration) {
-	x.xxx_hidden_HeartbeatTimeout = v
+func (x *WatchEngineResponse_Preamble) SetCluster(v *WatchEngineResponse_Preamble_Cluster) {
+	x.xxx_hidden_Cluster = v
 }
 
-func (x *WatchEngineResponse_Preamble) SetDescription(v string) {
-	x.xxx_hidden_Description = v
+func (x *WatchEngineResponse_Preamble) SetQueueModel(v *QueueModel) {
+	x.xxx_hidden_QueueModel = v
 }
 
-func (x *WatchEngineResponse_Preamble) HasNodeId() bool {
+func (x *WatchEngineResponse_Preamble) SetEventStreamModel(v *EventStreamModel) {
+	x.xxx_hidden_EventStreamModel = v
+}
+
+func (x *WatchEngineResponse_Preamble) HasId() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_NodeId != nil
-}
-
-func (x *WatchEngineResponse_Preamble) HasClusterId() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_ClusterId != nil
+	return x.xxx_hidden_Id != nil
 }
 
 func (x *WatchEngineResponse_Preamble) HasSite() bool {
@@ -709,19 +501,29 @@ func (x *WatchEngineResponse_Preamble) HasHeartbeatInterval() bool {
 	return x.xxx_hidden_HeartbeatInterval != nil
 }
 
-func (x *WatchEngineResponse_Preamble) HasHeartbeatTimeout() bool {
+func (x *WatchEngineResponse_Preamble) HasCluster() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_HeartbeatTimeout != nil
+	return x.xxx_hidden_Cluster != nil
 }
 
-func (x *WatchEngineResponse_Preamble) ClearNodeId() {
-	x.xxx_hidden_NodeId = nil
+func (x *WatchEngineResponse_Preamble) HasQueueModel() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_QueueModel != nil
 }
 
-func (x *WatchEngineResponse_Preamble) ClearClusterId() {
-	x.xxx_hidden_ClusterId = nil
+func (x *WatchEngineResponse_Preamble) HasEventStreamModel() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_EventStreamModel != nil
+}
+
+func (x *WatchEngineResponse_Preamble) ClearId() {
+	x.xxx_hidden_Id = nil
 }
 
 func (x *WatchEngineResponse_Preamble) ClearSite() {
@@ -736,60 +538,72 @@ func (x *WatchEngineResponse_Preamble) ClearHeartbeatInterval() {
 	x.xxx_hidden_HeartbeatInterval = nil
 }
 
-func (x *WatchEngineResponse_Preamble) ClearHeartbeatTimeout() {
-	x.xxx_hidden_HeartbeatTimeout = nil
+func (x *WatchEngineResponse_Preamble) ClearCluster() {
+	x.xxx_hidden_Cluster = nil
+}
+
+func (x *WatchEngineResponse_Preamble) ClearQueueModel() {
+	x.xxx_hidden_QueueModel = nil
+}
+
+func (x *WatchEngineResponse_Preamble) ClearEventStreamModel() {
+	x.xxx_hidden_EventStreamModel = nil
 }
 
 type WatchEngineResponse_Preamble_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// NodeId is the ID of the node that serves the call. A node has the same
-	// ID in every API that it serves. Each node has a different ID.
-	NodeId *uuidpb.UUID
-	// ClusterId is the ID of the node's cluster. Nodes of the same cluster give
-	// the same cluster ID, in every API that they serve. Each cluster has a
-	// different ID.
-	ClusterId *uuidpb.UUID
-	// Site is the identity of the site that the node is deployed to, which is
-	// one installation of the application. It is the same identity that the
-	// node records as the site of the source of each message that it produces.
-	// It is present only if the node is configured with a site.
-	Site *identitypb.Identity
-	// Application describes the version of the application that the node runs.
-	// It is required.
-	Application *configpb.Application
-	// HeartbeatInterval is how long the node aims to wait between two of its
-	// own heartbeats. It is greater than zero. It is present only if the node
-	// heartbeats.
-	HeartbeatInterval *durationpb.Duration
-	// HeartbeatTimeout is the longest time that the node waits for the next
-	// heartbeat of a node of its cluster before it stops treating that node as
-	// live. It is greater than zero. It is present only if the node uses such
-	// a timeout.
-	HeartbeatTimeout *durationpb.Duration
-	// Description is an optional human-readable description of the node, such
-	// as its host name.
+	// Id is the ID of the engine that serves the call. An engine has the same
+	// ID in every API that it serves. Each engine has a different ID.
+	//
+	// If the engine runs as a cluster, the ID identifies the node that serves
+	// the call, and each node of the cluster has a different ID.
+	Id *uuidpb.UUID
+	// Description is an optional human-readable description of the engine,
+	// such as its host name.
 	Description string
+	// Site is the identity of the site that the engine is deployed to, which is
+	// one installation of the application. It is the same identity that the
+	// engine records as the site of the source of each message that it
+	// produces. It is present only if the engine is configured with a site.
+	Site *identitypb.Identity
+	// Application describes the version of the application that the engine
+	// runs. It is required.
+	Application *configpb.Application
+	// HeartbeatInterval is how long the engine aims to wait between two of the
+	// heartbeats that it sends on this response stream. It is greater than
+	// zero. It is present only if the engine heartbeats.
+	//
+	// These heartbeats may or may not be the same as any heartbeats that the
+	// nodes of a cluster send to each other.
+	HeartbeatInterval *durationpb.Duration
+	// Cluster describes the engine's cluster. It is present only if the engine
+	// runs as a cluster.
+	Cluster *WatchEngineResponse_Preamble_Cluster
+	// QueueModel is the model by which the engine uses queues.
+	QueueModel *QueueModel
+	// EventStreamModel is the model by which the engine uses event streams.
+	EventStreamModel *EventStreamModel
 }
 
 func (b0 WatchEngineResponse_Preamble_builder) Build() *WatchEngineResponse_Preamble {
 	m0 := &WatchEngineResponse_Preamble{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_NodeId = b.NodeId
-	x.xxx_hidden_ClusterId = b.ClusterId
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Description = b.Description
 	x.xxx_hidden_Site = b.Site
 	x.xxx_hidden_Application = b.Application
 	x.xxx_hidden_HeartbeatInterval = b.HeartbeatInterval
-	x.xxx_hidden_HeartbeatTimeout = b.HeartbeatTimeout
-	x.xxx_hidden_Description = b.Description
+	x.xxx_hidden_Cluster = b.Cluster
+	x.xxx_hidden_QueueModel = b.QueueModel
+	x.xxx_hidden_EventStreamModel = b.EventStreamModel
 	return m0
 }
 
-// Heartbeat reports that the node has sent a heartbeat.
-//
-// A node that heartbeats sends a Heartbeat each time it does. It reports only
-// its own heartbeats.
+// Heartbeat reports that the engine has sent a heartbeat, which is a signal
+// that it sends repeatedly on the response stream to show that it is still
+// running.
 type WatchEngineResponse_Heartbeat struct {
 	state             protoimpl.MessageState                 `protogen:"opaque.v1"`
 	xxx_hidden_SentAt *timestamppb.Timestamp                 `protobuf:"bytes,1,opt,name=sent_at,json=sentAt"`
@@ -800,7 +614,7 @@ type WatchEngineResponse_Heartbeat struct {
 
 func (x *WatchEngineResponse_Heartbeat) Reset() {
 	*x = WatchEngineResponse_Heartbeat{}
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[6]
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -812,7 +626,7 @@ func (x *WatchEngineResponse_Heartbeat) String() string {
 func (*WatchEngineResponse_Heartbeat) ProtoMessage() {}
 
 func (x *WatchEngineResponse_Heartbeat) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[6]
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -939,17 +753,17 @@ func (x *WatchEngineResponse_Heartbeat) WhichExpiry() case_WatchEngineResponse_H
 type WatchEngineResponse_Heartbeat_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// SentAt is the time at which the node sent this heartbeat, by the node's
-	// own clock. It is required.
+	// SentAt is the time at which the engine sent this heartbeat, by the
+	// engine's own clock. It is required.
 	SentAt *timestamppb.Timestamp
-	// Expiry is the time by which the node sends its next heartbeat, if it is
-	// still running. It is present only if the node gives its heartbeats an
+	// Expiry is the time by which the engine sends its next heartbeat, if it is
+	// still running. It is present only if the engine gives its heartbeats an
 	// expiry.
 
 	// Fields of oneof xxx_hidden_Expiry:
 	// ExpiresAt is that time, by the same clock.
 	ExpiresAt *timestamppb.Timestamp
-	// ExpiresAfter is that time, as the length of time after the node sent
+	// ExpiresAfter is that time, as the length of time after the engine sent
 	// this heartbeat. It is greater than zero.
 	ExpiresAfter *durationpb.Duration
 	// -- end of xxx_hidden_Expiry
@@ -972,7 +786,7 @@ func (b0 WatchEngineResponse_Heartbeat_builder) Build() *WatchEngineResponse_Hea
 type case_WatchEngineResponse_Heartbeat_Expiry protoreflect.FieldNumber
 
 func (x case_WatchEngineResponse_Heartbeat_Expiry) String() string {
-	md := file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[6].Descriptor()
+	md := file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[3].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -989,7 +803,7 @@ type watchEngineResponse_Heartbeat_ExpiresAt struct {
 }
 
 type watchEngineResponse_Heartbeat_ExpiresAfter struct {
-	// ExpiresAfter is that time, as the length of time after the node sent
+	// ExpiresAfter is that time, as the length of time after the engine sent
 	// this heartbeat. It is greater than zero.
 	ExpiresAfter *durationpb.Duration `protobuf:"bytes,3,opt,name=expires_after,json=expiresAfter,oneof"`
 }
@@ -998,76 +812,208 @@ func (*watchEngineResponse_Heartbeat_ExpiresAt) isWatchEngineResponse_Heartbeat_
 
 func (*watchEngineResponse_Heartbeat_ExpiresAfter) isWatchEngineResponse_Heartbeat_Expiry() {}
 
+// Cluster describes the cluster that the engine runs as.
+type WatchEngineResponse_Preamble_Cluster struct {
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id               *uuidpb.UUID           `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Model            *ClusterModel          `protobuf:"bytes,2,opt,name=model"`
+	xxx_hidden_ReportsLiveNodes bool                   `protobuf:"varint,3,opt,name=reports_live_nodes,json=reportsLiveNodes"`
+	xxx_hidden_ReportsWorkloads bool                   `protobuf:"varint,4,opt,name=reports_workloads,json=reportsWorkloads"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) Reset() {
+	*x = WatchEngineResponse_Preamble_Cluster{}
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WatchEngineResponse_Preamble_Cluster) ProtoMessage() {}
+
+func (x *WatchEngineResponse_Preamble_Cluster) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) GetId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_Id
+	}
+	return nil
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) GetModel() *ClusterModel {
+	if x != nil {
+		return x.xxx_hidden_Model
+	}
+	return nil
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) GetReportsLiveNodes() bool {
+	if x != nil {
+		return x.xxx_hidden_ReportsLiveNodes
+	}
+	return false
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) GetReportsWorkloads() bool {
+	if x != nil {
+		return x.xxx_hidden_ReportsWorkloads
+	}
+	return false
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) SetId(v *uuidpb.UUID) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) SetModel(v *ClusterModel) {
+	x.xxx_hidden_Model = v
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) SetReportsLiveNodes(v bool) {
+	x.xxx_hidden_ReportsLiveNodes = v
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) SetReportsWorkloads(v bool) {
+	x.xxx_hidden_ReportsWorkloads = v
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Id != nil
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) HasModel() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Model != nil
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) ClearId() {
+	x.xxx_hidden_Id = nil
+}
+
+func (x *WatchEngineResponse_Preamble_Cluster) ClearModel() {
+	x.xxx_hidden_Model = nil
+}
+
+type WatchEngineResponse_Preamble_Cluster_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Id is the ID of the cluster. Nodes of the same cluster give the same
+	// cluster ID, in every API that they serve. Each cluster has a different
+	// ID.
+	Id *uuidpb.UUID
+	// Model describes the way that the nodes of the cluster share its work.
+	Model *ClusterModel
+	// ReportsLiveNodes is true if the node sends LiveClusterNodes messages,
+	// which list the nodes of the cluster that it considers to be running.
+	ReportsLiveNodes bool
+	// ReportsWorkloads is true if the node sends ClusterWorkloads messages,
+	// which list the workloads that it owns.
+	ReportsWorkloads bool
+}
+
+func (b0 WatchEngineResponse_Preamble_Cluster_builder) Build() *WatchEngineResponse_Preamble_Cluster {
+	m0 := &WatchEngineResponse_Preamble_Cluster{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Model = b.Model
+	x.xxx_hidden_ReportsLiveNodes = b.ReportsLiveNodes
+	x.xxx_hidden_ReportsWorkloads = b.ReportsWorkloads
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_enginegrpc_engine_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\n" +
-	"4github.com/dogmatiq/protobuf/enginegrpc/engine.proto\x12\x15dogma.engine.v1alpha1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x14\n" +
-	"\x12WatchEngineRequest\"\xc3\a\n" +
+	"4github.com/dogmatiq/protobuf/enginegrpc/engine.proto\x12\x15dogma.engine.v1alpha1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a5github.com/dogmatiq/protobuf/enginegrpc/cluster.proto\x1a9github.com/dogmatiq/protobuf/enginegrpc/eventstream.proto\x1a3github.com/dogmatiq/protobuf/enginegrpc/queue.proto\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x14\n" +
+	"\x12WatchEngineRequest\"\xb1\n" +
+	"\n" +
 	"\x13WatchEngineResponse\x12Q\n" +
-	"\bpreamble\x18\x01 \x01(\v23.dogma.engine.v1alpha1.WatchEngineResponse.PreambleH\x00R\bpreamble\x12A\n" +
-	"\n" +
-	"live_nodes\x18\x02 \x01(\v2 .dogma.engine.v1alpha1.LiveNodesH\x00R\tliveNodes\x12@\n" +
-	"\tworkloads\x18\x03 \x01(\v2 .dogma.engine.v1alpha1.WorkloadsH\x00R\tworkloads\x12T\n" +
-	"\theartbeat\x18\x04 \x01(\v24.dogma.engine.v1alpha1.WatchEngineResponse.HeartbeatH\x00R\theartbeat\x1a\xa6\x03\n" +
-	"\bPreamble\x120\n" +
-	"\anode_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x06nodeId\x126\n" +
-	"\n" +
-	"cluster_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\tclusterId\x12/\n" +
+	"\bpreamble\x18\x01 \x01(\v23.dogma.engine.v1alpha1.WatchEngineResponse.PreambleH\x00R\bpreamble\x12T\n" +
+	"\theartbeat\x18\x02 \x01(\v24.dogma.engine.v1alpha1.WatchEngineResponse.HeartbeatH\x00R\theartbeat\x12W\n" +
+	"\x12live_cluster_nodes\x18\x03 \x01(\v2'.dogma.engine.v1alpha1.LiveClusterNodesH\x00R\x10liveClusterNodes\x12V\n" +
+	"\x11cluster_workloads\x18\x04 \x01(\v2'.dogma.engine.v1alpha1.ClusterWorkloadsH\x00R\x10clusterWorkloads\x1a\xe8\x05\n" +
+	"\bPreamble\x12'\n" +
+	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x12'\n" +
+	"\vdescription\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription\x12/\n" +
 	"\x04site\x18\x03 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\x04site\x12D\n" +
 	"\vapplication\x18\x04 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12H\n" +
-	"\x12heartbeat_interval\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\x11heartbeatInterval\x12F\n" +
-	"\x11heartbeat_timeout\x18\x06 \x01(\v2\x19.google.protobuf.DurationR\x10heartbeatTimeout\x12'\n" +
-	"\vdescription\x18\a \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription\x1a\xc9\x01\n" +
+	"\x12heartbeat_interval\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\x11heartbeatInterval\x12U\n" +
+	"\acluster\x18\x06 \x01(\v2;.dogma.engine.v1alpha1.WatchEngineResponse.Preamble.ClusterR\acluster\x12B\n" +
+	"\vqueue_model\x18\a \x01(\v2!.dogma.engine.v1alpha1.QueueModelR\n" +
+	"queueModel\x12U\n" +
+	"\x12event_stream_model\x18\b \x01(\v2'.dogma.engine.v1alpha1.EventStreamModelR\x10eventStreamModel\x1a\xd6\x01\n" +
+	"\aCluster\x12'\n" +
+	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x129\n" +
+	"\x05model\x18\x02 \x01(\v2#.dogma.engine.v1alpha1.ClusterModelR\x05model\x123\n" +
+	"\x12reports_live_nodes\x18\x03 \x01(\bB\x05\xaa\x01\x02\b\x02R\x10reportsLiveNodes\x122\n" +
+	"\x11reports_workloads\x18\x04 \x01(\bB\x05\xaa\x01\x02\b\x02R\x10reportsWorkloads\x1a\xc9\x01\n" +
 	"\tHeartbeat\x123\n" +
 	"\asent_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x06sentAt\x12;\n" +
 	"\n" +
 	"expires_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampH\x00R\texpiresAt\x12@\n" +
 	"\rexpires_after\x18\x03 \x01(\v2\x19.google.protobuf.DurationH\x00R\fexpiresAfterB\b\n" +
 	"\x06expiryB\t\n" +
-	"\apayload\"?\n" +
-	"\tLiveNodes\x122\n" +
-	"\bnode_ids\x18\x01 \x03(\v2\x17.dogma.protobuf.v1.UUIDR\anodeIds\"J\n" +
-	"\tWorkloads\x12=\n" +
-	"\tworkloads\x18\x01 \x03(\v2\x1f.dogma.engine.v1alpha1.WorkloadR\tworkloads\"^\n" +
-	"\bWorkload\x12)\n" +
-	"\x03key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x03key\x12'\n" +
-	"\vdescription\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription2s\n" +
+	"\apayload2s\n" +
 	"\tEngineAPI\x12f\n" +
 	"\vWatchEngine\x12).dogma.engine.v1alpha1.WatchEngineRequest\x1a*.dogma.engine.v1alpha1.WatchEngineResponse0\x01B)Z'github.com/dogmatiq/protobuf/enginegrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_goTypes = []any{
-	(*WatchEngineRequest)(nil),            // 0: dogma.engine.v1alpha1.WatchEngineRequest
-	(*WatchEngineResponse)(nil),           // 1: dogma.engine.v1alpha1.WatchEngineResponse
-	(*LiveNodes)(nil),                     // 2: dogma.engine.v1alpha1.LiveNodes
-	(*Workloads)(nil),                     // 3: dogma.engine.v1alpha1.Workloads
-	(*Workload)(nil),                      // 4: dogma.engine.v1alpha1.Workload
-	(*WatchEngineResponse_Preamble)(nil),  // 5: dogma.engine.v1alpha1.WatchEngineResponse.Preamble
-	(*WatchEngineResponse_Heartbeat)(nil), // 6: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
-	(*uuidpb.UUID)(nil),                   // 7: dogma.protobuf.v1.UUID
-	(*identitypb.Identity)(nil),           // 8: dogma.protobuf.v1.Identity
-	(*configpb.Application)(nil),          // 9: dogma.config.v1alpha1.Application
-	(*durationpb.Duration)(nil),           // 10: google.protobuf.Duration
-	(*timestamppb.Timestamp)(nil),         // 11: google.protobuf.Timestamp
+	(*WatchEngineRequest)(nil),                   // 0: dogma.engine.v1alpha1.WatchEngineRequest
+	(*WatchEngineResponse)(nil),                  // 1: dogma.engine.v1alpha1.WatchEngineResponse
+	(*WatchEngineResponse_Preamble)(nil),         // 2: dogma.engine.v1alpha1.WatchEngineResponse.Preamble
+	(*WatchEngineResponse_Heartbeat)(nil),        // 3: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
+	(*WatchEngineResponse_Preamble_Cluster)(nil), // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
+	(*LiveClusterNodes)(nil),                     // 5: dogma.engine.v1alpha1.LiveClusterNodes
+	(*ClusterWorkloads)(nil),                     // 6: dogma.engine.v1alpha1.ClusterWorkloads
+	(*uuidpb.UUID)(nil),                          // 7: dogma.protobuf.v1.UUID
+	(*identitypb.Identity)(nil),                  // 8: dogma.protobuf.v1.Identity
+	(*configpb.Application)(nil),                 // 9: dogma.config.v1alpha1.Application
+	(*durationpb.Duration)(nil),                  // 10: google.protobuf.Duration
+	(*QueueModel)(nil),                           // 11: dogma.engine.v1alpha1.QueueModel
+	(*EventStreamModel)(nil),                     // 12: dogma.engine.v1alpha1.EventStreamModel
+	(*timestamppb.Timestamp)(nil),                // 13: google.protobuf.Timestamp
+	(*ClusterModel)(nil),                         // 14: dogma.engine.v1alpha1.ClusterModel
 }
 var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_depIdxs = []int32{
-	5,  // 0: dogma.engine.v1alpha1.WatchEngineResponse.preamble:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble
-	2,  // 1: dogma.engine.v1alpha1.WatchEngineResponse.live_nodes:type_name -> dogma.engine.v1alpha1.LiveNodes
-	3,  // 2: dogma.engine.v1alpha1.WatchEngineResponse.workloads:type_name -> dogma.engine.v1alpha1.Workloads
-	6,  // 3: dogma.engine.v1alpha1.WatchEngineResponse.heartbeat:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
-	7,  // 4: dogma.engine.v1alpha1.LiveNodes.node_ids:type_name -> dogma.protobuf.v1.UUID
-	4,  // 5: dogma.engine.v1alpha1.Workloads.workloads:type_name -> dogma.engine.v1alpha1.Workload
-	7,  // 6: dogma.engine.v1alpha1.Workload.key:type_name -> dogma.protobuf.v1.UUID
-	7,  // 7: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.node_id:type_name -> dogma.protobuf.v1.UUID
-	7,  // 8: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
-	8,  // 9: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.site:type_name -> dogma.protobuf.v1.Identity
-	9,  // 10: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
-	10, // 11: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.heartbeat_interval:type_name -> google.protobuf.Duration
-	10, // 12: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.heartbeat_timeout:type_name -> google.protobuf.Duration
-	11, // 13: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.sent_at:type_name -> google.protobuf.Timestamp
-	11, // 14: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_at:type_name -> google.protobuf.Timestamp
-	10, // 15: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_after:type_name -> google.protobuf.Duration
+	2,  // 0: dogma.engine.v1alpha1.WatchEngineResponse.preamble:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble
+	3,  // 1: dogma.engine.v1alpha1.WatchEngineResponse.heartbeat:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
+	5,  // 2: dogma.engine.v1alpha1.WatchEngineResponse.live_cluster_nodes:type_name -> dogma.engine.v1alpha1.LiveClusterNodes
+	6,  // 3: dogma.engine.v1alpha1.WatchEngineResponse.cluster_workloads:type_name -> dogma.engine.v1alpha1.ClusterWorkloads
+	7,  // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
+	8,  // 5: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.site:type_name -> dogma.protobuf.v1.Identity
+	9,  // 6: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
+	10, // 7: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.heartbeat_interval:type_name -> google.protobuf.Duration
+	4,  // 8: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.cluster:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
+	11, // 9: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.queue_model:type_name -> dogma.engine.v1alpha1.QueueModel
+	12, // 10: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.event_stream_model:type_name -> dogma.engine.v1alpha1.EventStreamModel
+	13, // 11: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.sent_at:type_name -> google.protobuf.Timestamp
+	13, // 12: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_at:type_name -> google.protobuf.Timestamp
+	10, // 13: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_after:type_name -> google.protobuf.Duration
+	7,  // 14: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.id:type_name -> dogma.protobuf.v1.UUID
+	14, // 15: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.model:type_name -> dogma.engine.v1alpha1.ClusterModel
 	0,  // 16: dogma.engine.v1alpha1.EngineAPI.WatchEngine:input_type -> dogma.engine.v1alpha1.WatchEngineRequest
 	1,  // 17: dogma.engine.v1alpha1.EngineAPI.WatchEngine:output_type -> dogma.engine.v1alpha1.WatchEngineResponse
 	17, // [17:18] is the sub-list for method output_type
@@ -1082,13 +1028,16 @@ func file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_init() {
 	if File_github_com_dogmatiq_protobuf_enginegrpc_engine_proto != nil {
 		return
 	}
+	file_github_com_dogmatiq_protobuf_enginegrpc_cluster_proto_init()
+	file_github_com_dogmatiq_protobuf_enginegrpc_eventstream_proto_init()
+	file_github_com_dogmatiq_protobuf_enginegrpc_queue_proto_init()
 	file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[1].OneofWrappers = []any{
 		(*watchEngineResponse_Preamble_)(nil),
-		(*watchEngineResponse_LiveNodes)(nil),
-		(*watchEngineResponse_Workloads)(nil),
 		(*watchEngineResponse_Heartbeat_)(nil),
+		(*watchEngineResponse_LiveClusterNodes)(nil),
+		(*watchEngineResponse_ClusterWorkloads)(nil),
 	}
-	file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[6].OneofWrappers = []any{
+	file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[3].OneofWrappers = []any{
 		(*watchEngineResponse_Heartbeat_ExpiresAt)(nil),
 		(*watchEngineResponse_Heartbeat_ExpiresAfter)(nil),
 	}
@@ -1098,7 +1047,7 @@ func file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
