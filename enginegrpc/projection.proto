@@ -1,0 +1,64 @@
+edition = "2024";
+package dogma.engine.v1alpha1;
+
+option go_package = "github.com/dogmatiq/protobuf/enginegrpc";
+
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+
+// ProjectionAPI is a service that lets a client manage the projections of an
+// engine.
+//
+// A projection is the data that a projection handler builds from the events of
+// an application.
+service ProjectionAPI {
+  // StartCompaction asks the engine to compact a projection handler, which
+  // reduces the size of its projection by removing or consolidating data.
+  //
+  // A successful call means only that the engine has accepted the request. The
+  // engine decides whether to start a compaction. For example, it may let the
+  // compaction that is already running finish instead of starting another.
+  //
+  // If the engine runs as a cluster, the node that serves the call passes the
+  // request to the node that does the work, or fails the call with UNAVAILABLE.
+  //
+  // An identity key that is missing or invalid, or that belongs to a handler of
+  // another type, results in INVALID_ARGUMENT. An unknown identity key results
+  // in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+  // support compaction, results in FAILED_PRECONDITION.
+  rpc StartCompaction(StartCompactionRequest) returns (StartCompactionResponse);
+
+  // CancelCompaction asks the engine to cancel the compaction of a projection
+  // handler that is running now.
+  //
+  // A successful call means only that the engine has accepted the request. The
+  // call succeeds whether the handler's compaction is running or ended.
+  //
+  // The handler keeps the progress that the compaction made. The engine may
+  // start a later compaction.
+  //
+  // It fails in the same ways as StartCompaction.
+  rpc CancelCompaction(CancelCompactionRequest)
+      returns (CancelCompactionResponse);
+}
+
+// StartCompactionRequest is the input to the ProjectionAPI.StartCompaction
+// method.
+message StartCompactionRequest {
+  // HandlerKey is the handler's identity key. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+}
+
+// StartCompactionResponse is the output of the ProjectionAPI.StartCompaction
+// method.
+message StartCompactionResponse {}
+
+// CancelCompactionRequest is the input to the ProjectionAPI.CancelCompaction
+// method.
+message CancelCompactionRequest {
+  // HandlerKey is the handler's identity key. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+}
+
+// CancelCompactionResponse is the output of the ProjectionAPI.CancelCompaction
+// method.
+message CancelCompactionResponse {}

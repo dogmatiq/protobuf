@@ -115,6 +115,13 @@ message Handler {
   // handler it is CONCURRENCY_PREFERENCE_UNSPECIFIED.
   ConcurrencyPreference concurrency_preference = 6
       [features.field_presence = IMPLICIT];
+
+  // SupportsCompaction says whether the handler supports compaction, which
+  // reduces the size of a projection by removing or consolidating its data.
+  //
+  // Only a projection handler can have it, and only if the engine knows whether
+  // the handler supports compaction. It is absent if the engine doesn't know.
+  bool supports_compaction = 7 [features.field_presence = EXPLICIT];
 }
 
 // MessageUsage describes how a handler uses a message type.

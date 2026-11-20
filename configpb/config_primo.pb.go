@@ -113,6 +113,9 @@ func (b *HandlerBuilder) From(x *Handler) *HandlerBuilder {
 	b.prototype.SetMessages(x.GetMessages())
 	b.prototype.SetIsDisabled(x.GetIsDisabled())
 	b.prototype.SetConcurrencyPreference(x.GetConcurrencyPreference())
+	if x.HasSupportsCompaction() {
+		b.prototype.SetSupportsCompaction(x.GetSupportsCompaction())
+	}
 	return b
 }
 
@@ -130,6 +133,9 @@ func (b *HandlerBuilder) Build() *Handler {
 	m.SetMessages(b.prototype.GetMessages())
 	m.SetIsDisabled(b.prototype.GetIsDisabled())
 	m.SetConcurrencyPreference(b.prototype.GetConcurrencyPreference())
+	if b.prototype.HasSupportsCompaction() {
+		m.SetSupportsCompaction(b.prototype.GetSupportsCompaction())
+	}
 	return m
 }
 
@@ -172,6 +178,13 @@ func (b *HandlerBuilder) WithIsDisabled(v bool) *HandlerBuilder {
 // then returns b.
 func (b *HandlerBuilder) WithConcurrencyPreference(v ConcurrencyPreference) *HandlerBuilder {
 	b.prototype.SetConcurrencyPreference(v)
+	return b
+}
+
+// WithSupportsCompaction configures the builder to set the SupportsCompaction field to v,
+// then returns b.
+func (b *HandlerBuilder) WithSupportsCompaction(v bool) *HandlerBuilder {
+	b.prototype.SetSupportsCompaction(v)
 	return b
 }
 

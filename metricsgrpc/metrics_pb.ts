@@ -317,9 +317,6 @@ export const ReachSchema: GenEnum<Reach> = /*@__PURE__*/
  * engine that share the work of one application between them. Each instance is
  * called a node, in that context.
  *
- * An engine that doesn't report metrics doesn't serve this API, so a call to it
- * fails with the UNIMPLEMENTED status code.
- *
  * @generated from service dogma.metrics.v1alpha1.MetricsAPI
  */
 export const MetricsAPI: GenService<{

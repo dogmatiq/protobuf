@@ -338,6 +338,9 @@ type Handler struct {
 	xxx_hidden_Messages              map[string]*MessageUsage `protobuf:"bytes,4,rep,name=messages" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	xxx_hidden_IsDisabled            bool                     `protobuf:"varint,5,opt,name=is_disabled,json=isDisabled"`
 	xxx_hidden_ConcurrencyPreference ConcurrencyPreference    `protobuf:"varint,6,opt,name=concurrency_preference,json=concurrencyPreference,enum=dogma.config.v1alpha1.ConcurrencyPreference"`
+	xxx_hidden_SupportsCompaction    bool                     `protobuf:"varint,7,opt,name=supports_compaction,json=supportsCompaction"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -409,6 +412,13 @@ func (x *Handler) GetConcurrencyPreference() ConcurrencyPreference {
 	return ConcurrencyPreference_CONCURRENCY_PREFERENCE_UNSPECIFIED
 }
 
+func (x *Handler) GetSupportsCompaction() bool {
+	if x != nil {
+		return x.xxx_hidden_SupportsCompaction
+	}
+	return false
+}
+
 func (x *Handler) SetIdentity(v *identitypb.Identity) {
 	x.xxx_hidden_Identity = v
 }
@@ -433,6 +443,11 @@ func (x *Handler) SetConcurrencyPreference(v ConcurrencyPreference) {
 	x.xxx_hidden_ConcurrencyPreference = v
 }
 
+func (x *Handler) SetSupportsCompaction(v bool) {
+	x.xxx_hidden_SupportsCompaction = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 7)
+}
+
 func (x *Handler) HasIdentity() bool {
 	if x == nil {
 		return false
@@ -440,8 +455,20 @@ func (x *Handler) HasIdentity() bool {
 	return x.xxx_hidden_Identity != nil
 }
 
+func (x *Handler) HasSupportsCompaction() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
 func (x *Handler) ClearIdentity() {
 	x.xxx_hidden_Identity = nil
+}
+
+func (x *Handler) ClearSupportsCompaction() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_SupportsCompaction = false
 }
 
 type Handler_builder struct {
@@ -466,6 +493,12 @@ type Handler_builder struct {
 	// the default is CONCURRENCY_PREFERENCE_MAXIMIZE. For the other types of
 	// handler it is CONCURRENCY_PREFERENCE_UNSPECIFIED.
 	ConcurrencyPreference ConcurrencyPreference
+	// SupportsCompaction says whether the handler supports compaction, which
+	// reduces the size of a projection by removing or consolidating its data.
+	//
+	// Only a projection handler can have it, and only if the engine knows whether
+	// the handler supports compaction. It is absent if the engine doesn't know.
+	SupportsCompaction *bool
 }
 
 func (b0 Handler_builder) Build() *Handler {
@@ -478,6 +511,10 @@ func (b0 Handler_builder) Build() *Handler {
 	x.xxx_hidden_Messages = b.Messages
 	x.xxx_hidden_IsDisabled = b.IsDisabled
 	x.xxx_hidden_ConcurrencyPreference = b.ConcurrencyPreference
+	if b.SupportsCompaction != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 7)
+		x.xxx_hidden_SupportsCompaction = *b.SupportsCompaction
+	}
 	return m0
 }
 
@@ -568,7 +605,7 @@ const file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc = "" +
 	"\bmessages\x18\x05 \x03(\v20.dogma.config.v1alpha1.Application.MessagesEntryR\bmessages\x1a_\n" +
 	"\rMessagesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
-	"\x05value\x18\x02 \x01(\x0e2\".dogma.config.v1alpha1.MessageKindR\x05value:\x028\x01\"\xe1\x03\n" +
+	"\x05value\x18\x02 \x01(\x0e2\".dogma.config.v1alpha1.MessageKindR\x05value:\x028\x01\"\x99\x04\n" +
 	"\aHandler\x127\n" +
 	"\bidentity\x18\x01 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\bidentity\x12\x1e\n" +
 	"\ago_type\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\x06goType\x12=\n" +
@@ -576,7 +613,8 @@ const file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc = "" +
 	"\bmessages\x18\x04 \x03(\v2,.dogma.config.v1alpha1.Handler.MessagesEntryR\bmessages\x12&\n" +
 	"\vis_disabled\x18\x05 \x01(\bB\x05\xaa\x01\x02\b\x02R\n" +
 	"isDisabled\x12j\n" +
-	"\x16concurrency_preference\x18\x06 \x01(\x0e2,.dogma.config.v1alpha1.ConcurrencyPreferenceB\x05\xaa\x01\x02\b\x02R\x15concurrencyPreference\x1a`\n" +
+	"\x16concurrency_preference\x18\x06 \x01(\x0e2,.dogma.config.v1alpha1.ConcurrencyPreferenceB\x05\xaa\x01\x02\b\x02R\x15concurrencyPreference\x126\n" +
+	"\x13supports_compaction\x18\a \x01(\bB\x05\xaa\x01\x02\b\x01R\x12supportsCompaction\x1a`\n" +
 	"\rMessagesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
 	"\x05value\x18\x02 \x01(\v2#.dogma.config.v1alpha1.MessageUsageR\x05value:\x028\x01\"^\n" +

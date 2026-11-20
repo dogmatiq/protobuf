@@ -32,9 +32,6 @@ const (
 // An engine may run as a cluster, which is a set of running instances of the
 // engine that share the work of one application between them. Each instance is
 // called a node, in that context.
-//
-// An engine that doesn't report metrics doesn't serve this API, so a call to it
-// fails with the UNIMPLEMENTED status code.
 type MetricsAPIClient interface {
 	// WatchMetrics reports metrics about the engine, such as the number of
 	// messages waiting in queues.
@@ -88,9 +85,6 @@ type MetricsAPI_WatchMetricsClient = grpc.ServerStreamingClient[WatchMetricsResp
 // An engine may run as a cluster, which is a set of running instances of the
 // engine that share the work of one application between them. Each instance is
 // called a node, in that context.
-//
-// An engine that doesn't report metrics doesn't serve this API, so a call to it
-// fails with the UNIMPLEMENTED status code.
 type MetricsAPIServer interface {
 	// WatchMetrics reports metrics about the engine, such as the number of
 	// messages waiting in queues.
