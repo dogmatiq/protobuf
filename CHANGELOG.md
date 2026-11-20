@@ -20,8 +20,8 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added the `metricsgrpc` package, which defines a service for reading engine
   metrics.
 - Added the `enginegrpc` package, which defines a service that reports what an
-  engine is and what it is doing, and a service that asks an engine to start or
-  cancel the compaction of a projection handler.
+  engine is and what it is doing, and a service that asks an engine to compact
+  or reset the projections of its handlers.
 - Added the optional `stream_length` field to `EventStreamSegment`, which tells
   a consumer where the end of the stream is, so that it can see how far behind
   it is.

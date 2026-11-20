@@ -122,6 +122,13 @@ message Handler {
   // Only a projection handler can have it, and only if the engine knows whether
   // the handler supports compaction. It is absent if the engine doesn't know.
   bool supports_compaction = 7 [features.field_presence = EXPLICIT];
+
+  // SupportsReset says whether the handler supports reset, which deletes all
+  // the data of a projection so that the handler builds it again.
+  //
+  // Only a projection handler can have it, and only if the engine knows whether
+  // the handler supports reset. It is absent if the engine doesn't know.
+  bool supports_reset = 8 [features.field_presence = EXPLICIT];
 }
 
 // MessageUsage describes how a handler uses a message type.

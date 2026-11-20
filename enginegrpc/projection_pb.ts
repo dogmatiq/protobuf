@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/enginegrpc/projection.proto.
  */
 export const file_github_com_dogmatiq_protobuf_enginegrpc_projection: GenFile = /*@__PURE__*/
-  fileDesc("CjhnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvcHJvamVjdGlvbi5wcm90bxIVZG9nbWEuZW5naW5lLnYxYWxwaGExIkYKFlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIhkKF1N0YXJ0Q29tcGFjdGlvblJlc3BvbnNlIkcKF0NhbmNlbENvbXBhY3Rpb25SZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIaChhDYW5jZWxDb21wYWN0aW9uUmVzcG9uc2Uy9gEKDVByb2plY3Rpb25BUEkScAoPU3RhcnRDb21wYWN0aW9uEi0uZG9nbWEuZW5naW5lLnYxYWxwaGExLlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QaLi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuU3RhcnRDb21wYWN0aW9uUmVzcG9uc2UScwoQQ2FuY2VsQ29tcGFjdGlvbhIuLmRvZ21hLmVuZ2luZS52MWFscGhhMS5DYW5jZWxDb21wYWN0aW9uUmVxdWVzdBovLmRvZ21hLmVuZ2luZS52MWFscGhhMS5DYW5jZWxDb21wYWN0aW9uUmVzcG9uc2VCKVonZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9lbmdpbmVncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjhnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvcHJvamVjdGlvbi5wcm90bxIVZG9nbWEuZW5naW5lLnYxYWxwaGExIkYKFlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIhkKF1N0YXJ0Q29tcGFjdGlvblJlc3BvbnNlIkcKF0NhbmNlbENvbXBhY3Rpb25SZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIaChhDYW5jZWxDb21wYWN0aW9uUmVzcG9uc2UiPAoMUmVzZXRSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIPCg1SZXNldFJlc3BvbnNlMsoCCg1Qcm9qZWN0aW9uQVBJEnAKD1N0YXJ0Q29tcGFjdGlvbhItLmRvZ21hLmVuZ2luZS52MWFscGhhMS5TdGFydENvbXBhY3Rpb25SZXF1ZXN0Gi4uZG9nbWEuZW5naW5lLnYxYWxwaGExLlN0YXJ0Q29tcGFjdGlvblJlc3BvbnNlEnMKEENhbmNlbENvbXBhY3Rpb24SLi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2FuY2VsQ29tcGFjdGlvblJlcXVlc3QaLy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2FuY2VsQ29tcGFjdGlvblJlc3BvbnNlElIKBVJlc2V0EiMuZG9nbWEuZW5naW5lLnYxYWxwaGExLlJlc2V0UmVxdWVzdBokLmRvZ21hLmVuZ2luZS52MWFscGhhMS5SZXNldFJlc3BvbnNlQilaJ2dpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvZW5naW5lZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * StartCompactionRequest is the input to the ProjectionAPI.StartCompaction
@@ -91,6 +91,42 @@ export const CancelCompactionResponseSchema: GenMessage<CancelCompactionResponse
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 3);
 
 /**
+ * ResetRequest is the input to the ProjectionAPI.Reset method.
+ *
+ * @generated from message dogma.engine.v1alpha1.ResetRequest
+ */
+export type ResetRequest = Message<"dogma.engine.v1alpha1.ResetRequest"> & {
+  /**
+   * HandlerKey is the handler's identity key. It is required.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.ResetRequest.
+ * Use `create(ResetRequestSchema)` to create a new message.
+ */
+export const ResetRequestSchema: GenMessage<ResetRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 4);
+
+/**
+ * ResetResponse is the output of the ProjectionAPI.Reset method.
+ *
+ * @generated from message dogma.engine.v1alpha1.ResetResponse
+ */
+export type ResetResponse = Message<"dogma.engine.v1alpha1.ResetResponse"> & {
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.ResetResponse.
+ * Use `create(ResetResponseSchema)` to create a new message.
+ */
+export const ResetResponseSchema: GenMessage<ResetResponse> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 5);
+
+/**
  * ProjectionAPI is a service that lets a client manage the projections of an
  * engine.
  *
@@ -141,6 +177,30 @@ export const ProjectionAPI: GenService<{
     methodKind: "unary";
     input: typeof CancelCompactionRequestSchema;
     output: typeof CancelCompactionResponseSchema;
+  },
+  /**
+   * Reset asks the engine to reset a projection handler, which deletes all the
+   * data of its projection, so that the projection is rebuilt from all the
+   * events of the application.
+   *
+   * A successful call means only that the engine has accepted the request. The
+   * reset may still fail afterwards, for example if the handler returns an
+   * error.
+   *
+   * If the engine runs as a cluster, the node that serves the call passes the
+   * request to the node that does the work, or fails the call with UNAVAILABLE.
+   *
+   * An identity key that is missing or invalid, or that belongs to a handler of
+   * another type, results in INVALID_ARGUMENT. An unknown identity key results
+   * in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+   * support reset, results in FAILED_PRECONDITION.
+   *
+   * @generated from rpc dogma.engine.v1alpha1.ProjectionAPI.Reset
+   */
+  reset: {
+    methodKind: "unary";
+    input: typeof ResetRequestSchema;
+    output: typeof ResetResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 0);

@@ -39,6 +39,23 @@ service ProjectionAPI {
   // It fails in the same ways as StartCompaction.
   rpc CancelCompaction(CancelCompactionRequest)
       returns (CancelCompactionResponse);
+
+  // Reset asks the engine to reset a projection handler, which deletes all the
+  // data of its projection, so that the projection is rebuilt from all the
+  // events of the application.
+  //
+  // A successful call means only that the engine has accepted the request. The
+  // reset may still fail afterwards, for example if the handler returns an
+  // error.
+  //
+  // If the engine runs as a cluster, the node that serves the call passes the
+  // request to the node that does the work, or fails the call with UNAVAILABLE.
+  //
+  // An identity key that is missing or invalid, or that belongs to a handler of
+  // another type, results in INVALID_ARGUMENT. An unknown identity key results
+  // in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+  // support reset, results in FAILED_PRECONDITION.
+  rpc Reset(ResetRequest) returns (ResetResponse);
 }
 
 // StartCompactionRequest is the input to the ProjectionAPI.StartCompaction
@@ -62,3 +79,12 @@ message CancelCompactionRequest {
 // CancelCompactionResponse is the output of the ProjectionAPI.CancelCompaction
 // method.
 message CancelCompactionResponse {}
+
+// ResetRequest is the input to the ProjectionAPI.Reset method.
+message ResetRequest {
+  // HandlerKey is the handler's identity key. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+}
+
+// ResetResponse is the output of the ProjectionAPI.Reset method.
+message ResetResponse {}

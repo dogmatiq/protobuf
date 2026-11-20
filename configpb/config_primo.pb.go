@@ -116,6 +116,9 @@ func (b *HandlerBuilder) From(x *Handler) *HandlerBuilder {
 	if x.HasSupportsCompaction() {
 		b.prototype.SetSupportsCompaction(x.GetSupportsCompaction())
 	}
+	if x.HasSupportsReset() {
+		b.prototype.SetSupportsReset(x.GetSupportsReset())
+	}
 	return b
 }
 
@@ -135,6 +138,9 @@ func (b *HandlerBuilder) Build() *Handler {
 	m.SetConcurrencyPreference(b.prototype.GetConcurrencyPreference())
 	if b.prototype.HasSupportsCompaction() {
 		m.SetSupportsCompaction(b.prototype.GetSupportsCompaction())
+	}
+	if b.prototype.HasSupportsReset() {
+		m.SetSupportsReset(b.prototype.GetSupportsReset())
 	}
 	return m
 }
@@ -185,6 +191,13 @@ func (b *HandlerBuilder) WithConcurrencyPreference(v ConcurrencyPreference) *Han
 // then returns b.
 func (b *HandlerBuilder) WithSupportsCompaction(v bool) *HandlerBuilder {
 	b.prototype.SetSupportsCompaction(v)
+	return b
+}
+
+// WithSupportsReset configures the builder to set the SupportsReset field to v,
+// then returns b.
+func (b *HandlerBuilder) WithSupportsReset(v bool) *HandlerBuilder {
+	b.prototype.SetSupportsReset(v)
 	return b
 }
 

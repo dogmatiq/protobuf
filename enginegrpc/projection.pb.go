@@ -253,6 +253,120 @@ func (b0 CancelCompactionResponse_builder) Build() *CancelCompactionResponse {
 	return m0
 }
 
+// ResetRequest is the input to the ProjectionAPI.Reset method.
+type ResetRequest struct {
+	state                 protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ResetRequest) Reset() {
+	*x = ResetRequest{}
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetRequest) ProtoMessage() {}
+
+func (x *ResetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ResetRequest) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ResetRequest) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ResetRequest) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ResetRequest) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+type ResetRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the handler's identity key. It is required.
+	HandlerKey *uuidpb.UUID
+}
+
+func (b0 ResetRequest_builder) Build() *ResetRequest {
+	m0 := &ResetRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	return m0
+}
+
+// ResetResponse is the output of the ProjectionAPI.Reset method.
+type ResetResponse struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResetResponse) Reset() {
+	*x = ResetResponse{}
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResetResponse) ProtoMessage() {}
+
+func (x *ResetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ResetResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ResetResponse_builder) Build() *ResetResponse {
+	m0 := &ResetResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_enginegrpc_projection_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_rawDesc = "" +
@@ -265,31 +379,41 @@ const file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_rawDesc = ""
 	"\x17CancelCompactionRequest\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\"\x1a\n" +
-	"\x18CancelCompactionResponse2\xf6\x01\n" +
+	"\x18CancelCompactionResponse\"H\n" +
+	"\fResetRequest\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\"\x0f\n" +
+	"\rResetResponse2\xca\x02\n" +
 	"\rProjectionAPI\x12p\n" +
 	"\x0fStartCompaction\x12-.dogma.engine.v1alpha1.StartCompactionRequest\x1a..dogma.engine.v1alpha1.StartCompactionResponse\x12s\n" +
-	"\x10CancelCompaction\x12..dogma.engine.v1alpha1.CancelCompactionRequest\x1a/.dogma.engine.v1alpha1.CancelCompactionResponseB)Z'github.com/dogmatiq/protobuf/enginegrpcb\beditionsp\xe9\a"
+	"\x10CancelCompaction\x12..dogma.engine.v1alpha1.CancelCompactionRequest\x1a/.dogma.engine.v1alpha1.CancelCompactionResponse\x12R\n" +
+	"\x05Reset\x12#.dogma.engine.v1alpha1.ResetRequest\x1a$.dogma.engine.v1alpha1.ResetResponseB)Z'github.com/dogmatiq/protobuf/enginegrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_goTypes = []any{
 	(*StartCompactionRequest)(nil),   // 0: dogma.engine.v1alpha1.StartCompactionRequest
 	(*StartCompactionResponse)(nil),  // 1: dogma.engine.v1alpha1.StartCompactionResponse
 	(*CancelCompactionRequest)(nil),  // 2: dogma.engine.v1alpha1.CancelCompactionRequest
 	(*CancelCompactionResponse)(nil), // 3: dogma.engine.v1alpha1.CancelCompactionResponse
-	(*uuidpb.UUID)(nil),              // 4: dogma.protobuf.v1.UUID
+	(*ResetRequest)(nil),             // 4: dogma.engine.v1alpha1.ResetRequest
+	(*ResetResponse)(nil),            // 5: dogma.engine.v1alpha1.ResetResponse
+	(*uuidpb.UUID)(nil),              // 6: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_depIdxs = []int32{
-	4, // 0: dogma.engine.v1alpha1.StartCompactionRequest.handler_key:type_name -> dogma.protobuf.v1.UUID
-	4, // 1: dogma.engine.v1alpha1.CancelCompactionRequest.handler_key:type_name -> dogma.protobuf.v1.UUID
-	0, // 2: dogma.engine.v1alpha1.ProjectionAPI.StartCompaction:input_type -> dogma.engine.v1alpha1.StartCompactionRequest
-	2, // 3: dogma.engine.v1alpha1.ProjectionAPI.CancelCompaction:input_type -> dogma.engine.v1alpha1.CancelCompactionRequest
-	1, // 4: dogma.engine.v1alpha1.ProjectionAPI.StartCompaction:output_type -> dogma.engine.v1alpha1.StartCompactionResponse
-	3, // 5: dogma.engine.v1alpha1.ProjectionAPI.CancelCompaction:output_type -> dogma.engine.v1alpha1.CancelCompactionResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	6, // 0: dogma.engine.v1alpha1.StartCompactionRequest.handler_key:type_name -> dogma.protobuf.v1.UUID
+	6, // 1: dogma.engine.v1alpha1.CancelCompactionRequest.handler_key:type_name -> dogma.protobuf.v1.UUID
+	6, // 2: dogma.engine.v1alpha1.ResetRequest.handler_key:type_name -> dogma.protobuf.v1.UUID
+	0, // 3: dogma.engine.v1alpha1.ProjectionAPI.StartCompaction:input_type -> dogma.engine.v1alpha1.StartCompactionRequest
+	2, // 4: dogma.engine.v1alpha1.ProjectionAPI.CancelCompaction:input_type -> dogma.engine.v1alpha1.CancelCompactionRequest
+	4, // 5: dogma.engine.v1alpha1.ProjectionAPI.Reset:input_type -> dogma.engine.v1alpha1.ResetRequest
+	1, // 6: dogma.engine.v1alpha1.ProjectionAPI.StartCompaction:output_type -> dogma.engine.v1alpha1.StartCompactionResponse
+	3, // 7: dogma.engine.v1alpha1.ProjectionAPI.CancelCompaction:output_type -> dogma.engine.v1alpha1.CancelCompactionResponse
+	5, // 8: dogma.engine.v1alpha1.ProjectionAPI.Reset:output_type -> dogma.engine.v1alpha1.ResetResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_init() }
@@ -303,7 +427,7 @@ func file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
