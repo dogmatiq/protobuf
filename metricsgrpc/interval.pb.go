@@ -24,8 +24,8 @@ const (
 
 // Interval is a span of time.
 //
-// A node reports an interval either as the times at which it began and ended,
-// or only as how long it lasted.
+// An engine reports an interval either as the times at which it began and
+// ended, or only as how long it lasted.
 type Interval struct {
 	state           protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Form isInterval_Form        `protobuf_oneof:"form"`
@@ -152,7 +152,7 @@ func (x *Interval) WhichForm() case_Interval_Form {
 type Interval_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Form is how the node reports the interval. It is required.
+	// Form is how the engine reports the interval. It is required.
 
 	// Fields of oneof xxx_hidden_Form:
 	Bounds *Interval_Bounds
@@ -280,7 +280,7 @@ func (x *Interval_Bounds) ClearEnd() {
 type Interval_Bounds_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Start is the time at which the interval began, by the node's own clock.
+	// Start is the time at which the interval began, by the engine's own clock.
 	// It is required.
 	Start *timestamppb.Timestamp
 	// End is the time at which the interval ended, by the same clock. It is
@@ -355,8 +355,8 @@ func (x *Interval_Length) ClearDuration() {
 type Interval_Length_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Duration is how long the interval lasted, as the node measured it. It is
-	// required.
+	// Duration is how long the interval lasted, as the engine measured it. It
+	// is required.
 	Duration *durationpb.Duration
 }
 

@@ -17,14 +17,14 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_interval: GenFile = /
 /**
  * Interval is a span of time.
  *
- * A node reports an interval either as the times at which it began and ended,
- * or only as how long it lasted.
+ * An engine reports an interval either as the times at which it began and
+ * ended, or only as how long it lasted.
  *
  * @generated from message dogma.metrics.v1alpha1.Interval
  */
 export type Interval = Message<"dogma.metrics.v1alpha1.Interval"> & {
   /**
-   * Form is how the node reports the interval. It is required.
+   * Form is how the engine reports the interval. It is required.
    *
    * @generated from oneof dogma.metrics.v1alpha1.Interval.form
    */
@@ -57,7 +57,7 @@ export const IntervalSchema: GenMessage<Interval> = /*@__PURE__*/
  */
 export type Interval_Bounds = Message<"dogma.metrics.v1alpha1.Interval.Bounds"> & {
   /**
-   * Start is the time at which the interval began, by the node's own clock.
+   * Start is the time at which the interval began, by the engine's own clock.
    * It is required.
    *
    * @generated from field: google.protobuf.Timestamp start = 1;
@@ -87,8 +87,8 @@ export const Interval_BoundsSchema: GenMessage<Interval_Bounds> = /*@__PURE__*/
  */
 export type Interval_Length = Message<"dogma.metrics.v1alpha1.Interval.Length"> & {
   /**
-   * Duration is how long the interval lasted, as the node measured it. It is
-   * required.
+   * Duration is how long the interval lasted, as the engine measured it. It
+   * is required.
    *
    * @generated from field: google.protobuf.Duration duration = 1;
    */

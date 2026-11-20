@@ -20,7 +20,7 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFi
 
 /**
  * AggregateInstancesInMemory is the number of an aggregate handler's instances
- * that the node holds in memory, so that it can handle commands for them
+ * that the engine holds in memory, so that it can handle commands for them
  * without loading them from storage.
  *
  * @generated from message dogma.metrics.v1alpha1.AggregateInstancesInMemory
@@ -35,7 +35,7 @@ export type AggregateInstancesInMemory = Message<"dogma.metrics.v1alpha1.Aggrega
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of instances that the node holds in memory.
+   * Value is the number of instances that the engine holds in memory.
    *
    * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
    */
@@ -51,8 +51,8 @@ export const AggregateInstancesInMemorySchema: GenMessage<AggregateInstancesInMe
 
 /**
  * ProcessInstancesInMemory is the number of a process handler's instances that
- * the node holds in memory, so that it can handle events and deadlines for them
- * without loading them from storage.
+ * the engine holds in memory, so that it can handle events and deadlines for
+ * them without loading them from storage.
  *
  * @generated from message dogma.metrics.v1alpha1.ProcessInstancesInMemory
  */
@@ -66,7 +66,7 @@ export type ProcessInstancesInMemory = Message<"dogma.metrics.v1alpha1.ProcessIn
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of instances that the node holds in memory.
+   * Value is the number of instances that the engine holds in memory.
    *
    * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
    */
@@ -82,8 +82,8 @@ export const ProcessInstancesInMemorySchema: GenMessage<ProcessInstancesInMemory
 
 /**
  * HandlerCommandsPending is the number of commands for one handler that are
- * waiting to be delivered. A node sends it only for aggregate and integration
- * handlers.
+ * waiting to be delivered. The engine sends it only for aggregate and
+ * integration handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerCommandsPending
  */
@@ -113,7 +113,7 @@ export const HandlerCommandsPendingSchema: GenMessage<HandlerCommandsPending> = 
 
 /**
  * HandlerCommandsDue is the number of commands for one handler that are ready
- * to be delivered now. A node sends it only for aggregate and integration
+ * to be delivered now. The engine sends it only for aggregate and integration
  * handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerCommandsDue
@@ -144,8 +144,8 @@ export const HandlerCommandsDueSchema: GenMessage<HandlerCommandsDue> = /*@__PUR
 
 /**
  * HandlerCommandsFailing is the number of commands for one handler that are
- * waiting to be delivered and whose most recent delivery attempt failed. A node
- * sends it only for aggregate and integration handlers.
+ * waiting to be delivered and whose most recent delivery attempt failed. The
+ * engine sends it only for aggregate and integration handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerCommandsFailing
  */
@@ -175,8 +175,8 @@ export const HandlerCommandsFailingSchema: GenMessage<HandlerCommandsFailing> = 
 
 /**
  * HandlerCommandsHandled is the running total of the commands that one handler
- * has handled successfully. A node sends it only for aggregate and integration
- * handlers.
+ * has handled successfully. The engine sends it only for aggregate and
+ * integration handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerCommandsHandled
  */
@@ -207,7 +207,7 @@ export const HandlerCommandsHandledSchema: GenMessage<HandlerCommandsHandled> = 
 
 /**
  * HandlerDeadlinesPending is the number of deadlines for one handler that are
- * waiting to be delivered. A node sends it only for process handlers.
+ * waiting to be delivered. The engine sends it only for process handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesPending
  */
@@ -237,7 +237,7 @@ export const HandlerDeadlinesPendingSchema: GenMessage<HandlerDeadlinesPending> 
 
 /**
  * HandlerDeadlinesDue is the number of deadlines for one handler that are ready
- * to be delivered now. A node sends it only for process handlers.
+ * to be delivered now. The engine sends it only for process handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesDue
  */
@@ -267,8 +267,8 @@ export const HandlerDeadlinesDueSchema: GenMessage<HandlerDeadlinesDue> = /*@__P
 
 /**
  * HandlerDeadlinesFailing is the number of deadlines for one handler that are
- * waiting to be delivered and whose most recent delivery attempt failed. A node
- * sends it only for process handlers.
+ * waiting to be delivered and whose most recent delivery attempt failed. The
+ * engine sends it only for process handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesFailing
  */
@@ -298,7 +298,8 @@ export const HandlerDeadlinesFailingSchema: GenMessage<HandlerDeadlinesFailing> 
 
 /**
  * HandlerDeadlinesHandled is the running total of the deadlines that one
- * handler has handled successfully. A node sends it only for process handlers.
+ * handler has handled successfully. The engine sends it only for process
+ * handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesHandled
  */
@@ -330,7 +331,7 @@ export const HandlerDeadlinesHandledSchema: GenMessage<HandlerDeadlinesHandled> 
 /**
  * HandlerDeadlinesCanceled is the running total of the deadlines of one handler
  * that were canceled before they were handled, such as when the process
- * instance that scheduled them ended. A node sends it only for process
+ * instance that scheduled them ended. The engine sends it only for process
  * handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
@@ -361,8 +362,8 @@ export const HandlerDeadlinesCanceledSchema: GenMessage<HandlerDeadlinesCanceled
 
 /**
  * HandlerEventsRecorded is the running total of the events that one handler has
- * recorded. A node sends it only for aggregate and integration handlers, and
- * not for an integration handler that records no events.
+ * recorded. The engine sends it only for aggregate and integration handlers,
+ * and not for an integration handler that records no events.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsRecorded
  */
@@ -392,7 +393,7 @@ export const HandlerEventsRecordedSchema: GenMessage<HandlerEventsRecorded> = /*
 
 /**
  * HandlerEventsHandled is the running total of the events that one handler has
- * handled. A node sends it only for process and projection handlers.
+ * handled. The engine sends it only for process and projection handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsHandled
  */
@@ -422,8 +423,8 @@ export const HandlerEventsHandledSchema: GenMessage<HandlerEventsHandled> = /*@_
 
 /**
  * HandlerEventsPending is the number of events that one handler handles and
- * hasn't handled yet, on the event streams of the handler's cluster. A node
- * sends it only for process and projection handlers.
+ * hasn't handled yet, on the engine's event streams. The engine sends it only
+ * for process and projection handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsPending
  */
@@ -453,8 +454,8 @@ export const HandlerEventsPendingSchema: GenMessage<HandlerEventsPending> = /*@_
 
 /**
  * HandlerEventsFailing is the number of events for one handler that haven't
- * been handled yet and whose most recent delivery attempt failed. A node sends
- * it only for process and projection handlers.
+ * been handled yet and whose most recent delivery attempt failed. The engine
+ * sends it only for process and projection handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsFailing
  */
@@ -517,11 +518,11 @@ export const ProcessInstancesEndedSchema: GenMessage<ProcessInstancesEnded> = /*
  * handler.
  *
  * It describes the compaction that is running now, the most recent one that
- * ended, and the one that the node plans to start next.
+ * ended, and the one that the engine plans to start next.
  *
- * ProjectionCompactionState describes one compaction at a time. A node isn't
+ * ProjectionCompactionState describes one compaction at a time. An engine isn't
  * expected to compact a handler more than once at a time, because the
- * compactions would repeat each other's work. A node that does so should not
+ * compactions would repeat each other's work. An engine that does so should not
  * send ProjectionCompactionState.
  *
  * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState
@@ -545,15 +546,15 @@ export type ProjectionCompactionState = Message<"dogma.metrics.v1alpha1.Projecti
 
   /**
    * Previous is the most recent compaction that has ended. It is absent if none
-   * has ended, or if the node doesn't report it.
+   * has ended, or if the engine doesn't report it.
    *
    * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended previous = 3;
    */
   previous?: ProjectionCompactionState_Ended | undefined;
 
   /**
-   * Next is the compaction that the node plans to start next. It is absent if
-   * the node doesn't plan to compact the handler again.
+   * Next is the compaction that the engine plans to start next. It is absent if
+   * the engine doesn't plan to compact the handler again.
    *
    * @generated from field: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned next = 4;
    */
@@ -574,8 +575,8 @@ export const ProjectionCompactionStateSchema: GenMessage<ProjectionCompactionSta
  */
 export type ProjectionCompactionState_Running = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Running"> & {
   /**
-   * StartedAt is the time at which the compaction started, by the node's own
-   * clock. It is required.
+   * StartedAt is the time at which the compaction started, by the engine's
+   * own clock. It is required.
    *
    * @generated from field: google.protobuf.Timestamp started_at = 1;
    */
@@ -628,7 +629,7 @@ export type ProjectionCompactionState_Ended = Message<"dogma.metrics.v1alpha1.Pr
 
   /**
    * Interval is the time during which the compaction ran. It is absent if
-   * the node reports nothing about when the compaction ran.
+   * the engine reports nothing about when the compaction ran.
    *
    * @generated from field: dogma.metrics.v1alpha1.Interval interval = 5;
    */
@@ -720,16 +721,16 @@ export const ProjectionCompactionState_Ended_CanceledSchema: GenMessage<Projecti
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 3);
 
 /**
- * Planned is a compaction that the node plans to start.
+ * Planned is a compaction that the engine plans to start.
  *
  * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
  */
 export type ProjectionCompactionState_Planned = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState.Planned"> & {
   /**
-   * StartsAt is the time at which the node plans to start the compaction, by
-   * the node's own clock.
+   * StartsAt is the time at which the engine plans to start the compaction,
+   * by the engine's own clock.
    *
-   * It is absent if the node plans to start the compaction but can't tell
+   * It is absent if the engine plans to start the compaction but can't tell
    * when.
    *
    * @generated from field: google.protobuf.Timestamp starts_at = 1;

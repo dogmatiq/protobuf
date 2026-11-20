@@ -23,7 +23,7 @@ const (
 )
 
 // AggregateInstancesInMemory is the number of an aggregate handler's instances
-// that the node holds in memory, so that it can handle commands for them
+// that the engine holds in memory, so that it can handle commands for them
 // without loading them from storage.
 type AggregateInstancesInMemory struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
@@ -97,7 +97,7 @@ type AggregateInstancesInMemory_builder struct {
 	// HandlerKey is the key of the handler's identity, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// Value is the number of instances that the node holds in memory.
+	// Value is the number of instances that the engine holds in memory.
 	Value uint64
 }
 
@@ -111,8 +111,8 @@ func (b0 AggregateInstancesInMemory_builder) Build() *AggregateInstancesInMemory
 }
 
 // ProcessInstancesInMemory is the number of a process handler's instances that
-// the node holds in memory, so that it can handle events and deadlines for them
-// without loading them from storage.
+// the engine holds in memory, so that it can handle events and deadlines for
+// them without loading them from storage.
 type ProcessInstancesInMemory struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -185,7 +185,7 @@ type ProcessInstancesInMemory_builder struct {
 	// HandlerKey is the key of the handler's identity, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// Value is the number of instances that the node holds in memory.
+	// Value is the number of instances that the engine holds in memory.
 	Value uint64
 }
 
@@ -199,8 +199,8 @@ func (b0 ProcessInstancesInMemory_builder) Build() *ProcessInstancesInMemory {
 }
 
 // HandlerCommandsPending is the number of commands for one handler that are
-// waiting to be delivered. A node sends it only for aggregate and integration
-// handlers.
+// waiting to be delivered. The engine sends it only for aggregate and
+// integration handlers.
 type HandlerCommandsPending struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -287,7 +287,7 @@ func (b0 HandlerCommandsPending_builder) Build() *HandlerCommandsPending {
 }
 
 // HandlerCommandsDue is the number of commands for one handler that are ready
-// to be delivered now. A node sends it only for aggregate and integration
+// to be delivered now. The engine sends it only for aggregate and integration
 // handlers.
 type HandlerCommandsDue struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
@@ -375,8 +375,8 @@ func (b0 HandlerCommandsDue_builder) Build() *HandlerCommandsDue {
 }
 
 // HandlerCommandsFailing is the number of commands for one handler that are
-// waiting to be delivered and whose most recent delivery attempt failed. A node
-// sends it only for aggregate and integration handlers.
+// waiting to be delivered and whose most recent delivery attempt failed. The
+// engine sends it only for aggregate and integration handlers.
 type HandlerCommandsFailing struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -463,8 +463,8 @@ func (b0 HandlerCommandsFailing_builder) Build() *HandlerCommandsFailing {
 }
 
 // HandlerCommandsHandled is the running total of the commands that one handler
-// has handled successfully. A node sends it only for aggregate and integration
-// handlers.
+// has handled successfully. The engine sends it only for aggregate and
+// integration handlers.
 type HandlerCommandsHandled struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -552,7 +552,7 @@ func (b0 HandlerCommandsHandled_builder) Build() *HandlerCommandsHandled {
 }
 
 // HandlerDeadlinesPending is the number of deadlines for one handler that are
-// waiting to be delivered. A node sends it only for process handlers.
+// waiting to be delivered. The engine sends it only for process handlers.
 type HandlerDeadlinesPending struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -639,7 +639,7 @@ func (b0 HandlerDeadlinesPending_builder) Build() *HandlerDeadlinesPending {
 }
 
 // HandlerDeadlinesDue is the number of deadlines for one handler that are ready
-// to be delivered now. A node sends it only for process handlers.
+// to be delivered now. The engine sends it only for process handlers.
 type HandlerDeadlinesDue struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -726,8 +726,8 @@ func (b0 HandlerDeadlinesDue_builder) Build() *HandlerDeadlinesDue {
 }
 
 // HandlerDeadlinesFailing is the number of deadlines for one handler that are
-// waiting to be delivered and whose most recent delivery attempt failed. A node
-// sends it only for process handlers.
+// waiting to be delivered and whose most recent delivery attempt failed. The
+// engine sends it only for process handlers.
 type HandlerDeadlinesFailing struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -814,7 +814,8 @@ func (b0 HandlerDeadlinesFailing_builder) Build() *HandlerDeadlinesFailing {
 }
 
 // HandlerDeadlinesHandled is the running total of the deadlines that one
-// handler has handled successfully. A node sends it only for process handlers.
+// handler has handled successfully. The engine sends it only for process
+// handlers.
 type HandlerDeadlinesHandled struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -903,7 +904,7 @@ func (b0 HandlerDeadlinesHandled_builder) Build() *HandlerDeadlinesHandled {
 
 // HandlerDeadlinesCanceled is the running total of the deadlines of one handler
 // that were canceled before they were handled, such as when the process
-// instance that scheduled them ended. A node sends it only for process
+// instance that scheduled them ended. The engine sends it only for process
 // handlers.
 type HandlerDeadlinesCanceled struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
@@ -991,8 +992,8 @@ func (b0 HandlerDeadlinesCanceled_builder) Build() *HandlerDeadlinesCanceled {
 }
 
 // HandlerEventsRecorded is the running total of the events that one handler has
-// recorded. A node sends it only for aggregate and integration handlers, and
-// not for an integration handler that records no events.
+// recorded. The engine sends it only for aggregate and integration handlers,
+// and not for an integration handler that records no events.
 type HandlerEventsRecorded struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -1079,7 +1080,7 @@ func (b0 HandlerEventsRecorded_builder) Build() *HandlerEventsRecorded {
 }
 
 // HandlerEventsHandled is the running total of the events that one handler has
-// handled. A node sends it only for process and projection handlers.
+// handled. The engine sends it only for process and projection handlers.
 type HandlerEventsHandled struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -1166,8 +1167,8 @@ func (b0 HandlerEventsHandled_builder) Build() *HandlerEventsHandled {
 }
 
 // HandlerEventsPending is the number of events that one handler handles and
-// hasn't handled yet, on the event streams of the handler's cluster. A node
-// sends it only for process and projection handlers.
+// hasn't handled yet, on the engine's event streams. The engine sends it only
+// for process and projection handlers.
 type HandlerEventsPending struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -1254,8 +1255,8 @@ func (b0 HandlerEventsPending_builder) Build() *HandlerEventsPending {
 }
 
 // HandlerEventsFailing is the number of events for one handler that haven't
-// been handled yet and whose most recent delivery attempt failed. A node sends
-// it only for process and projection handlers.
+// been handled yet and whose most recent delivery attempt failed. The engine
+// sends it only for process and projection handlers.
 type HandlerEventsFailing struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -1432,11 +1433,11 @@ func (b0 ProcessInstancesEnded_builder) Build() *ProcessInstancesEnded {
 // handler.
 //
 // It describes the compaction that is running now, the most recent one that
-// ended, and the one that the node plans to start next.
+// ended, and the one that the engine plans to start next.
 //
-// ProjectionCompactionState describes one compaction at a time. A node isn't
+// ProjectionCompactionState describes one compaction at a time. An engine isn't
 // expected to compact a handler more than once at a time, because the
-// compactions would repeat each other's work. A node that does so should not
+// compactions would repeat each other's work. An engine that does so should not
 // send ProjectionCompactionState.
 type ProjectionCompactionState struct {
 	state                 protoimpl.MessageState             `protogen:"opaque.v1"`
@@ -1571,10 +1572,10 @@ type ProjectionCompactionState_builder struct {
 	// running.
 	Current *ProjectionCompactionState_Running
 	// Previous is the most recent compaction that has ended. It is absent if none
-	// has ended, or if the node doesn't report it.
+	// has ended, or if the engine doesn't report it.
 	Previous *ProjectionCompactionState_Ended
-	// Next is the compaction that the node plans to start next. It is absent if
-	// the node doesn't plan to compact the handler again.
+	// Next is the compaction that the engine plans to start next. It is absent if
+	// the engine doesn't plan to compact the handler again.
 	Next *ProjectionCompactionState_Planned
 }
 
@@ -2006,8 +2007,8 @@ func (x *ProjectionCompactionState_Running) ClearStartedAt() {
 type ProjectionCompactionState_Running_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// StartedAt is the time at which the compaction started, by the node's own
-	// clock. It is required.
+	// StartedAt is the time at which the compaction started, by the engine's
+	// own clock. It is required.
 	StartedAt *timestamppb.Timestamp
 }
 
@@ -2246,7 +2247,7 @@ type ProjectionCompactionState_Ended_builder struct {
 	Canceled         *ProjectionCompactionState_Ended_Canceled
 	// -- end of xxx_hidden_Outcome
 	// Interval is the time during which the compaction ran. It is absent if
-	// the node reports nothing about when the compaction ran.
+	// the engine reports nothing about when the compaction ran.
 	Interval *Interval
 }
 
@@ -2309,7 +2310,7 @@ func (*projectionCompactionState_Ended_DeadlineExceeded_) isProjectionCompaction
 
 func (*projectionCompactionState_Ended_Canceled_) isProjectionCompactionState_Ended_Outcome() {}
 
-// Planned is a compaction that the node plans to start.
+// Planned is a compaction that the engine plans to start.
 type ProjectionCompactionState_Planned struct {
 	state               protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_StartsAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=starts_at,json=startsAt"`
@@ -2367,10 +2368,10 @@ func (x *ProjectionCompactionState_Planned) ClearStartsAt() {
 type ProjectionCompactionState_Planned_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// StartsAt is the time at which the node plans to start the compaction, by
-	// the node's own clock.
+	// StartsAt is the time at which the engine plans to start the compaction,
+	// by the engine's own clock.
 	//
-	// It is absent if the node plans to start the compaction but can't tell
+	// It is absent if the engine plans to start the compaction but can't tell
 	// when.
 	StartsAt *timestamppb.Timestamp
 }

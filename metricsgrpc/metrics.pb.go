@@ -297,7 +297,7 @@ func (*watchMetricsResponse_Preamble_) isWatchMetricsResponse_Payload() {}
 
 func (*watchMetricsResponse_Sample_) isWatchMetricsResponse_Payload() {}
 
-// SupportedMetric describes a metric that the node's engine supports.
+// SupportedMetric describes a metric that the engine supports.
 type SupportedMetric struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_MessageName string                 `protobuf:"bytes,1,opt,name=message_name,json=messageName"`
@@ -378,7 +378,8 @@ type SupportedMetric_builder struct {
 	// "dogma.metrics.v1alpha1.QueueCommandsPending".
 	MessageName string
 	// Reach indicates whether the node's samples of this metric describe the
-	// whole cluster, or only the work that the node owns.
+	// whole cluster, or only the work that the node owns. It is present only if
+	// the engine runs as a cluster.
 	Reach *Reach
 }
 
@@ -394,12 +395,12 @@ func (b0 SupportedMetric_builder) Build() *SupportedMetric {
 	return m0
 }
 
-// Preamble describes the metrics that the engine supports, and whether the
-// node reports each one for the entire cluster, or only for the work that the
-// node owns.
+// Preamble describes the metrics that the engine supports. If the engine runs
+// as a cluster, it also says whether the node reports each one for the entire
+// cluster, or only for the work that the node owns.
 type WatchMetricsResponse_Preamble struct {
 	state                       protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_NodeId           *uuidpb.UUID           `protobuf:"bytes,1,opt,name=node_id,json=nodeId"`
+	xxx_hidden_Id               *uuidpb.UUID           `protobuf:"bytes,1,opt,name=id"`
 	xxx_hidden_ClusterId        *uuidpb.UUID           `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId"`
 	xxx_hidden_Application      *configpb.Application  `protobuf:"bytes,3,opt,name=application"`
 	xxx_hidden_SupportedMetrics *[]*SupportedMetric    `protobuf:"bytes,4,rep,name=supported_metrics,json=supportedMetrics"`
@@ -432,9 +433,9 @@ func (x *WatchMetricsResponse_Preamble) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *WatchMetricsResponse_Preamble) GetNodeId() *uuidpb.UUID {
+func (x *WatchMetricsResponse_Preamble) GetId() *uuidpb.UUID {
 	if x != nil {
-		return x.xxx_hidden_NodeId
+		return x.xxx_hidden_Id
 	}
 	return nil
 }
@@ -462,8 +463,8 @@ func (x *WatchMetricsResponse_Preamble) GetSupportedMetrics() []*SupportedMetric
 	return nil
 }
 
-func (x *WatchMetricsResponse_Preamble) SetNodeId(v *uuidpb.UUID) {
-	x.xxx_hidden_NodeId = v
+func (x *WatchMetricsResponse_Preamble) SetId(v *uuidpb.UUID) {
+	x.xxx_hidden_Id = v
 }
 
 func (x *WatchMetricsResponse_Preamble) SetClusterId(v *uuidpb.UUID) {
@@ -478,11 +479,11 @@ func (x *WatchMetricsResponse_Preamble) SetSupportedMetrics(v []*SupportedMetric
 	x.xxx_hidden_SupportedMetrics = &v
 }
 
-func (x *WatchMetricsResponse_Preamble) HasNodeId() bool {
+func (x *WatchMetricsResponse_Preamble) HasId() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_NodeId != nil
+	return x.xxx_hidden_Id != nil
 }
 
 func (x *WatchMetricsResponse_Preamble) HasClusterId() bool {
@@ -499,8 +500,8 @@ func (x *WatchMetricsResponse_Preamble) HasApplication() bool {
 	return x.xxx_hidden_Application != nil
 }
 
-func (x *WatchMetricsResponse_Preamble) ClearNodeId() {
-	x.xxx_hidden_NodeId = nil
+func (x *WatchMetricsResponse_Preamble) ClearId() {
+	x.xxx_hidden_Id = nil
 }
 
 func (x *WatchMetricsResponse_Preamble) ClearClusterId() {
@@ -514,16 +515,21 @@ func (x *WatchMetricsResponse_Preamble) ClearApplication() {
 type WatchMetricsResponse_Preamble_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// NodeId is the ID of the node that serves the call. A node has the same
-	// ID in every API that it serves.
-	NodeId *uuidpb.UUID
-	// ClusterId is the ID of the node's cluster. Nodes of the same cluster give
-	// the same cluster ID, in every API that they serve.
+	// Id is the ID of the engine that serves the call. An engine has the same
+	// ID in every API that it serves. Each engine has a different ID.
+	//
+	// If the engine runs as a cluster, the ID identifies the node that serves
+	// the call, and each node of the cluster has a different ID.
+	Id *uuidpb.UUID
+	// ClusterId is the ID of the engine's cluster. It is present only if the
+	// engine runs as a cluster. Nodes of the same cluster give the same cluster
+	// ID, in every API that they serve.
 	ClusterId *uuidpb.UUID
-	// Application describes the version of the application that the node runs.
+	// Application describes the version of the application that the engine
+	// runs.
 	Application *configpb.Application
-	// SupportedMetrics is the list of the metrics that the node's engine
-	// supports. Each metric appears once.
+	// SupportedMetrics is the list of the metrics that the engine supports.
+	// Each metric appears once.
 	//
 	// Each Sample identifies the metric that it measures by a zero-based index
 	// into this list, in Sample.metric_index. The indexes apply only to the
@@ -535,7 +541,7 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 	m0 := &WatchMetricsResponse_Preamble{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_NodeId = b.NodeId
+	x.xxx_hidden_Id = b.Id
 	x.xxx_hidden_ClusterId = b.ClusterId
 	x.xxx_hidden_Application = b.Application
 	x.xxx_hidden_SupportedMetrics = &b.SupportedMetrics
@@ -547,15 +553,15 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // define its own.
 //
 // A Sample replaces any earlier Sample of the same metric that has the same
-// subject. The node chooses how often it measures each metric. Once it has
+// subject. The engine chooses how often it measures each metric. Once it has
 // sent a Sample on a response stream, it keeps it current: each time it
 // measures a different value for the same metric and subject, including
 // zero, it sends a new Sample.
 //
 // Some metrics report a running total, such as the number of events that a
-// handler has recorded since the node started counting. The doc of each says
-// so. Within one response stream, a node lowers a total only by starting
-// again from zero.
+// handler has recorded since the engine started counting. The doc of each
+// says so. Within one response stream, the engine lowers a total only by
+// starting again from zero.
 //
 // The metrics that this API defines are:
 //
@@ -688,10 +694,11 @@ type WatchMetricsResponse_Sample_builder struct {
 	MetricIndex uint32
 	// Subject identifies what this sample describes, such as one queue.
 	//
-	// Two samples of the same metric, from any nodes of one cluster, have equal
-	// subjects if and only if they describe the same queue, handler or other
-	// part of the system. A subject holds what every node of the cluster knows
-	// about the thing that it describes, such as a queue's ID.
+	// Two samples of the same metric have equal subjects if and only if they
+	// describe the same queue, handler or other part of the system. If the
+	// engine runs as a cluster, this holds for samples from any of its nodes: a
+	// subject holds what every node of the cluster knows about the thing that
+	// it describes, such as a queue's ID.
 	Subject []byte
 	// Value is the content of the sample: a Protocol Buffers message,
 	// serialized in the binary format. The message's full name is the
@@ -699,18 +706,18 @@ type WatchMetricsResponse_Sample_builder struct {
 	Value []byte
 	// Revision is a comparable value that describes when this sample was
 	// measured, relative to other samples of the same metric and subject from
-	// the same cluster. The sample with the greatest revision is the most
+	// the same engine. The sample with the greatest revision is the most
 	// recent, and replaces the others.
 	//
 	// Two revisions are compared in lexicographic order, as strings of unsigned
-	// bytes. For example, a node can use a timestamp, encoded as a fixed-width
-	// big-endian integer.
+	// bytes. For example, an engine can use a timestamp, encoded as a
+	// fixed-width big-endian integer.
 	//
 	// The nodes of a cluster should produce revisions that compare correctly
 	// with each other, for example by using timestamps from synchronized
 	// clocks. The order of samples from different nodes is a best effort.
 	//
-	// A node should give the same revision to every sample from one
+	// An engine should give the same revision to every sample from one
 	// measurement.
 	Revision []byte
 }
@@ -731,12 +738,12 @@ var File_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto protoreflect.Fil
 const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc = "" +
 	"\n" +
 	"6github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto\x12\x16dogma.metrics.v1alpha1\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x15\n" +
-	"\x13WatchMetricsRequest\"\xee\x04\n" +
+	"\x13WatchMetricsRequest\"\xe5\x04\n" +
 	"\x14WatchMetricsResponse\x12S\n" +
 	"\bpreamble\x18\x01 \x01(\v25.dogma.metrics.v1alpha1.WatchMetricsResponse.PreambleH\x00R\bpreamble\x12M\n" +
-	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x1a\x90\x02\n" +
-	"\bPreamble\x120\n" +
-	"\anode_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x06nodeId\x126\n" +
+	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x1a\x87\x02\n" +
+	"\bPreamble\x12'\n" +
+	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x126\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\tclusterId\x12D\n" +
 	"\vapplication\x18\x03 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12T\n" +
@@ -775,7 +782,7 @@ var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_depIdxs = []int3
 	4, // 0: dogma.metrics.v1alpha1.WatchMetricsResponse.preamble:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
 	5, // 1: dogma.metrics.v1alpha1.WatchMetricsResponse.sample:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
 	0, // 2: dogma.metrics.v1alpha1.SupportedMetric.reach:type_name -> dogma.metrics.v1alpha1.Reach
-	6, // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.node_id:type_name -> dogma.protobuf.v1.UUID
+	6, // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
 	6, // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
 	7, // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
 	3, // 6: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.supported_metrics:type_name -> dogma.metrics.v1alpha1.SupportedMetric

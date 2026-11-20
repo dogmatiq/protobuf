@@ -133,8 +133,8 @@ func NewWatchMetricsResponse_PreambleBuilder() *WatchMetricsResponse_PreambleBui
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *WatchMetricsResponse_PreambleBuilder) From(x *WatchMetricsResponse_Preamble) *WatchMetricsResponse_PreambleBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasNodeId() {
-		b.prototype.SetNodeId(x.GetNodeId())
+	if x.HasId() {
+		b.prototype.SetId(x.GetId())
 	}
 	if x.HasClusterId() {
 		b.prototype.SetClusterId(x.GetClusterId())
@@ -152,8 +152,8 @@ func (b *WatchMetricsResponse_PreambleBuilder) From(x *WatchMetricsResponse_Prea
 // not modify previously constructed messages.
 func (b *WatchMetricsResponse_PreambleBuilder) Build() *WatchMetricsResponse_Preamble {
 	m := &WatchMetricsResponse_Preamble{}
-	if b.prototype.HasNodeId() {
-		m.SetNodeId(b.prototype.GetNodeId())
+	if b.prototype.HasId() {
+		m.SetId(b.prototype.GetId())
 	}
 	if b.prototype.HasClusterId() {
 		m.SetClusterId(b.prototype.GetClusterId())
@@ -165,10 +165,10 @@ func (b *WatchMetricsResponse_PreambleBuilder) Build() *WatchMetricsResponse_Pre
 	return m
 }
 
-// WithNodeId configures the builder to set the NodeId field to v,
+// WithId configures the builder to set the Id field to v,
 // then returns b.
-func (b *WatchMetricsResponse_PreambleBuilder) WithNodeId(v *uuidpb.UUID) *WatchMetricsResponse_PreambleBuilder {
-	b.prototype.SetNodeId(v)
+func (b *WatchMetricsResponse_PreambleBuilder) WithId(v *uuidpb.UUID) *WatchMetricsResponse_PreambleBuilder {
+	b.prototype.SetId(v)
 	return b
 }
 

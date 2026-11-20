@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics: GenFile = /*@__PURE__*/
-  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiFQoTV2F0Y2hNZXRyaWNzUmVxdWVzdCKCBAoUV2F0Y2hNZXRyaWNzUmVzcG9uc2USSQoIcHJlYW1ibGUYASABKAsyNS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlLlByZWFtYmxlSAASRQoGc2FtcGxlGAIgASgLMjMuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5TYW1wbGVIABreAQoIUHJlYW1ibGUSKAoHbm9kZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSKwoKY2x1c3Rlcl9pZBgCIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSNwoLYXBwbGljYXRpb24YAyABKAsyIi5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24SQgoRc3VwcG9ydGVkX21ldHJpY3MYBCADKAsyJy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlN1cHBvcnRlZE1ldHJpYxpsCgZTYW1wbGUSGwoMbWV0cmljX2luZGV4GAEgASgNQgWqAQIIAhIWCgdzdWJqZWN0GAIgASgMQgWqAQIIAhIUCgV2YWx1ZRgDIAEoDEIFqgECCAISFwoIcmV2aXNpb24YBCABKAxCBaoBAggCQgkKB3BheWxvYWQiXAoPU3VwcG9ydGVkTWV0cmljEhsKDG1lc3NhZ2VfbmFtZRgBIAEoCUIFqgECCAISLAoFcmVhY2gYAiABKA4yHS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlJlYWNoKkEKBVJlYWNoEhUKEVJFQUNIX1VOU1BFQ0lGSUVEEAASEQoNUkVBQ0hfQ0xVU1RFUhABEg4KClJFQUNIX05PREUQAjJ5CgpNZXRyaWNzQVBJEmsKDFdhdGNoTWV0cmljcxIrLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVxdWVzdBosLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UwAUIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiFQoTV2F0Y2hNZXRyaWNzUmVxdWVzdCL9AwoUV2F0Y2hNZXRyaWNzUmVzcG9uc2USSQoIcHJlYW1ibGUYASABKAsyNS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlLlByZWFtYmxlSAASRQoGc2FtcGxlGAIgASgLMjMuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5TYW1wbGVIABrZAQoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEisKCmNsdXN0ZXJfaWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjcKC2FwcGxpY2F0aW9uGAMgASgLMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkFwcGxpY2F0aW9uEkIKEXN1cHBvcnRlZF9tZXRyaWNzGAQgAygLMicuZG9nbWEubWV0cmljcy52MWFscGhhMS5TdXBwb3J0ZWRNZXRyaWMabAoGU2FtcGxlEhsKDG1ldHJpY19pbmRleBgBIAEoDUIFqgECCAISFgoHc3ViamVjdBgCIAEoDEIFqgECCAISFAoFdmFsdWUYAyABKAxCBaoBAggCEhcKCHJldmlzaW9uGAQgASgMQgWqAQIIAkIJCgdwYXlsb2FkIlwKD1N1cHBvcnRlZE1ldHJpYxIbCgxtZXNzYWdlX25hbWUYASABKAlCBaoBAggCEiwKBXJlYWNoGAIgASgOMh0uZG9nbWEubWV0cmljcy52MWFscGhhMS5SZWFjaCpBCgVSZWFjaBIVChFSRUFDSF9VTlNQRUNJRklFRBAAEhEKDVJFQUNIX0NMVVNURVIQARIOCgpSRUFDSF9OT0RFEAIyeQoKTWV0cmljc0FQSRJrCgxXYXRjaE1ldHJpY3MSKy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * WatchMetricsRequest is the input to the MetricsAPI.WatchMetrics method.
@@ -67,39 +67,44 @@ export const WatchMetricsResponseSchema: GenMessage<WatchMetricsResponse> = /*@_
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 1);
 
 /**
- * Preamble describes the metrics that the engine supports, and whether the
- * node reports each one for the entire cluster, or only for the work that the
- * node owns.
+ * Preamble describes the metrics that the engine supports. If the engine runs
+ * as a cluster, it also says whether the node reports each one for the entire
+ * cluster, or only for the work that the node owns.
  *
  * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
  */
 export type WatchMetricsResponse_Preamble = Message<"dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble"> & {
   /**
-   * NodeId is the ID of the node that serves the call. A node has the same
-   * ID in every API that it serves.
+   * Id is the ID of the engine that serves the call. An engine has the same
+   * ID in every API that it serves. Each engine has a different ID.
    *
-   * @generated from field: dogma.protobuf.v1.UUID node_id = 1;
+   * If the engine runs as a cluster, the ID identifies the node that serves
+   * the call, and each node of the cluster has a different ID.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID id = 1;
    */
-  nodeId?: UUID | undefined;
+  id?: UUID | undefined;
 
   /**
-   * ClusterId is the ID of the node's cluster. Nodes of the same cluster give
-   * the same cluster ID, in every API that they serve.
+   * ClusterId is the ID of the engine's cluster. It is present only if the
+   * engine runs as a cluster. Nodes of the same cluster give the same cluster
+   * ID, in every API that they serve.
    *
    * @generated from field: dogma.protobuf.v1.UUID cluster_id = 2;
    */
   clusterId?: UUID | undefined;
 
   /**
-   * Application describes the version of the application that the node runs.
+   * Application describes the version of the application that the engine
+   * runs.
    *
    * @generated from field: dogma.config.v1alpha1.Application application = 3;
    */
   application?: Application | undefined;
 
   /**
-   * SupportedMetrics is the list of the metrics that the node's engine
-   * supports. Each metric appears once.
+   * SupportedMetrics is the list of the metrics that the engine supports.
+   * Each metric appears once.
    *
    * Each Sample identifies the metric that it measures by a zero-based index
    * into this list, in Sample.metric_index. The indexes apply only to the
@@ -123,15 +128,15 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * define its own.
  *
  * A Sample replaces any earlier Sample of the same metric that has the same
- * subject. The node chooses how often it measures each metric. Once it has
+ * subject. The engine chooses how often it measures each metric. Once it has
  * sent a Sample on a response stream, it keeps it current: each time it
  * measures a different value for the same metric and subject, including
  * zero, it sends a new Sample.
  *
  * Some metrics report a running total, such as the number of events that a
- * handler has recorded since the node started counting. The doc of each says
- * so. Within one response stream, a node lowers a total only by starting
- * again from zero.
+ * handler has recorded since the engine started counting. The doc of each
+ * says so. Within one response stream, the engine lowers a total only by
+ * starting again from zero.
  *
  * The metrics that this API defines are:
  *
@@ -183,10 +188,11 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
   /**
    * Subject identifies what this sample describes, such as one queue.
    *
-   * Two samples of the same metric, from any nodes of one cluster, have equal
-   * subjects if and only if they describe the same queue, handler or other
-   * part of the system. A subject holds what every node of the cluster knows
-   * about the thing that it describes, such as a queue's ID.
+   * Two samples of the same metric have equal subjects if and only if they
+   * describe the same queue, handler or other part of the system. If the
+   * engine runs as a cluster, this holds for samples from any of its nodes: a
+   * subject holds what every node of the cluster knows about the thing that
+   * it describes, such as a queue's ID.
    *
    * @generated from field: bytes subject = 2 [features.field_presence = IMPLICIT];
    */
@@ -204,18 +210,18 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
   /**
    * Revision is a comparable value that describes when this sample was
    * measured, relative to other samples of the same metric and subject from
-   * the same cluster. The sample with the greatest revision is the most
+   * the same engine. The sample with the greatest revision is the most
    * recent, and replaces the others.
    *
    * Two revisions are compared in lexicographic order, as strings of unsigned
-   * bytes. For example, a node can use a timestamp, encoded as a fixed-width
-   * big-endian integer.
+   * bytes. For example, an engine can use a timestamp, encoded as a
+   * fixed-width big-endian integer.
    *
    * The nodes of a cluster should produce revisions that compare correctly
    * with each other, for example by using timestamps from synchronized
    * clocks. The order of samples from different nodes is a best effort.
    *
-   * A node should give the same revision to every sample from one
+   * An engine should give the same revision to every sample from one
    * measurement.
    *
    * @generated from field: bytes revision = 4 [features.field_presence = IMPLICIT];
@@ -231,7 +237,7 @@ export const WatchMetricsResponse_SampleSchema: GenMessage<WatchMetricsResponse_
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 1, 1);
 
 /**
- * SupportedMetric describes a metric that the node's engine supports.
+ * SupportedMetric describes a metric that the engine supports.
  *
  * @generated from message dogma.metrics.v1alpha1.SupportedMetric
  */
@@ -247,7 +253,8 @@ export type SupportedMetric = Message<"dogma.metrics.v1alpha1.SupportedMetric"> 
 
   /**
    * Reach indicates whether the node's samples of this metric describe the
-   * whole cluster, or only the work that the node owns.
+   * whole cluster, or only the work that the node owns. It is present only if
+   * the engine runs as a cluster.
    *
    * @generated from field: dogma.metrics.v1alpha1.Reach reach = 2;
    */
@@ -306,10 +313,11 @@ export const ReachSchema: GenEnum<Reach> = /*@__PURE__*/
  * MetricsAPI is a service that reports metrics about an engine, such as the
  * number of messages waiting in queues.
  *
- * A node is one running process of an engine. A cluster is the set of nodes
- * that share the work of one application between them.
+ * An engine may run as a cluster, which is a set of running instances of the
+ * engine that share the work of one application between them. Each instance is
+ * called a node, in that context.
  *
- * A node that doesn't report metrics doesn't serve this API, so a call to it
+ * An engine that doesn't report metrics doesn't serve this API, so a call to it
  * fails with the UNIMPLEMENTED status code.
  *
  * @generated from service dogma.metrics.v1alpha1.MetricsAPI
@@ -325,11 +333,9 @@ export const MetricsAPI: GenService<{
    * Subsequent messages in the response contain a WatchMetricsResponse.Sample,
    * which reports one metric.
    *
-   * If the node can't measure a metric that it lists, it fails the call with
-   * the UNAVAILABLE status code. Another node of the same cluster may still be
-   * able to answer. The message of the status is for a person to read. It may
-   * be shown to anyone who can call the API, so it must not contain secrets
-   * such as passwords.
+   * If the engine can't measure a metric that it lists, it fails the call with
+   * the UNAVAILABLE status code. If the engine runs as a cluster, another node
+   * of the cluster may still be able to answer.
    *
    * @generated from rpc dogma.metrics.v1alpha1.MetricsAPI.WatchMetrics
    */

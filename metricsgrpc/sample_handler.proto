@@ -8,32 +8,32 @@ import "github.com/dogmatiq/protobuf/metricsgrpc/interval.proto";
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
 // AggregateInstancesInMemory is the number of an aggregate handler's instances
-// that the node holds in memory, so that it can handle commands for them
+// that the engine holds in memory, so that it can handle commands for them
 // without loading them from storage.
 message AggregateInstancesInMemory {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of instances that the node holds in memory.
+  // Value is the number of instances that the engine holds in memory.
   uint64 value = 2 [features.field_presence = IMPLICIT];
 }
 
 // ProcessInstancesInMemory is the number of a process handler's instances that
-// the node holds in memory, so that it can handle events and deadlines for them
-// without loading them from storage.
+// the engine holds in memory, so that it can handle events and deadlines for
+// them without loading them from storage.
 message ProcessInstancesInMemory {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of instances that the node holds in memory.
+  // Value is the number of instances that the engine holds in memory.
   uint64 value = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerCommandsPending is the number of commands for one handler that are
-// waiting to be delivered. A node sends it only for aggregate and integration
-// handlers.
+// waiting to be delivered. The engine sends it only for aggregate and
+// integration handlers.
 message HandlerCommandsPending {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -44,7 +44,7 @@ message HandlerCommandsPending {
 }
 
 // HandlerCommandsDue is the number of commands for one handler that are ready
-// to be delivered now. A node sends it only for aggregate and integration
+// to be delivered now. The engine sends it only for aggregate and integration
 // handlers.
 message HandlerCommandsDue {
   // HandlerKey is the key of the handler's identity, as the application in
@@ -56,8 +56,8 @@ message HandlerCommandsDue {
 }
 
 // HandlerCommandsFailing is the number of commands for one handler that are
-// waiting to be delivered and whose most recent delivery attempt failed. A node
-// sends it only for aggregate and integration handlers.
+// waiting to be delivered and whose most recent delivery attempt failed. The
+// engine sends it only for aggregate and integration handlers.
 message HandlerCommandsFailing {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -68,8 +68,8 @@ message HandlerCommandsFailing {
 }
 
 // HandlerCommandsHandled is the running total of the commands that one handler
-// has handled successfully. A node sends it only for aggregate and integration
-// handlers.
+// has handled successfully. The engine sends it only for aggregate and
+// integration handlers.
 message HandlerCommandsHandled {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -81,7 +81,7 @@ message HandlerCommandsHandled {
 }
 
 // HandlerDeadlinesPending is the number of deadlines for one handler that are
-// waiting to be delivered. A node sends it only for process handlers.
+// waiting to be delivered. The engine sends it only for process handlers.
 message HandlerDeadlinesPending {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -92,7 +92,7 @@ message HandlerDeadlinesPending {
 }
 
 // HandlerDeadlinesDue is the number of deadlines for one handler that are ready
-// to be delivered now. A node sends it only for process handlers.
+// to be delivered now. The engine sends it only for process handlers.
 message HandlerDeadlinesDue {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -103,8 +103,8 @@ message HandlerDeadlinesDue {
 }
 
 // HandlerDeadlinesFailing is the number of deadlines for one handler that are
-// waiting to be delivered and whose most recent delivery attempt failed. A node
-// sends it only for process handlers.
+// waiting to be delivered and whose most recent delivery attempt failed. The
+// engine sends it only for process handlers.
 message HandlerDeadlinesFailing {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -115,7 +115,8 @@ message HandlerDeadlinesFailing {
 }
 
 // HandlerDeadlinesHandled is the running total of the deadlines that one
-// handler has handled successfully. A node sends it only for process handlers.
+// handler has handled successfully. The engine sends it only for process
+// handlers.
 message HandlerDeadlinesHandled {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -128,7 +129,7 @@ message HandlerDeadlinesHandled {
 
 // HandlerDeadlinesCanceled is the running total of the deadlines of one handler
 // that were canceled before they were handled, such as when the process
-// instance that scheduled them ended. A node sends it only for process
+// instance that scheduled them ended. The engine sends it only for process
 // handlers.
 message HandlerDeadlinesCanceled {
   // HandlerKey is the key of the handler's identity, as the application in
@@ -140,8 +141,8 @@ message HandlerDeadlinesCanceled {
 }
 
 // HandlerEventsRecorded is the running total of the events that one handler has
-// recorded. A node sends it only for aggregate and integration handlers, and
-// not for an integration handler that records no events.
+// recorded. The engine sends it only for aggregate and integration handlers,
+// and not for an integration handler that records no events.
 message HandlerEventsRecorded {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -152,7 +153,7 @@ message HandlerEventsRecorded {
 }
 
 // HandlerEventsHandled is the running total of the events that one handler has
-// handled. A node sends it only for process and projection handlers.
+// handled. The engine sends it only for process and projection handlers.
 message HandlerEventsHandled {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -163,8 +164,8 @@ message HandlerEventsHandled {
 }
 
 // HandlerEventsPending is the number of events that one handler handles and
-// hasn't handled yet, on the event streams of the handler's cluster. A node
-// sends it only for process and projection handlers.
+// hasn't handled yet, on the engine's event streams. The engine sends it only
+// for process and projection handlers.
 message HandlerEventsPending {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -175,8 +176,8 @@ message HandlerEventsPending {
 }
 
 // HandlerEventsFailing is the number of events for one handler that haven't
-// been handled yet and whose most recent delivery attempt failed. A node sends
-// it only for process and projection handlers.
+// been handled yet and whose most recent delivery attempt failed. The engine
+// sends it only for process and projection handlers.
 message HandlerEventsFailing {
   // HandlerKey is the key of the handler's identity, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -201,17 +202,17 @@ message ProcessInstancesEnded {
 // handler.
 //
 // It describes the compaction that is running now, the most recent one that
-// ended, and the one that the node plans to start next.
+// ended, and the one that the engine plans to start next.
 //
-// ProjectionCompactionState describes one compaction at a time. A node isn't
+// ProjectionCompactionState describes one compaction at a time. An engine isn't
 // expected to compact a handler more than once at a time, because the
-// compactions would repeat each other's work. A node that does so should not
+// compactions would repeat each other's work. An engine that does so should not
 // send ProjectionCompactionState.
 message ProjectionCompactionState {
   // Running is a compaction that is running.
   message Running {
-    // StartedAt is the time at which the compaction started, by the node's own
-    // clock. It is required.
+    // StartedAt is the time at which the compaction started, by the engine's
+    // own clock. It is required.
     google.protobuf.Timestamp started_at = 1;
   }
 
@@ -252,16 +253,16 @@ message ProjectionCompactionState {
     }
 
     // Interval is the time during which the compaction ran. It is absent if
-    // the node reports nothing about when the compaction ran.
+    // the engine reports nothing about when the compaction ran.
     Interval interval = 5;
   }
 
-  // Planned is a compaction that the node plans to start.
+  // Planned is a compaction that the engine plans to start.
   message Planned {
-    // StartsAt is the time at which the node plans to start the compaction, by
-    // the node's own clock.
+    // StartsAt is the time at which the engine plans to start the compaction,
+    // by the engine's own clock.
     //
-    // It is absent if the node plans to start the compaction but can't tell
+    // It is absent if the engine plans to start the compaction but can't tell
     // when.
     google.protobuf.Timestamp starts_at = 1;
   }
@@ -275,11 +276,11 @@ message ProjectionCompactionState {
   Running current = 2;
 
   // Previous is the most recent compaction that has ended. It is absent if none
-  // has ended, or if the node doesn't report it.
+  // has ended, or if the engine doesn't report it.
   Ended previous = 3;
 
-  // Next is the compaction that the node plans to start next. It is absent if
-  // the node doesn't plan to compact the handler again.
+  // Next is the compaction that the engine plans to start next. It is absent if
+  // the engine doesn't plan to compact the handler again.
   Planned next = 4;
 }
 

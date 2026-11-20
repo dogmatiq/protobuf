@@ -29,10 +29,11 @@ const (
 // MetricsAPI is a service that reports metrics about an engine, such as the
 // number of messages waiting in queues.
 //
-// A node is one running process of an engine. A cluster is the set of nodes
-// that share the work of one application between them.
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 //
-// A node that doesn't report metrics doesn't serve this API, so a call to it
+// An engine that doesn't report metrics doesn't serve this API, so a call to it
 // fails with the UNIMPLEMENTED status code.
 type MetricsAPIClient interface {
 	// WatchMetrics reports metrics about the engine, such as the number of
@@ -44,11 +45,9 @@ type MetricsAPIClient interface {
 	// Subsequent messages in the response contain a WatchMetricsResponse.Sample,
 	// which reports one metric.
 	//
-	// If the node can't measure a metric that it lists, it fails the call with
-	// the UNAVAILABLE status code. Another node of the same cluster may still be
-	// able to answer. The message of the status is for a person to read. It may
-	// be shown to anyone who can call the API, so it must not contain secrets
-	// such as passwords.
+	// If the engine can't measure a metric that it lists, it fails the call with
+	// the UNAVAILABLE status code. If the engine runs as a cluster, another node
+	// of the cluster may still be able to answer.
 	WatchMetrics(ctx context.Context, in *WatchMetricsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchMetricsResponse], error)
 }
 
@@ -86,10 +85,11 @@ type MetricsAPI_WatchMetricsClient = grpc.ServerStreamingClient[WatchMetricsResp
 // MetricsAPI is a service that reports metrics about an engine, such as the
 // number of messages waiting in queues.
 //
-// A node is one running process of an engine. A cluster is the set of nodes
-// that share the work of one application between them.
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 //
-// A node that doesn't report metrics doesn't serve this API, so a call to it
+// An engine that doesn't report metrics doesn't serve this API, so a call to it
 // fails with the UNIMPLEMENTED status code.
 type MetricsAPIServer interface {
 	// WatchMetrics reports metrics about the engine, such as the number of
@@ -101,11 +101,9 @@ type MetricsAPIServer interface {
 	// Subsequent messages in the response contain a WatchMetricsResponse.Sample,
 	// which reports one metric.
 	//
-	// If the node can't measure a metric that it lists, it fails the call with
-	// the UNAVAILABLE status code. Another node of the same cluster may still be
-	// able to answer. The message of the status is for a person to read. It may
-	// be shown to anyone who can call the API, so it must not contain secrets
-	// such as passwords.
+	// If the engine can't measure a metric that it lists, it fails the call with
+	// the UNAVAILABLE status code. If the engine runs as a cluster, another node
+	// of the cluster may still be able to answer.
 	WatchMetrics(*WatchMetricsRequest, grpc.ServerStreamingServer[WatchMetricsResponse]) error
 }
 

@@ -713,7 +713,7 @@ func (b0 QueueDeadlinesRemoved_builder) Build() *QueueDeadlinesRemoved {
 
 // ProcessInstanceQueueBindings is the number of a process handler's instances
 // that are in progress and bound to one queue, or to none, which is the queue
-// that holds their deadlines. A node sends it only if its engine keeps each
+// that holds their deadlines. The engine sends it only if it keeps each
 // instance's deadlines in a queue.
 //
 // An instance is in progress until it ends, even while it waits for a deadline.

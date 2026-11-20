@@ -9,10 +9,11 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 // MetricsAPI is a service that reports metrics about an engine, such as the
 // number of messages waiting in queues.
 //
-// A node is one running process of an engine. A cluster is the set of nodes
-// that share the work of one application between them.
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 //
-// A node that doesn't report metrics doesn't serve this API, so a call to it
+// An engine that doesn't report metrics doesn't serve this API, so a call to it
 // fails with the UNIMPLEMENTED status code.
 service MetricsAPI {
   // WatchMetrics reports metrics about the engine, such as the number of
@@ -24,11 +25,9 @@ service MetricsAPI {
   // Subsequent messages in the response contain a WatchMetricsResponse.Sample,
   // which reports one metric.
   //
-  // If the node can't measure a metric that it lists, it fails the call with
-  // the UNAVAILABLE status code. Another node of the same cluster may still be
-  // able to answer. The message of the status is for a person to read. It may
-  // be shown to anyone who can call the API, so it must not contain secrets
-  // such as passwords.
+  // If the engine can't measure a metric that it lists, it fails the call with
+  // the UNAVAILABLE status code. If the engine runs as a cluster, another node
+  // of the cluster may still be able to answer.
   rpc WatchMetrics(WatchMetricsRequest) returns (stream WatchMetricsResponse);
 }
 
@@ -38,23 +37,28 @@ message WatchMetricsRequest {}
 // WatchMetricsResponse is the (streaming) output of the
 // MetricsAPI.WatchMetrics method.
 message WatchMetricsResponse {
-  // Preamble describes the metrics that the engine supports, and whether the
-  // node reports each one for the entire cluster, or only for the work that the
-  // node owns.
+  // Preamble describes the metrics that the engine supports. If the engine runs
+  // as a cluster, it also says whether the node reports each one for the entire
+  // cluster, or only for the work that the node owns.
   message Preamble {
-    // NodeId is the ID of the node that serves the call. A node has the same
-    // ID in every API that it serves.
-    dogma.protobuf.v1.UUID node_id = 1;
+    // Id is the ID of the engine that serves the call. An engine has the same
+    // ID in every API that it serves. Each engine has a different ID.
+    //
+    // If the engine runs as a cluster, the ID identifies the node that serves
+    // the call, and each node of the cluster has a different ID.
+    dogma.protobuf.v1.UUID id = 1;
 
-    // ClusterId is the ID of the node's cluster. Nodes of the same cluster give
-    // the same cluster ID, in every API that they serve.
+    // ClusterId is the ID of the engine's cluster. It is present only if the
+    // engine runs as a cluster. Nodes of the same cluster give the same cluster
+    // ID, in every API that they serve.
     dogma.protobuf.v1.UUID cluster_id = 2;
 
-    // Application describes the version of the application that the node runs.
+    // Application describes the version of the application that the engine
+    // runs.
     dogma.config.v1alpha1.Application application = 3;
 
-    // SupportedMetrics is the list of the metrics that the node's engine
-    // supports. Each metric appears once.
+    // SupportedMetrics is the list of the metrics that the engine supports.
+    // Each metric appears once.
     //
     // Each Sample identifies the metric that it measures by a zero-based index
     // into this list, in Sample.metric_index. The indexes apply only to the
@@ -67,15 +71,15 @@ message WatchMetricsResponse {
   // define its own.
   //
   // A Sample replaces any earlier Sample of the same metric that has the same
-  // subject. The node chooses how often it measures each metric. Once it has
+  // subject. The engine chooses how often it measures each metric. Once it has
   // sent a Sample on a response stream, it keeps it current: each time it
   // measures a different value for the same metric and subject, including
   // zero, it sends a new Sample.
   //
   // Some metrics report a running total, such as the number of events that a
-  // handler has recorded since the node started counting. The doc of each says
-  // so. Within one response stream, a node lowers a total only by starting
-  // again from zero.
+  // handler has recorded since the engine started counting. The doc of each
+  // says so. Within one response stream, the engine lowers a total only by
+  // starting again from zero.
   //
   // The metrics that this API defines are:
   //
@@ -119,10 +123,11 @@ message WatchMetricsResponse {
 
     // Subject identifies what this sample describes, such as one queue.
     //
-    // Two samples of the same metric, from any nodes of one cluster, have equal
-    // subjects if and only if they describe the same queue, handler or other
-    // part of the system. A subject holds what every node of the cluster knows
-    // about the thing that it describes, such as a queue's ID.
+    // Two samples of the same metric have equal subjects if and only if they
+    // describe the same queue, handler or other part of the system. If the
+    // engine runs as a cluster, this holds for samples from any of its nodes: a
+    // subject holds what every node of the cluster knows about the thing that
+    // it describes, such as a queue's ID.
     bytes subject = 2 [features.field_presence = IMPLICIT];
 
     // Value is the content of the sample: a Protocol Buffers message,
@@ -132,18 +137,18 @@ message WatchMetricsResponse {
 
     // Revision is a comparable value that describes when this sample was
     // measured, relative to other samples of the same metric and subject from
-    // the same cluster. The sample with the greatest revision is the most
+    // the same engine. The sample with the greatest revision is the most
     // recent, and replaces the others.
     //
     // Two revisions are compared in lexicographic order, as strings of unsigned
-    // bytes. For example, a node can use a timestamp, encoded as a fixed-width
-    // big-endian integer.
+    // bytes. For example, an engine can use a timestamp, encoded as a
+    // fixed-width big-endian integer.
     //
     // The nodes of a cluster should produce revisions that compare correctly
     // with each other, for example by using timestamps from synchronized
     // clocks. The order of samples from different nodes is a best effort.
     //
-    // A node should give the same revision to every sample from one
+    // An engine should give the same revision to every sample from one
     // measurement.
     bytes revision = 4 [features.field_presence = IMPLICIT];
   }
@@ -156,7 +161,7 @@ message WatchMetricsResponse {
   }
 }
 
-// SupportedMetric describes a metric that the node's engine supports.
+// SupportedMetric describes a metric that the engine supports.
 message SupportedMetric {
   // MessageName is the full name of the Protocol Buffers message that holds
   // this metric's samples, such as
@@ -164,7 +169,8 @@ message SupportedMetric {
   string message_name = 1 [features.field_presence = IMPLICIT];
 
   // Reach indicates whether the node's samples of this metric describe the
-  // whole cluster, or only the work that the node owns.
+  // whole cluster, or only the work that the node owns. It is present only if
+  // the engine runs as a cluster.
   Reach reach = 2;
 }
 

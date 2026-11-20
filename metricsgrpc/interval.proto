@@ -8,12 +8,12 @@ import "google/protobuf/timestamp.proto";
 
 // Interval is a span of time.
 //
-// A node reports an interval either as the times at which it began and ended,
-// or only as how long it lasted.
+// An engine reports an interval either as the times at which it began and
+// ended, or only as how long it lasted.
 message Interval {
   // Bounds is an interval reported as the times at which it began and ended.
   message Bounds {
-    // Start is the time at which the interval began, by the node's own clock.
+    // Start is the time at which the interval began, by the engine's own clock.
     // It is required.
     google.protobuf.Timestamp start = 1;
 
@@ -24,12 +24,12 @@ message Interval {
 
   // Length is an interval reported only as how long it lasted.
   message Length {
-    // Duration is how long the interval lasted, as the node measured it. It is
-    // required.
+    // Duration is how long the interval lasted, as the engine measured it. It
+    // is required.
     google.protobuf.Duration duration = 1;
   }
 
-  // Form is how the node reports the interval. It is required.
+  // Form is how the engine reports the interval. It is required.
   oneof form {
     Bounds bounds = 1;
     Length length = 2;
