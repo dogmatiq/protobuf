@@ -21,6 +21,9 @@ The format is based on [Keep a Changelog], and this project adheres to
   metrics.
 - Added the `enginegrpc` package, which defines a service that reports what an
   engine is and what it is doing.
+- Added the optional `stream_length` field to `EventStreamSegment`, which tells
+  a consumer where the end of the stream is, so that it can see how far behind
+  it is.
 
 ### Changed
 

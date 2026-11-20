@@ -142,6 +142,9 @@ func (b *EventStreamSegmentBuilder) From(x *EventStreamSegment) *EventStreamSegm
 	}
 	b.prototype.SetBeginOffset(x.GetBeginOffset())
 	b.prototype.SetEndOffset(x.GetEndOffset())
+	if x.HasStreamLength() {
+		b.prototype.SetStreamLength(x.GetStreamLength())
+	}
 	b.prototype.SetEnvelopes(x.GetEnvelopes())
 	return b
 }
@@ -157,6 +160,9 @@ func (b *EventStreamSegmentBuilder) Build() *EventStreamSegment {
 	}
 	m.SetBeginOffset(b.prototype.GetBeginOffset())
 	m.SetEndOffset(b.prototype.GetEndOffset())
+	if b.prototype.HasStreamLength() {
+		m.SetStreamLength(b.prototype.GetStreamLength())
+	}
 	m.SetEnvelopes(b.prototype.GetEnvelopes())
 	return m
 }
@@ -179,6 +185,13 @@ func (b *EventStreamSegmentBuilder) WithBeginOffset(v uint64) *EventStreamSegmen
 // then returns b.
 func (b *EventStreamSegmentBuilder) WithEndOffset(v uint64) *EventStreamSegmentBuilder {
 	b.prototype.SetEndOffset(v)
+	return b
+}
+
+// WithStreamLength configures the builder to set the StreamLength field to v,
+// then returns b.
+func (b *EventStreamSegmentBuilder) WithStreamLength(v uint64) *EventStreamSegmentBuilder {
+	b.prototype.SetStreamLength(v)
 	return b
 }
 

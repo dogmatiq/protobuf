@@ -218,7 +218,10 @@ type EventStreamSegment struct {
 	xxx_hidden_EventStreamId *uuidpb.UUID                 `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
 	xxx_hidden_BeginOffset   uint64                       `protobuf:"varint,2,opt,name=begin_offset,json=beginOffset"`
 	xxx_hidden_EndOffset     uint64                       `protobuf:"varint,3,opt,name=end_offset,json=endOffset"`
+	xxx_hidden_StreamLength  uint64                       `protobuf:"varint,7,opt,name=stream_length,json=streamLength"`
 	xxx_hidden_Envelopes     *[]*envelopepb.MultiEnvelope `protobuf:"bytes,4,rep,name=envelopes"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -269,6 +272,13 @@ func (x *EventStreamSegment) GetEndOffset() uint64 {
 	return 0
 }
 
+func (x *EventStreamSegment) GetStreamLength() uint64 {
+	if x != nil {
+		return x.xxx_hidden_StreamLength
+	}
+	return 0
+}
+
 func (x *EventStreamSegment) GetEnvelopes() []*envelopepb.MultiEnvelope {
 	if x != nil {
 		if x.xxx_hidden_Envelopes != nil {
@@ -290,6 +300,11 @@ func (x *EventStreamSegment) SetEndOffset(v uint64) {
 	x.xxx_hidden_EndOffset = v
 }
 
+func (x *EventStreamSegment) SetStreamLength(v uint64) {
+	x.xxx_hidden_StreamLength = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
 func (x *EventStreamSegment) SetEnvelopes(v []*envelopepb.MultiEnvelope) {
 	x.xxx_hidden_Envelopes = &v
 }
@@ -301,8 +316,20 @@ func (x *EventStreamSegment) HasEventStreamId() bool {
 	return x.xxx_hidden_EventStreamId != nil
 }
 
+func (x *EventStreamSegment) HasStreamLength() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *EventStreamSegment) ClearEventStreamId() {
 	x.xxx_hidden_EventStreamId = nil
+}
+
+func (x *EventStreamSegment) ClearStreamLength() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_StreamLength = 0
 }
 
 type EventStreamSegment_builder struct {
@@ -317,6 +344,16 @@ type EventStreamSegment_builder struct {
 	BeginOffset uint64
 	// EndOffset is the offset immediately after the range, exclusive.
 	EndOffset uint64
+	// StreamLength is the number of events in the stream, which is also the
+	// offset at which the next event will be appended, as known to the server
+	// when it sent this segment. It is zero if the stream has no events.
+	//
+	// It is never less than end_offset. The stream may have grown by the time the
+	// client receives the segment.
+	//
+	// The server may leave it unset, in which case the segment says nothing about
+	// the length of the stream.
+	StreamLength *uint64
 	// Envelopes is a (possibly empty) list of multi-envelopes containing the
 	// events in the range that match the requested message types.
 	//
@@ -336,6 +373,10 @@ func (b0 EventStreamSegment_builder) Build() *EventStreamSegment {
 	x.xxx_hidden_EventStreamId = b.EventStreamId
 	x.xxx_hidden_BeginOffset = b.BeginOffset
 	x.xxx_hidden_EndOffset = b.EndOffset
+	if b.StreamLength != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		x.xxx_hidden_StreamLength = *b.StreamLength
+	}
 	x.xxx_hidden_Envelopes = &b.Envelopes
 	return m0
 }
@@ -350,12 +391,13 @@ const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_
 	"\x11ReadEventsRequest\x12?\n" +
 	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12(\n" +
 	"\fbegin_offset\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\vbeginOffset\x129\n" +
-	"\x06filter\x18\x03 \x01(\v2!.dogma.messaging.v1.MessageFilterR\x06filter\"\xe5\x01\n" +
+	"\x06filter\x18\x03 \x01(\v2!.dogma.messaging.v1.MessageFilterR\x06filter\"\x8a\x02\n" +
 	"\x12EventStreamSegment\x12?\n" +
 	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12(\n" +
 	"\fbegin_offset\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\vbeginOffset\x12$\n" +
 	"\n" +
-	"end_offset\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\tendOffset\x12>\n" +
+	"end_offset\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\tendOffset\x12#\n" +
+	"\rstream_length\x18\a \x01(\x04R\fstreamLength\x12>\n" +
 	"\tenvelopes\x18\x04 \x03(\v2 .dogma.protobuf.v1.MultiEnvelopeR\tenvelopes2\xd8\x01\n" +
 	"\x16EventStreamConsumerAPI\x12_\n" +
 	"\vWatchEvents\x12&.dogma.messaging.v1.WatchEventsRequest\x1a&.dogma.messaging.v1.EventStreamSegment0\x01\x12]\n" +

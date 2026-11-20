@@ -89,6 +89,17 @@ message EventStreamSegment {
   // EndOffset is the offset immediately after the range, exclusive.
   uint64 end_offset = 3 [features.field_presence = IMPLICIT];
 
+  // StreamLength is the number of events in the stream, which is also the
+  // offset at which the next event will be appended, as known to the server
+  // when it sent this segment. It is zero if the stream has no events.
+  //
+  // It is never less than end_offset. The stream may have grown by the time the
+  // client receives the segment.
+  //
+  // The server may leave it unset, in which case the segment says nothing about
+  // the length of the stream.
+  uint64 stream_length = 7;
+
   // Envelopes is a (possibly empty) list of multi-envelopes containing the
   // events in the range that match the requested message types.
   //
