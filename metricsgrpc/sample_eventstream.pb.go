@@ -210,7 +210,7 @@ func (x *AggregateInstanceEventStreamBindings) ClearEventStreamId() {
 type AggregateInstanceEventStreamBindings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// EventStreamId is the ID of the event stream that the instances are bound

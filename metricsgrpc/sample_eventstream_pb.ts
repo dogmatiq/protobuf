@@ -60,7 +60,7 @@ export const EventStreamLengthSchema: GenMessage<EventStreamLength> = /*@__PURE_
  */
 export type AggregateInstanceEventStreamBindings = Message<"dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;

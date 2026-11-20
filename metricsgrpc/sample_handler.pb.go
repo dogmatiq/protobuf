@@ -94,7 +94,7 @@ func (x *AggregateInstancesInMemory) ClearHandlerKey() {
 type AggregateInstancesInMemory_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of instances that the engine holds in memory.
@@ -182,7 +182,7 @@ func (x *ProcessInstancesInMemory) ClearHandlerKey() {
 type ProcessInstancesInMemory_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of instances that the engine holds in memory.
@@ -270,7 +270,7 @@ func (x *HandlerCommandsPending) ClearHandlerKey() {
 type HandlerCommandsPending_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of commands.
@@ -358,7 +358,7 @@ func (x *HandlerCommandsDue) ClearHandlerKey() {
 type HandlerCommandsDue_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of commands that are ready.
@@ -446,7 +446,7 @@ func (x *HandlerCommandsFailing) ClearHandlerKey() {
 type HandlerCommandsFailing_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of failing commands.
@@ -534,7 +534,7 @@ func (x *HandlerCommandsHandled) ClearHandlerKey() {
 type HandlerCommandsHandled_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of commands that the handler has handled
@@ -622,7 +622,7 @@ func (x *HandlerDeadlinesPending) ClearHandlerKey() {
 type HandlerDeadlinesPending_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of deadlines.
@@ -709,7 +709,7 @@ func (x *HandlerDeadlinesDue) ClearHandlerKey() {
 type HandlerDeadlinesDue_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of deadlines that are ready.
@@ -797,7 +797,7 @@ func (x *HandlerDeadlinesFailing) ClearHandlerKey() {
 type HandlerDeadlinesFailing_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of failing deadlines.
@@ -885,7 +885,7 @@ func (x *HandlerDeadlinesHandled) ClearHandlerKey() {
 type HandlerDeadlinesHandled_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of deadlines that the handler has handled
@@ -975,7 +975,7 @@ func (x *HandlerDeadlinesCanceled) ClearHandlerKey() {
 type HandlerDeadlinesCanceled_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of deadlines that were canceled.
@@ -1063,7 +1063,7 @@ func (x *HandlerEventsRecorded) ClearHandlerKey() {
 type HandlerEventsRecorded_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of events that the handler has recorded.
@@ -1150,7 +1150,7 @@ func (x *HandlerEventsHandled) ClearHandlerKey() {
 type HandlerEventsHandled_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of events that the handler has handled.
@@ -1238,7 +1238,7 @@ func (x *HandlerEventsPending) ClearHandlerKey() {
 type HandlerEventsPending_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of events that haven't been handled.
@@ -1326,7 +1326,7 @@ func (x *HandlerEventsFailing) ClearHandlerKey() {
 type HandlerEventsFailing_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of failing events.
@@ -1413,7 +1413,7 @@ func (x *ProcessInstancesEnded) ClearHandlerKey() {
 type ProcessInstancesEnded_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of instances that have ended.
@@ -1565,7 +1565,7 @@ func (x *ProjectionCompactionState) ClearNext() {
 type ProjectionCompactionState_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Current is the compaction that is running now. It is absent if none is
@@ -1663,7 +1663,7 @@ func (x *ProjectionCompactionsCanceled) ClearHandlerKey() {
 type ProjectionCompactionsCanceled_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of compactions that have ended with the Canceled
@@ -1753,7 +1753,7 @@ func (x *ProjectionCompactionsCompleted) ClearHandlerKey() {
 type ProjectionCompactionsCompleted_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of compactions that have ended with the Success
@@ -1843,7 +1843,7 @@ func (x *ProjectionCompactionsDeadlineExceeded) ClearHandlerKey() {
 type ProjectionCompactionsDeadlineExceeded_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of compactions that have ended with the
@@ -1933,7 +1933,7 @@ func (x *ProjectionCompactionsFailed) ClearHandlerKey() {
 type ProjectionCompactionsFailed_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// HandlerKey is the key of the handler's identity, as the application in
+	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
 	// Value is the number of compactions that have ended with the Error outcome.

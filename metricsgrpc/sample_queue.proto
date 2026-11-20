@@ -96,7 +96,7 @@ message QueueDeadlinesRemoved {
 // The number of the handler's instances that are in progress is the total
 // across the queues, and the instances that are bound to none.
 message ProcessInstanceQueueBindings {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 

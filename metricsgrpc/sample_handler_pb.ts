@@ -27,7 +27,7 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFi
  */
 export type AggregateInstancesInMemory = Message<"dogma.metrics.v1alpha1.AggregateInstancesInMemory"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -58,7 +58,7 @@ export const AggregateInstancesInMemorySchema: GenMessage<AggregateInstancesInMe
  */
 export type ProcessInstancesInMemory = Message<"dogma.metrics.v1alpha1.ProcessInstancesInMemory"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -89,7 +89,7 @@ export const ProcessInstancesInMemorySchema: GenMessage<ProcessInstancesInMemory
  */
 export type HandlerCommandsPending = Message<"dogma.metrics.v1alpha1.HandlerCommandsPending"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -120,7 +120,7 @@ export const HandlerCommandsPendingSchema: GenMessage<HandlerCommandsPending> = 
  */
 export type HandlerCommandsDue = Message<"dogma.metrics.v1alpha1.HandlerCommandsDue"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -151,7 +151,7 @@ export const HandlerCommandsDueSchema: GenMessage<HandlerCommandsDue> = /*@__PUR
  */
 export type HandlerCommandsFailing = Message<"dogma.metrics.v1alpha1.HandlerCommandsFailing"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -182,7 +182,7 @@ export const HandlerCommandsFailingSchema: GenMessage<HandlerCommandsFailing> = 
  */
 export type HandlerCommandsHandled = Message<"dogma.metrics.v1alpha1.HandlerCommandsHandled"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -213,7 +213,7 @@ export const HandlerCommandsHandledSchema: GenMessage<HandlerCommandsHandled> = 
  */
 export type HandlerDeadlinesPending = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesPending"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -243,7 +243,7 @@ export const HandlerDeadlinesPendingSchema: GenMessage<HandlerDeadlinesPending> 
  */
 export type HandlerDeadlinesDue = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesDue"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -274,7 +274,7 @@ export const HandlerDeadlinesDueSchema: GenMessage<HandlerDeadlinesDue> = /*@__P
  */
 export type HandlerDeadlinesFailing = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesFailing"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -305,7 +305,7 @@ export const HandlerDeadlinesFailingSchema: GenMessage<HandlerDeadlinesFailing> 
  */
 export type HandlerDeadlinesHandled = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesHandled"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -338,7 +338,7 @@ export const HandlerDeadlinesHandledSchema: GenMessage<HandlerDeadlinesHandled> 
  */
 export type HandlerDeadlinesCanceled = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesCanceled"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -369,7 +369,7 @@ export const HandlerDeadlinesCanceledSchema: GenMessage<HandlerDeadlinesCanceled
  */
 export type HandlerEventsRecorded = Message<"dogma.metrics.v1alpha1.HandlerEventsRecorded"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -399,7 +399,7 @@ export const HandlerEventsRecordedSchema: GenMessage<HandlerEventsRecorded> = /*
  */
 export type HandlerEventsHandled = Message<"dogma.metrics.v1alpha1.HandlerEventsHandled"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -430,7 +430,7 @@ export const HandlerEventsHandledSchema: GenMessage<HandlerEventsHandled> = /*@_
  */
 export type HandlerEventsPending = Message<"dogma.metrics.v1alpha1.HandlerEventsPending"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -461,7 +461,7 @@ export const HandlerEventsPendingSchema: GenMessage<HandlerEventsPending> = /*@_
  */
 export type HandlerEventsFailing = Message<"dogma.metrics.v1alpha1.HandlerEventsFailing"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -491,7 +491,7 @@ export const HandlerEventsFailingSchema: GenMessage<HandlerEventsFailing> = /*@_
  */
 export type ProcessInstancesEnded = Message<"dogma.metrics.v1alpha1.ProcessInstancesEnded"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -529,7 +529,7 @@ export const ProcessInstancesEndedSchema: GenMessage<ProcessInstancesEnded> = /*
  */
 export type ProjectionCompactionState = Message<"dogma.metrics.v1alpha1.ProjectionCompactionState"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -755,7 +755,7 @@ export const ProjectionCompactionState_PlannedSchema: GenMessage<ProjectionCompa
  */
 export type ProjectionCompactionsCanceled = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsCanceled"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -788,7 +788,7 @@ export const ProjectionCompactionsCanceledSchema: GenMessage<ProjectionCompactio
  */
 export type ProjectionCompactionsCompleted = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsCompleted"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -821,7 +821,7 @@ export const ProjectionCompactionsCompletedSchema: GenMessage<ProjectionCompacti
  */
 export type ProjectionCompactionsDeadlineExceeded = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
@@ -854,7 +854,7 @@ export const ProjectionCompactionsDeadlineExceededSchema: GenMessage<ProjectionC
  */
 export type ProjectionCompactionsFailed = Message<"dogma.metrics.v1alpha1.ProjectionCompactionsFailed"> & {
   /**
-   * HandlerKey is the key of the handler's identity, as the application in
+   * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
    *
    * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;

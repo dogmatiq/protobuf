@@ -27,7 +27,7 @@ message EventStreamLength {
 //
 // The number of the handler's instances is the total across the event streams.
 message AggregateInstanceEventStreamBindings {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 

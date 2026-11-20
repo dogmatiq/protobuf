@@ -11,7 +11,7 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 // that the engine holds in memory, so that it can handle commands for them
 // without loading them from storage.
 message AggregateInstancesInMemory {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -23,7 +23,7 @@ message AggregateInstancesInMemory {
 // the engine holds in memory, so that it can handle events and deadlines for
 // them without loading them from storage.
 message ProcessInstancesInMemory {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -35,7 +35,7 @@ message ProcessInstancesInMemory {
 // waiting to be delivered. The engine sends it only for aggregate and
 // integration handlers.
 message HandlerCommandsPending {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -47,7 +47,7 @@ message HandlerCommandsPending {
 // to be delivered now. The engine sends it only for aggregate and integration
 // handlers.
 message HandlerCommandsDue {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -59,7 +59,7 @@ message HandlerCommandsDue {
 // waiting to be delivered and whose most recent delivery attempt failed. The
 // engine sends it only for aggregate and integration handlers.
 message HandlerCommandsFailing {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -71,7 +71,7 @@ message HandlerCommandsFailing {
 // has handled successfully. The engine sends it only for aggregate and
 // integration handlers.
 message HandlerCommandsHandled {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -83,7 +83,7 @@ message HandlerCommandsHandled {
 // HandlerDeadlinesPending is the number of deadlines for one handler that are
 // waiting to be delivered. The engine sends it only for process handlers.
 message HandlerDeadlinesPending {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -94,7 +94,7 @@ message HandlerDeadlinesPending {
 // HandlerDeadlinesDue is the number of deadlines for one handler that are ready
 // to be delivered now. The engine sends it only for process handlers.
 message HandlerDeadlinesDue {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -106,7 +106,7 @@ message HandlerDeadlinesDue {
 // waiting to be delivered and whose most recent delivery attempt failed. The
 // engine sends it only for process handlers.
 message HandlerDeadlinesFailing {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -118,7 +118,7 @@ message HandlerDeadlinesFailing {
 // handler has handled successfully. The engine sends it only for process
 // handlers.
 message HandlerDeadlinesHandled {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -132,7 +132,7 @@ message HandlerDeadlinesHandled {
 // instance that scheduled them ended. The engine sends it only for process
 // handlers.
 message HandlerDeadlinesCanceled {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -144,7 +144,7 @@ message HandlerDeadlinesCanceled {
 // recorded. The engine sends it only for aggregate and integration handlers,
 // and not for an integration handler that records no events.
 message HandlerEventsRecorded {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -155,7 +155,7 @@ message HandlerEventsRecorded {
 // HandlerEventsHandled is the running total of the events that one handler has
 // handled. The engine sends it only for process and projection handlers.
 message HandlerEventsHandled {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -167,7 +167,7 @@ message HandlerEventsHandled {
 // hasn't handled yet, on the engine's event streams. The engine sends it only
 // for process and projection handlers.
 message HandlerEventsPending {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -179,7 +179,7 @@ message HandlerEventsPending {
 // been handled yet and whose most recent delivery attempt failed. The engine
 // sends it only for process and projection handlers.
 message HandlerEventsFailing {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -190,7 +190,7 @@ message HandlerEventsFailing {
 // ProcessInstancesEnded is the running total of the instances of one process
 // handler that have ended.
 message ProcessInstancesEnded {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -267,7 +267,7 @@ message ProjectionCompactionState {
     google.protobuf.Timestamp starts_at = 1;
   }
 
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -289,7 +289,7 @@ message ProjectionCompactionState {
 //
 // ProjectionCompactionState.Ended.canceled describes that outcome.
 message ProjectionCompactionsCanceled {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -303,7 +303,7 @@ message ProjectionCompactionsCanceled {
 //
 // ProjectionCompactionState.Ended.success describes that outcome.
 message ProjectionCompactionsCompleted {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -317,7 +317,7 @@ message ProjectionCompactionsCompleted {
 //
 // ProjectionCompactionState.Ended.deadline_exceeded describes that outcome.
 message ProjectionCompactionsDeadlineExceeded {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
@@ -331,7 +331,7 @@ message ProjectionCompactionsDeadlineExceeded {
 //
 // ProjectionCompactionState.Ended.error describes that outcome.
 message ProjectionCompactionsFailed {
-  // HandlerKey is the key of the handler's identity, as the application in
+  // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
