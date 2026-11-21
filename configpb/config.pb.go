@@ -524,11 +524,12 @@ type Handler_builder struct {
 	// Only a projection handler can have it, and only if the engine knows whether
 	// the handler supports compaction. It is absent if the engine doesn't know.
 	SupportsCompaction *bool
-	// SupportsReset says whether the handler supports reset, which deletes all
-	// the data of a projection so that the handler builds it again.
+	// SupportsReset says whether the handler supports reset operations, which
+	// delete all the data of a projection so that the handler builds it again.
 	//
 	// Only a projection handler can have it, and only if the engine knows whether
-	// the handler supports reset. It is absent if the engine doesn't know.
+	// the handler supports reset operations. It is absent if the engine doesn't
+	// know.
 	SupportsReset *bool
 }
 

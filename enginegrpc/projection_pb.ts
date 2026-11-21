@@ -184,8 +184,8 @@ export const ProjectionAPI: GenService<{
    * events of the application.
    *
    * A successful call means only that the engine has accepted the request. The
-   * reset may still fail afterwards, for example if the handler returns an
-   * error.
+   * reset operation may still fail afterwards, for example if the handler
+   * returns an error.
    *
    * If the engine runs as a cluster, the node that serves the call passes the
    * request to the node that does the work, or fails the call with UNAVAILABLE.
@@ -193,7 +193,7 @@ export const ProjectionAPI: GenService<{
    * An identity key that is missing or invalid, or that belongs to a handler of
    * another type, results in INVALID_ARGUMENT. An unknown identity key results
    * in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
-   * support reset, results in FAILED_PRECONDITION.
+   * support reset operations, results in FAILED_PRECONDITION.
    *
    * @generated from rpc dogma.engine.v1alpha1.ProjectionAPI.Reset
    */

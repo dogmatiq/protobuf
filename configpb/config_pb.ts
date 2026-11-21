@@ -138,11 +138,12 @@ export type Handler = Message<"dogma.config.v1alpha1.Handler"> & {
   supportsCompaction: boolean;
 
   /**
-   * SupportsReset says whether the handler supports reset, which deletes all
-   * the data of a projection so that the handler builds it again.
+   * SupportsReset says whether the handler supports reset operations, which
+   * delete all the data of a projection so that the handler builds it again.
    *
    * Only a projection handler can have it, and only if the engine knows whether
-   * the handler supports reset. It is absent if the engine doesn't know.
+   * the handler supports reset operations. It is absent if the engine doesn't
+   * know.
    *
    * @generated from field: bool supports_reset = 8 [features.field_presence = EXPLICIT];
    */
