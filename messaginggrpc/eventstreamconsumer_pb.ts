@@ -16,7 +16,75 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer: GenFile = /*@__PURE__*/
-  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIhkKF0xpc3RFdmVudFN0cmVhbXNSZXF1ZXN0IlIKGExpc3RFdmVudFN0cmVhbXNSZXNwb25zZRI2Cg1ldmVudF9zdHJlYW1zGAEgAygLMh8uZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtIlYKC0V2ZW50U3RyZWFtEjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFQoGbGVuZ3RoGAIgASgEQgWqAQIIAiK2AQoXUmVhZEV2ZW50U2VnbWVudFJlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggBEjEKBmZpbHRlchgEIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIsoBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEhUKDXN0cmVhbV9sZW5ndGgYByABKAQSMwoJZW52ZWxvcGVzGAQgAygLMiAuZG9nbWEucHJvdG9idWYudjEuTXVsdGlFbnZlbG9wZTKwAwoWRXZlbnRTdHJlYW1Db25zdW1lckFQSRJtChBMaXN0RXZlbnRTdHJlYW1zEisuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXF1ZXN0GiwuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXNwb25zZRJfCgtXYXRjaEV2ZW50cxImLmRvZ21hLm1lc3NhZ2luZy52MS5XYXRjaEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAESXQoKUmVhZEV2ZW50cxIlLmRvZ21hLm1lc3NhZ2luZy52MS5SZWFkRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwARJnChBSZWFkRXZlbnRTZWdtZW50EisuZG9nbWEubWVzc2FnaW5nLnYxLlJlYWRFdmVudFNlZ21lbnRSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudEIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
+  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIhkKF0xpc3RFdmVudFN0cmVhbXNSZXF1ZXN0IlIKGExpc3RFdmVudFN0cmVhbXNSZXNwb25zZRI2Cg1ldmVudF9zdHJlYW1zGAEgAygLMh8uZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtIlYKC0V2ZW50U3RyZWFtEjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFQoGbGVuZ3RoGAIgASgEQgWqAQIIAiJHChJXYXRjaEV2ZW50c1JlcXVlc3QSMQoGZmlsdGVyGAEgASgLMiEuZG9nbWEubWVzc2FnaW5nLnYxLk1lc3NhZ2VGaWx0ZXIilQEKEVJlYWRFdmVudHNSZXF1ZXN0EjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSGwoMYmVnaW5fb2Zmc2V0GAIgASgEQgWqAQIIAhIxCgZmaWx0ZXIYAyABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciK2AQoXUmVhZEV2ZW50U2VnbWVudFJlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggBEjEKBmZpbHRlchgEIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIsoBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEhUKDXN0cmVhbV9sZW5ndGgYByABKAQSMwoJZW52ZWxvcGVzGAQgAygLMiAuZG9nbWEucHJvdG9idWYudjEuTXVsdGlFbnZlbG9wZTKwAwoWRXZlbnRTdHJlYW1Db25zdW1lckFQSRJtChBMaXN0RXZlbnRTdHJlYW1zEisuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXF1ZXN0GiwuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXNwb25zZRJfCgtXYXRjaEV2ZW50cxImLmRvZ21hLm1lc3NhZ2luZy52MS5XYXRjaEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAESXQoKUmVhZEV2ZW50cxIlLmRvZ21hLm1lc3NhZ2luZy52MS5SZWFkRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwARJnChBSZWFkRXZlbnRTZWdtZW50EisuZG9nbWEubWVzc2FnaW5nLnYxLlJlYWRFdmVudFNlZ21lbnRSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudEIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
+
+/**
+ * ListEventStreamsRequest is the input to the
+ * [EventStreamConsumerAPI.ListEventStreams] method.
+ *
+ * @generated from message dogma.messaging.v1.ListEventStreamsRequest
+ */
+export type ListEventStreamsRequest = Message<"dogma.messaging.v1.ListEventStreamsRequest"> & {
+};
+
+/**
+ * Describes the message dogma.messaging.v1.ListEventStreamsRequest.
+ * Use `create(ListEventStreamsRequestSchema)` to create a new message.
+ */
+export const ListEventStreamsRequestSchema: GenMessage<ListEventStreamsRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 0);
+
+/**
+ * ListEventStreamsResponse is the output of the
+ * [EventStreamConsumerAPI.ListEventStreams] method.
+ *
+ * @generated from message dogma.messaging.v1.ListEventStreamsResponse
+ */
+export type ListEventStreamsResponse = Message<"dogma.messaging.v1.ListEventStreamsResponse"> & {
+  /**
+   * EventStreams holds each stream once, in any order.
+   *
+   * @generated from field: repeated dogma.messaging.v1.EventStream event_streams = 1;
+   */
+  eventStreams: EventStream[];
+};
+
+/**
+ * Describes the message dogma.messaging.v1.ListEventStreamsResponse.
+ * Use `create(ListEventStreamsResponseSchema)` to create a new message.
+ */
+export const ListEventStreamsResponseSchema: GenMessage<ListEventStreamsResponse> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 1);
+
+/**
+ * EventStream describes one event stream.
+ *
+ * @generated from message dogma.messaging.v1.EventStream
+ */
+export type EventStream = Message<"dogma.messaging.v1.EventStream"> & {
+  /**
+   * EventStreamId is the ID of the stream.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
+   */
+  eventStreamId?: UUID | undefined;
+
+  /**
+   * Length is the number of events in the stream, which is also the offset at
+   * which the next event will be appended. It is zero if the stream has no
+   * events.
+   *
+   * @generated from field: uint64 length = 2 [features.field_presence = IMPLICIT];
+   */
+  length: bigint;
+};
+
+/**
+ * Describes the message dogma.messaging.v1.EventStream.
+ * Use `create(EventStreamSchema)` to create a new message.
+ */
+export const EventStreamSchema: GenMessage<EventStream> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 2);
 
 /**
  * WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
@@ -38,7 +106,7 @@ export type WatchEventsRequest = Message<"dogma.messaging.v1.WatchEventsRequest"
  * Use `create(WatchEventsRequestSchema)` to create a new message.
  */
 export const WatchEventsRequestSchema: GenMessage<WatchEventsRequest> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 3);
 
 /**
  * ReadEventsRequest is the input to the [EventStreamConsumerAPI.ReadEvents]
@@ -76,74 +144,6 @@ export type ReadEventsRequest = Message<"dogma.messaging.v1.ReadEventsRequest"> 
  * Use `create(ReadEventsRequestSchema)` to create a new message.
  */
 export const ReadEventsRequestSchema: GenMessage<ReadEventsRequest> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 1);
-
-/**
- * ListEventStreamsRequest is the input to the
- * [EventStreamConsumerAPI.ListEventStreams] method.
- *
- * @generated from message dogma.messaging.v1.ListEventStreamsRequest
- */
-export type ListEventStreamsRequest = Message<"dogma.messaging.v1.ListEventStreamsRequest"> & {
-};
-
-/**
- * Describes the message dogma.messaging.v1.ListEventStreamsRequest.
- * Use `create(ListEventStreamsRequestSchema)` to create a new message.
- */
-export const ListEventStreamsRequestSchema: GenMessage<ListEventStreamsRequest> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 2);
-
-/**
- * ListEventStreamsResponse is the output of the
- * [EventStreamConsumerAPI.ListEventStreams] method.
- *
- * @generated from message dogma.messaging.v1.ListEventStreamsResponse
- */
-export type ListEventStreamsResponse = Message<"dogma.messaging.v1.ListEventStreamsResponse"> & {
-  /**
-   * EventStreams holds each stream once, in any order.
-   *
-   * @generated from field: repeated dogma.messaging.v1.EventStream event_streams = 1;
-   */
-  eventStreams: EventStream[];
-};
-
-/**
- * Describes the message dogma.messaging.v1.ListEventStreamsResponse.
- * Use `create(ListEventStreamsResponseSchema)` to create a new message.
- */
-export const ListEventStreamsResponseSchema: GenMessage<ListEventStreamsResponse> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 3);
-
-/**
- * EventStream describes one event stream.
- *
- * @generated from message dogma.messaging.v1.EventStream
- */
-export type EventStream = Message<"dogma.messaging.v1.EventStream"> & {
-  /**
-   * EventStreamId is the ID of the stream.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
-   */
-  eventStreamId?: UUID | undefined;
-
-  /**
-   * Length is the number of events in the stream, which is also the offset at
-   * which the next event will be appended. It is zero if the stream has no
-   * events.
-   *
-   * @generated from field: uint64 length = 2 [features.field_presence = IMPLICIT];
-   */
-  length: bigint;
-};
-
-/**
- * Describes the message dogma.messaging.v1.EventStream.
- * Use `create(EventStreamSchema)` to create a new message.
- */
-export const EventStreamSchema: GenMessage<EventStream> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer, 4);
 
 /**

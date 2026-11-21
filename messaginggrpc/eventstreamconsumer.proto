@@ -84,28 +84,6 @@ service EventStreamConsumerAPI {
   rpc ReadEventSegment(ReadEventSegmentRequest) returns (EventStreamSegment);
 }
 
-// WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
-// method.
-message WatchEventsRequest {
-  // Filter describes the events to deliver.
-  MessageFilter filter = 1;
-}
-
-// ReadEventsRequest is the input to the [EventStreamConsumerAPI.ReadEvents]
-// method.
-message ReadEventsRequest {
-  // EventStreamId is the ID of the stream from which events are read.
-  dogma.protobuf.v1.UUID event_stream_id = 1;
-
-  // BeginOffset is the offset from which events are read. The first segment
-  // begins at this offset. Events from this offset to the end of the stream
-  // are delivered, then the call is closed.
-  uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
-
-  // Filter describes the events to deliver.
-  MessageFilter filter = 3;
-}
-
 // ListEventStreamsRequest is the input to the
 // [EventStreamConsumerAPI.ListEventStreams] method.
 message ListEventStreamsRequest {}
@@ -126,6 +104,28 @@ message EventStream {
   // which the next event will be appended. It is zero if the stream has no
   // events.
   uint64 length = 2 [features.field_presence = IMPLICIT];
+}
+
+// WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
+// method.
+message WatchEventsRequest {
+  // Filter describes the events to deliver.
+  MessageFilter filter = 1;
+}
+
+// ReadEventsRequest is the input to the [EventStreamConsumerAPI.ReadEvents]
+// method.
+message ReadEventsRequest {
+  // EventStreamId is the ID of the stream from which events are read.
+  dogma.protobuf.v1.UUID event_stream_id = 1;
+
+  // BeginOffset is the offset from which events are read. The first segment
+  // begins at this offset. Events from this offset to the end of the stream
+  // are delivered, then the call is closed.
+  uint64 begin_offset = 2 [features.field_presence = IMPLICIT];
+
+  // Filter describes the events to deliver.
+  MessageFilter filter = 3;
 }
 
 // ReadEventSegmentRequest is the input to the

@@ -17,110 +17,6 @@ import (
 	proto "google.golang.org/protobuf/proto"
 )
 
-type WatchEventsRequestBuilder struct {
-	prototype WatchEventsRequest
-}
-
-// NewWatchEventsRequestBuilder returns a builder that constructs [WatchEventsRequest] messages.
-func NewWatchEventsRequestBuilder() *WatchEventsRequestBuilder {
-	return &WatchEventsRequestBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *WatchEventsRequestBuilder) From(x *WatchEventsRequest) *WatchEventsRequestBuilder {
-	proto.Reset(&b.prototype)
-	if x.HasFilter() {
-		b.prototype.SetFilter(x.GetFilter())
-	}
-	return b
-}
-
-// Build returns a new [WatchEventsRequest] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *WatchEventsRequestBuilder) Build() *WatchEventsRequest {
-	m := &WatchEventsRequest{}
-	if b.prototype.HasFilter() {
-		m.SetFilter(b.prototype.GetFilter())
-	}
-	return m
-}
-
-// WithFilter configures the builder to set the Filter field to v,
-// then returns b.
-func (b *WatchEventsRequestBuilder) WithFilter(v *MessageFilter) *WatchEventsRequestBuilder {
-	b.prototype.SetFilter(v)
-	return b
-}
-
-type ReadEventsRequestBuilder struct {
-	prototype ReadEventsRequest
-}
-
-// NewReadEventsRequestBuilder returns a builder that constructs [ReadEventsRequest] messages.
-func NewReadEventsRequestBuilder() *ReadEventsRequestBuilder {
-	return &ReadEventsRequestBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *ReadEventsRequestBuilder) From(x *ReadEventsRequest) *ReadEventsRequestBuilder {
-	proto.Reset(&b.prototype)
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
-	}
-	b.prototype.SetBeginOffset(x.GetBeginOffset())
-	if x.HasFilter() {
-		b.prototype.SetFilter(x.GetFilter())
-	}
-	return b
-}
-
-// Build returns a new [ReadEventsRequest] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *ReadEventsRequestBuilder) Build() *ReadEventsRequest {
-	m := &ReadEventsRequest{}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
-	}
-	m.SetBeginOffset(b.prototype.GetBeginOffset())
-	if b.prototype.HasFilter() {
-		m.SetFilter(b.prototype.GetFilter())
-	}
-	return m
-}
-
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
-// then returns b.
-func (b *ReadEventsRequestBuilder) WithEventStreamId(v *uuidpb.UUID) *ReadEventsRequestBuilder {
-	b.prototype.SetEventStreamId(v)
-	return b
-}
-
-// WithBeginOffset configures the builder to set the BeginOffset field to v,
-// then returns b.
-func (b *ReadEventsRequestBuilder) WithBeginOffset(v uint64) *ReadEventsRequestBuilder {
-	b.prototype.SetBeginOffset(v)
-	return b
-}
-
-// WithFilter configures the builder to set the Filter field to v,
-// then returns b.
-func (b *ReadEventsRequestBuilder) WithFilter(v *MessageFilter) *ReadEventsRequestBuilder {
-	b.prototype.SetFilter(v)
-	return b
-}
-
 type ListEventStreamsRequestBuilder struct {
 	prototype ListEventStreamsRequest
 }
@@ -233,6 +129,110 @@ func (b *EventStreamBuilder) WithEventStreamId(v *uuidpb.UUID) *EventStreamBuild
 // then returns b.
 func (b *EventStreamBuilder) WithLength(v uint64) *EventStreamBuilder {
 	b.prototype.SetLength(v)
+	return b
+}
+
+type WatchEventsRequestBuilder struct {
+	prototype WatchEventsRequest
+}
+
+// NewWatchEventsRequestBuilder returns a builder that constructs [WatchEventsRequest] messages.
+func NewWatchEventsRequestBuilder() *WatchEventsRequestBuilder {
+	return &WatchEventsRequestBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *WatchEventsRequestBuilder) From(x *WatchEventsRequest) *WatchEventsRequestBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasFilter() {
+		b.prototype.SetFilter(x.GetFilter())
+	}
+	return b
+}
+
+// Build returns a new [WatchEventsRequest] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *WatchEventsRequestBuilder) Build() *WatchEventsRequest {
+	m := &WatchEventsRequest{}
+	if b.prototype.HasFilter() {
+		m.SetFilter(b.prototype.GetFilter())
+	}
+	return m
+}
+
+// WithFilter configures the builder to set the Filter field to v,
+// then returns b.
+func (b *WatchEventsRequestBuilder) WithFilter(v *MessageFilter) *WatchEventsRequestBuilder {
+	b.prototype.SetFilter(v)
+	return b
+}
+
+type ReadEventsRequestBuilder struct {
+	prototype ReadEventsRequest
+}
+
+// NewReadEventsRequestBuilder returns a builder that constructs [ReadEventsRequest] messages.
+func NewReadEventsRequestBuilder() *ReadEventsRequestBuilder {
+	return &ReadEventsRequestBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ReadEventsRequestBuilder) From(x *ReadEventsRequest) *ReadEventsRequestBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasEventStreamId() {
+		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	}
+	b.prototype.SetBeginOffset(x.GetBeginOffset())
+	if x.HasFilter() {
+		b.prototype.SetFilter(x.GetFilter())
+	}
+	return b
+}
+
+// Build returns a new [ReadEventsRequest] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ReadEventsRequestBuilder) Build() *ReadEventsRequest {
+	m := &ReadEventsRequest{}
+	if b.prototype.HasEventStreamId() {
+		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	}
+	m.SetBeginOffset(b.prototype.GetBeginOffset())
+	if b.prototype.HasFilter() {
+		m.SetFilter(b.prototype.GetFilter())
+	}
+	return m
+}
+
+// WithEventStreamId configures the builder to set the EventStreamId field to v,
+// then returns b.
+func (b *ReadEventsRequestBuilder) WithEventStreamId(v *uuidpb.UUID) *ReadEventsRequestBuilder {
+	b.prototype.SetEventStreamId(v)
+	return b
+}
+
+// WithBeginOffset configures the builder to set the BeginOffset field to v,
+// then returns b.
+func (b *ReadEventsRequestBuilder) WithBeginOffset(v uint64) *ReadEventsRequestBuilder {
+	b.prototype.SetBeginOffset(v)
+	return b
+}
+
+// WithFilter configures the builder to set the Filter field to v,
+// then returns b.
+func (b *ReadEventsRequestBuilder) WithFilter(v *MessageFilter) *ReadEventsRequestBuilder {
+	b.prototype.SetFilter(v)
 	return b
 }
 
@@ -391,152 +391,6 @@ func (b *EventStreamSegmentBuilder) WithStreamLength(v uint64) *EventStreamSegme
 func (b *EventStreamSegmentBuilder) WithEnvelopes(v []*envelopepb.MultiEnvelope) *EventStreamSegmentBuilder {
 	b.prototype.SetEnvelopes(v)
 	return b
-}
-
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *WatchEventsRequest) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = WatchEventsRequest
-	type WatchEventsRequest realType
-	fmt.Fprintf(f, format, (*WatchEventsRequest)(x))
-}
-
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *ReadEventsRequest) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = ReadEventsRequest
-	type ReadEventsRequest realType
-	fmt.Fprintf(f, format, (*ReadEventsRequest)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -771,6 +625,152 @@ func (x *EventStream) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
+func (x *WatchEventsRequest) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = WatchEventsRequest
+	type WatchEventsRequest realType
+	fmt.Fprintf(f, format, (*WatchEventsRequest)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ReadEventsRequest) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ReadEventsRequest
+	type ReadEventsRequest realType
+	fmt.Fprintf(f, format, (*ReadEventsRequest)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
 func (x *ReadEventSegmentRequest) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
@@ -956,38 +956,6 @@ func (c *EventStreamConsumerAPIClientStub) ReadEventSegment(ctx context.Context,
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*WatchEventsRequest] to implement [encoding.BinaryMarshaler].
-func (x *WatchEventsRequest) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*WatchEventsRequest] to implement [encoding.BinaryUnmarshaler].
-func (x *WatchEventsRequest) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*ReadEventsRequest] to implement [encoding.BinaryMarshaler].
-func (x *ReadEventsRequest) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*ReadEventsRequest] to implement [encoding.BinaryUnmarshaler].
-func (x *ReadEventsRequest) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
 // It allows [*ListEventStreamsRequest] to implement [encoding.BinaryMarshaler].
 func (x *ListEventStreamsRequest) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
@@ -1030,6 +998,38 @@ func (x *EventStream) MarshalBinary() ([]byte, error) {
 //
 // It allows [*EventStream] to implement [encoding.BinaryUnmarshaler].
 func (x *EventStream) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*WatchEventsRequest] to implement [encoding.BinaryMarshaler].
+func (x *WatchEventsRequest) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*WatchEventsRequest] to implement [encoding.BinaryUnmarshaler].
+func (x *WatchEventsRequest) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ReadEventsRequest] to implement [encoding.BinaryMarshaler].
+func (x *ReadEventsRequest) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ReadEventsRequest] to implement [encoding.BinaryUnmarshaler].
+func (x *ReadEventsRequest) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
