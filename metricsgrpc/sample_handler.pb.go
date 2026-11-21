@@ -1429,11 +1429,9 @@ func (b0 ProcessInstancesEnded_builder) Build() *ProcessInstancesEnded {
 	return m0
 }
 
-// ProjectionCompactionState is the state of compaction for one projection
-// handler.
-//
-// It describes the compaction that is running now, the most recent one that
-// ended, and the one that the engine plans to start next.
+// ProjectionCompactionState describes the compactions of one projection
+// handler: the compaction that is running now, the most recent compaction that
+// ended, and the compaction that the engine plans to start next.
 //
 // ProjectionCompactionState describes one compaction at a time. An engine isn't
 // expected to compact a handler more than once at a time, because the
