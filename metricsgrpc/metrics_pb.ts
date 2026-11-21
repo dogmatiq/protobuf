@@ -164,6 +164,7 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * - ProjectionCompactionsCompleted
  * - ProjectionCompactionsDeadlineExceeded
  * - ProjectionCompactionsFailed
+ * - ProjectionResetState
  * - QueueCommandsDue
  * - QueueCommandsFailing
  * - QueueCommandsPending

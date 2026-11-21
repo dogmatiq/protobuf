@@ -338,3 +338,80 @@ message ProjectionCompactionsFailed {
   // Value is the number of compactions that have ended with the Error outcome.
   uint64 value = 2 [features.field_presence = IMPLICIT];
 }
+
+// ProjectionResetState describes the reset operations of one projection
+// handler: the reset operation that is running now, the most recent reset
+// operation that ended, and the reset operation that the engine plans to start
+// next.
+//
+// A reset operation ends when the handler's Reset method returns, before the
+// projection is rebuilt.
+//
+// ProjectionResetState describes one reset operation at a time. An engine that
+// resets a handler more than once at a time should leave ProjectionResetState
+// out.
+message ProjectionResetState {
+  // Running is a reset operation that is running.
+  message Running {
+    // StartedAt is the time at which the reset operation started, by the
+    // engine's own clock. It is required.
+    google.protobuf.Timestamp started_at = 1;
+  }
+
+  // Ended is a reset operation that has ended.
+  message Ended {
+    // Success is the outcome of a reset operation that the handler completed.
+    message Success {}
+
+    // Error is the outcome of a reset operation that stopped because the
+    // handler reported an error.
+    message Error {
+      // Message is the text of the error, for a person to read.
+      string message = 1 [features.field_presence = IMPLICIT];
+    }
+
+    // DeadlineExceeded is the outcome of a reset operation that stopped because
+    // its deadline passed.
+    message DeadlineExceeded {}
+
+    // Canceled is the outcome of a reset operation that stopped because it was
+    // canceled, for example because the engine is shutting down.
+    message Canceled {}
+
+    // Outcome is how the reset operation ended. It is required.
+    oneof outcome {
+      Success          success           = 1;
+      Error            error             = 2;
+      DeadlineExceeded deadline_exceeded = 3;
+      Canceled         canceled          = 4;
+    }
+
+    // Interval is the time during which the reset operation ran. It is present
+    // only if the engine reports when the reset operation ran.
+    Interval interval = 5;
+  }
+
+  // Planned is a reset operation that the engine plans to start.
+  message Planned {
+    // StartsAt is the time at which the engine plans to start the reset
+    // operation, by the engine's own clock. It is present only if the engine
+    // can tell when.
+    google.protobuf.Timestamp starts_at = 1;
+  }
+
+  // HandlerKey is the handler's identity key, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Current is the reset operation that is running now. It is present only
+  // while a reset operation is running.
+  Running current = 2;
+
+  // Previous is the most recent reset operation that ended. It is present only
+  // if a reset operation has ended and the engine reports it.
+  Ended previous = 3;
+
+  // Next is the reset operation that the engine plans to start next. It is
+  // present only if the engine plans to reset the handler.
+  Planned next = 4;
+}

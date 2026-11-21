@@ -1949,6 +1949,168 @@ func (b0 ProjectionCompactionsFailed_builder) Build() *ProjectionCompactionsFail
 	return m0
 }
 
+// ProjectionResetState describes the reset operations of one projection
+// handler: the reset operation that is running now, the most recent reset
+// operation that ended, and the reset operation that the engine plans to start
+// next.
+//
+// A reset operation ends when the handler's Reset method returns, before the
+// projection is rebuilt.
+//
+// ProjectionResetState describes one reset operation at a time. An engine that
+// resets a handler more than once at a time should leave ProjectionResetState
+// out.
+type ProjectionResetState struct {
+	state                 protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey *uuidpb.UUID                  `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_Current    *ProjectionResetState_Running `protobuf:"bytes,2,opt,name=current"`
+	xxx_hidden_Previous   *ProjectionResetState_Ended   `protobuf:"bytes,3,opt,name=previous"`
+	xxx_hidden_Next       *ProjectionResetState_Planned `protobuf:"bytes,4,opt,name=next"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState) Reset() {
+	*x = ProjectionResetState{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState) ProtoMessage() {}
+
+func (x *ProjectionResetState) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionResetState) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *ProjectionResetState) GetCurrent() *ProjectionResetState_Running {
+	if x != nil {
+		return x.xxx_hidden_Current
+	}
+	return nil
+}
+
+func (x *ProjectionResetState) GetPrevious() *ProjectionResetState_Ended {
+	if x != nil {
+		return x.xxx_hidden_Previous
+	}
+	return nil
+}
+
+func (x *ProjectionResetState) GetNext() *ProjectionResetState_Planned {
+	if x != nil {
+		return x.xxx_hidden_Next
+	}
+	return nil
+}
+
+func (x *ProjectionResetState) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *ProjectionResetState) SetCurrent(v *ProjectionResetState_Running) {
+	x.xxx_hidden_Current = v
+}
+
+func (x *ProjectionResetState) SetPrevious(v *ProjectionResetState_Ended) {
+	x.xxx_hidden_Previous = v
+}
+
+func (x *ProjectionResetState) SetNext(v *ProjectionResetState_Planned) {
+	x.xxx_hidden_Next = v
+}
+
+func (x *ProjectionResetState) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *ProjectionResetState) HasCurrent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Current != nil
+}
+
+func (x *ProjectionResetState) HasPrevious() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Previous != nil
+}
+
+func (x *ProjectionResetState) HasNext() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Next != nil
+}
+
+func (x *ProjectionResetState) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *ProjectionResetState) ClearCurrent() {
+	x.xxx_hidden_Current = nil
+}
+
+func (x *ProjectionResetState) ClearPrevious() {
+	x.xxx_hidden_Previous = nil
+}
+
+func (x *ProjectionResetState) ClearNext() {
+	x.xxx_hidden_Next = nil
+}
+
+type ProjectionResetState_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the handler's identity key, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// Current is the reset operation that is running now. It is present only
+	// while a reset operation is running.
+	Current *ProjectionResetState_Running
+	// Previous is the most recent reset operation that ended. It is present only
+	// if a reset operation has ended and the engine reports it.
+	Previous *ProjectionResetState_Ended
+	// Next is the reset operation that the engine plans to start next. It is
+	// present only if the engine plans to reset the handler.
+	Next *ProjectionResetState_Planned
+}
+
+func (b0 ProjectionResetState_builder) Build() *ProjectionResetState {
+	m0 := &ProjectionResetState{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_Current = b.Current
+	x.xxx_hidden_Previous = b.Previous
+	x.xxx_hidden_Next = b.Next
+	return m0
+}
+
 // Running is a compaction that is running.
 type ProjectionCompactionState_Running struct {
 	state                protoimpl.MessageState `protogen:"opaque.v1"`
@@ -1959,7 +2121,7 @@ type ProjectionCompactionState_Running struct {
 
 func (x *ProjectionCompactionState_Running) Reset() {
 	*x = ProjectionCompactionState_Running{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[21]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1971,7 +2133,7 @@ func (x *ProjectionCompactionState_Running) String() string {
 func (*ProjectionCompactionState_Running) ProtoMessage() {}
 
 func (x *ProjectionCompactionState_Running) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[21]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2031,7 +2193,7 @@ type ProjectionCompactionState_Ended struct {
 
 func (x *ProjectionCompactionState_Ended) Reset() {
 	*x = ProjectionCompactionState_Ended{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2043,7 +2205,7 @@ func (x *ProjectionCompactionState_Ended) String() string {
 func (*ProjectionCompactionState_Ended) ProtoMessage() {}
 
 func (x *ProjectionCompactionState_Ended) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2274,7 +2436,7 @@ func (b0 ProjectionCompactionState_Ended_builder) Build() *ProjectionCompactionS
 type case_ProjectionCompactionState_Ended_Outcome protoreflect.FieldNumber
 
 func (x case_ProjectionCompactionState_Ended_Outcome) String() string {
-	md := file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22].Descriptor()
+	md := file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -2320,7 +2482,7 @@ type ProjectionCompactionState_Planned struct {
 
 func (x *ProjectionCompactionState_Planned) Reset() {
 	*x = ProjectionCompactionState_Planned{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2332,7 +2494,7 @@ func (x *ProjectionCompactionState_Planned) String() string {
 func (*ProjectionCompactionState_Planned) ProtoMessage() {}
 
 func (x *ProjectionCompactionState_Planned) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2394,7 +2556,7 @@ type ProjectionCompactionState_Ended_Success struct {
 
 func (x *ProjectionCompactionState_Ended_Success) Reset() {
 	*x = ProjectionCompactionState_Ended_Success{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[24]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2406,7 +2568,7 @@ func (x *ProjectionCompactionState_Ended_Success) String() string {
 func (*ProjectionCompactionState_Ended_Success) ProtoMessage() {}
 
 func (x *ProjectionCompactionState_Ended_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[24]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2440,7 +2602,7 @@ type ProjectionCompactionState_Ended_Error struct {
 
 func (x *ProjectionCompactionState_Ended_Error) Reset() {
 	*x = ProjectionCompactionState_Ended_Error{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[25]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2452,7 +2614,7 @@ func (x *ProjectionCompactionState_Ended_Error) String() string {
 func (*ProjectionCompactionState_Ended_Error) ProtoMessage() {}
 
 func (x *ProjectionCompactionState_Ended_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[25]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2503,7 +2665,7 @@ type ProjectionCompactionState_Ended_DeadlineExceeded struct {
 
 func (x *ProjectionCompactionState_Ended_DeadlineExceeded) Reset() {
 	*x = ProjectionCompactionState_Ended_DeadlineExceeded{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[26]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2515,7 +2677,7 @@ func (x *ProjectionCompactionState_Ended_DeadlineExceeded) String() string {
 func (*ProjectionCompactionState_Ended_DeadlineExceeded) ProtoMessage() {}
 
 func (x *ProjectionCompactionState_Ended_DeadlineExceeded) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[26]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2551,7 +2713,7 @@ type ProjectionCompactionState_Ended_Canceled struct {
 
 func (x *ProjectionCompactionState_Ended_Canceled) Reset() {
 	*x = ProjectionCompactionState_Ended_Canceled{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[27]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2563,7 +2725,7 @@ func (x *ProjectionCompactionState_Ended_Canceled) String() string {
 func (*ProjectionCompactionState_Ended_Canceled) ProtoMessage() {}
 
 func (x *ProjectionCompactionState_Ended_Canceled) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[27]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2581,6 +2743,632 @@ type ProjectionCompactionState_Ended_Canceled_builder struct {
 
 func (b0 ProjectionCompactionState_Ended_Canceled_builder) Build() *ProjectionCompactionState_Ended_Canceled {
 	m0 := &ProjectionCompactionState_Ended_Canceled{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+// Running is a reset operation that is running.
+type ProjectionResetState_Running struct {
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StartedAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=started_at,json=startedAt"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState_Running) Reset() {
+	*x = ProjectionResetState_Running{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState_Running) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState_Running) ProtoMessage() {}
+
+func (x *ProjectionResetState_Running) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionResetState_Running) GetStartedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_StartedAt
+	}
+	return nil
+}
+
+func (x *ProjectionResetState_Running) SetStartedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartedAt = v
+}
+
+func (x *ProjectionResetState_Running) HasStartedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartedAt != nil
+}
+
+func (x *ProjectionResetState_Running) ClearStartedAt() {
+	x.xxx_hidden_StartedAt = nil
+}
+
+type ProjectionResetState_Running_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// StartedAt is the time at which the reset operation started, by the
+	// engine's own clock. It is required.
+	StartedAt *timestamppb.Timestamp
+}
+
+func (b0 ProjectionResetState_Running_builder) Build() *ProjectionResetState_Running {
+	m0 := &ProjectionResetState_Running{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StartedAt = b.StartedAt
+	return m0
+}
+
+// Ended is a reset operation that has ended.
+type ProjectionResetState_Ended struct {
+	state               protoimpl.MessageState               `protogen:"opaque.v1"`
+	xxx_hidden_Outcome  isProjectionResetState_Ended_Outcome `protobuf_oneof:"outcome"`
+	xxx_hidden_Interval *Interval                            `protobuf:"bytes,5,opt,name=interval"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState_Ended) Reset() {
+	*x = ProjectionResetState_Ended{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState_Ended) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState_Ended) ProtoMessage() {}
+
+func (x *ProjectionResetState_Ended) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionResetState_Ended) GetSuccess() *ProjectionResetState_Ended_Success {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Success_); ok {
+			return x.Success
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionResetState_Ended) GetError() *ProjectionResetState_Ended_Error {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Error_); ok {
+			return x.Error
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionResetState_Ended) GetDeadlineExceeded() *ProjectionResetState_Ended_DeadlineExceeded {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_DeadlineExceeded_); ok {
+			return x.DeadlineExceeded
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionResetState_Ended) GetCanceled() *ProjectionResetState_Ended_Canceled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Canceled_); ok {
+			return x.Canceled
+		}
+	}
+	return nil
+}
+
+func (x *ProjectionResetState_Ended) GetInterval() *Interval {
+	if x != nil {
+		return x.xxx_hidden_Interval
+	}
+	return nil
+}
+
+func (x *ProjectionResetState_Ended) SetSuccess(v *ProjectionResetState_Ended_Success) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionResetState_Ended_Success_{v}
+}
+
+func (x *ProjectionResetState_Ended) SetError(v *ProjectionResetState_Ended_Error) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionResetState_Ended_Error_{v}
+}
+
+func (x *ProjectionResetState_Ended) SetDeadlineExceeded(v *ProjectionResetState_Ended_DeadlineExceeded) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionResetState_Ended_DeadlineExceeded_{v}
+}
+
+func (x *ProjectionResetState_Ended) SetCanceled(v *ProjectionResetState_Ended_Canceled) {
+	if v == nil {
+		x.xxx_hidden_Outcome = nil
+		return
+	}
+	x.xxx_hidden_Outcome = &projectionResetState_Ended_Canceled_{v}
+}
+
+func (x *ProjectionResetState_Ended) SetInterval(v *Interval) {
+	x.xxx_hidden_Interval = v
+}
+
+func (x *ProjectionResetState_Ended) HasOutcome() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Outcome != nil
+}
+
+func (x *ProjectionResetState_Ended) HasSuccess() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Success_)
+	return ok
+}
+
+func (x *ProjectionResetState_Ended) HasError() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Error_)
+	return ok
+}
+
+func (x *ProjectionResetState_Ended) HasDeadlineExceeded() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_DeadlineExceeded_)
+	return ok
+}
+
+func (x *ProjectionResetState_Ended) HasCanceled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Canceled_)
+	return ok
+}
+
+func (x *ProjectionResetState_Ended) HasInterval() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Interval != nil
+}
+
+func (x *ProjectionResetState_Ended) ClearOutcome() {
+	x.xxx_hidden_Outcome = nil
+}
+
+func (x *ProjectionResetState_Ended) ClearSuccess() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Success_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionResetState_Ended) ClearError() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Error_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionResetState_Ended) ClearDeadlineExceeded() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_DeadlineExceeded_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionResetState_Ended) ClearCanceled() {
+	if _, ok := x.xxx_hidden_Outcome.(*projectionResetState_Ended_Canceled_); ok {
+		x.xxx_hidden_Outcome = nil
+	}
+}
+
+func (x *ProjectionResetState_Ended) ClearInterval() {
+	x.xxx_hidden_Interval = nil
+}
+
+const ProjectionResetState_Ended_Outcome_not_set_case case_ProjectionResetState_Ended_Outcome = 0
+const ProjectionResetState_Ended_Success_case case_ProjectionResetState_Ended_Outcome = 1
+const ProjectionResetState_Ended_Error_case case_ProjectionResetState_Ended_Outcome = 2
+const ProjectionResetState_Ended_DeadlineExceeded_case case_ProjectionResetState_Ended_Outcome = 3
+const ProjectionResetState_Ended_Canceled_case case_ProjectionResetState_Ended_Outcome = 4
+
+func (x *ProjectionResetState_Ended) WhichOutcome() case_ProjectionResetState_Ended_Outcome {
+	if x == nil {
+		return ProjectionResetState_Ended_Outcome_not_set_case
+	}
+	switch x.xxx_hidden_Outcome.(type) {
+	case *projectionResetState_Ended_Success_:
+		return ProjectionResetState_Ended_Success_case
+	case *projectionResetState_Ended_Error_:
+		return ProjectionResetState_Ended_Error_case
+	case *projectionResetState_Ended_DeadlineExceeded_:
+		return ProjectionResetState_Ended_DeadlineExceeded_case
+	case *projectionResetState_Ended_Canceled_:
+		return ProjectionResetState_Ended_Canceled_case
+	default:
+		return ProjectionResetState_Ended_Outcome_not_set_case
+	}
+}
+
+type ProjectionResetState_Ended_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Outcome is how the reset operation ended. It is required.
+
+	// Fields of oneof xxx_hidden_Outcome:
+	Success          *ProjectionResetState_Ended_Success
+	Error            *ProjectionResetState_Ended_Error
+	DeadlineExceeded *ProjectionResetState_Ended_DeadlineExceeded
+	Canceled         *ProjectionResetState_Ended_Canceled
+	// -- end of xxx_hidden_Outcome
+	// Interval is the time during which the reset operation ran. It is present
+	// only if the engine reports when the reset operation ran.
+	Interval *Interval
+}
+
+func (b0 ProjectionResetState_Ended_builder) Build() *ProjectionResetState_Ended {
+	m0 := &ProjectionResetState_Ended{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Success != nil {
+		x.xxx_hidden_Outcome = &projectionResetState_Ended_Success_{b.Success}
+	}
+	if b.Error != nil {
+		x.xxx_hidden_Outcome = &projectionResetState_Ended_Error_{b.Error}
+	}
+	if b.DeadlineExceeded != nil {
+		x.xxx_hidden_Outcome = &projectionResetState_Ended_DeadlineExceeded_{b.DeadlineExceeded}
+	}
+	if b.Canceled != nil {
+		x.xxx_hidden_Outcome = &projectionResetState_Ended_Canceled_{b.Canceled}
+	}
+	x.xxx_hidden_Interval = b.Interval
+	return m0
+}
+
+type case_ProjectionResetState_Ended_Outcome protoreflect.FieldNumber
+
+func (x case_ProjectionResetState_Ended_Outcome) String() string {
+	md := file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[30].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isProjectionResetState_Ended_Outcome interface {
+	isProjectionResetState_Ended_Outcome()
+}
+
+type projectionResetState_Ended_Success_ struct {
+	Success *ProjectionResetState_Ended_Success `protobuf:"bytes,1,opt,name=success,oneof"`
+}
+
+type projectionResetState_Ended_Error_ struct {
+	Error *ProjectionResetState_Ended_Error `protobuf:"bytes,2,opt,name=error,oneof"`
+}
+
+type projectionResetState_Ended_DeadlineExceeded_ struct {
+	DeadlineExceeded *ProjectionResetState_Ended_DeadlineExceeded `protobuf:"bytes,3,opt,name=deadline_exceeded,json=deadlineExceeded,oneof"`
+}
+
+type projectionResetState_Ended_Canceled_ struct {
+	Canceled *ProjectionResetState_Ended_Canceled `protobuf:"bytes,4,opt,name=canceled,oneof"`
+}
+
+func (*projectionResetState_Ended_Success_) isProjectionResetState_Ended_Outcome() {}
+
+func (*projectionResetState_Ended_Error_) isProjectionResetState_Ended_Outcome() {}
+
+func (*projectionResetState_Ended_DeadlineExceeded_) isProjectionResetState_Ended_Outcome() {}
+
+func (*projectionResetState_Ended_Canceled_) isProjectionResetState_Ended_Outcome() {}
+
+// Planned is a reset operation that the engine plans to start.
+type ProjectionResetState_Planned struct {
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StartsAt *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=starts_at,json=startsAt"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState_Planned) Reset() {
+	*x = ProjectionResetState_Planned{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState_Planned) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState_Planned) ProtoMessage() {}
+
+func (x *ProjectionResetState_Planned) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionResetState_Planned) GetStartsAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_StartsAt
+	}
+	return nil
+}
+
+func (x *ProjectionResetState_Planned) SetStartsAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_StartsAt = v
+}
+
+func (x *ProjectionResetState_Planned) HasStartsAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StartsAt != nil
+}
+
+func (x *ProjectionResetState_Planned) ClearStartsAt() {
+	x.xxx_hidden_StartsAt = nil
+}
+
+type ProjectionResetState_Planned_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// StartsAt is the time at which the engine plans to start the reset
+	// operation, by the engine's own clock. It is present only if the engine
+	// can tell when.
+	StartsAt *timestamppb.Timestamp
+}
+
+func (b0 ProjectionResetState_Planned_builder) Build() *ProjectionResetState_Planned {
+	m0 := &ProjectionResetState_Planned{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_StartsAt = b.StartsAt
+	return m0
+}
+
+// Success is the outcome of a reset operation that the handler completed.
+type ProjectionResetState_Ended_Success struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState_Ended_Success) Reset() {
+	*x = ProjectionResetState_Ended_Success{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState_Ended_Success) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState_Ended_Success) ProtoMessage() {}
+
+func (x *ProjectionResetState_Ended_Success) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ProjectionResetState_Ended_Success_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ProjectionResetState_Ended_Success_builder) Build() *ProjectionResetState_Ended_Success {
+	m0 := &ProjectionResetState_Ended_Success{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+// Error is the outcome of a reset operation that stopped because the
+// handler reported an error.
+type ProjectionResetState_Ended_Error struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Message string                 `protobuf:"bytes,1,opt,name=message"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState_Ended_Error) Reset() {
+	*x = ProjectionResetState_Ended_Error{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState_Ended_Error) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState_Ended_Error) ProtoMessage() {}
+
+func (x *ProjectionResetState_Ended_Error) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ProjectionResetState_Ended_Error) GetMessage() string {
+	if x != nil {
+		return x.xxx_hidden_Message
+	}
+	return ""
+}
+
+func (x *ProjectionResetState_Ended_Error) SetMessage(v string) {
+	x.xxx_hidden_Message = v
+}
+
+type ProjectionResetState_Ended_Error_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Message is the text of the error, for a person to read.
+	Message string
+}
+
+func (b0 ProjectionResetState_Ended_Error_builder) Build() *ProjectionResetState_Ended_Error {
+	m0 := &ProjectionResetState_Ended_Error{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Message = b.Message
+	return m0
+}
+
+// DeadlineExceeded is the outcome of a reset operation that stopped because
+// its deadline passed.
+type ProjectionResetState_Ended_DeadlineExceeded struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState_Ended_DeadlineExceeded) Reset() {
+	*x = ProjectionResetState_Ended_DeadlineExceeded{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState_Ended_DeadlineExceeded) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState_Ended_DeadlineExceeded) ProtoMessage() {}
+
+func (x *ProjectionResetState_Ended_DeadlineExceeded) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ProjectionResetState_Ended_DeadlineExceeded_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ProjectionResetState_Ended_DeadlineExceeded_builder) Build() *ProjectionResetState_Ended_DeadlineExceeded {
+	m0 := &ProjectionResetState_Ended_DeadlineExceeded{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+// Canceled is the outcome of a reset operation that stopped because it was
+// canceled, for example because the engine is shutting down.
+type ProjectionResetState_Ended_Canceled struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ProjectionResetState_Ended_Canceled) Reset() {
+	*x = ProjectionResetState_Ended_Canceled{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ProjectionResetState_Ended_Canceled) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProjectionResetState_Ended_Canceled) ProtoMessage() {}
+
+func (x *ProjectionResetState_Ended_Canceled) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ProjectionResetState_Ended_Canceled_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ProjectionResetState_Ended_Canceled_builder) Build() *ProjectionResetState_Ended_Canceled {
+	m0 := &ProjectionResetState_Ended_Canceled{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
@@ -2694,9 +3482,33 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc
 	"\x1bProjectionCompactionsFailed\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12\x1b\n" +
-	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05valueB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
+	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"\xe5\a\n" +
+	"\x14ProjectionResetState\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12N\n" +
+	"\acurrent\x18\x02 \x01(\v24.dogma.metrics.v1alpha1.ProjectionResetState.RunningR\acurrent\x12N\n" +
+	"\bprevious\x18\x03 \x01(\v22.dogma.metrics.v1alpha1.ProjectionResetState.EndedR\bprevious\x12H\n" +
+	"\x04next\x18\x04 \x01(\v24.dogma.metrics.v1alpha1.ProjectionResetState.PlannedR\x04next\x1aD\n" +
+	"\aRunning\x129\n" +
+	"\n" +
+	"started_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x1a\x9e\x04\n" +
+	"\x05Ended\x12V\n" +
+	"\asuccess\x18\x01 \x01(\v2:.dogma.metrics.v1alpha1.ProjectionResetState.Ended.SuccessH\x00R\asuccess\x12P\n" +
+	"\x05error\x18\x02 \x01(\v28.dogma.metrics.v1alpha1.ProjectionResetState.Ended.ErrorH\x00R\x05error\x12r\n" +
+	"\x11deadline_exceeded\x18\x03 \x01(\v2C.dogma.metrics.v1alpha1.ProjectionResetState.Ended.DeadlineExceededH\x00R\x10deadlineExceeded\x12Y\n" +
+	"\bcanceled\x18\x04 \x01(\v2;.dogma.metrics.v1alpha1.ProjectionResetState.Ended.CanceledH\x00R\bcanceled\x12<\n" +
+	"\binterval\x18\x05 \x01(\v2 .dogma.metrics.v1alpha1.IntervalR\binterval\x1a\t\n" +
+	"\aSuccess\x1a(\n" +
+	"\x05Error\x12\x1f\n" +
+	"\amessage\x18\x01 \x01(\tB\x05\xaa\x01\x02\b\x02R\amessage\x1a\x12\n" +
+	"\x10DeadlineExceeded\x1a\n" +
+	"\n" +
+	"\bCanceledB\t\n" +
+	"\aoutcome\x1aB\n" +
+	"\aPlanned\x127\n" +
+	"\tstarts_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\bstartsAtB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes = []any{
 	(*AggregateInstancesInMemory)(nil),                       // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory
 	(*ProcessInstancesInMemory)(nil),                         // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory
@@ -2719,54 +3531,73 @@ var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes =
 	(*ProjectionCompactionsCompleted)(nil),                   // 18: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted
 	(*ProjectionCompactionsDeadlineExceeded)(nil),            // 19: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded
 	(*ProjectionCompactionsFailed)(nil),                      // 20: dogma.metrics.v1alpha1.ProjectionCompactionsFailed
-	(*ProjectionCompactionState_Running)(nil),                // 21: dogma.metrics.v1alpha1.ProjectionCompactionState.Running
-	(*ProjectionCompactionState_Ended)(nil),                  // 22: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended
-	(*ProjectionCompactionState_Planned)(nil),                // 23: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
-	(*ProjectionCompactionState_Ended_Success)(nil),          // 24: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success
-	(*ProjectionCompactionState_Ended_Error)(nil),            // 25: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error
-	(*ProjectionCompactionState_Ended_DeadlineExceeded)(nil), // 26: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded
-	(*ProjectionCompactionState_Ended_Canceled)(nil),         // 27: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled
-	(*uuidpb.UUID)(nil),                                      // 28: dogma.protobuf.v1.UUID
-	(*timestamppb.Timestamp)(nil),                            // 29: google.protobuf.Timestamp
-	(*Interval)(nil),                                         // 30: dogma.metrics.v1alpha1.Interval
+	(*ProjectionResetState)(nil),                             // 21: dogma.metrics.v1alpha1.ProjectionResetState
+	(*ProjectionCompactionState_Running)(nil),                // 22: dogma.metrics.v1alpha1.ProjectionCompactionState.Running
+	(*ProjectionCompactionState_Ended)(nil),                  // 23: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended
+	(*ProjectionCompactionState_Planned)(nil),                // 24: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
+	(*ProjectionCompactionState_Ended_Success)(nil),          // 25: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success
+	(*ProjectionCompactionState_Ended_Error)(nil),            // 26: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error
+	(*ProjectionCompactionState_Ended_DeadlineExceeded)(nil), // 27: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded
+	(*ProjectionCompactionState_Ended_Canceled)(nil),         // 28: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled
+	(*ProjectionResetState_Running)(nil),                     // 29: dogma.metrics.v1alpha1.ProjectionResetState.Running
+	(*ProjectionResetState_Ended)(nil),                       // 30: dogma.metrics.v1alpha1.ProjectionResetState.Ended
+	(*ProjectionResetState_Planned)(nil),                     // 31: dogma.metrics.v1alpha1.ProjectionResetState.Planned
+	(*ProjectionResetState_Ended_Success)(nil),               // 32: dogma.metrics.v1alpha1.ProjectionResetState.Ended.Success
+	(*ProjectionResetState_Ended_Error)(nil),                 // 33: dogma.metrics.v1alpha1.ProjectionResetState.Ended.Error
+	(*ProjectionResetState_Ended_DeadlineExceeded)(nil),      // 34: dogma.metrics.v1alpha1.ProjectionResetState.Ended.DeadlineExceeded
+	(*ProjectionResetState_Ended_Canceled)(nil),              // 35: dogma.metrics.v1alpha1.ProjectionResetState.Ended.Canceled
+	(*uuidpb.UUID)(nil),                                      // 36: dogma.protobuf.v1.UUID
+	(*timestamppb.Timestamp)(nil),                            // 37: google.protobuf.Timestamp
+	(*Interval)(nil),                                         // 38: dogma.metrics.v1alpha1.Interval
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_depIdxs = []int32{
-	28, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 14: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 16: dogma.metrics.v1alpha1.ProjectionCompactionState.handler_key:type_name -> dogma.protobuf.v1.UUID
-	21, // 17: dogma.metrics.v1alpha1.ProjectionCompactionState.current:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Running
-	22, // 18: dogma.metrics.v1alpha1.ProjectionCompactionState.previous:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended
-	23, // 19: dogma.metrics.v1alpha1.ProjectionCompactionState.next:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
-	28, // 20: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 21: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 22: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	28, // 23: dogma.metrics.v1alpha1.ProjectionCompactionsFailed.handler_key:type_name -> dogma.protobuf.v1.UUID
-	29, // 24: dogma.metrics.v1alpha1.ProjectionCompactionState.Running.started_at:type_name -> google.protobuf.Timestamp
-	24, // 25: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.success:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success
-	25, // 26: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.error:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error
-	26, // 27: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.deadline_exceeded:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded
-	27, // 28: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.canceled:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled
-	30, // 29: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.interval:type_name -> dogma.metrics.v1alpha1.Interval
-	29, // 30: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned.starts_at:type_name -> google.protobuf.Timestamp
-	31, // [31:31] is the sub-list for method output_type
-	31, // [31:31] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	36, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 13: dogma.metrics.v1alpha1.HandlerEventsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 14: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 15: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 16: dogma.metrics.v1alpha1.ProjectionCompactionState.handler_key:type_name -> dogma.protobuf.v1.UUID
+	22, // 17: dogma.metrics.v1alpha1.ProjectionCompactionState.current:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Running
+	23, // 18: dogma.metrics.v1alpha1.ProjectionCompactionState.previous:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended
+	24, // 19: dogma.metrics.v1alpha1.ProjectionCompactionState.next:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Planned
+	36, // 20: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 21: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 22: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 23: dogma.metrics.v1alpha1.ProjectionCompactionsFailed.handler_key:type_name -> dogma.protobuf.v1.UUID
+	36, // 24: dogma.metrics.v1alpha1.ProjectionResetState.handler_key:type_name -> dogma.protobuf.v1.UUID
+	29, // 25: dogma.metrics.v1alpha1.ProjectionResetState.current:type_name -> dogma.metrics.v1alpha1.ProjectionResetState.Running
+	30, // 26: dogma.metrics.v1alpha1.ProjectionResetState.previous:type_name -> dogma.metrics.v1alpha1.ProjectionResetState.Ended
+	31, // 27: dogma.metrics.v1alpha1.ProjectionResetState.next:type_name -> dogma.metrics.v1alpha1.ProjectionResetState.Planned
+	37, // 28: dogma.metrics.v1alpha1.ProjectionCompactionState.Running.started_at:type_name -> google.protobuf.Timestamp
+	25, // 29: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.success:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Success
+	26, // 30: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.error:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Error
+	27, // 31: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.deadline_exceeded:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.DeadlineExceeded
+	28, // 32: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.canceled:type_name -> dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.Canceled
+	38, // 33: dogma.metrics.v1alpha1.ProjectionCompactionState.Ended.interval:type_name -> dogma.metrics.v1alpha1.Interval
+	37, // 34: dogma.metrics.v1alpha1.ProjectionCompactionState.Planned.starts_at:type_name -> google.protobuf.Timestamp
+	37, // 35: dogma.metrics.v1alpha1.ProjectionResetState.Running.started_at:type_name -> google.protobuf.Timestamp
+	32, // 36: dogma.metrics.v1alpha1.ProjectionResetState.Ended.success:type_name -> dogma.metrics.v1alpha1.ProjectionResetState.Ended.Success
+	33, // 37: dogma.metrics.v1alpha1.ProjectionResetState.Ended.error:type_name -> dogma.metrics.v1alpha1.ProjectionResetState.Ended.Error
+	34, // 38: dogma.metrics.v1alpha1.ProjectionResetState.Ended.deadline_exceeded:type_name -> dogma.metrics.v1alpha1.ProjectionResetState.Ended.DeadlineExceeded
+	35, // 39: dogma.metrics.v1alpha1.ProjectionResetState.Ended.canceled:type_name -> dogma.metrics.v1alpha1.ProjectionResetState.Ended.Canceled
+	38, // 40: dogma.metrics.v1alpha1.ProjectionResetState.Ended.interval:type_name -> dogma.metrics.v1alpha1.Interval
+	37, // 41: dogma.metrics.v1alpha1.ProjectionResetState.Planned.starts_at:type_name -> google.protobuf.Timestamp
+	42, // [42:42] is the sub-list for method output_type
+	42, // [42:42] is the sub-list for method input_type
+	42, // [42:42] is the sub-list for extension type_name
+	42, // [42:42] is the sub-list for extension extendee
+	0,  // [0:42] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() }
@@ -2775,11 +3606,17 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() {
 		return
 	}
 	file_github_com_dogmatiq_protobuf_metricsgrpc_interval_proto_init()
-	file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[22].OneofWrappers = []any{
+	file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[23].OneofWrappers = []any{
 		(*projectionCompactionState_Ended_Success_)(nil),
 		(*projectionCompactionState_Ended_Error_)(nil),
 		(*projectionCompactionState_Ended_DeadlineExceeded_)(nil),
 		(*projectionCompactionState_Ended_Canceled_)(nil),
+	}
+	file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[30].OneofWrappers = []any{
+		(*projectionResetState_Ended_Success_)(nil),
+		(*projectionResetState_Ended_Error_)(nil),
+		(*projectionResetState_Ended_DeadlineExceeded_)(nil),
+		(*projectionResetState_Ended_Canceled_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2787,7 +3624,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   28,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -104,6 +104,7 @@ message WatchMetricsResponse {
   // - ProjectionCompactionsCompleted
   // - ProjectionCompactionsDeadlineExceeded
   // - ProjectionCompactionsFailed
+  // - ProjectionResetState
   // - QueueCommandsDue
   // - QueueCommandsFailing
   // - QueueCommandsPending
