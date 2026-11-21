@@ -16,7 +16,6 @@ The format is based on [Keep a Changelog], and this project adheres to
 ### Added
 
 - Added the `configpb` package, which describes an application and its handlers.
-  It is at the unstable `dogma.config.v1alpha1` Protocol Buffers package.
 - Added the `metricsgrpc` package, which defines a service for reading engine
   metrics.
 - Added the `enginegrpc` package, which defines a service that reports what an
@@ -35,8 +34,9 @@ The format is based on [Keep a Changelog], and this project adheres to
 ### Changed
 
 - **[BC]** The minimum supported version of `@bufbuild/protobuf` is now v2.17.0.
-- Documented that `WatchEvents` may send empty segments, with equal begin and end
-  offsets, to tell the client that no new events have been appended to a stream.
+- Documented that `WatchEvents` may send empty segments, with equal begin and
+  end offsets, to tell the client that no new events have been appended to a
+  stream.
 
 ## [0.8.0] - 2026-11-13
 
