@@ -752,11 +752,11 @@ const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_
 	"end_offset\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\tendOffset\x12#\n" +
 	"\rstream_length\x18\a \x01(\x04R\fstreamLength\x12>\n" +
 	"\tenvelopes\x18\x04 \x03(\v2 .dogma.protobuf.v1.MultiEnvelopeR\tenvelopes2\xb0\x03\n" +
-	"\x16EventStreamConsumerAPI\x12_\n" +
+	"\x16EventStreamConsumerAPI\x12m\n" +
+	"\x10ListEventStreams\x12+.dogma.messaging.v1.ListEventStreamsRequest\x1a,.dogma.messaging.v1.ListEventStreamsResponse\x12_\n" +
 	"\vWatchEvents\x12&.dogma.messaging.v1.WatchEventsRequest\x1a&.dogma.messaging.v1.EventStreamSegment0\x01\x12]\n" +
 	"\n" +
-	"ReadEvents\x12%.dogma.messaging.v1.ReadEventsRequest\x1a&.dogma.messaging.v1.EventStreamSegment0\x01\x12m\n" +
-	"\x10ListEventStreams\x12+.dogma.messaging.v1.ListEventStreamsRequest\x1a,.dogma.messaging.v1.ListEventStreamsResponse\x12g\n" +
+	"ReadEvents\x12%.dogma.messaging.v1.ReadEventsRequest\x1a&.dogma.messaging.v1.EventStreamSegment0\x01\x12g\n" +
 	"\x10ReadEventSegment\x12+.dogma.messaging.v1.ReadEventSegmentRequest\x1a&.dogma.messaging.v1.EventStreamSegmentB,Z*github.com/dogmatiq/protobuf/messaginggrpcb\beditionsp\xe9\a"
 
 var file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
@@ -782,13 +782,13 @@ var file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer_proto_de
 	7,  // 6: dogma.messaging.v1.ReadEventSegmentRequest.filter:type_name -> dogma.messaging.v1.MessageFilter
 	8,  // 7: dogma.messaging.v1.EventStreamSegment.event_stream_id:type_name -> dogma.protobuf.v1.UUID
 	9,  // 8: dogma.messaging.v1.EventStreamSegment.envelopes:type_name -> dogma.protobuf.v1.MultiEnvelope
-	0,  // 9: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:input_type -> dogma.messaging.v1.WatchEventsRequest
-	1,  // 10: dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents:input_type -> dogma.messaging.v1.ReadEventsRequest
-	2,  // 11: dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams:input_type -> dogma.messaging.v1.ListEventStreamsRequest
+	2,  // 9: dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams:input_type -> dogma.messaging.v1.ListEventStreamsRequest
+	0,  // 10: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:input_type -> dogma.messaging.v1.WatchEventsRequest
+	1,  // 11: dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents:input_type -> dogma.messaging.v1.ReadEventsRequest
 	5,  // 12: dogma.messaging.v1.EventStreamConsumerAPI.ReadEventSegment:input_type -> dogma.messaging.v1.ReadEventSegmentRequest
-	6,  // 13: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:output_type -> dogma.messaging.v1.EventStreamSegment
-	6,  // 14: dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents:output_type -> dogma.messaging.v1.EventStreamSegment
-	3,  // 15: dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams:output_type -> dogma.messaging.v1.ListEventStreamsResponse
+	3,  // 13: dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams:output_type -> dogma.messaging.v1.ListEventStreamsResponse
+	6,  // 14: dogma.messaging.v1.EventStreamConsumerAPI.WatchEvents:output_type -> dogma.messaging.v1.EventStreamSegment
+	6,  // 15: dogma.messaging.v1.EventStreamConsumerAPI.ReadEvents:output_type -> dogma.messaging.v1.EventStreamSegment
 	6,  // 16: dogma.messaging.v1.EventStreamConsumerAPI.ReadEventSegment:output_type -> dogma.messaging.v1.EventStreamSegment
 	13, // [13:17] is the sub-list for method output_type
 	9,  // [9:13] is the sub-list for method input_type

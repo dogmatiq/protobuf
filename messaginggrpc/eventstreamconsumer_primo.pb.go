@@ -908,17 +908,25 @@ func (x *EventStreamSegment) Format(f fmt.State, verb rune) {
 var _ EventStreamConsumerAPIClient = (*EventStreamConsumerAPIClientStub)(nil)
 
 type EventStreamConsumerAPIClientStub struct {
+	// ListEventStreamsFunc is a function that implements the ListEventStreams RPC method.
+	ListEventStreamsFunc func(ctx context.Context, req *ListEventStreamsRequest, options ...grpc.CallOption) (*ListEventStreamsResponse, error)
+
 	// WatchEventsFunc is a function that implements the WatchEvents RPC method.
 	WatchEventsFunc func(ctx context.Context, req *WatchEventsRequest, options ...grpc.CallOption) (EventStreamConsumerAPI_WatchEventsClient, error)
 
 	// ReadEventsFunc is a function that implements the ReadEvents RPC method.
 	ReadEventsFunc func(ctx context.Context, req *ReadEventsRequest, options ...grpc.CallOption) (EventStreamConsumerAPI_ReadEventsClient, error)
 
-	// ListEventStreamsFunc is a function that implements the ListEventStreams RPC method.
-	ListEventStreamsFunc func(ctx context.Context, req *ListEventStreamsRequest, options ...grpc.CallOption) (*ListEventStreamsResponse, error)
-
 	// ReadEventSegmentFunc is a function that implements the ReadEventSegment RPC method.
 	ReadEventSegmentFunc func(ctx context.Context, req *ReadEventSegmentRequest, options ...grpc.CallOption) (*EventStreamSegment, error)
+}
+
+// ListEventStreams calls c.ListEventStreamsFunc if it is non-nil. Otherwise, it returns an error.
+func (c *EventStreamConsumerAPIClientStub) ListEventStreams(ctx context.Context, req *ListEventStreamsRequest, options ...grpc.CallOption) (*ListEventStreamsResponse, error) {
+	if c.ListEventStreamsFunc == nil {
+		return nil, status.Error(codes.Unimplemented, "method ListEventStreams not implemented")
+	}
+	return c.ListEventStreamsFunc(ctx, req, options...)
 }
 
 // WatchEvents calls c.WatchEventsFunc if it is non-nil. Otherwise, it returns an error.
@@ -935,14 +943,6 @@ func (c *EventStreamConsumerAPIClientStub) ReadEvents(ctx context.Context, req *
 		return nil, status.Error(codes.Unimplemented, "method ReadEvents not implemented")
 	}
 	return c.ReadEventsFunc(ctx, req, options...)
-}
-
-// ListEventStreams calls c.ListEventStreamsFunc if it is non-nil. Otherwise, it returns an error.
-func (c *EventStreamConsumerAPIClientStub) ListEventStreams(ctx context.Context, req *ListEventStreamsRequest, options ...grpc.CallOption) (*ListEventStreamsResponse, error) {
-	if c.ListEventStreamsFunc == nil {
-		return nil, status.Error(codes.Unimplemented, "method ListEventStreams not implemented")
-	}
-	return c.ListEventStreamsFunc(ctx, req, options...)
 }
 
 // ReadEventSegment calls c.ReadEventSegmentFunc if it is non-nil. Otherwise, it returns an error.

@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	EventStreamConsumerAPI_ListEventStreams_FullMethodName = "/dogma.messaging.v1.EventStreamConsumerAPI/ListEventStreams"
 	EventStreamConsumerAPI_WatchEvents_FullMethodName      = "/dogma.messaging.v1.EventStreamConsumerAPI/WatchEvents"
 	EventStreamConsumerAPI_ReadEvents_FullMethodName       = "/dogma.messaging.v1.EventStreamConsumerAPI/ReadEvents"
-	EventStreamConsumerAPI_ListEventStreams_FullMethodName = "/dogma.messaging.v1.EventStreamConsumerAPI/ListEventStreams"
 	EventStreamConsumerAPI_ReadEventSegment_FullMethodName = "/dogma.messaging.v1.EventStreamConsumerAPI/ReadEventSegment"
 )
 
@@ -32,6 +32,14 @@ const (
 // EventStreamConsumerAPI is a service for consuming event messages from
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIClient interface {
+	// ListEventStreams returns the event streams available from the server, and
+	// the length of each. It lists every stream that the caller may read,
+	// including streams that have no events.
+	//
+	// Each length is the stream's length at some moment during the call, and the
+	// server may observe different streams at different moments. A stream may
+	// have grown by the time the client receives the response.
+	ListEventStreams(ctx context.Context, in *ListEventStreamsRequest, opts ...grpc.CallOption) (*ListEventStreamsResponse, error)
 	// WatchEvents delivers events from all streams available from the server.
 	// Events are delivered as they are appended, provided they match the
 	// request's filter.
@@ -67,14 +75,6 @@ type EventStreamConsumerAPIClient interface {
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	ReadEvents(ctx context.Context, in *ReadEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error)
-	// ListEventStreams returns the event streams available from the server, and
-	// the length of each. It lists every stream that the caller may read,
-	// including streams that have no events.
-	//
-	// Each length is the stream's length at some moment during the call, and the
-	// server may observe different streams at different moments. A stream may
-	// have grown by the time the client receives the response.
-	ListEventStreams(ctx context.Context, in *ListEventStreamsRequest, opts ...grpc.CallOption) (*ListEventStreamsResponse, error)
 	// ReadEventSegment returns one segment of a single event stream, which
 	// carries the events within its range that match the request's filter.
 	//
@@ -108,6 +108,16 @@ type eventStreamConsumerAPIClient struct {
 
 func NewEventStreamConsumerAPIClient(cc grpc.ClientConnInterface) EventStreamConsumerAPIClient {
 	return &eventStreamConsumerAPIClient{cc}
+}
+
+func (c *eventStreamConsumerAPIClient) ListEventStreams(ctx context.Context, in *ListEventStreamsRequest, opts ...grpc.CallOption) (*ListEventStreamsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListEventStreamsResponse)
+	err := c.cc.Invoke(ctx, EventStreamConsumerAPI_ListEventStreams_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *eventStreamConsumerAPIClient) WatchEvents(ctx context.Context, in *WatchEventsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[EventStreamSegment], error) {
@@ -148,16 +158,6 @@ func (c *eventStreamConsumerAPIClient) ReadEvents(ctx context.Context, in *ReadE
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type EventStreamConsumerAPI_ReadEventsClient = grpc.ServerStreamingClient[EventStreamSegment]
 
-func (c *eventStreamConsumerAPIClient) ListEventStreams(ctx context.Context, in *ListEventStreamsRequest, opts ...grpc.CallOption) (*ListEventStreamsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListEventStreamsResponse)
-	err := c.cc.Invoke(ctx, EventStreamConsumerAPI_ListEventStreams_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *eventStreamConsumerAPIClient) ReadEventSegment(ctx context.Context, in *ReadEventSegmentRequest, opts ...grpc.CallOption) (*EventStreamSegment, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(EventStreamSegment)
@@ -175,6 +175,14 @@ func (c *eventStreamConsumerAPIClient) ReadEventSegment(ctx context.Context, in 
 // EventStreamConsumerAPI is a service for consuming event messages from
 // offset-based, ordered event streams.
 type EventStreamConsumerAPIServer interface {
+	// ListEventStreams returns the event streams available from the server, and
+	// the length of each. It lists every stream that the caller may read,
+	// including streams that have no events.
+	//
+	// Each length is the stream's length at some moment during the call, and the
+	// server may observe different streams at different moments. A stream may
+	// have grown by the time the client receives the response.
+	ListEventStreams(context.Context, *ListEventStreamsRequest) (*ListEventStreamsResponse, error)
 	// WatchEvents delivers events from all streams available from the server.
 	// Events are delivered as they are appended, provided they match the
 	// request's filter.
@@ -210,14 +218,6 @@ type EventStreamConsumerAPIServer interface {
 	//
 	// A missing or invalid message filter results in INVALID_ARGUMENT.
 	ReadEvents(*ReadEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error
-	// ListEventStreams returns the event streams available from the server, and
-	// the length of each. It lists every stream that the caller may read,
-	// including streams that have no events.
-	//
-	// Each length is the stream's length at some moment during the call, and the
-	// server may observe different streams at different moments. A stream may
-	// have grown by the time the client receives the response.
-	ListEventStreams(context.Context, *ListEventStreamsRequest) (*ListEventStreamsResponse, error)
 	// ReadEventSegment returns one segment of a single event stream, which
 	// carries the events within its range that match the request's filter.
 	//
@@ -252,14 +252,14 @@ type EventStreamConsumerAPIServer interface {
 // pointer dereference when methods are called.
 type UnimplementedEventStreamConsumerAPIServer struct{}
 
+func (UnimplementedEventStreamConsumerAPIServer) ListEventStreams(context.Context, *ListEventStreamsRequest) (*ListEventStreamsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListEventStreams not implemented")
+}
 func (UnimplementedEventStreamConsumerAPIServer) WatchEvents(*WatchEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error {
 	return status.Error(codes.Unimplemented, "method WatchEvents not implemented")
 }
 func (UnimplementedEventStreamConsumerAPIServer) ReadEvents(*ReadEventsRequest, grpc.ServerStreamingServer[EventStreamSegment]) error {
 	return status.Error(codes.Unimplemented, "method ReadEvents not implemented")
-}
-func (UnimplementedEventStreamConsumerAPIServer) ListEventStreams(context.Context, *ListEventStreamsRequest) (*ListEventStreamsResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method ListEventStreams not implemented")
 }
 func (UnimplementedEventStreamConsumerAPIServer) ReadEventSegment(context.Context, *ReadEventSegmentRequest) (*EventStreamSegment, error) {
 	return nil, status.Error(codes.Unimplemented, "method ReadEventSegment not implemented")
@@ -284,6 +284,24 @@ func RegisterEventStreamConsumerAPIServer(s grpc.ServiceRegistrar, srv EventStre
 	s.RegisterService(&EventStreamConsumerAPI_ServiceDesc, srv)
 }
 
+func _EventStreamConsumerAPI_ListEventStreams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListEventStreamsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EventStreamConsumerAPIServer).ListEventStreams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EventStreamConsumerAPI_ListEventStreams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EventStreamConsumerAPIServer).ListEventStreams(ctx, req.(*ListEventStreamsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _EventStreamConsumerAPI_WatchEvents_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(WatchEventsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -305,24 +323,6 @@ func _EventStreamConsumerAPI_ReadEvents_Handler(srv interface{}, stream grpc.Ser
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type EventStreamConsumerAPI_ReadEventsServer = grpc.ServerStreamingServer[EventStreamSegment]
-
-func _EventStreamConsumerAPI_ListEventStreams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListEventStreamsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(EventStreamConsumerAPIServer).ListEventStreams(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: EventStreamConsumerAPI_ListEventStreams_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(EventStreamConsumerAPIServer).ListEventStreams(ctx, req.(*ListEventStreamsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
 
 func _EventStreamConsumerAPI_ReadEventSegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadEventSegmentRequest)

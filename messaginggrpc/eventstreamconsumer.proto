@@ -10,6 +10,16 @@ import "github.com/dogmatiq/protobuf/messaginggrpc/filter.proto";
 // EventStreamConsumerAPI is a service for consuming event messages from
 // offset-based, ordered event streams.
 service EventStreamConsumerAPI {
+  // ListEventStreams returns the event streams available from the server, and
+  // the length of each. It lists every stream that the caller may read,
+  // including streams that have no events.
+  //
+  // Each length is the stream's length at some moment during the call, and the
+  // server may observe different streams at different moments. A stream may
+  // have grown by the time the client receives the response.
+  rpc ListEventStreams(ListEventStreamsRequest)
+      returns (ListEventStreamsResponse);
+
   // WatchEvents delivers events from all streams available from the server.
   // Events are delivered as they are appended, provided they match the
   // request's filter.
@@ -46,16 +56,6 @@ service EventStreamConsumerAPI {
   //
   // A missing or invalid message filter results in INVALID_ARGUMENT.
   rpc ReadEvents(ReadEventsRequest) returns (stream EventStreamSegment);
-
-  // ListEventStreams returns the event streams available from the server, and
-  // the length of each. It lists every stream that the caller may read,
-  // including streams that have no events.
-  //
-  // Each length is the stream's length at some moment during the call, and the
-  // server may observe different streams at different moments. A stream may
-  // have grown by the time the client receives the response.
-  rpc ListEventStreams(ListEventStreamsRequest)
-      returns (ListEventStreamsResponse);
 
   // ReadEventSegment returns one segment of a single event stream, which
   // carries the events within its range that match the request's filter.

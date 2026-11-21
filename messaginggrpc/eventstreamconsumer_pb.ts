@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/messaginggrpc/eventstreamconsumer.proto.
  */
 export const file_github_com_dogmatiq_protobuf_messaginggrpc_eventstreamconsumer: GenFile = /*@__PURE__*/
-  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIhkKF0xpc3RFdmVudFN0cmVhbXNSZXF1ZXN0IlIKGExpc3RFdmVudFN0cmVhbXNSZXNwb25zZRI2Cg1ldmVudF9zdHJlYW1zGAEgAygLMh8uZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtIlYKC0V2ZW50U3RyZWFtEjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFQoGbGVuZ3RoGAIgASgEQgWqAQIIAiK2AQoXUmVhZEV2ZW50U2VnbWVudFJlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggBEjEKBmZpbHRlchgEIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIsoBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEhUKDXN0cmVhbV9sZW5ndGgYByABKAQSMwoJZW52ZWxvcGVzGAQgAygLMiAuZG9nbWEucHJvdG9idWYudjEuTXVsdGlFbnZlbG9wZTKwAwoWRXZlbnRTdHJlYW1Db25zdW1lckFQSRJfCgtXYXRjaEV2ZW50cxImLmRvZ21hLm1lc3NhZ2luZy52MS5XYXRjaEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAESXQoKUmVhZEV2ZW50cxIlLmRvZ21hLm1lc3NhZ2luZy52MS5SZWFkRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwARJtChBMaXN0RXZlbnRTdHJlYW1zEisuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXF1ZXN0GiwuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXNwb25zZRJnChBSZWFkRXZlbnRTZWdtZW50EisuZG9nbWEubWVzc2FnaW5nLnYxLlJlYWRFdmVudFNlZ21lbnRSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudEIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
+  fileDesc("CkRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGMvZXZlbnRzdHJlYW1jb25zdW1lci5wcm90bxISZG9nbWEubWVzc2FnaW5nLnYxIkcKEldhdGNoRXZlbnRzUmVxdWVzdBIxCgZmaWx0ZXIYASABKAsyIS5kb2dtYS5tZXNzYWdpbmcudjEuTWVzc2FnZUZpbHRlciKVAQoRUmVhZEV2ZW50c1JlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEjEKBmZpbHRlchgDIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIhkKF0xpc3RFdmVudFN0cmVhbXNSZXF1ZXN0IlIKGExpc3RFdmVudFN0cmVhbXNSZXNwb25zZRI2Cg1ldmVudF9zdHJlYW1zGAEgAygLMh8uZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtIlYKC0V2ZW50U3RyZWFtEjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFQoGbGVuZ3RoGAIgASgEQgWqAQIIAiK2AQoXUmVhZEV2ZW50U2VnbWVudFJlcXVlc3QSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggBEjEKBmZpbHRlchgEIAEoCzIhLmRvZ21hLm1lc3NhZ2luZy52MS5NZXNzYWdlRmlsdGVyIsoBChJFdmVudFN0cmVhbVNlZ21lbnQSMAoPZXZlbnRfc3RyZWFtX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIbCgxiZWdpbl9vZmZzZXQYAiABKARCBaoBAggCEhkKCmVuZF9vZmZzZXQYAyABKARCBaoBAggCEhUKDXN0cmVhbV9sZW5ndGgYByABKAQSMwoJZW52ZWxvcGVzGAQgAygLMiAuZG9nbWEucHJvdG9idWYudjEuTXVsdGlFbnZlbG9wZTKwAwoWRXZlbnRTdHJlYW1Db25zdW1lckFQSRJtChBMaXN0RXZlbnRTdHJlYW1zEisuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXF1ZXN0GiwuZG9nbWEubWVzc2FnaW5nLnYxLkxpc3RFdmVudFN0cmVhbXNSZXNwb25zZRJfCgtXYXRjaEV2ZW50cxImLmRvZ21hLm1lc3NhZ2luZy52MS5XYXRjaEV2ZW50c1JlcXVlc3QaJi5kb2dtYS5tZXNzYWdpbmcudjEuRXZlbnRTdHJlYW1TZWdtZW50MAESXQoKUmVhZEV2ZW50cxIlLmRvZ21hLm1lc3NhZ2luZy52MS5SZWFkRXZlbnRzUmVxdWVzdBomLmRvZ21hLm1lc3NhZ2luZy52MS5FdmVudFN0cmVhbVNlZ21lbnQwARJnChBSZWFkRXZlbnRTZWdtZW50EisuZG9nbWEubWVzc2FnaW5nLnYxLlJlYWRFdmVudFNlZ21lbnRSZXF1ZXN0GiYuZG9nbWEubWVzc2FnaW5nLnYxLkV2ZW50U3RyZWFtU2VnbWVudEIsWipnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21lc3NhZ2luZ2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_envelopepb_envelope, file_github_com_dogmatiq_protobuf_uuidpb_uuid, file_github_com_dogmatiq_protobuf_messaginggrpc_filter]);
 
 /**
  * WatchEventsRequest is the input to the [EventStreamConsumerAPI.WatchEvents]
@@ -272,6 +272,22 @@ export const EventStreamSegmentSchema: GenMessage<EventStreamSegment> = /*@__PUR
  */
 export const EventStreamConsumerAPI: GenService<{
   /**
+   * ListEventStreams returns the event streams available from the server, and
+   * the length of each. It lists every stream that the caller may read,
+   * including streams that have no events.
+   *
+   * Each length is the stream's length at some moment during the call, and the
+   * server may observe different streams at different moments. A stream may
+   * have grown by the time the client receives the response.
+   *
+   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams
+   */
+  listEventStreams: {
+    methodKind: "unary";
+    input: typeof ListEventStreamsRequestSchema;
+    output: typeof ListEventStreamsResponseSchema;
+  },
+  /**
    * WatchEvents delivers events from all streams available from the server.
    * Events are delivered as they are appended, provided they match the
    * request's filter.
@@ -321,22 +337,6 @@ export const EventStreamConsumerAPI: GenService<{
     methodKind: "server_streaming";
     input: typeof ReadEventsRequestSchema;
     output: typeof EventStreamSegmentSchema;
-  },
-  /**
-   * ListEventStreams returns the event streams available from the server, and
-   * the length of each. It lists every stream that the caller may read,
-   * including streams that have no events.
-   *
-   * Each length is the stream's length at some moment during the call, and the
-   * server may observe different streams at different moments. A stream may
-   * have grown by the time the client receives the response.
-   *
-   * @generated from rpc dogma.messaging.v1.EventStreamConsumerAPI.ListEventStreams
-   */
-  listEventStreams: {
-    methodKind: "unary";
-    input: typeof ListEventStreamsRequestSchema;
-    output: typeof ListEventStreamsResponseSchema;
   },
   /**
    * ReadEventSegment returns one segment of a single event stream, which
