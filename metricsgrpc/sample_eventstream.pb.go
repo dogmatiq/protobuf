@@ -231,6 +231,130 @@ func (b0 AggregateInstanceEventStreamBindings_builder) Build() *AggregateInstanc
 	return m0
 }
 
+// HandlerEventStreamLag is the number of events on one event stream, of any
+// type, that are after the offset that one handler has reached. The engine
+// sends it only for process and projection handlers.
+//
+// A handler handles the events of some types and skips the rest. It has reached
+// an offset when it has handled or skipped the event at that offset and every
+// event before it.
+//
+// The stream may be one of another engine's event streams. The engine then
+// counts the events that it knows are on the stream, which can be fewer than
+// the stream has.
+type HandlerEventStreamLag struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_EventStreamId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=event_stream_id,json=eventStreamId"`
+	xxx_hidden_Value         uint64                 `protobuf:"varint,3,opt,name=value"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *HandlerEventStreamLag) Reset() {
+	*x = HandlerEventStreamLag{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HandlerEventStreamLag) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HandlerEventStreamLag) ProtoMessage() {}
+
+func (x *HandlerEventStreamLag) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *HandlerEventStreamLag) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *HandlerEventStreamLag) GetEventStreamId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_EventStreamId
+	}
+	return nil
+}
+
+func (x *HandlerEventStreamLag) GetValue() uint64 {
+	if x != nil {
+		return x.xxx_hidden_Value
+	}
+	return 0
+}
+
+func (x *HandlerEventStreamLag) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerEventStreamLag) SetEventStreamId(v *uuidpb.UUID) {
+	x.xxx_hidden_EventStreamId = v
+}
+
+func (x *HandlerEventStreamLag) SetValue(v uint64) {
+	x.xxx_hidden_Value = v
+}
+
+func (x *HandlerEventStreamLag) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *HandlerEventStreamLag) HasEventStreamId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_EventStreamId != nil
+}
+
+func (x *HandlerEventStreamLag) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerEventStreamLag) ClearEventStreamId() {
+	x.xxx_hidden_EventStreamId = nil
+}
+
+type HandlerEventStreamLag_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the handler's identity key, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// EventStreamId is the ID of the event stream. It is required.
+	EventStreamId *uuidpb.UUID
+	// Value is the number of events after the offset that the handler has
+	// reached. It is zero when the handler has handled or skipped every event on
+	// the stream.
+	Value uint64
+}
+
+func (b0 HandlerEventStreamLag_builder) Build() *HandlerEventStreamLag {
+	m0 := &HandlerEventStreamLag{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_EventStreamId = b.EventStreamId
+	x.xxx_hidden_Value = b.Value
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_rawDesc = "" +
@@ -243,23 +367,31 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_raw
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12?\n" +
 	"\x0fevent_stream_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12\x1b\n" +
+	"\x05value\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"\xaf\x01\n" +
+	"\x15HandlerEventStreamLag\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12?\n" +
+	"\x0fevent_stream_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12\x1b\n" +
 	"\x05value\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05valueB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_goTypes = []any{
 	(*EventStreamLength)(nil),                    // 0: dogma.metrics.v1alpha1.EventStreamLength
 	(*AggregateInstanceEventStreamBindings)(nil), // 1: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings
-	(*uuidpb.UUID)(nil),                          // 2: dogma.protobuf.v1.UUID
+	(*HandlerEventStreamLag)(nil),                // 2: dogma.metrics.v1alpha1.HandlerEventStreamLag
+	(*uuidpb.UUID)(nil),                          // 3: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_depIdxs = []int32{
-	2, // 0: dogma.metrics.v1alpha1.EventStreamLength.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	2, // 1: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.handler_key:type_name -> dogma.protobuf.v1.UUID
-	2, // 2: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	3, // 0: dogma.metrics.v1alpha1.EventStreamLength.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	3, // 1: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.handler_key:type_name -> dogma.protobuf.v1.UUID
+	3, // 2: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	3, // 3: dogma.metrics.v1alpha1.HandlerEventStreamLag.handler_key:type_name -> dogma.protobuf.v1.UUID
+	3, // 4: dogma.metrics.v1alpha1.HandlerEventStreamLag.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_init() }
@@ -273,7 +405,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_init
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

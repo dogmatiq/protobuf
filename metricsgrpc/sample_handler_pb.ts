@@ -16,7 +16,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFile = /*@__PURE__*/
-  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImAKGkFnZ3JlZ2F0ZUluc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXgoYUHJvY2Vzc0luc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXAoWSGFuZGxlckNvbW1hbmRzUGVuZGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlgKEkhhbmRsZXJDb21tYW5kc0R1ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlwKFkhhbmRsZXJDb21tYW5kc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJcChZIYW5kbGVyQ29tbWFuZHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJZChNIYW5kbGVyRGVhZGxpbmVzRHVlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJdChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIl4KGEhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFUhhbmRsZXJFdmVudHNSZWNvcmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIloKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiWgoUSGFuZGxlckV2ZW50c1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJaChRIYW5kbGVyRXZlbnRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFVByb2Nlc3NJbnN0YW5jZXNFbmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIpQHChlQcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBJKCgdjdXJyZW50GAIgASgLMjkuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLlJ1bm5pbmcSSQoIcHJldmlvdXMYAyABKAsyNy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uU3RhdGUuRW5kZWQSRwoEbmV4dBgEIAEoCzI5LmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25TdGF0ZS5QbGFubmVkGjkKB1J1bm5pbmcSLgoKc3RhcnRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAa8wMKBUVuZGVkElIKB3N1Y2Nlc3MYASABKAsyPy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uU3RhdGUuRW5kZWQuU3VjY2Vzc0gAEk4KBWVycm9yGAIgASgLMj0uZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLkVuZGVkLkVycm9ySAASZQoRZGVhZGxpbmVfZXhjZWVkZWQYAyABKAsySC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uU3RhdGUuRW5kZWQuRGVhZGxpbmVFeGNlZWRlZEgAElQKCGNhbmNlbGVkGAQgASgLMkAuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLkVuZGVkLkNhbmNlbGVkSAASMgoIaW50ZXJ2YWwYBSABKAsyIC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkludGVydmFsGgkKB1N1Y2Nlc3MaHwoFRXJyb3ISFgoHbWVzc2FnZRgBIAEoCUIFqgECCAIaEgoQRGVhZGxpbmVFeGNlZWRlZBoKCghDYW5jZWxlZEIJCgdvdXRjb21lGjgKB1BsYW5uZWQSLQoJc3RhcnRzX2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJjCh1Qcm9qZWN0aW9uQ29tcGFjdGlvbnNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCImQKHlByb2plY3Rpb25Db21wYWN0aW9uc0NvbXBsZXRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCImsKJVByb2plY3Rpb25Db21wYWN0aW9uc0RlYWRsaW5lRXhjZWVkZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJhChtQcm9qZWN0aW9uQ29tcGFjdGlvbnNGYWlsZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiLsBgoUUHJvamVjdGlvblJlc2V0U3RhdGUSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEkUKB2N1cnJlbnQYAiABKAsyNC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25SZXNldFN0YXRlLlJ1bm5pbmcSRAoIcHJldmlvdXMYAyABKAsyMi5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25SZXNldFN0YXRlLkVuZGVkEkIKBG5leHQYBCABKAsyNC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25SZXNldFN0YXRlLlBsYW5uZWQaOQoHUnVubmluZxIuCgpzdGFydGVkX2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBrfAwoFRW5kZWQSTQoHc3VjY2VzcxgBIAEoCzI6LmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvblJlc2V0U3RhdGUuRW5kZWQuU3VjY2Vzc0gAEkkKBWVycm9yGAIgASgLMjguZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRTdGF0ZS5FbmRlZC5FcnJvckgAEmAKEWRlYWRsaW5lX2V4Y2VlZGVkGAMgASgLMkMuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRTdGF0ZS5FbmRlZC5EZWFkbGluZUV4Y2VlZGVkSAASTwoIY2FuY2VsZWQYBCABKAsyOy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25SZXNldFN0YXRlLkVuZGVkLkNhbmNlbGVkSAASMgoIaW50ZXJ2YWwYBSABKAsyIC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkludGVydmFsGgkKB1N1Y2Nlc3MaHwoFRXJyb3ISFgoHbWVzc2FnZRgBIAEoCUIFqgECCAIaEgoQRGVhZGxpbmVFeGNlZWRlZBoKCghDYW5jZWxlZEIJCgdvdXRjb21lGjgKB1BsYW5uZWQSLQoJc3RhcnRzX2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_metricsgrpc_interval, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImAKGkFnZ3JlZ2F0ZUluc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXgoYUHJvY2Vzc0luc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXAoWSGFuZGxlckNvbW1hbmRzUGVuZGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlgKEkhhbmRsZXJDb21tYW5kc0R1ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlwKFkhhbmRsZXJDb21tYW5kc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJcChZIYW5kbGVyQ29tbWFuZHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJZChNIYW5kbGVyRGVhZGxpbmVzRHVlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJdChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIl4KGEhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFUhhbmRsZXJFdmVudHNSZWNvcmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIloKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiWgoUSGFuZGxlckV2ZW50c0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJbChVQcm9jZXNzSW5zdGFuY2VzRW5kZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiKUBwoZUHJvamVjdGlvbkNvbXBhY3Rpb25TdGF0ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSSgoHY3VycmVudBgCIAEoCzI5LmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25TdGF0ZS5SdW5uaW5nEkkKCHByZXZpb3VzGAMgASgLMjcuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLkVuZGVkEkcKBG5leHQYBCABKAsyOS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uU3RhdGUuUGxhbm5lZBo5CgdSdW5uaW5nEi4KCnN0YXJ0ZWRfYXQYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wGvMDCgVFbmRlZBJSCgdzdWNjZXNzGAEgASgLMj8uZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLkVuZGVkLlN1Y2Nlc3NIABJOCgVlcnJvchgCIAEoCzI9LmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25TdGF0ZS5FbmRlZC5FcnJvckgAEmUKEWRlYWRsaW5lX2V4Y2VlZGVkGAMgASgLMkguZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXRlLkVuZGVkLkRlYWRsaW5lRXhjZWVkZWRIABJUCghjYW5jZWxlZBgEIAEoCzJALmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25TdGF0ZS5FbmRlZC5DYW5jZWxlZEgAEjIKCGludGVydmFsGAUgASgLMiAuZG9nbWEubWV0cmljcy52MWFscGhhMS5JbnRlcnZhbBoJCgdTdWNjZXNzGh8KBUVycm9yEhYKB21lc3NhZ2UYASABKAlCBaoBAggCGhIKEERlYWRsaW5lRXhjZWVkZWQaCgoIQ2FuY2VsZWRCCQoHb3V0Y29tZRo4CgdQbGFubmVkEi0KCXN0YXJ0c19hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiYwodUHJvamVjdGlvbkNvbXBhY3Rpb25zQ2FuY2VsZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJkCh5Qcm9qZWN0aW9uQ29tcGFjdGlvbnNDb21wbGV0ZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJrCiVQcm9qZWN0aW9uQ29tcGFjdGlvbnNEZWFkbGluZUV4Y2VlZGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiYQobUHJvamVjdGlvbkNvbXBhY3Rpb25zRmFpbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIi7AYKFFByb2plY3Rpb25SZXNldFN0YXRlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBJFCgdjdXJyZW50GAIgASgLMjQuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRTdGF0ZS5SdW5uaW5nEkQKCHByZXZpb3VzGAMgASgLMjIuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRTdGF0ZS5FbmRlZBJCCgRuZXh0GAQgASgLMjQuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRTdGF0ZS5QbGFubmVkGjkKB1J1bm5pbmcSLgoKc3RhcnRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAa3wMKBUVuZGVkEk0KB3N1Y2Nlc3MYASABKAsyOi5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlByb2plY3Rpb25SZXNldFN0YXRlLkVuZGVkLlN1Y2Nlc3NIABJJCgVlcnJvchgCIAEoCzI4LmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvblJlc2V0U3RhdGUuRW5kZWQuRXJyb3JIABJgChFkZWFkbGluZV9leGNlZWRlZBgDIAEoCzJDLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvamVjdGlvblJlc2V0U3RhdGUuRW5kZWQuRGVhZGxpbmVFeGNlZWRlZEgAEk8KCGNhbmNlbGVkGAQgASgLMjsuZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRTdGF0ZS5FbmRlZC5DYW5jZWxlZEgAEjIKCGludGVydmFsGAUgASgLMiAuZG9nbWEubWV0cmljcy52MWFscGhhMS5JbnRlcnZhbBoJCgdTdWNjZXNzGh8KBUVycm9yEhYKB21lc3NhZ2UYASABKAlCBaoBAggCGhIKEERlYWRsaW5lRXhjZWVkZWQaCgoIQ2FuY2VsZWRCCQoHb3V0Y29tZRo4CgdQbGFubmVkEi0KCXN0YXJ0c19hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_metricsgrpc_interval, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * AggregateInstancesInMemory is the number of an aggregate handler's instances
@@ -422,37 +422,6 @@ export const HandlerEventsHandledSchema: GenMessage<HandlerEventsHandled> = /*@_
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 12);
 
 /**
- * HandlerEventsPending is the number of events that one handler handles and
- * hasn't handled yet, on the engine's event streams. The engine sends it only
- * for process and projection handlers.
- *
- * @generated from message dogma.metrics.v1alpha1.HandlerEventsPending
- */
-export type HandlerEventsPending = Message<"dogma.metrics.v1alpha1.HandlerEventsPending"> & {
-  /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
-   */
-  handlerKey?: UUID | undefined;
-
-  /**
-   * Value is the number of events that haven't been handled.
-   *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
-   */
-  value: bigint;
-};
-
-/**
- * Describes the message dogma.metrics.v1alpha1.HandlerEventsPending.
- * Use `create(HandlerEventsPendingSchema)` to create a new message.
- */
-export const HandlerEventsPendingSchema: GenMessage<HandlerEventsPending> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 13);
-
-/**
  * HandlerEventsFailing is the number of events for one handler that haven't
  * been handled yet and whose most recent delivery attempt failed. The engine
  * sends it only for process and projection handlers.
@@ -481,7 +450,7 @@ export type HandlerEventsFailing = Message<"dogma.metrics.v1alpha1.HandlerEvents
  * Use `create(HandlerEventsFailingSchema)` to create a new message.
  */
 export const HandlerEventsFailingSchema: GenMessage<HandlerEventsFailing> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 14);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 13);
 
 /**
  * ProcessInstancesEnded is the running total of the instances of one process
@@ -511,7 +480,7 @@ export type ProcessInstancesEnded = Message<"dogma.metrics.v1alpha1.ProcessInsta
  * Use `create(ProcessInstancesEndedSchema)` to create a new message.
  */
 export const ProcessInstancesEndedSchema: GenMessage<ProcessInstancesEnded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 14);
 
 /**
  * ProjectionCompactionState describes the compactions of one projection
@@ -564,7 +533,7 @@ export type ProjectionCompactionState = Message<"dogma.metrics.v1alpha1.Projecti
  * Use `create(ProjectionCompactionStateSchema)` to create a new message.
  */
 export const ProjectionCompactionStateSchema: GenMessage<ProjectionCompactionState> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15);
 
 /**
  * Running is a compaction that is running.
@@ -586,7 +555,7 @@ export type ProjectionCompactionState_Running = Message<"dogma.metrics.v1alpha1.
  * Use `create(ProjectionCompactionState_RunningSchema)` to create a new message.
  */
 export const ProjectionCompactionState_RunningSchema: GenMessage<ProjectionCompactionState_Running> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15, 0);
 
 /**
  * Ended is a compaction that has ended.
@@ -639,7 +608,7 @@ export type ProjectionCompactionState_Ended = Message<"dogma.metrics.v1alpha1.Pr
  * Use `create(ProjectionCompactionState_EndedSchema)` to create a new message.
  */
 export const ProjectionCompactionState_EndedSchema: GenMessage<ProjectionCompactionState_Ended> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15, 1);
 
 /**
  * Success is the outcome of a compaction that the handler completed without
@@ -655,7 +624,7 @@ export type ProjectionCompactionState_Ended_Success = Message<"dogma.metrics.v1a
  * Use `create(ProjectionCompactionState_Ended_SuccessSchema)` to create a new message.
  */
 export const ProjectionCompactionState_Ended_SuccessSchema: GenMessage<ProjectionCompactionState_Ended_Success> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15, 1, 0);
 
 /**
  * Error is the outcome of a compaction that stopped because the handler
@@ -677,7 +646,7 @@ export type ProjectionCompactionState_Ended_Error = Message<"dogma.metrics.v1alp
  * Use `create(ProjectionCompactionState_Ended_ErrorSchema)` to create a new message.
  */
 export const ProjectionCompactionState_Ended_ErrorSchema: GenMessage<ProjectionCompactionState_Ended_Error> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 1);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15, 1, 1);
 
 /**
  * DeadlineExceeded is the outcome of a compaction that stopped because its
@@ -697,7 +666,7 @@ export type ProjectionCompactionState_Ended_DeadlineExceeded = Message<"dogma.me
  * Use `create(ProjectionCompactionState_Ended_DeadlineExceededSchema)` to create a new message.
  */
 export const ProjectionCompactionState_Ended_DeadlineExceededSchema: GenMessage<ProjectionCompactionState_Ended_DeadlineExceeded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15, 1, 2);
 
 /**
  * Canceled is the outcome of a compaction that stopped because it was
@@ -716,7 +685,7 @@ export type ProjectionCompactionState_Ended_Canceled = Message<"dogma.metrics.v1
  * Use `create(ProjectionCompactionState_Ended_CanceledSchema)` to create a new message.
  */
 export const ProjectionCompactionState_Ended_CanceledSchema: GenMessage<ProjectionCompactionState_Ended_Canceled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 1, 3);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15, 1, 3);
 
 /**
  * Planned is a compaction that the engine plans to start.
@@ -741,7 +710,7 @@ export type ProjectionCompactionState_Planned = Message<"dogma.metrics.v1alpha1.
  * Use `create(ProjectionCompactionState_PlannedSchema)` to create a new message.
  */
 export const ProjectionCompactionState_PlannedSchema: GenMessage<ProjectionCompactionState_Planned> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15, 2);
 
 /**
  * ProjectionCompactionsCanceled is the running total of the compactions of one
@@ -774,7 +743,7 @@ export type ProjectionCompactionsCanceled = Message<"dogma.metrics.v1alpha1.Proj
  * Use `create(ProjectionCompactionsCanceledSchema)` to create a new message.
  */
 export const ProjectionCompactionsCanceledSchema: GenMessage<ProjectionCompactionsCanceled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 17);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16);
 
 /**
  * ProjectionCompactionsCompleted is the running total of the compactions of one
@@ -807,7 +776,7 @@ export type ProjectionCompactionsCompleted = Message<"dogma.metrics.v1alpha1.Pro
  * Use `create(ProjectionCompactionsCompletedSchema)` to create a new message.
  */
 export const ProjectionCompactionsCompletedSchema: GenMessage<ProjectionCompactionsCompleted> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 18);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 17);
 
 /**
  * ProjectionCompactionsDeadlineExceeded is the running total of the compactions
@@ -840,7 +809,7 @@ export type ProjectionCompactionsDeadlineExceeded = Message<"dogma.metrics.v1alp
  * Use `create(ProjectionCompactionsDeadlineExceededSchema)` to create a new message.
  */
 export const ProjectionCompactionsDeadlineExceededSchema: GenMessage<ProjectionCompactionsDeadlineExceeded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 19);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 18);
 
 /**
  * ProjectionCompactionsFailed is the running total of the compactions of one
@@ -872,7 +841,7 @@ export type ProjectionCompactionsFailed = Message<"dogma.metrics.v1alpha1.Projec
  * Use `create(ProjectionCompactionsFailedSchema)` to create a new message.
  */
 export const ProjectionCompactionsFailedSchema: GenMessage<ProjectionCompactionsFailed> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 19);
 
 /**
  * ProjectionResetState describes the reset operations of one projection
@@ -928,7 +897,7 @@ export type ProjectionResetState = Message<"dogma.metrics.v1alpha1.ProjectionRes
  * Use `create(ProjectionResetStateSchema)` to create a new message.
  */
 export const ProjectionResetStateSchema: GenMessage<ProjectionResetState> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20);
 
 /**
  * Running is a reset operation that is running.
@@ -950,7 +919,7 @@ export type ProjectionResetState_Running = Message<"dogma.metrics.v1alpha1.Proje
  * Use `create(ProjectionResetState_RunningSchema)` to create a new message.
  */
 export const ProjectionResetState_RunningSchema: GenMessage<ProjectionResetState_Running> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20, 0);
 
 /**
  * Ended is a reset operation that has ended.
@@ -1003,7 +972,7 @@ export type ProjectionResetState_Ended = Message<"dogma.metrics.v1alpha1.Project
  * Use `create(ProjectionResetState_EndedSchema)` to create a new message.
  */
 export const ProjectionResetState_EndedSchema: GenMessage<ProjectionResetState_Ended> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21, 1);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20, 1);
 
 /**
  * Success is the outcome of a reset operation that the handler completed.
@@ -1018,7 +987,7 @@ export type ProjectionResetState_Ended_Success = Message<"dogma.metrics.v1alpha1
  * Use `create(ProjectionResetState_Ended_SuccessSchema)` to create a new message.
  */
 export const ProjectionResetState_Ended_SuccessSchema: GenMessage<ProjectionResetState_Ended_Success> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21, 1, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20, 1, 0);
 
 /**
  * Error is the outcome of a reset operation that stopped because the
@@ -1040,7 +1009,7 @@ export type ProjectionResetState_Ended_Error = Message<"dogma.metrics.v1alpha1.P
  * Use `create(ProjectionResetState_Ended_ErrorSchema)` to create a new message.
  */
 export const ProjectionResetState_Ended_ErrorSchema: GenMessage<ProjectionResetState_Ended_Error> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21, 1, 1);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20, 1, 1);
 
 /**
  * DeadlineExceeded is the outcome of a reset operation that stopped because
@@ -1056,7 +1025,7 @@ export type ProjectionResetState_Ended_DeadlineExceeded = Message<"dogma.metrics
  * Use `create(ProjectionResetState_Ended_DeadlineExceededSchema)` to create a new message.
  */
 export const ProjectionResetState_Ended_DeadlineExceededSchema: GenMessage<ProjectionResetState_Ended_DeadlineExceeded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21, 1, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20, 1, 2);
 
 /**
  * Canceled is the outcome of a reset operation that stopped because it was
@@ -1072,7 +1041,7 @@ export type ProjectionResetState_Ended_Canceled = Message<"dogma.metrics.v1alpha
  * Use `create(ProjectionResetState_Ended_CanceledSchema)` to create a new message.
  */
 export const ProjectionResetState_Ended_CanceledSchema: GenMessage<ProjectionResetState_Ended_Canceled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21, 1, 3);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20, 1, 3);
 
 /**
  * Planned is a reset operation that the engine plans to start.
@@ -1095,5 +1064,5 @@ export type ProjectionResetState_Planned = Message<"dogma.metrics.v1alpha1.Proje
  * Use `create(ProjectionResetState_PlannedSchema)` to create a new message.
  */
 export const ProjectionResetState_PlannedSchema: GenMessage<ProjectionResetState_Planned> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 21, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 20, 2);
 

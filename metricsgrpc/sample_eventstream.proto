@@ -39,3 +39,28 @@ message AggregateInstanceEventStreamBindings {
   // the instances that were bound to it have gone.
   uint64 value = 3 [features.field_presence = IMPLICIT];
 }
+
+// HandlerEventStreamLag is the number of events on one event stream, of any
+// type, that are after the offset that one handler has reached. The engine
+// sends it only for process and projection handlers.
+//
+// A handler handles the events of some types and skips the rest. It has reached
+// an offset when it has handled or skipped the event at that offset and every
+// event before it.
+//
+// The stream may be one of another engine's event streams. The engine then
+// counts the events that it knows are on the stream, which can be fewer than
+// the stream has.
+message HandlerEventStreamLag {
+  // HandlerKey is the handler's identity key, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // EventStreamId is the ID of the event stream. It is required.
+  dogma.protobuf.v1.UUID event_stream_id = 2;
+
+  // Value is the number of events after the offset that the handler has
+  // reached. It is zero when the handler has handled or skipped every event on
+  // the stream.
+  uint64 value = 3 [features.field_presence = IMPLICIT];
+}

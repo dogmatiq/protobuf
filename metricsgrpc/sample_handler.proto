@@ -163,18 +163,6 @@ message HandlerEventsHandled {
   uint64 value = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerEventsPending is the number of events that one handler handles and
-// hasn't handled yet, on the engine's event streams. The engine sends it only
-// for process and projection handlers.
-message HandlerEventsPending {
-  // HandlerKey is the handler's identity key, as the application in
-  // WatchMetricsResponse.Preamble.application describes it.
-  dogma.protobuf.v1.UUID handler_key = 1;
-
-  // Value is the number of events that haven't been handled.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
-}
-
 // HandlerEventsFailing is the number of events for one handler that haven't
 // been handled yet and whose most recent delivery attempt failed. The engine
 // sends it only for process and projection handlers.

@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream: GenFile = /*@__PURE__*/
-  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJbChFFdmVudFN0cmVhbUxlbmd0aBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiKcAQokQWdncmVnYXRlSW5zdGFuY2VFdmVudFN0cmVhbUJpbmRpbmdzEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJbChFFdmVudFN0cmVhbUxlbmd0aBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiKcAQokQWdncmVnYXRlSW5zdGFuY2VFdmVudFN0cmVhbUJpbmRpbmdzEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAMgASgEQgWqAQIIAiKNAQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * EventStreamLength is the number of events on one event stream, which is an
@@ -90,4 +90,52 @@ export type AggregateInstanceEventStreamBindings = Message<"dogma.metrics.v1alph
  */
 export const AggregateInstanceEventStreamBindingsSchema: GenMessage<AggregateInstanceEventStreamBindings> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream, 1);
+
+/**
+ * HandlerEventStreamLag is the number of events on one event stream, of any
+ * type, that are after the offset that one handler has reached. The engine
+ * sends it only for process and projection handlers.
+ *
+ * A handler handles the events of some types and skips the rest. It has reached
+ * an offset when it has handled or skipped the event at that offset and every
+ * event before it.
+ *
+ * The stream may be one of another engine's event streams. The engine then
+ * counts the events that it knows are on the stream, which can be fewer than
+ * the stream has.
+ *
+ * @generated from message dogma.metrics.v1alpha1.HandlerEventStreamLag
+ */
+export type HandlerEventStreamLag = Message<"dogma.metrics.v1alpha1.HandlerEventStreamLag"> & {
+  /**
+   * HandlerKey is the handler's identity key, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * EventStreamId is the ID of the event stream. It is required.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 2;
+   */
+  eventStreamId?: UUID | undefined;
+
+  /**
+   * Value is the number of events after the offset that the handler has
+   * reached. It is zero when the handler has handled or skipped every event on
+   * the stream.
+   *
+   * @generated from field: uint64 value = 3 [features.field_presence = IMPLICIT];
+   */
+  value: bigint;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.HandlerEventStreamLag.
+ * Use `create(HandlerEventStreamLagSchema)` to create a new message.
+ */
+export const HandlerEventStreamLagSchema: GenMessage<HandlerEventStreamLag> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream, 2);
 

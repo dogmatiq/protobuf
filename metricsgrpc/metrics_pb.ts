@@ -176,9 +176,9 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * - HandlerDeadlinesFailing
  * - HandlerDeadlinesHandled
  * - HandlerDeadlinesPending
+ * - HandlerEventStreamLag
  * - HandlerEventsFailing
  * - HandlerEventsHandled
- * - HandlerEventsPending
  * - HandlerEventsRecorded
  * - ProcessInstanceQueueBindings
  * - ProcessInstancesEnded

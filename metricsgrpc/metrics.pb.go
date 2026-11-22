@@ -475,9 +475,9 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // - HandlerDeadlinesFailing
 // - HandlerDeadlinesHandled
 // - HandlerDeadlinesPending
+// - HandlerEventStreamLag
 // - HandlerEventsFailing
 // - HandlerEventsHandled
-// - HandlerEventsPending
 // - HandlerEventsRecorded
 // - ProcessInstanceQueueBindings
 // - ProcessInstancesEnded

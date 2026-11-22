@@ -19,6 +19,8 @@ The format is based on [Keep a Changelog], and this project adheres to
   node that serves the call.
 - Added `WatchClusterMetrics` to `MetricsAPI`, which reports the metrics that
   describe a whole cluster. Any node of the cluster can serve it.
+- Added the `HandlerEventStreamLag` metric to `MetricsAPI`, for the number of
+  events that a handler has yet to handle or skip on one event stream.
 
 ### Changed
 
@@ -34,6 +36,9 @@ The format is based on [Keep a Changelog], and this project adheres to
   `WatchMetricsRequest`, `SupportedMetric` and `Reach`. Use `WatchNodeMetrics`
   and `WatchClusterMetrics` instead, which report the same metrics between
   them.
+- **[BC]** Removed the `HandlerEventsPending` metric from `MetricsAPI`. Use
+  `HandlerEventStreamLag` instead, which is per event stream and includes the
+  events that the handler skips.
 
 ## [0.9.0] - 2026-11-22
 
