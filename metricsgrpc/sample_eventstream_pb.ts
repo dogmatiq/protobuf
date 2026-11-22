@@ -34,8 +34,8 @@ export type EventStreamLength = Message<"dogma.metrics.v1alpha1.EventStreamLengt
    * which the next event will be appended. It never decreases.
    *
    * While ownership of the stream moves from one node to another, both may
-   * report it. Both counts are positions on the same stream, and the greater
-   * one is the more recent.
+   * report it. Both counts are positions on the same stream, so the value for
+   * the whole cluster is the greatest value that any node reports.
    *
    * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
    */

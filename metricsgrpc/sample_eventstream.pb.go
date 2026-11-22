@@ -99,8 +99,8 @@ type EventStreamLength_builder struct {
 	// which the next event will be appended. It never decreases.
 	//
 	// While ownership of the stream moves from one node to another, both may
-	// report it. Both counts are positions on the same stream, and the greater
-	// one is the more recent.
+	// report it. Both counts are positions on the same stream, so the value for
+	// the whole cluster is the greatest value that any node reports.
 	Value uint64
 }
 

@@ -48,7 +48,9 @@ type MetricsAPIClient interface {
 	//
 	// A client can add up the samples of one subject from every node of the
 	// cluster to estimate the value for the whole cluster. The sum is an estimate
-	// because each node measures at a different time.
+	// because each node measures at a different time. A metric whose doc gives
+	// another rule for combining samples, such as EventStreamLength, follows that
+	// rule instead.
 	//
 	// If the engine can't measure a metric that the call reports, it fails the
 	// call with the UNAVAILABLE status code.
@@ -137,7 +139,9 @@ type MetricsAPIServer interface {
 	//
 	// A client can add up the samples of one subject from every node of the
 	// cluster to estimate the value for the whole cluster. The sum is an estimate
-	// because each node measures at a different time.
+	// because each node measures at a different time. A metric whose doc gives
+	// another rule for combining samples, such as EventStreamLength, follows that
+	// rule instead.
 	//
 	// If the engine can't measure a metric that the call reports, it fails the
 	// call with the UNAVAILABLE status code.
