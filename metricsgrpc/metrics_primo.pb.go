@@ -35,13 +35,13 @@ func (x *WatchMetricsResponse) TryGetSample() (v *WatchMetricsResponse_Sample, o
 	return v, false
 }
 
-type WatchMetricsRequestBuilder struct {
-	prototype WatchMetricsRequest
+type WatchNodeMetricsRequestBuilder struct {
+	prototype WatchNodeMetricsRequest
 }
 
-// NewWatchMetricsRequestBuilder returns a builder that constructs [WatchMetricsRequest] messages.
-func NewWatchMetricsRequestBuilder() *WatchMetricsRequestBuilder {
-	return &WatchMetricsRequestBuilder{}
+// NewWatchNodeMetricsRequestBuilder returns a builder that constructs [WatchNodeMetricsRequest] messages.
+func NewWatchNodeMetricsRequestBuilder() *WatchNodeMetricsRequestBuilder {
+	return &WatchNodeMetricsRequestBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -49,17 +49,45 @@ func NewWatchMetricsRequestBuilder() *WatchMetricsRequestBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *WatchMetricsRequestBuilder) From(x *WatchMetricsRequest) *WatchMetricsRequestBuilder {
+func (b *WatchNodeMetricsRequestBuilder) From(x *WatchNodeMetricsRequest) *WatchNodeMetricsRequestBuilder {
 	proto.Reset(&b.prototype)
 	return b
 }
 
-// Build returns a new [WatchMetricsRequest] containing the values configured via the builder.
+// Build returns a new [WatchNodeMetricsRequest] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *WatchMetricsRequestBuilder) Build() *WatchMetricsRequest {
-	m := &WatchMetricsRequest{}
+func (b *WatchNodeMetricsRequestBuilder) Build() *WatchNodeMetricsRequest {
+	m := &WatchNodeMetricsRequest{}
+	return m
+}
+
+type WatchClusterMetricsRequestBuilder struct {
+	prototype WatchClusterMetricsRequest
+}
+
+// NewWatchClusterMetricsRequestBuilder returns a builder that constructs [WatchClusterMetricsRequest] messages.
+func NewWatchClusterMetricsRequestBuilder() *WatchClusterMetricsRequestBuilder {
+	return &WatchClusterMetricsRequestBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *WatchClusterMetricsRequestBuilder) From(x *WatchClusterMetricsRequest) *WatchClusterMetricsRequestBuilder {
+	proto.Reset(&b.prototype)
+	return b
+}
+
+// Build returns a new [WatchClusterMetricsRequest] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *WatchClusterMetricsRequestBuilder) Build() *WatchClusterMetricsRequest {
+	m := &WatchClusterMetricsRequest{}
 	return m
 }
 
@@ -188,7 +216,7 @@ func (b *WatchMetricsResponse_PreambleBuilder) WithApplication(v *configpb.Appli
 
 // WithSupportedMetrics configures the builder to set the SupportedMetrics field to v,
 // then returns b.
-func (b *WatchMetricsResponse_PreambleBuilder) WithSupportedMetrics(v []*SupportedMetric) *WatchMetricsResponse_PreambleBuilder {
+func (b *WatchMetricsResponse_PreambleBuilder) WithSupportedMetrics(v []string) *WatchMetricsResponse_PreambleBuilder {
 	b.prototype.SetSupportedMetrics(v)
 	return b
 }
@@ -254,56 +282,6 @@ func (b *WatchMetricsResponse_SampleBuilder) WithValue(v []byte) *WatchMetricsRe
 // then returns b.
 func (b *WatchMetricsResponse_SampleBuilder) WithRevision(v []byte) *WatchMetricsResponse_SampleBuilder {
 	b.prototype.SetRevision(v)
-	return b
-}
-
-type SupportedMetricBuilder struct {
-	prototype SupportedMetric
-}
-
-// NewSupportedMetricBuilder returns a builder that constructs [SupportedMetric] messages.
-func NewSupportedMetricBuilder() *SupportedMetricBuilder {
-	return &SupportedMetricBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *SupportedMetricBuilder) From(x *SupportedMetric) *SupportedMetricBuilder {
-	proto.Reset(&b.prototype)
-	b.prototype.SetMessageName(x.GetMessageName())
-	if x.HasReach() {
-		b.prototype.SetReach(x.GetReach())
-	}
-	return b
-}
-
-// Build returns a new [SupportedMetric] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *SupportedMetricBuilder) Build() *SupportedMetric {
-	m := &SupportedMetric{}
-	m.SetMessageName(b.prototype.GetMessageName())
-	if b.prototype.HasReach() {
-		m.SetReach(b.prototype.GetReach())
-	}
-	return m
-}
-
-// WithMessageName configures the builder to set the MessageName field to v,
-// then returns b.
-func (b *SupportedMetricBuilder) WithMessageName(v string) *SupportedMetricBuilder {
-	b.prototype.SetMessageName(v)
-	return b
-}
-
-// WithReach configures the builder to set the Reach field to v,
-// then returns b.
-func (b *SupportedMetricBuilder) WithReach(v Reach) *SupportedMetricBuilder {
-	b.prototype.SetReach(v)
 	return b
 }
 
@@ -387,63 +365,6 @@ func Map_WatchMetricsResponse_Payload[T any](
 	}
 }
 
-type (
-	// Reach_REACH_UNSPECIFIED_Case is a type that statically associates a function
-	// with a [Reach_REACH_UNSPECIFIED] value.
-	Reach_REACH_UNSPECIFIED_Case struct{}
-	// Reach_REACH_CLUSTER_Case is a type that statically associates a function
-	// with a [Reach_REACH_CLUSTER] value.
-	Reach_REACH_CLUSTER_Case struct{}
-	// Reach_REACH_NODE_Case is a type that statically associates a function
-	// with a [Reach_REACH_NODE] value.
-	Reach_REACH_NODE_Case struct{}
-)
-
-// Switch_Reach dispatches to a function based on the value of v.
-//
-// It invokes the function that corresponds to v. It panics if v is not a
-// recognized [Reach] value.
-func Switch_Reach(
-	v Reach,
-	caseREACH_UNSPECIFIED func(Reach_REACH_UNSPECIFIED_Case),
-	caseREACH_CLUSTER func(Reach_REACH_CLUSTER_Case),
-	caseREACH_NODE func(Reach_REACH_NODE_Case),
-) {
-	switch v {
-	case Reach_REACH_UNSPECIFIED:
-		caseREACH_UNSPECIFIED(Reach_REACH_UNSPECIFIED_Case{})
-	case Reach_REACH_CLUSTER:
-		caseREACH_CLUSTER(Reach_REACH_CLUSTER_Case{})
-	case Reach_REACH_NODE:
-		caseREACH_NODE(Reach_REACH_NODE_Case{})
-	default:
-		panic(fmt.Sprintf("Switch_Reach: %d is not a valid Reach", v))
-	}
-}
-
-// Map_Reach maps a member of the [Reach] enumeration to a
-// value of type T.
-//
-// It invokes the function that corresponds to v, and returns that function's
-// result. It panics if v is not a recognized [Reach] value.
-func Map_Reach[T any](
-	v Reach,
-	caseREACH_UNSPECIFIED func(Reach_REACH_UNSPECIFIED_Case) T,
-	caseREACH_CLUSTER func(Reach_REACH_CLUSTER_Case) T,
-	caseREACH_NODE func(Reach_REACH_NODE_Case) T,
-) T {
-	switch v {
-	case Reach_REACH_UNSPECIFIED:
-		return caseREACH_UNSPECIFIED(Reach_REACH_UNSPECIFIED_Case{})
-	case Reach_REACH_CLUSTER:
-		return caseREACH_CLUSTER(Reach_REACH_CLUSTER_Case{})
-	case Reach_REACH_NODE:
-		return caseREACH_NODE(Reach_REACH_NODE_Case{})
-	default:
-		panic(fmt.Sprintf("Map_Reach: %d is not a valid Reach", v))
-	}
-}
-
 // Format formats x according to the given [fmt] verb.
 //
 // It implements [fmt.Formatter], taking precedence over the String() method
@@ -457,7 +378,7 @@ func Map_Reach[T any](
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *WatchMetricsRequest) Format(f fmt.State, verb rune) {
+func (x *WatchNodeMetricsRequest) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -512,9 +433,82 @@ func (x *WatchMetricsRequest) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = WatchMetricsRequest
-	type WatchMetricsRequest realType
-	fmt.Fprintf(f, format, (*WatchMetricsRequest)(x))
+	type realType = WatchNodeMetricsRequest
+	type WatchNodeMetricsRequest realType
+	fmt.Fprintf(f, format, (*WatchNodeMetricsRequest)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *WatchClusterMetricsRequest) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = WatchClusterMetricsRequest
+	type WatchClusterMetricsRequest realType
+	fmt.Fprintf(f, format, (*WatchClusterMetricsRequest)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -736,108 +730,62 @@ func (x *WatchMetricsResponse_Sample) Format(f fmt.State, verb rune) {
 	fmt.Fprintf(f, format, (*WatchMetricsResponse_Sample)(x))
 }
 
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *SupportedMetric) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = SupportedMetric
-	type SupportedMetric realType
-	fmt.Fprintf(f, format, (*SupportedMetric)(x))
-}
-
 // MetricsAPIClientStub is a test implementation of the [MetricsAPIClient] interface.
 var _ MetricsAPIClient = (*MetricsAPIClientStub)(nil)
 
 type MetricsAPIClientStub struct {
-	// WatchMetricsFunc is a function that implements the WatchMetrics RPC method.
-	WatchMetricsFunc func(ctx context.Context, req *WatchMetricsRequest, options ...grpc.CallOption) (MetricsAPI_WatchMetricsClient, error)
+	// WatchNodeMetricsFunc is a function that implements the WatchNodeMetrics RPC method.
+	WatchNodeMetricsFunc func(ctx context.Context, req *WatchNodeMetricsRequest, options ...grpc.CallOption) (MetricsAPI_WatchNodeMetricsClient, error)
+
+	// WatchClusterMetricsFunc is a function that implements the WatchClusterMetrics RPC method.
+	WatchClusterMetricsFunc func(ctx context.Context, req *WatchClusterMetricsRequest, options ...grpc.CallOption) (MetricsAPI_WatchClusterMetricsClient, error)
 }
 
-// WatchMetrics calls c.WatchMetricsFunc if it is non-nil. Otherwise, it returns an error.
-func (c *MetricsAPIClientStub) WatchMetrics(ctx context.Context, req *WatchMetricsRequest, options ...grpc.CallOption) (MetricsAPI_WatchMetricsClient, error) {
-	if c.WatchMetricsFunc == nil {
-		return nil, status.Error(codes.Unimplemented, "method WatchMetrics not implemented")
+// WatchNodeMetrics calls c.WatchNodeMetricsFunc if it is non-nil. Otherwise, it returns an error.
+func (c *MetricsAPIClientStub) WatchNodeMetrics(ctx context.Context, req *WatchNodeMetricsRequest, options ...grpc.CallOption) (MetricsAPI_WatchNodeMetricsClient, error) {
+	if c.WatchNodeMetricsFunc == nil {
+		return nil, status.Error(codes.Unimplemented, "method WatchNodeMetrics not implemented")
 	}
-	return c.WatchMetricsFunc(ctx, req, options...)
+	return c.WatchNodeMetricsFunc(ctx, req, options...)
+}
+
+// WatchClusterMetrics calls c.WatchClusterMetricsFunc if it is non-nil. Otherwise, it returns an error.
+func (c *MetricsAPIClientStub) WatchClusterMetrics(ctx context.Context, req *WatchClusterMetricsRequest, options ...grpc.CallOption) (MetricsAPI_WatchClusterMetricsClient, error) {
+	if c.WatchClusterMetricsFunc == nil {
+		return nil, status.Error(codes.Unimplemented, "method WatchClusterMetrics not implemented")
+	}
+	return c.WatchClusterMetricsFunc(ctx, req, options...)
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*WatchMetricsRequest] to implement [encoding.BinaryMarshaler].
-func (x *WatchMetricsRequest) MarshalBinary() ([]byte, error) {
+// It allows [*WatchNodeMetricsRequest] to implement [encoding.BinaryMarshaler].
+func (x *WatchNodeMetricsRequest) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*WatchMetricsRequest] to implement [encoding.BinaryUnmarshaler].
-func (x *WatchMetricsRequest) UnmarshalBinary(data []byte) error {
+// It allows [*WatchNodeMetricsRequest] to implement [encoding.BinaryUnmarshaler].
+func (x *WatchNodeMetricsRequest) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*WatchClusterMetricsRequest] to implement [encoding.BinaryMarshaler].
+func (x *WatchClusterMetricsRequest) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*WatchClusterMetricsRequest] to implement [encoding.BinaryUnmarshaler].
+func (x *WatchClusterMetricsRequest) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
@@ -886,21 +834,5 @@ func (x *WatchMetricsResponse_Sample) MarshalBinary() ([]byte, error) {
 //
 // It allows [*WatchMetricsResponse_Sample] to implement [encoding.BinaryUnmarshaler].
 func (x *WatchMetricsResponse_Sample) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*SupportedMetric] to implement [encoding.BinaryMarshaler].
-func (x *SupportedMetric) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*SupportedMetric] to implement [encoding.BinaryUnmarshaler].
-func (x *SupportedMetric) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }

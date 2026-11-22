@@ -2,8 +2,8 @@
 // @generated from file github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto (package dogma.metrics.v1alpha1, edition 2024)
 /* eslint-disable */
 
-import type { GenEnum, GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
-import { enumDesc, fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
+import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Application } from "../configpb/config_pb.js";
 import { file_github_com_dogmatiq_protobuf_configpb_config } from "../configpb/config_pb.js";
 import type { UUID } from "../uuidpb/uuid_pb.js";
@@ -14,26 +14,49 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics: GenFile = /*@__PURE__*/
-  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiFQoTV2F0Y2hNZXRyaWNzUmVxdWVzdCL9AwoUV2F0Y2hNZXRyaWNzUmVzcG9uc2USSQoIcHJlYW1ibGUYASABKAsyNS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlLlByZWFtYmxlSAASRQoGc2FtcGxlGAIgASgLMjMuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5TYW1wbGVIABrZAQoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEisKCmNsdXN0ZXJfaWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjcKC2FwcGxpY2F0aW9uGAMgASgLMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkFwcGxpY2F0aW9uEkIKEXN1cHBvcnRlZF9tZXRyaWNzGAQgAygLMicuZG9nbWEubWV0cmljcy52MWFscGhhMS5TdXBwb3J0ZWRNZXRyaWMabAoGU2FtcGxlEhsKDG1ldHJpY19pbmRleBgBIAEoDUIFqgECCAISFgoHc3ViamVjdBgCIAEoDEIFqgECCAISFAoFdmFsdWUYAyABKAxCBaoBAggCEhcKCHJldmlzaW9uGAQgASgMQgWqAQIIAkIJCgdwYXlsb2FkIlwKD1N1cHBvcnRlZE1ldHJpYxIbCgxtZXNzYWdlX25hbWUYASABKAlCBaoBAggCEiwKBXJlYWNoGAIgASgOMh0uZG9nbWEubWV0cmljcy52MWFscGhhMS5SZWFjaCpBCgVSZWFjaBIVChFSRUFDSF9VTlNQRUNJRklFRBAAEhEKDVJFQUNIX0NMVVNURVIQARIOCgpSRUFDSF9OT0RFEAIyeQoKTWV0cmljc0FQSRJrCgxXYXRjaE1ldHJpY3MSKy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiGQoXV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QiHAoaV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3Qi1AMKFFdhdGNoTWV0cmljc1Jlc3BvbnNlEkkKCHByZWFtYmxlGAEgASgLMjUuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5QcmVhbWJsZUgAEkUKBnNhbXBsZRgCIAEoCzIzLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UuU2FtcGxlSAAasAEKCFByZWFtYmxlEiMKAmlkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIrCgpjbHVzdGVyX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBI3CgthcHBsaWNhdGlvbhgDIAEoCzIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5BcHBsaWNhdGlvbhIZChFzdXBwb3J0ZWRfbWV0cmljcxgEIAMoCRpsCgZTYW1wbGUSGwoMbWV0cmljX2luZGV4GAEgASgNQgWqAQIIAhIWCgdzdWJqZWN0GAIgASgMQgWqAQIIAhIUCgV2YWx1ZRgDIAEoDEIFqgECCAISFwoIcmV2aXNpb24YBCABKAxCBaoBAggCQgkKB3BheWxvYWQy/AEKCk1ldHJpY3NBUEkScwoQV2F0Y2hOb2RlTWV0cmljcxIvLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAESeQoTV2F0Y2hDbHVzdGVyTWV0cmljcxIyLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
- * WatchMetricsRequest is the input to the MetricsAPI.WatchMetrics method.
+ * WatchNodeMetricsRequest is the input to the MetricsAPI.WatchNodeMetrics
+ * method.
  *
- * @generated from message dogma.metrics.v1alpha1.WatchMetricsRequest
+ * @generated from message dogma.metrics.v1alpha1.WatchNodeMetricsRequest
  */
-export type WatchMetricsRequest = Message<"dogma.metrics.v1alpha1.WatchMetricsRequest"> & {
+export type WatchNodeMetricsRequest = Message<"dogma.metrics.v1alpha1.WatchNodeMetricsRequest"> & {
 };
 
 /**
- * Describes the message dogma.metrics.v1alpha1.WatchMetricsRequest.
- * Use `create(WatchMetricsRequestSchema)` to create a new message.
+ * Describes the message dogma.metrics.v1alpha1.WatchNodeMetricsRequest.
+ * Use `create(WatchNodeMetricsRequestSchema)` to create a new message.
  */
-export const WatchMetricsRequestSchema: GenMessage<WatchMetricsRequest> = /*@__PURE__*/
+export const WatchNodeMetricsRequestSchema: GenMessage<WatchNodeMetricsRequest> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 0);
 
 /**
+ * WatchClusterMetricsRequest is the input to the MetricsAPI.WatchClusterMetrics
+ * method.
+ *
+ * @generated from message dogma.metrics.v1alpha1.WatchClusterMetricsRequest
+ */
+export type WatchClusterMetricsRequest = Message<"dogma.metrics.v1alpha1.WatchClusterMetricsRequest"> & {
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.WatchClusterMetricsRequest.
+ * Use `create(WatchClusterMetricsRequestSchema)` to create a new message.
+ */
+export const WatchClusterMetricsRequestSchema: GenMessage<WatchClusterMetricsRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 1);
+
+/**
  * WatchMetricsResponse is the (streaming) output of the
- * MetricsAPI.WatchMetrics method.
+ * MetricsAPI.WatchNodeMetrics and MetricsAPI.WatchClusterMetrics methods.
+ *
+ * The first message in the response contains a Preamble, which lists the
+ * metrics that the call reports.
+ *
+ * Subsequent messages in the response contain a Sample, which reports one
+ * metric.
  *
  * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse
  */
@@ -64,12 +87,11 @@ export type WatchMetricsResponse = Message<"dogma.metrics.v1alpha1.WatchMetricsR
  * Use `create(WatchMetricsResponseSchema)` to create a new message.
  */
 export const WatchMetricsResponseSchema: GenMessage<WatchMetricsResponse> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 1);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2);
 
 /**
- * Preamble describes the metrics that the engine supports. If the engine runs
- * as a cluster, it also says whether the node reports each one for the entire
- * cluster, or only for the work that the node owns.
+ * Preamble identifies the engine that serves the call, and lists the metrics
+ * that the call reports.
  *
  * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
  */
@@ -103,16 +125,18 @@ export type WatchMetricsResponse_Preamble = Message<"dogma.metrics.v1alpha1.Watc
   application?: Application | undefined;
 
   /**
-   * SupportedMetrics is the list of the metrics that the engine supports.
-   * Each metric appears once.
+   * SupportedMetrics is the list of the metrics that this call reports. Each
+   * entry is the full name of the Protocol Buffers message that holds the
+   * metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsPending".
+   * Each name appears once.
    *
    * Each Sample identifies the metric that it measures by a zero-based index
    * into this list, in Sample.metric_index. The indexes apply only to the
    * subsequent responses on this stream.
    *
-   * @generated from field: repeated dogma.metrics.v1alpha1.SupportedMetric supported_metrics = 4;
+   * @generated from field: repeated string supported_metrics = 4;
    */
-  supportedMetrics: SupportedMetric[];
+  supportedMetrics: string[];
 };
 
 /**
@@ -120,18 +144,18 @@ export type WatchMetricsResponse_Preamble = Message<"dogma.metrics.v1alpha1.Watc
  * Use `create(WatchMetricsResponse_PreambleSchema)` to create a new message.
  */
 export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsResponse_Preamble> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 1, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2, 0);
 
 /**
  * Sample is a measurement of one metric, such as the number of messages in
  * one queue. This API defines the metrics listed below, and an engine may
  * define its own.
  *
- * A Sample replaces any earlier Sample of the same metric that has the same
- * subject. The engine chooses how often it measures each metric. Once it has
- * sent a Sample on a response stream, it keeps it current: each time it
- * measures a different value for the same metric and subject, including
- * zero, it sends a new Sample.
+ * A Sample replaces any earlier Sample of the same metric and subject on the
+ * same response stream. The engine chooses how often it measures each metric.
+ * It sends a new Sample each time it measures a value that differs from the
+ * last one that it sent on the stream for the same metric and subject,
+ * including when the new value is zero.
  *
  * Some metrics report a running total, such as the number of events that a
  * handler has recorded since the engine started counting. The doc of each
@@ -201,8 +225,8 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
 
   /**
    * Value is the content of the sample: a Protocol Buffers message,
-   * serialized in the binary format. The message's full name is the
-   * message_name of the sample's metric in Preamble.supported_metrics.
+   * serialized in the binary format. A client finds the message's full name
+   * in Preamble.supported_metrics, at the index that metric_index holds.
    *
    * @generated from field: bytes value = 3 [features.field_presence = IMPLICIT];
    */
@@ -211,16 +235,12 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
   /**
    * Revision is a comparable value that describes when this sample was
    * measured, relative to other samples of the same metric and subject from
-   * the same engine. The sample with the greatest revision is the most
-   * recent, and replaces the others.
+   * the same engine and method. The sample with the greatest revision is the
+   * most recent, and replaces the others.
    *
    * Two revisions are compared in lexicographic order, as strings of unsigned
    * bytes. For example, an engine can use a timestamp, encoded as a
    * fixed-width big-endian integer.
-   *
-   * The nodes of a cluster should produce revisions that compare correctly
-   * with each other, for example by using timestamps from synchronized
-   * clocks. The order of samples from different nodes is a best effort.
    *
    * An engine should give the same revision to every sample from one
    * measurement.
@@ -235,80 +255,7 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
  * Use `create(WatchMetricsResponse_SampleSchema)` to create a new message.
  */
 export const WatchMetricsResponse_SampleSchema: GenMessage<WatchMetricsResponse_Sample> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 1, 1);
-
-/**
- * SupportedMetric describes a metric that the engine supports.
- *
- * @generated from message dogma.metrics.v1alpha1.SupportedMetric
- */
-export type SupportedMetric = Message<"dogma.metrics.v1alpha1.SupportedMetric"> & {
-  /**
-   * MessageName is the full name of the Protocol Buffers message that holds
-   * this metric's samples, such as
-   * "dogma.metrics.v1alpha1.QueueCommandsPending".
-   *
-   * @generated from field: string message_name = 1 [features.field_presence = IMPLICIT];
-   */
-  messageName: string;
-
-  /**
-   * Reach indicates whether the node's samples of this metric describe the
-   * whole cluster, or only the work that the node owns. It is present only if
-   * the engine runs as a cluster.
-   *
-   * @generated from field: dogma.metrics.v1alpha1.Reach reach = 2;
-   */
-  reach: Reach;
-};
-
-/**
- * Describes the message dogma.metrics.v1alpha1.SupportedMetric.
- * Use `create(SupportedMetricSchema)` to create a new message.
- */
-export const SupportedMetricSchema: GenMessage<SupportedMetric> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2);
-
-/**
- * Reach indicates what a node's samples of one metric describe: the whole
- * cluster, or only the work that the node owns.
- *
- * @generated from enum dogma.metrics.v1alpha1.Reach
- */
-export enum Reach {
-  /**
-   * REACH_UNSPECIFIED is the zero-value. A node never uses it.
-   *
-   * @generated from enum value: REACH_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * REACH_CLUSTER means that the samples describe the whole cluster.
-   *
-   * @generated from enum value: REACH_CLUSTER = 1;
-   */
-  CLUSTER = 1,
-
-  /**
-   * REACH_NODE means that the samples describe only the work that the node
-   * owns, so a count is only the node's own share. A running total counts the
-   * occurrences on this node, so it keeps growing when ownership of the work
-   * moves to another node. A count falls to zero when the work moves to
-   * another node, because the node's share is then zero. The samples of one
-   * subject from every node of the cluster add up to the value for the whole
-   * cluster.
-   *
-   * @generated from enum value: REACH_NODE = 2;
-   */
-  NODE = 2,
-}
-
-/**
- * Describes the enum dogma.metrics.v1alpha1.Reach.
- */
-export const ReachSchema: GenEnum<Reach> = /*@__PURE__*/
-  enumDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2, 1);
 
 /**
  * MetricsAPI is a service that reports metrics about an engine, such as the
@@ -322,24 +269,49 @@ export const ReachSchema: GenEnum<Reach> = /*@__PURE__*/
  */
 export const MetricsAPI: GenService<{
   /**
-   * WatchMetrics reports metrics about the engine, such as the number of
-   * messages waiting in queues.
+   * WatchNodeMetrics reports metrics about the node that serves the call, such
+   * as the number of messages waiting in the queues that it owns.
    *
-   * The first message in the response contains a WatchMetricsResponse.Preamble,
-   * which lists the metrics that the engine supports.
+   * An engine that runs as a single instance also serves this method, and
+   * reports all of its metrics through it.
    *
-   * Subsequent messages in the response contain a WatchMetricsResponse.Sample,
-   * which reports one metric.
+   * If the engine runs as a cluster, the samples describe only the work that
+   * the node owns, so a count is only the node's own share. A running total
+   * counts the occurrences on this node, so it keeps growing when ownership of
+   * the work moves to another node. A count falls to zero when the work moves
+   * to another node, because the node's share is then zero.
    *
-   * If the engine can't measure a metric that it lists, it fails the call with
-   * the UNAVAILABLE status code. If the engine runs as a cluster, another node
-   * of the cluster may still be able to answer.
+   * A client can add up the samples of one subject from every node of the
+   * cluster to estimate the value for the whole cluster. The sum is an estimate
+   * because each node measures at a different time.
    *
-   * @generated from rpc dogma.metrics.v1alpha1.MetricsAPI.WatchMetrics
+   * If the engine can't measure a metric that the call reports, it fails the
+   * call with the UNAVAILABLE status code.
+   *
+   * @generated from rpc dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics
    */
-  watchMetrics: {
+  watchNodeMetrics: {
     methodKind: "server_streaming";
-    input: typeof WatchMetricsRequestSchema;
+    input: typeof WatchNodeMetricsRequestSchema;
+    output: typeof WatchMetricsResponseSchema;
+  },
+  /**
+   * WatchClusterMetrics reports metrics about the whole cluster, such as the
+   * number of messages waiting in each of its queues.
+   *
+   * Any node of the cluster can serve the call, and its samples describe the
+   * whole cluster. An engine that runs as a single instance fails the call with
+   * the UNIMPLEMENTED status code.
+   *
+   * If the node can't measure a metric that the call reports, it fails the call
+   * with the UNAVAILABLE status code. Another node of the cluster may still be
+   * able to answer.
+   *
+   * @generated from rpc dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics
+   */
+  watchClusterMetrics: {
+    methodKind: "server_streaming";
+    input: typeof WatchClusterMetricsRequestSchema;
     output: typeof WatchMetricsResponseSchema;
   },
 }> = /*@__PURE__*/

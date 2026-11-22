@@ -11,6 +11,30 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Added
+
+- Added `WatchNodeMetrics` to `MetricsAPI`, which reports metrics about the
+  node that serves the call.
+- Added `WatchClusterMetrics` to `MetricsAPI`, which reports the metrics that
+  describe a whole cluster. Any node of the cluster can serve it.
+
+### Changed
+
+- **[BC]** Changed `supported_metrics` in `WatchMetricsResponse.Preamble` from
+  a list of `SupportedMetric` messages to a list of strings. Each string is
+  the value that was in `SupportedMetric.message_name`.
+- **[BC]** Revisions in `WatchMetricsResponse.Sample` are now comparable only
+  when they come from the same node.
+
+### Removed
+
+- **[BC]** Removed `WatchMetrics` from `MetricsAPI`, along with
+  `WatchMetricsRequest`, `SupportedMetric` and `Reach`. Use `WatchNodeMetrics`
+  and `WatchClusterMetrics` instead, which report the same metrics between
+  them.
+
 ## [0.9.0] - 2026-11-22
 
 ### Added

@@ -22,82 +22,28 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Reach indicates what a node's samples of one metric describe: the whole
-// cluster, or only the work that the node owns.
-type Reach int32
-
-const (
-	// REACH_UNSPECIFIED is the zero-value. A node never uses it.
-	Reach_REACH_UNSPECIFIED Reach = 0
-	// REACH_CLUSTER means that the samples describe the whole cluster.
-	Reach_REACH_CLUSTER Reach = 1
-	// REACH_NODE means that the samples describe only the work that the node
-	// owns, so a count is only the node's own share. A running total counts the
-	// occurrences on this node, so it keeps growing when ownership of the work
-	// moves to another node. A count falls to zero when the work moves to
-	// another node, because the node's share is then zero. The samples of one
-	// subject from every node of the cluster add up to the value for the whole
-	// cluster.
-	Reach_REACH_NODE Reach = 2
-)
-
-// Enum value maps for Reach.
-var (
-	Reach_name = map[int32]string{
-		0: "REACH_UNSPECIFIED",
-		1: "REACH_CLUSTER",
-		2: "REACH_NODE",
-	}
-	Reach_value = map[string]int32{
-		"REACH_UNSPECIFIED": 0,
-		"REACH_CLUSTER":     1,
-		"REACH_NODE":        2,
-	}
-)
-
-func (x Reach) Enum() *Reach {
-	p := new(Reach)
-	*p = x
-	return p
-}
-
-func (x Reach) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (Reach) Descriptor() protoreflect.EnumDescriptor {
-	return file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_enumTypes[0].Descriptor()
-}
-
-func (Reach) Type() protoreflect.EnumType {
-	return &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_enumTypes[0]
-}
-
-func (x Reach) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// WatchMetricsRequest is the input to the MetricsAPI.WatchMetrics method.
-type WatchMetricsRequest struct {
+// WatchNodeMetricsRequest is the input to the MetricsAPI.WatchNodeMetrics
+// method.
+type WatchNodeMetricsRequest struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *WatchMetricsRequest) Reset() {
-	*x = WatchMetricsRequest{}
+func (x *WatchNodeMetricsRequest) Reset() {
+	*x = WatchNodeMetricsRequest{}
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *WatchMetricsRequest) String() string {
+func (x *WatchNodeMetricsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*WatchMetricsRequest) ProtoMessage() {}
+func (*WatchNodeMetricsRequest) ProtoMessage() {}
 
-func (x *WatchMetricsRequest) ProtoReflect() protoreflect.Message {
+func (x *WatchNodeMetricsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -109,20 +55,71 @@ func (x *WatchMetricsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-type WatchMetricsRequest_builder struct {
+type WatchNodeMetricsRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 WatchMetricsRequest_builder) Build() *WatchMetricsRequest {
-	m0 := &WatchMetricsRequest{}
+func (b0 WatchNodeMetricsRequest_builder) Build() *WatchNodeMetricsRequest {
+	m0 := &WatchNodeMetricsRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+// WatchClusterMetricsRequest is the input to the MetricsAPI.WatchClusterMetrics
+// method.
+type WatchClusterMetricsRequest struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *WatchClusterMetricsRequest) Reset() {
+	*x = WatchClusterMetricsRequest{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WatchClusterMetricsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WatchClusterMetricsRequest) ProtoMessage() {}
+
+func (x *WatchClusterMetricsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type WatchClusterMetricsRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 WatchClusterMetricsRequest_builder) Build() *WatchClusterMetricsRequest {
+	m0 := &WatchClusterMetricsRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
 }
 
 // WatchMetricsResponse is the (streaming) output of the
-// MetricsAPI.WatchMetrics method.
+// MetricsAPI.WatchNodeMetrics and MetricsAPI.WatchClusterMetrics methods.
+//
+// The first message in the response contains a Preamble, which lists the
+// metrics that the call reports.
+//
+// Subsequent messages in the response contain a Sample, which reports one
+// metric.
 type WatchMetricsResponse struct {
 	state              protoimpl.MessageState         `protogen:"opaque.v1"`
 	xxx_hidden_Payload isWatchMetricsResponse_Payload `protobuf_oneof:"payload"`
@@ -132,7 +129,7 @@ type WatchMetricsResponse struct {
 
 func (x *WatchMetricsResponse) Reset() {
 	*x = WatchMetricsResponse{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[1]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -144,7 +141,7 @@ func (x *WatchMetricsResponse) String() string {
 func (*WatchMetricsResponse) ProtoMessage() {}
 
 func (x *WatchMetricsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[1]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +271,7 @@ func (b0 WatchMetricsResponse_builder) Build() *WatchMetricsResponse {
 type case_WatchMetricsResponse_Payload protoreflect.FieldNumber
 
 func (x case_WatchMetricsResponse_Payload) String() string {
-	md := file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[1].Descriptor()
+	md := file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -297,113 +294,14 @@ func (*watchMetricsResponse_Preamble_) isWatchMetricsResponse_Payload() {}
 
 func (*watchMetricsResponse_Sample_) isWatchMetricsResponse_Payload() {}
 
-// SupportedMetric describes a metric that the engine supports.
-type SupportedMetric struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MessageName string                 `protobuf:"bytes,1,opt,name=message_name,json=messageName"`
-	xxx_hidden_Reach       Reach                  `protobuf:"varint,2,opt,name=reach,enum=dogma.metrics.v1alpha1.Reach"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *SupportedMetric) Reset() {
-	*x = SupportedMetric{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SupportedMetric) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SupportedMetric) ProtoMessage() {}
-
-func (x *SupportedMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *SupportedMetric) GetMessageName() string {
-	if x != nil {
-		return x.xxx_hidden_MessageName
-	}
-	return ""
-}
-
-func (x *SupportedMetric) GetReach() Reach {
-	if x != nil {
-		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
-			return x.xxx_hidden_Reach
-		}
-	}
-	return Reach_REACH_UNSPECIFIED
-}
-
-func (x *SupportedMetric) SetMessageName(v string) {
-	x.xxx_hidden_MessageName = v
-}
-
-func (x *SupportedMetric) SetReach(v Reach) {
-	x.xxx_hidden_Reach = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *SupportedMetric) HasReach() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *SupportedMetric) ClearReach() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Reach = Reach_REACH_UNSPECIFIED
-}
-
-type SupportedMetric_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// MessageName is the full name of the Protocol Buffers message that holds
-	// this metric's samples, such as
-	// "dogma.metrics.v1alpha1.QueueCommandsPending".
-	MessageName string
-	// Reach indicates whether the node's samples of this metric describe the
-	// whole cluster, or only the work that the node owns. It is present only if
-	// the engine runs as a cluster.
-	Reach *Reach
-}
-
-func (b0 SupportedMetric_builder) Build() *SupportedMetric {
-	m0 := &SupportedMetric{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_MessageName = b.MessageName
-	if b.Reach != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Reach = *b.Reach
-	}
-	return m0
-}
-
-// Preamble describes the metrics that the engine supports. If the engine runs
-// as a cluster, it also says whether the node reports each one for the entire
-// cluster, or only for the work that the node owns.
+// Preamble identifies the engine that serves the call, and lists the metrics
+// that the call reports.
 type WatchMetricsResponse_Preamble struct {
 	state                       protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Id               *uuidpb.UUID           `protobuf:"bytes,1,opt,name=id"`
 	xxx_hidden_ClusterId        *uuidpb.UUID           `protobuf:"bytes,2,opt,name=cluster_id,json=clusterId"`
 	xxx_hidden_Application      *configpb.Application  `protobuf:"bytes,3,opt,name=application"`
-	xxx_hidden_SupportedMetrics *[]*SupportedMetric    `protobuf:"bytes,4,rep,name=supported_metrics,json=supportedMetrics"`
+	xxx_hidden_SupportedMetrics []string               `protobuf:"bytes,4,rep,name=supported_metrics,json=supportedMetrics"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -454,11 +352,9 @@ func (x *WatchMetricsResponse_Preamble) GetApplication() *configpb.Application {
 	return nil
 }
 
-func (x *WatchMetricsResponse_Preamble) GetSupportedMetrics() []*SupportedMetric {
+func (x *WatchMetricsResponse_Preamble) GetSupportedMetrics() []string {
 	if x != nil {
-		if x.xxx_hidden_SupportedMetrics != nil {
-			return *x.xxx_hidden_SupportedMetrics
-		}
+		return x.xxx_hidden_SupportedMetrics
 	}
 	return nil
 }
@@ -475,8 +371,8 @@ func (x *WatchMetricsResponse_Preamble) SetApplication(v *configpb.Application) 
 	x.xxx_hidden_Application = v
 }
 
-func (x *WatchMetricsResponse_Preamble) SetSupportedMetrics(v []*SupportedMetric) {
-	x.xxx_hidden_SupportedMetrics = &v
+func (x *WatchMetricsResponse_Preamble) SetSupportedMetrics(v []string) {
+	x.xxx_hidden_SupportedMetrics = v
 }
 
 func (x *WatchMetricsResponse_Preamble) HasId() bool {
@@ -528,13 +424,15 @@ type WatchMetricsResponse_Preamble_builder struct {
 	// Application describes the application that the engine runs, in the
 	// version that it runs.
 	Application *configpb.Application
-	// SupportedMetrics is the list of the metrics that the engine supports.
-	// Each metric appears once.
+	// SupportedMetrics is the list of the metrics that this call reports. Each
+	// entry is the full name of the Protocol Buffers message that holds the
+	// metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsPending".
+	// Each name appears once.
 	//
 	// Each Sample identifies the metric that it measures by a zero-based index
 	// into this list, in Sample.metric_index. The indexes apply only to the
 	// subsequent responses on this stream.
-	SupportedMetrics []*SupportedMetric
+	SupportedMetrics []string
 }
 
 func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Preamble {
@@ -544,7 +442,7 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 	x.xxx_hidden_Id = b.Id
 	x.xxx_hidden_ClusterId = b.ClusterId
 	x.xxx_hidden_Application = b.Application
-	x.xxx_hidden_SupportedMetrics = &b.SupportedMetrics
+	x.xxx_hidden_SupportedMetrics = b.SupportedMetrics
 	return m0
 }
 
@@ -552,11 +450,11 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // one queue. This API defines the metrics listed below, and an engine may
 // define its own.
 //
-// A Sample replaces any earlier Sample of the same metric that has the same
-// subject. The engine chooses how often it measures each metric. Once it has
-// sent a Sample on a response stream, it keeps it current: each time it
-// measures a different value for the same metric and subject, including
-// zero, it sends a new Sample.
+// A Sample replaces any earlier Sample of the same metric and subject on the
+// same response stream. The engine chooses how often it measures each metric.
+// It sends a new Sample each time it measures a value that differs from the
+// last one that it sent on the stream for the same metric and subject,
+// including when the new value is zero.
 //
 // Some metrics report a running total, such as the number of events that a
 // handler has recorded since the engine started counting. The doc of each
@@ -702,21 +600,17 @@ type WatchMetricsResponse_Sample_builder struct {
 	// it describes, such as a queue's ID.
 	Subject []byte
 	// Value is the content of the sample: a Protocol Buffers message,
-	// serialized in the binary format. The message's full name is the
-	// message_name of the sample's metric in Preamble.supported_metrics.
+	// serialized in the binary format. A client finds the message's full name
+	// in Preamble.supported_metrics, at the index that metric_index holds.
 	Value []byte
 	// Revision is a comparable value that describes when this sample was
 	// measured, relative to other samples of the same metric and subject from
-	// the same engine. The sample with the greatest revision is the most
-	// recent, and replaces the others.
+	// the same engine and method. The sample with the greatest revision is the
+	// most recent, and replaces the others.
 	//
 	// Two revisions are compared in lexicographic order, as strings of unsigned
 	// bytes. For example, an engine can use a timestamp, encoded as a
 	// fixed-width big-endian integer.
-	//
-	// The nodes of a cluster should produce revisions that compare correctly
-	// with each other, for example by using timestamps from synchronized
-	// clocks. The order of samples from different nodes is a best effort.
 	//
 	// An engine should give the same revision to every sample from one
 	// measurement.
@@ -738,62 +632,54 @@ var File_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto protoreflect.Fil
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc = "" +
 	"\n" +
-	"6github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto\x12\x16dogma.metrics.v1alpha1\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x15\n" +
-	"\x13WatchMetricsRequest\"\xe5\x04\n" +
+	"6github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto\x12\x16dogma.metrics.v1alpha1\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x19\n" +
+	"\x17WatchNodeMetricsRequest\"\x1c\n" +
+	"\x1aWatchClusterMetricsRequest\"\xbc\x04\n" +
 	"\x14WatchMetricsResponse\x12S\n" +
 	"\bpreamble\x18\x01 \x01(\v25.dogma.metrics.v1alpha1.WatchMetricsResponse.PreambleH\x00R\bpreamble\x12M\n" +
-	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x1a\x87\x02\n" +
+	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x1a\xde\x01\n" +
 	"\bPreamble\x12'\n" +
 	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x126\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\tclusterId\x12D\n" +
-	"\vapplication\x18\x03 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12T\n" +
-	"\x11supported_metrics\x18\x04 \x03(\v2'.dogma.metrics.v1alpha1.SupportedMetricR\x10supportedMetrics\x1a\x93\x01\n" +
+	"\vapplication\x18\x03 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12+\n" +
+	"\x11supported_metrics\x18\x04 \x03(\tR\x10supportedMetrics\x1a\x93\x01\n" +
 	"\x06Sample\x12(\n" +
 	"\fmetric_index\x18\x01 \x01(\rB\x05\xaa\x01\x02\b\x02R\vmetricIndex\x12\x1f\n" +
 	"\asubject\x18\x02 \x01(\fB\x05\xaa\x01\x02\b\x02R\asubject\x12\x1b\n" +
 	"\x05value\x18\x03 \x01(\fB\x05\xaa\x01\x02\b\x02R\x05value\x12!\n" +
 	"\brevision\x18\x04 \x01(\fB\x05\xaa\x01\x02\b\x02R\brevisionB\t\n" +
-	"\apayload\"p\n" +
-	"\x0fSupportedMetric\x12(\n" +
-	"\fmessage_name\x18\x01 \x01(\tB\x05\xaa\x01\x02\b\x02R\vmessageName\x123\n" +
-	"\x05reach\x18\x02 \x01(\x0e2\x1d.dogma.metrics.v1alpha1.ReachR\x05reach*A\n" +
-	"\x05Reach\x12\x15\n" +
-	"\x11REACH_UNSPECIFIED\x10\x00\x12\x11\n" +
-	"\rREACH_CLUSTER\x10\x01\x12\x0e\n" +
+	"\apayload2\xfc\x01\n" +
 	"\n" +
-	"REACH_NODE\x10\x022y\n" +
-	"\n" +
-	"MetricsAPI\x12k\n" +
-	"\fWatchMetrics\x12+.dogma.metrics.v1alpha1.WatchMetricsRequest\x1a,.dogma.metrics.v1alpha1.WatchMetricsResponse0\x01B*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
+	"MetricsAPI\x12s\n" +
+	"\x10WatchNodeMetrics\x12/.dogma.metrics.v1alpha1.WatchNodeMetricsRequest\x1a,.dogma.metrics.v1alpha1.WatchMetricsResponse0\x01\x12y\n" +
+	"\x13WatchClusterMetrics\x122.dogma.metrics.v1alpha1.WatchClusterMetricsRequest\x1a,.dogma.metrics.v1alpha1.WatchMetricsResponse0\x01B*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_goTypes = []any{
-	(Reach)(0),                            // 0: dogma.metrics.v1alpha1.Reach
-	(*WatchMetricsRequest)(nil),           // 1: dogma.metrics.v1alpha1.WatchMetricsRequest
+	(*WatchNodeMetricsRequest)(nil),       // 0: dogma.metrics.v1alpha1.WatchNodeMetricsRequest
+	(*WatchClusterMetricsRequest)(nil),    // 1: dogma.metrics.v1alpha1.WatchClusterMetricsRequest
 	(*WatchMetricsResponse)(nil),          // 2: dogma.metrics.v1alpha1.WatchMetricsResponse
-	(*SupportedMetric)(nil),               // 3: dogma.metrics.v1alpha1.SupportedMetric
-	(*WatchMetricsResponse_Preamble)(nil), // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
-	(*WatchMetricsResponse_Sample)(nil),   // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
-	(*uuidpb.UUID)(nil),                   // 6: dogma.protobuf.v1.UUID
-	(*configpb.Application)(nil),          // 7: dogma.config.v1alpha1.Application
+	(*WatchMetricsResponse_Preamble)(nil), // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
+	(*WatchMetricsResponse_Sample)(nil),   // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
+	(*uuidpb.UUID)(nil),                   // 5: dogma.protobuf.v1.UUID
+	(*configpb.Application)(nil),          // 6: dogma.config.v1alpha1.Application
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_depIdxs = []int32{
-	4, // 0: dogma.metrics.v1alpha1.WatchMetricsResponse.preamble:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
-	5, // 1: dogma.metrics.v1alpha1.WatchMetricsResponse.sample:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
-	0, // 2: dogma.metrics.v1alpha1.SupportedMetric.reach:type_name -> dogma.metrics.v1alpha1.Reach
-	6, // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
-	6, // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
-	7, // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
-	3, // 6: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.supported_metrics:type_name -> dogma.metrics.v1alpha1.SupportedMetric
-	1, // 7: dogma.metrics.v1alpha1.MetricsAPI.WatchMetrics:input_type -> dogma.metrics.v1alpha1.WatchMetricsRequest
-	2, // 8: dogma.metrics.v1alpha1.MetricsAPI.WatchMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
-	8, // [8:9] is the sub-list for method output_type
-	7, // [7:8] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	3, // 0: dogma.metrics.v1alpha1.WatchMetricsResponse.preamble:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
+	4, // 1: dogma.metrics.v1alpha1.WatchMetricsResponse.sample:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
+	5, // 2: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
+	5, // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
+	6, // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
+	0, // 5: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:input_type -> dogma.metrics.v1alpha1.WatchNodeMetricsRequest
+	1, // 6: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:input_type -> dogma.metrics.v1alpha1.WatchClusterMetricsRequest
+	2, // 7: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
+	2, // 8: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() }
@@ -801,7 +687,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() {
 	if File_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto != nil {
 		return
 	}
-	file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[1].OneofWrappers = []any{
+	file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2].OneofWrappers = []any{
 		(*watchMetricsResponse_Preamble_)(nil),
 		(*watchMetricsResponse_Sample_)(nil),
 	}
@@ -810,14 +696,13 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      0,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_goTypes,
 		DependencyIndexes: file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_depIdxs,
-		EnumInfos:         file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_enumTypes,
 		MessageInfos:      file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes,
 	}.Build()
 	File_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto = out.File

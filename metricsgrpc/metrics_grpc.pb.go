@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MetricsAPI_WatchMetrics_FullMethodName = "/dogma.metrics.v1alpha1.MetricsAPI/WatchMetrics"
+	MetricsAPI_WatchNodeMetrics_FullMethodName    = "/dogma.metrics.v1alpha1.MetricsAPI/WatchNodeMetrics"
+	MetricsAPI_WatchClusterMetrics_FullMethodName = "/dogma.metrics.v1alpha1.MetricsAPI/WatchClusterMetrics"
 )
 
 // MetricsAPIClient is the client API for MetricsAPI service.
@@ -33,19 +34,36 @@ const (
 // engine that share the work of one application between them. Each instance is
 // called a node, in that context.
 type MetricsAPIClient interface {
-	// WatchMetrics reports metrics about the engine, such as the number of
-	// messages waiting in queues.
+	// WatchNodeMetrics reports metrics about the node that serves the call, such
+	// as the number of messages waiting in the queues that it owns.
 	//
-	// The first message in the response contains a WatchMetricsResponse.Preamble,
-	// which lists the metrics that the engine supports.
+	// An engine that runs as a single instance also serves this method, and
+	// reports all of its metrics through it.
 	//
-	// Subsequent messages in the response contain a WatchMetricsResponse.Sample,
-	// which reports one metric.
+	// If the engine runs as a cluster, the samples describe only the work that
+	// the node owns, so a count is only the node's own share. A running total
+	// counts the occurrences on this node, so it keeps growing when ownership of
+	// the work moves to another node. A count falls to zero when the work moves
+	// to another node, because the node's share is then zero.
 	//
-	// If the engine can't measure a metric that it lists, it fails the call with
-	// the UNAVAILABLE status code. If the engine runs as a cluster, another node
-	// of the cluster may still be able to answer.
-	WatchMetrics(ctx context.Context, in *WatchMetricsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchMetricsResponse], error)
+	// A client can add up the samples of one subject from every node of the
+	// cluster to estimate the value for the whole cluster. The sum is an estimate
+	// because each node measures at a different time.
+	//
+	// If the engine can't measure a metric that the call reports, it fails the
+	// call with the UNAVAILABLE status code.
+	WatchNodeMetrics(ctx context.Context, in *WatchNodeMetricsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchMetricsResponse], error)
+	// WatchClusterMetrics reports metrics about the whole cluster, such as the
+	// number of messages waiting in each of its queues.
+	//
+	// Any node of the cluster can serve the call, and its samples describe the
+	// whole cluster. An engine that runs as a single instance fails the call with
+	// the UNIMPLEMENTED status code.
+	//
+	// If the node can't measure a metric that the call reports, it fails the call
+	// with the UNAVAILABLE status code. Another node of the cluster may still be
+	// able to answer.
+	WatchClusterMetrics(ctx context.Context, in *WatchClusterMetricsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchMetricsResponse], error)
 }
 
 type metricsAPIClient struct {
@@ -56,13 +74,13 @@ func NewMetricsAPIClient(cc grpc.ClientConnInterface) MetricsAPIClient {
 	return &metricsAPIClient{cc}
 }
 
-func (c *metricsAPIClient) WatchMetrics(ctx context.Context, in *WatchMetricsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchMetricsResponse], error) {
+func (c *metricsAPIClient) WatchNodeMetrics(ctx context.Context, in *WatchNodeMetricsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchMetricsResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &MetricsAPI_ServiceDesc.Streams[0], MetricsAPI_WatchMetrics_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &MetricsAPI_ServiceDesc.Streams[0], MetricsAPI_WatchNodeMetrics_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &grpc.GenericClientStream[WatchMetricsRequest, WatchMetricsResponse]{ClientStream: stream}
+	x := &grpc.GenericClientStream[WatchNodeMetricsRequest, WatchMetricsResponse]{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -73,7 +91,26 @@ func (c *metricsAPIClient) WatchMetrics(ctx context.Context, in *WatchMetricsReq
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type MetricsAPI_WatchMetricsClient = grpc.ServerStreamingClient[WatchMetricsResponse]
+type MetricsAPI_WatchNodeMetricsClient = grpc.ServerStreamingClient[WatchMetricsResponse]
+
+func (c *metricsAPIClient) WatchClusterMetrics(ctx context.Context, in *WatchClusterMetricsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[WatchMetricsResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &MetricsAPI_ServiceDesc.Streams[1], MetricsAPI_WatchClusterMetrics_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[WatchClusterMetricsRequest, WatchMetricsResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type MetricsAPI_WatchClusterMetricsClient = grpc.ServerStreamingClient[WatchMetricsResponse]
 
 // MetricsAPIServer is the server API for MetricsAPI service.
 // All implementations should embed UnimplementedMetricsAPIServer
@@ -86,19 +123,36 @@ type MetricsAPI_WatchMetricsClient = grpc.ServerStreamingClient[WatchMetricsResp
 // engine that share the work of one application between them. Each instance is
 // called a node, in that context.
 type MetricsAPIServer interface {
-	// WatchMetrics reports metrics about the engine, such as the number of
-	// messages waiting in queues.
+	// WatchNodeMetrics reports metrics about the node that serves the call, such
+	// as the number of messages waiting in the queues that it owns.
 	//
-	// The first message in the response contains a WatchMetricsResponse.Preamble,
-	// which lists the metrics that the engine supports.
+	// An engine that runs as a single instance also serves this method, and
+	// reports all of its metrics through it.
 	//
-	// Subsequent messages in the response contain a WatchMetricsResponse.Sample,
-	// which reports one metric.
+	// If the engine runs as a cluster, the samples describe only the work that
+	// the node owns, so a count is only the node's own share. A running total
+	// counts the occurrences on this node, so it keeps growing when ownership of
+	// the work moves to another node. A count falls to zero when the work moves
+	// to another node, because the node's share is then zero.
 	//
-	// If the engine can't measure a metric that it lists, it fails the call with
-	// the UNAVAILABLE status code. If the engine runs as a cluster, another node
-	// of the cluster may still be able to answer.
-	WatchMetrics(*WatchMetricsRequest, grpc.ServerStreamingServer[WatchMetricsResponse]) error
+	// A client can add up the samples of one subject from every node of the
+	// cluster to estimate the value for the whole cluster. The sum is an estimate
+	// because each node measures at a different time.
+	//
+	// If the engine can't measure a metric that the call reports, it fails the
+	// call with the UNAVAILABLE status code.
+	WatchNodeMetrics(*WatchNodeMetricsRequest, grpc.ServerStreamingServer[WatchMetricsResponse]) error
+	// WatchClusterMetrics reports metrics about the whole cluster, such as the
+	// number of messages waiting in each of its queues.
+	//
+	// Any node of the cluster can serve the call, and its samples describe the
+	// whole cluster. An engine that runs as a single instance fails the call with
+	// the UNIMPLEMENTED status code.
+	//
+	// If the node can't measure a metric that the call reports, it fails the call
+	// with the UNAVAILABLE status code. Another node of the cluster may still be
+	// able to answer.
+	WatchClusterMetrics(*WatchClusterMetricsRequest, grpc.ServerStreamingServer[WatchMetricsResponse]) error
 }
 
 // UnimplementedMetricsAPIServer should be embedded to have
@@ -108,8 +162,11 @@ type MetricsAPIServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMetricsAPIServer struct{}
 
-func (UnimplementedMetricsAPIServer) WatchMetrics(*WatchMetricsRequest, grpc.ServerStreamingServer[WatchMetricsResponse]) error {
-	return status.Error(codes.Unimplemented, "method WatchMetrics not implemented")
+func (UnimplementedMetricsAPIServer) WatchNodeMetrics(*WatchNodeMetricsRequest, grpc.ServerStreamingServer[WatchMetricsResponse]) error {
+	return status.Error(codes.Unimplemented, "method WatchNodeMetrics not implemented")
+}
+func (UnimplementedMetricsAPIServer) WatchClusterMetrics(*WatchClusterMetricsRequest, grpc.ServerStreamingServer[WatchMetricsResponse]) error {
+	return status.Error(codes.Unimplemented, "method WatchClusterMetrics not implemented")
 }
 func (UnimplementedMetricsAPIServer) testEmbeddedByValue() {}
 
@@ -131,16 +188,27 @@ func RegisterMetricsAPIServer(s grpc.ServiceRegistrar, srv MetricsAPIServer) {
 	s.RegisterService(&MetricsAPI_ServiceDesc, srv)
 }
 
-func _MetricsAPI_WatchMetrics_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(WatchMetricsRequest)
+func _MetricsAPI_WatchNodeMetrics_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(WatchNodeMetricsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(MetricsAPIServer).WatchMetrics(m, &grpc.GenericServerStream[WatchMetricsRequest, WatchMetricsResponse]{ServerStream: stream})
+	return srv.(MetricsAPIServer).WatchNodeMetrics(m, &grpc.GenericServerStream[WatchNodeMetricsRequest, WatchMetricsResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type MetricsAPI_WatchMetricsServer = grpc.ServerStreamingServer[WatchMetricsResponse]
+type MetricsAPI_WatchNodeMetricsServer = grpc.ServerStreamingServer[WatchMetricsResponse]
+
+func _MetricsAPI_WatchClusterMetrics_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(WatchClusterMetricsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(MetricsAPIServer).WatchClusterMetrics(m, &grpc.GenericServerStream[WatchClusterMetricsRequest, WatchMetricsResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type MetricsAPI_WatchClusterMetricsServer = grpc.ServerStreamingServer[WatchMetricsResponse]
 
 // MetricsAPI_ServiceDesc is the grpc.ServiceDesc for MetricsAPI service.
 // It's only intended for direct use with grpc.RegisterService,
@@ -151,8 +219,13 @@ var MetricsAPI_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "WatchMetrics",
-			Handler:       _MetricsAPI_WatchMetrics_Handler,
+			StreamName:    "WatchNodeMetrics",
+			Handler:       _MetricsAPI_WatchNodeMetrics_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "WatchClusterMetrics",
+			Handler:       _MetricsAPI_WatchClusterMetrics_Handler,
 			ServerStreams: true,
 		},
 	},

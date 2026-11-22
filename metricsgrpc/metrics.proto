@@ -13,30 +13,60 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 // engine that share the work of one application between them. Each instance is
 // called a node, in that context.
 service MetricsAPI {
-  // WatchMetrics reports metrics about the engine, such as the number of
-  // messages waiting in queues.
+  // WatchNodeMetrics reports metrics about the node that serves the call, such
+  // as the number of messages waiting in the queues that it owns.
   //
-  // The first message in the response contains a WatchMetricsResponse.Preamble,
-  // which lists the metrics that the engine supports.
+  // An engine that runs as a single instance also serves this method, and
+  // reports all of its metrics through it.
   //
-  // Subsequent messages in the response contain a WatchMetricsResponse.Sample,
-  // which reports one metric.
+  // If the engine runs as a cluster, the samples describe only the work that
+  // the node owns, so a count is only the node's own share. A running total
+  // counts the occurrences on this node, so it keeps growing when ownership of
+  // the work moves to another node. A count falls to zero when the work moves
+  // to another node, because the node's share is then zero.
   //
-  // If the engine can't measure a metric that it lists, it fails the call with
-  // the UNAVAILABLE status code. If the engine runs as a cluster, another node
-  // of the cluster may still be able to answer.
-  rpc WatchMetrics(WatchMetricsRequest) returns (stream WatchMetricsResponse);
+  // A client can add up the samples of one subject from every node of the
+  // cluster to estimate the value for the whole cluster. The sum is an estimate
+  // because each node measures at a different time.
+  //
+  // If the engine can't measure a metric that the call reports, it fails the
+  // call with the UNAVAILABLE status code.
+  rpc WatchNodeMetrics(WatchNodeMetricsRequest)
+      returns (stream WatchMetricsResponse);
+
+  // WatchClusterMetrics reports metrics about the whole cluster, such as the
+  // number of messages waiting in each of its queues.
+  //
+  // Any node of the cluster can serve the call, and its samples describe the
+  // whole cluster. An engine that runs as a single instance fails the call with
+  // the UNIMPLEMENTED status code.
+  //
+  // If the node can't measure a metric that the call reports, it fails the call
+  // with the UNAVAILABLE status code. Another node of the cluster may still be
+  // able to answer.
+  rpc WatchClusterMetrics(WatchClusterMetricsRequest)
+      returns (stream WatchMetricsResponse);
 }
 
-// WatchMetricsRequest is the input to the MetricsAPI.WatchMetrics method.
-message WatchMetricsRequest {}
+// WatchNodeMetricsRequest is the input to the MetricsAPI.WatchNodeMetrics
+// method.
+message WatchNodeMetricsRequest {}
+
+// WatchClusterMetricsRequest is the input to the MetricsAPI.WatchClusterMetrics
+// method.
+message WatchClusterMetricsRequest {}
 
 // WatchMetricsResponse is the (streaming) output of the
-// MetricsAPI.WatchMetrics method.
+// MetricsAPI.WatchNodeMetrics and MetricsAPI.WatchClusterMetrics methods.
+//
+// The first message in the response contains a Preamble, which lists the
+// metrics that the call reports.
+//
+// Subsequent messages in the response contain a Sample, which reports one
+// metric.
 message WatchMetricsResponse {
-  // Preamble describes the metrics that the engine supports. If the engine runs
-  // as a cluster, it also says whether the node reports each one for the entire
-  // cluster, or only for the work that the node owns.
+  // Preamble identifies the engine that serves the call, and lists the metrics
+  // that the call reports.
   message Preamble {
     // Id is the ID of the engine that serves the call. An engine has the same
     // ID in every API that it serves. Each engine has a different ID.
@@ -54,24 +84,26 @@ message WatchMetricsResponse {
     // version that it runs.
     dogma.config.v1alpha1.Application application = 3;
 
-    // SupportedMetrics is the list of the metrics that the engine supports.
-    // Each metric appears once.
+    // SupportedMetrics is the list of the metrics that this call reports. Each
+    // entry is the full name of the Protocol Buffers message that holds the
+    // metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsPending".
+    // Each name appears once.
     //
     // Each Sample identifies the metric that it measures by a zero-based index
     // into this list, in Sample.metric_index. The indexes apply only to the
     // subsequent responses on this stream.
-    repeated SupportedMetric supported_metrics = 4;
+    repeated string supported_metrics = 4;
   }
 
   // Sample is a measurement of one metric, such as the number of messages in
   // one queue. This API defines the metrics listed below, and an engine may
   // define its own.
   //
-  // A Sample replaces any earlier Sample of the same metric that has the same
-  // subject. The engine chooses how often it measures each metric. Once it has
-  // sent a Sample on a response stream, it keeps it current: each time it
-  // measures a different value for the same metric and subject, including
-  // zero, it sends a new Sample.
+  // A Sample replaces any earlier Sample of the same metric and subject on the
+  // same response stream. The engine chooses how often it measures each metric.
+  // It sends a new Sample each time it measures a value that differs from the
+  // last one that it sent on the stream for the same metric and subject,
+  // including when the new value is zero.
   //
   // Some metrics report a running total, such as the number of events that a
   // handler has recorded since the engine started counting. The doc of each
@@ -129,22 +161,18 @@ message WatchMetricsResponse {
     bytes subject = 2 [features.field_presence = IMPLICIT];
 
     // Value is the content of the sample: a Protocol Buffers message,
-    // serialized in the binary format. The message's full name is the
-    // message_name of the sample's metric in Preamble.supported_metrics.
+    // serialized in the binary format. A client finds the message's full name
+    // in Preamble.supported_metrics, at the index that metric_index holds.
     bytes value = 3 [features.field_presence = IMPLICIT];
 
     // Revision is a comparable value that describes when this sample was
     // measured, relative to other samples of the same metric and subject from
-    // the same engine. The sample with the greatest revision is the most
-    // recent, and replaces the others.
+    // the same engine and method. The sample with the greatest revision is the
+    // most recent, and replaces the others.
     //
     // Two revisions are compared in lexicographic order, as strings of unsigned
     // bytes. For example, an engine can use a timestamp, encoded as a
     // fixed-width big-endian integer.
-    //
-    // The nodes of a cluster should produce revisions that compare correctly
-    // with each other, for example by using timestamps from synchronized
-    // clocks. The order of samples from different nodes is a best effort.
     //
     // An engine should give the same revision to every sample from one
     // measurement.
@@ -157,36 +185,4 @@ message WatchMetricsResponse {
     Preamble preamble = 1;
     Sample   sample   = 2;
   }
-}
-
-// SupportedMetric describes a metric that the engine supports.
-message SupportedMetric {
-  // MessageName is the full name of the Protocol Buffers message that holds
-  // this metric's samples, such as
-  // "dogma.metrics.v1alpha1.QueueCommandsPending".
-  string message_name = 1 [features.field_presence = IMPLICIT];
-
-  // Reach indicates whether the node's samples of this metric describe the
-  // whole cluster, or only the work that the node owns. It is present only if
-  // the engine runs as a cluster.
-  Reach reach = 2;
-}
-
-// Reach indicates what a node's samples of one metric describe: the whole
-// cluster, or only the work that the node owns.
-enum Reach {
-  // REACH_UNSPECIFIED is the zero-value. A node never uses it.
-  REACH_UNSPECIFIED = 0;
-
-  // REACH_CLUSTER means that the samples describe the whole cluster.
-  REACH_CLUSTER = 1;
-
-  // REACH_NODE means that the samples describe only the work that the node
-  // owns, so a count is only the node's own share. A running total counts the
-  // occurrences on this node, so it keeps growing when ownership of the work
-  // moves to another node. A count falls to zero when the work moves to
-  // another node, because the node's share is then zero. The samples of one
-  // subject from every node of the cluster add up to the value for the whole
-  // cluster.
-  REACH_NODE = 2;
 }
