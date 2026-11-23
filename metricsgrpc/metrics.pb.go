@@ -482,12 +482,10 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // - ProcessInstanceQueueBindings
 // - ProcessInstancesEnded
 // - ProcessInstancesInMemory
-// - ProjectionCompactionState
 // - ProjectionCompactionsCanceled
 // - ProjectionCompactionsCompleted
 // - ProjectionCompactionsDeadlineExceeded
 // - ProjectionCompactionsFailed
-// - ProjectionResetState
 // - QueueCommandsDue
 // - QueueCommandsFailing
 // - QueueCommandsPending

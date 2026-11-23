@@ -11,6 +11,14 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Removed
+
+- **[BC]** Removed the `ProjectionCompactionState` and `ProjectionResetState`
+  metrics from `MetricsAPI`, along with `Interval`. Use `GetCompactions` and
+  `GetResets` on `ProjectionAPI` instead.
+
 ## [0.10.0] - 2026-11-23
 
 ### Added
