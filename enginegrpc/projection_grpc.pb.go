@@ -23,6 +23,7 @@ const (
 	ProjectionAPI_CancelCompaction_FullMethodName = "/dogma.engine.v1alpha1.ProjectionAPI/CancelCompaction"
 	ProjectionAPI_GetCompactions_FullMethodName   = "/dogma.engine.v1alpha1.ProjectionAPI/GetCompactions"
 	ProjectionAPI_Reset_FullMethodName            = "/dogma.engine.v1alpha1.ProjectionAPI/Reset"
+	ProjectionAPI_GetResets_FullMethodName        = "/dogma.engine.v1alpha1.ProjectionAPI/GetResets"
 )
 
 // ProjectionAPIClient is the client API for ProjectionAPI service.
@@ -89,6 +90,14 @@ type ProjectionAPIClient interface {
 	// in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
 	// support reset operations, results in FAILED_PRECONDITION.
 	Reset(ctx context.Context, in *ResetRequest, opts ...grpc.CallOption) (*ResetResponse, error)
+	// GetResets reports what the node that serves the call knows about the reset
+	// operations of one projection handler.
+	//
+	// An identity key that is missing or invalid, or that belongs to a handler of
+	// another type, results in INVALID_ARGUMENT. An unknown identity key results
+	// in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+	// support reset operations, results in FAILED_PRECONDITION.
+	GetResets(ctx context.Context, in *GetResetsRequest, opts ...grpc.CallOption) (*GetResetsResponse, error)
 }
 
 type projectionAPIClient struct {
@@ -133,6 +142,16 @@ func (c *projectionAPIClient) Reset(ctx context.Context, in *ResetRequest, opts 
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResetResponse)
 	err := c.cc.Invoke(ctx, ProjectionAPI_Reset_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectionAPIClient) GetResets(ctx context.Context, in *GetResetsRequest, opts ...grpc.CallOption) (*GetResetsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResetsResponse)
+	err := c.cc.Invoke(ctx, ProjectionAPI_GetResets_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -203,6 +222,14 @@ type ProjectionAPIServer interface {
 	// in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
 	// support reset operations, results in FAILED_PRECONDITION.
 	Reset(context.Context, *ResetRequest) (*ResetResponse, error)
+	// GetResets reports what the node that serves the call knows about the reset
+	// operations of one projection handler.
+	//
+	// An identity key that is missing or invalid, or that belongs to a handler of
+	// another type, results in INVALID_ARGUMENT. An unknown identity key results
+	// in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+	// support reset operations, results in FAILED_PRECONDITION.
+	GetResets(context.Context, *GetResetsRequest) (*GetResetsResponse, error)
 }
 
 // UnimplementedProjectionAPIServer should be embedded to have
@@ -223,6 +250,9 @@ func (UnimplementedProjectionAPIServer) GetCompactions(context.Context, *GetComp
 }
 func (UnimplementedProjectionAPIServer) Reset(context.Context, *ResetRequest) (*ResetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Reset not implemented")
+}
+func (UnimplementedProjectionAPIServer) GetResets(context.Context, *GetResetsRequest) (*GetResetsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetResets not implemented")
 }
 func (UnimplementedProjectionAPIServer) testEmbeddedByValue() {}
 
@@ -316,6 +346,24 @@ func _ProjectionAPI_Reset_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectionAPI_GetResets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectionAPIServer).GetResets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectionAPI_GetResets_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectionAPIServer).GetResets(ctx, req.(*GetResetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProjectionAPI_ServiceDesc is the grpc.ServiceDesc for ProjectionAPI service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -338,6 +386,10 @@ var ProjectionAPI_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Reset",
 			Handler:    _ProjectionAPI_Reset_Handler,
+		},
+		{
+			MethodName: "GetResets",
+			Handler:    _ProjectionAPI_GetResets_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

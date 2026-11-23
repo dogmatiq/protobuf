@@ -23,12 +23,14 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added `ProjectionResetStarted` and `ProjectionResetEnded` to the messages that
   `EngineAPI.WatchEngine` sends, which report the reset operations that the
   engine starts and the outcome of each.
+- Added `GetResets` to `ProjectionAPI`, which reports what the node that serves
+  the call knows about the reset operations of one projection handler.
 
 ### Removed
 
 - **[BC]** Removed the `ProjectionCompactionState` and `ProjectionResetState`
-  metrics from `MetricsAPI`, along with `Interval`. Use `GetCompactions` on
-  `ProjectionAPI` instead of `ProjectionCompactionState`.
+  metrics from `MetricsAPI`, along with `Interval`. Use `GetCompactions` and
+  `GetResets` on `ProjectionAPI` instead.
 
 ## [0.10.0] - 2026-11-23
 

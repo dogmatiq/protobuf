@@ -70,6 +70,15 @@ service ProjectionAPI {
   // in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
   // support reset operations, results in FAILED_PRECONDITION.
   rpc Reset(ResetRequest) returns (ResetResponse);
+
+  // GetResets reports what the node that serves the call knows about the reset
+  // operations of one projection handler.
+  //
+  // An identity key that is missing or invalid, or that belongs to a handler of
+  // another type, results in INVALID_ARGUMENT. An unknown identity key results
+  // in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+  // support reset operations, results in FAILED_PRECONDITION.
+  rpc GetResets(GetResetsRequest) returns (GetResetsResponse);
 }
 
 // StartCompactionRequest is the input to the ProjectionAPI.StartCompaction
@@ -156,6 +165,50 @@ message ResetRequest {
 
 // ResetResponse is the output of the ProjectionAPI.Reset method.
 message ResetResponse {}
+
+// GetResetsRequest is the input to the ProjectionAPI.GetResets method.
+message GetResetsRequest {
+  // HandlerKey is the handler's identity key. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+}
+
+// GetResetsResponse is the output of the ProjectionAPI.GetResets method.
+message GetResetsResponse {
+  // Running is a reset operation that is running.
+  message Running {
+    // StartedAt is the time at which the reset operation started, by the
+    // engine's own clock. It is required.
+    google.protobuf.Timestamp started_at = 1;
+  }
+
+  // Ended is a reset operation that has ended. A reset operation ends when the
+  // handler's Reset method returns, before the projection is rebuilt.
+  message Ended {
+    // Outcome is how the reset operation ended. It is required.
+    ProjectionResetOutcome outcome = 1;
+
+    // StartedAt is the time at which the reset operation started, by the clock
+    // of the engine that ran it. It is present only if the engine that sends
+    // this message knows that time.
+    google.protobuf.Timestamp started_at = 2;
+
+    // EndedAt is the time at which the reset operation ended, by the same
+    // clock. It is present only if the engine that sends this message knows
+    // that time.
+    google.protobuf.Timestamp ended_at = 3;
+  }
+
+  // Current is the reset operation that the node that serves the call is
+  // running now. It is present only while that node is resetting the handler,
+  // and only if the engine reports the reset operations that it runs.
+  Running current = 1;
+
+  // Previous is the most recent ended reset operation that the node that serves
+  // the call knows of. Another node of the cluster may have run it. It is
+  // present only if the node that serves the call knows of an ended reset
+  // operation.
+  Ended previous = 2;
+}
 
 // ProjectionCompactionStarted reports that an engine has started a compaction
 // of one projection handler.

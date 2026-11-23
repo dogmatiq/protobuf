@@ -553,6 +553,209 @@ func (b *ResetResponseBuilder) Build() *ResetResponse {
 	return m
 }
 
+type GetResetsRequestBuilder struct {
+	prototype GetResetsRequest
+}
+
+// NewGetResetsRequestBuilder returns a builder that constructs [GetResetsRequest] messages.
+func NewGetResetsRequestBuilder() *GetResetsRequestBuilder {
+	return &GetResetsRequestBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *GetResetsRequestBuilder) From(x *GetResetsRequest) *GetResetsRequestBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasHandlerKey() {
+		b.prototype.SetHandlerKey(x.GetHandlerKey())
+	}
+	return b
+}
+
+// Build returns a new [GetResetsRequest] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *GetResetsRequestBuilder) Build() *GetResetsRequest {
+	m := &GetResetsRequest{}
+	if b.prototype.HasHandlerKey() {
+		m.SetHandlerKey(b.prototype.GetHandlerKey())
+	}
+	return m
+}
+
+// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// then returns b.
+func (b *GetResetsRequestBuilder) WithHandlerKey(v *uuidpb.UUID) *GetResetsRequestBuilder {
+	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+type GetResetsResponseBuilder struct {
+	prototype GetResetsResponse
+}
+
+// NewGetResetsResponseBuilder returns a builder that constructs [GetResetsResponse] messages.
+func NewGetResetsResponseBuilder() *GetResetsResponseBuilder {
+	return &GetResetsResponseBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *GetResetsResponseBuilder) From(x *GetResetsResponse) *GetResetsResponseBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasCurrent() {
+		b.prototype.SetCurrent(x.GetCurrent())
+	}
+	if x.HasPrevious() {
+		b.prototype.SetPrevious(x.GetPrevious())
+	}
+	return b
+}
+
+// Build returns a new [GetResetsResponse] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *GetResetsResponseBuilder) Build() *GetResetsResponse {
+	m := &GetResetsResponse{}
+	if b.prototype.HasCurrent() {
+		m.SetCurrent(b.prototype.GetCurrent())
+	}
+	if b.prototype.HasPrevious() {
+		m.SetPrevious(b.prototype.GetPrevious())
+	}
+	return m
+}
+
+// WithCurrent configures the builder to set the Current field to v,
+// then returns b.
+func (b *GetResetsResponseBuilder) WithCurrent(v *GetResetsResponse_Running) *GetResetsResponseBuilder {
+	b.prototype.SetCurrent(v)
+	return b
+}
+
+// WithPrevious configures the builder to set the Previous field to v,
+// then returns b.
+func (b *GetResetsResponseBuilder) WithPrevious(v *GetResetsResponse_Ended) *GetResetsResponseBuilder {
+	b.prototype.SetPrevious(v)
+	return b
+}
+
+type GetResetsResponse_RunningBuilder struct {
+	prototype GetResetsResponse_Running
+}
+
+// NewGetResetsResponse_RunningBuilder returns a builder that constructs [GetResetsResponse_Running] messages.
+func NewGetResetsResponse_RunningBuilder() *GetResetsResponse_RunningBuilder {
+	return &GetResetsResponse_RunningBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *GetResetsResponse_RunningBuilder) From(x *GetResetsResponse_Running) *GetResetsResponse_RunningBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasStartedAt() {
+		b.prototype.SetStartedAt(x.GetStartedAt())
+	}
+	return b
+}
+
+// Build returns a new [GetResetsResponse_Running] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *GetResetsResponse_RunningBuilder) Build() *GetResetsResponse_Running {
+	m := &GetResetsResponse_Running{}
+	if b.prototype.HasStartedAt() {
+		m.SetStartedAt(b.prototype.GetStartedAt())
+	}
+	return m
+}
+
+// WithStartedAt configures the builder to set the StartedAt field to v,
+// then returns b.
+func (b *GetResetsResponse_RunningBuilder) WithStartedAt(v *timestamppb.Timestamp) *GetResetsResponse_RunningBuilder {
+	b.prototype.SetStartedAt(v)
+	return b
+}
+
+type GetResetsResponse_EndedBuilder struct {
+	prototype GetResetsResponse_Ended
+}
+
+// NewGetResetsResponse_EndedBuilder returns a builder that constructs [GetResetsResponse_Ended] messages.
+func NewGetResetsResponse_EndedBuilder() *GetResetsResponse_EndedBuilder {
+	return &GetResetsResponse_EndedBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *GetResetsResponse_EndedBuilder) From(x *GetResetsResponse_Ended) *GetResetsResponse_EndedBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasOutcome() {
+		b.prototype.SetOutcome(x.GetOutcome())
+	}
+	if x.HasStartedAt() {
+		b.prototype.SetStartedAt(x.GetStartedAt())
+	}
+	if x.HasEndedAt() {
+		b.prototype.SetEndedAt(x.GetEndedAt())
+	}
+	return b
+}
+
+// Build returns a new [GetResetsResponse_Ended] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *GetResetsResponse_EndedBuilder) Build() *GetResetsResponse_Ended {
+	m := &GetResetsResponse_Ended{}
+	if b.prototype.HasOutcome() {
+		m.SetOutcome(b.prototype.GetOutcome())
+	}
+	if b.prototype.HasStartedAt() {
+		m.SetStartedAt(b.prototype.GetStartedAt())
+	}
+	if b.prototype.HasEndedAt() {
+		m.SetEndedAt(b.prototype.GetEndedAt())
+	}
+	return m
+}
+
+// WithOutcome configures the builder to set the Outcome field to v,
+// then returns b.
+func (b *GetResetsResponse_EndedBuilder) WithOutcome(v *ProjectionResetOutcome) *GetResetsResponse_EndedBuilder {
+	b.prototype.SetOutcome(v)
+	return b
+}
+
+// WithStartedAt configures the builder to set the StartedAt field to v,
+// then returns b.
+func (b *GetResetsResponse_EndedBuilder) WithStartedAt(v *timestamppb.Timestamp) *GetResetsResponse_EndedBuilder {
+	b.prototype.SetStartedAt(v)
+	return b
+}
+
+// WithEndedAt configures the builder to set the EndedAt field to v,
+// then returns b.
+func (b *GetResetsResponse_EndedBuilder) WithEndedAt(v *timestamppb.Timestamp) *GetResetsResponse_EndedBuilder {
+	b.prototype.SetEndedAt(v)
+	return b
+}
+
 type ProjectionCompactionStartedBuilder struct {
 	prototype ProjectionCompactionStarted
 }
@@ -2221,6 +2424,298 @@ func (x *ResetResponse) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
+func (x *GetResetsRequest) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = GetResetsRequest
+	type GetResetsRequest realType
+	fmt.Fprintf(f, format, (*GetResetsRequest)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *GetResetsResponse) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = GetResetsResponse
+	type GetResetsResponse realType
+	fmt.Fprintf(f, format, (*GetResetsResponse)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *GetResetsResponse_Running) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = GetResetsResponse_Running
+	type GetResetsResponse_Running realType
+	fmt.Fprintf(f, format, (*GetResetsResponse_Running)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *GetResetsResponse_Ended) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = GetResetsResponse_Ended
+	type GetResetsResponse_Ended realType
+	fmt.Fprintf(f, format, (*GetResetsResponse_Ended)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
 func (x *ProjectionCompactionStarted) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
@@ -3245,6 +3740,9 @@ type ProjectionAPIClientStub struct {
 
 	// ResetFunc is a function that implements the Reset RPC method.
 	ResetFunc func(ctx context.Context, req *ResetRequest, options ...grpc.CallOption) (*ResetResponse, error)
+
+	// GetResetsFunc is a function that implements the GetResets RPC method.
+	GetResetsFunc func(ctx context.Context, req *GetResetsRequest, options ...grpc.CallOption) (*GetResetsResponse, error)
 }
 
 // StartCompaction calls c.StartCompactionFunc if it is non-nil. Otherwise, it returns an error.
@@ -3277,6 +3775,14 @@ func (c *ProjectionAPIClientStub) Reset(ctx context.Context, req *ResetRequest, 
 		return nil, status.Error(codes.Unimplemented, "method Reset not implemented")
 	}
 	return c.ResetFunc(ctx, req, options...)
+}
+
+// GetResets calls c.GetResetsFunc if it is non-nil. Otherwise, it returns an error.
+func (c *ProjectionAPIClientStub) GetResets(ctx context.Context, req *GetResetsRequest, options ...grpc.CallOption) (*GetResetsResponse, error) {
+	if c.GetResetsFunc == nil {
+		return nil, status.Error(codes.Unimplemented, "method GetResets not implemented")
+	}
+	return c.GetResetsFunc(ctx, req, options...)
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
@@ -3452,6 +3958,70 @@ func (x *ResetResponse) MarshalBinary() ([]byte, error) {
 //
 // It allows [*ResetResponse] to implement [encoding.BinaryUnmarshaler].
 func (x *ResetResponse) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*GetResetsRequest] to implement [encoding.BinaryMarshaler].
+func (x *GetResetsRequest) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*GetResetsRequest] to implement [encoding.BinaryUnmarshaler].
+func (x *GetResetsRequest) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*GetResetsResponse] to implement [encoding.BinaryMarshaler].
+func (x *GetResetsResponse) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*GetResetsResponse] to implement [encoding.BinaryUnmarshaler].
+func (x *GetResetsResponse) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*GetResetsResponse_Running] to implement [encoding.BinaryMarshaler].
+func (x *GetResetsResponse_Running) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*GetResetsResponse_Running] to implement [encoding.BinaryUnmarshaler].
+func (x *GetResetsResponse_Running) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*GetResetsResponse_Ended] to implement [encoding.BinaryMarshaler].
+func (x *GetResetsResponse_Ended) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*GetResetsResponse_Ended] to implement [encoding.BinaryUnmarshaler].
+func (x *GetResetsResponse_Ended) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 

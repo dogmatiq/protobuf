@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/enginegrpc/projection.proto.
  */
 export const file_github_com_dogmatiq_protobuf_enginegrpc_projection: GenFile = /*@__PURE__*/
-  fileDesc("CjhnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvcHJvamVjdGlvbi5wcm90bxIVZG9nbWEuZW5naW5lLnYxYWxwaGExIkYKFlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIhkKF1N0YXJ0Q29tcGFjdGlvblJlc3BvbnNlIkcKF0NhbmNlbENvbXBhY3Rpb25SZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIaChhDYW5jZWxDb21wYWN0aW9uUmVzcG9uc2UiRQoVR2V0Q29tcGFjdGlvbnNSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCKOBAoWR2V0Q29tcGFjdGlvbnNSZXNwb25zZRJGCgdjdXJyZW50GAEgASgLMjUuZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldENvbXBhY3Rpb25zUmVzcG9uc2UuUnVubmluZxJFCghwcmV2aW91cxgCIAEoCzIzLmRvZ21hLmVuZ2luZS52MWFscGhhMS5HZXRDb21wYWN0aW9uc1Jlc3BvbnNlLkVuZGVkEkMKBG5leHQYAyABKAsyNS5kb2dtYS5lbmdpbmUudjFhbHBoYTEuR2V0Q29tcGFjdGlvbnNSZXNwb25zZS5QbGFubmVkGjkKB1J1bm5pbmcSLgoKc3RhcnRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaqgEKBUVuZGVkEkMKB291dGNvbWUYASABKAsyMi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lEi4KCnN0YXJ0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBo4CgdQbGFubmVkEi0KCXN0YXJ0c19hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiPAoMUmVzZXRSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIPCg1SZXNldFJlc3BvbnNlInsKG1Byb2plY3Rpb25Db21wYWN0aW9uU3RhcnRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSLgoKc3RhcnRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAivAEKGVByb2plY3Rpb25Db21wYWN0aW9uRW5kZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEkMKB291dGNvbWUYAiABKAsyMi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lEiwKCGVuZGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCLBAwobUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lEk0KB3N1Y2Nlc3MYASABKAsyOi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lLlN1Y2Nlc3NIABJJCgVlcnJvchgCIAEoCzI4LmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvbk91dGNvbWUuRXJyb3JIABJgChFkZWFkbGluZV9leGNlZWRlZBgDIAEoCzJDLmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvbk91dGNvbWUuRGVhZGxpbmVFeGNlZWRlZEgAEk8KCGNhbmNlbGVkGAQgASgLMjsuZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uT3V0Y29tZS5DYW5jZWxlZEgAGgkKB1N1Y2Nlc3MaHwoFRXJyb3ISFgoHbWVzc2FnZRgBIAEoCUIFqgECCAIaEgoQRGVhZGxpbmVFeGNlZWRlZBoKCghDYW5jZWxlZEIJCgdvdXRjb21lInYKFlByb2plY3Rpb25SZXNldFN0YXJ0ZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEi4KCnN0YXJ0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIrIBChRQcm9qZWN0aW9uUmVzZXRFbmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSPgoHb3V0Y29tZRgCIAEoCzItLmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRPdXRjb21lEiwKCGVuZGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCKoAwoWUHJvamVjdGlvblJlc2V0T3V0Y29tZRJICgdzdWNjZXNzGAEgASgLMjUuZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25SZXNldE91dGNvbWUuU3VjY2Vzc0gAEkQKBWVycm9yGAIgASgLMjMuZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25SZXNldE91dGNvbWUuRXJyb3JIABJbChFkZWFkbGluZV9leGNlZWRlZBgDIAEoCzI+LmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRPdXRjb21lLkRlYWRsaW5lRXhjZWVkZWRIABJKCghjYW5jZWxlZBgEIAEoCzI2LmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRPdXRjb21lLkNhbmNlbGVkSAAaCQoHU3VjY2VzcxofCgVFcnJvchIWCgdtZXNzYWdlGAEgASgJQgWqAQIIAhoSChBEZWFkbGluZUV4Y2VlZGVkGgoKCENhbmNlbGVkQgkKB291dGNvbWUyuQMKDVByb2plY3Rpb25BUEkScAoPU3RhcnRDb21wYWN0aW9uEi0uZG9nbWEuZW5naW5lLnYxYWxwaGExLlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QaLi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuU3RhcnRDb21wYWN0aW9uUmVzcG9uc2UScwoQQ2FuY2VsQ29tcGFjdGlvbhIuLmRvZ21hLmVuZ2luZS52MWFscGhhMS5DYW5jZWxDb21wYWN0aW9uUmVxdWVzdBovLmRvZ21hLmVuZ2luZS52MWFscGhhMS5DYW5jZWxDb21wYWN0aW9uUmVzcG9uc2USbQoOR2V0Q29tcGFjdGlvbnMSLC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuR2V0Q29tcGFjdGlvbnNSZXF1ZXN0Gi0uZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldENvbXBhY3Rpb25zUmVzcG9uc2USUgoFUmVzZXQSIy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUmVzZXRSZXF1ZXN0GiQuZG9nbWEuZW5naW5lLnYxYWxwaGExLlJlc2V0UmVzcG9uc2VCKVonZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9lbmdpbmVncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjhnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvcHJvamVjdGlvbi5wcm90bxIVZG9nbWEuZW5naW5lLnYxYWxwaGExIkYKFlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIhkKF1N0YXJ0Q29tcGFjdGlvblJlc3BvbnNlIkcKF0NhbmNlbENvbXBhY3Rpb25SZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIaChhDYW5jZWxDb21wYWN0aW9uUmVzcG9uc2UiRQoVR2V0Q29tcGFjdGlvbnNSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCKOBAoWR2V0Q29tcGFjdGlvbnNSZXNwb25zZRJGCgdjdXJyZW50GAEgASgLMjUuZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldENvbXBhY3Rpb25zUmVzcG9uc2UuUnVubmluZxJFCghwcmV2aW91cxgCIAEoCzIzLmRvZ21hLmVuZ2luZS52MWFscGhhMS5HZXRDb21wYWN0aW9uc1Jlc3BvbnNlLkVuZGVkEkMKBG5leHQYAyABKAsyNS5kb2dtYS5lbmdpbmUudjFhbHBoYTEuR2V0Q29tcGFjdGlvbnNSZXNwb25zZS5QbGFubmVkGjkKB1J1bm5pbmcSLgoKc3RhcnRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaqgEKBUVuZGVkEkMKB291dGNvbWUYASABKAsyMi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lEi4KCnN0YXJ0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBo4CgdQbGFubmVkEi0KCXN0YXJ0c19hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiPAoMUmVzZXRSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIPCg1SZXNldFJlc3BvbnNlIkAKEEdldFJlc2V0c1JlcXVlc3QSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIvsCChFHZXRSZXNldHNSZXNwb25zZRJBCgdjdXJyZW50GAEgASgLMjAuZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldFJlc2V0c1Jlc3BvbnNlLlJ1bm5pbmcSQAoIcHJldmlvdXMYAiABKAsyLi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuR2V0UmVzZXRzUmVzcG9uc2UuRW5kZWQaOQoHUnVubmluZxIuCgpzdGFydGVkX2F0GAEgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBqlAQoFRW5kZWQSPgoHb3V0Y29tZRgBIAEoCzItLmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRPdXRjb21lEi4KCnN0YXJ0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCJ7ChtQcm9qZWN0aW9uQ29tcGFjdGlvblN0YXJ0ZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEi4KCnN0YXJ0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wIrwBChlQcm9qZWN0aW9uQ29tcGFjdGlvbkVuZGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBJDCgdvdXRjb21lGAIgASgLMjIuZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uT3V0Y29tZRIsCghlbmRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiwQMKG1Byb2plY3Rpb25Db21wYWN0aW9uT3V0Y29tZRJNCgdzdWNjZXNzGAEgASgLMjouZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uT3V0Y29tZS5TdWNjZXNzSAASSQoFZXJyb3IYAiABKAsyOC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lLkVycm9ySAASYAoRZGVhZGxpbmVfZXhjZWVkZWQYAyABKAsyQy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lLkRlYWRsaW5lRXhjZWVkZWRIABJPCghjYW5jZWxlZBgEIAEoCzI7LmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvbk91dGNvbWUuQ2FuY2VsZWRIABoJCgdTdWNjZXNzGh8KBUVycm9yEhYKB21lc3NhZ2UYASABKAlCBaoBAggCGhIKEERlYWRsaW5lRXhjZWVkZWQaCgoIQ2FuY2VsZWRCCQoHb3V0Y29tZSJ2ChZQcm9qZWN0aW9uUmVzZXRTdGFydGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIuCgpzdGFydGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCKyAQoUUHJvamVjdGlvblJlc2V0RW5kZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEj4KB291dGNvbWUYAiABKAsyLS5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvblJlc2V0T3V0Y29tZRIsCghlbmRlZF9hdBgDIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiqAMKFlByb2plY3Rpb25SZXNldE91dGNvbWUSSAoHc3VjY2VzcxgBIAEoCzI1LmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRPdXRjb21lLlN1Y2Nlc3NIABJECgVlcnJvchgCIAEoCzIzLmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uUmVzZXRPdXRjb21lLkVycm9ySAASWwoRZGVhZGxpbmVfZXhjZWVkZWQYAyABKAsyPi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvblJlc2V0T3V0Y29tZS5EZWFkbGluZUV4Y2VlZGVkSAASSgoIY2FuY2VsZWQYBCABKAsyNi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvblJlc2V0T3V0Y29tZS5DYW5jZWxlZEgAGgkKB1N1Y2Nlc3MaHwoFRXJyb3ISFgoHbWVzc2FnZRgBIAEoCUIFqgECCAIaEgoQRGVhZGxpbmVFeGNlZWRlZBoKCghDYW5jZWxlZEIJCgdvdXRjb21lMpkECg1Qcm9qZWN0aW9uQVBJEnAKD1N0YXJ0Q29tcGFjdGlvbhItLmRvZ21hLmVuZ2luZS52MWFscGhhMS5TdGFydENvbXBhY3Rpb25SZXF1ZXN0Gi4uZG9nbWEuZW5naW5lLnYxYWxwaGExLlN0YXJ0Q29tcGFjdGlvblJlc3BvbnNlEnMKEENhbmNlbENvbXBhY3Rpb24SLi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2FuY2VsQ29tcGFjdGlvblJlcXVlc3QaLy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2FuY2VsQ29tcGFjdGlvblJlc3BvbnNlEm0KDkdldENvbXBhY3Rpb25zEiwuZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldENvbXBhY3Rpb25zUmVxdWVzdBotLmRvZ21hLmVuZ2luZS52MWFscGhhMS5HZXRDb21wYWN0aW9uc1Jlc3BvbnNlElIKBVJlc2V0EiMuZG9nbWEuZW5naW5lLnYxYWxwaGExLlJlc2V0UmVxdWVzdBokLmRvZ21hLmVuZ2luZS52MWFscGhhMS5SZXNldFJlc3BvbnNlEl4KCUdldFJlc2V0cxInLmRvZ21hLmVuZ2luZS52MWFscGhhMS5HZXRSZXNldHNSZXF1ZXN0GiguZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldFJlc2V0c1Jlc3BvbnNlQilaJ2dpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvZW5naW5lZ3JwY2IIZWRpdGlvbnNw6Qc", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * StartCompactionRequest is the input to the ProjectionAPI.StartCompaction
@@ -274,6 +274,122 @@ export const ResetResponseSchema: GenMessage<ResetResponse> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 7);
 
 /**
+ * GetResetsRequest is the input to the ProjectionAPI.GetResets method.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetResetsRequest
+ */
+export type GetResetsRequest = Message<"dogma.engine.v1alpha1.GetResetsRequest"> & {
+  /**
+   * HandlerKey is the handler's identity key. It is required.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetResetsRequest.
+ * Use `create(GetResetsRequestSchema)` to create a new message.
+ */
+export const GetResetsRequestSchema: GenMessage<GetResetsRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 8);
+
+/**
+ * GetResetsResponse is the output of the ProjectionAPI.GetResets method.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetResetsResponse
+ */
+export type GetResetsResponse = Message<"dogma.engine.v1alpha1.GetResetsResponse"> & {
+  /**
+   * Current is the reset operation that the node that serves the call is
+   * running now. It is present only while that node is resetting the handler,
+   * and only if the engine reports the reset operations that it runs.
+   *
+   * @generated from field: dogma.engine.v1alpha1.GetResetsResponse.Running current = 1;
+   */
+  current?: GetResetsResponse_Running | undefined;
+
+  /**
+   * Previous is the most recent ended reset operation that the node that serves
+   * the call knows of. Another node of the cluster may have run it. It is
+   * present only if the node that serves the call knows of an ended reset
+   * operation.
+   *
+   * @generated from field: dogma.engine.v1alpha1.GetResetsResponse.Ended previous = 2;
+   */
+  previous?: GetResetsResponse_Ended | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetResetsResponse.
+ * Use `create(GetResetsResponseSchema)` to create a new message.
+ */
+export const GetResetsResponseSchema: GenMessage<GetResetsResponse> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 9);
+
+/**
+ * Running is a reset operation that is running.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetResetsResponse.Running
+ */
+export type GetResetsResponse_Running = Message<"dogma.engine.v1alpha1.GetResetsResponse.Running"> & {
+  /**
+   * StartedAt is the time at which the reset operation started, by the
+   * engine's own clock. It is required.
+   *
+   * @generated from field: google.protobuf.Timestamp started_at = 1;
+   */
+  startedAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetResetsResponse.Running.
+ * Use `create(GetResetsResponse_RunningSchema)` to create a new message.
+ */
+export const GetResetsResponse_RunningSchema: GenMessage<GetResetsResponse_Running> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 9, 0);
+
+/**
+ * Ended is a reset operation that has ended. A reset operation ends when the
+ * handler's Reset method returns, before the projection is rebuilt.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetResetsResponse.Ended
+ */
+export type GetResetsResponse_Ended = Message<"dogma.engine.v1alpha1.GetResetsResponse.Ended"> & {
+  /**
+   * Outcome is how the reset operation ended. It is required.
+   *
+   * @generated from field: dogma.engine.v1alpha1.ProjectionResetOutcome outcome = 1;
+   */
+  outcome?: ProjectionResetOutcome | undefined;
+
+  /**
+   * StartedAt is the time at which the reset operation started, by the clock
+   * of the engine that ran it. It is present only if the engine that sends
+   * this message knows that time.
+   *
+   * @generated from field: google.protobuf.Timestamp started_at = 2;
+   */
+  startedAt?: Timestamp | undefined;
+
+  /**
+   * EndedAt is the time at which the reset operation ended, by the same
+   * clock. It is present only if the engine that sends this message knows
+   * that time.
+   *
+   * @generated from field: google.protobuf.Timestamp ended_at = 3;
+   */
+  endedAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetResetsResponse.Ended.
+ * Use `create(GetResetsResponse_EndedSchema)` to create a new message.
+ */
+export const GetResetsResponse_EndedSchema: GenMessage<GetResetsResponse_Ended> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 9, 1);
+
+/**
  * ProjectionCompactionStarted reports that an engine has started a compaction
  * of one projection handler.
  *
@@ -306,7 +422,7 @@ export type ProjectionCompactionStarted = Message<"dogma.engine.v1alpha1.Project
  * Use `create(ProjectionCompactionStartedSchema)` to create a new message.
  */
 export const ProjectionCompactionStartedSchema: GenMessage<ProjectionCompactionStarted> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 8);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10);
 
 /**
  * ProjectionCompactionEnded reports that a compaction that an engine was
@@ -344,7 +460,7 @@ export type ProjectionCompactionEnded = Message<"dogma.engine.v1alpha1.Projectio
  * Use `create(ProjectionCompactionEndedSchema)` to create a new message.
  */
 export const ProjectionCompactionEndedSchema: GenMessage<ProjectionCompactionEnded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 9);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 11);
 
 /**
  * ProjectionCompactionOutcome describes how a compaction of a projection
@@ -390,7 +506,7 @@ export type ProjectionCompactionOutcome = Message<"dogma.engine.v1alpha1.Project
  * Use `create(ProjectionCompactionOutcomeSchema)` to create a new message.
  */
 export const ProjectionCompactionOutcomeSchema: GenMessage<ProjectionCompactionOutcome> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 12);
 
 /**
  * Success is the outcome of a compaction that the handler completed.
@@ -405,7 +521,7 @@ export type ProjectionCompactionOutcome_Success = Message<"dogma.engine.v1alpha1
  * Use `create(ProjectionCompactionOutcome_SuccessSchema)` to create a new message.
  */
 export const ProjectionCompactionOutcome_SuccessSchema: GenMessage<ProjectionCompactionOutcome_Success> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 12, 0);
 
 /**
  * Error is the outcome of a compaction that stopped because the handler
@@ -427,7 +543,7 @@ export type ProjectionCompactionOutcome_Error = Message<"dogma.engine.v1alpha1.P
  * Use `create(ProjectionCompactionOutcome_ErrorSchema)` to create a new message.
  */
 export const ProjectionCompactionOutcome_ErrorSchema: GenMessage<ProjectionCompactionOutcome_Error> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 1);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 12, 1);
 
 /**
  * DeadlineExceeded is the outcome of a compaction that stopped because its
@@ -446,7 +562,7 @@ export type ProjectionCompactionOutcome_DeadlineExceeded = Message<"dogma.engine
  * Use `create(ProjectionCompactionOutcome_DeadlineExceededSchema)` to create a new message.
  */
 export const ProjectionCompactionOutcome_DeadlineExceededSchema: GenMessage<ProjectionCompactionOutcome_DeadlineExceeded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 12, 2);
 
 /**
  * Canceled is the outcome of a compaction that stopped because it was
@@ -462,7 +578,7 @@ export type ProjectionCompactionOutcome_Canceled = Message<"dogma.engine.v1alpha
  * Use `create(ProjectionCompactionOutcome_CanceledSchema)` to create a new message.
  */
 export const ProjectionCompactionOutcome_CanceledSchema: GenMessage<ProjectionCompactionOutcome_Canceled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 3);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 12, 3);
 
 /**
  * ProjectionResetStarted reports that an engine has started a reset operation
@@ -497,7 +613,7 @@ export type ProjectionResetStarted = Message<"dogma.engine.v1alpha1.ProjectionRe
  * Use `create(ProjectionResetStartedSchema)` to create a new message.
  */
 export const ProjectionResetStartedSchema: GenMessage<ProjectionResetStarted> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 11);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 13);
 
 /**
  * ProjectionResetEnded reports that a reset operation that an engine was
@@ -536,7 +652,7 @@ export type ProjectionResetEnded = Message<"dogma.engine.v1alpha1.ProjectionRese
  * Use `create(ProjectionResetEndedSchema)` to create a new message.
  */
 export const ProjectionResetEndedSchema: GenMessage<ProjectionResetEnded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 12);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 14);
 
 /**
  * ProjectionResetOutcome describes how a reset operation of a projection
@@ -582,7 +698,7 @@ export type ProjectionResetOutcome = Message<"dogma.engine.v1alpha1.ProjectionRe
  * Use `create(ProjectionResetOutcomeSchema)` to create a new message.
  */
 export const ProjectionResetOutcomeSchema: GenMessage<ProjectionResetOutcome> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 13);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 15);
 
 /**
  * Success is the outcome of a reset operation that the handler completed.
@@ -597,7 +713,7 @@ export type ProjectionResetOutcome_Success = Message<"dogma.engine.v1alpha1.Proj
  * Use `create(ProjectionResetOutcome_SuccessSchema)` to create a new message.
  */
 export const ProjectionResetOutcome_SuccessSchema: GenMessage<ProjectionResetOutcome_Success> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 13, 0);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 15, 0);
 
 /**
  * Error is the outcome of a reset operation that stopped because the handler
@@ -619,7 +735,7 @@ export type ProjectionResetOutcome_Error = Message<"dogma.engine.v1alpha1.Projec
  * Use `create(ProjectionResetOutcome_ErrorSchema)` to create a new message.
  */
 export const ProjectionResetOutcome_ErrorSchema: GenMessage<ProjectionResetOutcome_Error> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 13, 1);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 15, 1);
 
 /**
  * DeadlineExceeded is the outcome of a reset operation that stopped because
@@ -635,7 +751,7 @@ export type ProjectionResetOutcome_DeadlineExceeded = Message<"dogma.engine.v1al
  * Use `create(ProjectionResetOutcome_DeadlineExceededSchema)` to create a new message.
  */
 export const ProjectionResetOutcome_DeadlineExceededSchema: GenMessage<ProjectionResetOutcome_DeadlineExceeded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 13, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 15, 2);
 
 /**
  * Canceled is the outcome of a reset operation that stopped because it was
@@ -651,7 +767,7 @@ export type ProjectionResetOutcome_Canceled = Message<"dogma.engine.v1alpha1.Pro
  * Use `create(ProjectionResetOutcome_CanceledSchema)` to create a new message.
  */
 export const ProjectionResetOutcome_CanceledSchema: GenMessage<ProjectionResetOutcome_Canceled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 13, 3);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 15, 3);
 
 /**
  * ProjectionAPI is a service that lets a client inspect and manage the
@@ -748,6 +864,22 @@ export const ProjectionAPI: GenService<{
     methodKind: "unary";
     input: typeof ResetRequestSchema;
     output: typeof ResetResponseSchema;
+  },
+  /**
+   * GetResets reports what the node that serves the call knows about the reset
+   * operations of one projection handler.
+   *
+   * An identity key that is missing or invalid, or that belongs to a handler of
+   * another type, results in INVALID_ARGUMENT. An unknown identity key results
+   * in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+   * support reset operations, results in FAILED_PRECONDITION.
+   *
+   * @generated from rpc dogma.engine.v1alpha1.ProjectionAPI.GetResets
+   */
+  getResets: {
+    methodKind: "unary";
+    input: typeof GetResetsRequestSchema;
+    output: typeof GetResetsResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 0);
