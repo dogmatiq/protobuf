@@ -139,8 +139,8 @@ message HandlerDeadlinesCanceled {
 }
 
 // HandlerEventsRecorded is the cumulative count of the events that one handler
-// has recorded. The engine sends it only for aggregate and integration
-// handlers, and not for an integration handler that records no events.
+// has recorded. The engine sends it only for aggregate handlers, and for
+// integration handlers that record events.
 message HandlerEventsRecorded {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.

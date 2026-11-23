@@ -673,11 +673,12 @@ func (b0 WatchMetricsResponse_Sample_builder) Build() *WatchMetricsResponse_Samp
 
 // Tombstone reports that the engine has stopped reporting one metric of one
 // subject. A client discards the last Sample that it holds for that metric
-// and subject.
+// and subject, if it holds one.
 //
-// The engine sends a Tombstone when it stops reporting the subject, and a
-// Sample with a zero value when it still measures the subject and the value
-// is zero.
+// An engine sends a Tombstone when it stops reporting the subject, and a
+// Sample with a zero value when it reports a value of zero. A subject whose
+// count falls to zero gets either, depending on whether the engine keeps
+// measuring it.
 type WatchMetricsResponse_Tombstone struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_MetricIndex uint32                 `protobuf:"varint,1,opt,name=metric_index,json=metricIndex"`
@@ -763,9 +764,9 @@ type WatchMetricsResponse_Tombstone_builder struct {
 	// subject.
 	Subject []byte
 	// Revision is a comparable value that has the same meaning as
-	// Sample.revision. It is greater than the revision of the last Sample that
-	// the engine sent for the same metric and subject on the same response
-	// stream.
+	// Sample.revision. If the engine sent a Sample for the same metric and
+	// subject on the same response stream, the revision is greater than that of
+	// the last one.
 	Revision []byte
 }
 

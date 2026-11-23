@@ -358,8 +358,8 @@ export const HandlerDeadlinesCanceledSchema: GenMessage<HandlerDeadlinesCanceled
 
 /**
  * HandlerEventsRecorded is the cumulative count of the events that one handler
- * has recorded. The engine sends it only for aggregate and integration
- * handlers, and not for an integration handler that records no events.
+ * has recorded. The engine sends it only for aggregate handlers, and for
+ * integration handlers that record events.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsRecorded
  */

@@ -991,8 +991,8 @@ func (b0 HandlerDeadlinesCanceled_builder) Build() *HandlerDeadlinesCanceled {
 }
 
 // HandlerEventsRecorded is the cumulative count of the events that one handler
-// has recorded. The engine sends it only for aggregate and integration
-// handlers, and not for an integration handler that records no events.
+// has recorded. The engine sends it only for aggregate handlers, and for
+// integration handlers that record events.
 type HandlerEventsRecorded struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
