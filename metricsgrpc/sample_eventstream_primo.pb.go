@@ -31,7 +31,7 @@ func (b *EventStreamLengthBuilder) From(x *EventStreamLength) *EventStreamLength
 	if x.HasEventStreamId() {
 		b.prototype.SetEventStreamId(x.GetEventStreamId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetWatermark(x.GetWatermark())
 	return b
 }
 
@@ -44,7 +44,7 @@ func (b *EventStreamLengthBuilder) Build() *EventStreamLength {
 	if b.prototype.HasEventStreamId() {
 		m.SetEventStreamId(b.prototype.GetEventStreamId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetWatermark(b.prototype.GetWatermark())
 	return m
 }
 
@@ -55,10 +55,10 @@ func (b *EventStreamLengthBuilder) WithEventStreamId(v *uuidpb.UUID) *EventStrea
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithWatermark configures the builder to set the Watermark field to v,
 // then returns b.
-func (b *EventStreamLengthBuilder) WithValue(v uint64) *EventStreamLengthBuilder {
-	b.prototype.SetValue(v)
+func (b *EventStreamLengthBuilder) WithWatermark(v uint64) *EventStreamLengthBuilder {
+	b.prototype.SetWatermark(v)
 	return b
 }
 
@@ -84,7 +84,7 @@ func (b *AggregateInstanceEventStreamBindingsBuilder) From(x *AggregateInstanceE
 	if x.HasEventStreamId() {
 		b.prototype.SetEventStreamId(x.GetEventStreamId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -100,7 +100,7 @@ func (b *AggregateInstanceEventStreamBindingsBuilder) Build() *AggregateInstance
 	if b.prototype.HasEventStreamId() {
 		m.SetEventStreamId(b.prototype.GetEventStreamId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -118,10 +118,10 @@ func (b *AggregateInstanceEventStreamBindingsBuilder) WithEventStreamId(v *uuidp
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *AggregateInstanceEventStreamBindingsBuilder) WithValue(v uint64) *AggregateInstanceEventStreamBindingsBuilder {
-	b.prototype.SetValue(v)
+func (b *AggregateInstanceEventStreamBindingsBuilder) WithCurrentCount(v uint64) *AggregateInstanceEventStreamBindingsBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -147,7 +147,7 @@ func (b *HandlerEventStreamLagBuilder) From(x *HandlerEventStreamLag) *HandlerEv
 	if x.HasEventStreamId() {
 		b.prototype.SetEventStreamId(x.GetEventStreamId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetGauge(x.GetGauge())
 	return b
 }
 
@@ -163,7 +163,7 @@ func (b *HandlerEventStreamLagBuilder) Build() *HandlerEventStreamLag {
 	if b.prototype.HasEventStreamId() {
 		m.SetEventStreamId(b.prototype.GetEventStreamId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetGauge(b.prototype.GetGauge())
 	return m
 }
 
@@ -181,10 +181,10 @@ func (b *HandlerEventStreamLagBuilder) WithEventStreamId(v *uuidpb.UUID) *Handle
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithGauge configures the builder to set the Gauge field to v,
 // then returns b.
-func (b *HandlerEventStreamLagBuilder) WithValue(v uint64) *HandlerEventStreamLagBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerEventStreamLagBuilder) WithGauge(v uint64) *HandlerEventStreamLagBuilder {
+	b.prototype.SetGauge(v)
 	return b
 }
 

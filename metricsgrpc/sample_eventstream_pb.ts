@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream: GenFile = /*@__PURE__*/
-  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJbChFFdmVudFN0cmVhbUxlbmd0aBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiKcAQokQWdncmVnYXRlSW5zdGFuY2VFdmVudFN0cmVhbUJpbmRpbmdzEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAMgASgEQgWqAQIIAiKNAQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJfChFFdmVudFN0cmVhbUxlbmd0aBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhgKCXdhdGVybWFyaxgCIAEoBEIFqgECCAIipAEKJEFnZ3JlZ2F0ZUluc3RhbmNlRXZlbnRTdHJlYW1CaW5kaW5ncxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMAoPZXZlbnRfc3RyZWFtX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAMgASgEQgWqAQIIAiKNAQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBWdhdWdlGAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * EventStreamLength is the number of events on one event stream, which is an
@@ -30,16 +30,17 @@ export type EventStreamLength = Message<"dogma.metrics.v1alpha1.EventStreamLengt
   eventStreamId?: UUID | undefined;
 
   /**
-   * Value is the number of events on the stream, which is also the offset at
-   * which the next event will be appended. It never decreases.
+   * Watermark is the number of events on the stream, which is also the offset
+   * at which the next event will be appended. It never decreases, so a client
+   * that has seen a value knows that the stream has at least that many events.
    *
    * While ownership of the stream moves from one node to another, both may
    * report it. Both counts are positions on the same stream, so the value for
    * the whole cluster is the greatest value that any node reports.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 watermark = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  watermark: bigint;
 };
 
 /**
@@ -76,12 +77,11 @@ export type AggregateInstanceEventStreamBindings = Message<"dogma.metrics.v1alph
   eventStreamId?: UUID | undefined;
 
   /**
-   * Value is the number of instances bound to the event stream. It is zero if
-   * the instances that were bound to it have gone.
+   * CurrentCount is the number of instances bound to the event stream.
    *
-   * @generated from field: uint64 value = 3 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 3 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -123,13 +123,16 @@ export type HandlerEventStreamLag = Message<"dogma.metrics.v1alpha1.HandlerEvent
   eventStreamId?: UUID | undefined;
 
   /**
-   * Value is the number of events after the offset that the handler has
+   * Gauge is the number of events after the offset that the handler has
    * reached. It is zero when the handler has handled or skipped every event on
    * the stream.
    *
-   * @generated from field: uint64 value = 3 [features.field_presence = IMPLICIT];
+   * Several nodes can report the lag of one handler on one stream, so adding
+   * their values counts the same events more than once.
+   *
+   * @generated from field: uint64 gauge = 3 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  gauge: bigint;
 };
 
 /**

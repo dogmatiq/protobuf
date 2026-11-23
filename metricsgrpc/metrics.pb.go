@@ -119,7 +119,8 @@ func (b0 WatchClusterMetricsRequest_builder) Build() *WatchClusterMetricsRequest
 // metrics that the call reports.
 //
 // Subsequent messages in the response contain a Sample, which reports one
-// metric.
+// metric, or a Tombstone, which reports that the engine has stopped reporting
+// one metric of one subject.
 type WatchMetricsResponse struct {
 	state              protoimpl.MessageState         `protogen:"opaque.v1"`
 	xxx_hidden_Payload isWatchMetricsResponse_Payload `protobuf_oneof:"payload"`
@@ -170,6 +171,15 @@ func (x *WatchMetricsResponse) GetSample() *WatchMetricsResponse_Sample {
 	return nil
 }
 
+func (x *WatchMetricsResponse) GetTombstone() *WatchMetricsResponse_Tombstone {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*watchMetricsResponse_Tombstone_); ok {
+			return x.Tombstone
+		}
+	}
+	return nil
+}
+
 func (x *WatchMetricsResponse) SetPreamble(v *WatchMetricsResponse_Preamble) {
 	if v == nil {
 		x.xxx_hidden_Payload = nil
@@ -184,6 +194,14 @@ func (x *WatchMetricsResponse) SetSample(v *WatchMetricsResponse_Sample) {
 		return
 	}
 	x.xxx_hidden_Payload = &watchMetricsResponse_Sample_{v}
+}
+
+func (x *WatchMetricsResponse) SetTombstone(v *WatchMetricsResponse_Tombstone) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &watchMetricsResponse_Tombstone_{v}
 }
 
 func (x *WatchMetricsResponse) HasPayload() bool {
@@ -209,6 +227,14 @@ func (x *WatchMetricsResponse) HasSample() bool {
 	return ok
 }
 
+func (x *WatchMetricsResponse) HasTombstone() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*watchMetricsResponse_Tombstone_)
+	return ok
+}
+
 func (x *WatchMetricsResponse) ClearPayload() {
 	x.xxx_hidden_Payload = nil
 }
@@ -225,9 +251,16 @@ func (x *WatchMetricsResponse) ClearSample() {
 	}
 }
 
+func (x *WatchMetricsResponse) ClearTombstone() {
+	if _, ok := x.xxx_hidden_Payload.(*watchMetricsResponse_Tombstone_); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
 const WatchMetricsResponse_Payload_not_set_case case_WatchMetricsResponse_Payload = 0
 const WatchMetricsResponse_Preamble_case case_WatchMetricsResponse_Payload = 1
 const WatchMetricsResponse_Sample_case case_WatchMetricsResponse_Payload = 2
+const WatchMetricsResponse_Tombstone_case case_WatchMetricsResponse_Payload = 3
 
 func (x *WatchMetricsResponse) WhichPayload() case_WatchMetricsResponse_Payload {
 	if x == nil {
@@ -238,6 +271,8 @@ func (x *WatchMetricsResponse) WhichPayload() case_WatchMetricsResponse_Payload 
 		return WatchMetricsResponse_Preamble_case
 	case *watchMetricsResponse_Sample_:
 		return WatchMetricsResponse_Sample_case
+	case *watchMetricsResponse_Tombstone_:
+		return WatchMetricsResponse_Tombstone_case
 	default:
 		return WatchMetricsResponse_Payload_not_set_case
 	}
@@ -246,12 +281,13 @@ func (x *WatchMetricsResponse) WhichPayload() case_WatchMetricsResponse_Payload 
 type WatchMetricsResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Payload is the Preamble in the first response on a stream, and a Sample in
-	// every other.
+	// Payload is the Preamble in the first response on a stream, and a Sample or
+	// a Tombstone in every other.
 
 	// Fields of oneof xxx_hidden_Payload:
-	Preamble *WatchMetricsResponse_Preamble
-	Sample   *WatchMetricsResponse_Sample
+	Preamble  *WatchMetricsResponse_Preamble
+	Sample    *WatchMetricsResponse_Sample
+	Tombstone *WatchMetricsResponse_Tombstone
 	// -- end of xxx_hidden_Payload
 }
 
@@ -264,6 +300,9 @@ func (b0 WatchMetricsResponse_builder) Build() *WatchMetricsResponse {
 	}
 	if b.Sample != nil {
 		x.xxx_hidden_Payload = &watchMetricsResponse_Sample_{b.Sample}
+	}
+	if b.Tombstone != nil {
+		x.xxx_hidden_Payload = &watchMetricsResponse_Tombstone_{b.Tombstone}
 	}
 	return m0
 }
@@ -290,9 +329,15 @@ type watchMetricsResponse_Sample_ struct {
 	Sample *WatchMetricsResponse_Sample `protobuf:"bytes,2,opt,name=sample,oneof"`
 }
 
+type watchMetricsResponse_Tombstone_ struct {
+	Tombstone *WatchMetricsResponse_Tombstone `protobuf:"bytes,3,opt,name=tombstone,oneof"`
+}
+
 func (*watchMetricsResponse_Preamble_) isWatchMetricsResponse_Payload() {}
 
 func (*watchMetricsResponse_Sample_) isWatchMetricsResponse_Payload() {}
+
+func (*watchMetricsResponse_Tombstone_) isWatchMetricsResponse_Payload() {}
 
 // Preamble identifies the engine that serves the call, and lists the metrics
 // that the call reports.
@@ -450,16 +495,16 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // one queue. This API defines the metrics listed below, and an engine may
 // define its own.
 //
-// A Sample replaces any earlier Sample of the same metric and subject on the
-// same response stream. The engine chooses how often it measures each metric.
-// It sends a new Sample each time it measures a value that differs from the
-// last one that it sent on the stream for the same metric and subject,
-// including when the new value is zero.
+// A Sample replaces any earlier Sample or Tombstone of the same metric and
+// subject on the same response stream. The engine chooses how often it
+// measures each metric. It sends a new Sample each time it measures a value
+// that differs from the last one that it sent on the stream for the same
+// metric and subject, including when the new value is zero.
 //
-// Some metrics report a running total, such as the number of events that a
+// Some metrics report a cumulative count, such as the number of events that a
 // handler has recorded since the engine started counting. The doc of each
-// says so. Within one response stream, the engine lowers a total only by
-// starting again from zero.
+// says so. Within one response stream, the engine lowers a cumulative count
+// only by starting again from zero.
 //
 // The metrics that this API defines are:
 //
@@ -602,9 +647,9 @@ type WatchMetricsResponse_Sample_builder struct {
 	// in Preamble.supported_metrics, at the index that metric_index holds.
 	Value []byte
 	// Revision is a comparable value that describes when this sample was
-	// measured, relative to other samples of the same metric and subject from
-	// the same engine and method. The sample with the greatest revision is the
-	// most recent, and replaces the others.
+	// measured, relative to other samples and tombstones of the same metric and
+	// subject from the same engine and method. The message with the greatest
+	// revision is the most recent, and replaces the others.
 	//
 	// Two revisions are compared in lexicographic order, as strings of unsigned
 	// bytes. For example, an engine can use a timestamp, encoded as a
@@ -626,16 +671,125 @@ func (b0 WatchMetricsResponse_Sample_builder) Build() *WatchMetricsResponse_Samp
 	return m0
 }
 
+// Tombstone reports that the engine has stopped reporting one metric of one
+// subject. A client discards the last Sample that it holds for that metric
+// and subject.
+//
+// The engine sends a Tombstone when it stops reporting the subject, and a
+// Sample with a zero value when it still measures the subject and the value
+// is zero.
+type WatchMetricsResponse_Tombstone struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MetricIndex uint32                 `protobuf:"varint,1,opt,name=metric_index,json=metricIndex"`
+	xxx_hidden_Subject     []byte                 `protobuf:"bytes,2,opt,name=subject"`
+	xxx_hidden_Revision    []byte                 `protobuf:"bytes,3,opt,name=revision"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *WatchMetricsResponse_Tombstone) Reset() {
+	*x = WatchMetricsResponse_Tombstone{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WatchMetricsResponse_Tombstone) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WatchMetricsResponse_Tombstone) ProtoMessage() {}
+
+func (x *WatchMetricsResponse_Tombstone) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *WatchMetricsResponse_Tombstone) GetMetricIndex() uint32 {
+	if x != nil {
+		return x.xxx_hidden_MetricIndex
+	}
+	return 0
+}
+
+func (x *WatchMetricsResponse_Tombstone) GetSubject() []byte {
+	if x != nil {
+		return x.xxx_hidden_Subject
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Tombstone) GetRevision() []byte {
+	if x != nil {
+		return x.xxx_hidden_Revision
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Tombstone) SetMetricIndex(v uint32) {
+	x.xxx_hidden_MetricIndex = v
+}
+
+func (x *WatchMetricsResponse_Tombstone) SetSubject(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Subject = v
+}
+
+func (x *WatchMetricsResponse_Tombstone) SetRevision(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Revision = v
+}
+
+type WatchMetricsResponse_Tombstone_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// MetricIndex identifies the metric that the engine has stopped reporting.
+	// It is a zero-based index into the supported_metrics of the Preamble on
+	// the same response stream.
+	MetricIndex uint32
+	// Subject identifies what the engine has stopped reporting, such as one
+	// queue. It holds the same bytes as Sample.subject in the samples of that
+	// subject.
+	Subject []byte
+	// Revision is a comparable value that has the same meaning as
+	// Sample.revision. It is greater than the revision of the last Sample that
+	// the engine sent for the same metric and subject on the same response
+	// stream.
+	Revision []byte
+}
+
+func (b0 WatchMetricsResponse_Tombstone_builder) Build() *WatchMetricsResponse_Tombstone {
+	m0 := &WatchMetricsResponse_Tombstone{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_MetricIndex = b.MetricIndex
+	x.xxx_hidden_Subject = b.Subject
+	x.xxx_hidden_Revision = b.Revision
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc = "" +
 	"\n" +
 	"6github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto\x12\x16dogma.metrics.v1alpha1\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x19\n" +
 	"\x17WatchNodeMetricsRequest\"\x1c\n" +
-	"\x1aWatchClusterMetricsRequest\"\xbc\x04\n" +
+	"\x1aWatchClusterMetricsRequest\"\x8f\x06\n" +
 	"\x14WatchMetricsResponse\x12S\n" +
 	"\bpreamble\x18\x01 \x01(\v25.dogma.metrics.v1alpha1.WatchMetricsResponse.PreambleH\x00R\bpreamble\x12M\n" +
-	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x1a\xde\x01\n" +
+	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x12V\n" +
+	"\ttombstone\x18\x03 \x01(\v26.dogma.metrics.v1alpha1.WatchMetricsResponse.TombstoneH\x00R\ttombstone\x1a\xde\x01\n" +
 	"\bPreamble\x12'\n" +
 	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x126\n" +
 	"\n" +
@@ -646,38 +800,44 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc = "" +
 	"\fmetric_index\x18\x01 \x01(\rB\x05\xaa\x01\x02\b\x02R\vmetricIndex\x12\x1f\n" +
 	"\asubject\x18\x02 \x01(\fB\x05\xaa\x01\x02\b\x02R\asubject\x12\x1b\n" +
 	"\x05value\x18\x03 \x01(\fB\x05\xaa\x01\x02\b\x02R\x05value\x12!\n" +
-	"\brevision\x18\x04 \x01(\fB\x05\xaa\x01\x02\b\x02R\brevisionB\t\n" +
+	"\brevision\x18\x04 \x01(\fB\x05\xaa\x01\x02\b\x02R\brevision\x1ay\n" +
+	"\tTombstone\x12(\n" +
+	"\fmetric_index\x18\x01 \x01(\rB\x05\xaa\x01\x02\b\x02R\vmetricIndex\x12\x1f\n" +
+	"\asubject\x18\x02 \x01(\fB\x05\xaa\x01\x02\b\x02R\asubject\x12!\n" +
+	"\brevision\x18\x03 \x01(\fB\x05\xaa\x01\x02\b\x02R\brevisionB\t\n" +
 	"\apayload2\xfc\x01\n" +
 	"\n" +
 	"MetricsAPI\x12s\n" +
 	"\x10WatchNodeMetrics\x12/.dogma.metrics.v1alpha1.WatchNodeMetricsRequest\x1a,.dogma.metrics.v1alpha1.WatchMetricsResponse0\x01\x12y\n" +
 	"\x13WatchClusterMetrics\x122.dogma.metrics.v1alpha1.WatchClusterMetricsRequest\x1a,.dogma.metrics.v1alpha1.WatchMetricsResponse0\x01B*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_goTypes = []any{
-	(*WatchNodeMetricsRequest)(nil),       // 0: dogma.metrics.v1alpha1.WatchNodeMetricsRequest
-	(*WatchClusterMetricsRequest)(nil),    // 1: dogma.metrics.v1alpha1.WatchClusterMetricsRequest
-	(*WatchMetricsResponse)(nil),          // 2: dogma.metrics.v1alpha1.WatchMetricsResponse
-	(*WatchMetricsResponse_Preamble)(nil), // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
-	(*WatchMetricsResponse_Sample)(nil),   // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
-	(*uuidpb.UUID)(nil),                   // 5: dogma.protobuf.v1.UUID
-	(*configpb.Application)(nil),          // 6: dogma.config.v1alpha1.Application
+	(*WatchNodeMetricsRequest)(nil),        // 0: dogma.metrics.v1alpha1.WatchNodeMetricsRequest
+	(*WatchClusterMetricsRequest)(nil),     // 1: dogma.metrics.v1alpha1.WatchClusterMetricsRequest
+	(*WatchMetricsResponse)(nil),           // 2: dogma.metrics.v1alpha1.WatchMetricsResponse
+	(*WatchMetricsResponse_Preamble)(nil),  // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
+	(*WatchMetricsResponse_Sample)(nil),    // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
+	(*WatchMetricsResponse_Tombstone)(nil), // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone
+	(*uuidpb.UUID)(nil),                    // 6: dogma.protobuf.v1.UUID
+	(*configpb.Application)(nil),           // 7: dogma.config.v1alpha1.Application
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_depIdxs = []int32{
 	3, // 0: dogma.metrics.v1alpha1.WatchMetricsResponse.preamble:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
 	4, // 1: dogma.metrics.v1alpha1.WatchMetricsResponse.sample:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
-	5, // 2: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
-	5, // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
-	6, // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
-	0, // 5: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:input_type -> dogma.metrics.v1alpha1.WatchNodeMetricsRequest
-	1, // 6: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:input_type -> dogma.metrics.v1alpha1.WatchClusterMetricsRequest
-	2, // 7: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
-	2, // 8: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	5, // 2: dogma.metrics.v1alpha1.WatchMetricsResponse.tombstone:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone
+	6, // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
+	6, // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
+	7, // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
+	0, // 6: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:input_type -> dogma.metrics.v1alpha1.WatchNodeMetricsRequest
+	1, // 7: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:input_type -> dogma.metrics.v1alpha1.WatchClusterMetricsRequest
+	2, // 8: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
+	2, // 9: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() }
@@ -688,6 +848,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() {
 	file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2].OneofWrappers = []any{
 		(*watchMetricsResponse_Preamble_)(nil),
 		(*watchMetricsResponse_Sample_)(nil),
+		(*watchMetricsResponse_Tombstone_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -695,7 +856,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

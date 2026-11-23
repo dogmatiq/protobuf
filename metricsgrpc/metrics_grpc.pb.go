@@ -41,16 +41,22 @@ type MetricsAPIClient interface {
 	// reports all of its metrics through it.
 	//
 	// If the engine runs as a cluster, the samples describe only the work that
-	// the node owns, so a count is only the node's own share. A running total
-	// counts the occurrences on this node, so it keeps growing when ownership of
-	// the work moves to another node. A count falls to zero when the work moves
-	// to another node, because the node's share is then zero.
+	// the node owns, so a current count is only the node's own share. A
+	// cumulative count is the number of occurrences on this node, so it keeps
+	// growing when ownership of the work moves to another node. When the work
+	// moves to another node, the node sends a Tombstone for each current count of
+	// that work.
 	//
-	// A client can add up the samples of one subject from every node of the
-	// cluster to estimate the value for the whole cluster. The sum is an estimate
-	// because each node measures at a different time. A metric whose doc gives
-	// another rule for combining samples, such as EventStreamLength, follows that
-	// rule instead.
+	// A client can add up the cumulative_count and current_count fields of one
+	// subject from every node of the cluster to estimate the value for the whole
+	// cluster. A node that sent a Tombstone for a current count contributes zero
+	// to the sum. The sum is an estimate because each node measures at a
+	// different time.
+	//
+	// The other fields, such as watermark and gauge, describe one quantity that
+	// several nodes can report, so adding them up can count it more than once.
+	// The doc of each such field gives the rule for combining the values, if
+	// there is one.
 	//
 	// If the engine can't measure a metric that the call reports, it fails the
 	// call with the UNAVAILABLE status code.
@@ -132,16 +138,22 @@ type MetricsAPIServer interface {
 	// reports all of its metrics through it.
 	//
 	// If the engine runs as a cluster, the samples describe only the work that
-	// the node owns, so a count is only the node's own share. A running total
-	// counts the occurrences on this node, so it keeps growing when ownership of
-	// the work moves to another node. A count falls to zero when the work moves
-	// to another node, because the node's share is then zero.
+	// the node owns, so a current count is only the node's own share. A
+	// cumulative count is the number of occurrences on this node, so it keeps
+	// growing when ownership of the work moves to another node. When the work
+	// moves to another node, the node sends a Tombstone for each current count of
+	// that work.
 	//
-	// A client can add up the samples of one subject from every node of the
-	// cluster to estimate the value for the whole cluster. The sum is an estimate
-	// because each node measures at a different time. A metric whose doc gives
-	// another rule for combining samples, such as EventStreamLength, follows that
-	// rule instead.
+	// A client can add up the cumulative_count and current_count fields of one
+	// subject from every node of the cluster to estimate the value for the whole
+	// cluster. A node that sent a Tombstone for a current count contributes zero
+	// to the sum. The sum is an estimate because each node measures at a
+	// different time.
+	//
+	// The other fields, such as watermark and gauge, describe one quantity that
+	// several nodes can report, so adding them up can count it more than once.
+	// The doc of each such field gives the rule for combining the values, if
+	// there is one.
 	//
 	// If the engine can't measure a metric that the call reports, it fails the
 	// call with the UNAVAILABLE status code.

@@ -31,7 +31,7 @@ func (b *QueueCommandsPendingBuilder) From(x *QueueCommandsPending) *QueueComman
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -44,7 +44,7 @@ func (b *QueueCommandsPendingBuilder) Build() *QueueCommandsPending {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -55,10 +55,10 @@ func (b *QueueCommandsPendingBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommands
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueCommandsPendingBuilder) WithValue(v uint64) *QueueCommandsPendingBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueCommandsPendingBuilder) WithCurrentCount(v uint64) *QueueCommandsPendingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -81,7 +81,7 @@ func (b *QueueDeadlinesPendingBuilder) From(x *QueueDeadlinesPending) *QueueDead
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -94,7 +94,7 @@ func (b *QueueDeadlinesPendingBuilder) Build() *QueueDeadlinesPending {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -105,10 +105,10 @@ func (b *QueueDeadlinesPendingBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlin
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueDeadlinesPendingBuilder) WithValue(v uint64) *QueueDeadlinesPendingBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueDeadlinesPendingBuilder) WithCurrentCount(v uint64) *QueueDeadlinesPendingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -131,7 +131,7 @@ func (b *QueueCommandsDueBuilder) From(x *QueueCommandsDue) *QueueCommandsDueBui
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -144,7 +144,7 @@ func (b *QueueCommandsDueBuilder) Build() *QueueCommandsDue {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -155,10 +155,10 @@ func (b *QueueCommandsDueBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommandsDueB
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueCommandsDueBuilder) WithValue(v uint64) *QueueCommandsDueBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueCommandsDueBuilder) WithCurrentCount(v uint64) *QueueCommandsDueBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -181,7 +181,7 @@ func (b *QueueDeadlinesDueBuilder) From(x *QueueDeadlinesDue) *QueueDeadlinesDue
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -194,7 +194,7 @@ func (b *QueueDeadlinesDueBuilder) Build() *QueueDeadlinesDue {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -205,10 +205,10 @@ func (b *QueueDeadlinesDueBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesDu
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueDeadlinesDueBuilder) WithValue(v uint64) *QueueDeadlinesDueBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueDeadlinesDueBuilder) WithCurrentCount(v uint64) *QueueDeadlinesDueBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -231,7 +231,7 @@ func (b *QueueCommandsFailingBuilder) From(x *QueueCommandsFailing) *QueueComman
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -244,7 +244,7 @@ func (b *QueueCommandsFailingBuilder) Build() *QueueCommandsFailing {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -255,10 +255,10 @@ func (b *QueueCommandsFailingBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommands
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueCommandsFailingBuilder) WithValue(v uint64) *QueueCommandsFailingBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueCommandsFailingBuilder) WithCurrentCount(v uint64) *QueueCommandsFailingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -281,7 +281,7 @@ func (b *QueueDeadlinesFailingBuilder) From(x *QueueDeadlinesFailing) *QueueDead
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -294,7 +294,7 @@ func (b *QueueDeadlinesFailingBuilder) Build() *QueueDeadlinesFailing {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -305,10 +305,10 @@ func (b *QueueDeadlinesFailingBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlin
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueDeadlinesFailingBuilder) WithValue(v uint64) *QueueDeadlinesFailingBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueDeadlinesFailingBuilder) WithCurrentCount(v uint64) *QueueDeadlinesFailingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -331,7 +331,7 @@ func (b *QueueCommandsRemovedBuilder) From(x *QueueCommandsRemoved) *QueueComman
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -344,7 +344,7 @@ func (b *QueueCommandsRemovedBuilder) Build() *QueueCommandsRemoved {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -355,10 +355,10 @@ func (b *QueueCommandsRemovedBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommands
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *QueueCommandsRemovedBuilder) WithValue(v uint64) *QueueCommandsRemovedBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueCommandsRemovedBuilder) WithCumulativeCount(v uint64) *QueueCommandsRemovedBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -381,7 +381,7 @@ func (b *QueueDeadlinesRemovedBuilder) From(x *QueueDeadlinesRemoved) *QueueDead
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -394,7 +394,7 @@ func (b *QueueDeadlinesRemovedBuilder) Build() *QueueDeadlinesRemoved {
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -405,10 +405,10 @@ func (b *QueueDeadlinesRemovedBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlin
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *QueueDeadlinesRemovedBuilder) WithValue(v uint64) *QueueDeadlinesRemovedBuilder {
-	b.prototype.SetValue(v)
+func (b *QueueDeadlinesRemovedBuilder) WithCumulativeCount(v uint64) *QueueDeadlinesRemovedBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -434,7 +434,7 @@ func (b *ProcessInstanceQueueBindingsBuilder) From(x *ProcessInstanceQueueBindin
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -450,7 +450,7 @@ func (b *ProcessInstanceQueueBindingsBuilder) Build() *ProcessInstanceQueueBindi
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -468,10 +468,10 @@ func (b *ProcessInstanceQueueBindingsBuilder) WithQueueId(v *uuidpb.UUID) *Proce
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *ProcessInstanceQueueBindingsBuilder) WithValue(v uint64) *ProcessInstanceQueueBindingsBuilder {
-	b.prototype.SetValue(v)
+func (b *ProcessInstanceQueueBindingsBuilder) WithCurrentCount(v uint64) *ProcessInstanceQueueBindingsBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 

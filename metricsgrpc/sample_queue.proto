@@ -11,8 +11,8 @@ message QueueCommandsPending {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of commands in the queue.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of commands in the queue.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // QueueDeadlinesPending is the number of deadlines in a single logical queue
@@ -21,8 +21,8 @@ message QueueDeadlinesPending {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of deadlines in the queue.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of deadlines in the queue.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // QueueCommandsDue is the number of commands in a single logical queue that are
@@ -31,8 +31,8 @@ message QueueCommandsDue {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of commands that are ready.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of commands that are ready.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // QueueDeadlinesDue is the number of deadlines in a single logical queue that
@@ -41,8 +41,8 @@ message QueueDeadlinesDue {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of deadlines that are ready.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of deadlines that are ready.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // QueueCommandsFailing is the number of commands in a single logical queue
@@ -51,8 +51,8 @@ message QueueCommandsFailing {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of failing commands in the queue.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of failing commands in the queue.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // QueueDeadlinesFailing is the number of deadlines in a single logical queue
@@ -61,30 +61,32 @@ message QueueDeadlinesFailing {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of failing deadlines in the queue.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of failing deadlines in the queue.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// QueueCommandsRemoved is the running total of the commands that have been
+// QueueCommandsRemoved is the cumulative count of the commands that have been
 // removed from a single logical queue, because they were delivered or for any
 // other reason.
 message QueueCommandsRemoved {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of commands that have been removed from the queue.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of commands that have been removed from the
+  // queue.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// QueueDeadlinesRemoved is the running total of the deadlines that have been
+// QueueDeadlinesRemoved is the cumulative count of the deadlines that have been
 // removed from a single logical queue, because they were delivered or for any
 // other reason.
 message QueueDeadlinesRemoved {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 
-  // Value is the number of deadlines that have been removed from the queue.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of deadlines that have been removed from the
+  // queue.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // ProcessInstanceQueueBindings is the number of a process handler's instances
@@ -104,7 +106,6 @@ message ProcessInstanceQueueBindings {
   // absent for the instances that are bound to none.
   dogma.protobuf.v1.UUID queue_id = 2;
 
-  // Value is the number of instances bound to the queue, or to none. It is
-  // zero if the instances that were bound to it have gone.
-  uint64 value = 3 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of instances bound to the queue, or to none.
+  uint64 current_count = 3 [features.field_presence = IMPLICIT];
 }

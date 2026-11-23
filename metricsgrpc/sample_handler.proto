@@ -13,8 +13,8 @@ message AggregateInstancesInMemory {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of instances that the engine holds in memory.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of instances that the engine holds in memory.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // ProcessInstancesInMemory is the number of a process handler's instances that
@@ -25,8 +25,8 @@ message ProcessInstancesInMemory {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of instances that the engine holds in memory.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of instances that the engine holds in memory.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerCommandsPending is the number of commands for one handler that are
@@ -37,8 +37,8 @@ message HandlerCommandsPending {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of commands.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of commands.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerCommandsDue is the number of commands for one handler that are ready
@@ -49,8 +49,8 @@ message HandlerCommandsDue {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of commands that are ready.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of commands that are ready.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerCommandsFailing is the number of commands for one handler that are
@@ -61,21 +61,21 @@ message HandlerCommandsFailing {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of failing commands.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of failing commands.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerCommandsHandled is the running total of the commands that one handler
-// has handled successfully. The engine sends it only for aggregate and
+// HandlerCommandsHandled is the cumulative count of the commands that one
+// handler has handled successfully. The engine sends it only for aggregate and
 // integration handlers.
 message HandlerCommandsHandled {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of commands that the handler has handled
+  // CumulativeCount is the number of commands that the handler has handled
   // successfully.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerDeadlinesPending is the number of deadlines for one handler that are
@@ -85,8 +85,8 @@ message HandlerDeadlinesPending {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of deadlines.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of deadlines.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerDeadlinesDue is the number of deadlines for one handler that are ready
@@ -96,8 +96,8 @@ message HandlerDeadlinesDue {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of deadlines that are ready.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of deadlines that are ready.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerDeadlinesFailing is the number of deadlines for one handler that are
@@ -108,11 +108,11 @@ message HandlerDeadlinesFailing {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of failing deadlines.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of failing deadlines.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerDeadlinesHandled is the running total of the deadlines that one
+// HandlerDeadlinesHandled is the cumulative count of the deadlines that one
 // handler has handled successfully. The engine sends it only for process
 // handlers.
 message HandlerDeadlinesHandled {
@@ -120,13 +120,13 @@ message HandlerDeadlinesHandled {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of deadlines that the handler has handled
+  // CumulativeCount is the number of deadlines that the handler has handled
   // successfully.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerDeadlinesCanceled is the running total of the deadlines of one handler
-// that were canceled before they were handled, such as when the process
+// HandlerDeadlinesCanceled is the cumulative count of the deadlines of one
+// handler that were canceled before they were handled, such as when the process
 // instance that scheduled them ended. The engine sends it only for process
 // handlers.
 message HandlerDeadlinesCanceled {
@@ -134,31 +134,31 @@ message HandlerDeadlinesCanceled {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of deadlines that were canceled.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of deadlines that were canceled.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerEventsRecorded is the running total of the events that one handler has
-// recorded. The engine sends it only for aggregate and integration handlers,
-// and not for an integration handler that records no events.
+// HandlerEventsRecorded is the cumulative count of the events that one handler
+// has recorded. The engine sends it only for aggregate and integration
+// handlers, and not for an integration handler that records no events.
 message HandlerEventsRecorded {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of events that the handler has recorded.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of events that the handler has recorded.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerEventsHandled is the running total of the events that one handler has
-// handled. The engine sends it only for process and projection handlers.
+// HandlerEventsHandled is the cumulative count of the events that one handler
+// has handled. The engine sends it only for process and projection handlers.
 message HandlerEventsHandled {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of events that the handler has handled.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of events that the handler has handled.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerEventsFailing is the number of events for one handler that haven't
@@ -169,64 +169,66 @@ message HandlerEventsFailing {
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of failing events.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of failing events.
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// ProcessInstancesEnded is the running total of the instances of one process
+// ProcessInstancesEnded is the cumulative count of the instances of one process
 // handler that have ended.
 message ProcessInstancesEnded {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of instances that have ended.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of instances that have ended.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// ProjectionCompactionsCanceled is the running total of the compactions of one
-// projection handler that have ended with the Canceled outcome.
+// ProjectionCompactionsCanceled is the cumulative count of the compactions of
+// one projection handler that have ended with the Canceled outcome.
 message ProjectionCompactionsCanceled {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of compactions that have ended with the Canceled
-  // outcome.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of compactions that have ended with the
+  // Canceled outcome.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// ProjectionCompactionsCompleted is the running total of the compactions of one
-// projection handler that have ended with the Success outcome.
+// ProjectionCompactionsCompleted is the cumulative count of the compactions of
+// one projection handler that have ended with the Success outcome.
 message ProjectionCompactionsCompleted {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of compactions that have ended with the Success
-  // outcome.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of compactions that have ended with the
+  // Success outcome.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// ProjectionCompactionsDeadlineExceeded is the running total of the compactions
-// of one projection handler that have ended with the DeadlineExceeded outcome.
+// ProjectionCompactionsDeadlineExceeded is the cumulative count of the
+// compactions of one projection handler that have ended with the
+// DeadlineExceeded outcome.
 message ProjectionCompactionsDeadlineExceeded {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of compactions that have ended with the
+  // CumulativeCount is the number of compactions that have ended with the
   // DeadlineExceeded outcome.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// ProjectionCompactionsFailed is the running total of the compactions of one
+// ProjectionCompactionsFailed is the cumulative count of the compactions of one
 // projection handler that have ended with the Error outcome.
 message ProjectionCompactionsFailed {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // Value is the number of compactions that have ended with the Error outcome.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of compactions that have ended with the Error
+  // outcome.
+  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }

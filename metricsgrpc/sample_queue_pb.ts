@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue: GenFile = /*@__PURE__*/
-  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJXChRRdWV1ZUNvbW1hbmRzUGVuZGluZxIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlgKFVF1ZXVlRGVhZGxpbmVzUGVuZGluZxIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlMKEFF1ZXVlQ29tbWFuZHNEdWUSKQoIcXVldWVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJUChFRdWV1ZURlYWRsaW5lc0R1ZRIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlcKFFF1ZXVlQ29tbWFuZHNGYWlsaW5nEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiWAoVUXVldWVEZWFkbGluZXNGYWlsaW5nEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiVwoUUXVldWVDb21tYW5kc1JlbW92ZWQSKQoIcXVldWVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJYChVRdWV1ZURlYWRsaW5lc1JlbW92ZWQSKQoIcXVldWVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiKNAQocUHJvY2Vzc0luc3RhbmNlUXVldWVCaW5kaW5ncxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSKQoIcXVldWVfaWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJfChRRdWV1ZUNvbW1hbmRzUGVuZGluZxIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiYAoVUXVldWVEZWFkbGluZXNQZW5kaW5nEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJbChBRdWV1ZUNvbW1hbmRzRHVlEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJcChFRdWV1ZURlYWRsaW5lc0R1ZRIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiXwoUUXVldWVDb21tYW5kc0ZhaWxpbmcSKQoIcXVldWVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImAKFVF1ZXVlRGVhZGxpbmVzRmFpbGluZxIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiYgoUUXVldWVDb21tYW5kc1JlbW92ZWQSKQoIcXVldWVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCImMKFVF1ZXVlRGVhZGxpbmVzUmVtb3ZlZBIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIilQEKHFByb2Nlc3NJbnN0YW5jZVF1ZXVlQmluZGluZ3MSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEikKCHF1ZXVlX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * QueueCommandsPending is the number of commands in a single logical queue that
@@ -29,11 +29,11 @@ export type QueueCommandsPending = Message<"dogma.metrics.v1alpha1.QueueCommands
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of commands in the queue.
+   * CurrentCount is the number of commands in the queue.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -58,11 +58,11 @@ export type QueueDeadlinesPending = Message<"dogma.metrics.v1alpha1.QueueDeadlin
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of deadlines in the queue.
+   * CurrentCount is the number of deadlines in the queue.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -87,11 +87,11 @@ export type QueueCommandsDue = Message<"dogma.metrics.v1alpha1.QueueCommandsDue"
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of commands that are ready.
+   * CurrentCount is the number of commands that are ready.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -116,11 +116,11 @@ export type QueueDeadlinesDue = Message<"dogma.metrics.v1alpha1.QueueDeadlinesDu
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of deadlines that are ready.
+   * CurrentCount is the number of deadlines that are ready.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -145,11 +145,11 @@ export type QueueCommandsFailing = Message<"dogma.metrics.v1alpha1.QueueCommands
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of failing commands in the queue.
+   * CurrentCount is the number of failing commands in the queue.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -174,11 +174,11 @@ export type QueueDeadlinesFailing = Message<"dogma.metrics.v1alpha1.QueueDeadlin
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of failing deadlines in the queue.
+   * CurrentCount is the number of failing deadlines in the queue.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -189,7 +189,7 @@ export const QueueDeadlinesFailingSchema: GenMessage<QueueDeadlinesFailing> = /*
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 5);
 
 /**
- * QueueCommandsRemoved is the running total of the commands that have been
+ * QueueCommandsRemoved is the cumulative count of the commands that have been
  * removed from a single logical queue, because they were delivered or for any
  * other reason.
  *
@@ -204,11 +204,12 @@ export type QueueCommandsRemoved = Message<"dogma.metrics.v1alpha1.QueueCommands
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of commands that have been removed from the queue.
+   * CumulativeCount is the number of commands that have been removed from the
+   * queue.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -219,7 +220,7 @@ export const QueueCommandsRemovedSchema: GenMessage<QueueCommandsRemoved> = /*@_
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 6);
 
 /**
- * QueueDeadlinesRemoved is the running total of the deadlines that have been
+ * QueueDeadlinesRemoved is the cumulative count of the deadlines that have been
  * removed from a single logical queue, because they were delivered or for any
  * other reason.
  *
@@ -234,11 +235,12 @@ export type QueueDeadlinesRemoved = Message<"dogma.metrics.v1alpha1.QueueDeadlin
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of deadlines that have been removed from the queue.
+   * CumulativeCount is the number of deadlines that have been removed from the
+   * queue.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -278,12 +280,11 @@ export type ProcessInstanceQueueBindings = Message<"dogma.metrics.v1alpha1.Proce
   queueId?: UUID | undefined;
 
   /**
-   * Value is the number of instances bound to the queue, or to none. It is
-   * zero if the instances that were bound to it have gone.
+   * CurrentCount is the number of instances bound to the queue, or to none.
    *
-   * @generated from field: uint64 value = 3 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 3 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
