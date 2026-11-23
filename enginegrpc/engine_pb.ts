@@ -12,6 +12,8 @@ import type { ClusterModel, ClusterWorkloads, LiveClusterNodes } from "./cluster
 import { file_github_com_dogmatiq_protobuf_enginegrpc_cluster } from "./cluster_pb.js";
 import type { EventStreamModel } from "./eventstream_pb.js";
 import { file_github_com_dogmatiq_protobuf_enginegrpc_eventstream } from "./eventstream_pb.js";
+import type { ProjectionCompactionEnded, ProjectionCompactionStarted } from "./projection_pb.js";
+import { file_github_com_dogmatiq_protobuf_enginegrpc_projection } from "./projection_pb.js";
 import type { QueueModel } from "./queue_pb.js";
 import { file_github_com_dogmatiq_protobuf_enginegrpc_queue } from "./queue_pb.js";
 import type { Identity } from "../identitypb/identity_pb.js";
@@ -24,7 +26,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/enginegrpc/engine.proto.
  */
 export const file_github_com_dogmatiq_protobuf_enginegrpc_engine: GenFile = /*@__PURE__*/
-  fileDesc("CjRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvZW5naW5lLnByb3RvEhVkb2dtYS5lbmdpbmUudjFhbHBoYTEiFAoSV2F0Y2hFbmdpbmVSZXF1ZXN0IuUJChNXYXRjaEVuZ2luZVJlc3BvbnNlEkcKCHByZWFtYmxlGAEgASgLMjMuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGVIABJJCgloZWFydGJlYXQYAiABKAsyNC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5IZWFydGJlYXRIABJFChJsaXZlX2NsdXN0ZXJfbm9kZXMYAyABKAsyJy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuTGl2ZUNsdXN0ZXJOb2Rlc0gAEkQKEWNsdXN0ZXJfd29ya2xvYWRzGAQgASgLMicuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJXb3JrbG9hZHNIABr2BQoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhoKC2Rlc2NyaXB0aW9uGAIgASgJQgWqAQIIAhJaCg5pbXBsZW1lbnRhdGlvbhgDIAEoCzJCLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlc3BvbnNlLlByZWFtYmxlLkltcGxlbWVudGF0aW9uEikKBHNpdGUYBCABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRI3CgthcHBsaWNhdGlvbhgFIAEoCzIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5BcHBsaWNhdGlvbhI1ChJoZWFydGJlYXRfaW50ZXJ2YWwYBiABKAsyGS5nb29nbGUucHJvdG9idWYuRHVyYXRpb24STAoHY2x1c3RlchgHIAEoCzI7LmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlc3BvbnNlLlByZWFtYmxlLkNsdXN0ZXISNgoLcXVldWVfbW9kZWwYCCABKAsyIS5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUXVldWVNb2RlbBJDChJldmVudF9zdHJlYW1fbW9kZWwYCSABKAsyJy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuRXZlbnRTdHJlYW1Nb2RlbBo9Cg5JbXBsZW1lbnRhdGlvbhITCgRuYW1lGAEgASgJQgWqAQIIAhIWCgd2ZXJzaW9uGAIgASgJQgWqAQIIAhqnAQoHQ2x1c3RlchIjCgJpZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMgoFbW9kZWwYAiABKAsyIy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2x1c3Rlck1vZGVsEiEKEnJlcG9ydHNfbGl2ZV9ub2RlcxgDIAEoCEIFqgECCAISIAoRcmVwb3J0c193b3JrbG9hZHMYBCABKAhCBaoBAggCGqgBCglIZWFydGJlYXQSKwoHc2VudF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASMAoKZXhwaXJlc19hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBIABIyCg1leHBpcmVzX2FmdGVyGAMgASgLMhkuZ29vZ2xlLnByb3RvYnVmLkR1cmF0aW9uSABCCAoGZXhwaXJ5QgkKB3BheWxvYWQycwoJRW5naW5lQVBJEmYKC1dhdGNoRW5naW5lEikuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVxdWVzdBoqLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlc3BvbnNlMAFCKVonZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9lbmdpbmVncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_enginegrpc_cluster, file_github_com_dogmatiq_protobuf_enginegrpc_eventstream, file_github_com_dogmatiq_protobuf_enginegrpc_queue, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjRnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvZW5naW5lLnByb3RvEhVkb2dtYS5lbmdpbmUudjFhbHBoYTEiFAoSV2F0Y2hFbmdpbmVSZXF1ZXN0IqQMChNXYXRjaEVuZ2luZVJlc3BvbnNlEkcKCHByZWFtYmxlGAEgASgLMjMuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGVIABJJCgloZWFydGJlYXQYAiABKAsyNC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZS5IZWFydGJlYXRIABJFChJsaXZlX2NsdXN0ZXJfbm9kZXMYAyABKAsyJy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuTGl2ZUNsdXN0ZXJOb2Rlc0gAEkQKEWNsdXN0ZXJfd29ya2xvYWRzGAQgASgLMicuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJXb3JrbG9hZHNIABJbCh1wcm9qZWN0aW9uX2NvbXBhY3Rpb25fc3RhcnRlZBgFIAEoCzIyLmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvblN0YXJ0ZWRIABJXChtwcm9qZWN0aW9uX2NvbXBhY3Rpb25fZW5kZWQYBiABKAsyMC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25FbmRlZEgAGv8GCghQcmVhbWJsZRIjCgJpZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSGgoLZGVzY3JpcHRpb24YAiABKAlCBaoBAggCEloKDmltcGxlbWVudGF0aW9uGAMgASgLMkIuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGUuSW1wbGVtZW50YXRpb24SKQoEc2l0ZRgEIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EjcKC2FwcGxpY2F0aW9uGAUgASgLMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkFwcGxpY2F0aW9uEjUKEmhlYXJ0YmVhdF9pbnRlcnZhbBgGIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbhJMCgdjbHVzdGVyGAcgASgLMjsuZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGUuQ2x1c3RlchI2CgtxdWV1ZV9tb2RlbBgIIAEoCzIhLmRvZ21hLmVuZ2luZS52MWFscGhhMS5RdWV1ZU1vZGVsEkMKEmV2ZW50X3N0cmVhbV9tb2RlbBgJIAEoCzInLmRvZ21hLmVuZ2luZS52MWFscGhhMS5FdmVudFN0cmVhbU1vZGVsElQKC3Byb2plY3Rpb25zGAogASgLMj8uZG9nbWEuZW5naW5lLnYxYWxwaGExLldhdGNoRW5naW5lUmVzcG9uc2UuUHJlYW1ibGUuUHJvamVjdGlvbnMaPQoOSW1wbGVtZW50YXRpb24SEwoEbmFtZRgBIAEoCUIFqgECCAISFgoHdmVyc2lvbhgCIAEoCUIFqgECCAIapwEKB0NsdXN0ZXISIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjIKBW1vZGVsGAIgASgLMiMuZG9nbWEuZW5naW5lLnYxYWxwaGExLkNsdXN0ZXJNb2RlbBIhChJyZXBvcnRzX2xpdmVfbm9kZXMYAyABKAhCBaoBAggCEiAKEXJlcG9ydHNfd29ya2xvYWRzGAQgASgIQgWqAQIIAhoxCgtQcm9qZWN0aW9ucxIiChNyZXBvcnRzX2NvbXBhY3Rpb25zGAEgASgIQgWqAQIIAhqoAQoJSGVhcnRiZWF0EisKB3NlbnRfYXQYASABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEjAKCmV4cGlyZXNfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wSAASMgoNZXhwaXJlc19hZnRlchgDIAEoCzIZLmdvb2dsZS5wcm90b2J1Zi5EdXJhdGlvbkgAQggKBmV4cGlyeUIJCgdwYXlsb2FkMnMKCUVuZ2luZUFQSRJmCgtXYXRjaEVuZ2luZRIpLmRvZ21hLmVuZ2luZS52MWFscGhhMS5XYXRjaEVuZ2luZVJlcXVlc3QaKi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuV2F0Y2hFbmdpbmVSZXNwb25zZTABQilaJ2dpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvZW5naW5lZ3JwY2IIZWRpdGlvbnNw6Qc", [file_google_protobuf_duration, file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_enginegrpc_cluster, file_github_com_dogmatiq_protobuf_enginegrpc_eventstream, file_github_com_dogmatiq_protobuf_enginegrpc_projection, file_github_com_dogmatiq_protobuf_enginegrpc_queue, file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * WatchEngineRequest is the input to the EngineAPI.WatchEngine method.
@@ -49,17 +51,15 @@ export const WatchEngineRequestSchema: GenMessage<WatchEngineRequest> = /*@__PUR
  */
 export type WatchEngineResponse = Message<"dogma.engine.v1alpha1.WatchEngineResponse"> & {
   /**
-   * Payload is the Preamble in the first response on a stream, and a Heartbeat,
-   * a LiveClusterNodes or a ClusterWorkloads in every other.
+   * Payload is the Preamble in the first response on a stream, and one of the
+   * other messages in every other.
    *
-   * If the Preamble has a heartbeat_interval, the engine sends a Heartbeat
-   * message each time it heartbeats.
+   * Only an engine that runs as a cluster sends LiveClusterNodes and
+   * ClusterWorkloads messages.
    *
-   * If the Preamble has a cluster, the node sends LiveClusterNodes messages if
-   * the cluster's reports_live_nodes is true, and ClusterWorkloads messages if
-   * its reports_workloads is true. For each kind, it sends a first message,
-   * then another whenever the set changes. Each message replaces the one before
-   * it of the same kind.
+   * LiveClusterNodes and ClusterWorkloads each hold a set. The engine sends one
+   * when the stream starts, and another whenever the set changes. Each replaces
+   * the one before it of the same kind.
    *
    * @generated from oneof dogma.engine.v1alpha1.WatchEngineResponse.payload
    */
@@ -87,6 +87,18 @@ export type WatchEngineResponse = Message<"dogma.engine.v1alpha1.WatchEngineResp
      */
     value: ClusterWorkloads;
     case: "clusterWorkloads";
+  } | {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionStarted projection_compaction_started = 5;
+     */
+    value: ProjectionCompactionStarted;
+    case: "projectionCompactionStarted";
+  } | {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionEnded projection_compaction_ended = 6;
+     */
+    value: ProjectionCompactionEnded;
+    case: "projectionCompactionEnded";
   } | { case: undefined; value?: undefined };
 };
 
@@ -183,6 +195,14 @@ export type WatchEngineResponse_Preamble = Message<"dogma.engine.v1alpha1.WatchE
    * @generated from field: dogma.engine.v1alpha1.EventStreamModel event_stream_model = 9;
    */
   eventStreamModel?: EventStreamModel | undefined;
+
+  /**
+   * Projections says which messages about projections the engine sends on
+   * this response stream.
+   *
+   * @generated from field: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Projections projections = 10;
+   */
+  projections?: WatchEngineResponse_Preamble_Projections | undefined;
 };
 
 /**
@@ -273,6 +293,30 @@ export const WatchEngineResponse_Preamble_ClusterSchema: GenMessage<WatchEngineR
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0, 1);
 
 /**
+ * Projections says which messages about projections the engine sends on
+ * this response stream.
+ *
+ * @generated from message dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Projections
+ */
+export type WatchEngineResponse_Preamble_Projections = Message<"dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Projections"> & {
+  /**
+   * ReportsCompactions is true if the engine sends a
+   * ProjectionCompactionStarted message for each compaction that it starts,
+   * and a ProjectionCompactionEnded message when that compaction ends.
+   *
+   * @generated from field: bool reports_compactions = 1 [features.field_presence = IMPLICIT];
+   */
+  reportsCompactions: boolean;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Projections.
+ * Use `create(WatchEngineResponse_Preamble_ProjectionsSchema)` to create a new message.
+ */
+export const WatchEngineResponse_Preamble_ProjectionsSchema: GenMessage<WatchEngineResponse_Preamble_Projections> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_engine, 1, 0, 2);
+
+/**
  * Heartbeat reports that the engine has sent a heartbeat, which is a signal
  * that it sends repeatedly on the response stream to show that it is still
  * running.
@@ -344,18 +388,6 @@ export const EngineAPI: GenService<{
    * The first message in the response contains a WatchEngineResponse.Preamble,
    * which identifies the engine, the application it is running, and how it
    * operates.
-   *
-   * Each subsequent message in the response contains one of these:
-   *
-   * - A Heartbeat, which shows that the engine is still running.
-   * - A LiveClusterNodes, which lists the nodes of the cluster that the node
-   *   serving the call considers to be running.
-   * - A ClusterWorkloads, which lists the units of the cluster's work that the
-   *   node serving the call currently owns.
-   *
-   * Only an engine that runs as a cluster sends LiveClusterNodes and
-   * ClusterWorkloads messages. The Preamble says which of the three kinds the
-   * engine sends.
    *
    * If the node that serves the call reports live nodes or workloads but can't
    * currently determine them, it fails the call with the UNAVAILABLE status

@@ -56,6 +56,24 @@ func (x *WatchEngineResponse) TryGetClusterWorkloads() (v *ClusterWorkloads, ok 
 	return v, false
 }
 
+// TryGetProjectionCompactionStarted returns the ProjectionCompactionStarted value if x.Payload is set to ProjectionCompactionStarted.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchEngineResponse) TryGetProjectionCompactionStarted() (v *ProjectionCompactionStarted, ok bool) {
+	if x.HasProjectionCompactionStarted() {
+		return x.GetProjectionCompactionStarted(), true
+	}
+	return v, false
+}
+
+// TryGetProjectionCompactionEnded returns the ProjectionCompactionEnded value if x.Payload is set to ProjectionCompactionEnded.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchEngineResponse) TryGetProjectionCompactionEnded() (v *ProjectionCompactionEnded, ok bool) {
+	if x.HasProjectionCompactionEnded() {
+		return x.GetProjectionCompactionEnded(), true
+	}
+	return v, false
+}
+
 // TryGetExpiresAt returns the ExpiresAt value if x.Expiry is set to ExpiresAt.
 // Otherwise, ok is false and v is the zero-value.
 func (x *WatchEngineResponse_Heartbeat) TryGetExpiresAt() (v *timestamppb.Timestamp, ok bool) {
@@ -130,6 +148,12 @@ func (b *WatchEngineResponseBuilder) From(x *WatchEngineResponse) *WatchEngineRe
 	if x.HasClusterWorkloads() {
 		b.prototype.SetClusterWorkloads(x.GetClusterWorkloads())
 	}
+	if x.HasProjectionCompactionStarted() {
+		b.prototype.SetProjectionCompactionStarted(x.GetProjectionCompactionStarted())
+	}
+	if x.HasProjectionCompactionEnded() {
+		b.prototype.SetProjectionCompactionEnded(x.GetProjectionCompactionEnded())
+	}
 	return b
 }
 
@@ -150,6 +174,12 @@ func (b *WatchEngineResponseBuilder) Build() *WatchEngineResponse {
 	}
 	if b.prototype.HasClusterWorkloads() {
 		m.SetClusterWorkloads(b.prototype.GetClusterWorkloads())
+	}
+	if b.prototype.HasProjectionCompactionStarted() {
+		m.SetProjectionCompactionStarted(b.prototype.GetProjectionCompactionStarted())
+	}
+	if b.prototype.HasProjectionCompactionEnded() {
+		m.SetProjectionCompactionEnded(b.prototype.GetProjectionCompactionEnded())
 	}
 	return m
 }
@@ -179,6 +209,20 @@ func (b *WatchEngineResponseBuilder) WithLiveClusterNodes(v *LiveClusterNodes) *
 // then returns b.
 func (b *WatchEngineResponseBuilder) WithClusterWorkloads(v *ClusterWorkloads) *WatchEngineResponseBuilder {
 	b.prototype.SetClusterWorkloads(v)
+	return b
+}
+
+// WithProjectionCompactionStarted configures the builder to set the ProjectionCompactionStarted field to v,
+// then returns b.
+func (b *WatchEngineResponseBuilder) WithProjectionCompactionStarted(v *ProjectionCompactionStarted) *WatchEngineResponseBuilder {
+	b.prototype.SetProjectionCompactionStarted(v)
+	return b
+}
+
+// WithProjectionCompactionEnded configures the builder to set the ProjectionCompactionEnded field to v,
+// then returns b.
+func (b *WatchEngineResponseBuilder) WithProjectionCompactionEnded(v *ProjectionCompactionEnded) *WatchEngineResponseBuilder {
+	b.prototype.SetProjectionCompactionEnded(v)
 	return b
 }
 
@@ -223,6 +267,9 @@ func (b *WatchEngineResponse_PreambleBuilder) From(x *WatchEngineResponse_Preamb
 	if x.HasEventStreamModel() {
 		b.prototype.SetEventStreamModel(x.GetEventStreamModel())
 	}
+	if x.HasProjections() {
+		b.prototype.SetProjections(x.GetProjections())
+	}
 	return b
 }
 
@@ -256,6 +303,9 @@ func (b *WatchEngineResponse_PreambleBuilder) Build() *WatchEngineResponse_Pream
 	}
 	if b.prototype.HasEventStreamModel() {
 		m.SetEventStreamModel(b.prototype.GetEventStreamModel())
+	}
+	if b.prototype.HasProjections() {
+		m.SetProjections(b.prototype.GetProjections())
 	}
 	return m
 }
@@ -320,6 +370,13 @@ func (b *WatchEngineResponse_PreambleBuilder) WithQueueModel(v *QueueModel) *Wat
 // then returns b.
 func (b *WatchEngineResponse_PreambleBuilder) WithEventStreamModel(v *EventStreamModel) *WatchEngineResponse_PreambleBuilder {
 	b.prototype.SetEventStreamModel(v)
+	return b
+}
+
+// WithProjections configures the builder to set the Projections field to v,
+// then returns b.
+func (b *WatchEngineResponse_PreambleBuilder) WithProjections(v *WatchEngineResponse_Preamble_Projections) *WatchEngineResponse_PreambleBuilder {
+	b.prototype.SetProjections(v)
 	return b
 }
 
@@ -441,6 +498,43 @@ func (b *WatchEngineResponse_Preamble_ClusterBuilder) WithReportsWorkloads(v boo
 	return b
 }
 
+type WatchEngineResponse_Preamble_ProjectionsBuilder struct {
+	prototype WatchEngineResponse_Preamble_Projections
+}
+
+// NewWatchEngineResponse_Preamble_ProjectionsBuilder returns a builder that constructs [WatchEngineResponse_Preamble_Projections] messages.
+func NewWatchEngineResponse_Preamble_ProjectionsBuilder() *WatchEngineResponse_Preamble_ProjectionsBuilder {
+	return &WatchEngineResponse_Preamble_ProjectionsBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) From(x *WatchEngineResponse_Preamble_Projections) *WatchEngineResponse_Preamble_ProjectionsBuilder {
+	proto.Reset(&b.prototype)
+	b.prototype.SetReportsCompactions(x.GetReportsCompactions())
+	return b
+}
+
+// Build returns a new [WatchEngineResponse_Preamble_Projections] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) Build() *WatchEngineResponse_Preamble_Projections {
+	m := &WatchEngineResponse_Preamble_Projections{}
+	m.SetReportsCompactions(b.prototype.GetReportsCompactions())
+	return m
+}
+
+// WithReportsCompactions configures the builder to set the ReportsCompactions field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) WithReportsCompactions(v bool) *WatchEngineResponse_Preamble_ProjectionsBuilder {
+	b.prototype.SetReportsCompactions(v)
+	return b
+}
+
 type WatchEngineResponse_HeartbeatBuilder struct {
 	prototype WatchEngineResponse_Heartbeat
 }
@@ -518,6 +612,8 @@ func MustSwitch_WatchEngineResponse_Payload(
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat),
 	caseLiveClusterNodes func(*LiveClusterNodes),
 	caseClusterWorkloads func(*ClusterWorkloads),
+	caseProjectionCompactionStarted func(*ProjectionCompactionStarted),
+	caseProjectionCompactionEnded func(*ProjectionCompactionEnded),
 ) {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
@@ -528,6 +624,10 @@ func MustSwitch_WatchEngineResponse_Payload(
 		caseLiveClusterNodes(x.GetLiveClusterNodes())
 	case WatchEngineResponse_ClusterWorkloads_case:
 		caseClusterWorkloads(x.GetClusterWorkloads())
+	case WatchEngineResponse_ProjectionCompactionStarted_case:
+		caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
+	case WatchEngineResponse_ProjectionCompactionEnded_case:
+		caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
 	default:
 		panic("MustSwitch_WatchEngineResponse_Payload: x.Payload is not set")
 	}
@@ -543,6 +643,8 @@ func Switch_WatchEngineResponse_Payload(
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat),
 	caseLiveClusterNodes func(*LiveClusterNodes),
 	caseClusterWorkloads func(*ClusterWorkloads),
+	caseProjectionCompactionStarted func(*ProjectionCompactionStarted),
+	caseProjectionCompactionEnded func(*ProjectionCompactionEnded),
 	none func(),
 ) {
 	switch x.WhichPayload() {
@@ -554,6 +656,10 @@ func Switch_WatchEngineResponse_Payload(
 		caseLiveClusterNodes(x.GetLiveClusterNodes())
 	case WatchEngineResponse_ClusterWorkloads_case:
 		caseClusterWorkloads(x.GetClusterWorkloads())
+	case WatchEngineResponse_ProjectionCompactionStarted_case:
+		caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
+	case WatchEngineResponse_ProjectionCompactionEnded_case:
+		caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
 	default:
 		none()
 	}
@@ -570,6 +676,8 @@ func MustMap_WatchEngineResponse_Payload[T any](
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat) T,
 	caseLiveClusterNodes func(*LiveClusterNodes) T,
 	caseClusterWorkloads func(*ClusterWorkloads) T,
+	caseProjectionCompactionStarted func(*ProjectionCompactionStarted) T,
+	caseProjectionCompactionEnded func(*ProjectionCompactionEnded) T,
 ) T {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
@@ -580,6 +688,10 @@ func MustMap_WatchEngineResponse_Payload[T any](
 		return caseLiveClusterNodes(x.GetLiveClusterNodes())
 	case WatchEngineResponse_ClusterWorkloads_case:
 		return caseClusterWorkloads(x.GetClusterWorkloads())
+	case WatchEngineResponse_ProjectionCompactionStarted_case:
+		return caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
+	case WatchEngineResponse_ProjectionCompactionEnded_case:
+		return caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
 	default:
 		panic("MustMap_WatchEngineResponse_Payload: x.Payload is not set")
 	}
@@ -596,6 +708,8 @@ func Map_WatchEngineResponse_Payload[T any](
 	caseHeartbeat func(*WatchEngineResponse_Heartbeat) T,
 	caseLiveClusterNodes func(*LiveClusterNodes) T,
 	caseClusterWorkloads func(*ClusterWorkloads) T,
+	caseProjectionCompactionStarted func(*ProjectionCompactionStarted) T,
+	caseProjectionCompactionEnded func(*ProjectionCompactionEnded) T,
 	none func() T,
 ) T {
 	switch x.WhichPayload() {
@@ -607,6 +721,10 @@ func Map_WatchEngineResponse_Payload[T any](
 		return caseLiveClusterNodes(x.GetLiveClusterNodes())
 	case WatchEngineResponse_ClusterWorkloads_case:
 		return caseClusterWorkloads(x.GetClusterWorkloads())
+	case WatchEngineResponse_ProjectionCompactionStarted_case:
+		return caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
+	case WatchEngineResponse_ProjectionCompactionEnded_case:
+		return caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
 	default:
 		return none()
 	}
@@ -1070,6 +1188,79 @@ func (x *WatchEngineResponse_Preamble_Cluster) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
+func (x *WatchEngineResponse_Preamble_Projections) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = WatchEngineResponse_Preamble_Projections
+	type WatchEngineResponse_Preamble_Projections realType
+	fmt.Fprintf(f, format, (*WatchEngineResponse_Preamble_Projections)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
 func (x *WatchEngineResponse_Heartbeat) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
@@ -1223,6 +1414,22 @@ func (x *WatchEngineResponse_Preamble_Cluster) MarshalBinary() ([]byte, error) {
 //
 // It allows [*WatchEngineResponse_Preamble_Cluster] to implement [encoding.BinaryUnmarshaler].
 func (x *WatchEngineResponse_Preamble_Cluster) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*WatchEngineResponse_Preamble_Projections] to implement [encoding.BinaryMarshaler].
+func (x *WatchEngineResponse_Preamble_Projections) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*WatchEngineResponse_Preamble_Projections] to implement [encoding.BinaryUnmarshaler].
+func (x *WatchEngineResponse_Preamble_Projections) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 

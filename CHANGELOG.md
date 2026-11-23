@@ -13,6 +13,12 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added `ProjectionCompactionStarted` and `ProjectionCompactionEnded` to the
+  messages that `EngineAPI.WatchEngine` sends, which report the compactions that
+  the engine starts and the outcome of each.
+
 ### Removed
 
 - **[BC]** Removed the `ProjectionCompactionState` and `ProjectionResetState`

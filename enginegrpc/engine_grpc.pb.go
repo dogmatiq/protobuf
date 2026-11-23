@@ -44,18 +44,6 @@ type EngineAPIClient interface {
 	// which identifies the engine, the application it is running, and how it
 	// operates.
 	//
-	// Each subsequent message in the response contains one of these:
-	//
-	// - A Heartbeat, which shows that the engine is still running.
-	// - A LiveClusterNodes, which lists the nodes of the cluster that the node
-	//   serving the call considers to be running.
-	// - A ClusterWorkloads, which lists the units of the cluster's work that the
-	//   node serving the call currently owns.
-	//
-	// Only an engine that runs as a cluster sends LiveClusterNodes and
-	// ClusterWorkloads messages. The Preamble says which of the three kinds the
-	// engine sends.
-	//
 	// If the node that serves the call reports live nodes or workloads but can't
 	// currently determine them, it fails the call with the UNAVAILABLE status
 	// code.
@@ -110,18 +98,6 @@ type EngineAPIServer interface {
 	// The first message in the response contains a WatchEngineResponse.Preamble,
 	// which identifies the engine, the application it is running, and how it
 	// operates.
-	//
-	// Each subsequent message in the response contains one of these:
-	//
-	// - A Heartbeat, which shows that the engine is still running.
-	// - A LiveClusterNodes, which lists the nodes of the cluster that the node
-	//   serving the call considers to be running.
-	// - A ClusterWorkloads, which lists the units of the cluster's work that the
-	//   node serving the call currently owns.
-	//
-	// Only an engine that runs as a cluster sends LiveClusterNodes and
-	// ClusterWorkloads messages. The Preamble says which of the three kinds the
-	// engine sends.
 	//
 	// If the node that serves the call reports live nodes or workloads but can't
 	// currently determine them, it fails the call with the UNAVAILABLE status

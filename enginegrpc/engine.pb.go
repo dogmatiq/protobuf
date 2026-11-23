@@ -139,6 +139,24 @@ func (x *WatchEngineResponse) GetClusterWorkloads() *ClusterWorkloads {
 	return nil
 }
 
+func (x *WatchEngineResponse) GetProjectionCompactionStarted() *ProjectionCompactionStarted {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ProjectionCompactionStarted); ok {
+			return x.ProjectionCompactionStarted
+		}
+	}
+	return nil
+}
+
+func (x *WatchEngineResponse) GetProjectionCompactionEnded() *ProjectionCompactionEnded {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ProjectionCompactionEnded); ok {
+			return x.ProjectionCompactionEnded
+		}
+	}
+	return nil
+}
+
 func (x *WatchEngineResponse) SetPreamble(v *WatchEngineResponse_Preamble) {
 	if v == nil {
 		x.xxx_hidden_Payload = nil
@@ -169,6 +187,22 @@ func (x *WatchEngineResponse) SetClusterWorkloads(v *ClusterWorkloads) {
 		return
 	}
 	x.xxx_hidden_Payload = &watchEngineResponse_ClusterWorkloads{v}
+}
+
+func (x *WatchEngineResponse) SetProjectionCompactionStarted(v *ProjectionCompactionStarted) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &watchEngineResponse_ProjectionCompactionStarted{v}
+}
+
+func (x *WatchEngineResponse) SetProjectionCompactionEnded(v *ProjectionCompactionEnded) {
+	if v == nil {
+		x.xxx_hidden_Payload = nil
+		return
+	}
+	x.xxx_hidden_Payload = &watchEngineResponse_ProjectionCompactionEnded{v}
 }
 
 func (x *WatchEngineResponse) HasPayload() bool {
@@ -210,6 +244,22 @@ func (x *WatchEngineResponse) HasClusterWorkloads() bool {
 	return ok
 }
 
+func (x *WatchEngineResponse) HasProjectionCompactionStarted() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ProjectionCompactionStarted)
+	return ok
+}
+
+func (x *WatchEngineResponse) HasProjectionCompactionEnded() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ProjectionCompactionEnded)
+	return ok
+}
+
 func (x *WatchEngineResponse) ClearPayload() {
 	x.xxx_hidden_Payload = nil
 }
@@ -238,11 +288,25 @@ func (x *WatchEngineResponse) ClearClusterWorkloads() {
 	}
 }
 
+func (x *WatchEngineResponse) ClearProjectionCompactionStarted() {
+	if _, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ProjectionCompactionStarted); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
+func (x *WatchEngineResponse) ClearProjectionCompactionEnded() {
+	if _, ok := x.xxx_hidden_Payload.(*watchEngineResponse_ProjectionCompactionEnded); ok {
+		x.xxx_hidden_Payload = nil
+	}
+}
+
 const WatchEngineResponse_Payload_not_set_case case_WatchEngineResponse_Payload = 0
 const WatchEngineResponse_Preamble_case case_WatchEngineResponse_Payload = 1
 const WatchEngineResponse_Heartbeat_case case_WatchEngineResponse_Payload = 2
 const WatchEngineResponse_LiveClusterNodes_case case_WatchEngineResponse_Payload = 3
 const WatchEngineResponse_ClusterWorkloads_case case_WatchEngineResponse_Payload = 4
+const WatchEngineResponse_ProjectionCompactionStarted_case case_WatchEngineResponse_Payload = 5
+const WatchEngineResponse_ProjectionCompactionEnded_case case_WatchEngineResponse_Payload = 6
 
 func (x *WatchEngineResponse) WhichPayload() case_WatchEngineResponse_Payload {
 	if x == nil {
@@ -257,6 +321,10 @@ func (x *WatchEngineResponse) WhichPayload() case_WatchEngineResponse_Payload {
 		return WatchEngineResponse_LiveClusterNodes_case
 	case *watchEngineResponse_ClusterWorkloads:
 		return WatchEngineResponse_ClusterWorkloads_case
+	case *watchEngineResponse_ProjectionCompactionStarted:
+		return WatchEngineResponse_ProjectionCompactionStarted_case
+	case *watchEngineResponse_ProjectionCompactionEnded:
+		return WatchEngineResponse_ProjectionCompactionEnded_case
 	default:
 		return WatchEngineResponse_Payload_not_set_case
 	}
@@ -265,23 +333,23 @@ func (x *WatchEngineResponse) WhichPayload() case_WatchEngineResponse_Payload {
 type WatchEngineResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Payload is the Preamble in the first response on a stream, and a Heartbeat,
-	// a LiveClusterNodes or a ClusterWorkloads in every other.
+	// Payload is the Preamble in the first response on a stream, and one of the
+	// other messages in every other.
 	//
-	// If the Preamble has a heartbeat_interval, the engine sends a Heartbeat
-	// message each time it heartbeats.
+	// Only an engine that runs as a cluster sends LiveClusterNodes and
+	// ClusterWorkloads messages.
 	//
-	// If the Preamble has a cluster, the node sends LiveClusterNodes messages if
-	// the cluster's reports_live_nodes is true, and ClusterWorkloads messages if
-	// its reports_workloads is true. For each kind, it sends a first message,
-	// then another whenever the set changes. Each message replaces the one before
-	// it of the same kind.
+	// LiveClusterNodes and ClusterWorkloads each hold a set. The engine sends one
+	// when the stream starts, and another whenever the set changes. Each replaces
+	// the one before it of the same kind.
 
 	// Fields of oneof xxx_hidden_Payload:
-	Preamble         *WatchEngineResponse_Preamble
-	Heartbeat        *WatchEngineResponse_Heartbeat
-	LiveClusterNodes *LiveClusterNodes
-	ClusterWorkloads *ClusterWorkloads
+	Preamble                    *WatchEngineResponse_Preamble
+	Heartbeat                   *WatchEngineResponse_Heartbeat
+	LiveClusterNodes            *LiveClusterNodes
+	ClusterWorkloads            *ClusterWorkloads
+	ProjectionCompactionStarted *ProjectionCompactionStarted
+	ProjectionCompactionEnded   *ProjectionCompactionEnded
 	// -- end of xxx_hidden_Payload
 }
 
@@ -300,6 +368,12 @@ func (b0 WatchEngineResponse_builder) Build() *WatchEngineResponse {
 	}
 	if b.ClusterWorkloads != nil {
 		x.xxx_hidden_Payload = &watchEngineResponse_ClusterWorkloads{b.ClusterWorkloads}
+	}
+	if b.ProjectionCompactionStarted != nil {
+		x.xxx_hidden_Payload = &watchEngineResponse_ProjectionCompactionStarted{b.ProjectionCompactionStarted}
+	}
+	if b.ProjectionCompactionEnded != nil {
+		x.xxx_hidden_Payload = &watchEngineResponse_ProjectionCompactionEnded{b.ProjectionCompactionEnded}
 	}
 	return m0
 }
@@ -334,6 +408,14 @@ type watchEngineResponse_ClusterWorkloads struct {
 	ClusterWorkloads *ClusterWorkloads `protobuf:"bytes,4,opt,name=cluster_workloads,json=clusterWorkloads,oneof"`
 }
 
+type watchEngineResponse_ProjectionCompactionStarted struct {
+	ProjectionCompactionStarted *ProjectionCompactionStarted `protobuf:"bytes,5,opt,name=projection_compaction_started,json=projectionCompactionStarted,oneof"`
+}
+
+type watchEngineResponse_ProjectionCompactionEnded struct {
+	ProjectionCompactionEnded *ProjectionCompactionEnded `protobuf:"bytes,6,opt,name=projection_compaction_ended,json=projectionCompactionEnded,oneof"`
+}
+
 func (*watchEngineResponse_Preamble_) isWatchEngineResponse_Payload() {}
 
 func (*watchEngineResponse_Heartbeat_) isWatchEngineResponse_Payload() {}
@@ -341,6 +423,10 @@ func (*watchEngineResponse_Heartbeat_) isWatchEngineResponse_Payload() {}
 func (*watchEngineResponse_LiveClusterNodes) isWatchEngineResponse_Payload() {}
 
 func (*watchEngineResponse_ClusterWorkloads) isWatchEngineResponse_Payload() {}
+
+func (*watchEngineResponse_ProjectionCompactionStarted) isWatchEngineResponse_Payload() {}
+
+func (*watchEngineResponse_ProjectionCompactionEnded) isWatchEngineResponse_Payload() {}
 
 // Preamble describes the engine that serves the call.
 //
@@ -357,6 +443,7 @@ type WatchEngineResponse_Preamble struct {
 	xxx_hidden_Cluster           *WatchEngineResponse_Preamble_Cluster        `protobuf:"bytes,7,opt,name=cluster"`
 	xxx_hidden_QueueModel        *QueueModel                                  `protobuf:"bytes,8,opt,name=queue_model,json=queueModel"`
 	xxx_hidden_EventStreamModel  *EventStreamModel                            `protobuf:"bytes,9,opt,name=event_stream_model,json=eventStreamModel"`
+	xxx_hidden_Projections       *WatchEngineResponse_Preamble_Projections    `protobuf:"bytes,10,opt,name=projections"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -449,6 +536,13 @@ func (x *WatchEngineResponse_Preamble) GetEventStreamModel() *EventStreamModel {
 	return nil
 }
 
+func (x *WatchEngineResponse_Preamble) GetProjections() *WatchEngineResponse_Preamble_Projections {
+	if x != nil {
+		return x.xxx_hidden_Projections
+	}
+	return nil
+}
+
 func (x *WatchEngineResponse_Preamble) SetId(v *uuidpb.UUID) {
 	x.xxx_hidden_Id = v
 }
@@ -483,6 +577,10 @@ func (x *WatchEngineResponse_Preamble) SetQueueModel(v *QueueModel) {
 
 func (x *WatchEngineResponse_Preamble) SetEventStreamModel(v *EventStreamModel) {
 	x.xxx_hidden_EventStreamModel = v
+}
+
+func (x *WatchEngineResponse_Preamble) SetProjections(v *WatchEngineResponse_Preamble_Projections) {
+	x.xxx_hidden_Projections = v
 }
 
 func (x *WatchEngineResponse_Preamble) HasId() bool {
@@ -541,6 +639,13 @@ func (x *WatchEngineResponse_Preamble) HasEventStreamModel() bool {
 	return x.xxx_hidden_EventStreamModel != nil
 }
 
+func (x *WatchEngineResponse_Preamble) HasProjections() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Projections != nil
+}
+
 func (x *WatchEngineResponse_Preamble) ClearId() {
 	x.xxx_hidden_Id = nil
 }
@@ -571,6 +676,10 @@ func (x *WatchEngineResponse_Preamble) ClearQueueModel() {
 
 func (x *WatchEngineResponse_Preamble) ClearEventStreamModel() {
 	x.xxx_hidden_EventStreamModel = nil
+}
+
+func (x *WatchEngineResponse_Preamble) ClearProjections() {
+	x.xxx_hidden_Projections = nil
 }
 
 type WatchEngineResponse_Preamble_builder struct {
@@ -609,6 +718,9 @@ type WatchEngineResponse_Preamble_builder struct {
 	QueueModel *QueueModel
 	// EventStreamModel is the model by which the engine uses event streams.
 	EventStreamModel *EventStreamModel
+	// Projections says which messages about projections the engine sends on
+	// this response stream.
+	Projections *WatchEngineResponse_Preamble_Projections
 }
 
 func (b0 WatchEngineResponse_Preamble_builder) Build() *WatchEngineResponse_Preamble {
@@ -624,6 +736,7 @@ func (b0 WatchEngineResponse_Preamble_builder) Build() *WatchEngineResponse_Prea
 	x.xxx_hidden_Cluster = b.Cluster
 	x.xxx_hidden_QueueModel = b.QueueModel
 	x.xxx_hidden_EventStreamModel = b.EventStreamModel
+	x.xxx_hidden_Projections = b.Projections
 	return m0
 }
 
@@ -1048,17 +1161,81 @@ func (b0 WatchEngineResponse_Preamble_Cluster_builder) Build() *WatchEngineRespo
 	return m0
 }
 
+// Projections says which messages about projections the engine sends on
+// this response stream.
+type WatchEngineResponse_Preamble_Projections struct {
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ReportsCompactions bool                   `protobuf:"varint,1,opt,name=reports_compactions,json=reportsCompactions"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
+}
+
+func (x *WatchEngineResponse_Preamble_Projections) Reset() {
+	*x = WatchEngineResponse_Preamble_Projections{}
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *WatchEngineResponse_Preamble_Projections) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WatchEngineResponse_Preamble_Projections) ProtoMessage() {}
+
+func (x *WatchEngineResponse_Preamble_Projections) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *WatchEngineResponse_Preamble_Projections) GetReportsCompactions() bool {
+	if x != nil {
+		return x.xxx_hidden_ReportsCompactions
+	}
+	return false
+}
+
+func (x *WatchEngineResponse_Preamble_Projections) SetReportsCompactions(v bool) {
+	x.xxx_hidden_ReportsCompactions = v
+}
+
+type WatchEngineResponse_Preamble_Projections_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// ReportsCompactions is true if the engine sends a
+	// ProjectionCompactionStarted message for each compaction that it starts,
+	// and a ProjectionCompactionEnded message when that compaction ends.
+	ReportsCompactions bool
+}
+
+func (b0 WatchEngineResponse_Preamble_Projections_builder) Build() *WatchEngineResponse_Preamble_Projections {
+	m0 := &WatchEngineResponse_Preamble_Projections{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ReportsCompactions = b.ReportsCompactions
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_enginegrpc_engine_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\n" +
-	"4github.com/dogmatiq/protobuf/enginegrpc/engine.proto\x12\x15dogma.engine.v1alpha1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a5github.com/dogmatiq/protobuf/enginegrpc/cluster.proto\x1a9github.com/dogmatiq/protobuf/enginegrpc/eventstream.proto\x1a3github.com/dogmatiq/protobuf/enginegrpc/queue.proto\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x14\n" +
-	"\x12WatchEngineRequest\"\xeb\v\n" +
+	"4github.com/dogmatiq/protobuf/enginegrpc/engine.proto\x12\x15dogma.engine.v1alpha1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a5github.com/dogmatiq/protobuf/enginegrpc/cluster.proto\x1a9github.com/dogmatiq/protobuf/enginegrpc/eventstream.proto\x1a8github.com/dogmatiq/protobuf/enginegrpc/projection.proto\x1a3github.com/dogmatiq/protobuf/enginegrpc/queue.proto\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x14\n" +
+	"\x12WatchEngineRequest\"\x83\x0f\n" +
 	"\x13WatchEngineResponse\x12Q\n" +
 	"\bpreamble\x18\x01 \x01(\v23.dogma.engine.v1alpha1.WatchEngineResponse.PreambleH\x00R\bpreamble\x12T\n" +
 	"\theartbeat\x18\x02 \x01(\v24.dogma.engine.v1alpha1.WatchEngineResponse.HeartbeatH\x00R\theartbeat\x12W\n" +
 	"\x12live_cluster_nodes\x18\x03 \x01(\v2'.dogma.engine.v1alpha1.LiveClusterNodesH\x00R\x10liveClusterNodes\x12V\n" +
-	"\x11cluster_workloads\x18\x04 \x01(\v2'.dogma.engine.v1alpha1.ClusterWorkloadsH\x00R\x10clusterWorkloads\x1a\xa2\a\n" +
+	"\x11cluster_workloads\x18\x04 \x01(\v2'.dogma.engine.v1alpha1.ClusterWorkloadsH\x00R\x10clusterWorkloads\x12x\n" +
+	"\x1dprojection_compaction_started\x18\x05 \x01(\v22.dogma.engine.v1alpha1.ProjectionCompactionStartedH\x00R\x1bprojectionCompactionStarted\x12r\n" +
+	"\x1bprojection_compaction_ended\x18\x06 \x01(\v20.dogma.engine.v1alpha1.ProjectionCompactionEndedH\x00R\x19projectionCompactionEnded\x1a\xcc\b\n" +
 	"\bPreamble\x12'\n" +
 	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x12'\n" +
 	"\vdescription\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\vdescription\x12j\n" +
@@ -1069,7 +1246,9 @@ const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\acluster\x18\a \x01(\v2;.dogma.engine.v1alpha1.WatchEngineResponse.Preamble.ClusterR\acluster\x12B\n" +
 	"\vqueue_model\x18\b \x01(\v2!.dogma.engine.v1alpha1.QueueModelR\n" +
 	"queueModel\x12U\n" +
-	"\x12event_stream_model\x18\t \x01(\v2'.dogma.engine.v1alpha1.EventStreamModelR\x10eventStreamModel\x1aL\n" +
+	"\x12event_stream_model\x18\t \x01(\v2'.dogma.engine.v1alpha1.EventStreamModelR\x10eventStreamModel\x12a\n" +
+	"\vprojections\x18\n" +
+	" \x01(\v2?.dogma.engine.v1alpha1.WatchEngineResponse.Preamble.ProjectionsR\vprojections\x1aL\n" +
 	"\x0eImplementation\x12\x19\n" +
 	"\x04name\x18\x01 \x01(\tB\x05\xaa\x01\x02\b\x02R\x04name\x12\x1f\n" +
 	"\aversion\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\aversion\x1a\xd6\x01\n" +
@@ -1077,7 +1256,9 @@ const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x129\n" +
 	"\x05model\x18\x02 \x01(\v2#.dogma.engine.v1alpha1.ClusterModelR\x05model\x123\n" +
 	"\x12reports_live_nodes\x18\x03 \x01(\bB\x05\xaa\x01\x02\b\x02R\x10reportsLiveNodes\x122\n" +
-	"\x11reports_workloads\x18\x04 \x01(\bB\x05\xaa\x01\x02\b\x02R\x10reportsWorkloads\x1a\xc9\x01\n" +
+	"\x11reports_workloads\x18\x04 \x01(\bB\x05\xaa\x01\x02\b\x02R\x10reportsWorkloads\x1aE\n" +
+	"\vProjections\x126\n" +
+	"\x13reports_compactions\x18\x01 \x01(\bB\x05\xaa\x01\x02\b\x02R\x12reportsCompactions\x1a\xc9\x01\n" +
 	"\tHeartbeat\x123\n" +
 	"\asent_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x06sentAt\x12;\n" +
 	"\n" +
@@ -1088,7 +1269,7 @@ const file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc = "" +
 	"\tEngineAPI\x12f\n" +
 	"\vWatchEngine\x12).dogma.engine.v1alpha1.WatchEngineRequest\x1a*.dogma.engine.v1alpha1.WatchEngineResponse0\x01B)Z'github.com/dogmatiq/protobuf/enginegrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_goTypes = []any{
 	(*WatchEngineRequest)(nil),                          // 0: dogma.engine.v1alpha1.WatchEngineRequest
 	(*WatchEngineResponse)(nil),                         // 1: dogma.engine.v1alpha1.WatchEngineResponse
@@ -1096,42 +1277,48 @@ var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_goTypes = []any{
 	(*WatchEngineResponse_Heartbeat)(nil),               // 3: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
 	(*WatchEngineResponse_Preamble_Implementation)(nil), // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation
 	(*WatchEngineResponse_Preamble_Cluster)(nil),        // 5: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
-	(*LiveClusterNodes)(nil),                            // 6: dogma.engine.v1alpha1.LiveClusterNodes
-	(*ClusterWorkloads)(nil),                            // 7: dogma.engine.v1alpha1.ClusterWorkloads
-	(*uuidpb.UUID)(nil),                                 // 8: dogma.protobuf.v1.UUID
-	(*identitypb.Identity)(nil),                         // 9: dogma.protobuf.v1.Identity
-	(*configpb.Application)(nil),                        // 10: dogma.config.v1alpha1.Application
-	(*durationpb.Duration)(nil),                         // 11: google.protobuf.Duration
-	(*QueueModel)(nil),                                  // 12: dogma.engine.v1alpha1.QueueModel
-	(*EventStreamModel)(nil),                            // 13: dogma.engine.v1alpha1.EventStreamModel
-	(*timestamppb.Timestamp)(nil),                       // 14: google.protobuf.Timestamp
-	(*ClusterModel)(nil),                                // 15: dogma.engine.v1alpha1.ClusterModel
+	(*WatchEngineResponse_Preamble_Projections)(nil),    // 6: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Projections
+	(*LiveClusterNodes)(nil),                            // 7: dogma.engine.v1alpha1.LiveClusterNodes
+	(*ClusterWorkloads)(nil),                            // 8: dogma.engine.v1alpha1.ClusterWorkloads
+	(*ProjectionCompactionStarted)(nil),                 // 9: dogma.engine.v1alpha1.ProjectionCompactionStarted
+	(*ProjectionCompactionEnded)(nil),                   // 10: dogma.engine.v1alpha1.ProjectionCompactionEnded
+	(*uuidpb.UUID)(nil),                                 // 11: dogma.protobuf.v1.UUID
+	(*identitypb.Identity)(nil),                         // 12: dogma.protobuf.v1.Identity
+	(*configpb.Application)(nil),                        // 13: dogma.config.v1alpha1.Application
+	(*durationpb.Duration)(nil),                         // 14: google.protobuf.Duration
+	(*QueueModel)(nil),                                  // 15: dogma.engine.v1alpha1.QueueModel
+	(*EventStreamModel)(nil),                            // 16: dogma.engine.v1alpha1.EventStreamModel
+	(*timestamppb.Timestamp)(nil),                       // 17: google.protobuf.Timestamp
+	(*ClusterModel)(nil),                                // 18: dogma.engine.v1alpha1.ClusterModel
 }
 var file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_depIdxs = []int32{
 	2,  // 0: dogma.engine.v1alpha1.WatchEngineResponse.preamble:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble
 	3,  // 1: dogma.engine.v1alpha1.WatchEngineResponse.heartbeat:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat
-	6,  // 2: dogma.engine.v1alpha1.WatchEngineResponse.live_cluster_nodes:type_name -> dogma.engine.v1alpha1.LiveClusterNodes
-	7,  // 3: dogma.engine.v1alpha1.WatchEngineResponse.cluster_workloads:type_name -> dogma.engine.v1alpha1.ClusterWorkloads
-	8,  // 4: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
-	4,  // 5: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.implementation:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation
-	9,  // 6: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.site:type_name -> dogma.protobuf.v1.Identity
-	10, // 7: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
-	11, // 8: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.heartbeat_interval:type_name -> google.protobuf.Duration
-	5,  // 9: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.cluster:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
-	12, // 10: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.queue_model:type_name -> dogma.engine.v1alpha1.QueueModel
-	13, // 11: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.event_stream_model:type_name -> dogma.engine.v1alpha1.EventStreamModel
-	14, // 12: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.sent_at:type_name -> google.protobuf.Timestamp
-	14, // 13: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_at:type_name -> google.protobuf.Timestamp
-	11, // 14: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_after:type_name -> google.protobuf.Duration
-	8,  // 15: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.id:type_name -> dogma.protobuf.v1.UUID
-	15, // 16: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.model:type_name -> dogma.engine.v1alpha1.ClusterModel
-	0,  // 17: dogma.engine.v1alpha1.EngineAPI.WatchEngine:input_type -> dogma.engine.v1alpha1.WatchEngineRequest
-	1,  // 18: dogma.engine.v1alpha1.EngineAPI.WatchEngine:output_type -> dogma.engine.v1alpha1.WatchEngineResponse
-	18, // [18:19] is the sub-list for method output_type
-	17, // [17:18] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	7,  // 2: dogma.engine.v1alpha1.WatchEngineResponse.live_cluster_nodes:type_name -> dogma.engine.v1alpha1.LiveClusterNodes
+	8,  // 3: dogma.engine.v1alpha1.WatchEngineResponse.cluster_workloads:type_name -> dogma.engine.v1alpha1.ClusterWorkloads
+	9,  // 4: dogma.engine.v1alpha1.WatchEngineResponse.projection_compaction_started:type_name -> dogma.engine.v1alpha1.ProjectionCompactionStarted
+	10, // 5: dogma.engine.v1alpha1.WatchEngineResponse.projection_compaction_ended:type_name -> dogma.engine.v1alpha1.ProjectionCompactionEnded
+	11, // 6: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
+	4,  // 7: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.implementation:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Implementation
+	12, // 8: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.site:type_name -> dogma.protobuf.v1.Identity
+	13, // 9: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
+	14, // 10: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.heartbeat_interval:type_name -> google.protobuf.Duration
+	5,  // 11: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.cluster:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster
+	15, // 12: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.queue_model:type_name -> dogma.engine.v1alpha1.QueueModel
+	16, // 13: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.event_stream_model:type_name -> dogma.engine.v1alpha1.EventStreamModel
+	6,  // 14: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.projections:type_name -> dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Projections
+	17, // 15: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.sent_at:type_name -> google.protobuf.Timestamp
+	17, // 16: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_at:type_name -> google.protobuf.Timestamp
+	14, // 17: dogma.engine.v1alpha1.WatchEngineResponse.Heartbeat.expires_after:type_name -> google.protobuf.Duration
+	11, // 18: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.id:type_name -> dogma.protobuf.v1.UUID
+	18, // 19: dogma.engine.v1alpha1.WatchEngineResponse.Preamble.Cluster.model:type_name -> dogma.engine.v1alpha1.ClusterModel
+	0,  // 20: dogma.engine.v1alpha1.EngineAPI.WatchEngine:input_type -> dogma.engine.v1alpha1.WatchEngineRequest
+	1,  // 21: dogma.engine.v1alpha1.EngineAPI.WatchEngine:output_type -> dogma.engine.v1alpha1.WatchEngineResponse
+	21, // [21:22] is the sub-list for method output_type
+	20, // [20:21] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_init() }
@@ -1141,12 +1328,15 @@ func file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_init() {
 	}
 	file_github_com_dogmatiq_protobuf_enginegrpc_cluster_proto_init()
 	file_github_com_dogmatiq_protobuf_enginegrpc_eventstream_proto_init()
+	file_github_com_dogmatiq_protobuf_enginegrpc_projection_proto_init()
 	file_github_com_dogmatiq_protobuf_enginegrpc_queue_proto_init()
 	file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[1].OneofWrappers = []any{
 		(*watchEngineResponse_Preamble_)(nil),
 		(*watchEngineResponse_Heartbeat_)(nil),
 		(*watchEngineResponse_LiveClusterNodes)(nil),
 		(*watchEngineResponse_ClusterWorkloads)(nil),
+		(*watchEngineResponse_ProjectionCompactionStarted)(nil),
+		(*watchEngineResponse_ProjectionCompactionEnded)(nil),
 	}
 	file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_msgTypes[3].OneofWrappers = []any{
 		(*watchEngineResponse_Heartbeat_ExpiresAt)(nil),
@@ -1158,7 +1348,7 @@ func file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_enginegrpc_engine_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

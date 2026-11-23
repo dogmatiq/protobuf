@@ -8,6 +8,7 @@ import "google/protobuf/timestamp.proto";
 import "github.com/dogmatiq/protobuf/configpb/config.proto";
 import "github.com/dogmatiq/protobuf/enginegrpc/cluster.proto";
 import "github.com/dogmatiq/protobuf/enginegrpc/eventstream.proto";
+import "github.com/dogmatiq/protobuf/enginegrpc/projection.proto";
 import "github.com/dogmatiq/protobuf/enginegrpc/queue.proto";
 import "github.com/dogmatiq/protobuf/identitypb/identity.proto";
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
@@ -29,18 +30,6 @@ service EngineAPI {
   // The first message in the response contains a WatchEngineResponse.Preamble,
   // which identifies the engine, the application it is running, and how it
   // operates.
-  //
-  // Each subsequent message in the response contains one of these:
-  //
-  // - A Heartbeat, which shows that the engine is still running.
-  // - A LiveClusterNodes, which lists the nodes of the cluster that the node
-  //   serving the call considers to be running.
-  // - A ClusterWorkloads, which lists the units of the cluster's work that the
-  //   node serving the call currently owns.
-  //
-  // Only an engine that runs as a cluster sends LiveClusterNodes and
-  // ClusterWorkloads messages. The Preamble says which of the three kinds the
-  // engine sends.
   //
   // If the node that serves the call reports live nodes or workloads but can't
   // currently determine them, it fails the call with the UNAVAILABLE status
@@ -93,6 +82,15 @@ message WatchEngineResponse {
       bool reports_workloads = 4 [features.field_presence = IMPLICIT];
     }
 
+    // Projections says which messages about projections the engine sends on
+    // this response stream.
+    message Projections {
+      // ReportsCompactions is true if the engine sends a
+      // ProjectionCompactionStarted message for each compaction that it starts,
+      // and a ProjectionCompactionEnded message when that compaction ends.
+      bool reports_compactions = 1 [features.field_presence = IMPLICIT];
+    }
+
     // Id is the ID of the engine that serves the call. An engine has the same
     // ID in every API that it serves. Each engine has a different ID.
     //
@@ -134,6 +132,10 @@ message WatchEngineResponse {
 
     // EventStreamModel is the model by which the engine uses event streams.
     EventStreamModel event_stream_model = 9;
+
+    // Projections says which messages about projections the engine sends on
+    // this response stream.
+    Projections projections = 10;
   }
 
   // Heartbeat reports that the engine has sent a heartbeat, which is a signal
@@ -157,21 +159,21 @@ message WatchEngineResponse {
     }
   }
 
-  // Payload is the Preamble in the first response on a stream, and a Heartbeat,
-  // a LiveClusterNodes or a ClusterWorkloads in every other.
+  // Payload is the Preamble in the first response on a stream, and one of the
+  // other messages in every other.
   //
-  // If the Preamble has a heartbeat_interval, the engine sends a Heartbeat
-  // message each time it heartbeats.
+  // Only an engine that runs as a cluster sends LiveClusterNodes and
+  // ClusterWorkloads messages.
   //
-  // If the Preamble has a cluster, the node sends LiveClusterNodes messages if
-  // the cluster's reports_live_nodes is true, and ClusterWorkloads messages if
-  // its reports_workloads is true. For each kind, it sends a first message,
-  // then another whenever the set changes. Each message replaces the one before
-  // it of the same kind.
+  // LiveClusterNodes and ClusterWorkloads each hold a set. The engine sends one
+  // when the stream starts, and another whenever the set changes. Each replaces
+  // the one before it of the same kind.
   oneof payload {
-    Preamble         preamble           = 1;
-    Heartbeat        heartbeat          = 2;
-    LiveClusterNodes live_cluster_nodes = 3;
-    ClusterWorkloads cluster_workloads  = 4;
+    Preamble                    preamble                      = 1;
+    Heartbeat                   heartbeat                     = 2;
+    LiveClusterNodes            live_cluster_nodes            = 3;
+    ClusterWorkloads            cluster_workloads             = 4;
+    ProjectionCompactionStarted projection_compaction_started = 5;
+    ProjectionCompactionEnded   projection_compaction_ended   = 6;
   }
 }

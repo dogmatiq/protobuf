@@ -3,6 +3,7 @@ package dogma.engine.v1alpha1;
 
 option go_package = "github.com/dogmatiq/protobuf/enginegrpc";
 
+import "google/protobuf/timestamp.proto";
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
 // ProjectionAPI is a service that lets a client manage the projections of an
@@ -88,3 +89,60 @@ message ResetRequest {
 
 // ResetResponse is the output of the ProjectionAPI.Reset method.
 message ResetResponse {}
+
+// ProjectionCompactionStarted reports that an engine has started a compaction
+// of one projection handler.
+//
+// At the start of a WatchEngine response stream, the engine sends one for each
+// compaction that it is already running. A node of a cluster sends it for each
+// compaction that it runs.
+message ProjectionCompactionStarted {
+  // HandlerKey is the identity key of the handler that the engine is
+  // compacting. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // StartedAt is the time at which the compaction started, by the engine's own
+  // clock. It is required.
+  google.protobuf.Timestamp started_at = 2;
+}
+
+// ProjectionCompactionEnded reports that a compaction that an engine was
+// running has ended.
+message ProjectionCompactionEnded {
+  // Success is the outcome of a compaction that the handler completed.
+  message Success {}
+
+  // Error is the outcome of a compaction that stopped because the handler
+  // reported an error.
+  message Error {
+    // Message is the text of the error, for a person to read.
+    string message = 1 [features.field_presence = IMPLICIT];
+  }
+
+  // DeadlineExceeded is the outcome of a compaction that stopped because its
+  // deadline passed.
+  //
+  // A handler is asked to compact in small steps, so that it makes some
+  // progress even if the deadline passes.
+  message DeadlineExceeded {}
+
+  // Canceled is the outcome of a compaction that stopped because it was
+  // canceled, for example by a call to ProjectionAPI.CancelCompaction.
+  message Canceled {}
+
+  // HandlerKey is the identity key of the handler that the engine was
+  // compacting. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Outcome is how the compaction ended. It is required.
+  oneof outcome {
+    Success          success           = 2;
+    Error            error             = 3;
+    DeadlineExceeded deadline_exceeded = 4;
+    Canceled         canceled          = 5;
+  }
+
+  // EndedAt is the time at which the compaction ended, by the engine's own
+  // clock. It is required.
+  google.protobuf.Timestamp ended_at = 6;
+}
