@@ -6,11 +6,15 @@ option go_package = "github.com/dogmatiq/protobuf/enginegrpc";
 import "google/protobuf/timestamp.proto";
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
-// ProjectionAPI is a service that lets a client manage the projections of an
-// engine.
+// ProjectionAPI is a service that lets a client inspect and manage the
+// projections of an engine.
 //
 // A projection is the data that a projection handler builds from the events of
 // an application.
+//
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 service ProjectionAPI {
   // StartCompaction asks the engine to compact a projection handler, which
   // reduces the size of its projection by removing or consolidating data.
@@ -40,6 +44,15 @@ service ProjectionAPI {
   // It fails in the same ways as StartCompaction.
   rpc CancelCompaction(CancelCompactionRequest)
       returns (CancelCompactionResponse);
+
+  // GetCompactions reports what the node that serves the call knows about the
+  // compactions of one projection handler.
+  //
+  // An identity key that is missing or invalid, or that belongs to a handler of
+  // another type, results in INVALID_ARGUMENT. An unknown identity key results
+  // in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+  // support compaction, results in FAILED_PRECONDITION.
+  rpc GetCompactions(GetCompactionsRequest) returns (GetCompactionsResponse);
 
   // Reset asks the engine to reset a projection handler, which deletes all the
   // data of its projection, so that the projection is rebuilt from all the
@@ -81,6 +94,60 @@ message CancelCompactionRequest {
 // method.
 message CancelCompactionResponse {}
 
+// GetCompactionsRequest is the input to the ProjectionAPI.GetCompactions
+// method.
+message GetCompactionsRequest {
+  // HandlerKey is the handler's identity key. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+}
+
+// GetCompactionsResponse is the output of the ProjectionAPI.GetCompactions
+// method.
+message GetCompactionsResponse {
+  // Running is a compaction that is running.
+  message Running {
+    // StartedAt is the time at which the compaction started, by the engine's
+    // own clock. It is required.
+    google.protobuf.Timestamp started_at = 1;
+  }
+
+  // Ended is a compaction that has ended.
+  message Ended {
+    // Outcome is how the compaction ended. It is required.
+    ProjectionCompactionOutcome outcome = 1;
+
+    // StartedAt is the time at which the compaction started, by the clock of
+    // the engine that ran it. It is present only if the engine that sends this
+    // message knows that time.
+    google.protobuf.Timestamp started_at = 2;
+
+    // EndedAt is the time at which the compaction ended, by the same clock. It
+    // is present only if the engine that sends this message knows that time.
+    google.protobuf.Timestamp ended_at = 3;
+  }
+
+  // Planned is a compaction that a node plans to start.
+  message Planned {
+    // StartsAt is the time at which the node plans to start the compaction, by
+    // its own clock. It is present only if the node can tell when.
+    google.protobuf.Timestamp starts_at = 1;
+  }
+
+  // Current is the compaction that the node that serves the call is running
+  // now. It is present only while that node is compacting the handler, and only
+  // if the engine reports the compactions that it runs.
+  Running current = 1;
+
+  // Previous is the most recent ended compaction that the node that serves the
+  // call knows of. Another node of the cluster may have run it. It is present
+  // only if the node that serves the call knows of an ended compaction.
+  Ended previous = 2;
+
+  // Next is the compaction that the node that serves the call plans to start
+  // next. It is present only if that node plans to compact the handler.
+  Planned next = 3;
+}
+
 // ResetRequest is the input to the ProjectionAPI.Reset method.
 message ResetRequest {
   // HandlerKey is the handler's identity key. It is required.
@@ -109,6 +176,21 @@ message ProjectionCompactionStarted {
 // ProjectionCompactionEnded reports that a compaction that an engine was
 // running has ended.
 message ProjectionCompactionEnded {
+  // HandlerKey is the identity key of the handler that the engine was
+  // compacting. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Outcome is how the compaction ended. It is required.
+  ProjectionCompactionOutcome outcome = 2;
+
+  // EndedAt is the time at which the compaction ended, by the engine's own
+  // clock. It is required.
+  google.protobuf.Timestamp ended_at = 3;
+}
+
+// ProjectionCompactionOutcome describes how a compaction of a projection
+// handler ended.
+message ProjectionCompactionOutcome {
   // Success is the outcome of a compaction that the handler completed.
   message Success {}
 
@@ -130,19 +212,11 @@ message ProjectionCompactionEnded {
   // canceled, for example by a call to ProjectionAPI.CancelCompaction.
   message Canceled {}
 
-  // HandlerKey is the identity key of the handler that the engine was
-  // compacting. It is required.
-  dogma.protobuf.v1.UUID handler_key = 1;
-
   // Outcome is how the compaction ended. It is required.
   oneof outcome {
-    Success          success           = 2;
-    Error            error             = 3;
-    DeadlineExceeded deadline_exceeded = 4;
-    Canceled         canceled          = 5;
+    Success          success           = 1;
+    Error            error             = 2;
+    DeadlineExceeded deadline_exceeded = 3;
+    Canceled         canceled          = 4;
   }
-
-  // EndedAt is the time at which the compaction ended, by the engine's own
-  // clock. It is required.
-  google.protobuf.Timestamp ended_at = 6;
 }

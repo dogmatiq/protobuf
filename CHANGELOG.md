@@ -18,12 +18,14 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added `ProjectionCompactionStarted` and `ProjectionCompactionEnded` to the
   messages that `EngineAPI.WatchEngine` sends, which report the compactions that
   the engine starts and the outcome of each.
+- Added `GetCompactions` to `ProjectionAPI`, which reports what the node that
+  serves the call knows about the compactions of one projection handler.
 
 ### Removed
 
 - **[BC]** Removed the `ProjectionCompactionState` and `ProjectionResetState`
-  metrics from `MetricsAPI`, along with `Interval`. Use `GetCompactions` and
-  `GetResets` on `ProjectionAPI` instead.
+  metrics from `MetricsAPI`, along with `Interval`. Use `GetCompactions` on
+  `ProjectionAPI` instead of `ProjectionCompactionState`.
 
 ## [0.10.0] - 2026-11-23
 

@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	ProjectionAPI_StartCompaction_FullMethodName  = "/dogma.engine.v1alpha1.ProjectionAPI/StartCompaction"
 	ProjectionAPI_CancelCompaction_FullMethodName = "/dogma.engine.v1alpha1.ProjectionAPI/CancelCompaction"
+	ProjectionAPI_GetCompactions_FullMethodName   = "/dogma.engine.v1alpha1.ProjectionAPI/GetCompactions"
 	ProjectionAPI_Reset_FullMethodName            = "/dogma.engine.v1alpha1.ProjectionAPI/Reset"
 )
 
@@ -28,11 +29,15 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// ProjectionAPI is a service that lets a client manage the projections of an
-// engine.
+// ProjectionAPI is a service that lets a client inspect and manage the
+// projections of an engine.
 //
 // A projection is the data that a projection handler builds from the events of
 // an application.
+//
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 type ProjectionAPIClient interface {
 	// StartCompaction asks the engine to compact a projection handler, which
 	// reduces the size of its projection by removing or consolidating data.
@@ -60,6 +65,14 @@ type ProjectionAPIClient interface {
 	//
 	// It fails in the same ways as StartCompaction.
 	CancelCompaction(ctx context.Context, in *CancelCompactionRequest, opts ...grpc.CallOption) (*CancelCompactionResponse, error)
+	// GetCompactions reports what the node that serves the call knows about the
+	// compactions of one projection handler.
+	//
+	// An identity key that is missing or invalid, or that belongs to a handler of
+	// another type, results in INVALID_ARGUMENT. An unknown identity key results
+	// in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+	// support compaction, results in FAILED_PRECONDITION.
+	GetCompactions(ctx context.Context, in *GetCompactionsRequest, opts ...grpc.CallOption) (*GetCompactionsResponse, error)
 	// Reset asks the engine to reset a projection handler, which deletes all the
 	// data of its projection, so that the projection is rebuilt from all the
 	// events of the application.
@@ -106,6 +119,16 @@ func (c *projectionAPIClient) CancelCompaction(ctx context.Context, in *CancelCo
 	return out, nil
 }
 
+func (c *projectionAPIClient) GetCompactions(ctx context.Context, in *GetCompactionsRequest, opts ...grpc.CallOption) (*GetCompactionsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCompactionsResponse)
+	err := c.cc.Invoke(ctx, ProjectionAPI_GetCompactions_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *projectionAPIClient) Reset(ctx context.Context, in *ResetRequest, opts ...grpc.CallOption) (*ResetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ResetResponse)
@@ -120,11 +143,15 @@ func (c *projectionAPIClient) Reset(ctx context.Context, in *ResetRequest, opts 
 // All implementations should embed UnimplementedProjectionAPIServer
 // for forward compatibility.
 //
-// ProjectionAPI is a service that lets a client manage the projections of an
-// engine.
+// ProjectionAPI is a service that lets a client inspect and manage the
+// projections of an engine.
 //
 // A projection is the data that a projection handler builds from the events of
 // an application.
+//
+// An engine may run as a cluster, which is a set of running instances of the
+// engine that share the work of one application between them. Each instance is
+// called a node, in that context.
 type ProjectionAPIServer interface {
 	// StartCompaction asks the engine to compact a projection handler, which
 	// reduces the size of its projection by removing or consolidating data.
@@ -152,6 +179,14 @@ type ProjectionAPIServer interface {
 	//
 	// It fails in the same ways as StartCompaction.
 	CancelCompaction(context.Context, *CancelCompactionRequest) (*CancelCompactionResponse, error)
+	// GetCompactions reports what the node that serves the call knows about the
+	// compactions of one projection handler.
+	//
+	// An identity key that is missing or invalid, or that belongs to a handler of
+	// another type, results in INVALID_ARGUMENT. An unknown identity key results
+	// in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+	// support compaction, results in FAILED_PRECONDITION.
+	GetCompactions(context.Context, *GetCompactionsRequest) (*GetCompactionsResponse, error)
 	// Reset asks the engine to reset a projection handler, which deletes all the
 	// data of its projection, so that the projection is rebuilt from all the
 	// events of the application.
@@ -182,6 +217,9 @@ func (UnimplementedProjectionAPIServer) StartCompaction(context.Context, *StartC
 }
 func (UnimplementedProjectionAPIServer) CancelCompaction(context.Context, *CancelCompactionRequest) (*CancelCompactionResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CancelCompaction not implemented")
+}
+func (UnimplementedProjectionAPIServer) GetCompactions(context.Context, *GetCompactionsRequest) (*GetCompactionsResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetCompactions not implemented")
 }
 func (UnimplementedProjectionAPIServer) Reset(context.Context, *ResetRequest) (*ResetResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method Reset not implemented")
@@ -242,6 +280,24 @@ func _ProjectionAPI_CancelCompaction_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProjectionAPI_GetCompactions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCompactionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProjectionAPIServer).GetCompactions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ProjectionAPI_GetCompactions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProjectionAPIServer).GetCompactions(ctx, req.(*GetCompactionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ProjectionAPI_Reset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetRequest)
 	if err := dec(in); err != nil {
@@ -274,6 +330,10 @@ var ProjectionAPI_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelCompaction",
 			Handler:    _ProjectionAPI_CancelCompaction_Handler,
+		},
+		{
+			MethodName: "GetCompactions",
+			Handler:    _ProjectionAPI_GetCompactions_Handler,
 		},
 		{
 			MethodName: "Reset",

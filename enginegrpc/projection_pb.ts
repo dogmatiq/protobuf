@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/enginegrpc/projection.proto.
  */
 export const file_github_com_dogmatiq_protobuf_enginegrpc_projection: GenFile = /*@__PURE__*/
-  fileDesc("CjhnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvcHJvamVjdGlvbi5wcm90bxIVZG9nbWEuZW5naW5lLnYxYWxwaGExIkYKFlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIhkKF1N0YXJ0Q29tcGFjdGlvblJlc3BvbnNlIkcKF0NhbmNlbENvbXBhY3Rpb25SZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIaChhDYW5jZWxDb21wYWN0aW9uUmVzcG9uc2UiPAoMUmVzZXRSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIPCg1SZXNldFJlc3BvbnNlInsKG1Byb2plY3Rpb25Db21wYWN0aW9uU3RhcnRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSLgoKc3RhcnRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAikwQKGVByb2plY3Rpb25Db21wYWN0aW9uRW5kZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEksKB3N1Y2Nlc3MYAiABKAsyOC5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25FbmRlZC5TdWNjZXNzSAASRwoFZXJyb3IYAyABKAsyNi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25FbmRlZC5FcnJvckgAEl4KEWRlYWRsaW5lX2V4Y2VlZGVkGAQgASgLMkEuZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uRW5kZWQuRGVhZGxpbmVFeGNlZWRlZEgAEk0KCGNhbmNlbGVkGAUgASgLMjkuZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uRW5kZWQuQ2FuY2VsZWRIABIsCghlbmRlZF9hdBgGIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaCQoHU3VjY2VzcxofCgVFcnJvchIWCgdtZXNzYWdlGAEgASgJQgWqAQIIAhoSChBEZWFkbGluZUV4Y2VlZGVkGgoKCENhbmNlbGVkQgkKB291dGNvbWUyygIKDVByb2plY3Rpb25BUEkScAoPU3RhcnRDb21wYWN0aW9uEi0uZG9nbWEuZW5naW5lLnYxYWxwaGExLlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QaLi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuU3RhcnRDb21wYWN0aW9uUmVzcG9uc2UScwoQQ2FuY2VsQ29tcGFjdGlvbhIuLmRvZ21hLmVuZ2luZS52MWFscGhhMS5DYW5jZWxDb21wYWN0aW9uUmVxdWVzdBovLmRvZ21hLmVuZ2luZS52MWFscGhhMS5DYW5jZWxDb21wYWN0aW9uUmVzcG9uc2USUgoFUmVzZXQSIy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUmVzZXRSZXF1ZXN0GiQuZG9nbWEuZW5naW5lLnYxYWxwaGExLlJlc2V0UmVzcG9uc2VCKVonZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9lbmdpbmVncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjhnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2VuZ2luZWdycGMvcHJvamVjdGlvbi5wcm90bxIVZG9nbWEuZW5naW5lLnYxYWxwaGExIkYKFlN0YXJ0Q29tcGFjdGlvblJlcXVlc3QSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEIhkKF1N0YXJ0Q29tcGFjdGlvblJlc3BvbnNlIkcKF0NhbmNlbENvbXBhY3Rpb25SZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIaChhDYW5jZWxDb21wYWN0aW9uUmVzcG9uc2UiRQoVR2V0Q29tcGFjdGlvbnNSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCKOBAoWR2V0Q29tcGFjdGlvbnNSZXNwb25zZRJGCgdjdXJyZW50GAEgASgLMjUuZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldENvbXBhY3Rpb25zUmVzcG9uc2UuUnVubmluZxJFCghwcmV2aW91cxgCIAEoCzIzLmRvZ21hLmVuZ2luZS52MWFscGhhMS5HZXRDb21wYWN0aW9uc1Jlc3BvbnNlLkVuZGVkEkMKBG5leHQYAyABKAsyNS5kb2dtYS5lbmdpbmUudjFhbHBoYTEuR2V0Q29tcGFjdGlvbnNSZXNwb25zZS5QbGFubmVkGjkKB1J1bm5pbmcSLgoKc3RhcnRlZF9hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAaqgEKBUVuZGVkEkMKB291dGNvbWUYASABKAsyMi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lEi4KCnN0YXJ0ZWRfYXQYAiABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wEiwKCGVuZGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBo4CgdQbGFubmVkEi0KCXN0YXJ0c19hdBgBIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiPAoMUmVzZXRSZXF1ZXN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCIPCg1SZXNldFJlc3BvbnNlInsKG1Byb2plY3Rpb25Db21wYWN0aW9uU3RhcnRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSLgoKc3RhcnRlZF9hdBgCIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAivAEKGVByb2plY3Rpb25Db21wYWN0aW9uRW5kZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEkMKB291dGNvbWUYAiABKAsyMi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lEiwKCGVuZGVkX2F0GAMgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcCLBAwobUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lEk0KB3N1Y2Nlc3MYASABKAsyOi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuUHJvamVjdGlvbkNvbXBhY3Rpb25PdXRjb21lLlN1Y2Nlc3NIABJJCgVlcnJvchgCIAEoCzI4LmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvbk91dGNvbWUuRXJyb3JIABJgChFkZWFkbGluZV9leGNlZWRlZBgDIAEoCzJDLmRvZ21hLmVuZ2luZS52MWFscGhhMS5Qcm9qZWN0aW9uQ29tcGFjdGlvbk91dGNvbWUuRGVhZGxpbmVFeGNlZWRlZEgAEk8KCGNhbmNlbGVkGAQgASgLMjsuZG9nbWEuZW5naW5lLnYxYWxwaGExLlByb2plY3Rpb25Db21wYWN0aW9uT3V0Y29tZS5DYW5jZWxlZEgAGgkKB1N1Y2Nlc3MaHwoFRXJyb3ISFgoHbWVzc2FnZRgBIAEoCUIFqgECCAIaEgoQRGVhZGxpbmVFeGNlZWRlZBoKCghDYW5jZWxlZEIJCgdvdXRjb21lMrkDCg1Qcm9qZWN0aW9uQVBJEnAKD1N0YXJ0Q29tcGFjdGlvbhItLmRvZ21hLmVuZ2luZS52MWFscGhhMS5TdGFydENvbXBhY3Rpb25SZXF1ZXN0Gi4uZG9nbWEuZW5naW5lLnYxYWxwaGExLlN0YXJ0Q29tcGFjdGlvblJlc3BvbnNlEnMKEENhbmNlbENvbXBhY3Rpb24SLi5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2FuY2VsQ29tcGFjdGlvblJlcXVlc3QaLy5kb2dtYS5lbmdpbmUudjFhbHBoYTEuQ2FuY2VsQ29tcGFjdGlvblJlc3BvbnNlEm0KDkdldENvbXBhY3Rpb25zEiwuZG9nbWEuZW5naW5lLnYxYWxwaGExLkdldENvbXBhY3Rpb25zUmVxdWVzdBotLmRvZ21hLmVuZ2luZS52MWFscGhhMS5HZXRDb21wYWN0aW9uc1Jlc3BvbnNlElIKBVJlc2V0EiMuZG9nbWEuZW5naW5lLnYxYWxwaGExLlJlc2V0UmVxdWVzdBokLmRvZ21hLmVuZ2luZS52MWFscGhhMS5SZXNldFJlc3BvbnNlQilaJ2dpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvZW5naW5lZ3JwY2IIZWRpdGlvbnNw6Qc", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * StartCompactionRequest is the input to the ProjectionAPI.StartCompaction
@@ -93,6 +93,151 @@ export const CancelCompactionResponseSchema: GenMessage<CancelCompactionResponse
   messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 3);
 
 /**
+ * GetCompactionsRequest is the input to the ProjectionAPI.GetCompactions
+ * method.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetCompactionsRequest
+ */
+export type GetCompactionsRequest = Message<"dogma.engine.v1alpha1.GetCompactionsRequest"> & {
+  /**
+   * HandlerKey is the handler's identity key. It is required.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetCompactionsRequest.
+ * Use `create(GetCompactionsRequestSchema)` to create a new message.
+ */
+export const GetCompactionsRequestSchema: GenMessage<GetCompactionsRequest> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 4);
+
+/**
+ * GetCompactionsResponse is the output of the ProjectionAPI.GetCompactions
+ * method.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetCompactionsResponse
+ */
+export type GetCompactionsResponse = Message<"dogma.engine.v1alpha1.GetCompactionsResponse"> & {
+  /**
+   * Current is the compaction that the node that serves the call is running
+   * now. It is present only while that node is compacting the handler, and only
+   * if the engine reports the compactions that it runs.
+   *
+   * @generated from field: dogma.engine.v1alpha1.GetCompactionsResponse.Running current = 1;
+   */
+  current?: GetCompactionsResponse_Running | undefined;
+
+  /**
+   * Previous is the most recent ended compaction that the node that serves the
+   * call knows of. Another node of the cluster may have run it. It is present
+   * only if the node that serves the call knows of an ended compaction.
+   *
+   * @generated from field: dogma.engine.v1alpha1.GetCompactionsResponse.Ended previous = 2;
+   */
+  previous?: GetCompactionsResponse_Ended | undefined;
+
+  /**
+   * Next is the compaction that the node that serves the call plans to start
+   * next. It is present only if that node plans to compact the handler.
+   *
+   * @generated from field: dogma.engine.v1alpha1.GetCompactionsResponse.Planned next = 3;
+   */
+  next?: GetCompactionsResponse_Planned | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetCompactionsResponse.
+ * Use `create(GetCompactionsResponseSchema)` to create a new message.
+ */
+export const GetCompactionsResponseSchema: GenMessage<GetCompactionsResponse> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 5);
+
+/**
+ * Running is a compaction that is running.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetCompactionsResponse.Running
+ */
+export type GetCompactionsResponse_Running = Message<"dogma.engine.v1alpha1.GetCompactionsResponse.Running"> & {
+  /**
+   * StartedAt is the time at which the compaction started, by the engine's
+   * own clock. It is required.
+   *
+   * @generated from field: google.protobuf.Timestamp started_at = 1;
+   */
+  startedAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetCompactionsResponse.Running.
+ * Use `create(GetCompactionsResponse_RunningSchema)` to create a new message.
+ */
+export const GetCompactionsResponse_RunningSchema: GenMessage<GetCompactionsResponse_Running> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 5, 0);
+
+/**
+ * Ended is a compaction that has ended.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetCompactionsResponse.Ended
+ */
+export type GetCompactionsResponse_Ended = Message<"dogma.engine.v1alpha1.GetCompactionsResponse.Ended"> & {
+  /**
+   * Outcome is how the compaction ended. It is required.
+   *
+   * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionOutcome outcome = 1;
+   */
+  outcome?: ProjectionCompactionOutcome | undefined;
+
+  /**
+   * StartedAt is the time at which the compaction started, by the clock of
+   * the engine that ran it. It is present only if the engine that sends this
+   * message knows that time.
+   *
+   * @generated from field: google.protobuf.Timestamp started_at = 2;
+   */
+  startedAt?: Timestamp | undefined;
+
+  /**
+   * EndedAt is the time at which the compaction ended, by the same clock. It
+   * is present only if the engine that sends this message knows that time.
+   *
+   * @generated from field: google.protobuf.Timestamp ended_at = 3;
+   */
+  endedAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetCompactionsResponse.Ended.
+ * Use `create(GetCompactionsResponse_EndedSchema)` to create a new message.
+ */
+export const GetCompactionsResponse_EndedSchema: GenMessage<GetCompactionsResponse_Ended> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 5, 1);
+
+/**
+ * Planned is a compaction that a node plans to start.
+ *
+ * @generated from message dogma.engine.v1alpha1.GetCompactionsResponse.Planned
+ */
+export type GetCompactionsResponse_Planned = Message<"dogma.engine.v1alpha1.GetCompactionsResponse.Planned"> & {
+  /**
+   * StartsAt is the time at which the node plans to start the compaction, by
+   * its own clock. It is present only if the node can tell when.
+   *
+   * @generated from field: google.protobuf.Timestamp starts_at = 1;
+   */
+  startsAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.GetCompactionsResponse.Planned.
+ * Use `create(GetCompactionsResponse_PlannedSchema)` to create a new message.
+ */
+export const GetCompactionsResponse_PlannedSchema: GenMessage<GetCompactionsResponse_Planned> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 5, 2);
+
+/**
  * ResetRequest is the input to the ProjectionAPI.Reset method.
  *
  * @generated from message dogma.engine.v1alpha1.ResetRequest
@@ -111,7 +256,7 @@ export type ResetRequest = Message<"dogma.engine.v1alpha1.ResetRequest"> & {
  * Use `create(ResetRequestSchema)` to create a new message.
  */
 export const ResetRequestSchema: GenMessage<ResetRequest> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 4);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 6);
 
 /**
  * ResetResponse is the output of the ProjectionAPI.Reset method.
@@ -126,7 +271,7 @@ export type ResetResponse = Message<"dogma.engine.v1alpha1.ResetResponse"> & {
  * Use `create(ResetResponseSchema)` to create a new message.
  */
 export const ResetResponseSchema: GenMessage<ResetResponse> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 5);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 7);
 
 /**
  * ProjectionCompactionStarted reports that an engine has started a compaction
@@ -161,7 +306,7 @@ export type ProjectionCompactionStarted = Message<"dogma.engine.v1alpha1.Project
  * Use `create(ProjectionCompactionStartedSchema)` to create a new message.
  */
 export const ProjectionCompactionStartedSchema: GenMessage<ProjectionCompactionStarted> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 6);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 8);
 
 /**
  * ProjectionCompactionEnded reports that a compaction that an engine was
@@ -181,39 +326,15 @@ export type ProjectionCompactionEnded = Message<"dogma.engine.v1alpha1.Projectio
   /**
    * Outcome is how the compaction ended. It is required.
    *
-   * @generated from oneof dogma.engine.v1alpha1.ProjectionCompactionEnded.outcome
+   * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionOutcome outcome = 2;
    */
-  outcome: {
-    /**
-     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionEnded.Success success = 2;
-     */
-    value: ProjectionCompactionEnded_Success;
-    case: "success";
-  } | {
-    /**
-     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionEnded.Error error = 3;
-     */
-    value: ProjectionCompactionEnded_Error;
-    case: "error";
-  } | {
-    /**
-     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionEnded.DeadlineExceeded deadline_exceeded = 4;
-     */
-    value: ProjectionCompactionEnded_DeadlineExceeded;
-    case: "deadlineExceeded";
-  } | {
-    /**
-     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionEnded.Canceled canceled = 5;
-     */
-    value: ProjectionCompactionEnded_Canceled;
-    case: "canceled";
-  } | { case: undefined; value?: undefined };
+  outcome?: ProjectionCompactionOutcome | undefined;
 
   /**
    * EndedAt is the time at which the compaction ended, by the engine's own
    * clock. It is required.
    *
-   * @generated from field: google.protobuf.Timestamp ended_at = 6;
+   * @generated from field: google.protobuf.Timestamp ended_at = 3;
    */
   endedAt?: Timestamp | undefined;
 };
@@ -223,30 +344,76 @@ export type ProjectionCompactionEnded = Message<"dogma.engine.v1alpha1.Projectio
  * Use `create(ProjectionCompactionEndedSchema)` to create a new message.
  */
 export const ProjectionCompactionEndedSchema: GenMessage<ProjectionCompactionEnded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 7);
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 9);
+
+/**
+ * ProjectionCompactionOutcome describes how a compaction of a projection
+ * handler ended.
+ *
+ * @generated from message dogma.engine.v1alpha1.ProjectionCompactionOutcome
+ */
+export type ProjectionCompactionOutcome = Message<"dogma.engine.v1alpha1.ProjectionCompactionOutcome"> & {
+  /**
+   * Outcome is how the compaction ended. It is required.
+   *
+   * @generated from oneof dogma.engine.v1alpha1.ProjectionCompactionOutcome.outcome
+   */
+  outcome: {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionOutcome.Success success = 1;
+     */
+    value: ProjectionCompactionOutcome_Success;
+    case: "success";
+  } | {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionOutcome.Error error = 2;
+     */
+    value: ProjectionCompactionOutcome_Error;
+    case: "error";
+  } | {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionOutcome.DeadlineExceeded deadline_exceeded = 3;
+     */
+    value: ProjectionCompactionOutcome_DeadlineExceeded;
+    case: "deadlineExceeded";
+  } | {
+    /**
+     * @generated from field: dogma.engine.v1alpha1.ProjectionCompactionOutcome.Canceled canceled = 4;
+     */
+    value: ProjectionCompactionOutcome_Canceled;
+    case: "canceled";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message dogma.engine.v1alpha1.ProjectionCompactionOutcome.
+ * Use `create(ProjectionCompactionOutcomeSchema)` to create a new message.
+ */
+export const ProjectionCompactionOutcomeSchema: GenMessage<ProjectionCompactionOutcome> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10);
 
 /**
  * Success is the outcome of a compaction that the handler completed.
  *
- * @generated from message dogma.engine.v1alpha1.ProjectionCompactionEnded.Success
+ * @generated from message dogma.engine.v1alpha1.ProjectionCompactionOutcome.Success
  */
-export type ProjectionCompactionEnded_Success = Message<"dogma.engine.v1alpha1.ProjectionCompactionEnded.Success"> & {
+export type ProjectionCompactionOutcome_Success = Message<"dogma.engine.v1alpha1.ProjectionCompactionOutcome.Success"> & {
 };
 
 /**
- * Describes the message dogma.engine.v1alpha1.ProjectionCompactionEnded.Success.
- * Use `create(ProjectionCompactionEnded_SuccessSchema)` to create a new message.
+ * Describes the message dogma.engine.v1alpha1.ProjectionCompactionOutcome.Success.
+ * Use `create(ProjectionCompactionOutcome_SuccessSchema)` to create a new message.
  */
-export const ProjectionCompactionEnded_SuccessSchema: GenMessage<ProjectionCompactionEnded_Success> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 7, 0);
+export const ProjectionCompactionOutcome_SuccessSchema: GenMessage<ProjectionCompactionOutcome_Success> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 0);
 
 /**
  * Error is the outcome of a compaction that stopped because the handler
  * reported an error.
  *
- * @generated from message dogma.engine.v1alpha1.ProjectionCompactionEnded.Error
+ * @generated from message dogma.engine.v1alpha1.ProjectionCompactionOutcome.Error
  */
-export type ProjectionCompactionEnded_Error = Message<"dogma.engine.v1alpha1.ProjectionCompactionEnded.Error"> & {
+export type ProjectionCompactionOutcome_Error = Message<"dogma.engine.v1alpha1.ProjectionCompactionOutcome.Error"> & {
   /**
    * Message is the text of the error, for a person to read.
    *
@@ -256,11 +423,11 @@ export type ProjectionCompactionEnded_Error = Message<"dogma.engine.v1alpha1.Pro
 };
 
 /**
- * Describes the message dogma.engine.v1alpha1.ProjectionCompactionEnded.Error.
- * Use `create(ProjectionCompactionEnded_ErrorSchema)` to create a new message.
+ * Describes the message dogma.engine.v1alpha1.ProjectionCompactionOutcome.Error.
+ * Use `create(ProjectionCompactionOutcome_ErrorSchema)` to create a new message.
  */
-export const ProjectionCompactionEnded_ErrorSchema: GenMessage<ProjectionCompactionEnded_Error> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 7, 1);
+export const ProjectionCompactionOutcome_ErrorSchema: GenMessage<ProjectionCompactionOutcome_Error> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 1);
 
 /**
  * DeadlineExceeded is the outcome of a compaction that stopped because its
@@ -269,40 +436,44 @@ export const ProjectionCompactionEnded_ErrorSchema: GenMessage<ProjectionCompact
  * A handler is asked to compact in small steps, so that it makes some
  * progress even if the deadline passes.
  *
- * @generated from message dogma.engine.v1alpha1.ProjectionCompactionEnded.DeadlineExceeded
+ * @generated from message dogma.engine.v1alpha1.ProjectionCompactionOutcome.DeadlineExceeded
  */
-export type ProjectionCompactionEnded_DeadlineExceeded = Message<"dogma.engine.v1alpha1.ProjectionCompactionEnded.DeadlineExceeded"> & {
+export type ProjectionCompactionOutcome_DeadlineExceeded = Message<"dogma.engine.v1alpha1.ProjectionCompactionOutcome.DeadlineExceeded"> & {
 };
 
 /**
- * Describes the message dogma.engine.v1alpha1.ProjectionCompactionEnded.DeadlineExceeded.
- * Use `create(ProjectionCompactionEnded_DeadlineExceededSchema)` to create a new message.
+ * Describes the message dogma.engine.v1alpha1.ProjectionCompactionOutcome.DeadlineExceeded.
+ * Use `create(ProjectionCompactionOutcome_DeadlineExceededSchema)` to create a new message.
  */
-export const ProjectionCompactionEnded_DeadlineExceededSchema: GenMessage<ProjectionCompactionEnded_DeadlineExceeded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 7, 2);
+export const ProjectionCompactionOutcome_DeadlineExceededSchema: GenMessage<ProjectionCompactionOutcome_DeadlineExceeded> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 2);
 
 /**
  * Canceled is the outcome of a compaction that stopped because it was
  * canceled, for example by a call to ProjectionAPI.CancelCompaction.
  *
- * @generated from message dogma.engine.v1alpha1.ProjectionCompactionEnded.Canceled
+ * @generated from message dogma.engine.v1alpha1.ProjectionCompactionOutcome.Canceled
  */
-export type ProjectionCompactionEnded_Canceled = Message<"dogma.engine.v1alpha1.ProjectionCompactionEnded.Canceled"> & {
+export type ProjectionCompactionOutcome_Canceled = Message<"dogma.engine.v1alpha1.ProjectionCompactionOutcome.Canceled"> & {
 };
 
 /**
- * Describes the message dogma.engine.v1alpha1.ProjectionCompactionEnded.Canceled.
- * Use `create(ProjectionCompactionEnded_CanceledSchema)` to create a new message.
+ * Describes the message dogma.engine.v1alpha1.ProjectionCompactionOutcome.Canceled.
+ * Use `create(ProjectionCompactionOutcome_CanceledSchema)` to create a new message.
  */
-export const ProjectionCompactionEnded_CanceledSchema: GenMessage<ProjectionCompactionEnded_Canceled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 7, 3);
+export const ProjectionCompactionOutcome_CanceledSchema: GenMessage<ProjectionCompactionOutcome_Canceled> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_enginegrpc_projection, 10, 3);
 
 /**
- * ProjectionAPI is a service that lets a client manage the projections of an
- * engine.
+ * ProjectionAPI is a service that lets a client inspect and manage the
+ * projections of an engine.
  *
  * A projection is the data that a projection handler builds from the events of
  * an application.
+ *
+ * An engine may run as a cluster, which is a set of running instances of the
+ * engine that share the work of one application between them. Each instance is
+ * called a node, in that context.
  *
  * @generated from service dogma.engine.v1alpha1.ProjectionAPI
  */
@@ -348,6 +519,22 @@ export const ProjectionAPI: GenService<{
     methodKind: "unary";
     input: typeof CancelCompactionRequestSchema;
     output: typeof CancelCompactionResponseSchema;
+  },
+  /**
+   * GetCompactions reports what the node that serves the call knows about the
+   * compactions of one projection handler.
+   *
+   * An identity key that is missing or invalid, or that belongs to a handler of
+   * another type, results in INVALID_ARGUMENT. An unknown identity key results
+   * in NOT_FOUND. A handler that is disabled, or that the engine knows doesn't
+   * support compaction, results in FAILED_PRECONDITION.
+   *
+   * @generated from rpc dogma.engine.v1alpha1.ProjectionAPI.GetCompactions
+   */
+  getCompactions: {
+    methodKind: "unary";
+    input: typeof GetCompactionsRequestSchema;
+    output: typeof GetCompactionsResponseSchema;
   },
   /**
    * Reset asks the engine to reset a projection handler, which deletes all the
