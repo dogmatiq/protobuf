@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
-## [Unreleased]
+## [0.12.0] - 2026-11-24
 
 ### Added
 
@@ -279,6 +279,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 [0.9.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.9.0
 [0.10.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.10.0
 [0.11.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.11.0
+[0.12.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.12.0
 
 <!-- version template
 ## [0.0.1] - YYYY-MM-DD
