@@ -1,13 +1,16 @@
 <div align="center">
 
-# Dogma Protocol Buffers Schema
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://dogmatiq.io/res/img/dynamic/repo/protobuf/banner/dark.svg">
+  <img alt="Dogmatiq protobuf" src="https://dogmatiq.io/res/img/dynamic/repo/protobuf/banner/light.svg" height="44">
+</picture>
 
 The Protocol Buffers and gRPC schema used by [Dogma] engines and their clients.
 
-[![Documentation](https://img.shields.io/badge/go.dev-documentation-007d9c?&style=for-the-badge)](https://pkg.go.dev/github.com/dogmatiq/protobuf)
-[![Latest Version](https://img.shields.io/github/tag/dogmatiq/protobuf.svg?&style=for-the-badge&label=semver)](https://github.com/dogmatiq/protobuf/releases)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/dogmatiq/protobuf/ci.yml?style=for-the-badge&branch=main)](https://github.com/dogmatiq/protobuf/actions/workflows/ci.yml)
-[![Code Coverage](https://img.shields.io/codecov/c/github/dogmatiq/protobuf/main.svg?style=for-the-badge)](https://codecov.io/github/dogmatiq/protobuf)
+[![API reference](https://dogmatiq.io/res/img/dynamic/repo/protobuf/badge/docs.svg)](https://pkg.go.dev/github.com/dogmatiq/protobuf)
+[![Latest version](https://dogmatiq.io/res/img/dynamic/repo/protobuf/badge/semver.svg)](https://github.com/dogmatiq/protobuf/releases)
+[![Build status](https://dogmatiq.io/res/img/dynamic/repo/protobuf/badge/build.svg)](https://github.com/dogmatiq/protobuf/actions/workflows/ci.yml)
+[![Code coverage](https://dogmatiq.io/res/img/dynamic/repo/protobuf/badge/coverage.svg)](https://codecov.io/github/dogmatiq/protobuf)
 
 </div>
 
