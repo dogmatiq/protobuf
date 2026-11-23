@@ -3,11 +3,12 @@ package metricsgrpc
 import "bytes"
 
 // CompareRevisions compares two revisions, as given in
-// [WatchMetricsResponse_Sample.GetRevision].
+// [WatchMetricsResponse_Sample.GetRevision] or
+// [WatchMetricsResponse_Tombstone.GetRevision].
 //
 // It returns a negative number if a is less than b, zero if they are equal,
-// and a positive number if a is greater than b. Of two samples of the same
-// subject, the one with the greater revision is the more recent.
+// and a positive number if a is greater than b. Of two samples or tombstones of
+// the same subject, the one with the greater revision is the more recent.
 func CompareRevisions(a, b []byte) int {
 	return bytes.Compare(a, b)
 }

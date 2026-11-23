@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics: GenFile = /*@__PURE__*/
-  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiGQoXV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QiHAoaV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3Qi1AMKFFdhdGNoTWV0cmljc1Jlc3BvbnNlEkkKCHByZWFtYmxlGAEgASgLMjUuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5QcmVhbWJsZUgAEkUKBnNhbXBsZRgCIAEoCzIzLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UuU2FtcGxlSAAasAEKCFByZWFtYmxlEiMKAmlkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIrCgpjbHVzdGVyX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBI3CgthcHBsaWNhdGlvbhgDIAEoCzIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5BcHBsaWNhdGlvbhIZChFzdXBwb3J0ZWRfbWV0cmljcxgEIAMoCRpsCgZTYW1wbGUSGwoMbWV0cmljX2luZGV4GAEgASgNQgWqAQIIAhIWCgdzdWJqZWN0GAIgASgMQgWqAQIIAhIUCgV2YWx1ZRgDIAEoDEIFqgECCAISFwoIcmV2aXNpb24YBCABKAxCBaoBAggCQgkKB3BheWxvYWQy/AEKCk1ldHJpY3NBUEkScwoQV2F0Y2hOb2RlTWV0cmljcxIvLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAESeQoTV2F0Y2hDbHVzdGVyTWV0cmljcxIyLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiGQoXV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QiHAoaV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3Qi/AQKFFdhdGNoTWV0cmljc1Jlc3BvbnNlEkkKCHByZWFtYmxlGAEgASgLMjUuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5QcmVhbWJsZUgAEkUKBnNhbXBsZRgCIAEoCzIzLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UuU2FtcGxlSAASSwoJdG9tYnN0b25lGAMgASgLMjYuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5Ub21ic3RvbmVIABqwAQoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEisKCmNsdXN0ZXJfaWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjcKC2FwcGxpY2F0aW9uGAMgASgLMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkFwcGxpY2F0aW9uEhkKEXN1cHBvcnRlZF9tZXRyaWNzGAQgAygJGmwKBlNhbXBsZRIbCgxtZXRyaWNfaW5kZXgYASABKA1CBaoBAggCEhYKB3N1YmplY3QYAiABKAxCBaoBAggCEhQKBXZhbHVlGAMgASgMQgWqAQIIAhIXCghyZXZpc2lvbhgEIAEoDEIFqgECCAIaWQoJVG9tYnN0b25lEhsKDG1ldHJpY19pbmRleBgBIAEoDUIFqgECCAISFgoHc3ViamVjdBgCIAEoDEIFqgECCAISFwoIcmV2aXNpb24YAyABKAxCBaoBAggCQgkKB3BheWxvYWQy/AEKCk1ldHJpY3NBUEkScwoQV2F0Y2hOb2RlTWV0cmljcxIvLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAESeQoTV2F0Y2hDbHVzdGVyTWV0cmljcxIyLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * WatchNodeMetricsRequest is the input to the MetricsAPI.WatchNodeMetrics
@@ -56,14 +56,15 @@ export const WatchClusterMetricsRequestSchema: GenMessage<WatchClusterMetricsReq
  * metrics that the call reports.
  *
  * Subsequent messages in the response contain a Sample, which reports one
- * metric.
+ * metric, or a Tombstone, which reports that the engine has stopped reporting
+ * one metric of one subject.
  *
  * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse
  */
 export type WatchMetricsResponse = Message<"dogma.metrics.v1alpha1.WatchMetricsResponse"> & {
   /**
-   * Payload is the Preamble in the first response on a stream, and a Sample in
-   * every other.
+   * Payload is the Preamble in the first response on a stream, and a Sample or
+   * a Tombstone in every other.
    *
    * @generated from oneof dogma.metrics.v1alpha1.WatchMetricsResponse.payload
    */
@@ -79,6 +80,12 @@ export type WatchMetricsResponse = Message<"dogma.metrics.v1alpha1.WatchMetricsR
      */
     value: WatchMetricsResponse_Sample;
     case: "sample";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone tombstone = 3;
+     */
+    value: WatchMetricsResponse_Tombstone;
+    case: "tombstone";
   } | { case: undefined; value?: undefined };
 };
 
@@ -151,16 +158,16 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * one queue. This API defines the metrics listed below, and an engine may
  * define its own.
  *
- * A Sample replaces any earlier Sample of the same metric and subject on the
- * same response stream. The engine chooses how often it measures each metric.
- * It sends a new Sample each time it measures a value that differs from the
- * last one that it sent on the stream for the same metric and subject,
- * including when the new value is zero.
+ * A Sample replaces any earlier Sample or Tombstone of the same metric and
+ * subject on the same response stream. The engine chooses how often it
+ * measures each metric. It sends a new Sample each time it measures a value
+ * that differs from the last one that it sent on the stream for the same
+ * metric and subject, including when the new value is zero.
  *
- * Some metrics report a running total, such as the number of events that a
+ * Some metrics report a cumulative count, such as the number of events that a
  * handler has recorded since the engine started counting. The doc of each
- * says so. Within one response stream, the engine lowers a total only by
- * starting again from zero.
+ * says so. Within one response stream, the engine lowers a cumulative count
+ * only by starting again from zero.
  *
  * The metrics that this API defines are:
  *
@@ -232,9 +239,9 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
 
   /**
    * Revision is a comparable value that describes when this sample was
-   * measured, relative to other samples of the same metric and subject from
-   * the same engine and method. The sample with the greatest revision is the
-   * most recent, and replaces the others.
+   * measured, relative to other samples and tombstones of the same metric and
+   * subject from the same engine and method. The message with the greatest
+   * revision is the most recent, and replaces the others.
    *
    * Two revisions are compared in lexicographic order, as strings of unsigned
    * bytes. For example, an engine can use a timestamp, encoded as a
@@ -256,6 +263,55 @@ export const WatchMetricsResponse_SampleSchema: GenMessage<WatchMetricsResponse_
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2, 1);
 
 /**
+ * Tombstone reports that the engine has stopped reporting one metric of one
+ * subject. A client discards the last Sample that it holds for that metric
+ * and subject, if it holds one.
+ *
+ * An engine sends a Tombstone when it stops reporting the subject, and a
+ * Sample with a zero value when it reports a value of zero. A subject whose
+ * count falls to zero gets either, depending on whether the engine keeps
+ * measuring it.
+ *
+ * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone
+ */
+export type WatchMetricsResponse_Tombstone = Message<"dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone"> & {
+  /**
+   * MetricIndex identifies the metric that the engine has stopped reporting.
+   * It is a zero-based index into the supported_metrics of the Preamble on
+   * the same response stream.
+   *
+   * @generated from field: uint32 metric_index = 1 [features.field_presence = IMPLICIT];
+   */
+  metricIndex: number;
+
+  /**
+   * Subject identifies what the engine has stopped reporting, such as one
+   * queue. It holds the same bytes as Sample.subject in the samples of that
+   * subject.
+   *
+   * @generated from field: bytes subject = 2 [features.field_presence = IMPLICIT];
+   */
+  subject: Uint8Array;
+
+  /**
+   * Revision is a comparable value that has the same meaning as
+   * Sample.revision. If the engine sent a Sample for the same metric and
+   * subject on the same response stream, the revision is greater than that of
+   * the last one.
+   *
+   * @generated from field: bytes revision = 3 [features.field_presence = IMPLICIT];
+   */
+  revision: Uint8Array;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone.
+ * Use `create(WatchMetricsResponse_TombstoneSchema)` to create a new message.
+ */
+export const WatchMetricsResponse_TombstoneSchema: GenMessage<WatchMetricsResponse_Tombstone> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2, 2);
+
+/**
  * MetricsAPI is a service that reports metrics about an engine, such as the
  * number of messages waiting in queues.
  *
@@ -274,16 +330,22 @@ export const MetricsAPI: GenService<{
    * reports all of its metrics through it.
    *
    * If the engine runs as a cluster, the samples describe only the work that
-   * the node owns, so a count is only the node's own share. A running total
-   * counts the occurrences on this node, so it keeps growing when ownership of
-   * the work moves to another node. A count falls to zero when the work moves
-   * to another node, because the node's share is then zero.
+   * the node owns, so a current count is only the node's own share. A
+   * cumulative count is the number of occurrences on this node, so it keeps
+   * growing when ownership of the work moves to another node. When the work
+   * moves to another node, the node sends a Tombstone for each current count of
+   * that work.
    *
-   * A client can add up the samples of one subject from every node of the
-   * cluster to estimate the value for the whole cluster. The sum is an estimate
-   * because each node measures at a different time. A metric whose doc gives
-   * another rule for combining samples, such as EventStreamLength, follows that
-   * rule instead.
+   * A client can add up the cumulative_count and current_count fields of one
+   * subject from every node of the cluster to estimate the value for the whole
+   * cluster. A node that sent a Tombstone for a current count contributes zero
+   * to the sum. The sum is an estimate because each node measures at a
+   * different time.
+   *
+   * The other fields, such as watermark and gauge, describe one quantity that
+   * several nodes can report, so adding them up can count it more than once.
+   * The doc of each such field gives the rule for combining the values, if
+   * there is one.
    *
    * If the engine can't measure a metric that the call reports, it fails the
    * call with the UNAVAILABLE status code.

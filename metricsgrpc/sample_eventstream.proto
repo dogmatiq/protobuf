@@ -12,13 +12,14 @@ message EventStreamLength {
   // EventStreamId is the ID of the event stream.
   dogma.protobuf.v1.UUID event_stream_id = 1;
 
-  // Value is the number of events on the stream, which is also the offset at
-  // which the next event will be appended. It never decreases.
+  // Watermark is the number of events on the stream, which is also the offset
+  // at which the next event will be appended. It never decreases, so a client
+  // that has seen a value knows that the stream has at least that many events.
   //
   // While ownership of the stream moves from one node to another, both may
   // report it. Both counts are positions on the same stream, so the value for
   // the whole cluster is the greatest value that any node reports.
-  uint64 value = 2 [features.field_presence = IMPLICIT];
+  uint64 watermark = 2 [features.field_presence = IMPLICIT];
 }
 
 // AggregateInstanceEventStreamBindings is the number of an aggregate handler's
@@ -35,9 +36,8 @@ message AggregateInstanceEventStreamBindings {
   // to. It is required.
   dogma.protobuf.v1.UUID event_stream_id = 2;
 
-  // Value is the number of instances bound to the event stream. It is zero if
-  // the instances that were bound to it have gone.
-  uint64 value = 3 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of instances bound to the event stream.
+  uint64 current_count = 3 [features.field_presence = IMPLICIT];
 }
 
 // HandlerEventStreamLag is the number of events on one event stream, of any
@@ -59,8 +59,11 @@ message HandlerEventStreamLag {
   // EventStreamId is the ID of the event stream. It is required.
   dogma.protobuf.v1.UUID event_stream_id = 2;
 
-  // Value is the number of events after the offset that the handler has
+  // Gauge is the number of events after the offset that the handler has
   // reached. It is zero when the handler has handled or skipped every event on
   // the stream.
-  uint64 value = 3 [features.field_presence = IMPLICIT];
+  //
+  // Several nodes can report the lag of one handler on one stream, so adding
+  // their values counts the same events more than once.
+  uint64 gauge = 3 [features.field_presence = IMPLICIT];
 }

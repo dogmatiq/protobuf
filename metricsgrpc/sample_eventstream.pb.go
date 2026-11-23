@@ -27,7 +27,7 @@ const (
 type EventStreamLength struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_EventStreamId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
-	xxx_hidden_Value         uint64                 `protobuf:"varint,2,opt,name=value"`
+	xxx_hidden_Watermark     uint64                 `protobuf:"varint,2,opt,name=watermark"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -64,9 +64,9 @@ func (x *EventStreamLength) GetEventStreamId() *uuidpb.UUID {
 	return nil
 }
 
-func (x *EventStreamLength) GetValue() uint64 {
+func (x *EventStreamLength) GetWatermark() uint64 {
 	if x != nil {
-		return x.xxx_hidden_Value
+		return x.xxx_hidden_Watermark
 	}
 	return 0
 }
@@ -75,8 +75,8 @@ func (x *EventStreamLength) SetEventStreamId(v *uuidpb.UUID) {
 	x.xxx_hidden_EventStreamId = v
 }
 
-func (x *EventStreamLength) SetValue(v uint64) {
-	x.xxx_hidden_Value = v
+func (x *EventStreamLength) SetWatermark(v uint64) {
+	x.xxx_hidden_Watermark = v
 }
 
 func (x *EventStreamLength) HasEventStreamId() bool {
@@ -95,13 +95,14 @@ type EventStreamLength_builder struct {
 
 	// EventStreamId is the ID of the event stream.
 	EventStreamId *uuidpb.UUID
-	// Value is the number of events on the stream, which is also the offset at
-	// which the next event will be appended. It never decreases.
+	// Watermark is the number of events on the stream, which is also the offset
+	// at which the next event will be appended. It never decreases, so a client
+	// that has seen a value knows that the stream has at least that many events.
 	//
 	// While ownership of the stream moves from one node to another, both may
 	// report it. Both counts are positions on the same stream, so the value for
 	// the whole cluster is the greatest value that any node reports.
-	Value uint64
+	Watermark uint64
 }
 
 func (b0 EventStreamLength_builder) Build() *EventStreamLength {
@@ -109,7 +110,7 @@ func (b0 EventStreamLength_builder) Build() *EventStreamLength {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_EventStreamId = b.EventStreamId
-	x.xxx_hidden_Value = b.Value
+	x.xxx_hidden_Watermark = b.Watermark
 	return m0
 }
 
@@ -122,7 +123,7 @@ type AggregateInstanceEventStreamBindings struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
 	xxx_hidden_EventStreamId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=event_stream_id,json=eventStreamId"`
-	xxx_hidden_Value         uint64                 `protobuf:"varint,3,opt,name=value"`
+	xxx_hidden_CurrentCount  uint64                 `protobuf:"varint,3,opt,name=current_count,json=currentCount"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -166,9 +167,9 @@ func (x *AggregateInstanceEventStreamBindings) GetEventStreamId() *uuidpb.UUID {
 	return nil
 }
 
-func (x *AggregateInstanceEventStreamBindings) GetValue() uint64 {
+func (x *AggregateInstanceEventStreamBindings) GetCurrentCount() uint64 {
 	if x != nil {
-		return x.xxx_hidden_Value
+		return x.xxx_hidden_CurrentCount
 	}
 	return 0
 }
@@ -181,8 +182,8 @@ func (x *AggregateInstanceEventStreamBindings) SetEventStreamId(v *uuidpb.UUID) 
 	x.xxx_hidden_EventStreamId = v
 }
 
-func (x *AggregateInstanceEventStreamBindings) SetValue(v uint64) {
-	x.xxx_hidden_Value = v
+func (x *AggregateInstanceEventStreamBindings) SetCurrentCount(v uint64) {
+	x.xxx_hidden_CurrentCount = v
 }
 
 func (x *AggregateInstanceEventStreamBindings) HasHandlerKey() bool {
@@ -216,9 +217,8 @@ type AggregateInstanceEventStreamBindings_builder struct {
 	// EventStreamId is the ID of the event stream that the instances are bound
 	// to. It is required.
 	EventStreamId *uuidpb.UUID
-	// Value is the number of instances bound to the event stream. It is zero if
-	// the instances that were bound to it have gone.
-	Value uint64
+	// CurrentCount is the number of instances bound to the event stream.
+	CurrentCount uint64
 }
 
 func (b0 AggregateInstanceEventStreamBindings_builder) Build() *AggregateInstanceEventStreamBindings {
@@ -227,7 +227,7 @@ func (b0 AggregateInstanceEventStreamBindings_builder) Build() *AggregateInstanc
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
 	x.xxx_hidden_EventStreamId = b.EventStreamId
-	x.xxx_hidden_Value = b.Value
+	x.xxx_hidden_CurrentCount = b.CurrentCount
 	return m0
 }
 
@@ -246,7 +246,7 @@ type HandlerEventStreamLag struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
 	xxx_hidden_EventStreamId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=event_stream_id,json=eventStreamId"`
-	xxx_hidden_Value         uint64                 `protobuf:"varint,3,opt,name=value"`
+	xxx_hidden_Gauge         uint64                 `protobuf:"varint,3,opt,name=gauge"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -290,9 +290,9 @@ func (x *HandlerEventStreamLag) GetEventStreamId() *uuidpb.UUID {
 	return nil
 }
 
-func (x *HandlerEventStreamLag) GetValue() uint64 {
+func (x *HandlerEventStreamLag) GetGauge() uint64 {
 	if x != nil {
-		return x.xxx_hidden_Value
+		return x.xxx_hidden_Gauge
 	}
 	return 0
 }
@@ -305,8 +305,8 @@ func (x *HandlerEventStreamLag) SetEventStreamId(v *uuidpb.UUID) {
 	x.xxx_hidden_EventStreamId = v
 }
 
-func (x *HandlerEventStreamLag) SetValue(v uint64) {
-	x.xxx_hidden_Value = v
+func (x *HandlerEventStreamLag) SetGauge(v uint64) {
+	x.xxx_hidden_Gauge = v
 }
 
 func (x *HandlerEventStreamLag) HasHandlerKey() bool {
@@ -339,10 +339,13 @@ type HandlerEventStreamLag_builder struct {
 	HandlerKey *uuidpb.UUID
 	// EventStreamId is the ID of the event stream. It is required.
 	EventStreamId *uuidpb.UUID
-	// Value is the number of events after the offset that the handler has
+	// Gauge is the number of events after the offset that the handler has
 	// reached. It is zero when the handler has handled or skipped every event on
 	// the stream.
-	Value uint64
+	//
+	// Several nodes can report the lag of one handler on one stream, so adding
+	// their values counts the same events more than once.
+	Gauge uint64
 }
 
 func (b0 HandlerEventStreamLag_builder) Build() *HandlerEventStreamLag {
@@ -351,7 +354,7 @@ func (b0 HandlerEventStreamLag_builder) Build() *HandlerEventStreamLag {
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
 	x.xxx_hidden_EventStreamId = b.EventStreamId
-	x.xxx_hidden_Value = b.Value
+	x.xxx_hidden_Gauge = b.Gauge
 	return m0
 }
 
@@ -359,20 +362,20 @@ var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto proto
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_rawDesc = "" +
 	"\n" +
-	"Agithub.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"q\n" +
+	"Agithub.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"y\n" +
 	"\x11EventStreamLength\x12?\n" +
-	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12\x1b\n" +
-	"\x05value\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"\xbe\x01\n" +
+	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12#\n" +
+	"\twatermark\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\twatermark\"\xcd\x01\n" +
 	"$AggregateInstanceEventStreamBindings\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12?\n" +
-	"\x0fevent_stream_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12\x1b\n" +
-	"\x05value\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05value\"\xaf\x01\n" +
+	"\x0fevent_stream_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12*\n" +
+	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\xaf\x01\n" +
 	"\x15HandlerEventStreamLag\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12?\n" +
 	"\x0fevent_stream_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12\x1b\n" +
-	"\x05value\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05valueB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
+	"\x05gauge\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05gaugeB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_goTypes = []any{

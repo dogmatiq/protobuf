@@ -20,16 +20,22 @@ service MetricsAPI {
   // reports all of its metrics through it.
   //
   // If the engine runs as a cluster, the samples describe only the work that
-  // the node owns, so a count is only the node's own share. A running total
-  // counts the occurrences on this node, so it keeps growing when ownership of
-  // the work moves to another node. A count falls to zero when the work moves
-  // to another node, because the node's share is then zero.
+  // the node owns, so a current count is only the node's own share. A
+  // cumulative count is the number of occurrences on this node, so it keeps
+  // growing when ownership of the work moves to another node. When the work
+  // moves to another node, the node sends a Tombstone for each current count of
+  // that work.
   //
-  // A client can add up the samples of one subject from every node of the
-  // cluster to estimate the value for the whole cluster. The sum is an estimate
-  // because each node measures at a different time. A metric whose doc gives
-  // another rule for combining samples, such as EventStreamLength, follows that
-  // rule instead.
+  // A client can add up the cumulative_count and current_count fields of one
+  // subject from every node of the cluster to estimate the value for the whole
+  // cluster. A node that sent a Tombstone for a current count contributes zero
+  // to the sum. The sum is an estimate because each node measures at a
+  // different time.
+  //
+  // The other fields, such as watermark and gauge, describe one quantity that
+  // several nodes can report, so adding them up can count it more than once.
+  // The doc of each such field gives the rule for combining the values, if
+  // there is one.
   //
   // If the engine can't measure a metric that the call reports, it fails the
   // call with the UNAVAILABLE status code.
@@ -65,7 +71,8 @@ message WatchClusterMetricsRequest {}
 // metrics that the call reports.
 //
 // Subsequent messages in the response contain a Sample, which reports one
-// metric.
+// metric, or a Tombstone, which reports that the engine has stopped reporting
+// one metric of one subject.
 message WatchMetricsResponse {
   // Preamble identifies the engine that serves the call, and lists the metrics
   // that the call reports.
@@ -101,16 +108,16 @@ message WatchMetricsResponse {
   // one queue. This API defines the metrics listed below, and an engine may
   // define its own.
   //
-  // A Sample replaces any earlier Sample of the same metric and subject on the
-  // same response stream. The engine chooses how often it measures each metric.
-  // It sends a new Sample each time it measures a value that differs from the
-  // last one that it sent on the stream for the same metric and subject,
-  // including when the new value is zero.
+  // A Sample replaces any earlier Sample or Tombstone of the same metric and
+  // subject on the same response stream. The engine chooses how often it
+  // measures each metric. It sends a new Sample each time it measures a value
+  // that differs from the last one that it sent on the stream for the same
+  // metric and subject, including when the new value is zero.
   //
-  // Some metrics report a running total, such as the number of events that a
+  // Some metrics report a cumulative count, such as the number of events that a
   // handler has recorded since the engine started counting. The doc of each
-  // says so. Within one response stream, the engine lowers a total only by
-  // starting again from zero.
+  // says so. Within one response stream, the engine lowers a cumulative count
+  // only by starting again from zero.
   //
   // The metrics that this API defines are:
   //
@@ -166,9 +173,9 @@ message WatchMetricsResponse {
     bytes value = 3 [features.field_presence = IMPLICIT];
 
     // Revision is a comparable value that describes when this sample was
-    // measured, relative to other samples of the same metric and subject from
-    // the same engine and method. The sample with the greatest revision is the
-    // most recent, and replaces the others.
+    // measured, relative to other samples and tombstones of the same metric and
+    // subject from the same engine and method. The message with the greatest
+    // revision is the most recent, and replaces the others.
     //
     // Two revisions are compared in lexicographic order, as strings of unsigned
     // bytes. For example, an engine can use a timestamp, encoded as a
@@ -179,10 +186,37 @@ message WatchMetricsResponse {
     bytes revision = 4 [features.field_presence = IMPLICIT];
   }
 
-  // Payload is the Preamble in the first response on a stream, and a Sample in
-  // every other.
+  // Tombstone reports that the engine has stopped reporting one metric of one
+  // subject. A client discards the last Sample that it holds for that metric
+  // and subject, if it holds one.
+  //
+  // An engine sends a Tombstone when it stops reporting the subject, and a
+  // Sample with a zero value when it reports a value of zero. A subject whose
+  // count falls to zero gets either, depending on whether the engine keeps
+  // measuring it.
+  message Tombstone {
+    // MetricIndex identifies the metric that the engine has stopped reporting.
+    // It is a zero-based index into the supported_metrics of the Preamble on
+    // the same response stream.
+    uint32 metric_index = 1 [features.field_presence = IMPLICIT];
+
+    // Subject identifies what the engine has stopped reporting, such as one
+    // queue. It holds the same bytes as Sample.subject in the samples of that
+    // subject.
+    bytes subject = 2 [features.field_presence = IMPLICIT];
+
+    // Revision is a comparable value that has the same meaning as
+    // Sample.revision. If the engine sent a Sample for the same metric and
+    // subject on the same response stream, the revision is greater than that of
+    // the last one.
+    bytes revision = 3 [features.field_presence = IMPLICIT];
+  }
+
+  // Payload is the Preamble in the first response on a stream, and a Sample or
+  // a Tombstone in every other.
   oneof payload {
-    Preamble preamble = 1;
-    Sample   sample   = 2;
+    Preamble  preamble  = 1;
+    Sample    sample    = 2;
+    Tombstone tombstone = 3;
   }
 }

@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFile = /*@__PURE__*/
-  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImAKGkFnZ3JlZ2F0ZUluc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXgoYUHJvY2Vzc0luc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXAoWSGFuZGxlckNvbW1hbmRzUGVuZGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlgKEkhhbmRsZXJDb21tYW5kc0R1ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlwKFkhhbmRsZXJDb21tYW5kc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJcChZIYW5kbGVyQ29tbWFuZHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJZChNIYW5kbGVyRGVhZGxpbmVzRHVlEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiXQoXSGFuZGxlckRlYWRsaW5lc0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJdChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIl4KGEhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIlsKFUhhbmRsZXJFdmVudHNSZWNvcmRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCIloKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIUCgV2YWx1ZRgCIAEoBEIFqgECCAIiWgoUSGFuZGxlckV2ZW50c0ZhaWxpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJbChVQcm9jZXNzSW5zdGFuY2VzRW5kZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJjCh1Qcm9qZWN0aW9uQ29tcGFjdGlvbnNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCImQKHlByb2plY3Rpb25Db21wYWN0aW9uc0NvbXBsZXRlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSFAoFdmFsdWUYAiABKARCBaoBAggCImsKJVByb2plY3Rpb25Db21wYWN0aW9uc0RlYWRsaW5lRXhjZWVkZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAiJhChtQcm9qZWN0aW9uQ29tcGFjdGlvbnNGYWlsZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBXZhbHVlGAIgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImgKGkFnZ3JlZ2F0ZUluc3RhbmNlc0luTWVtb3J5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJmChhQcm9jZXNzSW5zdGFuY2VzSW5NZW1vcnkSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImQKFkhhbmRsZXJDb21tYW5kc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImAKEkhhbmRsZXJDb21tYW5kc0R1ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiZAoWSGFuZGxlckNvbW1hbmRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiZwoWSGFuZGxlckNvbW1hbmRzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIiZQoXSGFuZGxlckRlYWRsaW5lc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImEKE0hhbmRsZXJEZWFkbGluZXNEdWUSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImUKF0hhbmRsZXJEZWFkbGluZXNGYWlsaW5nEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJoChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIiaQoYSGFuZGxlckRlYWRsaW5lc0NhbmNlbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJmChVIYW5kbGVyRXZlbnRzUmVjb3JkZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCImUKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJiChRIYW5kbGVyRXZlbnRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiZgoVUHJvY2Vzc0luc3RhbmNlc0VuZGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJuCh1Qcm9qZWN0aW9uQ29tcGFjdGlvbnNDYW5jZWxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIibwoeUHJvamVjdGlvbkNvbXBhY3Rpb25zQ29tcGxldGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJ2CiVQcm9qZWN0aW9uQ29tcGFjdGlvbnNEZWFkbGluZUV4Y2VlZGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJsChtQcm9qZWN0aW9uQ29tcGFjdGlvbnNGYWlsZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCQipaKGdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWV0cmljc2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * AggregateInstancesInMemory is the number of an aggregate handler's instances
@@ -31,11 +31,11 @@ export type AggregateInstancesInMemory = Message<"dogma.metrics.v1alpha1.Aggrega
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of instances that the engine holds in memory.
+   * CurrentCount is the number of instances that the engine holds in memory.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -62,11 +62,11 @@ export type ProcessInstancesInMemory = Message<"dogma.metrics.v1alpha1.ProcessIn
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of instances that the engine holds in memory.
+   * CurrentCount is the number of instances that the engine holds in memory.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -93,11 +93,11 @@ export type HandlerCommandsPending = Message<"dogma.metrics.v1alpha1.HandlerComm
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of commands.
+   * CurrentCount is the number of commands.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -124,11 +124,11 @@ export type HandlerCommandsDue = Message<"dogma.metrics.v1alpha1.HandlerCommands
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of commands that are ready.
+   * CurrentCount is the number of commands that are ready.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -155,11 +155,11 @@ export type HandlerCommandsFailing = Message<"dogma.metrics.v1alpha1.HandlerComm
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of failing commands.
+   * CurrentCount is the number of failing commands.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -170,8 +170,8 @@ export const HandlerCommandsFailingSchema: GenMessage<HandlerCommandsFailing> = 
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 4);
 
 /**
- * HandlerCommandsHandled is the running total of the commands that one handler
- * has handled successfully. The engine sends it only for aggregate and
+ * HandlerCommandsHandled is the cumulative count of the commands that one
+ * handler has handled successfully. The engine sends it only for aggregate and
  * integration handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerCommandsHandled
@@ -186,12 +186,12 @@ export type HandlerCommandsHandled = Message<"dogma.metrics.v1alpha1.HandlerComm
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of commands that the handler has handled
+   * CumulativeCount is the number of commands that the handler has handled
    * successfully.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -217,11 +217,11 @@ export type HandlerDeadlinesPending = Message<"dogma.metrics.v1alpha1.HandlerDea
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of deadlines.
+   * CurrentCount is the number of deadlines.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -247,11 +247,11 @@ export type HandlerDeadlinesDue = Message<"dogma.metrics.v1alpha1.HandlerDeadlin
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of deadlines that are ready.
+   * CurrentCount is the number of deadlines that are ready.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -278,11 +278,11 @@ export type HandlerDeadlinesFailing = Message<"dogma.metrics.v1alpha1.HandlerDea
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of failing deadlines.
+   * CurrentCount is the number of failing deadlines.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -293,7 +293,7 @@ export const HandlerDeadlinesFailingSchema: GenMessage<HandlerDeadlinesFailing> 
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 8);
 
 /**
- * HandlerDeadlinesHandled is the running total of the deadlines that one
+ * HandlerDeadlinesHandled is the cumulative count of the deadlines that one
  * handler has handled successfully. The engine sends it only for process
  * handlers.
  *
@@ -309,12 +309,12 @@ export type HandlerDeadlinesHandled = Message<"dogma.metrics.v1alpha1.HandlerDea
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of deadlines that the handler has handled
+   * CumulativeCount is the number of deadlines that the handler has handled
    * successfully.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -325,8 +325,8 @@ export const HandlerDeadlinesHandledSchema: GenMessage<HandlerDeadlinesHandled> 
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 9);
 
 /**
- * HandlerDeadlinesCanceled is the running total of the deadlines of one handler
- * that were canceled before they were handled, such as when the process
+ * HandlerDeadlinesCanceled is the cumulative count of the deadlines of one
+ * handler that were canceled before they were handled, such as when the process
  * instance that scheduled them ended. The engine sends it only for process
  * handlers.
  *
@@ -342,11 +342,11 @@ export type HandlerDeadlinesCanceled = Message<"dogma.metrics.v1alpha1.HandlerDe
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of deadlines that were canceled.
+   * CumulativeCount is the number of deadlines that were canceled.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -357,9 +357,9 @@ export const HandlerDeadlinesCanceledSchema: GenMessage<HandlerDeadlinesCanceled
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 10);
 
 /**
- * HandlerEventsRecorded is the running total of the events that one handler has
- * recorded. The engine sends it only for aggregate and integration handlers,
- * and not for an integration handler that records no events.
+ * HandlerEventsRecorded is the cumulative count of the events that one handler
+ * has recorded. The engine sends it only for aggregate handlers, and for
+ * integration handlers that record events.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsRecorded
  */
@@ -373,11 +373,11 @@ export type HandlerEventsRecorded = Message<"dogma.metrics.v1alpha1.HandlerEvent
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of events that the handler has recorded.
+   * CumulativeCount is the number of events that the handler has recorded.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -388,8 +388,8 @@ export const HandlerEventsRecordedSchema: GenMessage<HandlerEventsRecorded> = /*
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 11);
 
 /**
- * HandlerEventsHandled is the running total of the events that one handler has
- * handled. The engine sends it only for process and projection handlers.
+ * HandlerEventsHandled is the cumulative count of the events that one handler
+ * has handled. The engine sends it only for process and projection handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsHandled
  */
@@ -403,11 +403,11 @@ export type HandlerEventsHandled = Message<"dogma.metrics.v1alpha1.HandlerEvents
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of events that the handler has handled.
+   * CumulativeCount is the number of events that the handler has handled.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -434,11 +434,11 @@ export type HandlerEventsFailing = Message<"dogma.metrics.v1alpha1.HandlerEvents
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of failing events.
+   * CurrentCount is the number of failing events.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  currentCount: bigint;
 };
 
 /**
@@ -449,7 +449,7 @@ export const HandlerEventsFailingSchema: GenMessage<HandlerEventsFailing> = /*@_
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 13);
 
 /**
- * ProcessInstancesEnded is the running total of the instances of one process
+ * ProcessInstancesEnded is the cumulative count of the instances of one process
  * handler that have ended.
  *
  * @generated from message dogma.metrics.v1alpha1.ProcessInstancesEnded
@@ -464,11 +464,11 @@ export type ProcessInstancesEnded = Message<"dogma.metrics.v1alpha1.ProcessInsta
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of instances that have ended.
+   * CumulativeCount is the number of instances that have ended.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -479,8 +479,8 @@ export const ProcessInstancesEndedSchema: GenMessage<ProcessInstancesEnded> = /*
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 14);
 
 /**
- * ProjectionCompactionsCanceled is the running total of the compactions of one
- * projection handler that have ended with the Canceled outcome.
+ * ProjectionCompactionsCanceled is the cumulative count of the compactions of
+ * one projection handler that have ended with the Canceled outcome.
  *
  * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsCanceled
  */
@@ -494,12 +494,12 @@ export type ProjectionCompactionsCanceled = Message<"dogma.metrics.v1alpha1.Proj
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of compactions that have ended with the Canceled
-   * outcome.
+   * CumulativeCount is the number of compactions that have ended with the
+   * Canceled outcome.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -510,8 +510,8 @@ export const ProjectionCompactionsCanceledSchema: GenMessage<ProjectionCompactio
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 15);
 
 /**
- * ProjectionCompactionsCompleted is the running total of the compactions of one
- * projection handler that have ended with the Success outcome.
+ * ProjectionCompactionsCompleted is the cumulative count of the compactions of
+ * one projection handler that have ended with the Success outcome.
  *
  * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsCompleted
  */
@@ -525,12 +525,12 @@ export type ProjectionCompactionsCompleted = Message<"dogma.metrics.v1alpha1.Pro
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of compactions that have ended with the Success
-   * outcome.
+   * CumulativeCount is the number of compactions that have ended with the
+   * Success outcome.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -541,8 +541,9 @@ export const ProjectionCompactionsCompletedSchema: GenMessage<ProjectionCompacti
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 16);
 
 /**
- * ProjectionCompactionsDeadlineExceeded is the running total of the compactions
- * of one projection handler that have ended with the DeadlineExceeded outcome.
+ * ProjectionCompactionsDeadlineExceeded is the cumulative count of the
+ * compactions of one projection handler that have ended with the
+ * DeadlineExceeded outcome.
  *
  * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded
  */
@@ -556,12 +557,12 @@ export type ProjectionCompactionsDeadlineExceeded = Message<"dogma.metrics.v1alp
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of compactions that have ended with the
+   * CumulativeCount is the number of compactions that have ended with the
    * DeadlineExceeded outcome.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**
@@ -572,7 +573,7 @@ export const ProjectionCompactionsDeadlineExceededSchema: GenMessage<ProjectionC
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 17);
 
 /**
- * ProjectionCompactionsFailed is the running total of the compactions of one
+ * ProjectionCompactionsFailed is the cumulative count of the compactions of one
  * projection handler that have ended with the Error outcome.
  *
  * @generated from message dogma.metrics.v1alpha1.ProjectionCompactionsFailed
@@ -587,11 +588,12 @@ export type ProjectionCompactionsFailed = Message<"dogma.metrics.v1alpha1.Projec
   handlerKey?: UUID | undefined;
 
   /**
-   * Value is the number of compactions that have ended with the Error outcome.
+   * CumulativeCount is the number of compactions that have ended with the Error
+   * outcome.
    *
-   * @generated from field: uint64 value = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
    */
-  value: bigint;
+  cumulativeCount: bigint;
 };
 
 /**

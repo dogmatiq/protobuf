@@ -31,7 +31,7 @@ func (b *AggregateInstancesInMemoryBuilder) From(x *AggregateInstancesInMemory) 
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -44,7 +44,7 @@ func (b *AggregateInstancesInMemoryBuilder) Build() *AggregateInstancesInMemory 
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -55,10 +55,10 @@ func (b *AggregateInstancesInMemoryBuilder) WithHandlerKey(v *uuidpb.UUID) *Aggr
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *AggregateInstancesInMemoryBuilder) WithValue(v uint64) *AggregateInstancesInMemoryBuilder {
-	b.prototype.SetValue(v)
+func (b *AggregateInstancesInMemoryBuilder) WithCurrentCount(v uint64) *AggregateInstancesInMemoryBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -81,7 +81,7 @@ func (b *ProcessInstancesInMemoryBuilder) From(x *ProcessInstancesInMemory) *Pro
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -94,7 +94,7 @@ func (b *ProcessInstancesInMemoryBuilder) Build() *ProcessInstancesInMemory {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -105,10 +105,10 @@ func (b *ProcessInstancesInMemoryBuilder) WithHandlerKey(v *uuidpb.UUID) *Proces
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *ProcessInstancesInMemoryBuilder) WithValue(v uint64) *ProcessInstancesInMemoryBuilder {
-	b.prototype.SetValue(v)
+func (b *ProcessInstancesInMemoryBuilder) WithCurrentCount(v uint64) *ProcessInstancesInMemoryBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -131,7 +131,7 @@ func (b *HandlerCommandsPendingBuilder) From(x *HandlerCommandsPending) *Handler
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -144,7 +144,7 @@ func (b *HandlerCommandsPendingBuilder) Build() *HandlerCommandsPending {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -155,10 +155,10 @@ func (b *HandlerCommandsPendingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerC
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerCommandsPendingBuilder) WithValue(v uint64) *HandlerCommandsPendingBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerCommandsPendingBuilder) WithCurrentCount(v uint64) *HandlerCommandsPendingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -181,7 +181,7 @@ func (b *HandlerCommandsDueBuilder) From(x *HandlerCommandsDue) *HandlerCommands
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -194,7 +194,7 @@ func (b *HandlerCommandsDueBuilder) Build() *HandlerCommandsDue {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -205,10 +205,10 @@ func (b *HandlerCommandsDueBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerComma
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerCommandsDueBuilder) WithValue(v uint64) *HandlerCommandsDueBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerCommandsDueBuilder) WithCurrentCount(v uint64) *HandlerCommandsDueBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -231,7 +231,7 @@ func (b *HandlerCommandsFailingBuilder) From(x *HandlerCommandsFailing) *Handler
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -244,7 +244,7 @@ func (b *HandlerCommandsFailingBuilder) Build() *HandlerCommandsFailing {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -255,10 +255,10 @@ func (b *HandlerCommandsFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerC
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerCommandsFailingBuilder) WithValue(v uint64) *HandlerCommandsFailingBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerCommandsFailingBuilder) WithCurrentCount(v uint64) *HandlerCommandsFailingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -281,7 +281,7 @@ func (b *HandlerCommandsHandledBuilder) From(x *HandlerCommandsHandled) *Handler
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -294,7 +294,7 @@ func (b *HandlerCommandsHandledBuilder) Build() *HandlerCommandsHandled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -305,10 +305,10 @@ func (b *HandlerCommandsHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerC
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *HandlerCommandsHandledBuilder) WithValue(v uint64) *HandlerCommandsHandledBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerCommandsHandledBuilder) WithCumulativeCount(v uint64) *HandlerCommandsHandledBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -331,7 +331,7 @@ func (b *HandlerDeadlinesPendingBuilder) From(x *HandlerDeadlinesPending) *Handl
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -344,7 +344,7 @@ func (b *HandlerDeadlinesPendingBuilder) Build() *HandlerDeadlinesPending {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -355,10 +355,10 @@ func (b *HandlerDeadlinesPendingBuilder) WithHandlerKey(v *uuidpb.UUID) *Handler
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerDeadlinesPendingBuilder) WithValue(v uint64) *HandlerDeadlinesPendingBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerDeadlinesPendingBuilder) WithCurrentCount(v uint64) *HandlerDeadlinesPendingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -381,7 +381,7 @@ func (b *HandlerDeadlinesDueBuilder) From(x *HandlerDeadlinesDue) *HandlerDeadli
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -394,7 +394,7 @@ func (b *HandlerDeadlinesDueBuilder) Build() *HandlerDeadlinesDue {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -405,10 +405,10 @@ func (b *HandlerDeadlinesDueBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDead
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerDeadlinesDueBuilder) WithValue(v uint64) *HandlerDeadlinesDueBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerDeadlinesDueBuilder) WithCurrentCount(v uint64) *HandlerDeadlinesDueBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -431,7 +431,7 @@ func (b *HandlerDeadlinesFailingBuilder) From(x *HandlerDeadlinesFailing) *Handl
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -444,7 +444,7 @@ func (b *HandlerDeadlinesFailingBuilder) Build() *HandlerDeadlinesFailing {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -455,10 +455,10 @@ func (b *HandlerDeadlinesFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *Handler
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerDeadlinesFailingBuilder) WithValue(v uint64) *HandlerDeadlinesFailingBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerDeadlinesFailingBuilder) WithCurrentCount(v uint64) *HandlerDeadlinesFailingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -481,7 +481,7 @@ func (b *HandlerDeadlinesHandledBuilder) From(x *HandlerDeadlinesHandled) *Handl
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -494,7 +494,7 @@ func (b *HandlerDeadlinesHandledBuilder) Build() *HandlerDeadlinesHandled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -505,10 +505,10 @@ func (b *HandlerDeadlinesHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *Handler
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *HandlerDeadlinesHandledBuilder) WithValue(v uint64) *HandlerDeadlinesHandledBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerDeadlinesHandledBuilder) WithCumulativeCount(v uint64) *HandlerDeadlinesHandledBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -531,7 +531,7 @@ func (b *HandlerDeadlinesCanceledBuilder) From(x *HandlerDeadlinesCanceled) *Han
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -544,7 +544,7 @@ func (b *HandlerDeadlinesCanceledBuilder) Build() *HandlerDeadlinesCanceled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -555,10 +555,10 @@ func (b *HandlerDeadlinesCanceledBuilder) WithHandlerKey(v *uuidpb.UUID) *Handle
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *HandlerDeadlinesCanceledBuilder) WithValue(v uint64) *HandlerDeadlinesCanceledBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerDeadlinesCanceledBuilder) WithCumulativeCount(v uint64) *HandlerDeadlinesCanceledBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -581,7 +581,7 @@ func (b *HandlerEventsRecordedBuilder) From(x *HandlerEventsRecorded) *HandlerEv
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -594,7 +594,7 @@ func (b *HandlerEventsRecordedBuilder) Build() *HandlerEventsRecorded {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -605,10 +605,10 @@ func (b *HandlerEventsRecordedBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEv
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *HandlerEventsRecordedBuilder) WithValue(v uint64) *HandlerEventsRecordedBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerEventsRecordedBuilder) WithCumulativeCount(v uint64) *HandlerEventsRecordedBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -631,7 +631,7 @@ func (b *HandlerEventsHandledBuilder) From(x *HandlerEventsHandled) *HandlerEven
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -644,7 +644,7 @@ func (b *HandlerEventsHandledBuilder) Build() *HandlerEventsHandled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -655,10 +655,10 @@ func (b *HandlerEventsHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEve
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *HandlerEventsHandledBuilder) WithValue(v uint64) *HandlerEventsHandledBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerEventsHandledBuilder) WithCumulativeCount(v uint64) *HandlerEventsHandledBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -681,7 +681,7 @@ func (b *HandlerEventsFailingBuilder) From(x *HandlerEventsFailing) *HandlerEven
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -694,7 +694,7 @@ func (b *HandlerEventsFailingBuilder) Build() *HandlerEventsFailing {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
@@ -705,10 +705,10 @@ func (b *HandlerEventsFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEve
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerEventsFailingBuilder) WithValue(v uint64) *HandlerEventsFailingBuilder {
-	b.prototype.SetValue(v)
+func (b *HandlerEventsFailingBuilder) WithCurrentCount(v uint64) *HandlerEventsFailingBuilder {
+	b.prototype.SetCurrentCount(v)
 	return b
 }
 
@@ -731,7 +731,7 @@ func (b *ProcessInstancesEndedBuilder) From(x *ProcessInstancesEnded) *ProcessIn
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -744,7 +744,7 @@ func (b *ProcessInstancesEndedBuilder) Build() *ProcessInstancesEnded {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -755,10 +755,10 @@ func (b *ProcessInstancesEndedBuilder) WithHandlerKey(v *uuidpb.UUID) *ProcessIn
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *ProcessInstancesEndedBuilder) WithValue(v uint64) *ProcessInstancesEndedBuilder {
-	b.prototype.SetValue(v)
+func (b *ProcessInstancesEndedBuilder) WithCumulativeCount(v uint64) *ProcessInstancesEndedBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -781,7 +781,7 @@ func (b *ProjectionCompactionsCanceledBuilder) From(x *ProjectionCompactionsCanc
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -794,7 +794,7 @@ func (b *ProjectionCompactionsCanceledBuilder) Build() *ProjectionCompactionsCan
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -805,10 +805,10 @@ func (b *ProjectionCompactionsCanceledBuilder) WithHandlerKey(v *uuidpb.UUID) *P
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *ProjectionCompactionsCanceledBuilder) WithValue(v uint64) *ProjectionCompactionsCanceledBuilder {
-	b.prototype.SetValue(v)
+func (b *ProjectionCompactionsCanceledBuilder) WithCumulativeCount(v uint64) *ProjectionCompactionsCanceledBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -831,7 +831,7 @@ func (b *ProjectionCompactionsCompletedBuilder) From(x *ProjectionCompactionsCom
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -844,7 +844,7 @@ func (b *ProjectionCompactionsCompletedBuilder) Build() *ProjectionCompactionsCo
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -855,10 +855,10 @@ func (b *ProjectionCompactionsCompletedBuilder) WithHandlerKey(v *uuidpb.UUID) *
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *ProjectionCompactionsCompletedBuilder) WithValue(v uint64) *ProjectionCompactionsCompletedBuilder {
-	b.prototype.SetValue(v)
+func (b *ProjectionCompactionsCompletedBuilder) WithCumulativeCount(v uint64) *ProjectionCompactionsCompletedBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -881,7 +881,7 @@ func (b *ProjectionCompactionsDeadlineExceededBuilder) From(x *ProjectionCompact
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -894,7 +894,7 @@ func (b *ProjectionCompactionsDeadlineExceededBuilder) Build() *ProjectionCompac
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -905,10 +905,10 @@ func (b *ProjectionCompactionsDeadlineExceededBuilder) WithHandlerKey(v *uuidpb.
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *ProjectionCompactionsDeadlineExceededBuilder) WithValue(v uint64) *ProjectionCompactionsDeadlineExceededBuilder {
-	b.prototype.SetValue(v)
+func (b *ProjectionCompactionsDeadlineExceededBuilder) WithCumulativeCount(v uint64) *ProjectionCompactionsDeadlineExceededBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 
@@ -931,7 +931,7 @@ func (b *ProjectionCompactionsFailedBuilder) From(x *ProjectionCompactionsFailed
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
-	b.prototype.SetValue(x.GetValue())
+	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
 
@@ -944,7 +944,7 @@ func (b *ProjectionCompactionsFailedBuilder) Build() *ProjectionCompactionsFaile
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
-	m.SetValue(b.prototype.GetValue())
+	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
@@ -955,10 +955,10 @@ func (b *ProjectionCompactionsFailedBuilder) WithHandlerKey(v *uuidpb.UUID) *Pro
 	return b
 }
 
-// WithValue configures the builder to set the Value field to v,
+// WithCumulativeCount configures the builder to set the CumulativeCount field to v,
 // then returns b.
-func (b *ProjectionCompactionsFailedBuilder) WithValue(v uint64) *ProjectionCompactionsFailedBuilder {
-	b.prototype.SetValue(v)
+func (b *ProjectionCompactionsFailedBuilder) WithCumulativeCount(v uint64) *ProjectionCompactionsFailedBuilder {
+	b.prototype.SetCumulativeCount(v)
 	return b
 }
 

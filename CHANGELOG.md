@@ -11,6 +11,26 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Added
+
+- Added `WatchMetricsResponse.Tombstone`, which `WatchNodeMetrics` and
+  `WatchClusterMetrics` send to report that the engine has stopped reporting one
+  metric of one subject.
+
+### Changed
+
+- **[BC]** `WatchNodeMetrics` now sends a `Tombstone`, instead of a `Sample`
+  with a value of zero, for the current counts of work that moves to another
+  node. A `Sample` with a value of zero means that the engine still measures the
+  subject.
+- **[BC]** Renamed the `value` field of each metric message that reports a
+  cumulative count to `cumulative_count`, and of each that reports a current
+  count to `current_count`. `EventStreamLength.value` is now `watermark`, and
+  `HandlerEventStreamLag.value` is now `gauge`. The field numbers and the wire
+  format are unchanged.
+
 ## [0.11.0] - 2026-11-24
 
 ### Added

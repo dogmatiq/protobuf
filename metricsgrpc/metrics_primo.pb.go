@@ -35,6 +35,15 @@ func (x *WatchMetricsResponse) TryGetSample() (v *WatchMetricsResponse_Sample, o
 	return v, false
 }
 
+// TryGetTombstone returns the Tombstone value if x.Payload is set to Tombstone.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse) TryGetTombstone() (v *WatchMetricsResponse_Tombstone, ok bool) {
+	if x.HasTombstone() {
+		return x.GetTombstone(), true
+	}
+	return v, false
+}
+
 type WatchNodeMetricsRequestBuilder struct {
 	prototype WatchNodeMetricsRequest
 }
@@ -113,6 +122,9 @@ func (b *WatchMetricsResponseBuilder) From(x *WatchMetricsResponse) *WatchMetric
 	if x.HasSample() {
 		b.prototype.SetSample(x.GetSample())
 	}
+	if x.HasTombstone() {
+		b.prototype.SetTombstone(x.GetTombstone())
+	}
 	return b
 }
 
@@ -128,6 +140,9 @@ func (b *WatchMetricsResponseBuilder) Build() *WatchMetricsResponse {
 	if b.prototype.HasSample() {
 		m.SetSample(b.prototype.GetSample())
 	}
+	if b.prototype.HasTombstone() {
+		m.SetTombstone(b.prototype.GetTombstone())
+	}
 	return m
 }
 
@@ -142,6 +157,13 @@ func (b *WatchMetricsResponseBuilder) WithPreamble(v *WatchMetricsResponse_Pream
 // then returns b.
 func (b *WatchMetricsResponseBuilder) WithSample(v *WatchMetricsResponse_Sample) *WatchMetricsResponseBuilder {
 	b.prototype.SetSample(v)
+	return b
+}
+
+// WithTombstone configures the builder to set the Tombstone field to v,
+// then returns b.
+func (b *WatchMetricsResponseBuilder) WithTombstone(v *WatchMetricsResponse_Tombstone) *WatchMetricsResponseBuilder {
+	b.prototype.SetTombstone(v)
 	return b
 }
 
@@ -285,6 +307,61 @@ func (b *WatchMetricsResponse_SampleBuilder) WithRevision(v []byte) *WatchMetric
 	return b
 }
 
+type WatchMetricsResponse_TombstoneBuilder struct {
+	prototype WatchMetricsResponse_Tombstone
+}
+
+// NewWatchMetricsResponse_TombstoneBuilder returns a builder that constructs [WatchMetricsResponse_Tombstone] messages.
+func NewWatchMetricsResponse_TombstoneBuilder() *WatchMetricsResponse_TombstoneBuilder {
+	return &WatchMetricsResponse_TombstoneBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *WatchMetricsResponse_TombstoneBuilder) From(x *WatchMetricsResponse_Tombstone) *WatchMetricsResponse_TombstoneBuilder {
+	proto.Reset(&b.prototype)
+	b.prototype.SetMetricIndex(x.GetMetricIndex())
+	b.prototype.SetSubject(x.GetSubject())
+	b.prototype.SetRevision(x.GetRevision())
+	return b
+}
+
+// Build returns a new [WatchMetricsResponse_Tombstone] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *WatchMetricsResponse_TombstoneBuilder) Build() *WatchMetricsResponse_Tombstone {
+	m := &WatchMetricsResponse_Tombstone{}
+	m.SetMetricIndex(b.prototype.GetMetricIndex())
+	m.SetSubject(b.prototype.GetSubject())
+	m.SetRevision(b.prototype.GetRevision())
+	return m
+}
+
+// WithMetricIndex configures the builder to set the MetricIndex field to v,
+// then returns b.
+func (b *WatchMetricsResponse_TombstoneBuilder) WithMetricIndex(v uint32) *WatchMetricsResponse_TombstoneBuilder {
+	b.prototype.SetMetricIndex(v)
+	return b
+}
+
+// WithSubject configures the builder to set the Subject field to v,
+// then returns b.
+func (b *WatchMetricsResponse_TombstoneBuilder) WithSubject(v []byte) *WatchMetricsResponse_TombstoneBuilder {
+	b.prototype.SetSubject(v)
+	return b
+}
+
+// WithRevision configures the builder to set the Revision field to v,
+// then returns b.
+func (b *WatchMetricsResponse_TombstoneBuilder) WithRevision(v []byte) *WatchMetricsResponse_TombstoneBuilder {
+	b.prototype.SetRevision(v)
+	return b
+}
+
 // MustSwitch_WatchMetricsResponse_Payload invokes one of the given functions based on
 // the value of x.Payload.
 //
@@ -293,12 +370,15 @@ func MustSwitch_WatchMetricsResponse_Payload(
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble),
 	caseSample func(*WatchMetricsResponse_Sample),
+	caseTombstone func(*WatchMetricsResponse_Tombstone),
 ) {
 	switch x.WhichPayload() {
 	case WatchMetricsResponse_Preamble_case:
 		casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		caseSample(x.GetSample())
+	case WatchMetricsResponse_Tombstone_case:
+		caseTombstone(x.GetTombstone())
 	default:
 		panic("MustSwitch_WatchMetricsResponse_Payload: x.Payload is not set")
 	}
@@ -312,6 +392,7 @@ func Switch_WatchMetricsResponse_Payload(
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble),
 	caseSample func(*WatchMetricsResponse_Sample),
+	caseTombstone func(*WatchMetricsResponse_Tombstone),
 	none func(),
 ) {
 	switch x.WhichPayload() {
@@ -319,6 +400,8 @@ func Switch_WatchMetricsResponse_Payload(
 		casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		caseSample(x.GetSample())
+	case WatchMetricsResponse_Tombstone_case:
+		caseTombstone(x.GetTombstone())
 	default:
 		none()
 	}
@@ -333,12 +416,15 @@ func MustMap_WatchMetricsResponse_Payload[T any](
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble) T,
 	caseSample func(*WatchMetricsResponse_Sample) T,
+	caseTombstone func(*WatchMetricsResponse_Tombstone) T,
 ) T {
 	switch x.WhichPayload() {
 	case WatchMetricsResponse_Preamble_case:
 		return casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		return caseSample(x.GetSample())
+	case WatchMetricsResponse_Tombstone_case:
+		return caseTombstone(x.GetTombstone())
 	default:
 		panic("MustMap_WatchMetricsResponse_Payload: x.Payload is not set")
 	}
@@ -353,6 +439,7 @@ func Map_WatchMetricsResponse_Payload[T any](
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble) T,
 	caseSample func(*WatchMetricsResponse_Sample) T,
+	caseTombstone func(*WatchMetricsResponse_Tombstone) T,
 	none func() T,
 ) T {
 	switch x.WhichPayload() {
@@ -360,6 +447,8 @@ func Map_WatchMetricsResponse_Payload[T any](
 		return casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		return caseSample(x.GetSample())
+	case WatchMetricsResponse_Tombstone_case:
+		return caseTombstone(x.GetTombstone())
 	default:
 		return none()
 	}
@@ -730,6 +819,79 @@ func (x *WatchMetricsResponse_Sample) Format(f fmt.State, verb rune) {
 	fmt.Fprintf(f, format, (*WatchMetricsResponse_Sample)(x))
 }
 
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *WatchMetricsResponse_Tombstone) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = WatchMetricsResponse_Tombstone
+	type WatchMetricsResponse_Tombstone realType
+	fmt.Fprintf(f, format, (*WatchMetricsResponse_Tombstone)(x))
+}
+
 // MetricsAPIClientStub is a test implementation of the [MetricsAPIClient] interface.
 var _ MetricsAPIClient = (*MetricsAPIClientStub)(nil)
 
@@ -834,5 +996,21 @@ func (x *WatchMetricsResponse_Sample) MarshalBinary() ([]byte, error) {
 //
 // It allows [*WatchMetricsResponse_Sample] to implement [encoding.BinaryUnmarshaler].
 func (x *WatchMetricsResponse_Sample) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*WatchMetricsResponse_Tombstone] to implement [encoding.BinaryMarshaler].
+func (x *WatchMetricsResponse_Tombstone) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*WatchMetricsResponse_Tombstone] to implement [encoding.BinaryUnmarshaler].
+func (x *WatchMetricsResponse_Tombstone) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
