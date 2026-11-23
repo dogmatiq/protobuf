@@ -74,6 +74,24 @@ func (x *WatchEngineResponse) TryGetProjectionCompactionEnded() (v *ProjectionCo
 	return v, false
 }
 
+// TryGetProjectionResetStarted returns the ProjectionResetStarted value if x.Payload is set to ProjectionResetStarted.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchEngineResponse) TryGetProjectionResetStarted() (v *ProjectionResetStarted, ok bool) {
+	if x.HasProjectionResetStarted() {
+		return x.GetProjectionResetStarted(), true
+	}
+	return v, false
+}
+
+// TryGetProjectionResetEnded returns the ProjectionResetEnded value if x.Payload is set to ProjectionResetEnded.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchEngineResponse) TryGetProjectionResetEnded() (v *ProjectionResetEnded, ok bool) {
+	if x.HasProjectionResetEnded() {
+		return x.GetProjectionResetEnded(), true
+	}
+	return v, false
+}
+
 // TryGetExpiresAt returns the ExpiresAt value if x.Expiry is set to ExpiresAt.
 // Otherwise, ok is false and v is the zero-value.
 func (x *WatchEngineResponse_Heartbeat) TryGetExpiresAt() (v *timestamppb.Timestamp, ok bool) {
@@ -154,6 +172,12 @@ func (b *WatchEngineResponseBuilder) From(x *WatchEngineResponse) *WatchEngineRe
 	if x.HasProjectionCompactionEnded() {
 		b.prototype.SetProjectionCompactionEnded(x.GetProjectionCompactionEnded())
 	}
+	if x.HasProjectionResetStarted() {
+		b.prototype.SetProjectionResetStarted(x.GetProjectionResetStarted())
+	}
+	if x.HasProjectionResetEnded() {
+		b.prototype.SetProjectionResetEnded(x.GetProjectionResetEnded())
+	}
 	return b
 }
 
@@ -180,6 +204,12 @@ func (b *WatchEngineResponseBuilder) Build() *WatchEngineResponse {
 	}
 	if b.prototype.HasProjectionCompactionEnded() {
 		m.SetProjectionCompactionEnded(b.prototype.GetProjectionCompactionEnded())
+	}
+	if b.prototype.HasProjectionResetStarted() {
+		m.SetProjectionResetStarted(b.prototype.GetProjectionResetStarted())
+	}
+	if b.prototype.HasProjectionResetEnded() {
+		m.SetProjectionResetEnded(b.prototype.GetProjectionResetEnded())
 	}
 	return m
 }
@@ -223,6 +253,20 @@ func (b *WatchEngineResponseBuilder) WithProjectionCompactionStarted(v *Projecti
 // then returns b.
 func (b *WatchEngineResponseBuilder) WithProjectionCompactionEnded(v *ProjectionCompactionEnded) *WatchEngineResponseBuilder {
 	b.prototype.SetProjectionCompactionEnded(v)
+	return b
+}
+
+// WithProjectionResetStarted configures the builder to set the ProjectionResetStarted field to v,
+// then returns b.
+func (b *WatchEngineResponseBuilder) WithProjectionResetStarted(v *ProjectionResetStarted) *WatchEngineResponseBuilder {
+	b.prototype.SetProjectionResetStarted(v)
+	return b
+}
+
+// WithProjectionResetEnded configures the builder to set the ProjectionResetEnded field to v,
+// then returns b.
+func (b *WatchEngineResponseBuilder) WithProjectionResetEnded(v *ProjectionResetEnded) *WatchEngineResponseBuilder {
+	b.prototype.SetProjectionResetEnded(v)
 	return b
 }
 
@@ -515,6 +559,7 @@ func NewWatchEngineResponse_Preamble_ProjectionsBuilder() *WatchEngineResponse_P
 func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) From(x *WatchEngineResponse_Preamble_Projections) *WatchEngineResponse_Preamble_ProjectionsBuilder {
 	proto.Reset(&b.prototype)
 	b.prototype.SetReportsCompactions(x.GetReportsCompactions())
+	b.prototype.SetReportsResets(x.GetReportsResets())
 	return b
 }
 
@@ -525,6 +570,7 @@ func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) From(x *WatchEngineRes
 func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) Build() *WatchEngineResponse_Preamble_Projections {
 	m := &WatchEngineResponse_Preamble_Projections{}
 	m.SetReportsCompactions(b.prototype.GetReportsCompactions())
+	m.SetReportsResets(b.prototype.GetReportsResets())
 	return m
 }
 
@@ -532,6 +578,13 @@ func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) Build() *WatchEngineRe
 // then returns b.
 func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) WithReportsCompactions(v bool) *WatchEngineResponse_Preamble_ProjectionsBuilder {
 	b.prototype.SetReportsCompactions(v)
+	return b
+}
+
+// WithReportsResets configures the builder to set the ReportsResets field to v,
+// then returns b.
+func (b *WatchEngineResponse_Preamble_ProjectionsBuilder) WithReportsResets(v bool) *WatchEngineResponse_Preamble_ProjectionsBuilder {
+	b.prototype.SetReportsResets(v)
 	return b
 }
 
@@ -614,6 +667,8 @@ func MustSwitch_WatchEngineResponse_Payload(
 	caseClusterWorkloads func(*ClusterWorkloads),
 	caseProjectionCompactionStarted func(*ProjectionCompactionStarted),
 	caseProjectionCompactionEnded func(*ProjectionCompactionEnded),
+	caseProjectionResetStarted func(*ProjectionResetStarted),
+	caseProjectionResetEnded func(*ProjectionResetEnded),
 ) {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
@@ -628,6 +683,10 @@ func MustSwitch_WatchEngineResponse_Payload(
 		caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
 	case WatchEngineResponse_ProjectionCompactionEnded_case:
 		caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
+	case WatchEngineResponse_ProjectionResetStarted_case:
+		caseProjectionResetStarted(x.GetProjectionResetStarted())
+	case WatchEngineResponse_ProjectionResetEnded_case:
+		caseProjectionResetEnded(x.GetProjectionResetEnded())
 	default:
 		panic("MustSwitch_WatchEngineResponse_Payload: x.Payload is not set")
 	}
@@ -645,6 +704,8 @@ func Switch_WatchEngineResponse_Payload(
 	caseClusterWorkloads func(*ClusterWorkloads),
 	caseProjectionCompactionStarted func(*ProjectionCompactionStarted),
 	caseProjectionCompactionEnded func(*ProjectionCompactionEnded),
+	caseProjectionResetStarted func(*ProjectionResetStarted),
+	caseProjectionResetEnded func(*ProjectionResetEnded),
 	none func(),
 ) {
 	switch x.WhichPayload() {
@@ -660,6 +721,10 @@ func Switch_WatchEngineResponse_Payload(
 		caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
 	case WatchEngineResponse_ProjectionCompactionEnded_case:
 		caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
+	case WatchEngineResponse_ProjectionResetStarted_case:
+		caseProjectionResetStarted(x.GetProjectionResetStarted())
+	case WatchEngineResponse_ProjectionResetEnded_case:
+		caseProjectionResetEnded(x.GetProjectionResetEnded())
 	default:
 		none()
 	}
@@ -678,6 +743,8 @@ func MustMap_WatchEngineResponse_Payload[T any](
 	caseClusterWorkloads func(*ClusterWorkloads) T,
 	caseProjectionCompactionStarted func(*ProjectionCompactionStarted) T,
 	caseProjectionCompactionEnded func(*ProjectionCompactionEnded) T,
+	caseProjectionResetStarted func(*ProjectionResetStarted) T,
+	caseProjectionResetEnded func(*ProjectionResetEnded) T,
 ) T {
 	switch x.WhichPayload() {
 	case WatchEngineResponse_Preamble_case:
@@ -692,6 +759,10 @@ func MustMap_WatchEngineResponse_Payload[T any](
 		return caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
 	case WatchEngineResponse_ProjectionCompactionEnded_case:
 		return caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
+	case WatchEngineResponse_ProjectionResetStarted_case:
+		return caseProjectionResetStarted(x.GetProjectionResetStarted())
+	case WatchEngineResponse_ProjectionResetEnded_case:
+		return caseProjectionResetEnded(x.GetProjectionResetEnded())
 	default:
 		panic("MustMap_WatchEngineResponse_Payload: x.Payload is not set")
 	}
@@ -710,6 +781,8 @@ func Map_WatchEngineResponse_Payload[T any](
 	caseClusterWorkloads func(*ClusterWorkloads) T,
 	caseProjectionCompactionStarted func(*ProjectionCompactionStarted) T,
 	caseProjectionCompactionEnded func(*ProjectionCompactionEnded) T,
+	caseProjectionResetStarted func(*ProjectionResetStarted) T,
+	caseProjectionResetEnded func(*ProjectionResetEnded) T,
 	none func() T,
 ) T {
 	switch x.WhichPayload() {
@@ -725,6 +798,10 @@ func Map_WatchEngineResponse_Payload[T any](
 		return caseProjectionCompactionStarted(x.GetProjectionCompactionStarted())
 	case WatchEngineResponse_ProjectionCompactionEnded_case:
 		return caseProjectionCompactionEnded(x.GetProjectionCompactionEnded())
+	case WatchEngineResponse_ProjectionResetStarted_case:
+		return caseProjectionResetStarted(x.GetProjectionResetStarted())
+	case WatchEngineResponse_ProjectionResetEnded_case:
+		return caseProjectionResetEnded(x.GetProjectionResetEnded())
 	default:
 		return none()
 	}

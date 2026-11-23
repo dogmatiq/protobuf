@@ -53,6 +53,42 @@ func (x *ProjectionCompactionOutcome) TryGetCanceled() (v *ProjectionCompactionO
 	return v, false
 }
 
+// TryGetSuccess returns the Success value if x.Outcome is set to Success.
+// Otherwise, ok is false and v is the zero-value.
+func (x *ProjectionResetOutcome) TryGetSuccess() (v *ProjectionResetOutcome_Success, ok bool) {
+	if x.HasSuccess() {
+		return x.GetSuccess(), true
+	}
+	return v, false
+}
+
+// TryGetError returns the Error value if x.Outcome is set to Error.
+// Otherwise, ok is false and v is the zero-value.
+func (x *ProjectionResetOutcome) TryGetError() (v *ProjectionResetOutcome_Error, ok bool) {
+	if x.HasError() {
+		return x.GetError(), true
+	}
+	return v, false
+}
+
+// TryGetDeadlineExceeded returns the DeadlineExceeded value if x.Outcome is set to DeadlineExceeded.
+// Otherwise, ok is false and v is the zero-value.
+func (x *ProjectionResetOutcome) TryGetDeadlineExceeded() (v *ProjectionResetOutcome_DeadlineExceeded, ok bool) {
+	if x.HasDeadlineExceeded() {
+		return x.GetDeadlineExceeded(), true
+	}
+	return v, false
+}
+
+// TryGetCanceled returns the Canceled value if x.Outcome is set to Canceled.
+// Otherwise, ok is false and v is the zero-value.
+func (x *ProjectionResetOutcome) TryGetCanceled() (v *ProjectionResetOutcome_Canceled, ok bool) {
+	if x.HasCanceled() {
+		return x.GetCanceled(), true
+	}
+	return v, false
+}
+
 type StartCompactionRequestBuilder struct {
 	prototype StartCompactionRequest
 }
@@ -839,6 +875,328 @@ func (b *ProjectionCompactionOutcome_CanceledBuilder) Build() *ProjectionCompact
 	return m
 }
 
+type ProjectionResetStartedBuilder struct {
+	prototype ProjectionResetStarted
+}
+
+// NewProjectionResetStartedBuilder returns a builder that constructs [ProjectionResetStarted] messages.
+func NewProjectionResetStartedBuilder() *ProjectionResetStartedBuilder {
+	return &ProjectionResetStartedBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ProjectionResetStartedBuilder) From(x *ProjectionResetStarted) *ProjectionResetStartedBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasHandlerKey() {
+		b.prototype.SetHandlerKey(x.GetHandlerKey())
+	}
+	if x.HasStartedAt() {
+		b.prototype.SetStartedAt(x.GetStartedAt())
+	}
+	return b
+}
+
+// Build returns a new [ProjectionResetStarted] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ProjectionResetStartedBuilder) Build() *ProjectionResetStarted {
+	m := &ProjectionResetStarted{}
+	if b.prototype.HasHandlerKey() {
+		m.SetHandlerKey(b.prototype.GetHandlerKey())
+	}
+	if b.prototype.HasStartedAt() {
+		m.SetStartedAt(b.prototype.GetStartedAt())
+	}
+	return m
+}
+
+// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// then returns b.
+func (b *ProjectionResetStartedBuilder) WithHandlerKey(v *uuidpb.UUID) *ProjectionResetStartedBuilder {
+	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithStartedAt configures the builder to set the StartedAt field to v,
+// then returns b.
+func (b *ProjectionResetStartedBuilder) WithStartedAt(v *timestamppb.Timestamp) *ProjectionResetStartedBuilder {
+	b.prototype.SetStartedAt(v)
+	return b
+}
+
+type ProjectionResetEndedBuilder struct {
+	prototype ProjectionResetEnded
+}
+
+// NewProjectionResetEndedBuilder returns a builder that constructs [ProjectionResetEnded] messages.
+func NewProjectionResetEndedBuilder() *ProjectionResetEndedBuilder {
+	return &ProjectionResetEndedBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ProjectionResetEndedBuilder) From(x *ProjectionResetEnded) *ProjectionResetEndedBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasHandlerKey() {
+		b.prototype.SetHandlerKey(x.GetHandlerKey())
+	}
+	if x.HasOutcome() {
+		b.prototype.SetOutcome(x.GetOutcome())
+	}
+	if x.HasEndedAt() {
+		b.prototype.SetEndedAt(x.GetEndedAt())
+	}
+	return b
+}
+
+// Build returns a new [ProjectionResetEnded] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ProjectionResetEndedBuilder) Build() *ProjectionResetEnded {
+	m := &ProjectionResetEnded{}
+	if b.prototype.HasHandlerKey() {
+		m.SetHandlerKey(b.prototype.GetHandlerKey())
+	}
+	if b.prototype.HasOutcome() {
+		m.SetOutcome(b.prototype.GetOutcome())
+	}
+	if b.prototype.HasEndedAt() {
+		m.SetEndedAt(b.prototype.GetEndedAt())
+	}
+	return m
+}
+
+// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// then returns b.
+func (b *ProjectionResetEndedBuilder) WithHandlerKey(v *uuidpb.UUID) *ProjectionResetEndedBuilder {
+	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithOutcome configures the builder to set the Outcome field to v,
+// then returns b.
+func (b *ProjectionResetEndedBuilder) WithOutcome(v *ProjectionResetOutcome) *ProjectionResetEndedBuilder {
+	b.prototype.SetOutcome(v)
+	return b
+}
+
+// WithEndedAt configures the builder to set the EndedAt field to v,
+// then returns b.
+func (b *ProjectionResetEndedBuilder) WithEndedAt(v *timestamppb.Timestamp) *ProjectionResetEndedBuilder {
+	b.prototype.SetEndedAt(v)
+	return b
+}
+
+type ProjectionResetOutcomeBuilder struct {
+	prototype ProjectionResetOutcome
+}
+
+// NewProjectionResetOutcomeBuilder returns a builder that constructs [ProjectionResetOutcome] messages.
+func NewProjectionResetOutcomeBuilder() *ProjectionResetOutcomeBuilder {
+	return &ProjectionResetOutcomeBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ProjectionResetOutcomeBuilder) From(x *ProjectionResetOutcome) *ProjectionResetOutcomeBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasSuccess() {
+		b.prototype.SetSuccess(x.GetSuccess())
+	}
+	if x.HasError() {
+		b.prototype.SetError(x.GetError())
+	}
+	if x.HasDeadlineExceeded() {
+		b.prototype.SetDeadlineExceeded(x.GetDeadlineExceeded())
+	}
+	if x.HasCanceled() {
+		b.prototype.SetCanceled(x.GetCanceled())
+	}
+	return b
+}
+
+// Build returns a new [ProjectionResetOutcome] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ProjectionResetOutcomeBuilder) Build() *ProjectionResetOutcome {
+	m := &ProjectionResetOutcome{}
+	if b.prototype.HasSuccess() {
+		m.SetSuccess(b.prototype.GetSuccess())
+	}
+	if b.prototype.HasError() {
+		m.SetError(b.prototype.GetError())
+	}
+	if b.prototype.HasDeadlineExceeded() {
+		m.SetDeadlineExceeded(b.prototype.GetDeadlineExceeded())
+	}
+	if b.prototype.HasCanceled() {
+		m.SetCanceled(b.prototype.GetCanceled())
+	}
+	return m
+}
+
+// WithSuccess configures the builder to set the Success field to v,
+// then returns b.
+func (b *ProjectionResetOutcomeBuilder) WithSuccess(v *ProjectionResetOutcome_Success) *ProjectionResetOutcomeBuilder {
+	b.prototype.SetSuccess(v)
+	return b
+}
+
+// WithError configures the builder to set the Error field to v,
+// then returns b.
+func (b *ProjectionResetOutcomeBuilder) WithError(v *ProjectionResetOutcome_Error) *ProjectionResetOutcomeBuilder {
+	b.prototype.SetError(v)
+	return b
+}
+
+// WithDeadlineExceeded configures the builder to set the DeadlineExceeded field to v,
+// then returns b.
+func (b *ProjectionResetOutcomeBuilder) WithDeadlineExceeded(v *ProjectionResetOutcome_DeadlineExceeded) *ProjectionResetOutcomeBuilder {
+	b.prototype.SetDeadlineExceeded(v)
+	return b
+}
+
+// WithCanceled configures the builder to set the Canceled field to v,
+// then returns b.
+func (b *ProjectionResetOutcomeBuilder) WithCanceled(v *ProjectionResetOutcome_Canceled) *ProjectionResetOutcomeBuilder {
+	b.prototype.SetCanceled(v)
+	return b
+}
+
+type ProjectionResetOutcome_SuccessBuilder struct {
+	prototype ProjectionResetOutcome_Success
+}
+
+// NewProjectionResetOutcome_SuccessBuilder returns a builder that constructs [ProjectionResetOutcome_Success] messages.
+func NewProjectionResetOutcome_SuccessBuilder() *ProjectionResetOutcome_SuccessBuilder {
+	return &ProjectionResetOutcome_SuccessBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ProjectionResetOutcome_SuccessBuilder) From(x *ProjectionResetOutcome_Success) *ProjectionResetOutcome_SuccessBuilder {
+	proto.Reset(&b.prototype)
+	return b
+}
+
+// Build returns a new [ProjectionResetOutcome_Success] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ProjectionResetOutcome_SuccessBuilder) Build() *ProjectionResetOutcome_Success {
+	m := &ProjectionResetOutcome_Success{}
+	return m
+}
+
+type ProjectionResetOutcome_ErrorBuilder struct {
+	prototype ProjectionResetOutcome_Error
+}
+
+// NewProjectionResetOutcome_ErrorBuilder returns a builder that constructs [ProjectionResetOutcome_Error] messages.
+func NewProjectionResetOutcome_ErrorBuilder() *ProjectionResetOutcome_ErrorBuilder {
+	return &ProjectionResetOutcome_ErrorBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ProjectionResetOutcome_ErrorBuilder) From(x *ProjectionResetOutcome_Error) *ProjectionResetOutcome_ErrorBuilder {
+	proto.Reset(&b.prototype)
+	b.prototype.SetMessage(x.GetMessage())
+	return b
+}
+
+// Build returns a new [ProjectionResetOutcome_Error] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ProjectionResetOutcome_ErrorBuilder) Build() *ProjectionResetOutcome_Error {
+	m := &ProjectionResetOutcome_Error{}
+	m.SetMessage(b.prototype.GetMessage())
+	return m
+}
+
+// WithMessage configures the builder to set the Message field to v,
+// then returns b.
+func (b *ProjectionResetOutcome_ErrorBuilder) WithMessage(v string) *ProjectionResetOutcome_ErrorBuilder {
+	b.prototype.SetMessage(v)
+	return b
+}
+
+type ProjectionResetOutcome_DeadlineExceededBuilder struct {
+	prototype ProjectionResetOutcome_DeadlineExceeded
+}
+
+// NewProjectionResetOutcome_DeadlineExceededBuilder returns a builder that constructs [ProjectionResetOutcome_DeadlineExceeded] messages.
+func NewProjectionResetOutcome_DeadlineExceededBuilder() *ProjectionResetOutcome_DeadlineExceededBuilder {
+	return &ProjectionResetOutcome_DeadlineExceededBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ProjectionResetOutcome_DeadlineExceededBuilder) From(x *ProjectionResetOutcome_DeadlineExceeded) *ProjectionResetOutcome_DeadlineExceededBuilder {
+	proto.Reset(&b.prototype)
+	return b
+}
+
+// Build returns a new [ProjectionResetOutcome_DeadlineExceeded] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ProjectionResetOutcome_DeadlineExceededBuilder) Build() *ProjectionResetOutcome_DeadlineExceeded {
+	m := &ProjectionResetOutcome_DeadlineExceeded{}
+	return m
+}
+
+type ProjectionResetOutcome_CanceledBuilder struct {
+	prototype ProjectionResetOutcome_Canceled
+}
+
+// NewProjectionResetOutcome_CanceledBuilder returns a builder that constructs [ProjectionResetOutcome_Canceled] messages.
+func NewProjectionResetOutcome_CanceledBuilder() *ProjectionResetOutcome_CanceledBuilder {
+	return &ProjectionResetOutcome_CanceledBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *ProjectionResetOutcome_CanceledBuilder) From(x *ProjectionResetOutcome_Canceled) *ProjectionResetOutcome_CanceledBuilder {
+	proto.Reset(&b.prototype)
+	return b
+}
+
+// Build returns a new [ProjectionResetOutcome_Canceled] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *ProjectionResetOutcome_CanceledBuilder) Build() *ProjectionResetOutcome_Canceled {
+	m := &ProjectionResetOutcome_Canceled{}
+	return m
+}
+
 // MustSwitch_ProjectionCompactionOutcome_Outcome invokes one of the given functions based on
 // the value of x.Outcome.
 //
@@ -937,6 +1295,110 @@ func Map_ProjectionCompactionOutcome_Outcome[T any](
 	case ProjectionCompactionOutcome_DeadlineExceeded_case:
 		return caseDeadlineExceeded(x.GetDeadlineExceeded())
 	case ProjectionCompactionOutcome_Canceled_case:
+		return caseCanceled(x.GetCanceled())
+	default:
+		return none()
+	}
+}
+
+// MustSwitch_ProjectionResetOutcome_Outcome invokes one of the given functions based on
+// the value of x.Outcome.
+//
+// It panics if x.Outcome is nil.
+func MustSwitch_ProjectionResetOutcome_Outcome(
+	x *ProjectionResetOutcome,
+	caseSuccess func(*ProjectionResetOutcome_Success),
+	caseError func(*ProjectionResetOutcome_Error),
+	caseDeadlineExceeded func(*ProjectionResetOutcome_DeadlineExceeded),
+	caseCanceled func(*ProjectionResetOutcome_Canceled),
+) {
+	switch x.WhichOutcome() {
+	case ProjectionResetOutcome_Success_case:
+		caseSuccess(x.GetSuccess())
+	case ProjectionResetOutcome_Error_case:
+		caseError(x.GetError())
+	case ProjectionResetOutcome_DeadlineExceeded_case:
+		caseDeadlineExceeded(x.GetDeadlineExceeded())
+	case ProjectionResetOutcome_Canceled_case:
+		caseCanceled(x.GetCanceled())
+	default:
+		panic("MustSwitch_ProjectionResetOutcome_Outcome: x.Outcome is not set")
+	}
+}
+
+// Switch_ProjectionResetOutcome_Outcome invokes one of the given functions based on
+// the value of x.Outcome.
+//
+// It calls none() if x.Outcome is nil.
+func Switch_ProjectionResetOutcome_Outcome(
+	x *ProjectionResetOutcome,
+	caseSuccess func(*ProjectionResetOutcome_Success),
+	caseError func(*ProjectionResetOutcome_Error),
+	caseDeadlineExceeded func(*ProjectionResetOutcome_DeadlineExceeded),
+	caseCanceled func(*ProjectionResetOutcome_Canceled),
+	none func(),
+) {
+	switch x.WhichOutcome() {
+	case ProjectionResetOutcome_Success_case:
+		caseSuccess(x.GetSuccess())
+	case ProjectionResetOutcome_Error_case:
+		caseError(x.GetError())
+	case ProjectionResetOutcome_DeadlineExceeded_case:
+		caseDeadlineExceeded(x.GetDeadlineExceeded())
+	case ProjectionResetOutcome_Canceled_case:
+		caseCanceled(x.GetCanceled())
+	default:
+		none()
+	}
+}
+
+// MustMap_ProjectionResetOutcome_Outcome maps x.Outcome to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Outcome,
+// and returns that function's result. It panics if x.Outcome is nil.
+func MustMap_ProjectionResetOutcome_Outcome[T any](
+	x *ProjectionResetOutcome,
+	caseSuccess func(*ProjectionResetOutcome_Success) T,
+	caseError func(*ProjectionResetOutcome_Error) T,
+	caseDeadlineExceeded func(*ProjectionResetOutcome_DeadlineExceeded) T,
+	caseCanceled func(*ProjectionResetOutcome_Canceled) T,
+) T {
+	switch x.WhichOutcome() {
+	case ProjectionResetOutcome_Success_case:
+		return caseSuccess(x.GetSuccess())
+	case ProjectionResetOutcome_Error_case:
+		return caseError(x.GetError())
+	case ProjectionResetOutcome_DeadlineExceeded_case:
+		return caseDeadlineExceeded(x.GetDeadlineExceeded())
+	case ProjectionResetOutcome_Canceled_case:
+		return caseCanceled(x.GetCanceled())
+	default:
+		panic("MustMap_ProjectionResetOutcome_Outcome: x.Outcome is not set")
+	}
+}
+
+// Map_ProjectionResetOutcome_Outcome maps x.Outcome to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Outcome,
+// and returns that function's result. It calls none() if x.Outcome is nil.
+func Map_ProjectionResetOutcome_Outcome[T any](
+	x *ProjectionResetOutcome,
+	caseSuccess func(*ProjectionResetOutcome_Success) T,
+	caseError func(*ProjectionResetOutcome_Error) T,
+	caseDeadlineExceeded func(*ProjectionResetOutcome_DeadlineExceeded) T,
+	caseCanceled func(*ProjectionResetOutcome_Canceled) T,
+	none func() T,
+) T {
+	switch x.WhichOutcome() {
+	case ProjectionResetOutcome_Success_case:
+		return caseSuccess(x.GetSuccess())
+	case ProjectionResetOutcome_Error_case:
+		return caseError(x.GetError())
+	case ProjectionResetOutcome_DeadlineExceeded_case:
+		return caseDeadlineExceeded(x.GetDeadlineExceeded())
+	case ProjectionResetOutcome_Canceled_case:
 		return caseCanceled(x.GetCanceled())
 	default:
 		return none()
@@ -2257,6 +2719,517 @@ func (x *ProjectionCompactionOutcome_Canceled) Format(f fmt.State, verb rune) {
 	fmt.Fprintf(f, format, (*ProjectionCompactionOutcome_Canceled)(x))
 }
 
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ProjectionResetStarted) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ProjectionResetStarted
+	type ProjectionResetStarted realType
+	fmt.Fprintf(f, format, (*ProjectionResetStarted)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ProjectionResetEnded) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ProjectionResetEnded
+	type ProjectionResetEnded realType
+	fmt.Fprintf(f, format, (*ProjectionResetEnded)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ProjectionResetOutcome) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ProjectionResetOutcome
+	type ProjectionResetOutcome realType
+	fmt.Fprintf(f, format, (*ProjectionResetOutcome)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ProjectionResetOutcome_Success) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ProjectionResetOutcome_Success
+	type ProjectionResetOutcome_Success realType
+	fmt.Fprintf(f, format, (*ProjectionResetOutcome_Success)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ProjectionResetOutcome_Error) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ProjectionResetOutcome_Error
+	type ProjectionResetOutcome_Error realType
+	fmt.Fprintf(f, format, (*ProjectionResetOutcome_Error)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ProjectionResetOutcome_DeadlineExceeded) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ProjectionResetOutcome_DeadlineExceeded
+	type ProjectionResetOutcome_DeadlineExceeded realType
+	fmt.Fprintf(f, format, (*ProjectionResetOutcome_DeadlineExceeded)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *ProjectionResetOutcome_Canceled) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = ProjectionResetOutcome_Canceled
+	type ProjectionResetOutcome_Canceled realType
+	fmt.Fprintf(f, format, (*ProjectionResetOutcome_Canceled)(x))
+}
+
 // ProjectionAPIClientStub is a test implementation of the [ProjectionAPIClient] interface.
 var _ ProjectionAPIClient = (*ProjectionAPIClientStub)(nil)
 
@@ -2591,5 +3564,117 @@ func (x *ProjectionCompactionOutcome_Canceled) MarshalBinary() ([]byte, error) {
 //
 // It allows [*ProjectionCompactionOutcome_Canceled] to implement [encoding.BinaryUnmarshaler].
 func (x *ProjectionCompactionOutcome_Canceled) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ProjectionResetStarted] to implement [encoding.BinaryMarshaler].
+func (x *ProjectionResetStarted) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ProjectionResetStarted] to implement [encoding.BinaryUnmarshaler].
+func (x *ProjectionResetStarted) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ProjectionResetEnded] to implement [encoding.BinaryMarshaler].
+func (x *ProjectionResetEnded) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ProjectionResetEnded] to implement [encoding.BinaryUnmarshaler].
+func (x *ProjectionResetEnded) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ProjectionResetOutcome] to implement [encoding.BinaryMarshaler].
+func (x *ProjectionResetOutcome) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ProjectionResetOutcome] to implement [encoding.BinaryUnmarshaler].
+func (x *ProjectionResetOutcome) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ProjectionResetOutcome_Success] to implement [encoding.BinaryMarshaler].
+func (x *ProjectionResetOutcome_Success) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ProjectionResetOutcome_Success] to implement [encoding.BinaryUnmarshaler].
+func (x *ProjectionResetOutcome_Success) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ProjectionResetOutcome_Error] to implement [encoding.BinaryMarshaler].
+func (x *ProjectionResetOutcome_Error) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ProjectionResetOutcome_Error] to implement [encoding.BinaryUnmarshaler].
+func (x *ProjectionResetOutcome_Error) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ProjectionResetOutcome_DeadlineExceeded] to implement [encoding.BinaryMarshaler].
+func (x *ProjectionResetOutcome_DeadlineExceeded) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ProjectionResetOutcome_DeadlineExceeded] to implement [encoding.BinaryUnmarshaler].
+func (x *ProjectionResetOutcome_DeadlineExceeded) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*ProjectionResetOutcome_Canceled] to implement [encoding.BinaryMarshaler].
+func (x *ProjectionResetOutcome_Canceled) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*ProjectionResetOutcome_Canceled] to implement [encoding.BinaryUnmarshaler].
+func (x *ProjectionResetOutcome_Canceled) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }

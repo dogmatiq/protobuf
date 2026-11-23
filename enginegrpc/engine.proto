@@ -89,6 +89,11 @@ message WatchEngineResponse {
       // ProjectionCompactionStarted message for each compaction that it starts,
       // and a ProjectionCompactionEnded message when that compaction ends.
       bool reports_compactions = 1 [features.field_presence = IMPLICIT];
+
+      // ReportsResets is true if the engine sends a ProjectionResetStarted
+      // message for each reset operation that it starts, and a
+      // ProjectionResetEnded message when that reset operation ends.
+      bool reports_resets = 2 [features.field_presence = IMPLICIT];
     }
 
     // Id is the ID of the engine that serves the call. An engine has the same
@@ -175,5 +180,7 @@ message WatchEngineResponse {
     ClusterWorkloads            cluster_workloads             = 4;
     ProjectionCompactionStarted projection_compaction_started = 5;
     ProjectionCompactionEnded   projection_compaction_ended   = 6;
+    ProjectionResetStarted      projection_reset_started      = 7;
+    ProjectionResetEnded        projection_reset_ended        = 8;
   }
 }

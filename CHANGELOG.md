@@ -20,6 +20,9 @@ The format is based on [Keep a Changelog], and this project adheres to
   the engine starts and the outcome of each.
 - Added `GetCompactions` to `ProjectionAPI`, which reports what the node that
   serves the call knows about the compactions of one projection handler.
+- Added `ProjectionResetStarted` and `ProjectionResetEnded` to the messages that
+  `EngineAPI.WatchEngine` sends, which report the reset operations that the
+  engine starts and the outcome of each.
 
 ### Removed
 

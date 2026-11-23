@@ -220,3 +220,65 @@ message ProjectionCompactionOutcome {
     Canceled         canceled          = 4;
   }
 }
+
+// ProjectionResetStarted reports that an engine has started a reset operation
+// of one projection handler.
+//
+// At the start of a WatchEngine response stream, the engine sends one for each
+// reset operation that it is already running. A node of a cluster sends it for
+// each reset operation that it runs.
+message ProjectionResetStarted {
+  // HandlerKey is the identity key of the handler that the engine is resetting.
+  // It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // StartedAt is the time at which the reset operation started, by the engine's
+  // own clock. It is required.
+  google.protobuf.Timestamp started_at = 2;
+}
+
+// ProjectionResetEnded reports that a reset operation that an engine was
+// running has ended. A reset operation ends when the handler's Reset method
+// returns, before the projection is rebuilt.
+message ProjectionResetEnded {
+  // HandlerKey is the identity key of the handler that the engine was
+  // resetting. It is required.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // Outcome is how the reset operation ended. It is required.
+  ProjectionResetOutcome outcome = 2;
+
+  // EndedAt is the time at which the reset operation ended, by the engine's own
+  // clock. It is required.
+  google.protobuf.Timestamp ended_at = 3;
+}
+
+// ProjectionResetOutcome describes how a reset operation of a projection
+// handler ended.
+message ProjectionResetOutcome {
+  // Success is the outcome of a reset operation that the handler completed.
+  message Success {}
+
+  // Error is the outcome of a reset operation that stopped because the handler
+  // reported an error.
+  message Error {
+    // Message is the text of the error, for a person to read.
+    string message = 1 [features.field_presence = IMPLICIT];
+  }
+
+  // DeadlineExceeded is the outcome of a reset operation that stopped because
+  // its deadline passed.
+  message DeadlineExceeded {}
+
+  // Canceled is the outcome of a reset operation that stopped because it was
+  // canceled, for example because the engine is shutting down.
+  message Canceled {}
+
+  // Outcome is how the reset operation ended. It is required.
+  oneof outcome {
+    Success          success           = 1;
+    Error            error             = 2;
+    DeadlineExceeded deadline_exceeded = 3;
+    Canceled         canceled          = 4;
+  }
+}
