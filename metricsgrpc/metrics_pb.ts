@@ -6,6 +6,12 @@ import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegen
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Application } from "../configpb/config_pb.js";
 import { file_github_com_dogmatiq_protobuf_configpb_config } from "../configpb/config_pb.js";
+import type { AggregateInstanceEventStreamBindings, EventStreamLength, HandlerEventStreamLag, HandlerEventStreamStaleness } from "./sample_eventstream_pb.js";
+import { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream } from "./sample_eventstream_pb.js";
+import type { HandlerCommandsFailing, HandlerCommandsHandled, HandlerCommandsReady, HandlerDeadlinesCanceled, HandlerDeadlinesFailing, HandlerDeadlinesHandled, HandlerDeadlinesReady, HandlerDeadlinesScheduled, HandlerEventsFailing, HandlerEventsHandled, HandlerEventsRecorded, ProcessInstancesEnded } from "./sample_handler_pb.js";
+import { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler } from "./sample_handler_pb.js";
+import type { ProcessInstanceQueueBindings, QueueCommandsFailing, QueueCommandsReady, QueueCommandsRemoved, QueueDeadlinesFailing, QueueDeadlinesReady, QueueDeadlinesRemoved, QueueDeadlinesScheduled } from "./sample_queue_pb.js";
+import { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue } from "./sample_queue_pb.js";
 import type { UUID } from "../uuidpb/uuid_pb.js";
 import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -14,7 +20,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics: GenFile = /*@__PURE__*/
-  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiGQoXV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QiHAoaV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3Qi/AQKFFdhdGNoTWV0cmljc1Jlc3BvbnNlEkkKCHByZWFtYmxlGAEgASgLMjUuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5QcmVhbWJsZUgAEkUKBnNhbXBsZRgCIAEoCzIzLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UuU2FtcGxlSAASSwoJdG9tYnN0b25lGAMgASgLMjYuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5Ub21ic3RvbmVIABqwAQoIUHJlYW1ibGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEisKCmNsdXN0ZXJfaWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjcKC2FwcGxpY2F0aW9uGAMgASgLMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkFwcGxpY2F0aW9uEhkKEXN1cHBvcnRlZF9tZXRyaWNzGAQgAygJGmwKBlNhbXBsZRIbCgxtZXRyaWNfaW5kZXgYASABKA1CBaoBAggCEhYKB3N1YmplY3QYAiABKAxCBaoBAggCEhQKBXZhbHVlGAMgASgMQgWqAQIIAhIXCghyZXZpc2lvbhgEIAEoDEIFqgECCAIaWQoJVG9tYnN0b25lEhsKDG1ldHJpY19pbmRleBgBIAEoDUIFqgECCAISFgoHc3ViamVjdBgCIAEoDEIFqgECCAISFwoIcmV2aXNpb24YAyABKAxCBaoBAggCQgkKB3BheWxvYWQy/AEKCk1ldHJpY3NBUEkScwoQV2F0Y2hOb2RlTWV0cmljcxIvLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAESeQoTV2F0Y2hDbHVzdGVyTWV0cmljcxIyLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3QaLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLldhdGNoTWV0cmljc1Jlc3BvbnNlMAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL21ldHJpY3MucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiGQoXV2F0Y2hOb2RlTWV0cmljc1JlcXVlc3QiHAoaV2F0Y2hDbHVzdGVyTWV0cmljc1JlcXVlc3QigxMKFFdhdGNoTWV0cmljc1Jlc3BvbnNlEkkKCHByZWFtYmxlGAEgASgLMjUuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE1ldHJpY3NSZXNwb25zZS5QcmVhbWJsZUgAEkUKBnNhbXBsZRgCIAEoCzIzLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UuU2FtcGxlSAAasAEKCFByZWFtYmxlEiMKAmlkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIrCgpjbHVzdGVyX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBI3CgthcHBsaWNhdGlvbhgDIAEoCzIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5BcHBsaWNhdGlvbhIZChFzdXBwb3J0ZWRfbWV0cmljcxgEIAMoCRqaEAoGU2FtcGxlEhcKCHJldmlzaW9uGAEgASgMQgWqAQIIAhJwCihhZ2dyZWdhdGVfaW5zdGFuY2VfZXZlbnRfc3RyZWFtX2JpbmRpbmdzGAIgASgLMjwuZG9nbWEubWV0cmljcy52MWFscGhhMS5BZ2dyZWdhdGVJbnN0YW5jZUV2ZW50U3RyZWFtQmluZGluZ3NIABJIChNldmVudF9zdHJlYW1fbGVuZ3RoGAMgASgLMikuZG9nbWEubWV0cmljcy52MWFscGhhMS5FdmVudFN0cmVhbUxlbmd0aEgAElIKGGhhbmRsZXJfY29tbWFuZHNfZmFpbGluZxgEIAEoCzIuLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckNvbW1hbmRzRmFpbGluZ0gAElIKGGhhbmRsZXJfY29tbWFuZHNfaGFuZGxlZBgFIAEoCzIuLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckNvbW1hbmRzSGFuZGxlZEgAEk4KFmhhbmRsZXJfY29tbWFuZHNfcmVhZHkYBiABKAsyLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJDb21tYW5kc1JlYWR5SAASVgoaaGFuZGxlcl9kZWFkbGluZXNfY2FuY2VsZWQYByABKAsyMC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZEgAElQKGWhhbmRsZXJfZGVhZGxpbmVzX2ZhaWxpbmcYCCABKAsyLy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJEZWFkbGluZXNGYWlsaW5nSAASVAoZaGFuZGxlcl9kZWFkbGluZXNfaGFuZGxlZBgJIAEoCzIvLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckRlYWRsaW5lc0hhbmRsZWRIABJQChdoYW5kbGVyX2RlYWRsaW5lc19yZWFkeRgKIAEoCzItLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckRlYWRsaW5lc1JlYWR5SAASWAobaGFuZGxlcl9kZWFkbGluZXNfc2NoZWR1bGVkGAsgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyRGVhZGxpbmVzU2NoZWR1bGVkSAASUQoYaGFuZGxlcl9ldmVudF9zdHJlYW1fbGFnGAwgASgLMi0uZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyRXZlbnRTdHJlYW1MYWdIABJdCh5oYW5kbGVyX2V2ZW50X3N0cmVhbV9zdGFsZW5lc3MYDSABKAsyMy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudFN0cmVhbVN0YWxlbmVzc0gAEk4KFmhhbmRsZXJfZXZlbnRzX2ZhaWxpbmcYDiABKAsyLC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudHNGYWlsaW5nSAASTgoWaGFuZGxlcl9ldmVudHNfaGFuZGxlZBgPIAEoCzIsLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckV2ZW50c0hhbmRsZWRIABJQChdoYW5kbGVyX2V2ZW50c19yZWNvcmRlZBgQIAEoCzItLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckV2ZW50c1JlY29yZGVkSAASXwofcHJvY2Vzc19pbnN0YW5jZV9xdWV1ZV9iaW5kaW5ncxgRIAEoCzI0LmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUHJvY2Vzc0luc3RhbmNlUXVldWVCaW5kaW5nc0gAElAKF3Byb2Nlc3NfaW5zdGFuY2VzX2VuZGVkGBIgASgLMi0uZG9nbWEubWV0cmljcy52MWFscGhhMS5Qcm9jZXNzSW5zdGFuY2VzRW5kZWRIABJOChZxdWV1ZV9jb21tYW5kc19mYWlsaW5nGBMgASgLMiwuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZUNvbW1hbmRzRmFpbGluZ0gAEkoKFHF1ZXVlX2NvbW1hbmRzX3JlYWR5GBQgASgLMiouZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZUNvbW1hbmRzUmVhZHlIABJOChZxdWV1ZV9jb21tYW5kc19yZW1vdmVkGBUgASgLMiwuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZUNvbW1hbmRzUmVtb3ZlZEgAElAKF3F1ZXVlX2RlYWRsaW5lc19mYWlsaW5nGBYgASgLMi0uZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZURlYWRsaW5lc0ZhaWxpbmdIABJMChVxdWV1ZV9kZWFkbGluZXNfcmVhZHkYFyABKAsyKy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlRGVhZGxpbmVzUmVhZHlIABJQChdxdWV1ZV9kZWFkbGluZXNfcmVtb3ZlZBgYIAEoCzItLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUXVldWVEZWFkbGluZXNSZW1vdmVkSAASVAoZcXVldWVfZGVhZGxpbmVzX3NjaGVkdWxlZBgZIAEoCzIvLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuUXVldWVEZWFkbGluZXNTY2hlZHVsZWRIAEIICgZtZXRyaWNCCQoHcGF5bG9hZDL8AQoKTWV0cmljc0FQSRJzChBXYXRjaE5vZGVNZXRyaWNzEi8uZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaE5vZGVNZXRyaWNzUmVxdWVzdBosLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UwARJ5ChNXYXRjaENsdXN0ZXJNZXRyaWNzEjIuZG9nbWEubWV0cmljcy52MWFscGhhMS5XYXRjaENsdXN0ZXJNZXRyaWNzUmVxdWVzdBosLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuV2F0Y2hNZXRyaWNzUmVzcG9uc2UwAUIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_configpb_config, file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream, file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * WatchNodeMetricsRequest is the input to the MetricsAPI.WatchNodeMetrics
@@ -55,16 +61,15 @@ export const WatchClusterMetricsRequestSchema: GenMessage<WatchClusterMetricsReq
  * The first message in the response contains a Preamble, which lists the
  * metrics that the call reports.
  *
- * Subsequent messages in the response contain a Sample, which reports one
- * metric, or a Tombstone, which reports that the engine has stopped reporting
- * one metric of one subject.
+ * Subsequent messages in the response each contain a Sample, which reports one
+ * metric of one subject.
  *
  * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse
  */
 export type WatchMetricsResponse = Message<"dogma.metrics.v1alpha1.WatchMetricsResponse"> & {
   /**
-   * Payload is the Preamble in the first response on a stream, and a Sample or
-   * a Tombstone in every other.
+   * Payload is the Preamble in the first response on a stream, and a Sample in
+   * every other.
    *
    * @generated from oneof dogma.metrics.v1alpha1.WatchMetricsResponse.payload
    */
@@ -80,12 +85,6 @@ export type WatchMetricsResponse = Message<"dogma.metrics.v1alpha1.WatchMetricsR
      */
     value: WatchMetricsResponse_Sample;
     case: "sample";
-  } | {
-    /**
-     * @generated from field: dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone tombstone = 3;
-     */
-    value: WatchMetricsResponse_Tombstone;
-    case: "tombstone";
   } | { case: undefined; value?: undefined };
 };
 
@@ -133,13 +132,8 @@ export type WatchMetricsResponse_Preamble = Message<"dogma.metrics.v1alpha1.Watc
 
   /**
    * SupportedMetrics is the list of the metrics that this call reports. Each
-   * entry is the full name of the Protocol Buffers message that holds the
-   * metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsPending".
-   * Each name appears once.
-   *
-   * Each Sample identifies the metric that it measures by a zero-based index
-   * into this list, in Sample.metric_index. The indexes apply only to the
-   * subsequent responses on this stream.
+   * entry is the full name of one metric's Protocol Buffers message, such as
+   * "dogma.metrics.v1alpha1.QueueCommandsReady". Each name appears once.
    *
    * @generated from field: repeated string supported_metrics = 4;
    */
@@ -154,94 +148,32 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2, 0);
 
 /**
- * Sample is a measurement of one metric, such as the number of messages in
- * one queue. This API defines the metrics listed below, and an engine may
- * define its own.
+ * Sample holds the value of one metric for one subject. A Sample whose value
+ * is absent is a tombstone, which means that the engine has stopped reporting
+ * that metric for that subject.
  *
- * A Sample replaces any earlier Sample or Tombstone of the same metric and
- * subject on the same response stream. The engine chooses how often it
- * measures each metric. It sends a new Sample each time it measures a value
- * that differs from the last one that it sent on the stream for the same
- * metric and subject, including when the new value is zero.
+ * A Sample replaces any earlier Sample of the same metric and subject on the
+ * same response stream.
+ *
+ * The engine chooses how often it measures each metric. It sends a new Sample
+ * each time it measures a value that differs from the last one that it sent
+ * on the stream for the same metric and subject, including when the new value
+ * is zero. A subject whose count falls to zero gets a zero or a tombstone,
+ * depending on whether the engine keeps measuring it.
  *
  * Some metrics report a cumulative count, such as the number of events that a
  * handler has recorded since the engine started counting. The doc of each
  * says so. Within one response stream, the engine lowers a cumulative count
  * only by starting again from zero.
  *
- * The metrics that this API defines are:
- *
- * - AggregateInstanceEventStreamBindings
- * - AggregateInstancesInMemory
- * - EventStreamLength
- * - HandlerCommandsDue
- * - HandlerCommandsFailing
- * - HandlerCommandsHandled
- * - HandlerCommandsPending
- * - HandlerDeadlinesCanceled
- * - HandlerDeadlinesDue
- * - HandlerDeadlinesFailing
- * - HandlerDeadlinesHandled
- * - HandlerDeadlinesPending
- * - HandlerEventStreamLag
- * - HandlerEventsFailing
- * - HandlerEventsHandled
- * - HandlerEventsRecorded
- * - ProcessInstanceQueueBindings
- * - ProcessInstancesEnded
- * - ProcessInstancesInMemory
- * - ProjectionCompactionsCanceled
- * - ProjectionCompactionsCompleted
- * - ProjectionCompactionsDeadlineExceeded
- * - ProjectionCompactionsFailed
- * - QueueCommandsDue
- * - QueueCommandsFailing
- * - QueueCommandsPending
- * - QueueCommandsRemoved
- * - QueueDeadlinesDue
- * - QueueDeadlinesFailing
- * - QueueDeadlinesPending
- * - QueueDeadlinesRemoved
- *
  * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
  */
 export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchMetricsResponse.Sample"> & {
   /**
-   * MetricIndex identifies the metric that this sample measures. It is a
-   * zero-based index into the supported_metrics of the Preamble on the same
-   * response stream.
-   *
-   * @generated from field: uint32 metric_index = 1 [features.field_presence = IMPLICIT];
-   */
-  metricIndex: number;
-
-  /**
-   * Subject identifies what this sample describes, such as one queue.
-   *
-   * Two samples of the same metric have equal subjects if and only if they
-   * describe the same queue, handler or other part of the system. If the
-   * engine runs as a cluster, this holds for samples from any of its nodes: a
-   * subject holds what every node of the cluster knows about the thing that
-   * it describes, such as a queue's ID.
-   *
-   * @generated from field: bytes subject = 2 [features.field_presence = IMPLICIT];
-   */
-  subject: Uint8Array;
-
-  /**
-   * Value is the content of the sample: a Protocol Buffers message,
-   * serialized in the binary format. A client finds the message's full name
-   * in Preamble.supported_metrics, at the index that metric_index holds.
-   *
-   * @generated from field: bytes value = 3 [features.field_presence = IMPLICIT];
-   */
-  value: Uint8Array;
-
-  /**
    * Revision is a comparable value that describes when this sample was
-   * measured, relative to other samples and tombstones of the same metric and
-   * subject from the same engine and method. The message with the greatest
-   * revision is the most recent, and replaces the others.
+   * measured, relative to other samples of the same metric and subject from
+   * the same engine and method. The sample with the greatest revision is the
+   * most recent, and replaces the others.
    *
    * Two revisions are compared in lexicographic order, as strings of unsigned
    * bytes. For example, an engine can use a timestamp, encoded as a
@@ -250,9 +182,168 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
    * An engine should give the same revision to every sample from one
    * measurement.
    *
-   * @generated from field: bytes revision = 4 [features.field_presence = IMPLICIT];
+   * If this Sample is a tombstone, its revision is greater than that of the
+   * previous Sample of the same metric and subject on the same response
+   * stream, if there is one.
+   *
+   * @generated from field: bytes revision = 1 [features.field_presence = IMPLICIT];
    */
   revision: Uint8Array;
+
+  /**
+   * Metric identifies which metric the sample is for. Each case holds the
+   * message of one metric, which holds the sample's subject and its value.
+   * The engine always sets one case. A client that finds none of them set
+   * ignores the Sample, because it is for a metric that the client does not
+   * know.
+   *
+   * @generated from oneof dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.metric
+   */
+  metric: {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings aggregate_instance_event_stream_bindings = 2;
+     */
+    value: AggregateInstanceEventStreamBindings;
+    case: "aggregateInstanceEventStreamBindings";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.EventStreamLength event_stream_length = 3;
+     */
+    value: EventStreamLength;
+    case: "eventStreamLength";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerCommandsFailing handler_commands_failing = 4;
+     */
+    value: HandlerCommandsFailing;
+    case: "handlerCommandsFailing";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerCommandsHandled handler_commands_handled = 5;
+     */
+    value: HandlerCommandsHandled;
+    case: "handlerCommandsHandled";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerCommandsReady handler_commands_ready = 6;
+     */
+    value: HandlerCommandsReady;
+    case: "handlerCommandsReady";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled handler_deadlines_canceled = 7;
+     */
+    value: HandlerDeadlinesCanceled;
+    case: "handlerDeadlinesCanceled";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerDeadlinesFailing handler_deadlines_failing = 8;
+     */
+    value: HandlerDeadlinesFailing;
+    case: "handlerDeadlinesFailing";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerDeadlinesHandled handler_deadlines_handled = 9;
+     */
+    value: HandlerDeadlinesHandled;
+    case: "handlerDeadlinesHandled";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerDeadlinesReady handler_deadlines_ready = 10;
+     */
+    value: HandlerDeadlinesReady;
+    case: "handlerDeadlinesReady";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerDeadlinesScheduled handler_deadlines_scheduled = 11;
+     */
+    value: HandlerDeadlinesScheduled;
+    case: "handlerDeadlinesScheduled";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerEventStreamLag handler_event_stream_lag = 12;
+     */
+    value: HandlerEventStreamLag;
+    case: "handlerEventStreamLag";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerEventStreamStaleness handler_event_stream_staleness = 13;
+     */
+    value: HandlerEventStreamStaleness;
+    case: "handlerEventStreamStaleness";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerEventsFailing handler_events_failing = 14;
+     */
+    value: HandlerEventsFailing;
+    case: "handlerEventsFailing";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerEventsHandled handler_events_handled = 15;
+     */
+    value: HandlerEventsHandled;
+    case: "handlerEventsHandled";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.HandlerEventsRecorded handler_events_recorded = 16;
+     */
+    value: HandlerEventsRecorded;
+    case: "handlerEventsRecorded";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings process_instance_queue_bindings = 17;
+     */
+    value: ProcessInstanceQueueBindings;
+    case: "processInstanceQueueBindings";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.ProcessInstancesEnded process_instances_ended = 18;
+     */
+    value: ProcessInstancesEnded;
+    case: "processInstancesEnded";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.QueueCommandsFailing queue_commands_failing = 19;
+     */
+    value: QueueCommandsFailing;
+    case: "queueCommandsFailing";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.QueueCommandsReady queue_commands_ready = 20;
+     */
+    value: QueueCommandsReady;
+    case: "queueCommandsReady";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.QueueCommandsRemoved queue_commands_removed = 21;
+     */
+    value: QueueCommandsRemoved;
+    case: "queueCommandsRemoved";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.QueueDeadlinesFailing queue_deadlines_failing = 22;
+     */
+    value: QueueDeadlinesFailing;
+    case: "queueDeadlinesFailing";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.QueueDeadlinesReady queue_deadlines_ready = 23;
+     */
+    value: QueueDeadlinesReady;
+    case: "queueDeadlinesReady";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.QueueDeadlinesRemoved queue_deadlines_removed = 24;
+     */
+    value: QueueDeadlinesRemoved;
+    case: "queueDeadlinesRemoved";
+  } | {
+    /**
+     * @generated from field: dogma.metrics.v1alpha1.QueueDeadlinesScheduled queue_deadlines_scheduled = 25;
+     */
+    value: QueueDeadlinesScheduled;
+    case: "queueDeadlinesScheduled";
+  } | { case: undefined; value?: undefined };
 };
 
 /**
@@ -261,55 +352,6 @@ export type WatchMetricsResponse_Sample = Message<"dogma.metrics.v1alpha1.WatchM
  */
 export const WatchMetricsResponse_SampleSchema: GenMessage<WatchMetricsResponse_Sample> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2, 1);
-
-/**
- * Tombstone reports that the engine has stopped reporting one metric of one
- * subject. A client discards the last Sample that it holds for that metric
- * and subject, if it holds one.
- *
- * An engine sends a Tombstone when it stops reporting the subject, and a
- * Sample with a zero value when it reports a value of zero. A subject whose
- * count falls to zero gets either, depending on whether the engine keeps
- * measuring it.
- *
- * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone
- */
-export type WatchMetricsResponse_Tombstone = Message<"dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone"> & {
-  /**
-   * MetricIndex identifies the metric that the engine has stopped reporting.
-   * It is a zero-based index into the supported_metrics of the Preamble on
-   * the same response stream.
-   *
-   * @generated from field: uint32 metric_index = 1 [features.field_presence = IMPLICIT];
-   */
-  metricIndex: number;
-
-  /**
-   * Subject identifies what the engine has stopped reporting, such as one
-   * queue. It holds the same bytes as Sample.subject in the samples of that
-   * subject.
-   *
-   * @generated from field: bytes subject = 2 [features.field_presence = IMPLICIT];
-   */
-  subject: Uint8Array;
-
-  /**
-   * Revision is a comparable value that has the same meaning as
-   * Sample.revision. If the engine sent a Sample for the same metric and
-   * subject on the same response stream, the revision is greater than that of
-   * the last one.
-   *
-   * @generated from field: bytes revision = 3 [features.field_presence = IMPLICIT];
-   */
-  revision: Uint8Array;
-};
-
-/**
- * Describes the message dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone.
- * Use `create(WatchMetricsResponse_TombstoneSchema)` to create a new message.
- */
-export const WatchMetricsResponse_TombstoneSchema: GenMessage<WatchMetricsResponse_Tombstone> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics, 2, 2);
 
 /**
  * MetricsAPI is a service that reports metrics about an engine, such as the
@@ -333,12 +375,12 @@ export const MetricsAPI: GenService<{
    * the node owns, so a current count is only the node's own share. A
    * cumulative count is the number of occurrences on this node, so it keeps
    * growing when ownership of the work moves to another node. When the work
-   * moves to another node, the node sends a Tombstone for each current count of
+   * moves to another node, the node sends a tombstone for each current count of
    * that work.
    *
    * A client can add up the cumulative_count and current_count fields of one
    * subject from every node of the cluster to estimate the value for the whole
-   * cluster. A node that sent a Tombstone for a current count contributes zero
+   * cluster. A node that sent a tombstone for a current count contributes zero
    * to the sum. The sum is an estimate because each node measures at a
    * different time.
    *

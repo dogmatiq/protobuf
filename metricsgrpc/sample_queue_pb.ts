@@ -4,150 +4,159 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { UUID } from "../uuidpb/uuid_pb.js";
-import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
+import type { HandlerQueueSubject, QueueSubject } from "./subject_pb.js";
+import { file_github_com_dogmatiq_protobuf_metricsgrpc_subject } from "./subject_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue: GenFile = /*@__PURE__*/
-  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJfChRRdWV1ZUNvbW1hbmRzUGVuZGluZxIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiYAoVUXVldWVEZWFkbGluZXNQZW5kaW5nEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJbChBRdWV1ZUNvbW1hbmRzRHVlEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJcChFRdWV1ZURlYWRsaW5lc0R1ZRIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiXwoUUXVldWVDb21tYW5kc0ZhaWxpbmcSKQoIcXVldWVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImAKFVF1ZXVlRGVhZGxpbmVzRmFpbGluZxIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiYgoUUXVldWVDb21tYW5kc1JlbW92ZWQSKQoIcXVldWVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCImMKFVF1ZXVlRGVhZGxpbmVzUmVtb3ZlZBIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIilQEKHFByb2Nlc3NJbnN0YW5jZVF1ZXVlQmluZGluZ3MSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEikKCHF1ZXVlX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJuChdRdWV1ZURlYWRsaW5lc1NjaGVkdWxlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEiaQoSUXVldWVDb21tYW5kc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJqChNRdWV1ZURlYWRsaW5lc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJrChRRdWV1ZUNvbW1hbmRzRmFpbGluZxI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEibAoVUXVldWVEZWFkbGluZXNGYWlsaW5nEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJuChRRdWV1ZUNvbW1hbmRzUmVtb3ZlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAEibwoVUXVldWVEZWFkbGluZXNSZW1vdmVkEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIASJ6ChxQcm9jZXNzSW5zdGFuY2VRdWV1ZUJpbmRpbmdzEjwKB3N1YmplY3QYASABKAsyKy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJRdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
 
 /**
- * QueueCommandsPending is the number of commands in a single logical queue that
- * are waiting to be delivered.
+ * QueueDeadlinesScheduled is the number of deadlines in a single logical queue
+ * that are scheduled for a time that has not come yet, and that have not had a
+ * failed delivery attempt.
  *
- * @generated from message dogma.metrics.v1alpha1.QueueCommandsPending
+ * Each deadline in the queue is counted in exactly one of
+ * QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
+ * the number of deadlines in the queue is the total of the three.
+ *
+ * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesScheduled
  */
-export type QueueCommandsPending = Message<"dogma.metrics.v1alpha1.QueueCommandsPending"> & {
+export type QueueDeadlinesScheduled = Message<"dogma.metrics.v1alpha1.QueueDeadlinesScheduled"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
-   * CurrentCount is the number of commands in the queue.
+   * CurrentCount is the number of deadlines in the queue that are scheduled for
+   * a time that has not come yet. It is absent when the engine has stopped
+   * reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
 
 /**
- * Describes the message dogma.metrics.v1alpha1.QueueCommandsPending.
- * Use `create(QueueCommandsPendingSchema)` to create a new message.
+ * Describes the message dogma.metrics.v1alpha1.QueueDeadlinesScheduled.
+ * Use `create(QueueDeadlinesScheduledSchema)` to create a new message.
  */
-export const QueueCommandsPendingSchema: GenMessage<QueueCommandsPending> = /*@__PURE__*/
+export const QueueDeadlinesScheduledSchema: GenMessage<QueueDeadlinesScheduled> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 0);
 
 /**
- * QueueDeadlinesPending is the number of deadlines in a single logical queue
- * that are waiting to be delivered.
+ * QueueCommandsReady is the number of commands in a single logical queue that
+ * have not had a failed delivery attempt.
  *
- * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesPending
+ * A command is still ready while the engine attempts to deliver it, and while
+ * the engine delays it for a reason of its own, such as to deliver messages of
+ * higher priority first.
+ *
+ * Each command in the queue is counted in either QueueCommandsReady or
+ * QueueCommandsFailing, so the number of commands in the queue is the total of
+ * the two.
+ *
+ * @generated from message dogma.metrics.v1alpha1.QueueCommandsReady
  */
-export type QueueDeadlinesPending = Message<"dogma.metrics.v1alpha1.QueueDeadlinesPending"> & {
+export type QueueCommandsReady = Message<"dogma.metrics.v1alpha1.QueueCommandsReady"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
-   * CurrentCount is the number of deadlines in the queue.
+   * CurrentCount is the number of commands in the queue that have not had a
+   * failed delivery attempt. It is absent when the engine has stopped reporting
+   * this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
 
 /**
- * Describes the message dogma.metrics.v1alpha1.QueueDeadlinesPending.
- * Use `create(QueueDeadlinesPendingSchema)` to create a new message.
+ * Describes the message dogma.metrics.v1alpha1.QueueCommandsReady.
+ * Use `create(QueueCommandsReadySchema)` to create a new message.
  */
-export const QueueDeadlinesPendingSchema: GenMessage<QueueDeadlinesPending> = /*@__PURE__*/
+export const QueueCommandsReadySchema: GenMessage<QueueCommandsReady> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 1);
 
 /**
- * QueueCommandsDue is the number of commands in a single logical queue that are
- * ready to be delivered now.
+ * QueueDeadlinesReady is the number of deadlines in a single logical queue that
+ * are scheduled for a time that has come, and that have not had a failed
+ * delivery attempt.
  *
- * @generated from message dogma.metrics.v1alpha1.QueueCommandsDue
+ * A deadline is still ready while the engine attempts to deliver it, and while
+ * the engine delays it for a reason of its own, such as to deliver messages of
+ * higher priority first.
+ *
+ * Each deadline in the queue is counted in exactly one of
+ * QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
+ * the number of deadlines in the queue is the total of the three.
+ *
+ * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesReady
  */
-export type QueueCommandsDue = Message<"dogma.metrics.v1alpha1.QueueCommandsDue"> & {
+export type QueueDeadlinesReady = Message<"dogma.metrics.v1alpha1.QueueDeadlinesReady"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
-   * CurrentCount is the number of commands that are ready.
+   * CurrentCount is the number of deadlines in the queue that are scheduled for
+   * a time that has come, and that have not had a failed delivery attempt. It
+   * is absent when the engine has stopped reporting this metric for the
+   * subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
 
 /**
- * Describes the message dogma.metrics.v1alpha1.QueueCommandsDue.
- * Use `create(QueueCommandsDueSchema)` to create a new message.
+ * Describes the message dogma.metrics.v1alpha1.QueueDeadlinesReady.
+ * Use `create(QueueDeadlinesReadySchema)` to create a new message.
  */
-export const QueueCommandsDueSchema: GenMessage<QueueCommandsDue> = /*@__PURE__*/
+export const QueueDeadlinesReadySchema: GenMessage<QueueDeadlinesReady> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 2);
 
 /**
- * QueueDeadlinesDue is the number of deadlines in a single logical queue that
- * are ready to be delivered now.
+ * QueueCommandsFailing is the number of commands in a single logical queue that
+ * have had at least one failed delivery attempt.
  *
- * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesDue
- */
-export type QueueDeadlinesDue = Message<"dogma.metrics.v1alpha1.QueueDeadlinesDue"> & {
-  /**
-   * QueueId is the ID of the queue.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
-   */
-  queueId?: UUID | undefined;
-
-  /**
-   * CurrentCount is the number of deadlines that are ready.
-   *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
-   */
-  currentCount: bigint;
-};
-
-/**
- * Describes the message dogma.metrics.v1alpha1.QueueDeadlinesDue.
- * Use `create(QueueDeadlinesDueSchema)` to create a new message.
- */
-export const QueueDeadlinesDueSchema: GenMessage<QueueDeadlinesDue> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 3);
-
-/**
- * QueueCommandsFailing is the number of commands in a single logical queue
- * whose most recent delivery attempt failed.
+ * A command stays failing for as long as it is in the queue, whether or not its
+ * next delivery attempt is due, and while that attempt is in progress.
+ *
+ * Each command in the queue is counted in either QueueCommandsReady or
+ * QueueCommandsFailing, so the number of commands in the queue is the total of
+ * the two.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueCommandsFailing
  */
 export type QueueCommandsFailing = Message<"dogma.metrics.v1alpha1.QueueCommandsFailing"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
-   * CurrentCount is the number of failing commands in the queue.
+   * CurrentCount is the number of commands in the queue that have had at least
+   * one failed delivery attempt. It is absent when the engine has stopped
+   * reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -157,26 +166,35 @@ export type QueueCommandsFailing = Message<"dogma.metrics.v1alpha1.QueueCommands
  * Use `create(QueueCommandsFailingSchema)` to create a new message.
  */
 export const QueueCommandsFailingSchema: GenMessage<QueueCommandsFailing> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 4);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 3);
 
 /**
  * QueueDeadlinesFailing is the number of deadlines in a single logical queue
- * whose most recent delivery attempt failed.
+ * that have had at least one failed delivery attempt.
+ *
+ * A deadline stays failing for as long as it is in the queue, whether or not
+ * its next delivery attempt is due, and while that attempt is in progress.
+ *
+ * Each deadline in the queue is counted in exactly one of
+ * QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
+ * the number of deadlines in the queue is the total of the three.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueDeadlinesFailing
  */
 export type QueueDeadlinesFailing = Message<"dogma.metrics.v1alpha1.QueueDeadlinesFailing"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
-   * CurrentCount is the number of failing deadlines in the queue.
+   * CurrentCount is the number of deadlines in the queue that have had at least
+   * one failed delivery attempt. It is absent when the engine has stopped
+   * reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -186,7 +204,7 @@ export type QueueDeadlinesFailing = Message<"dogma.metrics.v1alpha1.QueueDeadlin
  * Use `create(QueueDeadlinesFailingSchema)` to create a new message.
  */
 export const QueueDeadlinesFailingSchema: GenMessage<QueueDeadlinesFailing> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 5);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 4);
 
 /**
  * QueueCommandsRemoved is the cumulative count of the commands that have been
@@ -197,17 +215,18 @@ export const QueueDeadlinesFailingSchema: GenMessage<QueueDeadlinesFailing> = /*
  */
 export type QueueCommandsRemoved = Message<"dogma.metrics.v1alpha1.QueueCommandsRemoved"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CumulativeCount is the number of commands that have been removed from the
-   * queue.
+   * queue. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -217,7 +236,7 @@ export type QueueCommandsRemoved = Message<"dogma.metrics.v1alpha1.QueueCommands
  * Use `create(QueueCommandsRemovedSchema)` to create a new message.
  */
 export const QueueCommandsRemovedSchema: GenMessage<QueueCommandsRemoved> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 6);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 5);
 
 /**
  * QueueDeadlinesRemoved is the cumulative count of the deadlines that have been
@@ -228,17 +247,18 @@ export const QueueCommandsRemovedSchema: GenMessage<QueueCommandsRemoved> = /*@_
  */
 export type QueueDeadlinesRemoved = Message<"dogma.metrics.v1alpha1.QueueDeadlinesRemoved"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CumulativeCount is the number of deadlines that have been removed from the
-   * queue.
+   * queue. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -248,7 +268,7 @@ export type QueueDeadlinesRemoved = Message<"dogma.metrics.v1alpha1.QueueDeadlin
  * Use `create(QueueDeadlinesRemovedSchema)` to create a new message.
  */
 export const QueueDeadlinesRemovedSchema: GenMessage<QueueDeadlinesRemoved> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 7);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 6);
 
 /**
  * ProcessInstanceQueueBindings is the number of a process handler's instances
@@ -264,25 +284,19 @@ export const QueueDeadlinesRemovedSchema: GenMessage<QueueDeadlinesRemoved> = /*
  */
 export type ProcessInstanceQueueBindings = Message<"dogma.metrics.v1alpha1.ProcessInstanceQueueBindings"> & {
   /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
+   * Subject identifies the handler, and the queue that the instances are bound
+   * to if they are bound to one.
    *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   * @generated from field: dogma.metrics.v1alpha1.HandlerQueueSubject subject = 1;
    */
-  handlerKey?: UUID | undefined;
+  subject?: HandlerQueueSubject | undefined;
 
   /**
-   * QueueId is the ID of the queue that the instances are bound to. It is
-   * absent for the instances that are bound to none.
+   * CurrentCount is the number of instances bound to the queue, or to none. It
+   * is absent when the engine has stopped reporting this metric for the
+   * subject.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 2;
-   */
-  queueId?: UUID | undefined;
-
-  /**
-   * CurrentCount is the number of instances bound to the queue, or to none.
-   *
-   * @generated from field: uint64 current_count = 3 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -292,5 +306,5 @@ export type ProcessInstanceQueueBindings = Message<"dogma.metrics.v1alpha1.Proce
  * Use `create(ProcessInstanceQueueBindingsSchema)` to create a new message.
  */
 export const ProcessInstanceQueueBindingsSchema: GenMessage<ProcessInstanceQueueBindings> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 8);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue, 7);
 

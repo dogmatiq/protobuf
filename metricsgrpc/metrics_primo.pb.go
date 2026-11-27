@@ -35,11 +35,218 @@ func (x *WatchMetricsResponse) TryGetSample() (v *WatchMetricsResponse_Sample, o
 	return v, false
 }
 
-// TryGetTombstone returns the Tombstone value if x.Payload is set to Tombstone.
+// TryGetAggregateInstanceEventStreamBindings returns the AggregateInstanceEventStreamBindings value if x.Metric is set to AggregateInstanceEventStreamBindings.
 // Otherwise, ok is false and v is the zero-value.
-func (x *WatchMetricsResponse) TryGetTombstone() (v *WatchMetricsResponse_Tombstone, ok bool) {
-	if x.HasTombstone() {
-		return x.GetTombstone(), true
+func (x *WatchMetricsResponse_Sample) TryGetAggregateInstanceEventStreamBindings() (v *AggregateInstanceEventStreamBindings, ok bool) {
+	if x.HasAggregateInstanceEventStreamBindings() {
+		return x.GetAggregateInstanceEventStreamBindings(), true
+	}
+	return v, false
+}
+
+// TryGetEventStreamLength returns the EventStreamLength value if x.Metric is set to EventStreamLength.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetEventStreamLength() (v *EventStreamLength, ok bool) {
+	if x.HasEventStreamLength() {
+		return x.GetEventStreamLength(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerCommandsFailing returns the HandlerCommandsFailing value if x.Metric is set to HandlerCommandsFailing.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerCommandsFailing() (v *HandlerCommandsFailing, ok bool) {
+	if x.HasHandlerCommandsFailing() {
+		return x.GetHandlerCommandsFailing(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerCommandsHandled returns the HandlerCommandsHandled value if x.Metric is set to HandlerCommandsHandled.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerCommandsHandled() (v *HandlerCommandsHandled, ok bool) {
+	if x.HasHandlerCommandsHandled() {
+		return x.GetHandlerCommandsHandled(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerCommandsReady returns the HandlerCommandsReady value if x.Metric is set to HandlerCommandsReady.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerCommandsReady() (v *HandlerCommandsReady, ok bool) {
+	if x.HasHandlerCommandsReady() {
+		return x.GetHandlerCommandsReady(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerDeadlinesCanceled returns the HandlerDeadlinesCanceled value if x.Metric is set to HandlerDeadlinesCanceled.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerDeadlinesCanceled() (v *HandlerDeadlinesCanceled, ok bool) {
+	if x.HasHandlerDeadlinesCanceled() {
+		return x.GetHandlerDeadlinesCanceled(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerDeadlinesFailing returns the HandlerDeadlinesFailing value if x.Metric is set to HandlerDeadlinesFailing.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerDeadlinesFailing() (v *HandlerDeadlinesFailing, ok bool) {
+	if x.HasHandlerDeadlinesFailing() {
+		return x.GetHandlerDeadlinesFailing(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerDeadlinesHandled returns the HandlerDeadlinesHandled value if x.Metric is set to HandlerDeadlinesHandled.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerDeadlinesHandled() (v *HandlerDeadlinesHandled, ok bool) {
+	if x.HasHandlerDeadlinesHandled() {
+		return x.GetHandlerDeadlinesHandled(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerDeadlinesReady returns the HandlerDeadlinesReady value if x.Metric is set to HandlerDeadlinesReady.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerDeadlinesReady() (v *HandlerDeadlinesReady, ok bool) {
+	if x.HasHandlerDeadlinesReady() {
+		return x.GetHandlerDeadlinesReady(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerDeadlinesScheduled returns the HandlerDeadlinesScheduled value if x.Metric is set to HandlerDeadlinesScheduled.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerDeadlinesScheduled() (v *HandlerDeadlinesScheduled, ok bool) {
+	if x.HasHandlerDeadlinesScheduled() {
+		return x.GetHandlerDeadlinesScheduled(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerEventStreamLag returns the HandlerEventStreamLag value if x.Metric is set to HandlerEventStreamLag.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerEventStreamLag() (v *HandlerEventStreamLag, ok bool) {
+	if x.HasHandlerEventStreamLag() {
+		return x.GetHandlerEventStreamLag(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerEventStreamStaleness returns the HandlerEventStreamStaleness value if x.Metric is set to HandlerEventStreamStaleness.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerEventStreamStaleness() (v *HandlerEventStreamStaleness, ok bool) {
+	if x.HasHandlerEventStreamStaleness() {
+		return x.GetHandlerEventStreamStaleness(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerEventsFailing returns the HandlerEventsFailing value if x.Metric is set to HandlerEventsFailing.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerEventsFailing() (v *HandlerEventsFailing, ok bool) {
+	if x.HasHandlerEventsFailing() {
+		return x.GetHandlerEventsFailing(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerEventsHandled returns the HandlerEventsHandled value if x.Metric is set to HandlerEventsHandled.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerEventsHandled() (v *HandlerEventsHandled, ok bool) {
+	if x.HasHandlerEventsHandled() {
+		return x.GetHandlerEventsHandled(), true
+	}
+	return v, false
+}
+
+// TryGetHandlerEventsRecorded returns the HandlerEventsRecorded value if x.Metric is set to HandlerEventsRecorded.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetHandlerEventsRecorded() (v *HandlerEventsRecorded, ok bool) {
+	if x.HasHandlerEventsRecorded() {
+		return x.GetHandlerEventsRecorded(), true
+	}
+	return v, false
+}
+
+// TryGetProcessInstanceQueueBindings returns the ProcessInstanceQueueBindings value if x.Metric is set to ProcessInstanceQueueBindings.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetProcessInstanceQueueBindings() (v *ProcessInstanceQueueBindings, ok bool) {
+	if x.HasProcessInstanceQueueBindings() {
+		return x.GetProcessInstanceQueueBindings(), true
+	}
+	return v, false
+}
+
+// TryGetProcessInstancesEnded returns the ProcessInstancesEnded value if x.Metric is set to ProcessInstancesEnded.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetProcessInstancesEnded() (v *ProcessInstancesEnded, ok bool) {
+	if x.HasProcessInstancesEnded() {
+		return x.GetProcessInstancesEnded(), true
+	}
+	return v, false
+}
+
+// TryGetQueueCommandsFailing returns the QueueCommandsFailing value if x.Metric is set to QueueCommandsFailing.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetQueueCommandsFailing() (v *QueueCommandsFailing, ok bool) {
+	if x.HasQueueCommandsFailing() {
+		return x.GetQueueCommandsFailing(), true
+	}
+	return v, false
+}
+
+// TryGetQueueCommandsReady returns the QueueCommandsReady value if x.Metric is set to QueueCommandsReady.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetQueueCommandsReady() (v *QueueCommandsReady, ok bool) {
+	if x.HasQueueCommandsReady() {
+		return x.GetQueueCommandsReady(), true
+	}
+	return v, false
+}
+
+// TryGetQueueCommandsRemoved returns the QueueCommandsRemoved value if x.Metric is set to QueueCommandsRemoved.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetQueueCommandsRemoved() (v *QueueCommandsRemoved, ok bool) {
+	if x.HasQueueCommandsRemoved() {
+		return x.GetQueueCommandsRemoved(), true
+	}
+	return v, false
+}
+
+// TryGetQueueDeadlinesFailing returns the QueueDeadlinesFailing value if x.Metric is set to QueueDeadlinesFailing.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetQueueDeadlinesFailing() (v *QueueDeadlinesFailing, ok bool) {
+	if x.HasQueueDeadlinesFailing() {
+		return x.GetQueueDeadlinesFailing(), true
+	}
+	return v, false
+}
+
+// TryGetQueueDeadlinesReady returns the QueueDeadlinesReady value if x.Metric is set to QueueDeadlinesReady.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetQueueDeadlinesReady() (v *QueueDeadlinesReady, ok bool) {
+	if x.HasQueueDeadlinesReady() {
+		return x.GetQueueDeadlinesReady(), true
+	}
+	return v, false
+}
+
+// TryGetQueueDeadlinesRemoved returns the QueueDeadlinesRemoved value if x.Metric is set to QueueDeadlinesRemoved.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetQueueDeadlinesRemoved() (v *QueueDeadlinesRemoved, ok bool) {
+	if x.HasQueueDeadlinesRemoved() {
+		return x.GetQueueDeadlinesRemoved(), true
+	}
+	return v, false
+}
+
+// TryGetQueueDeadlinesScheduled returns the QueueDeadlinesScheduled value if x.Metric is set to QueueDeadlinesScheduled.
+// Otherwise, ok is false and v is the zero-value.
+func (x *WatchMetricsResponse_Sample) TryGetQueueDeadlinesScheduled() (v *QueueDeadlinesScheduled, ok bool) {
+	if x.HasQueueDeadlinesScheduled() {
+		return x.GetQueueDeadlinesScheduled(), true
 	}
 	return v, false
 }
@@ -122,9 +329,6 @@ func (b *WatchMetricsResponseBuilder) From(x *WatchMetricsResponse) *WatchMetric
 	if x.HasSample() {
 		b.prototype.SetSample(x.GetSample())
 	}
-	if x.HasTombstone() {
-		b.prototype.SetTombstone(x.GetTombstone())
-	}
 	return b
 }
 
@@ -140,9 +344,6 @@ func (b *WatchMetricsResponseBuilder) Build() *WatchMetricsResponse {
 	if b.prototype.HasSample() {
 		m.SetSample(b.prototype.GetSample())
 	}
-	if b.prototype.HasTombstone() {
-		m.SetTombstone(b.prototype.GetTombstone())
-	}
 	return m
 }
 
@@ -157,13 +358,6 @@ func (b *WatchMetricsResponseBuilder) WithPreamble(v *WatchMetricsResponse_Pream
 // then returns b.
 func (b *WatchMetricsResponseBuilder) WithSample(v *WatchMetricsResponse_Sample) *WatchMetricsResponseBuilder {
 	b.prototype.SetSample(v)
-	return b
-}
-
-// WithTombstone configures the builder to set the Tombstone field to v,
-// then returns b.
-func (b *WatchMetricsResponseBuilder) WithTombstone(v *WatchMetricsResponse_Tombstone) *WatchMetricsResponseBuilder {
-	b.prototype.SetTombstone(v)
 	return b
 }
 
@@ -259,10 +453,79 @@ func NewWatchMetricsResponse_SampleBuilder() *WatchMetricsResponse_SampleBuilder
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *WatchMetricsResponse_SampleBuilder) From(x *WatchMetricsResponse_Sample) *WatchMetricsResponse_SampleBuilder {
 	proto.Reset(&b.prototype)
-	b.prototype.SetMetricIndex(x.GetMetricIndex())
-	b.prototype.SetSubject(x.GetSubject())
-	b.prototype.SetValue(x.GetValue())
 	b.prototype.SetRevision(x.GetRevision())
+	if x.HasAggregateInstanceEventStreamBindings() {
+		b.prototype.SetAggregateInstanceEventStreamBindings(x.GetAggregateInstanceEventStreamBindings())
+	}
+	if x.HasEventStreamLength() {
+		b.prototype.SetEventStreamLength(x.GetEventStreamLength())
+	}
+	if x.HasHandlerCommandsFailing() {
+		b.prototype.SetHandlerCommandsFailing(x.GetHandlerCommandsFailing())
+	}
+	if x.HasHandlerCommandsHandled() {
+		b.prototype.SetHandlerCommandsHandled(x.GetHandlerCommandsHandled())
+	}
+	if x.HasHandlerCommandsReady() {
+		b.prototype.SetHandlerCommandsReady(x.GetHandlerCommandsReady())
+	}
+	if x.HasHandlerDeadlinesCanceled() {
+		b.prototype.SetHandlerDeadlinesCanceled(x.GetHandlerDeadlinesCanceled())
+	}
+	if x.HasHandlerDeadlinesFailing() {
+		b.prototype.SetHandlerDeadlinesFailing(x.GetHandlerDeadlinesFailing())
+	}
+	if x.HasHandlerDeadlinesHandled() {
+		b.prototype.SetHandlerDeadlinesHandled(x.GetHandlerDeadlinesHandled())
+	}
+	if x.HasHandlerDeadlinesReady() {
+		b.prototype.SetHandlerDeadlinesReady(x.GetHandlerDeadlinesReady())
+	}
+	if x.HasHandlerDeadlinesScheduled() {
+		b.prototype.SetHandlerDeadlinesScheduled(x.GetHandlerDeadlinesScheduled())
+	}
+	if x.HasHandlerEventStreamLag() {
+		b.prototype.SetHandlerEventStreamLag(x.GetHandlerEventStreamLag())
+	}
+	if x.HasHandlerEventStreamStaleness() {
+		b.prototype.SetHandlerEventStreamStaleness(x.GetHandlerEventStreamStaleness())
+	}
+	if x.HasHandlerEventsFailing() {
+		b.prototype.SetHandlerEventsFailing(x.GetHandlerEventsFailing())
+	}
+	if x.HasHandlerEventsHandled() {
+		b.prototype.SetHandlerEventsHandled(x.GetHandlerEventsHandled())
+	}
+	if x.HasHandlerEventsRecorded() {
+		b.prototype.SetHandlerEventsRecorded(x.GetHandlerEventsRecorded())
+	}
+	if x.HasProcessInstanceQueueBindings() {
+		b.prototype.SetProcessInstanceQueueBindings(x.GetProcessInstanceQueueBindings())
+	}
+	if x.HasProcessInstancesEnded() {
+		b.prototype.SetProcessInstancesEnded(x.GetProcessInstancesEnded())
+	}
+	if x.HasQueueCommandsFailing() {
+		b.prototype.SetQueueCommandsFailing(x.GetQueueCommandsFailing())
+	}
+	if x.HasQueueCommandsReady() {
+		b.prototype.SetQueueCommandsReady(x.GetQueueCommandsReady())
+	}
+	if x.HasQueueCommandsRemoved() {
+		b.prototype.SetQueueCommandsRemoved(x.GetQueueCommandsRemoved())
+	}
+	if x.HasQueueDeadlinesFailing() {
+		b.prototype.SetQueueDeadlinesFailing(x.GetQueueDeadlinesFailing())
+	}
+	if x.HasQueueDeadlinesReady() {
+		b.prototype.SetQueueDeadlinesReady(x.GetQueueDeadlinesReady())
+	}
+	if x.HasQueueDeadlinesRemoved() {
+		b.prototype.SetQueueDeadlinesRemoved(x.GetQueueDeadlinesRemoved())
+	}
+	if x.HasQueueDeadlinesScheduled() {
+		b.prototype.SetQueueDeadlinesScheduled(x.GetQueueDeadlinesScheduled())
+	}
 	return b
 }
 
@@ -272,32 +535,80 @@ func (b *WatchMetricsResponse_SampleBuilder) From(x *WatchMetricsResponse_Sample
 // not modify previously constructed messages.
 func (b *WatchMetricsResponse_SampleBuilder) Build() *WatchMetricsResponse_Sample {
 	m := &WatchMetricsResponse_Sample{}
-	m.SetMetricIndex(b.prototype.GetMetricIndex())
-	m.SetSubject(b.prototype.GetSubject())
-	m.SetValue(b.prototype.GetValue())
 	m.SetRevision(b.prototype.GetRevision())
+	if b.prototype.HasAggregateInstanceEventStreamBindings() {
+		m.SetAggregateInstanceEventStreamBindings(b.prototype.GetAggregateInstanceEventStreamBindings())
+	}
+	if b.prototype.HasEventStreamLength() {
+		m.SetEventStreamLength(b.prototype.GetEventStreamLength())
+	}
+	if b.prototype.HasHandlerCommandsFailing() {
+		m.SetHandlerCommandsFailing(b.prototype.GetHandlerCommandsFailing())
+	}
+	if b.prototype.HasHandlerCommandsHandled() {
+		m.SetHandlerCommandsHandled(b.prototype.GetHandlerCommandsHandled())
+	}
+	if b.prototype.HasHandlerCommandsReady() {
+		m.SetHandlerCommandsReady(b.prototype.GetHandlerCommandsReady())
+	}
+	if b.prototype.HasHandlerDeadlinesCanceled() {
+		m.SetHandlerDeadlinesCanceled(b.prototype.GetHandlerDeadlinesCanceled())
+	}
+	if b.prototype.HasHandlerDeadlinesFailing() {
+		m.SetHandlerDeadlinesFailing(b.prototype.GetHandlerDeadlinesFailing())
+	}
+	if b.prototype.HasHandlerDeadlinesHandled() {
+		m.SetHandlerDeadlinesHandled(b.prototype.GetHandlerDeadlinesHandled())
+	}
+	if b.prototype.HasHandlerDeadlinesReady() {
+		m.SetHandlerDeadlinesReady(b.prototype.GetHandlerDeadlinesReady())
+	}
+	if b.prototype.HasHandlerDeadlinesScheduled() {
+		m.SetHandlerDeadlinesScheduled(b.prototype.GetHandlerDeadlinesScheduled())
+	}
+	if b.prototype.HasHandlerEventStreamLag() {
+		m.SetHandlerEventStreamLag(b.prototype.GetHandlerEventStreamLag())
+	}
+	if b.prototype.HasHandlerEventStreamStaleness() {
+		m.SetHandlerEventStreamStaleness(b.prototype.GetHandlerEventStreamStaleness())
+	}
+	if b.prototype.HasHandlerEventsFailing() {
+		m.SetHandlerEventsFailing(b.prototype.GetHandlerEventsFailing())
+	}
+	if b.prototype.HasHandlerEventsHandled() {
+		m.SetHandlerEventsHandled(b.prototype.GetHandlerEventsHandled())
+	}
+	if b.prototype.HasHandlerEventsRecorded() {
+		m.SetHandlerEventsRecorded(b.prototype.GetHandlerEventsRecorded())
+	}
+	if b.prototype.HasProcessInstanceQueueBindings() {
+		m.SetProcessInstanceQueueBindings(b.prototype.GetProcessInstanceQueueBindings())
+	}
+	if b.prototype.HasProcessInstancesEnded() {
+		m.SetProcessInstancesEnded(b.prototype.GetProcessInstancesEnded())
+	}
+	if b.prototype.HasQueueCommandsFailing() {
+		m.SetQueueCommandsFailing(b.prototype.GetQueueCommandsFailing())
+	}
+	if b.prototype.HasQueueCommandsReady() {
+		m.SetQueueCommandsReady(b.prototype.GetQueueCommandsReady())
+	}
+	if b.prototype.HasQueueCommandsRemoved() {
+		m.SetQueueCommandsRemoved(b.prototype.GetQueueCommandsRemoved())
+	}
+	if b.prototype.HasQueueDeadlinesFailing() {
+		m.SetQueueDeadlinesFailing(b.prototype.GetQueueDeadlinesFailing())
+	}
+	if b.prototype.HasQueueDeadlinesReady() {
+		m.SetQueueDeadlinesReady(b.prototype.GetQueueDeadlinesReady())
+	}
+	if b.prototype.HasQueueDeadlinesRemoved() {
+		m.SetQueueDeadlinesRemoved(b.prototype.GetQueueDeadlinesRemoved())
+	}
+	if b.prototype.HasQueueDeadlinesScheduled() {
+		m.SetQueueDeadlinesScheduled(b.prototype.GetQueueDeadlinesScheduled())
+	}
 	return m
-}
-
-// WithMetricIndex configures the builder to set the MetricIndex field to v,
-// then returns b.
-func (b *WatchMetricsResponse_SampleBuilder) WithMetricIndex(v uint32) *WatchMetricsResponse_SampleBuilder {
-	b.prototype.SetMetricIndex(v)
-	return b
-}
-
-// WithSubject configures the builder to set the Subject field to v,
-// then returns b.
-func (b *WatchMetricsResponse_SampleBuilder) WithSubject(v []byte) *WatchMetricsResponse_SampleBuilder {
-	b.prototype.SetSubject(v)
-	return b
-}
-
-// WithValue configures the builder to set the Value field to v,
-// then returns b.
-func (b *WatchMetricsResponse_SampleBuilder) WithValue(v []byte) *WatchMetricsResponse_SampleBuilder {
-	b.prototype.SetValue(v)
-	return b
 }
 
 // WithRevision configures the builder to set the Revision field to v,
@@ -307,58 +618,171 @@ func (b *WatchMetricsResponse_SampleBuilder) WithRevision(v []byte) *WatchMetric
 	return b
 }
 
-type WatchMetricsResponse_TombstoneBuilder struct {
-	prototype WatchMetricsResponse_Tombstone
-}
-
-// NewWatchMetricsResponse_TombstoneBuilder returns a builder that constructs [WatchMetricsResponse_Tombstone] messages.
-func NewWatchMetricsResponse_TombstoneBuilder() *WatchMetricsResponse_TombstoneBuilder {
-	return &WatchMetricsResponse_TombstoneBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
+// WithAggregateInstanceEventStreamBindings configures the builder to set the AggregateInstanceEventStreamBindings field to v,
 // then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *WatchMetricsResponse_TombstoneBuilder) From(x *WatchMetricsResponse_Tombstone) *WatchMetricsResponse_TombstoneBuilder {
-	proto.Reset(&b.prototype)
-	b.prototype.SetMetricIndex(x.GetMetricIndex())
-	b.prototype.SetSubject(x.GetSubject())
-	b.prototype.SetRevision(x.GetRevision())
+func (b *WatchMetricsResponse_SampleBuilder) WithAggregateInstanceEventStreamBindings(v *AggregateInstanceEventStreamBindings) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetAggregateInstanceEventStreamBindings(v)
 	return b
 }
 
-// Build returns a new [WatchMetricsResponse_Tombstone] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *WatchMetricsResponse_TombstoneBuilder) Build() *WatchMetricsResponse_Tombstone {
-	m := &WatchMetricsResponse_Tombstone{}
-	m.SetMetricIndex(b.prototype.GetMetricIndex())
-	m.SetSubject(b.prototype.GetSubject())
-	m.SetRevision(b.prototype.GetRevision())
-	return m
-}
-
-// WithMetricIndex configures the builder to set the MetricIndex field to v,
+// WithEventStreamLength configures the builder to set the EventStreamLength field to v,
 // then returns b.
-func (b *WatchMetricsResponse_TombstoneBuilder) WithMetricIndex(v uint32) *WatchMetricsResponse_TombstoneBuilder {
-	b.prototype.SetMetricIndex(v)
+func (b *WatchMetricsResponse_SampleBuilder) WithEventStreamLength(v *EventStreamLength) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetEventStreamLength(v)
 	return b
 }
 
-// WithSubject configures the builder to set the Subject field to v,
+// WithHandlerCommandsFailing configures the builder to set the HandlerCommandsFailing field to v,
 // then returns b.
-func (b *WatchMetricsResponse_TombstoneBuilder) WithSubject(v []byte) *WatchMetricsResponse_TombstoneBuilder {
-	b.prototype.SetSubject(v)
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerCommandsFailing(v *HandlerCommandsFailing) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerCommandsFailing(v)
 	return b
 }
 
-// WithRevision configures the builder to set the Revision field to v,
+// WithHandlerCommandsHandled configures the builder to set the HandlerCommandsHandled field to v,
 // then returns b.
-func (b *WatchMetricsResponse_TombstoneBuilder) WithRevision(v []byte) *WatchMetricsResponse_TombstoneBuilder {
-	b.prototype.SetRevision(v)
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerCommandsHandled(v *HandlerCommandsHandled) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerCommandsHandled(v)
+	return b
+}
+
+// WithHandlerCommandsReady configures the builder to set the HandlerCommandsReady field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerCommandsReady(v *HandlerCommandsReady) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerCommandsReady(v)
+	return b
+}
+
+// WithHandlerDeadlinesCanceled configures the builder to set the HandlerDeadlinesCanceled field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerDeadlinesCanceled(v *HandlerDeadlinesCanceled) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerDeadlinesCanceled(v)
+	return b
+}
+
+// WithHandlerDeadlinesFailing configures the builder to set the HandlerDeadlinesFailing field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerDeadlinesFailing(v *HandlerDeadlinesFailing) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerDeadlinesFailing(v)
+	return b
+}
+
+// WithHandlerDeadlinesHandled configures the builder to set the HandlerDeadlinesHandled field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerDeadlinesHandled(v *HandlerDeadlinesHandled) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerDeadlinesHandled(v)
+	return b
+}
+
+// WithHandlerDeadlinesReady configures the builder to set the HandlerDeadlinesReady field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerDeadlinesReady(v *HandlerDeadlinesReady) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerDeadlinesReady(v)
+	return b
+}
+
+// WithHandlerDeadlinesScheduled configures the builder to set the HandlerDeadlinesScheduled field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerDeadlinesScheduled(v *HandlerDeadlinesScheduled) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerDeadlinesScheduled(v)
+	return b
+}
+
+// WithHandlerEventStreamLag configures the builder to set the HandlerEventStreamLag field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerEventStreamLag(v *HandlerEventStreamLag) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerEventStreamLag(v)
+	return b
+}
+
+// WithHandlerEventStreamStaleness configures the builder to set the HandlerEventStreamStaleness field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerEventStreamStaleness(v *HandlerEventStreamStaleness) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerEventStreamStaleness(v)
+	return b
+}
+
+// WithHandlerEventsFailing configures the builder to set the HandlerEventsFailing field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerEventsFailing(v *HandlerEventsFailing) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerEventsFailing(v)
+	return b
+}
+
+// WithHandlerEventsHandled configures the builder to set the HandlerEventsHandled field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerEventsHandled(v *HandlerEventsHandled) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerEventsHandled(v)
+	return b
+}
+
+// WithHandlerEventsRecorded configures the builder to set the HandlerEventsRecorded field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithHandlerEventsRecorded(v *HandlerEventsRecorded) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetHandlerEventsRecorded(v)
+	return b
+}
+
+// WithProcessInstanceQueueBindings configures the builder to set the ProcessInstanceQueueBindings field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithProcessInstanceQueueBindings(v *ProcessInstanceQueueBindings) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetProcessInstanceQueueBindings(v)
+	return b
+}
+
+// WithProcessInstancesEnded configures the builder to set the ProcessInstancesEnded field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithProcessInstancesEnded(v *ProcessInstancesEnded) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetProcessInstancesEnded(v)
+	return b
+}
+
+// WithQueueCommandsFailing configures the builder to set the QueueCommandsFailing field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithQueueCommandsFailing(v *QueueCommandsFailing) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetQueueCommandsFailing(v)
+	return b
+}
+
+// WithQueueCommandsReady configures the builder to set the QueueCommandsReady field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithQueueCommandsReady(v *QueueCommandsReady) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetQueueCommandsReady(v)
+	return b
+}
+
+// WithQueueCommandsRemoved configures the builder to set the QueueCommandsRemoved field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithQueueCommandsRemoved(v *QueueCommandsRemoved) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetQueueCommandsRemoved(v)
+	return b
+}
+
+// WithQueueDeadlinesFailing configures the builder to set the QueueDeadlinesFailing field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithQueueDeadlinesFailing(v *QueueDeadlinesFailing) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetQueueDeadlinesFailing(v)
+	return b
+}
+
+// WithQueueDeadlinesReady configures the builder to set the QueueDeadlinesReady field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithQueueDeadlinesReady(v *QueueDeadlinesReady) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetQueueDeadlinesReady(v)
+	return b
+}
+
+// WithQueueDeadlinesRemoved configures the builder to set the QueueDeadlinesRemoved field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithQueueDeadlinesRemoved(v *QueueDeadlinesRemoved) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetQueueDeadlinesRemoved(v)
+	return b
+}
+
+// WithQueueDeadlinesScheduled configures the builder to set the QueueDeadlinesScheduled field to v,
+// then returns b.
+func (b *WatchMetricsResponse_SampleBuilder) WithQueueDeadlinesScheduled(v *QueueDeadlinesScheduled) *WatchMetricsResponse_SampleBuilder {
+	b.prototype.SetQueueDeadlinesScheduled(v)
 	return b
 }
 
@@ -370,15 +794,12 @@ func MustSwitch_WatchMetricsResponse_Payload(
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble),
 	caseSample func(*WatchMetricsResponse_Sample),
-	caseTombstone func(*WatchMetricsResponse_Tombstone),
 ) {
 	switch x.WhichPayload() {
 	case WatchMetricsResponse_Preamble_case:
 		casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		caseSample(x.GetSample())
-	case WatchMetricsResponse_Tombstone_case:
-		caseTombstone(x.GetTombstone())
 	default:
 		panic("MustSwitch_WatchMetricsResponse_Payload: x.Payload is not set")
 	}
@@ -392,7 +813,6 @@ func Switch_WatchMetricsResponse_Payload(
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble),
 	caseSample func(*WatchMetricsResponse_Sample),
-	caseTombstone func(*WatchMetricsResponse_Tombstone),
 	none func(),
 ) {
 	switch x.WhichPayload() {
@@ -400,8 +820,6 @@ func Switch_WatchMetricsResponse_Payload(
 		casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		caseSample(x.GetSample())
-	case WatchMetricsResponse_Tombstone_case:
-		caseTombstone(x.GetTombstone())
 	default:
 		none()
 	}
@@ -416,15 +834,12 @@ func MustMap_WatchMetricsResponse_Payload[T any](
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble) T,
 	caseSample func(*WatchMetricsResponse_Sample) T,
-	caseTombstone func(*WatchMetricsResponse_Tombstone) T,
 ) T {
 	switch x.WhichPayload() {
 	case WatchMetricsResponse_Preamble_case:
 		return casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		return caseSample(x.GetSample())
-	case WatchMetricsResponse_Tombstone_case:
-		return caseTombstone(x.GetTombstone())
 	default:
 		panic("MustMap_WatchMetricsResponse_Payload: x.Payload is not set")
 	}
@@ -439,7 +854,6 @@ func Map_WatchMetricsResponse_Payload[T any](
 	x *WatchMetricsResponse,
 	casePreamble func(*WatchMetricsResponse_Preamble) T,
 	caseSample func(*WatchMetricsResponse_Sample) T,
-	caseTombstone func(*WatchMetricsResponse_Tombstone) T,
 	none func() T,
 ) T {
 	switch x.WhichPayload() {
@@ -447,8 +861,350 @@ func Map_WatchMetricsResponse_Payload[T any](
 		return casePreamble(x.GetPreamble())
 	case WatchMetricsResponse_Sample_case:
 		return caseSample(x.GetSample())
-	case WatchMetricsResponse_Tombstone_case:
-		return caseTombstone(x.GetTombstone())
+	default:
+		return none()
+	}
+}
+
+// MustSwitch_WatchMetricsResponse_Sample_Metric invokes one of the given functions based on
+// the value of x.Metric.
+//
+// It panics if x.Metric is nil.
+func MustSwitch_WatchMetricsResponse_Sample_Metric(
+	x *WatchMetricsResponse_Sample,
+	caseAggregateInstanceEventStreamBindings func(*AggregateInstanceEventStreamBindings),
+	caseEventStreamLength func(*EventStreamLength),
+	caseHandlerCommandsFailing func(*HandlerCommandsFailing),
+	caseHandlerCommandsHandled func(*HandlerCommandsHandled),
+	caseHandlerCommandsReady func(*HandlerCommandsReady),
+	caseHandlerDeadlinesCanceled func(*HandlerDeadlinesCanceled),
+	caseHandlerDeadlinesFailing func(*HandlerDeadlinesFailing),
+	caseHandlerDeadlinesHandled func(*HandlerDeadlinesHandled),
+	caseHandlerDeadlinesReady func(*HandlerDeadlinesReady),
+	caseHandlerDeadlinesScheduled func(*HandlerDeadlinesScheduled),
+	caseHandlerEventStreamLag func(*HandlerEventStreamLag),
+	caseHandlerEventStreamStaleness func(*HandlerEventStreamStaleness),
+	caseHandlerEventsFailing func(*HandlerEventsFailing),
+	caseHandlerEventsHandled func(*HandlerEventsHandled),
+	caseHandlerEventsRecorded func(*HandlerEventsRecorded),
+	caseProcessInstanceQueueBindings func(*ProcessInstanceQueueBindings),
+	caseProcessInstancesEnded func(*ProcessInstancesEnded),
+	caseQueueCommandsFailing func(*QueueCommandsFailing),
+	caseQueueCommandsReady func(*QueueCommandsReady),
+	caseQueueCommandsRemoved func(*QueueCommandsRemoved),
+	caseQueueDeadlinesFailing func(*QueueDeadlinesFailing),
+	caseQueueDeadlinesReady func(*QueueDeadlinesReady),
+	caseQueueDeadlinesRemoved func(*QueueDeadlinesRemoved),
+	caseQueueDeadlinesScheduled func(*QueueDeadlinesScheduled),
+) {
+	switch x.WhichMetric() {
+	case WatchMetricsResponse_Sample_AggregateInstanceEventStreamBindings_case:
+		caseAggregateInstanceEventStreamBindings(x.GetAggregateInstanceEventStreamBindings())
+	case WatchMetricsResponse_Sample_EventStreamLength_case:
+		caseEventStreamLength(x.GetEventStreamLength())
+	case WatchMetricsResponse_Sample_HandlerCommandsFailing_case:
+		caseHandlerCommandsFailing(x.GetHandlerCommandsFailing())
+	case WatchMetricsResponse_Sample_HandlerCommandsHandled_case:
+		caseHandlerCommandsHandled(x.GetHandlerCommandsHandled())
+	case WatchMetricsResponse_Sample_HandlerCommandsReady_case:
+		caseHandlerCommandsReady(x.GetHandlerCommandsReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesCanceled_case:
+		caseHandlerDeadlinesCanceled(x.GetHandlerDeadlinesCanceled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesFailing_case:
+		caseHandlerDeadlinesFailing(x.GetHandlerDeadlinesFailing())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesHandled_case:
+		caseHandlerDeadlinesHandled(x.GetHandlerDeadlinesHandled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesReady_case:
+		caseHandlerDeadlinesReady(x.GetHandlerDeadlinesReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesScheduled_case:
+		caseHandlerDeadlinesScheduled(x.GetHandlerDeadlinesScheduled())
+	case WatchMetricsResponse_Sample_HandlerEventStreamLag_case:
+		caseHandlerEventStreamLag(x.GetHandlerEventStreamLag())
+	case WatchMetricsResponse_Sample_HandlerEventStreamStaleness_case:
+		caseHandlerEventStreamStaleness(x.GetHandlerEventStreamStaleness())
+	case WatchMetricsResponse_Sample_HandlerEventsFailing_case:
+		caseHandlerEventsFailing(x.GetHandlerEventsFailing())
+	case WatchMetricsResponse_Sample_HandlerEventsHandled_case:
+		caseHandlerEventsHandled(x.GetHandlerEventsHandled())
+	case WatchMetricsResponse_Sample_HandlerEventsRecorded_case:
+		caseHandlerEventsRecorded(x.GetHandlerEventsRecorded())
+	case WatchMetricsResponse_Sample_ProcessInstanceQueueBindings_case:
+		caseProcessInstanceQueueBindings(x.GetProcessInstanceQueueBindings())
+	case WatchMetricsResponse_Sample_ProcessInstancesEnded_case:
+		caseProcessInstancesEnded(x.GetProcessInstancesEnded())
+	case WatchMetricsResponse_Sample_QueueCommandsFailing_case:
+		caseQueueCommandsFailing(x.GetQueueCommandsFailing())
+	case WatchMetricsResponse_Sample_QueueCommandsReady_case:
+		caseQueueCommandsReady(x.GetQueueCommandsReady())
+	case WatchMetricsResponse_Sample_QueueCommandsRemoved_case:
+		caseQueueCommandsRemoved(x.GetQueueCommandsRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesFailing_case:
+		caseQueueDeadlinesFailing(x.GetQueueDeadlinesFailing())
+	case WatchMetricsResponse_Sample_QueueDeadlinesReady_case:
+		caseQueueDeadlinesReady(x.GetQueueDeadlinesReady())
+	case WatchMetricsResponse_Sample_QueueDeadlinesRemoved_case:
+		caseQueueDeadlinesRemoved(x.GetQueueDeadlinesRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesScheduled_case:
+		caseQueueDeadlinesScheduled(x.GetQueueDeadlinesScheduled())
+	default:
+		panic("MustSwitch_WatchMetricsResponse_Sample_Metric: x.Metric is not set")
+	}
+}
+
+// Switch_WatchMetricsResponse_Sample_Metric invokes one of the given functions based on
+// the value of x.Metric.
+//
+// It calls none() if x.Metric is nil.
+func Switch_WatchMetricsResponse_Sample_Metric(
+	x *WatchMetricsResponse_Sample,
+	caseAggregateInstanceEventStreamBindings func(*AggregateInstanceEventStreamBindings),
+	caseEventStreamLength func(*EventStreamLength),
+	caseHandlerCommandsFailing func(*HandlerCommandsFailing),
+	caseHandlerCommandsHandled func(*HandlerCommandsHandled),
+	caseHandlerCommandsReady func(*HandlerCommandsReady),
+	caseHandlerDeadlinesCanceled func(*HandlerDeadlinesCanceled),
+	caseHandlerDeadlinesFailing func(*HandlerDeadlinesFailing),
+	caseHandlerDeadlinesHandled func(*HandlerDeadlinesHandled),
+	caseHandlerDeadlinesReady func(*HandlerDeadlinesReady),
+	caseHandlerDeadlinesScheduled func(*HandlerDeadlinesScheduled),
+	caseHandlerEventStreamLag func(*HandlerEventStreamLag),
+	caseHandlerEventStreamStaleness func(*HandlerEventStreamStaleness),
+	caseHandlerEventsFailing func(*HandlerEventsFailing),
+	caseHandlerEventsHandled func(*HandlerEventsHandled),
+	caseHandlerEventsRecorded func(*HandlerEventsRecorded),
+	caseProcessInstanceQueueBindings func(*ProcessInstanceQueueBindings),
+	caseProcessInstancesEnded func(*ProcessInstancesEnded),
+	caseQueueCommandsFailing func(*QueueCommandsFailing),
+	caseQueueCommandsReady func(*QueueCommandsReady),
+	caseQueueCommandsRemoved func(*QueueCommandsRemoved),
+	caseQueueDeadlinesFailing func(*QueueDeadlinesFailing),
+	caseQueueDeadlinesReady func(*QueueDeadlinesReady),
+	caseQueueDeadlinesRemoved func(*QueueDeadlinesRemoved),
+	caseQueueDeadlinesScheduled func(*QueueDeadlinesScheduled),
+	none func(),
+) {
+	switch x.WhichMetric() {
+	case WatchMetricsResponse_Sample_AggregateInstanceEventStreamBindings_case:
+		caseAggregateInstanceEventStreamBindings(x.GetAggregateInstanceEventStreamBindings())
+	case WatchMetricsResponse_Sample_EventStreamLength_case:
+		caseEventStreamLength(x.GetEventStreamLength())
+	case WatchMetricsResponse_Sample_HandlerCommandsFailing_case:
+		caseHandlerCommandsFailing(x.GetHandlerCommandsFailing())
+	case WatchMetricsResponse_Sample_HandlerCommandsHandled_case:
+		caseHandlerCommandsHandled(x.GetHandlerCommandsHandled())
+	case WatchMetricsResponse_Sample_HandlerCommandsReady_case:
+		caseHandlerCommandsReady(x.GetHandlerCommandsReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesCanceled_case:
+		caseHandlerDeadlinesCanceled(x.GetHandlerDeadlinesCanceled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesFailing_case:
+		caseHandlerDeadlinesFailing(x.GetHandlerDeadlinesFailing())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesHandled_case:
+		caseHandlerDeadlinesHandled(x.GetHandlerDeadlinesHandled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesReady_case:
+		caseHandlerDeadlinesReady(x.GetHandlerDeadlinesReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesScheduled_case:
+		caseHandlerDeadlinesScheduled(x.GetHandlerDeadlinesScheduled())
+	case WatchMetricsResponse_Sample_HandlerEventStreamLag_case:
+		caseHandlerEventStreamLag(x.GetHandlerEventStreamLag())
+	case WatchMetricsResponse_Sample_HandlerEventStreamStaleness_case:
+		caseHandlerEventStreamStaleness(x.GetHandlerEventStreamStaleness())
+	case WatchMetricsResponse_Sample_HandlerEventsFailing_case:
+		caseHandlerEventsFailing(x.GetHandlerEventsFailing())
+	case WatchMetricsResponse_Sample_HandlerEventsHandled_case:
+		caseHandlerEventsHandled(x.GetHandlerEventsHandled())
+	case WatchMetricsResponse_Sample_HandlerEventsRecorded_case:
+		caseHandlerEventsRecorded(x.GetHandlerEventsRecorded())
+	case WatchMetricsResponse_Sample_ProcessInstanceQueueBindings_case:
+		caseProcessInstanceQueueBindings(x.GetProcessInstanceQueueBindings())
+	case WatchMetricsResponse_Sample_ProcessInstancesEnded_case:
+		caseProcessInstancesEnded(x.GetProcessInstancesEnded())
+	case WatchMetricsResponse_Sample_QueueCommandsFailing_case:
+		caseQueueCommandsFailing(x.GetQueueCommandsFailing())
+	case WatchMetricsResponse_Sample_QueueCommandsReady_case:
+		caseQueueCommandsReady(x.GetQueueCommandsReady())
+	case WatchMetricsResponse_Sample_QueueCommandsRemoved_case:
+		caseQueueCommandsRemoved(x.GetQueueCommandsRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesFailing_case:
+		caseQueueDeadlinesFailing(x.GetQueueDeadlinesFailing())
+	case WatchMetricsResponse_Sample_QueueDeadlinesReady_case:
+		caseQueueDeadlinesReady(x.GetQueueDeadlinesReady())
+	case WatchMetricsResponse_Sample_QueueDeadlinesRemoved_case:
+		caseQueueDeadlinesRemoved(x.GetQueueDeadlinesRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesScheduled_case:
+		caseQueueDeadlinesScheduled(x.GetQueueDeadlinesScheduled())
+	default:
+		none()
+	}
+}
+
+// MustMap_WatchMetricsResponse_Sample_Metric maps x.Metric to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Metric,
+// and returns that function's result. It panics if x.Metric is nil.
+func MustMap_WatchMetricsResponse_Sample_Metric[T any](
+	x *WatchMetricsResponse_Sample,
+	caseAggregateInstanceEventStreamBindings func(*AggregateInstanceEventStreamBindings) T,
+	caseEventStreamLength func(*EventStreamLength) T,
+	caseHandlerCommandsFailing func(*HandlerCommandsFailing) T,
+	caseHandlerCommandsHandled func(*HandlerCommandsHandled) T,
+	caseHandlerCommandsReady func(*HandlerCommandsReady) T,
+	caseHandlerDeadlinesCanceled func(*HandlerDeadlinesCanceled) T,
+	caseHandlerDeadlinesFailing func(*HandlerDeadlinesFailing) T,
+	caseHandlerDeadlinesHandled func(*HandlerDeadlinesHandled) T,
+	caseHandlerDeadlinesReady func(*HandlerDeadlinesReady) T,
+	caseHandlerDeadlinesScheduled func(*HandlerDeadlinesScheduled) T,
+	caseHandlerEventStreamLag func(*HandlerEventStreamLag) T,
+	caseHandlerEventStreamStaleness func(*HandlerEventStreamStaleness) T,
+	caseHandlerEventsFailing func(*HandlerEventsFailing) T,
+	caseHandlerEventsHandled func(*HandlerEventsHandled) T,
+	caseHandlerEventsRecorded func(*HandlerEventsRecorded) T,
+	caseProcessInstanceQueueBindings func(*ProcessInstanceQueueBindings) T,
+	caseProcessInstancesEnded func(*ProcessInstancesEnded) T,
+	caseQueueCommandsFailing func(*QueueCommandsFailing) T,
+	caseQueueCommandsReady func(*QueueCommandsReady) T,
+	caseQueueCommandsRemoved func(*QueueCommandsRemoved) T,
+	caseQueueDeadlinesFailing func(*QueueDeadlinesFailing) T,
+	caseQueueDeadlinesReady func(*QueueDeadlinesReady) T,
+	caseQueueDeadlinesRemoved func(*QueueDeadlinesRemoved) T,
+	caseQueueDeadlinesScheduled func(*QueueDeadlinesScheduled) T,
+) T {
+	switch x.WhichMetric() {
+	case WatchMetricsResponse_Sample_AggregateInstanceEventStreamBindings_case:
+		return caseAggregateInstanceEventStreamBindings(x.GetAggregateInstanceEventStreamBindings())
+	case WatchMetricsResponse_Sample_EventStreamLength_case:
+		return caseEventStreamLength(x.GetEventStreamLength())
+	case WatchMetricsResponse_Sample_HandlerCommandsFailing_case:
+		return caseHandlerCommandsFailing(x.GetHandlerCommandsFailing())
+	case WatchMetricsResponse_Sample_HandlerCommandsHandled_case:
+		return caseHandlerCommandsHandled(x.GetHandlerCommandsHandled())
+	case WatchMetricsResponse_Sample_HandlerCommandsReady_case:
+		return caseHandlerCommandsReady(x.GetHandlerCommandsReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesCanceled_case:
+		return caseHandlerDeadlinesCanceled(x.GetHandlerDeadlinesCanceled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesFailing_case:
+		return caseHandlerDeadlinesFailing(x.GetHandlerDeadlinesFailing())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesHandled_case:
+		return caseHandlerDeadlinesHandled(x.GetHandlerDeadlinesHandled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesReady_case:
+		return caseHandlerDeadlinesReady(x.GetHandlerDeadlinesReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesScheduled_case:
+		return caseHandlerDeadlinesScheduled(x.GetHandlerDeadlinesScheduled())
+	case WatchMetricsResponse_Sample_HandlerEventStreamLag_case:
+		return caseHandlerEventStreamLag(x.GetHandlerEventStreamLag())
+	case WatchMetricsResponse_Sample_HandlerEventStreamStaleness_case:
+		return caseHandlerEventStreamStaleness(x.GetHandlerEventStreamStaleness())
+	case WatchMetricsResponse_Sample_HandlerEventsFailing_case:
+		return caseHandlerEventsFailing(x.GetHandlerEventsFailing())
+	case WatchMetricsResponse_Sample_HandlerEventsHandled_case:
+		return caseHandlerEventsHandled(x.GetHandlerEventsHandled())
+	case WatchMetricsResponse_Sample_HandlerEventsRecorded_case:
+		return caseHandlerEventsRecorded(x.GetHandlerEventsRecorded())
+	case WatchMetricsResponse_Sample_ProcessInstanceQueueBindings_case:
+		return caseProcessInstanceQueueBindings(x.GetProcessInstanceQueueBindings())
+	case WatchMetricsResponse_Sample_ProcessInstancesEnded_case:
+		return caseProcessInstancesEnded(x.GetProcessInstancesEnded())
+	case WatchMetricsResponse_Sample_QueueCommandsFailing_case:
+		return caseQueueCommandsFailing(x.GetQueueCommandsFailing())
+	case WatchMetricsResponse_Sample_QueueCommandsReady_case:
+		return caseQueueCommandsReady(x.GetQueueCommandsReady())
+	case WatchMetricsResponse_Sample_QueueCommandsRemoved_case:
+		return caseQueueCommandsRemoved(x.GetQueueCommandsRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesFailing_case:
+		return caseQueueDeadlinesFailing(x.GetQueueDeadlinesFailing())
+	case WatchMetricsResponse_Sample_QueueDeadlinesReady_case:
+		return caseQueueDeadlinesReady(x.GetQueueDeadlinesReady())
+	case WatchMetricsResponse_Sample_QueueDeadlinesRemoved_case:
+		return caseQueueDeadlinesRemoved(x.GetQueueDeadlinesRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesScheduled_case:
+		return caseQueueDeadlinesScheduled(x.GetQueueDeadlinesScheduled())
+	default:
+		panic("MustMap_WatchMetricsResponse_Sample_Metric: x.Metric is not set")
+	}
+}
+
+// Map_WatchMetricsResponse_Sample_Metric maps x.Metric to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Metric,
+// and returns that function's result. It calls none() if x.Metric is nil.
+func Map_WatchMetricsResponse_Sample_Metric[T any](
+	x *WatchMetricsResponse_Sample,
+	caseAggregateInstanceEventStreamBindings func(*AggregateInstanceEventStreamBindings) T,
+	caseEventStreamLength func(*EventStreamLength) T,
+	caseHandlerCommandsFailing func(*HandlerCommandsFailing) T,
+	caseHandlerCommandsHandled func(*HandlerCommandsHandled) T,
+	caseHandlerCommandsReady func(*HandlerCommandsReady) T,
+	caseHandlerDeadlinesCanceled func(*HandlerDeadlinesCanceled) T,
+	caseHandlerDeadlinesFailing func(*HandlerDeadlinesFailing) T,
+	caseHandlerDeadlinesHandled func(*HandlerDeadlinesHandled) T,
+	caseHandlerDeadlinesReady func(*HandlerDeadlinesReady) T,
+	caseHandlerDeadlinesScheduled func(*HandlerDeadlinesScheduled) T,
+	caseHandlerEventStreamLag func(*HandlerEventStreamLag) T,
+	caseHandlerEventStreamStaleness func(*HandlerEventStreamStaleness) T,
+	caseHandlerEventsFailing func(*HandlerEventsFailing) T,
+	caseHandlerEventsHandled func(*HandlerEventsHandled) T,
+	caseHandlerEventsRecorded func(*HandlerEventsRecorded) T,
+	caseProcessInstanceQueueBindings func(*ProcessInstanceQueueBindings) T,
+	caseProcessInstancesEnded func(*ProcessInstancesEnded) T,
+	caseQueueCommandsFailing func(*QueueCommandsFailing) T,
+	caseQueueCommandsReady func(*QueueCommandsReady) T,
+	caseQueueCommandsRemoved func(*QueueCommandsRemoved) T,
+	caseQueueDeadlinesFailing func(*QueueDeadlinesFailing) T,
+	caseQueueDeadlinesReady func(*QueueDeadlinesReady) T,
+	caseQueueDeadlinesRemoved func(*QueueDeadlinesRemoved) T,
+	caseQueueDeadlinesScheduled func(*QueueDeadlinesScheduled) T,
+	none func() T,
+) T {
+	switch x.WhichMetric() {
+	case WatchMetricsResponse_Sample_AggregateInstanceEventStreamBindings_case:
+		return caseAggregateInstanceEventStreamBindings(x.GetAggregateInstanceEventStreamBindings())
+	case WatchMetricsResponse_Sample_EventStreamLength_case:
+		return caseEventStreamLength(x.GetEventStreamLength())
+	case WatchMetricsResponse_Sample_HandlerCommandsFailing_case:
+		return caseHandlerCommandsFailing(x.GetHandlerCommandsFailing())
+	case WatchMetricsResponse_Sample_HandlerCommandsHandled_case:
+		return caseHandlerCommandsHandled(x.GetHandlerCommandsHandled())
+	case WatchMetricsResponse_Sample_HandlerCommandsReady_case:
+		return caseHandlerCommandsReady(x.GetHandlerCommandsReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesCanceled_case:
+		return caseHandlerDeadlinesCanceled(x.GetHandlerDeadlinesCanceled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesFailing_case:
+		return caseHandlerDeadlinesFailing(x.GetHandlerDeadlinesFailing())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesHandled_case:
+		return caseHandlerDeadlinesHandled(x.GetHandlerDeadlinesHandled())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesReady_case:
+		return caseHandlerDeadlinesReady(x.GetHandlerDeadlinesReady())
+	case WatchMetricsResponse_Sample_HandlerDeadlinesScheduled_case:
+		return caseHandlerDeadlinesScheduled(x.GetHandlerDeadlinesScheduled())
+	case WatchMetricsResponse_Sample_HandlerEventStreamLag_case:
+		return caseHandlerEventStreamLag(x.GetHandlerEventStreamLag())
+	case WatchMetricsResponse_Sample_HandlerEventStreamStaleness_case:
+		return caseHandlerEventStreamStaleness(x.GetHandlerEventStreamStaleness())
+	case WatchMetricsResponse_Sample_HandlerEventsFailing_case:
+		return caseHandlerEventsFailing(x.GetHandlerEventsFailing())
+	case WatchMetricsResponse_Sample_HandlerEventsHandled_case:
+		return caseHandlerEventsHandled(x.GetHandlerEventsHandled())
+	case WatchMetricsResponse_Sample_HandlerEventsRecorded_case:
+		return caseHandlerEventsRecorded(x.GetHandlerEventsRecorded())
+	case WatchMetricsResponse_Sample_ProcessInstanceQueueBindings_case:
+		return caseProcessInstanceQueueBindings(x.GetProcessInstanceQueueBindings())
+	case WatchMetricsResponse_Sample_ProcessInstancesEnded_case:
+		return caseProcessInstancesEnded(x.GetProcessInstancesEnded())
+	case WatchMetricsResponse_Sample_QueueCommandsFailing_case:
+		return caseQueueCommandsFailing(x.GetQueueCommandsFailing())
+	case WatchMetricsResponse_Sample_QueueCommandsReady_case:
+		return caseQueueCommandsReady(x.GetQueueCommandsReady())
+	case WatchMetricsResponse_Sample_QueueCommandsRemoved_case:
+		return caseQueueCommandsRemoved(x.GetQueueCommandsRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesFailing_case:
+		return caseQueueDeadlinesFailing(x.GetQueueDeadlinesFailing())
+	case WatchMetricsResponse_Sample_QueueDeadlinesReady_case:
+		return caseQueueDeadlinesReady(x.GetQueueDeadlinesReady())
+	case WatchMetricsResponse_Sample_QueueDeadlinesRemoved_case:
+		return caseQueueDeadlinesRemoved(x.GetQueueDeadlinesRemoved())
+	case WatchMetricsResponse_Sample_QueueDeadlinesScheduled_case:
+		return caseQueueDeadlinesScheduled(x.GetQueueDeadlinesScheduled())
 	default:
 		return none()
 	}
@@ -819,79 +1575,6 @@ func (x *WatchMetricsResponse_Sample) Format(f fmt.State, verb rune) {
 	fmt.Fprintf(f, format, (*WatchMetricsResponse_Sample)(x))
 }
 
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *WatchMetricsResponse_Tombstone) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = WatchMetricsResponse_Tombstone
-	type WatchMetricsResponse_Tombstone realType
-	fmt.Fprintf(f, format, (*WatchMetricsResponse_Tombstone)(x))
-}
-
 // MetricsAPIClientStub is a test implementation of the [MetricsAPIClient] interface.
 var _ MetricsAPIClient = (*MetricsAPIClientStub)(nil)
 
@@ -996,21 +1679,5 @@ func (x *WatchMetricsResponse_Sample) MarshalBinary() ([]byte, error) {
 //
 // It allows [*WatchMetricsResponse_Sample] to implement [encoding.BinaryUnmarshaler].
 func (x *WatchMetricsResponse_Sample) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*WatchMetricsResponse_Tombstone] to implement [encoding.BinaryMarshaler].
-func (x *WatchMetricsResponse_Tombstone) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*WatchMetricsResponse_Tombstone] to implement [encoding.BinaryUnmarshaler].
-func (x *WatchMetricsResponse_Tombstone) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }

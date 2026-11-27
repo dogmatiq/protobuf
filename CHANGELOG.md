@@ -11,6 +11,48 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+This release reworks `MetricsAPI`, which is at `v1alpha1`, and the application
+description in `configpb`. Every engine and client that uses either one has to
+change.
+
+### Added
+
+- Added the `HandlerEventStreamStaleness` metric to `MetricsAPI`, for the
+  creation time of the oldest event on one event stream that a handler has yet
+  to handle or skip.
+
+### Changed
+
+- **[BC]** `MetricsAPI` now sends each metric in a typed `Sample`. A `Sample`
+  holds a `metric` oneof with a case for each metric. Each metric's message
+  holds its value and a `subject`, which has one of six new subject types, such
+  as `QueueSubject`. A `Sample` whose value is absent is a tombstone. The metric
+  index, the opaque subject, the `Tombstone` message and the metrics that an
+  engine defines for itself are removed.
+- **[BC]** Each command or deadline that is waiting to be delivered is now
+  counted in exactly one metric: ready or failing for a command, and scheduled,
+  ready or failing for a deadline. The `Due` metrics are renamed to `Ready`, the
+  `Pending` metrics are removed, and `QueueDeadlinesScheduled` and
+  `HandlerDeadlinesScheduled` are new.
+- **[BC]** The metrics that count a handler's commands, deadlines and events now
+  count the messages of one message type, which the `message_type_id` of the
+  metric's subject identifies. A client adds up a handler's samples of a metric
+  to get the count for every type.
+- **[BC]** `configpb` now identifies message types by ID. An `Application` lists
+  each message type as a `MessageType`, and a `Handler` lists its routes, each
+  as a `Route` with a `RouteType`. They replace `MessageUsage` and the
+  `messages` maps that were keyed by Go type.
+
+### Removed
+
+- **[BC]** Removed the `AggregateInstancesInMemory` and
+  `ProcessInstancesInMemory` metrics from `MetricsAPI`.
+- **[BC]** Removed the four `ProjectionCompactions` metrics from `MetricsAPI`.
+  Use `GetCompactions` on `ProjectionAPI`, or the `ProjectionCompactionEnded`
+  messages that `EngineAPI.WatchEngine` sends, instead.
+
 ## [0.12.0] - 2026-11-24
 
 ### Added

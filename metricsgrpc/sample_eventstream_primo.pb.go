@@ -8,9 +8,28 @@ package metricsgrpc
 
 import (
 	"fmt"
-	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	proto "google.golang.org/protobuf/proto"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
+
+// TryGetCreatedAt returns the CreatedAt value if x.Value is set to CreatedAt.
+// Otherwise, ok is false and v is the zero-value.
+func (x *HandlerEventStreamStaleness) TryGetCreatedAt() (v *timestamppb.Timestamp, ok bool) {
+	if x.HasCreatedAt() {
+		return x.GetCreatedAt(), true
+	}
+	return v, false
+}
+
+// TryGetCaughtUp returns the CaughtUp value if x.Value is set to CaughtUp.
+// Otherwise, ok is false and v is the zero-value.
+func (x *HandlerEventStreamStaleness) TryGetCaughtUp() (v *emptypb.Empty, ok bool) {
+	if x.HasCaughtUp() {
+		return x.GetCaughtUp(), true
+	}
+	return v, false
+}
 
 type EventStreamLengthBuilder struct {
 	prototype EventStreamLength
@@ -28,10 +47,12 @@ func NewEventStreamLengthBuilder() *EventStreamLengthBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *EventStreamLengthBuilder) From(x *EventStreamLength) *EventStreamLengthBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetWatermark(x.GetWatermark())
+	if x.HasWatermark() {
+		b.prototype.SetWatermark(x.GetWatermark())
+	}
 	return b
 }
 
@@ -41,17 +62,19 @@ func (b *EventStreamLengthBuilder) From(x *EventStreamLength) *EventStreamLength
 // not modify previously constructed messages.
 func (b *EventStreamLengthBuilder) Build() *EventStreamLength {
 	m := &EventStreamLength{}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetWatermark(b.prototype.GetWatermark())
+	if b.prototype.HasWatermark() {
+		m.SetWatermark(b.prototype.GetWatermark())
+	}
 	return m
 }
 
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *EventStreamLengthBuilder) WithEventStreamId(v *uuidpb.UUID) *EventStreamLengthBuilder {
-	b.prototype.SetEventStreamId(v)
+func (b *EventStreamLengthBuilder) WithSubject(v *EventStreamSubject) *EventStreamLengthBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -78,13 +101,12 @@ func NewAggregateInstanceEventStreamBindingsBuilder() *AggregateInstanceEventStr
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *AggregateInstanceEventStreamBindingsBuilder) From(x *AggregateInstanceEventStreamBindings) *AggregateInstanceEventStreamBindingsBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
 
@@ -94,27 +116,19 @@ func (b *AggregateInstanceEventStreamBindingsBuilder) From(x *AggregateInstanceE
 // not modify previously constructed messages.
 func (b *AggregateInstanceEventStreamBindingsBuilder) Build() *AggregateInstanceEventStreamBindings {
 	m := &AggregateInstanceEventStreamBindings{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *AggregateInstanceEventStreamBindingsBuilder) WithHandlerKey(v *uuidpb.UUID) *AggregateInstanceEventStreamBindingsBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
-// then returns b.
-func (b *AggregateInstanceEventStreamBindingsBuilder) WithEventStreamId(v *uuidpb.UUID) *AggregateInstanceEventStreamBindingsBuilder {
-	b.prototype.SetEventStreamId(v)
+func (b *AggregateInstanceEventStreamBindingsBuilder) WithSubject(v *HandlerEventStreamSubject) *AggregateInstanceEventStreamBindingsBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -141,13 +155,12 @@ func NewHandlerEventStreamLagBuilder() *HandlerEventStreamLagBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerEventStreamLagBuilder) From(x *HandlerEventStreamLag) *HandlerEventStreamLagBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	if x.HasGauge() {
+		b.prototype.SetGauge(x.GetGauge())
 	}
-	b.prototype.SetGauge(x.GetGauge())
 	return b
 }
 
@@ -157,27 +170,19 @@ func (b *HandlerEventStreamLagBuilder) From(x *HandlerEventStreamLag) *HandlerEv
 // not modify previously constructed messages.
 func (b *HandlerEventStreamLagBuilder) Build() *HandlerEventStreamLag {
 	m := &HandlerEventStreamLag{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	if b.prototype.HasGauge() {
+		m.SetGauge(b.prototype.GetGauge())
 	}
-	m.SetGauge(b.prototype.GetGauge())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerEventStreamLagBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventStreamLagBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
-// then returns b.
-func (b *HandlerEventStreamLagBuilder) WithEventStreamId(v *uuidpb.UUID) *HandlerEventStreamLagBuilder {
-	b.prototype.SetEventStreamId(v)
+func (b *HandlerEventStreamLagBuilder) WithSubject(v *HandlerEventStreamSubject) *HandlerEventStreamLagBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -186,6 +191,153 @@ func (b *HandlerEventStreamLagBuilder) WithEventStreamId(v *uuidpb.UUID) *Handle
 func (b *HandlerEventStreamLagBuilder) WithGauge(v uint64) *HandlerEventStreamLagBuilder {
 	b.prototype.SetGauge(v)
 	return b
+}
+
+type HandlerEventStreamStalenessBuilder struct {
+	prototype HandlerEventStreamStaleness
+}
+
+// NewHandlerEventStreamStalenessBuilder returns a builder that constructs [HandlerEventStreamStaleness] messages.
+func NewHandlerEventStreamStalenessBuilder() *HandlerEventStreamStalenessBuilder {
+	return &HandlerEventStreamStalenessBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *HandlerEventStreamStalenessBuilder) From(x *HandlerEventStreamStaleness) *HandlerEventStreamStalenessBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
+	}
+	if x.HasCreatedAt() {
+		b.prototype.SetCreatedAt(x.GetCreatedAt())
+	}
+	if x.HasCaughtUp() {
+		b.prototype.SetCaughtUp(x.GetCaughtUp())
+	}
+	return b
+}
+
+// Build returns a new [HandlerEventStreamStaleness] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *HandlerEventStreamStalenessBuilder) Build() *HandlerEventStreamStaleness {
+	m := &HandlerEventStreamStaleness{}
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
+	}
+	if b.prototype.HasCreatedAt() {
+		m.SetCreatedAt(b.prototype.GetCreatedAt())
+	}
+	if b.prototype.HasCaughtUp() {
+		m.SetCaughtUp(b.prototype.GetCaughtUp())
+	}
+	return m
+}
+
+// WithSubject configures the builder to set the Subject field to v,
+// then returns b.
+func (b *HandlerEventStreamStalenessBuilder) WithSubject(v *HandlerEventStreamSubject) *HandlerEventStreamStalenessBuilder {
+	b.prototype.SetSubject(v)
+	return b
+}
+
+// WithCreatedAt configures the builder to set the CreatedAt field to v,
+// then returns b.
+func (b *HandlerEventStreamStalenessBuilder) WithCreatedAt(v *timestamppb.Timestamp) *HandlerEventStreamStalenessBuilder {
+	b.prototype.SetCreatedAt(v)
+	return b
+}
+
+// WithCaughtUp configures the builder to set the CaughtUp field to v,
+// then returns b.
+func (b *HandlerEventStreamStalenessBuilder) WithCaughtUp(v *emptypb.Empty) *HandlerEventStreamStalenessBuilder {
+	b.prototype.SetCaughtUp(v)
+	return b
+}
+
+// MustSwitch_HandlerEventStreamStaleness_Value invokes one of the given functions based on
+// the value of x.Value.
+//
+// It panics if x.Value is nil.
+func MustSwitch_HandlerEventStreamStaleness_Value(
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp),
+	caseCaughtUp func(*emptypb.Empty),
+) {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		caseCaughtUp(x.GetCaughtUp())
+	default:
+		panic("MustSwitch_HandlerEventStreamStaleness_Value: x.Value is not set")
+	}
+}
+
+// Switch_HandlerEventStreamStaleness_Value invokes one of the given functions based on
+// the value of x.Value.
+//
+// It calls none() if x.Value is nil.
+func Switch_HandlerEventStreamStaleness_Value(
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp),
+	caseCaughtUp func(*emptypb.Empty),
+	none func(),
+) {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		caseCaughtUp(x.GetCaughtUp())
+	default:
+		none()
+	}
+}
+
+// MustMap_HandlerEventStreamStaleness_Value maps x.Value to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Value,
+// and returns that function's result. It panics if x.Value is nil.
+func MustMap_HandlerEventStreamStaleness_Value[T any](
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp) T,
+	caseCaughtUp func(*emptypb.Empty) T,
+) T {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		return caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		return caseCaughtUp(x.GetCaughtUp())
+	default:
+		panic("MustMap_HandlerEventStreamStaleness_Value: x.Value is not set")
+	}
+}
+
+// Map_HandlerEventStreamStaleness_Value maps x.Value to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Value,
+// and returns that function's result. It calls none() if x.Value is nil.
+func Map_HandlerEventStreamStaleness_Value[T any](
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp) T,
+	caseCaughtUp func(*emptypb.Empty) T,
+	none func() T,
+) T {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		return caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		return caseCaughtUp(x.GetCaughtUp())
+	default:
+		return none()
+	}
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -407,6 +559,79 @@ func (x *HandlerEventStreamLag) Format(f fmt.State, verb rune) {
 	fmt.Fprintf(f, format, (*HandlerEventStreamLag)(x))
 }
 
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *HandlerEventStreamStaleness) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = HandlerEventStreamStaleness
+	type HandlerEventStreamStaleness realType
+	fmt.Fprintf(f, format, (*HandlerEventStreamStaleness)(x))
+}
+
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
@@ -452,5 +677,21 @@ func (x *HandlerEventStreamLag) MarshalBinary() ([]byte, error) {
 //
 // It allows [*HandlerEventStreamLag] to implement [encoding.BinaryUnmarshaler].
 func (x *HandlerEventStreamLag) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*HandlerEventStreamStaleness] to implement [encoding.BinaryMarshaler].
+func (x *HandlerEventStreamStaleness) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*HandlerEventStreamStaleness] to implement [encoding.BinaryUnmarshaler].
+func (x *HandlerEventStreamStaleness) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }

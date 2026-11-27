@@ -8,6 +8,7 @@ package configpb
 
 import (
 	identitypb "github.com/dogmatiq/protobuf/identitypb"
+	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -137,6 +138,73 @@ func (x HandlerType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
+// RouteType is an enumeration of the types of route that a handler can have. A
+// route says how the handler uses messages of one type.
+type RouteType int32
+
+const (
+	// ROUTE_TYPE_UNSPECIFIED is the zero-value. It is not a valid route type.
+	RouteType_ROUTE_TYPE_UNSPECIFIED RouteType = 0
+	// ROUTE_TYPE_HANDLES_COMMAND is the type of route that a handler has for a
+	// type of command that it handles.
+	RouteType_ROUTE_TYPE_HANDLES_COMMAND RouteType = 1
+	// ROUTE_TYPE_HANDLES_EVENT is the type of route that a handler has for a type
+	// of event that it handles.
+	RouteType_ROUTE_TYPE_HANDLES_EVENT RouteType = 2
+	// ROUTE_TYPE_EXECUTES_COMMAND is the type of route that a handler has for a
+	// type of command that it executes.
+	RouteType_ROUTE_TYPE_EXECUTES_COMMAND RouteType = 3
+	// ROUTE_TYPE_RECORDS_EVENT is the type of route that a handler has for a type
+	// of event that it records.
+	RouteType_ROUTE_TYPE_RECORDS_EVENT RouteType = 4
+	// ROUTE_TYPE_SCHEDULES_DEADLINE is the type of route that a handler has for a
+	// type of deadline that it schedules. The handler also handles each deadline
+	// that it schedules.
+	RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE RouteType = 5
+)
+
+// Enum value maps for RouteType.
+var (
+	RouteType_name = map[int32]string{
+		0: "ROUTE_TYPE_UNSPECIFIED",
+		1: "ROUTE_TYPE_HANDLES_COMMAND",
+		2: "ROUTE_TYPE_HANDLES_EVENT",
+		3: "ROUTE_TYPE_EXECUTES_COMMAND",
+		4: "ROUTE_TYPE_RECORDS_EVENT",
+		5: "ROUTE_TYPE_SCHEDULES_DEADLINE",
+	}
+	RouteType_value = map[string]int32{
+		"ROUTE_TYPE_UNSPECIFIED":        0,
+		"ROUTE_TYPE_HANDLES_COMMAND":    1,
+		"ROUTE_TYPE_HANDLES_EVENT":      2,
+		"ROUTE_TYPE_EXECUTES_COMMAND":   3,
+		"ROUTE_TYPE_RECORDS_EVENT":      4,
+		"ROUTE_TYPE_SCHEDULES_DEADLINE": 5,
+	}
+)
+
+func (x RouteType) Enum() *RouteType {
+	p := new(RouteType)
+	*p = x
+	return p
+}
+
+func (x RouteType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RouteType) Descriptor() protoreflect.EnumDescriptor {
+	return file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[2].Descriptor()
+}
+
+func (RouteType) Type() protoreflect.EnumType {
+	return &file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[2]
+}
+
+func (x RouteType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // ConcurrencyPreference is a hint to the engine as to the best way to handle
 // concurrent messages for a message handler.
 type ConcurrencyPreference int32
@@ -178,11 +246,11 @@ func (x ConcurrencyPreference) String() string {
 }
 
 func (ConcurrencyPreference) Descriptor() protoreflect.EnumDescriptor {
-	return file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[2].Descriptor()
+	return file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[3].Descriptor()
 }
 
 func (ConcurrencyPreference) Type() protoreflect.EnumType {
-	return &file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[2]
+	return &file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes[3]
 }
 
 func (x ConcurrencyPreference) Number() protoreflect.EnumNumber {
@@ -192,14 +260,14 @@ func (x ConcurrencyPreference) Number() protoreflect.EnumNumber {
 // Application represents a Dogma application hosted by the engine on the
 // server.
 type Application struct {
-	state               protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Identity *identitypb.Identity   `protobuf:"bytes,1,opt,name=identity"`
-	xxx_hidden_Version  string                 `protobuf:"bytes,2,opt,name=version"`
-	xxx_hidden_GoType   string                 `protobuf:"bytes,3,opt,name=go_type,json=goType"`
-	xxx_hidden_Handlers *[]*Handler            `protobuf:"bytes,4,rep,name=handlers"`
-	xxx_hidden_Messages map[string]MessageKind `protobuf:"bytes,5,rep,name=messages" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value,enum=dogma.config.v1alpha1.MessageKind"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Identity     *identitypb.Identity   `protobuf:"bytes,1,opt,name=identity"`
+	xxx_hidden_Version      string                 `protobuf:"bytes,2,opt,name=version"`
+	xxx_hidden_GoType       string                 `protobuf:"bytes,3,opt,name=go_type,json=goType"`
+	xxx_hidden_Handlers     *[]*Handler            `protobuf:"bytes,4,rep,name=handlers"`
+	xxx_hidden_MessageTypes *[]*MessageType        `protobuf:"bytes,5,rep,name=message_types,json=messageTypes"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *Application) Reset() {
@@ -257,9 +325,11 @@ func (x *Application) GetHandlers() []*Handler {
 	return nil
 }
 
-func (x *Application) GetMessages() map[string]MessageKind {
+func (x *Application) GetMessageTypes() []*MessageType {
 	if x != nil {
-		return x.xxx_hidden_Messages
+		if x.xxx_hidden_MessageTypes != nil {
+			return *x.xxx_hidden_MessageTypes
+		}
 	}
 	return nil
 }
@@ -280,8 +350,8 @@ func (x *Application) SetHandlers(v []*Handler) {
 	x.xxx_hidden_Handlers = &v
 }
 
-func (x *Application) SetMessages(v map[string]MessageKind) {
-	x.xxx_hidden_Messages = v
+func (x *Application) SetMessageTypes(v []*MessageType) {
+	x.xxx_hidden_MessageTypes = &v
 }
 
 func (x *Application) HasIdentity() bool {
@@ -312,9 +382,9 @@ type Application_builder struct {
 	GoType string
 	// Handlers is the set of handlers within the application.
 	Handlers []*Handler
-	// Messages is a map of each message type's fully-qualified Go type to the
-	// kind of message that the type implements.
-	Messages map[string]MessageKind
+	// MessageTypes is the set of message types that the application's handlers
+	// produce or consume. Each message type appears once.
+	MessageTypes []*MessageType
 }
 
 func (b0 Application_builder) Build() *Application {
@@ -325,21 +395,21 @@ func (b0 Application_builder) Build() *Application {
 	x.xxx_hidden_Version = b.Version
 	x.xxx_hidden_GoType = b.GoType
 	x.xxx_hidden_Handlers = &b.Handlers
-	x.xxx_hidden_Messages = b.Messages
+	x.xxx_hidden_MessageTypes = &b.MessageTypes
 	return m0
 }
 
 // Handler is a message handler within an application.
 type Handler struct {
-	state                            protoimpl.MessageState   `protogen:"opaque.v1"`
-	xxx_hidden_Identity              *identitypb.Identity     `protobuf:"bytes,1,opt,name=identity"`
-	xxx_hidden_GoType                string                   `protobuf:"bytes,2,opt,name=go_type,json=goType"`
-	xxx_hidden_Type                  HandlerType              `protobuf:"varint,3,opt,name=type,enum=dogma.config.v1alpha1.HandlerType"`
-	xxx_hidden_Messages              map[string]*MessageUsage `protobuf:"bytes,4,rep,name=messages" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_IsDisabled            bool                     `protobuf:"varint,5,opt,name=is_disabled,json=isDisabled"`
-	xxx_hidden_ConcurrencyPreference ConcurrencyPreference    `protobuf:"varint,6,opt,name=concurrency_preference,json=concurrencyPreference,enum=dogma.config.v1alpha1.ConcurrencyPreference"`
-	xxx_hidden_SupportsCompaction    bool                     `protobuf:"varint,7,opt,name=supports_compaction,json=supportsCompaction"`
-	xxx_hidden_SupportsReset         bool                     `protobuf:"varint,8,opt,name=supports_reset,json=supportsReset"`
+	state                            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Identity              *identitypb.Identity   `protobuf:"bytes,1,opt,name=identity"`
+	xxx_hidden_GoType                string                 `protobuf:"bytes,2,opt,name=go_type,json=goType"`
+	xxx_hidden_Type                  HandlerType            `protobuf:"varint,3,opt,name=type,enum=dogma.config.v1alpha1.HandlerType"`
+	xxx_hidden_Routes                *[]*Route              `protobuf:"bytes,4,rep,name=routes"`
+	xxx_hidden_IsDisabled            bool                   `protobuf:"varint,5,opt,name=is_disabled,json=isDisabled"`
+	xxx_hidden_ConcurrencyPreference ConcurrencyPreference  `protobuf:"varint,6,opt,name=concurrency_preference,json=concurrencyPreference,enum=dogma.config.v1alpha1.ConcurrencyPreference"`
+	xxx_hidden_SupportsCompaction    bool                   `protobuf:"varint,7,opt,name=supports_compaction,json=supportsCompaction"`
+	xxx_hidden_SupportsReset         bool                   `protobuf:"varint,8,opt,name=supports_reset,json=supportsReset"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -392,9 +462,11 @@ func (x *Handler) GetType() HandlerType {
 	return HandlerType_HANDLER_TYPE_UNSPECIFIED
 }
 
-func (x *Handler) GetMessages() map[string]*MessageUsage {
+func (x *Handler) GetRoutes() []*Route {
 	if x != nil {
-		return x.xxx_hidden_Messages
+		if x.xxx_hidden_Routes != nil {
+			return *x.xxx_hidden_Routes
+		}
 	}
 	return nil
 }
@@ -439,8 +511,8 @@ func (x *Handler) SetType(v HandlerType) {
 	x.xxx_hidden_Type = v
 }
 
-func (x *Handler) SetMessages(v map[string]*MessageUsage) {
-	x.xxx_hidden_Messages = v
+func (x *Handler) SetRoutes(v []*Route) {
+	x.xxx_hidden_Routes = &v
 }
 
 func (x *Handler) SetIsDisabled(v bool) {
@@ -506,9 +578,8 @@ type Handler_builder struct {
 	GoType string
 	// Type is the handler's type.
 	Type HandlerType
-	// Messages is a map of each message type's fully-qualified Go type to the way
-	// that this handler uses messages of that type.
-	Messages map[string]*MessageUsage
+	// Routes is the set of the handler's routes.
+	Routes []*Route
 	// IsDisabled indicates whether the handler is disabled.
 	IsDisabled bool
 	// ConcurrencyPreference is a hint to the engine as to the best way to handle
@@ -540,7 +611,7 @@ func (b0 Handler_builder) Build() *Handler {
 	x.xxx_hidden_Identity = b.Identity
 	x.xxx_hidden_GoType = b.GoType
 	x.xxx_hidden_Type = b.Type
-	x.xxx_hidden_Messages = b.Messages
+	x.xxx_hidden_Routes = &b.Routes
 	x.xxx_hidden_IsDisabled = b.IsDisabled
 	x.xxx_hidden_ConcurrencyPreference = b.ConcurrencyPreference
 	if b.SupportsCompaction != nil {
@@ -554,29 +625,32 @@ func (b0 Handler_builder) Build() *Handler {
 	return m0
 }
 
-// MessageUsage describes how a handler uses a message type.
-type MessageUsage struct {
-	state                 protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_IsProduced bool                   `protobuf:"varint,1,opt,name=is_produced,json=isProduced"`
-	xxx_hidden_IsConsumed bool                   `protobuf:"varint,2,opt,name=is_consumed,json=isConsumed"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+// MessageType describes a type of message that an application's handlers
+// produce or consume.
+type MessageType struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id            *uuidpb.UUID           `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Name          string                 `protobuf:"bytes,2,opt,name=name"`
+	xxx_hidden_QualifiedName string                 `protobuf:"bytes,3,opt,name=qualified_name,json=qualifiedName"`
+	xxx_hidden_Kind          MessageKind            `protobuf:"varint,4,opt,name=kind,enum=dogma.config.v1alpha1.MessageKind"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
-func (x *MessageUsage) Reset() {
-	*x = MessageUsage{}
+func (x *MessageType) Reset() {
+	*x = MessageType{}
 	mi := &file_github_com_dogmatiq_protobuf_configpb_config_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *MessageUsage) String() string {
+func (x *MessageType) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*MessageUsage) ProtoMessage() {}
+func (*MessageType) ProtoMessage() {}
 
-func (x *MessageUsage) ProtoReflect() protoreflect.Message {
+func (x *MessageType) ProtoReflect() protoreflect.Message {
 	mi := &file_github_com_dogmatiq_protobuf_configpb_config_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -588,43 +662,177 @@ func (x *MessageUsage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *MessageUsage) GetIsProduced() bool {
+func (x *MessageType) GetId() *uuidpb.UUID {
 	if x != nil {
-		return x.xxx_hidden_IsProduced
+		return x.xxx_hidden_Id
 	}
-	return false
+	return nil
 }
 
-func (x *MessageUsage) GetIsConsumed() bool {
+func (x *MessageType) GetName() string {
 	if x != nil {
-		return x.xxx_hidden_IsConsumed
+		return x.xxx_hidden_Name
 	}
-	return false
+	return ""
 }
 
-func (x *MessageUsage) SetIsProduced(v bool) {
-	x.xxx_hidden_IsProduced = v
+func (x *MessageType) GetQualifiedName() string {
+	if x != nil {
+		return x.xxx_hidden_QualifiedName
+	}
+	return ""
 }
 
-func (x *MessageUsage) SetIsConsumed(v bool) {
-	x.xxx_hidden_IsConsumed = v
+func (x *MessageType) GetKind() MessageKind {
+	if x != nil {
+		return x.xxx_hidden_Kind
+	}
+	return MessageKind_MESSAGE_KIND_UNSPECIFIED
 }
 
-type MessageUsage_builder struct {
+func (x *MessageType) SetId(v *uuidpb.UUID) {
+	x.xxx_hidden_Id = v
+}
+
+func (x *MessageType) SetName(v string) {
+	x.xxx_hidden_Name = v
+}
+
+func (x *MessageType) SetQualifiedName(v string) {
+	x.xxx_hidden_QualifiedName = v
+}
+
+func (x *MessageType) SetKind(v MessageKind) {
+	x.xxx_hidden_Kind = v
+}
+
+func (x *MessageType) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Id != nil
+}
+
+func (x *MessageType) ClearId() {
+	x.xxx_hidden_Id = nil
+}
+
+type MessageType_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// IsProduced indicates whether the message is produced by the handler.
-	IsProduced bool
-	// IsConsumed indicates whether the message is consumed by the handler.
-	IsConsumed bool
+	// Id is the unique identifier of the message type, as per the Dogma message
+	// type registry. An envelope that holds a message of this type gives the same
+	// ID in the type_id of its dogma.protobuf.v1.Message.
+	Id *uuidpb.UUID
+	// Name is the name of the message type without the package or module that
+	// defines it, such as "OrderPlaced". Two message types can have the same
+	// name.
+	Name string
+	// QualifiedName is the name of the message type with the package or module
+	// that defines it, such as "github.com/example/shop.OrderPlaced". Its format
+	// depends on the programming language of the application.
+	QualifiedName string
+	// Kind says whether messages of this type are commands, events or deadlines.
+	Kind MessageKind
 }
 
-func (b0 MessageUsage_builder) Build() *MessageUsage {
-	m0 := &MessageUsage{}
+func (b0 MessageType_builder) Build() *MessageType {
+	m0 := &MessageType{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_IsProduced = b.IsProduced
-	x.xxx_hidden_IsConsumed = b.IsConsumed
+	x.xxx_hidden_Id = b.Id
+	x.xxx_hidden_Name = b.Name
+	x.xxx_hidden_QualifiedName = b.QualifiedName
+	x.xxx_hidden_Kind = b.Kind
+	return m0
+}
+
+// Route describes one of a handler's routes, which says how the handler uses
+// messages of one type.
+type Route struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MessageTypeId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_RouteType     RouteType              `protobuf:"varint,2,opt,name=route_type,json=routeType,enum=dogma.config.v1alpha1.RouteType"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *Route) Reset() {
+	*x = Route{}
+	mi := &file_github_com_dogmatiq_protobuf_configpb_config_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Route) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Route) ProtoMessage() {}
+
+func (x *Route) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_configpb_config_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Route) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
+func (x *Route) GetRouteType() RouteType {
+	if x != nil {
+		return x.xxx_hidden_RouteType
+	}
+	return RouteType_ROUTE_TYPE_UNSPECIFIED
+}
+
+func (x *Route) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
+}
+
+func (x *Route) SetRouteType(v RouteType) {
+	x.xxx_hidden_RouteType = v
+}
+
+func (x *Route) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
+func (x *Route) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
+}
+
+type Route_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// MessageTypeId is the ID of the type of message that the route is for. It is
+	// the id of one of the message types in Application.message_types.
+	MessageTypeId *uuidpb.UUID
+	// RouteType says what the handler does with messages of that type, such as
+	// handle commands or record events. The kind of message that the route type
+	// names is the kind of the message type.
+	RouteType RouteType
+}
+
+func (b0 Route_builder) Build() *Route {
+	m0 := &Route{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
+	x.xxx_hidden_RouteType = b.RouteType
 	return m0
 }
 
@@ -632,34 +840,32 @@ var File_github_com_dogmatiq_protobuf_configpb_config_proto protoreflect.FileDes
 
 const file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc = "" +
 	"\n" +
-	"2github.com/dogmatiq/protobuf/configpb/config.proto\x12\x15dogma.config.v1alpha1\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\"\xf2\x02\n" +
+	"2github.com/dogmatiq/protobuf/configpb/config.proto\x12\x15dogma.config.v1alpha1\x1a6github.com/dogmatiq/protobuf/identitypb/identity.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x8c\x02\n" +
 	"\vApplication\x127\n" +
 	"\bidentity\x18\x01 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\bidentity\x12\x1f\n" +
 	"\aversion\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\aversion\x12\x1e\n" +
 	"\ago_type\x18\x03 \x01(\tB\x05\xaa\x01\x02\b\x02R\x06goType\x12:\n" +
-	"\bhandlers\x18\x04 \x03(\v2\x1e.dogma.config.v1alpha1.HandlerR\bhandlers\x12L\n" +
-	"\bmessages\x18\x05 \x03(\v20.dogma.config.v1alpha1.Application.MessagesEntryR\bmessages\x1a_\n" +
-	"\rMessagesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
-	"\x05value\x18\x02 \x01(\x0e2\".dogma.config.v1alpha1.MessageKindR\x05value:\x028\x01\"\xc7\x04\n" +
+	"\bhandlers\x18\x04 \x03(\v2\x1e.dogma.config.v1alpha1.HandlerR\bhandlers\x12G\n" +
+	"\rmessage_types\x18\x05 \x03(\v2\".dogma.config.v1alpha1.MessageTypeR\fmessageTypes\"\xd1\x03\n" +
 	"\aHandler\x127\n" +
 	"\bidentity\x18\x01 \x01(\v2\x1b.dogma.protobuf.v1.IdentityR\bidentity\x12\x1e\n" +
 	"\ago_type\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\x06goType\x12=\n" +
-	"\x04type\x18\x03 \x01(\x0e2\".dogma.config.v1alpha1.HandlerTypeB\x05\xaa\x01\x02\b\x02R\x04type\x12H\n" +
-	"\bmessages\x18\x04 \x03(\v2,.dogma.config.v1alpha1.Handler.MessagesEntryR\bmessages\x12&\n" +
+	"\x04type\x18\x03 \x01(\x0e2\".dogma.config.v1alpha1.HandlerTypeB\x05\xaa\x01\x02\b\x02R\x04type\x124\n" +
+	"\x06routes\x18\x04 \x03(\v2\x1c.dogma.config.v1alpha1.RouteR\x06routes\x12&\n" +
 	"\vis_disabled\x18\x05 \x01(\bB\x05\xaa\x01\x02\b\x02R\n" +
 	"isDisabled\x12j\n" +
 	"\x16concurrency_preference\x18\x06 \x01(\x0e2,.dogma.config.v1alpha1.ConcurrencyPreferenceB\x05\xaa\x01\x02\b\x02R\x15concurrencyPreference\x126\n" +
 	"\x13supports_compaction\x18\a \x01(\bB\x05\xaa\x01\x02\b\x01R\x12supportsCompaction\x12,\n" +
-	"\x0esupports_reset\x18\b \x01(\bB\x05\xaa\x01\x02\b\x01R\rsupportsReset\x1a`\n" +
-	"\rMessagesEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
-	"\x05value\x18\x02 \x01(\v2#.dogma.config.v1alpha1.MessageUsageR\x05value:\x028\x01\"^\n" +
-	"\fMessageUsage\x12&\n" +
-	"\vis_produced\x18\x01 \x01(\bB\x05\xaa\x01\x02\b\x02R\n" +
-	"isProduced\x12&\n" +
-	"\vis_consumed\x18\x02 \x01(\bB\x05\xaa\x01\x02\b\x02R\n" +
-	"isConsumed*x\n" +
+	"\x0esupports_reset\x18\b \x01(\bB\x05\xaa\x01\x02\b\x01R\rsupportsReset\"\xbe\x01\n" +
+	"\vMessageType\x12'\n" +
+	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x12\x19\n" +
+	"\x04name\x18\x02 \x01(\tB\x05\xaa\x01\x02\b\x02R\x04name\x12,\n" +
+	"\x0equalified_name\x18\x03 \x01(\tB\x05\xaa\x01\x02\b\x02R\rqualifiedName\x12=\n" +
+	"\x04kind\x18\x04 \x01(\x0e2\".dogma.config.v1alpha1.MessageKindB\x05\xaa\x01\x02\b\x02R\x04kind\"\x90\x01\n" +
+	"\x05Route\x12?\n" +
+	"\x0fmessage_type_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x12F\n" +
+	"\n" +
+	"route_type\x18\x02 \x01(\x0e2 .dogma.config.v1alpha1.RouteTypeB\x05\xaa\x01\x02\b\x02R\trouteType*x\n" +
 	"\vMessageKind\x12\x1c\n" +
 	"\x18MESSAGE_KIND_UNSPECIFIED\x10\x00\x12\x18\n" +
 	"\x14MESSAGE_KIND_COMMAND\x10\x01\x12\x16\n" +
@@ -670,40 +876,50 @@ const file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc = "" +
 	"\x16HANDLER_TYPE_AGGREGATE\x10\x01\x12\x18\n" +
 	"\x14HANDLER_TYPE_PROCESS\x10\x02\x12\x1c\n" +
 	"\x18HANDLER_TYPE_INTEGRATION\x10\x03\x12\x1b\n" +
-	"\x17HANDLER_TYPE_PROJECTION\x10\x04*\x89\x01\n" +
+	"\x17HANDLER_TYPE_PROJECTION\x10\x04*\xc7\x01\n" +
+	"\tRouteType\x12\x1a\n" +
+	"\x16ROUTE_TYPE_UNSPECIFIED\x10\x00\x12\x1e\n" +
+	"\x1aROUTE_TYPE_HANDLES_COMMAND\x10\x01\x12\x1c\n" +
+	"\x18ROUTE_TYPE_HANDLES_EVENT\x10\x02\x12\x1f\n" +
+	"\x1bROUTE_TYPE_EXECUTES_COMMAND\x10\x03\x12\x1c\n" +
+	"\x18ROUTE_TYPE_RECORDS_EVENT\x10\x04\x12!\n" +
+	"\x1dROUTE_TYPE_SCHEDULES_DEADLINE\x10\x05*\x89\x01\n" +
 	"\x15ConcurrencyPreference\x12&\n" +
 	"\"CONCURRENCY_PREFERENCE_UNSPECIFIED\x10\x00\x12#\n" +
 	"\x1fCONCURRENCY_PREFERENCE_MAXIMIZE\x10\x01\x12#\n" +
 	"\x1fCONCURRENCY_PREFERENCE_MINIMIZE\x10\x02B'Z%github.com/dogmatiq/protobuf/configpbb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_github_com_dogmatiq_protobuf_configpb_config_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_github_com_dogmatiq_protobuf_configpb_config_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_github_com_dogmatiq_protobuf_configpb_config_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_github_com_dogmatiq_protobuf_configpb_config_proto_goTypes = []any{
 	(MessageKind)(0),            // 0: dogma.config.v1alpha1.MessageKind
 	(HandlerType)(0),            // 1: dogma.config.v1alpha1.HandlerType
-	(ConcurrencyPreference)(0),  // 2: dogma.config.v1alpha1.ConcurrencyPreference
-	(*Application)(nil),         // 3: dogma.config.v1alpha1.Application
-	(*Handler)(nil),             // 4: dogma.config.v1alpha1.Handler
-	(*MessageUsage)(nil),        // 5: dogma.config.v1alpha1.MessageUsage
-	nil,                         // 6: dogma.config.v1alpha1.Application.MessagesEntry
-	nil,                         // 7: dogma.config.v1alpha1.Handler.MessagesEntry
+	(RouteType)(0),              // 2: dogma.config.v1alpha1.RouteType
+	(ConcurrencyPreference)(0),  // 3: dogma.config.v1alpha1.ConcurrencyPreference
+	(*Application)(nil),         // 4: dogma.config.v1alpha1.Application
+	(*Handler)(nil),             // 5: dogma.config.v1alpha1.Handler
+	(*MessageType)(nil),         // 6: dogma.config.v1alpha1.MessageType
+	(*Route)(nil),               // 7: dogma.config.v1alpha1.Route
 	(*identitypb.Identity)(nil), // 8: dogma.protobuf.v1.Identity
+	(*uuidpb.UUID)(nil),         // 9: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_configpb_config_proto_depIdxs = []int32{
-	8, // 0: dogma.config.v1alpha1.Application.identity:type_name -> dogma.protobuf.v1.Identity
-	4, // 1: dogma.config.v1alpha1.Application.handlers:type_name -> dogma.config.v1alpha1.Handler
-	6, // 2: dogma.config.v1alpha1.Application.messages:type_name -> dogma.config.v1alpha1.Application.MessagesEntry
-	8, // 3: dogma.config.v1alpha1.Handler.identity:type_name -> dogma.protobuf.v1.Identity
-	1, // 4: dogma.config.v1alpha1.Handler.type:type_name -> dogma.config.v1alpha1.HandlerType
-	7, // 5: dogma.config.v1alpha1.Handler.messages:type_name -> dogma.config.v1alpha1.Handler.MessagesEntry
-	2, // 6: dogma.config.v1alpha1.Handler.concurrency_preference:type_name -> dogma.config.v1alpha1.ConcurrencyPreference
-	0, // 7: dogma.config.v1alpha1.Application.MessagesEntry.value:type_name -> dogma.config.v1alpha1.MessageKind
-	5, // 8: dogma.config.v1alpha1.Handler.MessagesEntry.value:type_name -> dogma.config.v1alpha1.MessageUsage
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	8,  // 0: dogma.config.v1alpha1.Application.identity:type_name -> dogma.protobuf.v1.Identity
+	5,  // 1: dogma.config.v1alpha1.Application.handlers:type_name -> dogma.config.v1alpha1.Handler
+	6,  // 2: dogma.config.v1alpha1.Application.message_types:type_name -> dogma.config.v1alpha1.MessageType
+	8,  // 3: dogma.config.v1alpha1.Handler.identity:type_name -> dogma.protobuf.v1.Identity
+	1,  // 4: dogma.config.v1alpha1.Handler.type:type_name -> dogma.config.v1alpha1.HandlerType
+	7,  // 5: dogma.config.v1alpha1.Handler.routes:type_name -> dogma.config.v1alpha1.Route
+	3,  // 6: dogma.config.v1alpha1.Handler.concurrency_preference:type_name -> dogma.config.v1alpha1.ConcurrencyPreference
+	9,  // 7: dogma.config.v1alpha1.MessageType.id:type_name -> dogma.protobuf.v1.UUID
+	0,  // 8: dogma.config.v1alpha1.MessageType.kind:type_name -> dogma.config.v1alpha1.MessageKind
+	9,  // 9: dogma.config.v1alpha1.Route.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	2,  // 10: dogma.config.v1alpha1.Route.route_type:type_name -> dogma.config.v1alpha1.RouteType
+	11, // [11:11] is the sub-list for method output_type
+	11, // [11:11] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_configpb_config_proto_init() }
@@ -716,8 +932,8 @@ func file_github_com_dogmatiq_protobuf_configpb_config_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_configpb_config_proto_rawDesc)),
-			NumEnums:      3,
-			NumMessages:   5,
+			NumEnums:      4,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

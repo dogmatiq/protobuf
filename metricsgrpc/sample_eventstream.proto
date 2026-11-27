@@ -3,23 +3,27 @@ package dogma.metrics.v1alpha1;
 
 option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
 
-import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "github.com/dogmatiq/protobuf/metricsgrpc/subject.proto";
 
 // EventStreamLength is the number of events on one event stream, which is an
 // ordered sequence of events in which each event has an offset. The first
 // event's offset is 0.
 message EventStreamLength {
-  // EventStreamId is the ID of the event stream.
-  dogma.protobuf.v1.UUID event_stream_id = 1;
+  // Subject identifies the event stream.
+  EventStreamSubject subject = 1;
 
   // Watermark is the number of events on the stream, which is also the offset
   // at which the next event will be appended. It never decreases, so a client
   // that has seen a value knows that the stream has at least that many events.
+  // It is absent when the engine has stopped reporting this metric for the
+  // subject.
   //
   // While ownership of the stream moves from one node to another, both may
   // report it. Both counts are positions on the same stream, so the value for
   // the whole cluster is the greatest value that any node reports.
-  uint64 watermark = 2 [features.field_presence = IMPLICIT];
+  uint64 watermark = 2 [features.field_presence = EXPLICIT];
 }
 
 // AggregateInstanceEventStreamBindings is the number of an aggregate handler's
@@ -28,16 +32,13 @@ message EventStreamLength {
 //
 // The number of the handler's instances is the total across the event streams.
 message AggregateInstanceEventStreamBindings {
-  // HandlerKey is the handler's identity key, as the application in
-  // WatchMetricsResponse.Preamble.application describes it.
-  dogma.protobuf.v1.UUID handler_key = 1;
+  // Subject identifies the handler and the event stream that the instances are
+  // bound to.
+  HandlerEventStreamSubject subject = 1;
 
-  // EventStreamId is the ID of the event stream that the instances are bound
-  // to. It is required.
-  dogma.protobuf.v1.UUID event_stream_id = 2;
-
-  // CurrentCount is the number of instances bound to the event stream.
-  uint64 current_count = 3 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of instances bound to the event stream. It is
+  // absent when the engine has stopped reporting this metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerEventStreamLag is the number of events on one event stream, of any
@@ -52,18 +53,49 @@ message AggregateInstanceEventStreamBindings {
 // counts the events that it knows are on the stream, which can be fewer than
 // the stream has.
 message HandlerEventStreamLag {
-  // HandlerKey is the handler's identity key, as the application in
-  // WatchMetricsResponse.Preamble.application describes it.
-  dogma.protobuf.v1.UUID handler_key = 1;
-
-  // EventStreamId is the ID of the event stream. It is required.
-  dogma.protobuf.v1.UUID event_stream_id = 2;
+  // Subject identifies the handler and the event stream.
+  HandlerEventStreamSubject subject = 1;
 
   // Gauge is the number of events after the offset that the handler has
-  // reached. It is zero when the handler has handled or skipped every event on
-  // the stream.
+  // reached. It is zero when the handler has handled or skipped every event
+  // that the engine knows is on the stream. It is absent when the engine has
+  // stopped reporting this metric for the subject.
   //
   // Several nodes can report the lag of one handler on one stream, so adding
   // their values counts the same events more than once.
-  uint64 gauge = 3 [features.field_presence = IMPLICIT];
+  uint64 gauge = 2 [features.field_presence = EXPLICIT];
+}
+
+// HandlerEventStreamStaleness is the creation time of the oldest event on one
+// event stream that one handler has neither handled nor skipped. The time that
+// has passed since then is the handler's staleness on that stream.
+//
+// The engine sends it only for process and projection handlers.
+//
+// A handler handles the events of some types and skips the rest. The oldest
+// event that it has neither handled nor skipped is the one with the lowest
+// offset.
+//
+// The engine that recorded the event set its creation time, from its own clock.
+//
+// The stream may be one of another engine's event streams, and the engine may
+// not have received the event yet. An engine that does not know the creation
+// time sends a tombstone.
+message HandlerEventStreamStaleness {
+  // Subject identifies the handler and the event stream.
+  HandlerEventStreamSubject subject = 1;
+
+  // Value has one case for a handler that is behind, and one for a handler that
+  // has caught up. Neither case is set when the engine has stopped reporting
+  // this metric for the subject.
+  oneof value {
+    // CreatedAt is the creation time of the oldest event on the stream that the
+    // handler has neither handled nor skipped, as the created_at of the event's
+    // envelope gives it.
+    google.protobuf.Timestamp created_at = 2;
+
+    // CaughtUp is set when the handler has handled or skipped every event that
+    // the engine knows is on the stream.
+    google.protobuf.Empty caught_up = 3;
+  }
 }

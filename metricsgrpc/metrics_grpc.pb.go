@@ -44,12 +44,12 @@ type MetricsAPIClient interface {
 	// the node owns, so a current count is only the node's own share. A
 	// cumulative count is the number of occurrences on this node, so it keeps
 	// growing when ownership of the work moves to another node. When the work
-	// moves to another node, the node sends a Tombstone for each current count of
+	// moves to another node, the node sends a tombstone for each current count of
 	// that work.
 	//
 	// A client can add up the cumulative_count and current_count fields of one
 	// subject from every node of the cluster to estimate the value for the whole
-	// cluster. A node that sent a Tombstone for a current count contributes zero
+	// cluster. A node that sent a tombstone for a current count contributes zero
 	// to the sum. The sum is an estimate because each node measures at a
 	// different time.
 	//
@@ -141,12 +141,12 @@ type MetricsAPIServer interface {
 	// the node owns, so a current count is only the node's own share. A
 	// cumulative count is the number of occurrences on this node, so it keeps
 	// growing when ownership of the work moves to another node. When the work
-	// moves to another node, the node sends a Tombstone for each current count of
+	// moves to another node, the node sends a tombstone for each current count of
 	// that work.
 	//
 	// A client can add up the cumulative_count and current_count fields of one
 	// subject from every node of the cluster to estimate the value for the whole
-	// cluster. A node that sent a Tombstone for a current count contributes zero
+	// cluster. A node that sent a tombstone for a current count contributes zero
 	// to the sum. The sum is an estimate because each node measures at a
 	// different time.
 	//
