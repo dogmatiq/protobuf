@@ -95,7 +95,7 @@ message WatchMetricsResponse {
 
     // SupportedMetrics is the list of the metrics that this call reports. Each
     // entry is the full name of the Protocol Buffers message that holds the
-    // metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsPending".
+    // metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsReady".
     // Each name appears once.
     //
     // Each Sample identifies the metric that it measures by a zero-based index
@@ -123,29 +123,27 @@ message WatchMetricsResponse {
   //
   // - AggregateInstanceEventStreamBindings
   // - EventStreamLength
-  // - HandlerCommandsDue
   // - HandlerCommandsFailing
   // - HandlerCommandsHandled
-  // - HandlerCommandsPending
+  // - HandlerCommandsReady
   // - HandlerDeadlinesCanceled
-  // - HandlerDeadlinesDue
   // - HandlerDeadlinesFailing
   // - HandlerDeadlinesHandled
-  // - HandlerDeadlinesPending
+  // - HandlerDeadlinesReady
+  // - HandlerDeadlinesScheduled
   // - HandlerEventStreamLag
   // - HandlerEventsFailing
   // - HandlerEventsHandled
   // - HandlerEventsRecorded
   // - ProcessInstanceQueueBindings
   // - ProcessInstancesEnded
-  // - QueueCommandsDue
   // - QueueCommandsFailing
-  // - QueueCommandsPending
+  // - QueueCommandsReady
   // - QueueCommandsRemoved
-  // - QueueDeadlinesDue
   // - QueueDeadlinesFailing
-  // - QueueDeadlinesPending
+  // - QueueDeadlinesReady
   // - QueueDeadlinesRemoved
+  // - QueueDeadlinesScheduled
   message Sample {
     // MetricIndex identifies the metric that this sample measures. It is a
     // zero-based index into the supported_metrics of the Preamble on the same

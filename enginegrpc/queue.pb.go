@@ -199,7 +199,7 @@ func (*queueModel_MultipleQueues_) isQueueModel_Model() {}
 
 // SingleQueue is the model of an engine that delivers every message through
 // one queue. Every metric that describes a queue, such as
-// dogma.metrics.v1alpha1.QueueCommandsPending, gives the same queue ID.
+// dogma.metrics.v1alpha1.QueueCommandsReady, gives the same queue ID.
 //
 // Every engine has at least one queue, even if no part of the engine is
 // called a queue. A deadline waits until the time that it is scheduled for,

@@ -21,9 +21,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// QueueCommandsPending is the number of commands in a single logical queue that
-// are waiting to be delivered.
-type QueueCommandsPending struct {
+// QueueDeadlinesScheduled is the number of deadlines in a single logical queue
+// that are scheduled for a time that has not come yet, and that have not had a
+// failed delivery attempt.
+//
+// Each deadline in the queue is counted in exactly one of
+// QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
+// the number of deadlines in the queue is the total of the three.
+type QueueDeadlinesScheduled struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
@@ -31,20 +36,20 @@ type QueueCommandsPending struct {
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *QueueCommandsPending) Reset() {
-	*x = QueueCommandsPending{}
+func (x *QueueDeadlinesScheduled) Reset() {
+	*x = QueueDeadlinesScheduled{}
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *QueueCommandsPending) String() string {
+func (x *QueueDeadlinesScheduled) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueueCommandsPending) ProtoMessage() {}
+func (*QueueDeadlinesScheduled) ProtoMessage() {}
 
-func (x *QueueCommandsPending) ProtoReflect() protoreflect.Message {
+func (x *QueueDeadlinesScheduled) ProtoReflect() protoreflect.Message {
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -56,50 +61,51 @@ func (x *QueueCommandsPending) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *QueueCommandsPending) GetQueueId() *uuidpb.UUID {
+func (x *QueueDeadlinesScheduled) GetQueueId() *uuidpb.UUID {
 	if x != nil {
 		return x.xxx_hidden_QueueId
 	}
 	return nil
 }
 
-func (x *QueueCommandsPending) GetCurrentCount() uint64 {
+func (x *QueueDeadlinesScheduled) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
 	}
 	return 0
 }
 
-func (x *QueueCommandsPending) SetQueueId(v *uuidpb.UUID) {
+func (x *QueueDeadlinesScheduled) SetQueueId(v *uuidpb.UUID) {
 	x.xxx_hidden_QueueId = v
 }
 
-func (x *QueueCommandsPending) SetCurrentCount(v uint64) {
+func (x *QueueDeadlinesScheduled) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
 }
 
-func (x *QueueCommandsPending) HasQueueId() bool {
+func (x *QueueDeadlinesScheduled) HasQueueId() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_QueueId != nil
 }
 
-func (x *QueueCommandsPending) ClearQueueId() {
+func (x *QueueDeadlinesScheduled) ClearQueueId() {
 	x.xxx_hidden_QueueId = nil
 }
 
-type QueueCommandsPending_builder struct {
+type QueueDeadlinesScheduled_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// QueueId is the ID of the queue.
 	QueueId *uuidpb.UUID
-	// CurrentCount is the number of commands in the queue.
+	// CurrentCount is the number of deadlines in the queue that are scheduled for
+	// a time that has not come yet.
 	CurrentCount uint64
 }
 
-func (b0 QueueCommandsPending_builder) Build() *QueueCommandsPending {
-	m0 := &QueueCommandsPending{}
+func (b0 QueueDeadlinesScheduled_builder) Build() *QueueDeadlinesScheduled {
+	m0 := &QueueDeadlinesScheduled{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_QueueId = b.QueueId
@@ -107,9 +113,18 @@ func (b0 QueueCommandsPending_builder) Build() *QueueCommandsPending {
 	return m0
 }
 
-// QueueDeadlinesPending is the number of deadlines in a single logical queue
-// that are waiting to be delivered.
-type QueueDeadlinesPending struct {
+// QueueCommandsReady is the number of commands in a single logical queue that
+// have not had a failed delivery attempt.
+//
+// A command is ready from the time that the engine adds it to the queue. It is
+// still ready while the engine attempts to deliver it, and while the engine
+// delays it for a reason of its own, such as to deliver messages of higher
+// priority first.
+//
+// Each command in the queue is counted in either QueueCommandsReady or
+// QueueCommandsFailing, so the number of commands in the queue is the total of
+// the two.
+type QueueCommandsReady struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
@@ -117,20 +132,20 @@ type QueueDeadlinesPending struct {
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *QueueDeadlinesPending) Reset() {
-	*x = QueueDeadlinesPending{}
+func (x *QueueCommandsReady) Reset() {
+	*x = QueueCommandsReady{}
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *QueueDeadlinesPending) String() string {
+func (x *QueueCommandsReady) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueueDeadlinesPending) ProtoMessage() {}
+func (*QueueCommandsReady) ProtoMessage() {}
 
-func (x *QueueDeadlinesPending) ProtoReflect() protoreflect.Message {
+func (x *QueueCommandsReady) ProtoReflect() protoreflect.Message {
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -142,50 +157,51 @@ func (x *QueueDeadlinesPending) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *QueueDeadlinesPending) GetQueueId() *uuidpb.UUID {
+func (x *QueueCommandsReady) GetQueueId() *uuidpb.UUID {
 	if x != nil {
 		return x.xxx_hidden_QueueId
 	}
 	return nil
 }
 
-func (x *QueueDeadlinesPending) GetCurrentCount() uint64 {
+func (x *QueueCommandsReady) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
 	}
 	return 0
 }
 
-func (x *QueueDeadlinesPending) SetQueueId(v *uuidpb.UUID) {
+func (x *QueueCommandsReady) SetQueueId(v *uuidpb.UUID) {
 	x.xxx_hidden_QueueId = v
 }
 
-func (x *QueueDeadlinesPending) SetCurrentCount(v uint64) {
+func (x *QueueCommandsReady) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
 }
 
-func (x *QueueDeadlinesPending) HasQueueId() bool {
+func (x *QueueCommandsReady) HasQueueId() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_QueueId != nil
 }
 
-func (x *QueueDeadlinesPending) ClearQueueId() {
+func (x *QueueCommandsReady) ClearQueueId() {
 	x.xxx_hidden_QueueId = nil
 }
 
-type QueueDeadlinesPending_builder struct {
+type QueueCommandsReady_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// QueueId is the ID of the queue.
 	QueueId *uuidpb.UUID
-	// CurrentCount is the number of deadlines in the queue.
+	// CurrentCount is the number of commands in the queue that have not had a
+	// failed delivery attempt.
 	CurrentCount uint64
 }
 
-func (b0 QueueDeadlinesPending_builder) Build() *QueueDeadlinesPending {
-	m0 := &QueueDeadlinesPending{}
+func (b0 QueueCommandsReady_builder) Build() *QueueCommandsReady {
+	m0 := &QueueCommandsReady{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_QueueId = b.QueueId
@@ -193,9 +209,18 @@ func (b0 QueueDeadlinesPending_builder) Build() *QueueDeadlinesPending {
 	return m0
 }
 
-// QueueCommandsDue is the number of commands in a single logical queue that are
-// ready to be delivered now.
-type QueueCommandsDue struct {
+// QueueDeadlinesReady is the number of deadlines in a single logical queue that
+// are scheduled for a time that has come, and that have not had a failed
+// delivery attempt.
+//
+// A deadline is still ready while the engine attempts to deliver it, and while
+// the engine delays it for a reason of its own, such as to deliver messages of
+// higher priority first.
+//
+// Each deadline in the queue is counted in exactly one of
+// QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
+// the number of deadlines in the queue is the total of the three.
+type QueueDeadlinesReady struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
@@ -203,20 +228,20 @@ type QueueCommandsDue struct {
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *QueueCommandsDue) Reset() {
-	*x = QueueCommandsDue{}
+func (x *QueueDeadlinesReady) Reset() {
+	*x = QueueDeadlinesReady{}
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *QueueCommandsDue) String() string {
+func (x *QueueDeadlinesReady) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*QueueCommandsDue) ProtoMessage() {}
+func (*QueueDeadlinesReady) ProtoMessage() {}
 
-func (x *QueueCommandsDue) ProtoReflect() protoreflect.Message {
+func (x *QueueDeadlinesReady) ProtoReflect() protoreflect.Message {
 	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -228,50 +253,51 @@ func (x *QueueCommandsDue) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *QueueCommandsDue) GetQueueId() *uuidpb.UUID {
+func (x *QueueDeadlinesReady) GetQueueId() *uuidpb.UUID {
 	if x != nil {
 		return x.xxx_hidden_QueueId
 	}
 	return nil
 }
 
-func (x *QueueCommandsDue) GetCurrentCount() uint64 {
+func (x *QueueDeadlinesReady) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
 	}
 	return 0
 }
 
-func (x *QueueCommandsDue) SetQueueId(v *uuidpb.UUID) {
+func (x *QueueDeadlinesReady) SetQueueId(v *uuidpb.UUID) {
 	x.xxx_hidden_QueueId = v
 }
 
-func (x *QueueCommandsDue) SetCurrentCount(v uint64) {
+func (x *QueueDeadlinesReady) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
 }
 
-func (x *QueueCommandsDue) HasQueueId() bool {
+func (x *QueueDeadlinesReady) HasQueueId() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_QueueId != nil
 }
 
-func (x *QueueCommandsDue) ClearQueueId() {
+func (x *QueueDeadlinesReady) ClearQueueId() {
 	x.xxx_hidden_QueueId = nil
 }
 
-type QueueCommandsDue_builder struct {
+type QueueDeadlinesReady_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// QueueId is the ID of the queue.
 	QueueId *uuidpb.UUID
-	// CurrentCount is the number of commands that are ready.
+	// CurrentCount is the number of deadlines in the queue that are scheduled for
+	// a time that has come, and that have not had a failed delivery attempt.
 	CurrentCount uint64
 }
 
-func (b0 QueueCommandsDue_builder) Build() *QueueCommandsDue {
-	m0 := &QueueCommandsDue{}
+func (b0 QueueDeadlinesReady_builder) Build() *QueueDeadlinesReady {
+	m0 := &QueueDeadlinesReady{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_QueueId = b.QueueId
@@ -279,94 +305,15 @@ func (b0 QueueCommandsDue_builder) Build() *QueueCommandsDue {
 	return m0
 }
 
-// QueueDeadlinesDue is the number of deadlines in a single logical queue that
-// are ready to be delivered now.
-type QueueDeadlinesDue struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_QueueId      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
-}
-
-func (x *QueueDeadlinesDue) Reset() {
-	*x = QueueDeadlinesDue{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *QueueDeadlinesDue) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*QueueDeadlinesDue) ProtoMessage() {}
-
-func (x *QueueDeadlinesDue) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *QueueDeadlinesDue) GetQueueId() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_QueueId
-	}
-	return nil
-}
-
-func (x *QueueDeadlinesDue) GetCurrentCount() uint64 {
-	if x != nil {
-		return x.xxx_hidden_CurrentCount
-	}
-	return 0
-}
-
-func (x *QueueDeadlinesDue) SetQueueId(v *uuidpb.UUID) {
-	x.xxx_hidden_QueueId = v
-}
-
-func (x *QueueDeadlinesDue) SetCurrentCount(v uint64) {
-	x.xxx_hidden_CurrentCount = v
-}
-
-func (x *QueueDeadlinesDue) HasQueueId() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_QueueId != nil
-}
-
-func (x *QueueDeadlinesDue) ClearQueueId() {
-	x.xxx_hidden_QueueId = nil
-}
-
-type QueueDeadlinesDue_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// QueueId is the ID of the queue.
-	QueueId *uuidpb.UUID
-	// CurrentCount is the number of deadlines that are ready.
-	CurrentCount uint64
-}
-
-func (b0 QueueDeadlinesDue_builder) Build() *QueueDeadlinesDue {
-	m0 := &QueueDeadlinesDue{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_QueueId = b.QueueId
-	x.xxx_hidden_CurrentCount = b.CurrentCount
-	return m0
-}
-
-// QueueCommandsFailing is the number of commands in a single logical queue
-// whose most recent delivery attempt failed.
+// QueueCommandsFailing is the number of commands in a single logical queue that
+// have had at least one failed delivery attempt.
+//
+// A command stays failing for as long as it is in the queue, whether or not its
+// next delivery attempt is due, and while that attempt is in progress.
+//
+// Each command in the queue is counted in either QueueCommandsReady or
+// QueueCommandsFailing, so the number of commands in the queue is the total of
+// the two.
 type QueueCommandsFailing struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -377,7 +324,7 @@ type QueueCommandsFailing struct {
 
 func (x *QueueCommandsFailing) Reset() {
 	*x = QueueCommandsFailing{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[4]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -389,7 +336,7 @@ func (x *QueueCommandsFailing) String() string {
 func (*QueueCommandsFailing) ProtoMessage() {}
 
 func (x *QueueCommandsFailing) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[4]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -438,7 +385,8 @@ type QueueCommandsFailing_builder struct {
 
 	// QueueId is the ID of the queue.
 	QueueId *uuidpb.UUID
-	// CurrentCount is the number of failing commands in the queue.
+	// CurrentCount is the number of commands in the queue that have had at least
+	// one failed delivery attempt.
 	CurrentCount uint64
 }
 
@@ -452,7 +400,14 @@ func (b0 QueueCommandsFailing_builder) Build() *QueueCommandsFailing {
 }
 
 // QueueDeadlinesFailing is the number of deadlines in a single logical queue
-// whose most recent delivery attempt failed.
+// that have had at least one failed delivery attempt.
+//
+// A deadline stays failing for as long as it is in the queue, whether or not
+// its next delivery attempt is due, and while that attempt is in progress.
+//
+// Each deadline in the queue is counted in exactly one of
+// QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
+// the number of deadlines in the queue is the total of the three.
 type QueueDeadlinesFailing struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -463,7 +418,7 @@ type QueueDeadlinesFailing struct {
 
 func (x *QueueDeadlinesFailing) Reset() {
 	*x = QueueDeadlinesFailing{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[5]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -475,7 +430,7 @@ func (x *QueueDeadlinesFailing) String() string {
 func (*QueueDeadlinesFailing) ProtoMessage() {}
 
 func (x *QueueDeadlinesFailing) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[5]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -524,7 +479,8 @@ type QueueDeadlinesFailing_builder struct {
 
 	// QueueId is the ID of the queue.
 	QueueId *uuidpb.UUID
-	// CurrentCount is the number of failing deadlines in the queue.
+	// CurrentCount is the number of deadlines in the queue that have had at least
+	// one failed delivery attempt.
 	CurrentCount uint64
 }
 
@@ -550,7 +506,7 @@ type QueueCommandsRemoved struct {
 
 func (x *QueueCommandsRemoved) Reset() {
 	*x = QueueCommandsRemoved{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[6]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -562,7 +518,7 @@ func (x *QueueCommandsRemoved) String() string {
 func (*QueueCommandsRemoved) ProtoMessage() {}
 
 func (x *QueueCommandsRemoved) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[6]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -638,7 +594,7 @@ type QueueDeadlinesRemoved struct {
 
 func (x *QueueDeadlinesRemoved) Reset() {
 	*x = QueueDeadlinesRemoved{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[7]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -650,7 +606,7 @@ func (x *QueueDeadlinesRemoved) String() string {
 func (*QueueDeadlinesRemoved) ProtoMessage() {}
 
 func (x *QueueDeadlinesRemoved) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[7]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -732,7 +688,7 @@ type ProcessInstanceQueueBindings struct {
 
 func (x *ProcessInstanceQueueBindings) Reset() {
 	*x = ProcessInstanceQueueBindings{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[8]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -744,7 +700,7 @@ func (x *ProcessInstanceQueueBindings) String() string {
 func (*ProcessInstanceQueueBindings) ProtoMessage() {}
 
 func (x *ProcessInstanceQueueBindings) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[8]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -837,17 +793,14 @@ var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto protoreflec
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_rawDesc = "" +
 	"\n" +
-	";github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"v\n" +
-	"\x14QueueCommandsPending\x122\n" +
+	";github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"y\n" +
+	"\x17QueueDeadlinesScheduled\x122\n" +
 	"\bqueue_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\aqueueId\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"w\n" +
-	"\x15QueueDeadlinesPending\x122\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"t\n" +
+	"\x12QueueCommandsReady\x122\n" +
 	"\bqueue_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\aqueueId\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"r\n" +
-	"\x10QueueCommandsDue\x122\n" +
-	"\bqueue_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\aqueueId\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"s\n" +
-	"\x11QueueDeadlinesDue\x122\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"u\n" +
+	"\x13QueueDeadlinesReady\x122\n" +
 	"\bqueue_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\aqueueId\x12*\n" +
 	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"v\n" +
 	"\x14QueueCommandsFailing\x122\n" +
@@ -868,35 +821,33 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_rawDesc =
 	"\bqueue_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\aqueueId\x12*\n" +
 	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCountB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_goTypes = []any{
-	(*QueueCommandsPending)(nil),         // 0: dogma.metrics.v1alpha1.QueueCommandsPending
-	(*QueueDeadlinesPending)(nil),        // 1: dogma.metrics.v1alpha1.QueueDeadlinesPending
-	(*QueueCommandsDue)(nil),             // 2: dogma.metrics.v1alpha1.QueueCommandsDue
-	(*QueueDeadlinesDue)(nil),            // 3: dogma.metrics.v1alpha1.QueueDeadlinesDue
-	(*QueueCommandsFailing)(nil),         // 4: dogma.metrics.v1alpha1.QueueCommandsFailing
-	(*QueueDeadlinesFailing)(nil),        // 5: dogma.metrics.v1alpha1.QueueDeadlinesFailing
-	(*QueueCommandsRemoved)(nil),         // 6: dogma.metrics.v1alpha1.QueueCommandsRemoved
-	(*QueueDeadlinesRemoved)(nil),        // 7: dogma.metrics.v1alpha1.QueueDeadlinesRemoved
-	(*ProcessInstanceQueueBindings)(nil), // 8: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings
-	(*uuidpb.UUID)(nil),                  // 9: dogma.protobuf.v1.UUID
+	(*QueueDeadlinesScheduled)(nil),      // 0: dogma.metrics.v1alpha1.QueueDeadlinesScheduled
+	(*QueueCommandsReady)(nil),           // 1: dogma.metrics.v1alpha1.QueueCommandsReady
+	(*QueueDeadlinesReady)(nil),          // 2: dogma.metrics.v1alpha1.QueueDeadlinesReady
+	(*QueueCommandsFailing)(nil),         // 3: dogma.metrics.v1alpha1.QueueCommandsFailing
+	(*QueueDeadlinesFailing)(nil),        // 4: dogma.metrics.v1alpha1.QueueDeadlinesFailing
+	(*QueueCommandsRemoved)(nil),         // 5: dogma.metrics.v1alpha1.QueueCommandsRemoved
+	(*QueueDeadlinesRemoved)(nil),        // 6: dogma.metrics.v1alpha1.QueueDeadlinesRemoved
+	(*ProcessInstanceQueueBindings)(nil), // 7: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings
+	(*uuidpb.UUID)(nil),                  // 8: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_depIdxs = []int32{
-	9,  // 0: dogma.metrics.v1alpha1.QueueCommandsPending.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 1: dogma.metrics.v1alpha1.QueueDeadlinesPending.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 2: dogma.metrics.v1alpha1.QueueCommandsDue.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 3: dogma.metrics.v1alpha1.QueueDeadlinesDue.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 4: dogma.metrics.v1alpha1.QueueCommandsFailing.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 5: dogma.metrics.v1alpha1.QueueDeadlinesFailing.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 6: dogma.metrics.v1alpha1.QueueCommandsRemoved.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 7: dogma.metrics.v1alpha1.QueueDeadlinesRemoved.queue_id:type_name -> dogma.protobuf.v1.UUID
-	9,  // 8: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings.handler_key:type_name -> dogma.protobuf.v1.UUID
-	9,  // 9: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings.queue_id:type_name -> dogma.protobuf.v1.UUID
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	8, // 0: dogma.metrics.v1alpha1.QueueDeadlinesScheduled.queue_id:type_name -> dogma.protobuf.v1.UUID
+	8, // 1: dogma.metrics.v1alpha1.QueueCommandsReady.queue_id:type_name -> dogma.protobuf.v1.UUID
+	8, // 2: dogma.metrics.v1alpha1.QueueDeadlinesReady.queue_id:type_name -> dogma.protobuf.v1.UUID
+	8, // 3: dogma.metrics.v1alpha1.QueueCommandsFailing.queue_id:type_name -> dogma.protobuf.v1.UUID
+	8, // 4: dogma.metrics.v1alpha1.QueueDeadlinesFailing.queue_id:type_name -> dogma.protobuf.v1.UUID
+	8, // 5: dogma.metrics.v1alpha1.QueueCommandsRemoved.queue_id:type_name -> dogma.protobuf.v1.UUID
+	8, // 6: dogma.metrics.v1alpha1.QueueDeadlinesRemoved.queue_id:type_name -> dogma.protobuf.v1.UUID
+	8, // 7: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings.handler_key:type_name -> dogma.protobuf.v1.UUID
+	8, // 8: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings.queue_id:type_name -> dogma.protobuf.v1.UUID
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_init() }
@@ -910,7 +861,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

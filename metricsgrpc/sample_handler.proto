@@ -5,39 +5,46 @@ option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
 
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
-// HandlerCommandsPending is the number of commands for one handler that are
-// waiting to be delivered. The engine sends it only for aggregate and
-// integration handlers.
-message HandlerCommandsPending {
+// HandlerCommandsReady is the number of commands for one handler that are
+// waiting to be delivered, and that have not had a failed delivery attempt. The
+// engine sends it only for aggregate and integration handlers.
+//
+// A command is ready from the time that the engine adds it to a queue. It is
+// still ready while the engine attempts to deliver it, and while the engine
+// delays it for a reason of its own, such as to deliver messages of higher
+// priority first.
+//
+// Each command that is waiting to be delivered to the handler is counted in
+// either HandlerCommandsReady or HandlerCommandsFailing, so the number of those
+// commands is the total of the two.
+message HandlerCommandsReady {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // CurrentCount is the number of commands.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
-}
-
-// HandlerCommandsDue is the number of commands for one handler that are ready
-// to be delivered now. The engine sends it only for aggregate and integration
-// handlers.
-message HandlerCommandsDue {
-  // HandlerKey is the handler's identity key, as the application in
-  // WatchMetricsResponse.Preamble.application describes it.
-  dogma.protobuf.v1.UUID handler_key = 1;
-
-  // CurrentCount is the number of commands that are ready.
+  // CurrentCount is the number of commands for the handler that are waiting to
+  // be delivered, and that have not had a failed delivery attempt.
   uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerCommandsFailing is the number of commands for one handler that are
-// waiting to be delivered and whose most recent delivery attempt failed. The
-// engine sends it only for aggregate and integration handlers.
+// waiting to be delivered, and that have had at least one failed delivery
+// attempt. The engine sends it only for aggregate and integration handlers.
+//
+// A command stays failing for as long as it is waiting to be delivered, whether
+// or not its next delivery attempt is due, and while that attempt is in
+// progress.
+//
+// Each command that is waiting to be delivered to the handler is counted in
+// either HandlerCommandsReady or HandlerCommandsFailing, so the number of those
+// commands is the total of the two.
 message HandlerCommandsFailing {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // CurrentCount is the number of failing commands.
+  // CurrentCount is the number of commands for the handler that are waiting to
+  // be delivered, and that have had at least one failed delivery attempt.
   uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
@@ -54,37 +61,66 @@ message HandlerCommandsHandled {
   uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerDeadlinesPending is the number of deadlines for one handler that are
-// waiting to be delivered. The engine sends it only for process handlers.
-message HandlerDeadlinesPending {
+// HandlerDeadlinesScheduled is the number of deadlines for one handler that are
+// scheduled for a time that has not come yet, and that have not had a failed
+// delivery attempt. The engine sends it only for process handlers.
+//
+// Each deadline that is waiting to be delivered to the handler is counted in
+// exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
+// HandlerDeadlinesFailing, so the number of those deadlines is the total of the
+// three.
+message HandlerDeadlinesScheduled {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // CurrentCount is the number of deadlines.
+  // CurrentCount is the number of deadlines for the handler that are scheduled
+  // for a time that has not come yet.
   uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
-// HandlerDeadlinesDue is the number of deadlines for one handler that are ready
-// to be delivered now. The engine sends it only for process handlers.
-message HandlerDeadlinesDue {
+// HandlerDeadlinesReady is the number of deadlines for one handler that are
+// waiting to be delivered, that are scheduled for a time that has come, and
+// that have not had a failed delivery attempt. The engine sends it only for
+// process handlers.
+//
+// A deadline is still ready while the engine attempts to deliver it, and while
+// the engine delays it for a reason of its own, such as to deliver messages of
+// higher priority first.
+//
+// Each deadline that is waiting to be delivered to the handler is counted in
+// exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
+// HandlerDeadlinesFailing, so the number of those deadlines is the total of the
+// three.
+message HandlerDeadlinesReady {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // CurrentCount is the number of deadlines that are ready.
+  // CurrentCount is the number of deadlines for the handler that are scheduled
+  // for a time that has come, and that have not had a failed delivery attempt.
   uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
 // HandlerDeadlinesFailing is the number of deadlines for one handler that are
-// waiting to be delivered and whose most recent delivery attempt failed. The
-// engine sends it only for process handlers.
+// waiting to be delivered, and that have had at least one failed delivery
+// attempt. The engine sends it only for process handlers.
+//
+// A deadline stays failing for as long as it is waiting to be delivered,
+// whether or not its next delivery attempt is due, and while that attempt is in
+// progress.
+//
+// Each deadline that is waiting to be delivered to the handler is counted in
+// exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
+// HandlerDeadlinesFailing, so the number of those deadlines is the total of the
+// three.
 message HandlerDeadlinesFailing {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // CurrentCount is the number of failing deadlines.
+  // CurrentCount is the number of deadlines for the handler that are waiting to
+  // be delivered, and that have had at least one failed delivery attempt.
   uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 
@@ -138,14 +174,15 @@ message HandlerEventsHandled {
 }
 
 // HandlerEventsFailing is the number of events for one handler that haven't
-// been handled yet and whose most recent delivery attempt failed. The engine
-// sends it only for process and projection handlers.
+// been handled yet and that have had at least one failed delivery attempt. The
+// engine sends it only for process and projection handlers.
 message HandlerEventsFailing {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
   dogma.protobuf.v1.UUID handler_key = 1;
 
-  // CurrentCount is the number of failing events.
+  // CurrentCount is the number of events for the handler that haven't been
+  // handled yet, and that have had at least one failed delivery attempt.
   uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }
 

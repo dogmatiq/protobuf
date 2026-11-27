@@ -13,6 +13,25 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added the `QueueDeadlinesScheduled` and `HandlerDeadlinesScheduled` metrics to
+  `MetricsAPI`, for the deadlines that are scheduled for a time that has not
+  come yet.
+
+### Changed
+
+- **[BC]** Renamed the `QueueCommandsDue`, `QueueDeadlinesDue`,
+  `HandlerCommandsDue` and `HandlerDeadlinesDue` metrics to
+  `QueueCommandsReady`, `QueueDeadlinesReady`, `HandlerCommandsReady` and
+  `HandlerDeadlinesReady`.
+- **[BC]** Each command or deadline that is waiting to be delivered is now
+  counted in exactly one metric: ready or failing for a command, and scheduled,
+  ready or failing for a deadline. The ready metrics count only those that have
+  not had a failed delivery attempt. The failing metrics count those that have
+  had one, whether or not the next attempt is due, and while that attempt is in
+  progress.
+
 ### Removed
 
 - **[BC]** Removed the `AggregateInstancesInMemory` and
@@ -22,6 +41,11 @@ The format is based on [Keep a Changelog], and this project adheres to
   `ProjectionCompactionsCanceled` metrics from `MetricsAPI`. Use
   `GetCompactions` on `ProjectionAPI`, or the `ProjectionCompactionEnded`
   messages that `EngineAPI.WatchEngine` sends, instead.
+- **[BC]** Removed the `QueueCommandsPending`, `QueueDeadlinesPending`,
+  `HandlerCommandsPending` and `HandlerDeadlinesPending` metrics from
+  `MetricsAPI`. The number of commands is the total of the ready and failing
+  metrics, and the number of deadlines is the total of the scheduled, ready and
+  failing metrics.
 
 ## [0.12.0] - 2026-11-24
 

@@ -12,13 +12,13 @@ import (
 	proto "google.golang.org/protobuf/proto"
 )
 
-type QueueCommandsPendingBuilder struct {
-	prototype QueueCommandsPending
+type QueueDeadlinesScheduledBuilder struct {
+	prototype QueueDeadlinesScheduled
 }
 
-// NewQueueCommandsPendingBuilder returns a builder that constructs [QueueCommandsPending] messages.
-func NewQueueCommandsPendingBuilder() *QueueCommandsPendingBuilder {
-	return &QueueCommandsPendingBuilder{}
+// NewQueueDeadlinesScheduledBuilder returns a builder that constructs [QueueDeadlinesScheduled] messages.
+func NewQueueDeadlinesScheduledBuilder() *QueueDeadlinesScheduledBuilder {
+	return &QueueDeadlinesScheduledBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -26,7 +26,7 @@ func NewQueueCommandsPendingBuilder() *QueueCommandsPendingBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *QueueCommandsPendingBuilder) From(x *QueueCommandsPending) *QueueCommandsPendingBuilder {
+func (b *QueueDeadlinesScheduledBuilder) From(x *QueueDeadlinesScheduled) *QueueDeadlinesScheduledBuilder {
 	proto.Reset(&b.prototype)
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
@@ -35,12 +35,12 @@ func (b *QueueCommandsPendingBuilder) From(x *QueueCommandsPending) *QueueComman
 	return b
 }
 
-// Build returns a new [QueueCommandsPending] containing the values configured via the builder.
+// Build returns a new [QueueDeadlinesScheduled] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *QueueCommandsPendingBuilder) Build() *QueueCommandsPending {
-	m := &QueueCommandsPending{}
+func (b *QueueDeadlinesScheduledBuilder) Build() *QueueDeadlinesScheduled {
+	m := &QueueDeadlinesScheduled{}
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
@@ -50,25 +50,25 @@ func (b *QueueCommandsPendingBuilder) Build() *QueueCommandsPending {
 
 // WithQueueId configures the builder to set the QueueId field to v,
 // then returns b.
-func (b *QueueCommandsPendingBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommandsPendingBuilder {
+func (b *QueueDeadlinesScheduledBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesScheduledBuilder {
 	b.prototype.SetQueueId(v)
 	return b
 }
 
 // WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueCommandsPendingBuilder) WithCurrentCount(v uint64) *QueueCommandsPendingBuilder {
+func (b *QueueDeadlinesScheduledBuilder) WithCurrentCount(v uint64) *QueueDeadlinesScheduledBuilder {
 	b.prototype.SetCurrentCount(v)
 	return b
 }
 
-type QueueDeadlinesPendingBuilder struct {
-	prototype QueueDeadlinesPending
+type QueueCommandsReadyBuilder struct {
+	prototype QueueCommandsReady
 }
 
-// NewQueueDeadlinesPendingBuilder returns a builder that constructs [QueueDeadlinesPending] messages.
-func NewQueueDeadlinesPendingBuilder() *QueueDeadlinesPendingBuilder {
-	return &QueueDeadlinesPendingBuilder{}
+// NewQueueCommandsReadyBuilder returns a builder that constructs [QueueCommandsReady] messages.
+func NewQueueCommandsReadyBuilder() *QueueCommandsReadyBuilder {
+	return &QueueCommandsReadyBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -76,7 +76,7 @@ func NewQueueDeadlinesPendingBuilder() *QueueDeadlinesPendingBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *QueueDeadlinesPendingBuilder) From(x *QueueDeadlinesPending) *QueueDeadlinesPendingBuilder {
+func (b *QueueCommandsReadyBuilder) From(x *QueueCommandsReady) *QueueCommandsReadyBuilder {
 	proto.Reset(&b.prototype)
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
@@ -85,12 +85,12 @@ func (b *QueueDeadlinesPendingBuilder) From(x *QueueDeadlinesPending) *QueueDead
 	return b
 }
 
-// Build returns a new [QueueDeadlinesPending] containing the values configured via the builder.
+// Build returns a new [QueueCommandsReady] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *QueueDeadlinesPendingBuilder) Build() *QueueDeadlinesPending {
-	m := &QueueDeadlinesPending{}
+func (b *QueueCommandsReadyBuilder) Build() *QueueCommandsReady {
+	m := &QueueCommandsReady{}
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
@@ -100,25 +100,25 @@ func (b *QueueDeadlinesPendingBuilder) Build() *QueueDeadlinesPending {
 
 // WithQueueId configures the builder to set the QueueId field to v,
 // then returns b.
-func (b *QueueDeadlinesPendingBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesPendingBuilder {
+func (b *QueueCommandsReadyBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommandsReadyBuilder {
 	b.prototype.SetQueueId(v)
 	return b
 }
 
 // WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueDeadlinesPendingBuilder) WithCurrentCount(v uint64) *QueueDeadlinesPendingBuilder {
+func (b *QueueCommandsReadyBuilder) WithCurrentCount(v uint64) *QueueCommandsReadyBuilder {
 	b.prototype.SetCurrentCount(v)
 	return b
 }
 
-type QueueCommandsDueBuilder struct {
-	prototype QueueCommandsDue
+type QueueDeadlinesReadyBuilder struct {
+	prototype QueueDeadlinesReady
 }
 
-// NewQueueCommandsDueBuilder returns a builder that constructs [QueueCommandsDue] messages.
-func NewQueueCommandsDueBuilder() *QueueCommandsDueBuilder {
-	return &QueueCommandsDueBuilder{}
+// NewQueueDeadlinesReadyBuilder returns a builder that constructs [QueueDeadlinesReady] messages.
+func NewQueueDeadlinesReadyBuilder() *QueueDeadlinesReadyBuilder {
+	return &QueueDeadlinesReadyBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -126,7 +126,7 @@ func NewQueueCommandsDueBuilder() *QueueCommandsDueBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *QueueCommandsDueBuilder) From(x *QueueCommandsDue) *QueueCommandsDueBuilder {
+func (b *QueueDeadlinesReadyBuilder) From(x *QueueDeadlinesReady) *QueueDeadlinesReadyBuilder {
 	proto.Reset(&b.prototype)
 	if x.HasQueueId() {
 		b.prototype.SetQueueId(x.GetQueueId())
@@ -135,12 +135,12 @@ func (b *QueueCommandsDueBuilder) From(x *QueueCommandsDue) *QueueCommandsDueBui
 	return b
 }
 
-// Build returns a new [QueueCommandsDue] containing the values configured via the builder.
+// Build returns a new [QueueDeadlinesReady] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *QueueCommandsDueBuilder) Build() *QueueCommandsDue {
-	m := &QueueCommandsDue{}
+func (b *QueueDeadlinesReadyBuilder) Build() *QueueDeadlinesReady {
+	m := &QueueDeadlinesReady{}
 	if b.prototype.HasQueueId() {
 		m.SetQueueId(b.prototype.GetQueueId())
 	}
@@ -150,64 +150,14 @@ func (b *QueueCommandsDueBuilder) Build() *QueueCommandsDue {
 
 // WithQueueId configures the builder to set the QueueId field to v,
 // then returns b.
-func (b *QueueCommandsDueBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommandsDueBuilder {
+func (b *QueueDeadlinesReadyBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesReadyBuilder {
 	b.prototype.SetQueueId(v)
 	return b
 }
 
 // WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *QueueCommandsDueBuilder) WithCurrentCount(v uint64) *QueueCommandsDueBuilder {
-	b.prototype.SetCurrentCount(v)
-	return b
-}
-
-type QueueDeadlinesDueBuilder struct {
-	prototype QueueDeadlinesDue
-}
-
-// NewQueueDeadlinesDueBuilder returns a builder that constructs [QueueDeadlinesDue] messages.
-func NewQueueDeadlinesDueBuilder() *QueueDeadlinesDueBuilder {
-	return &QueueDeadlinesDueBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *QueueDeadlinesDueBuilder) From(x *QueueDeadlinesDue) *QueueDeadlinesDueBuilder {
-	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
-	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
-	return b
-}
-
-// Build returns a new [QueueDeadlinesDue] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *QueueDeadlinesDueBuilder) Build() *QueueDeadlinesDue {
-	m := &QueueDeadlinesDue{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
-	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
-	return m
-}
-
-// WithQueueId configures the builder to set the QueueId field to v,
-// then returns b.
-func (b *QueueDeadlinesDueBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesDueBuilder {
-	b.prototype.SetQueueId(v)
-	return b
-}
-
-// WithCurrentCount configures the builder to set the CurrentCount field to v,
-// then returns b.
-func (b *QueueDeadlinesDueBuilder) WithCurrentCount(v uint64) *QueueDeadlinesDueBuilder {
+func (b *QueueDeadlinesReadyBuilder) WithCurrentCount(v uint64) *QueueDeadlinesReadyBuilder {
 	b.prototype.SetCurrentCount(v)
 	return b
 }
@@ -488,7 +438,7 @@ func (b *ProcessInstanceQueueBindingsBuilder) WithCurrentCount(v uint64) *Proces
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *QueueCommandsPending) Format(f fmt.State, verb rune) {
+func (x *QueueDeadlinesScheduled) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -543,9 +493,9 @@ func (x *QueueCommandsPending) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = QueueCommandsPending
-	type QueueCommandsPending realType
-	fmt.Fprintf(f, format, (*QueueCommandsPending)(x))
+	type realType = QueueDeadlinesScheduled
+	type QueueDeadlinesScheduled realType
+	fmt.Fprintf(f, format, (*QueueDeadlinesScheduled)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -561,7 +511,7 @@ func (x *QueueCommandsPending) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *QueueDeadlinesPending) Format(f fmt.State, verb rune) {
+func (x *QueueCommandsReady) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -616,9 +566,9 @@ func (x *QueueDeadlinesPending) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = QueueDeadlinesPending
-	type QueueDeadlinesPending realType
-	fmt.Fprintf(f, format, (*QueueDeadlinesPending)(x))
+	type realType = QueueCommandsReady
+	type QueueCommandsReady realType
+	fmt.Fprintf(f, format, (*QueueCommandsReady)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -634,7 +584,7 @@ func (x *QueueDeadlinesPending) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *QueueCommandsDue) Format(f fmt.State, verb rune) {
+func (x *QueueDeadlinesReady) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -689,82 +639,9 @@ func (x *QueueCommandsDue) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = QueueCommandsDue
-	type QueueCommandsDue realType
-	fmt.Fprintf(f, format, (*QueueCommandsDue)(x))
-}
-
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *QueueDeadlinesDue) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = QueueDeadlinesDue
-	type QueueDeadlinesDue realType
-	fmt.Fprintf(f, format, (*QueueDeadlinesDue)(x))
+	type realType = QueueDeadlinesReady
+	type QueueDeadlinesReady realType
+	fmt.Fprintf(f, format, (*QueueDeadlinesReady)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -1135,64 +1012,48 @@ func (x *ProcessInstanceQueueBindings) Format(f fmt.State, verb rune) {
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*QueueCommandsPending] to implement [encoding.BinaryMarshaler].
-func (x *QueueCommandsPending) MarshalBinary() ([]byte, error) {
+// It allows [*QueueDeadlinesScheduled] to implement [encoding.BinaryMarshaler].
+func (x *QueueDeadlinesScheduled) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*QueueCommandsPending] to implement [encoding.BinaryUnmarshaler].
-func (x *QueueCommandsPending) UnmarshalBinary(data []byte) error {
+// It allows [*QueueDeadlinesScheduled] to implement [encoding.BinaryUnmarshaler].
+func (x *QueueDeadlinesScheduled) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*QueueDeadlinesPending] to implement [encoding.BinaryMarshaler].
-func (x *QueueDeadlinesPending) MarshalBinary() ([]byte, error) {
+// It allows [*QueueCommandsReady] to implement [encoding.BinaryMarshaler].
+func (x *QueueCommandsReady) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*QueueDeadlinesPending] to implement [encoding.BinaryUnmarshaler].
-func (x *QueueDeadlinesPending) UnmarshalBinary(data []byte) error {
+// It allows [*QueueCommandsReady] to implement [encoding.BinaryUnmarshaler].
+func (x *QueueCommandsReady) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*QueueCommandsDue] to implement [encoding.BinaryMarshaler].
-func (x *QueueCommandsDue) MarshalBinary() ([]byte, error) {
+// It allows [*QueueDeadlinesReady] to implement [encoding.BinaryMarshaler].
+func (x *QueueDeadlinesReady) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*QueueCommandsDue] to implement [encoding.BinaryUnmarshaler].
-func (x *QueueCommandsDue) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*QueueDeadlinesDue] to implement [encoding.BinaryMarshaler].
-func (x *QueueDeadlinesDue) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*QueueDeadlinesDue] to implement [encoding.BinaryUnmarshaler].
-func (x *QueueDeadlinesDue) UnmarshalBinary(data []byte) error {
+// It allows [*QueueDeadlinesReady] to implement [encoding.BinaryUnmarshaler].
+func (x *QueueDeadlinesReady) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 

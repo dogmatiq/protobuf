@@ -471,7 +471,7 @@ type WatchMetricsResponse_Preamble_builder struct {
 	Application *configpb.Application
 	// SupportedMetrics is the list of the metrics that this call reports. Each
 	// entry is the full name of the Protocol Buffers message that holds the
-	// metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsPending".
+	// metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsReady".
 	// Each name appears once.
 	//
 	// Each Sample identifies the metric that it measures by a zero-based index
@@ -510,29 +510,27 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 //
 // - AggregateInstanceEventStreamBindings
 // - EventStreamLength
-// - HandlerCommandsDue
 // - HandlerCommandsFailing
 // - HandlerCommandsHandled
-// - HandlerCommandsPending
+// - HandlerCommandsReady
 // - HandlerDeadlinesCanceled
-// - HandlerDeadlinesDue
 // - HandlerDeadlinesFailing
 // - HandlerDeadlinesHandled
-// - HandlerDeadlinesPending
+// - HandlerDeadlinesReady
+// - HandlerDeadlinesScheduled
 // - HandlerEventStreamLag
 // - HandlerEventsFailing
 // - HandlerEventsHandled
 // - HandlerEventsRecorded
 // - ProcessInstanceQueueBindings
 // - ProcessInstancesEnded
-// - QueueCommandsDue
 // - QueueCommandsFailing
-// - QueueCommandsPending
+// - QueueCommandsReady
 // - QueueCommandsRemoved
-// - QueueDeadlinesDue
 // - QueueDeadlinesFailing
-// - QueueDeadlinesPending
+// - QueueDeadlinesReady
 // - QueueDeadlinesRemoved
+// - QueueDeadlinesScheduled
 type WatchMetricsResponse_Sample struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_MetricIndex uint32                 `protobuf:"varint,1,opt,name=metric_index,json=metricIndex"`

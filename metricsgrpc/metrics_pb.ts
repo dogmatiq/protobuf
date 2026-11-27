@@ -134,7 +134,7 @@ export type WatchMetricsResponse_Preamble = Message<"dogma.metrics.v1alpha1.Watc
   /**
    * SupportedMetrics is the list of the metrics that this call reports. Each
    * entry is the full name of the Protocol Buffers message that holds the
-   * metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsPending".
+   * metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsReady".
    * Each name appears once.
    *
    * Each Sample identifies the metric that it measures by a zero-based index
@@ -173,29 +173,27 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  *
  * - AggregateInstanceEventStreamBindings
  * - EventStreamLength
- * - HandlerCommandsDue
  * - HandlerCommandsFailing
  * - HandlerCommandsHandled
- * - HandlerCommandsPending
+ * - HandlerCommandsReady
  * - HandlerDeadlinesCanceled
- * - HandlerDeadlinesDue
  * - HandlerDeadlinesFailing
  * - HandlerDeadlinesHandled
- * - HandlerDeadlinesPending
+ * - HandlerDeadlinesReady
+ * - HandlerDeadlinesScheduled
  * - HandlerEventStreamLag
  * - HandlerEventsFailing
  * - HandlerEventsHandled
  * - HandlerEventsRecorded
  * - ProcessInstanceQueueBindings
  * - ProcessInstancesEnded
- * - QueueCommandsDue
  * - QueueCommandsFailing
- * - QueueCommandsPending
+ * - QueueCommandsReady
  * - QueueCommandsRemoved
- * - QueueDeadlinesDue
  * - QueueDeadlinesFailing
- * - QueueDeadlinesPending
+ * - QueueDeadlinesReady
  * - QueueDeadlinesRemoved
+ * - QueueDeadlinesScheduled
  *
  * @generated from message dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
  */

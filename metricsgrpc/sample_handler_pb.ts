@@ -12,16 +12,25 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFile = /*@__PURE__*/
-  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImQKFkhhbmRsZXJDb21tYW5kc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImAKEkhhbmRsZXJDb21tYW5kc0R1ZRIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiZAoWSGFuZGxlckNvbW1hbmRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiZwoWSGFuZGxlckNvbW1hbmRzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIiZQoXSGFuZGxlckRlYWRsaW5lc1BlbmRpbmcSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImEKE0hhbmRsZXJEZWFkbGluZXNEdWUSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImUKF0hhbmRsZXJEZWFkbGluZXNGYWlsaW5nEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJoChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIiaQoYSGFuZGxlckRlYWRsaW5lc0NhbmNlbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJmChVIYW5kbGVyRXZlbnRzUmVjb3JkZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCImUKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJiChRIYW5kbGVyRXZlbnRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiZgoVUHJvY2Vzc0luc3RhbmNlc0VuZGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExImIKFEhhbmRsZXJDb21tYW5kc1JlYWR5EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJkChZIYW5kbGVyQ29tbWFuZHNGYWlsaW5nEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJnChZIYW5kbGVyQ29tbWFuZHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJnChlIYW5kbGVyRGVhZGxpbmVzU2NoZWR1bGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJjChVIYW5kbGVyRGVhZGxpbmVzUmVhZHkSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCImUKF0hhbmRsZXJEZWFkbGluZXNGYWlsaW5nEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJoChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIiaQoYSGFuZGxlckRlYWRsaW5lc0NhbmNlbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJmChVIYW5kbGVyRXZlbnRzUmVjb3JkZWQSLAoLaGFuZGxlcl9rZXkYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCImUKFEhhbmRsZXJFdmVudHNIYW5kbGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJiChRIYW5kbGVyRXZlbnRzRmFpbGluZxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiZgoVUHJvY2Vzc0luc3RhbmNlc0VuZGVkEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
- * HandlerCommandsPending is the number of commands for one handler that are
- * waiting to be delivered. The engine sends it only for aggregate and
- * integration handlers.
+ * HandlerCommandsReady is the number of commands for one handler that are
+ * waiting to be delivered, and that have not had a failed delivery attempt. The
+ * engine sends it only for aggregate and integration handlers.
  *
- * @generated from message dogma.metrics.v1alpha1.HandlerCommandsPending
+ * A command is ready from the time that the engine adds it to a queue. It is
+ * still ready while the engine attempts to deliver it, and while the engine
+ * delays it for a reason of its own, such as to deliver messages of higher
+ * priority first.
+ *
+ * Each command that is waiting to be delivered to the handler is counted in
+ * either HandlerCommandsReady or HandlerCommandsFailing, so the number of those
+ * commands is the total of the two.
+ *
+ * @generated from message dogma.metrics.v1alpha1.HandlerCommandsReady
  */
-export type HandlerCommandsPending = Message<"dogma.metrics.v1alpha1.HandlerCommandsPending"> & {
+export type HandlerCommandsReady = Message<"dogma.metrics.v1alpha1.HandlerCommandsReady"> & {
   /**
    * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
@@ -31,7 +40,8 @@ export type HandlerCommandsPending = Message<"dogma.metrics.v1alpha1.HandlerComm
   handlerKey?: UUID | undefined;
 
   /**
-   * CurrentCount is the number of commands.
+   * CurrentCount is the number of commands for the handler that are waiting to
+   * be delivered, and that have not had a failed delivery attempt.
    *
    * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
@@ -39,47 +49,24 @@ export type HandlerCommandsPending = Message<"dogma.metrics.v1alpha1.HandlerComm
 };
 
 /**
- * Describes the message dogma.metrics.v1alpha1.HandlerCommandsPending.
- * Use `create(HandlerCommandsPendingSchema)` to create a new message.
+ * Describes the message dogma.metrics.v1alpha1.HandlerCommandsReady.
+ * Use `create(HandlerCommandsReadySchema)` to create a new message.
  */
-export const HandlerCommandsPendingSchema: GenMessage<HandlerCommandsPending> = /*@__PURE__*/
+export const HandlerCommandsReadySchema: GenMessage<HandlerCommandsReady> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 0);
 
 /**
- * HandlerCommandsDue is the number of commands for one handler that are ready
- * to be delivered now. The engine sends it only for aggregate and integration
- * handlers.
- *
- * @generated from message dogma.metrics.v1alpha1.HandlerCommandsDue
- */
-export type HandlerCommandsDue = Message<"dogma.metrics.v1alpha1.HandlerCommandsDue"> & {
-  /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
-   */
-  handlerKey?: UUID | undefined;
-
-  /**
-   * CurrentCount is the number of commands that are ready.
-   *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
-   */
-  currentCount: bigint;
-};
-
-/**
- * Describes the message dogma.metrics.v1alpha1.HandlerCommandsDue.
- * Use `create(HandlerCommandsDueSchema)` to create a new message.
- */
-export const HandlerCommandsDueSchema: GenMessage<HandlerCommandsDue> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 1);
-
-/**
  * HandlerCommandsFailing is the number of commands for one handler that are
- * waiting to be delivered and whose most recent delivery attempt failed. The
- * engine sends it only for aggregate and integration handlers.
+ * waiting to be delivered, and that have had at least one failed delivery
+ * attempt. The engine sends it only for aggregate and integration handlers.
+ *
+ * A command stays failing for as long as it is waiting to be delivered, whether
+ * or not its next delivery attempt is due, and while that attempt is in
+ * progress.
+ *
+ * Each command that is waiting to be delivered to the handler is counted in
+ * either HandlerCommandsReady or HandlerCommandsFailing, so the number of those
+ * commands is the total of the two.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerCommandsFailing
  */
@@ -93,7 +80,8 @@ export type HandlerCommandsFailing = Message<"dogma.metrics.v1alpha1.HandlerComm
   handlerKey?: UUID | undefined;
 
   /**
-   * CurrentCount is the number of failing commands.
+   * CurrentCount is the number of commands for the handler that are waiting to
+   * be delivered, and that have had at least one failed delivery attempt.
    *
    * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
@@ -105,7 +93,7 @@ export type HandlerCommandsFailing = Message<"dogma.metrics.v1alpha1.HandlerComm
  * Use `create(HandlerCommandsFailingSchema)` to create a new message.
  */
 export const HandlerCommandsFailingSchema: GenMessage<HandlerCommandsFailing> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 2);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 1);
 
 /**
  * HandlerCommandsHandled is the cumulative count of the commands that one
@@ -137,15 +125,63 @@ export type HandlerCommandsHandled = Message<"dogma.metrics.v1alpha1.HandlerComm
  * Use `create(HandlerCommandsHandledSchema)` to create a new message.
  */
 export const HandlerCommandsHandledSchema: GenMessage<HandlerCommandsHandled> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 2);
+
+/**
+ * HandlerDeadlinesScheduled is the number of deadlines for one handler that are
+ * scheduled for a time that has not come yet, and that have not had a failed
+ * delivery attempt. The engine sends it only for process handlers.
+ *
+ * Each deadline that is waiting to be delivered to the handler is counted in
+ * exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
+ * HandlerDeadlinesFailing, so the number of those deadlines is the total of the
+ * three.
+ *
+ * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesScheduled
+ */
+export type HandlerDeadlinesScheduled = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesScheduled"> & {
+  /**
+   * HandlerKey is the handler's identity key, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * CurrentCount is the number of deadlines for the handler that are scheduled
+   * for a time that has not come yet.
+   *
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   */
+  currentCount: bigint;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.HandlerDeadlinesScheduled.
+ * Use `create(HandlerDeadlinesScheduledSchema)` to create a new message.
+ */
+export const HandlerDeadlinesScheduledSchema: GenMessage<HandlerDeadlinesScheduled> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 3);
 
 /**
- * HandlerDeadlinesPending is the number of deadlines for one handler that are
- * waiting to be delivered. The engine sends it only for process handlers.
+ * HandlerDeadlinesReady is the number of deadlines for one handler that are
+ * waiting to be delivered, that are scheduled for a time that has come, and
+ * that have not had a failed delivery attempt. The engine sends it only for
+ * process handlers.
  *
- * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesPending
+ * A deadline is still ready while the engine attempts to deliver it, and while
+ * the engine delays it for a reason of its own, such as to deliver messages of
+ * higher priority first.
+ *
+ * Each deadline that is waiting to be delivered to the handler is counted in
+ * exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
+ * HandlerDeadlinesFailing, so the number of those deadlines is the total of the
+ * three.
+ *
+ * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesReady
  */
-export type HandlerDeadlinesPending = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesPending"> & {
+export type HandlerDeadlinesReady = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesReady"> & {
   /**
    * HandlerKey is the handler's identity key, as the application in
    * WatchMetricsResponse.Preamble.application describes it.
@@ -155,7 +191,8 @@ export type HandlerDeadlinesPending = Message<"dogma.metrics.v1alpha1.HandlerDea
   handlerKey?: UUID | undefined;
 
   /**
-   * CurrentCount is the number of deadlines.
+   * CurrentCount is the number of deadlines for the handler that are scheduled
+   * for a time that has come, and that have not had a failed delivery attempt.
    *
    * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
@@ -163,46 +200,25 @@ export type HandlerDeadlinesPending = Message<"dogma.metrics.v1alpha1.HandlerDea
 };
 
 /**
- * Describes the message dogma.metrics.v1alpha1.HandlerDeadlinesPending.
- * Use `create(HandlerDeadlinesPendingSchema)` to create a new message.
+ * Describes the message dogma.metrics.v1alpha1.HandlerDeadlinesReady.
+ * Use `create(HandlerDeadlinesReadySchema)` to create a new message.
  */
-export const HandlerDeadlinesPendingSchema: GenMessage<HandlerDeadlinesPending> = /*@__PURE__*/
+export const HandlerDeadlinesReadySchema: GenMessage<HandlerDeadlinesReady> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 4);
 
 /**
- * HandlerDeadlinesDue is the number of deadlines for one handler that are ready
- * to be delivered now. The engine sends it only for process handlers.
- *
- * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesDue
- */
-export type HandlerDeadlinesDue = Message<"dogma.metrics.v1alpha1.HandlerDeadlinesDue"> & {
-  /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
-   */
-  handlerKey?: UUID | undefined;
-
-  /**
-   * CurrentCount is the number of deadlines that are ready.
-   *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
-   */
-  currentCount: bigint;
-};
-
-/**
- * Describes the message dogma.metrics.v1alpha1.HandlerDeadlinesDue.
- * Use `create(HandlerDeadlinesDueSchema)` to create a new message.
- */
-export const HandlerDeadlinesDueSchema: GenMessage<HandlerDeadlinesDue> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 5);
-
-/**
  * HandlerDeadlinesFailing is the number of deadlines for one handler that are
- * waiting to be delivered and whose most recent delivery attempt failed. The
- * engine sends it only for process handlers.
+ * waiting to be delivered, and that have had at least one failed delivery
+ * attempt. The engine sends it only for process handlers.
+ *
+ * A deadline stays failing for as long as it is waiting to be delivered,
+ * whether or not its next delivery attempt is due, and while that attempt is in
+ * progress.
+ *
+ * Each deadline that is waiting to be delivered to the handler is counted in
+ * exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
+ * HandlerDeadlinesFailing, so the number of those deadlines is the total of the
+ * three.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerDeadlinesFailing
  */
@@ -216,7 +232,8 @@ export type HandlerDeadlinesFailing = Message<"dogma.metrics.v1alpha1.HandlerDea
   handlerKey?: UUID | undefined;
 
   /**
-   * CurrentCount is the number of failing deadlines.
+   * CurrentCount is the number of deadlines for the handler that are waiting to
+   * be delivered, and that have had at least one failed delivery attempt.
    *
    * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
@@ -228,7 +245,7 @@ export type HandlerDeadlinesFailing = Message<"dogma.metrics.v1alpha1.HandlerDea
  * Use `create(HandlerDeadlinesFailingSchema)` to create a new message.
  */
 export const HandlerDeadlinesFailingSchema: GenMessage<HandlerDeadlinesFailing> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 6);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 5);
 
 /**
  * HandlerDeadlinesHandled is the cumulative count of the deadlines that one
@@ -260,7 +277,7 @@ export type HandlerDeadlinesHandled = Message<"dogma.metrics.v1alpha1.HandlerDea
  * Use `create(HandlerDeadlinesHandledSchema)` to create a new message.
  */
 export const HandlerDeadlinesHandledSchema: GenMessage<HandlerDeadlinesHandled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 7);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 6);
 
 /**
  * HandlerDeadlinesCanceled is the cumulative count of the deadlines of one
@@ -292,7 +309,7 @@ export type HandlerDeadlinesCanceled = Message<"dogma.metrics.v1alpha1.HandlerDe
  * Use `create(HandlerDeadlinesCanceledSchema)` to create a new message.
  */
 export const HandlerDeadlinesCanceledSchema: GenMessage<HandlerDeadlinesCanceled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 8);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 7);
 
 /**
  * HandlerEventsRecorded is the cumulative count of the events that one handler
@@ -323,7 +340,7 @@ export type HandlerEventsRecorded = Message<"dogma.metrics.v1alpha1.HandlerEvent
  * Use `create(HandlerEventsRecordedSchema)` to create a new message.
  */
 export const HandlerEventsRecordedSchema: GenMessage<HandlerEventsRecorded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 9);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 8);
 
 /**
  * HandlerEventsHandled is the cumulative count of the events that one handler
@@ -353,12 +370,12 @@ export type HandlerEventsHandled = Message<"dogma.metrics.v1alpha1.HandlerEvents
  * Use `create(HandlerEventsHandledSchema)` to create a new message.
  */
 export const HandlerEventsHandledSchema: GenMessage<HandlerEventsHandled> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 10);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 9);
 
 /**
  * HandlerEventsFailing is the number of events for one handler that haven't
- * been handled yet and whose most recent delivery attempt failed. The engine
- * sends it only for process and projection handlers.
+ * been handled yet and that have had at least one failed delivery attempt. The
+ * engine sends it only for process and projection handlers.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventsFailing
  */
@@ -372,7 +389,8 @@ export type HandlerEventsFailing = Message<"dogma.metrics.v1alpha1.HandlerEvents
   handlerKey?: UUID | undefined;
 
   /**
-   * CurrentCount is the number of failing events.
+   * CurrentCount is the number of events for the handler that haven't been
+   * handled yet, and that have had at least one failed delivery attempt.
    *
    * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
@@ -384,7 +402,7 @@ export type HandlerEventsFailing = Message<"dogma.metrics.v1alpha1.HandlerEvents
  * Use `create(HandlerEventsFailingSchema)` to create a new message.
  */
 export const HandlerEventsFailingSchema: GenMessage<HandlerEventsFailing> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 11);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 10);
 
 /**
  * ProcessInstancesEnded is the cumulative count of the instances of one process
@@ -414,5 +432,5 @@ export type ProcessInstancesEnded = Message<"dogma.metrics.v1alpha1.ProcessInsta
  * Use `create(ProcessInstancesEndedSchema)` to create a new message.
  */
 export const ProcessInstancesEndedSchema: GenMessage<ProcessInstancesEnded> = /*@__PURE__*/
-  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 12);
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler, 11);
 

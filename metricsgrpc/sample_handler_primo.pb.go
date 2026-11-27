@@ -12,13 +12,13 @@ import (
 	proto "google.golang.org/protobuf/proto"
 )
 
-type HandlerCommandsPendingBuilder struct {
-	prototype HandlerCommandsPending
+type HandlerCommandsReadyBuilder struct {
+	prototype HandlerCommandsReady
 }
 
-// NewHandlerCommandsPendingBuilder returns a builder that constructs [HandlerCommandsPending] messages.
-func NewHandlerCommandsPendingBuilder() *HandlerCommandsPendingBuilder {
-	return &HandlerCommandsPendingBuilder{}
+// NewHandlerCommandsReadyBuilder returns a builder that constructs [HandlerCommandsReady] messages.
+func NewHandlerCommandsReadyBuilder() *HandlerCommandsReadyBuilder {
+	return &HandlerCommandsReadyBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -26,7 +26,7 @@ func NewHandlerCommandsPendingBuilder() *HandlerCommandsPendingBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *HandlerCommandsPendingBuilder) From(x *HandlerCommandsPending) *HandlerCommandsPendingBuilder {
+func (b *HandlerCommandsReadyBuilder) From(x *HandlerCommandsReady) *HandlerCommandsReadyBuilder {
 	proto.Reset(&b.prototype)
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
@@ -35,12 +35,12 @@ func (b *HandlerCommandsPendingBuilder) From(x *HandlerCommandsPending) *Handler
 	return b
 }
 
-// Build returns a new [HandlerCommandsPending] containing the values configured via the builder.
+// Build returns a new [HandlerCommandsReady] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *HandlerCommandsPendingBuilder) Build() *HandlerCommandsPending {
-	m := &HandlerCommandsPending{}
+func (b *HandlerCommandsReadyBuilder) Build() *HandlerCommandsReady {
+	m := &HandlerCommandsReady{}
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
@@ -50,64 +50,14 @@ func (b *HandlerCommandsPendingBuilder) Build() *HandlerCommandsPending {
 
 // WithHandlerKey configures the builder to set the HandlerKey field to v,
 // then returns b.
-func (b *HandlerCommandsPendingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsPendingBuilder {
+func (b *HandlerCommandsReadyBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsReadyBuilder {
 	b.prototype.SetHandlerKey(v)
 	return b
 }
 
 // WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerCommandsPendingBuilder) WithCurrentCount(v uint64) *HandlerCommandsPendingBuilder {
-	b.prototype.SetCurrentCount(v)
-	return b
-}
-
-type HandlerCommandsDueBuilder struct {
-	prototype HandlerCommandsDue
-}
-
-// NewHandlerCommandsDueBuilder returns a builder that constructs [HandlerCommandsDue] messages.
-func NewHandlerCommandsDueBuilder() *HandlerCommandsDueBuilder {
-	return &HandlerCommandsDueBuilder{}
-}
-
-// From configures the builder to use x as the prototype for new messages,
-// then returns b.
-//
-// It performs a shallow copy of x, such that any changes made via the builder
-// do not modify x. It does not make a copy of the field values themselves.
-func (b *HandlerCommandsDueBuilder) From(x *HandlerCommandsDue) *HandlerCommandsDueBuilder {
-	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
-	return b
-}
-
-// Build returns a new [HandlerCommandsDue] containing the values configured via the builder.
-//
-// Each call returns a new message, such that future changes to the builder do
-// not modify previously constructed messages.
-func (b *HandlerCommandsDueBuilder) Build() *HandlerCommandsDue {
-	m := &HandlerCommandsDue{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
-	return m
-}
-
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
-// then returns b.
-func (b *HandlerCommandsDueBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsDueBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithCurrentCount configures the builder to set the CurrentCount field to v,
-// then returns b.
-func (b *HandlerCommandsDueBuilder) WithCurrentCount(v uint64) *HandlerCommandsDueBuilder {
+func (b *HandlerCommandsReadyBuilder) WithCurrentCount(v uint64) *HandlerCommandsReadyBuilder {
 	b.prototype.SetCurrentCount(v)
 	return b
 }
@@ -212,13 +162,13 @@ func (b *HandlerCommandsHandledBuilder) WithCumulativeCount(v uint64) *HandlerCo
 	return b
 }
 
-type HandlerDeadlinesPendingBuilder struct {
-	prototype HandlerDeadlinesPending
+type HandlerDeadlinesScheduledBuilder struct {
+	prototype HandlerDeadlinesScheduled
 }
 
-// NewHandlerDeadlinesPendingBuilder returns a builder that constructs [HandlerDeadlinesPending] messages.
-func NewHandlerDeadlinesPendingBuilder() *HandlerDeadlinesPendingBuilder {
-	return &HandlerDeadlinesPendingBuilder{}
+// NewHandlerDeadlinesScheduledBuilder returns a builder that constructs [HandlerDeadlinesScheduled] messages.
+func NewHandlerDeadlinesScheduledBuilder() *HandlerDeadlinesScheduledBuilder {
+	return &HandlerDeadlinesScheduledBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -226,7 +176,7 @@ func NewHandlerDeadlinesPendingBuilder() *HandlerDeadlinesPendingBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *HandlerDeadlinesPendingBuilder) From(x *HandlerDeadlinesPending) *HandlerDeadlinesPendingBuilder {
+func (b *HandlerDeadlinesScheduledBuilder) From(x *HandlerDeadlinesScheduled) *HandlerDeadlinesScheduledBuilder {
 	proto.Reset(&b.prototype)
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
@@ -235,12 +185,12 @@ func (b *HandlerDeadlinesPendingBuilder) From(x *HandlerDeadlinesPending) *Handl
 	return b
 }
 
-// Build returns a new [HandlerDeadlinesPending] containing the values configured via the builder.
+// Build returns a new [HandlerDeadlinesScheduled] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *HandlerDeadlinesPendingBuilder) Build() *HandlerDeadlinesPending {
-	m := &HandlerDeadlinesPending{}
+func (b *HandlerDeadlinesScheduledBuilder) Build() *HandlerDeadlinesScheduled {
+	m := &HandlerDeadlinesScheduled{}
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
@@ -250,25 +200,25 @@ func (b *HandlerDeadlinesPendingBuilder) Build() *HandlerDeadlinesPending {
 
 // WithHandlerKey configures the builder to set the HandlerKey field to v,
 // then returns b.
-func (b *HandlerDeadlinesPendingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesPendingBuilder {
+func (b *HandlerDeadlinesScheduledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesScheduledBuilder {
 	b.prototype.SetHandlerKey(v)
 	return b
 }
 
 // WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerDeadlinesPendingBuilder) WithCurrentCount(v uint64) *HandlerDeadlinesPendingBuilder {
+func (b *HandlerDeadlinesScheduledBuilder) WithCurrentCount(v uint64) *HandlerDeadlinesScheduledBuilder {
 	b.prototype.SetCurrentCount(v)
 	return b
 }
 
-type HandlerDeadlinesDueBuilder struct {
-	prototype HandlerDeadlinesDue
+type HandlerDeadlinesReadyBuilder struct {
+	prototype HandlerDeadlinesReady
 }
 
-// NewHandlerDeadlinesDueBuilder returns a builder that constructs [HandlerDeadlinesDue] messages.
-func NewHandlerDeadlinesDueBuilder() *HandlerDeadlinesDueBuilder {
-	return &HandlerDeadlinesDueBuilder{}
+// NewHandlerDeadlinesReadyBuilder returns a builder that constructs [HandlerDeadlinesReady] messages.
+func NewHandlerDeadlinesReadyBuilder() *HandlerDeadlinesReadyBuilder {
+	return &HandlerDeadlinesReadyBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -276,7 +226,7 @@ func NewHandlerDeadlinesDueBuilder() *HandlerDeadlinesDueBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *HandlerDeadlinesDueBuilder) From(x *HandlerDeadlinesDue) *HandlerDeadlinesDueBuilder {
+func (b *HandlerDeadlinesReadyBuilder) From(x *HandlerDeadlinesReady) *HandlerDeadlinesReadyBuilder {
 	proto.Reset(&b.prototype)
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
@@ -285,12 +235,12 @@ func (b *HandlerDeadlinesDueBuilder) From(x *HandlerDeadlinesDue) *HandlerDeadli
 	return b
 }
 
-// Build returns a new [HandlerDeadlinesDue] containing the values configured via the builder.
+// Build returns a new [HandlerDeadlinesReady] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *HandlerDeadlinesDueBuilder) Build() *HandlerDeadlinesDue {
-	m := &HandlerDeadlinesDue{}
+func (b *HandlerDeadlinesReadyBuilder) Build() *HandlerDeadlinesReady {
+	m := &HandlerDeadlinesReady{}
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
@@ -300,14 +250,14 @@ func (b *HandlerDeadlinesDueBuilder) Build() *HandlerDeadlinesDue {
 
 // WithHandlerKey configures the builder to set the HandlerKey field to v,
 // then returns b.
-func (b *HandlerDeadlinesDueBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesDueBuilder {
+func (b *HandlerDeadlinesReadyBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesReadyBuilder {
 	b.prototype.SetHandlerKey(v)
 	return b
 }
 
 // WithCurrentCount configures the builder to set the CurrentCount field to v,
 // then returns b.
-func (b *HandlerDeadlinesDueBuilder) WithCurrentCount(v uint64) *HandlerDeadlinesDueBuilder {
+func (b *HandlerDeadlinesReadyBuilder) WithCurrentCount(v uint64) *HandlerDeadlinesReadyBuilder {
 	b.prototype.SetCurrentCount(v)
 	return b
 }
@@ -675,7 +625,7 @@ func (b *ProcessInstancesEndedBuilder) WithCumulativeCount(v uint64) *ProcessIns
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *HandlerCommandsPending) Format(f fmt.State, verb rune) {
+func (x *HandlerCommandsReady) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -730,82 +680,9 @@ func (x *HandlerCommandsPending) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = HandlerCommandsPending
-	type HandlerCommandsPending realType
-	fmt.Fprintf(f, format, (*HandlerCommandsPending)(x))
-}
-
-// Format formats x according to the given [fmt] verb.
-//
-// It implements [fmt.Formatter], taking precedence over the String() method
-// generated by the Protocol Buffers compiler.
-//
-// For the %s and %q verbs it uses the string returned by x.AsString() if x
-// provides such a method. For the %#v verb it uses the string returned by
-// x.GoString() if x provides such a method. Otherwise it formats x as though this
-// method were not defined.
-//
-// AsString() and GoString() are called even when x is nil, since some message
-// types handle a nil receiver themselves. If either method panics, the panic is
-// formatted the same way the fmt package formats a panicking String() method.
-func (x *HandlerCommandsDue) Format(f fmt.State, verb rune) {
-	format := fmt.FormatString(f, verb)
-
-	if verb == 's' || verb == 'q' {
-		if s, ok := any(x).(interface {
-			AsString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
-					}
-				}()
-				return s.AsString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, format, result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	}
-
-	if verb == 'v' && f.Flag('#') {
-		if s, ok := any(x).(interface {
-			GoString() string
-		}); ok {
-			result, ok := func() (result string, ok bool) {
-				defer func() {
-					if r := recover(); r != nil {
-						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
-					}
-				}()
-				return s.GoString(), true
-			}()
-			if ok {
-				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
-			} else if x == nil {
-				fmt.Fprint(f, "<nil>")
-			} else {
-				fmt.Fprint(f, result)
-			}
-			return
-		}
-	} else {
-		switch verb {
-		case 'v', 's', 'x', 'X', 'q':
-			fmt.Fprintf(f, format, x.String())
-			return
-		}
-	}
-
-	type realType = HandlerCommandsDue
-	type HandlerCommandsDue realType
-	fmt.Fprintf(f, format, (*HandlerCommandsDue)(x))
+	type realType = HandlerCommandsReady
+	type HandlerCommandsReady realType
+	fmt.Fprintf(f, format, (*HandlerCommandsReady)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -967,7 +844,7 @@ func (x *HandlerCommandsHandled) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *HandlerDeadlinesPending) Format(f fmt.State, verb rune) {
+func (x *HandlerDeadlinesScheduled) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -1022,9 +899,9 @@ func (x *HandlerDeadlinesPending) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = HandlerDeadlinesPending
-	type HandlerDeadlinesPending realType
-	fmt.Fprintf(f, format, (*HandlerDeadlinesPending)(x))
+	type realType = HandlerDeadlinesScheduled
+	type HandlerDeadlinesScheduled realType
+	fmt.Fprintf(f, format, (*HandlerDeadlinesScheduled)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -1040,7 +917,7 @@ func (x *HandlerDeadlinesPending) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *HandlerDeadlinesDue) Format(f fmt.State, verb rune) {
+func (x *HandlerDeadlinesReady) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -1095,9 +972,9 @@ func (x *HandlerDeadlinesDue) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = HandlerDeadlinesDue
-	type HandlerDeadlinesDue realType
-	fmt.Fprintf(f, format, (*HandlerDeadlinesDue)(x))
+	type realType = HandlerDeadlinesReady
+	type HandlerDeadlinesReady realType
+	fmt.Fprintf(f, format, (*HandlerDeadlinesReady)(x))
 }
 
 // Format formats x according to the given [fmt] verb.
@@ -1614,32 +1491,16 @@ func (x *ProcessInstancesEnded) Format(f fmt.State, verb rune) {
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*HandlerCommandsPending] to implement [encoding.BinaryMarshaler].
-func (x *HandlerCommandsPending) MarshalBinary() ([]byte, error) {
+// It allows [*HandlerCommandsReady] to implement [encoding.BinaryMarshaler].
+func (x *HandlerCommandsReady) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*HandlerCommandsPending] to implement [encoding.BinaryUnmarshaler].
-func (x *HandlerCommandsPending) UnmarshalBinary(data []byte) error {
-	return proto.Unmarshal(data, x)
-}
-
-// MarshalBinary returns the binary representation of the message, equivalent to
-// calling proto.Marshal(x).
-//
-// It allows [*HandlerCommandsDue] to implement [encoding.BinaryMarshaler].
-func (x *HandlerCommandsDue) MarshalBinary() ([]byte, error) {
-	return proto.Marshal(x)
-}
-
-// UnmarshalBinary populates x from its binary representation, equivalent to
-// calling proto.Unmarshal(data, x).
-//
-// It allows [*HandlerCommandsDue] to implement [encoding.BinaryUnmarshaler].
-func (x *HandlerCommandsDue) UnmarshalBinary(data []byte) error {
+// It allows [*HandlerCommandsReady] to implement [encoding.BinaryUnmarshaler].
+func (x *HandlerCommandsReady) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
@@ -1678,32 +1539,32 @@ func (x *HandlerCommandsHandled) UnmarshalBinary(data []byte) error {
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*HandlerDeadlinesPending] to implement [encoding.BinaryMarshaler].
-func (x *HandlerDeadlinesPending) MarshalBinary() ([]byte, error) {
+// It allows [*HandlerDeadlinesScheduled] to implement [encoding.BinaryMarshaler].
+func (x *HandlerDeadlinesScheduled) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*HandlerDeadlinesPending] to implement [encoding.BinaryUnmarshaler].
-func (x *HandlerDeadlinesPending) UnmarshalBinary(data []byte) error {
+// It allows [*HandlerDeadlinesScheduled] to implement [encoding.BinaryUnmarshaler].
+func (x *HandlerDeadlinesScheduled) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*HandlerDeadlinesDue] to implement [encoding.BinaryMarshaler].
-func (x *HandlerDeadlinesDue) MarshalBinary() ([]byte, error) {
+// It allows [*HandlerDeadlinesReady] to implement [encoding.BinaryMarshaler].
+func (x *HandlerDeadlinesReady) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*HandlerDeadlinesDue] to implement [encoding.BinaryUnmarshaler].
-func (x *HandlerDeadlinesDue) UnmarshalBinary(data []byte) error {
+// It allows [*HandlerDeadlinesReady] to implement [encoding.BinaryUnmarshaler].
+func (x *HandlerDeadlinesReady) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
 
