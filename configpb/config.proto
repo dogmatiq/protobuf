@@ -4,6 +4,7 @@ package dogma.config.v1alpha1;
 option go_package = "github.com/dogmatiq/protobuf/configpb";
 
 import "github.com/dogmatiq/protobuf/identitypb/identity.proto";
+import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
 // MessageKind is an enumeration of the kinds of message, represented by the
 // [dogma.Command], [dogma.Event], and [dogma.Deadline] interfaces.
@@ -46,6 +47,34 @@ enum HandlerType {
   HANDLER_TYPE_PROJECTION = 4;
 }
 
+// RouteType is an enumeration of the types of route that a handler can have. A
+// route says how the handler uses messages of one type.
+enum RouteType {
+  // ROUTE_TYPE_UNSPECIFIED is the zero-value. It is not a valid route type.
+  ROUTE_TYPE_UNSPECIFIED = 0;
+
+  // ROUTE_TYPE_HANDLES_COMMAND is the type of route that a handler has for a
+  // type of command that it handles.
+  ROUTE_TYPE_HANDLES_COMMAND = 1;
+
+  // ROUTE_TYPE_HANDLES_EVENT is the type of route that a handler has for a type
+  // of event that it handles.
+  ROUTE_TYPE_HANDLES_EVENT = 2;
+
+  // ROUTE_TYPE_EXECUTES_COMMAND is the type of route that a handler has for a
+  // type of command that it executes.
+  ROUTE_TYPE_EXECUTES_COMMAND = 3;
+
+  // ROUTE_TYPE_RECORDS_EVENT is the type of route that a handler has for a type
+  // of event that it records.
+  ROUTE_TYPE_RECORDS_EVENT = 4;
+
+  // ROUTE_TYPE_SCHEDULES_DEADLINE is the type of route that a handler has for a
+  // type of deadline that it schedules. The handler also handles each deadline
+  // that it schedules.
+  ROUTE_TYPE_SCHEDULES_DEADLINE = 5;
+}
+
 // ConcurrencyPreference is a hint to the engine as to the best way to handle
 // concurrent messages for a message handler.
 enum ConcurrencyPreference {
@@ -83,9 +112,9 @@ message Application {
   // Handlers is the set of handlers within the application.
   repeated Handler handlers = 4;
 
-  // Messages is a map of each message type's fully-qualified Go type to the
-  // kind of message that the type implements.
-  map<string, MessageKind> messages = 5;
+  // MessageTypes is the set of message types that the application's handlers
+  // produce or consume. Each message type appears once.
+  repeated MessageType message_types = 5;
 }
 
 // Handler is a message handler within an application.
@@ -100,9 +129,8 @@ message Handler {
   // Type is the handler's type.
   HandlerType type = 3 [features.field_presence = IMPLICIT];
 
-  // Messages is a map of each message type's fully-qualified Go type to the way
-  // that this handler uses messages of that type.
-  map<string, MessageUsage> messages = 4;
+  // Routes is the set of the handler's routes.
+  repeated Route routes = 4;
 
   // IsDisabled indicates whether the handler is disabled.
   bool is_disabled = 5 [features.field_presence = IMPLICIT];
@@ -132,11 +160,37 @@ message Handler {
   bool supports_reset = 8 [features.field_presence = EXPLICIT];
 }
 
-// MessageUsage describes how a handler uses a message type.
-message MessageUsage {
-  // IsProduced indicates whether the message is produced by the handler.
-  bool is_produced = 1 [features.field_presence = IMPLICIT];
+// MessageType describes a type of message that an application's handlers
+// produce or consume.
+message MessageType {
+  // Id is the unique identifier of the message type, as per the Dogma message
+  // type registry. An envelope that holds a message of this type gives the same
+  // ID in the type_id of its dogma.protobuf.v1.Message.
+  dogma.protobuf.v1.UUID id = 1;
 
-  // IsConsumed indicates whether the message is consumed by the handler.
-  bool is_consumed = 2 [features.field_presence = IMPLICIT];
+  // Name is the name of the message type without the package or module that
+  // defines it, such as "OrderPlaced". Two message types can have the same
+  // name.
+  string name = 2 [features.field_presence = IMPLICIT];
+
+  // QualifiedName is the name of the message type with the package or module
+  // that defines it, such as "github.com/example/shop.OrderPlaced". Its format
+  // depends on the programming language of the application.
+  string qualified_name = 3 [features.field_presence = IMPLICIT];
+
+  // Kind says whether messages of this type are commands, events or deadlines.
+  MessageKind kind = 4 [features.field_presence = IMPLICIT];
+}
+
+// Route describes one of a handler's routes, which says how the handler uses
+// messages of one type.
+message Route {
+  // MessageTypeId is the ID of the type of message that the route is for. It is
+  // the id of one of the message types in Application.message_types.
+  dogma.protobuf.v1.UUID message_type_id = 1;
+
+  // RouteType says what the handler does with messages of that type, such as
+  // handle commands or record events. The kind of message that the route type
+  // names is the kind of the message type.
+  RouteType route_type = 2 [features.field_presence = IMPLICIT];
 }

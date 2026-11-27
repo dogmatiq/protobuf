@@ -18,6 +18,12 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added the `QueueDeadlinesScheduled` and `HandlerDeadlinesScheduled` metrics to
   `MetricsAPI`, for the deadlines that are scheduled for a time that has not
   come yet.
+- Added `MessageType` to `configpb`, which describes one message type of an
+  application by its ID, its name, its qualified name and its kind. The ID is
+  the one that an envelope gives in `Message.type_id`.
+- Added `Route` and `RouteType` to `configpb`, which describe one of a handler's
+  routes: the ID of the message type that the route is for, and what the handler
+  does with messages of that type.
 
 ### Changed
 
@@ -31,6 +37,12 @@ The format is based on [Keep a Changelog], and this project adheres to
   not had a failed delivery attempt. The failing metrics count those that have
   had one, whether or not the next attempt is due, and while that attempt is in
   progress.
+- **[BC]** Replaced `messages` in `configpb.Application`, a map of each message
+  type's Go type to its kind, with `message_types`, a list of `MessageType`.
+- **[BC]** Replaced `messages` in `configpb.Handler`, a map of each message
+  type's Go type to a `MessageUsage`, with `routes`, a list of `Route`.
+  `MessageUsage` is removed, and a route's `route_type` takes the place of its
+  `is_produced` and `is_consumed` flags.
 
 ### Removed
 

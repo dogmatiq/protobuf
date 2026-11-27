@@ -6,13 +6,15 @@ import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2"
 import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Identity } from "../identitypb/identity_pb.js";
 import { file_github_com_dogmatiq_protobuf_identitypb_identity } from "../identitypb/identity_pb.js";
+import type { UUID } from "../uuidpb/uuid_pb.js";
+import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file github.com/dogmatiq/protobuf/configpb/config.proto.
  */
 export const file_github_com_dogmatiq_protobuf_configpb_config: GenFile = /*@__PURE__*/
-  fileDesc("CjJnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiL2NvbmZpZy5wcm90bxIVZG9nbWEuY29uZmlnLnYxYWxwaGExIrcCCgtBcHBsaWNhdGlvbhItCghpZGVudGl0eRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhYKB3ZlcnNpb24YAiABKAlCBaoBAggCEhYKB2dvX3R5cGUYAyABKAlCBaoBAggCEjAKCGhhbmRsZXJzGAQgAygLMh4uZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXISQgoIbWVzc2FnZXMYBSADKAsyMC5kb2dtYS5jb25maWcudjFhbHBoYTEuQXBwbGljYXRpb24uTWVzc2FnZXNFbnRyeRpTCg1NZXNzYWdlc0VudHJ5EgsKA2tleRgBIAEoCRIxCgV2YWx1ZRgCIAEoDjIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlS2luZDoCOAEi0wMKB0hhbmRsZXISLQoIaWRlbnRpdHkYASABKAsyGy5kb2dtYS5wcm90b2J1Zi52MS5JZGVudGl0eRIWCgdnb190eXBlGAIgASgJQgWqAQIIAhI3CgR0eXBlGAMgASgOMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXJUeXBlQgWqAQIIAhI+CghtZXNzYWdlcxgEIAMoCzIsLmRvZ21hLmNvbmZpZy52MWFscGhhMS5IYW5kbGVyLk1lc3NhZ2VzRW50cnkSGgoLaXNfZGlzYWJsZWQYBSABKAhCBaoBAggCElMKFmNvbmN1cnJlbmN5X3ByZWZlcmVuY2UYBiABKA4yLC5kb2dtYS5jb25maWcudjFhbHBoYTEuQ29uY3VycmVuY3lQcmVmZXJlbmNlQgWqAQIIAhIiChNzdXBwb3J0c19jb21wYWN0aW9uGAcgASgIQgWqAQIIARIdCg5zdXBwb3J0c19yZXNldBgIIAEoCEIFqgECCAEaVAoNTWVzc2FnZXNFbnRyeRILCgNrZXkYASABKAkSMgoFdmFsdWUYAiABKAsyIy5kb2dtYS5jb25maWcudjFhbHBoYTEuTWVzc2FnZVVzYWdlOgI4ASJGCgxNZXNzYWdlVXNhZ2USGgoLaXNfcHJvZHVjZWQYASABKAhCBaoBAggCEhoKC2lzX2NvbnN1bWVkGAIgASgIQgWqAQIIAip4CgtNZXNzYWdlS2luZBIcChhNRVNTQUdFX0tJTkRfVU5TUEVDSUZJRUQQABIYChRNRVNTQUdFX0tJTkRfQ09NTUFORBABEhYKEk1FU1NBR0VfS0lORF9FVkVOVBACEhkKFU1FU1NBR0VfS0lORF9ERUFETElORRADKpwBCgtIYW5kbGVyVHlwZRIcChhIQU5ETEVSX1RZUEVfVU5TUEVDSUZJRUQQABIaChZIQU5ETEVSX1RZUEVfQUdHUkVHQVRFEAESGAoUSEFORExFUl9UWVBFX1BST0NFU1MQAhIcChhIQU5ETEVSX1RZUEVfSU5URUdSQVRJT04QAxIbChdIQU5ETEVSX1RZUEVfUFJPSkVDVElPThAEKokBChVDb25jdXJyZW5jeVByZWZlcmVuY2USJgoiQ09OQ1VSUkVOQ1lfUFJFRkVSRU5DRV9VTlNQRUNJRklFRBAAEiMKH0NPTkNVUlJFTkNZX1BSRUZFUkVOQ0VfTUFYSU1JWkUQARIjCh9DT05DVVJSRU5DWV9QUkVGRVJFTkNFX01JTklNSVpFEAJCJ1olZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9jb25maWdwYmIIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_identitypb_identity]);
+  fileDesc("CjJnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL2NvbmZpZ3BiL2NvbmZpZy5wcm90bxIVZG9nbWEuY29uZmlnLnYxYWxwaGExItkBCgtBcHBsaWNhdGlvbhItCghpZGVudGl0eRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhYKB3ZlcnNpb24YAiABKAlCBaoBAggCEhYKB2dvX3R5cGUYAyABKAlCBaoBAggCEjAKCGhhbmRsZXJzGAQgAygLMh4uZG9nbWEuY29uZmlnLnYxYWxwaGExLkhhbmRsZXISOQoNbWVzc2FnZV90eXBlcxgFIAMoCzIiLmRvZ21hLmNvbmZpZy52MWFscGhhMS5NZXNzYWdlVHlwZSLrAgoHSGFuZGxlchItCghpZGVudGl0eRgBIAEoCzIbLmRvZ21hLnByb3RvYnVmLnYxLklkZW50aXR5EhYKB2dvX3R5cGUYAiABKAlCBaoBAggCEjcKBHR5cGUYAyABKA4yIi5kb2dtYS5jb25maWcudjFhbHBoYTEuSGFuZGxlclR5cGVCBaoBAggCEiwKBnJvdXRlcxgEIAMoCzIcLmRvZ21hLmNvbmZpZy52MWFscGhhMS5Sb3V0ZRIaCgtpc19kaXNhYmxlZBgFIAEoCEIFqgECCAISUwoWY29uY3VycmVuY3lfcHJlZmVyZW5jZRgGIAEoDjIsLmRvZ21hLmNvbmZpZy52MWFscGhhMS5Db25jdXJyZW5jeVByZWZlcmVuY2VCBaoBAggCEiIKE3N1cHBvcnRzX2NvbXBhY3Rpb24YByABKAhCBaoBAggBEh0KDnN1cHBvcnRzX3Jlc2V0GAggASgIQgWqAQIIASKfAQoLTWVzc2FnZVR5cGUSIwoCaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhMKBG5hbWUYAiABKAlCBaoBAggCEh0KDnF1YWxpZmllZF9uYW1lGAMgASgJQgWqAQIIAhI3CgRraW5kGAQgASgOMiIuZG9nbWEuY29uZmlnLnYxYWxwaGExLk1lc3NhZ2VLaW5kQgWqAQIIAiJ2CgVSb3V0ZRIwCg9tZXNzYWdlX3R5cGVfaWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEjsKCnJvdXRlX3R5cGUYAiABKA4yIC5kb2dtYS5jb25maWcudjFhbHBoYTEuUm91dGVUeXBlQgWqAQIIAip4CgtNZXNzYWdlS2luZBIcChhNRVNTQUdFX0tJTkRfVU5TUEVDSUZJRUQQABIYChRNRVNTQUdFX0tJTkRfQ09NTUFORBABEhYKEk1FU1NBR0VfS0lORF9FVkVOVBACEhkKFU1FU1NBR0VfS0lORF9ERUFETElORRADKpwBCgtIYW5kbGVyVHlwZRIcChhIQU5ETEVSX1RZUEVfVU5TUEVDSUZJRUQQABIaChZIQU5ETEVSX1RZUEVfQUdHUkVHQVRFEAESGAoUSEFORExFUl9UWVBFX1BST0NFU1MQAhIcChhIQU5ETEVSX1RZUEVfSU5URUdSQVRJT04QAxIbChdIQU5ETEVSX1RZUEVfUFJPSkVDVElPThAEKscBCglSb3V0ZVR5cGUSGgoWUk9VVEVfVFlQRV9VTlNQRUNJRklFRBAAEh4KGlJPVVRFX1RZUEVfSEFORExFU19DT01NQU5EEAESHAoYUk9VVEVfVFlQRV9IQU5ETEVTX0VWRU5UEAISHwobUk9VVEVfVFlQRV9FWEVDVVRFU19DT01NQU5EEAMSHAoYUk9VVEVfVFlQRV9SRUNPUkRTX0VWRU5UEAQSIQodUk9VVEVfVFlQRV9TQ0hFRFVMRVNfREVBRExJTkUQBSqJAQoVQ29uY3VycmVuY3lQcmVmZXJlbmNlEiYKIkNPTkNVUlJFTkNZX1BSRUZFUkVOQ0VfVU5TUEVDSUZJRUQQABIjCh9DT05DVVJSRU5DWV9QUkVGRVJFTkNFX01BWElNSVpFEAESIwofQ09OQ1VSUkVOQ1lfUFJFRkVSRU5DRV9NSU5JTUlaRRACQidaJWdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvY29uZmlncGJiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_identitypb_identity, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * Application represents a Dogma application hosted by the engine on the
@@ -56,12 +58,12 @@ export type Application = Message<"dogma.config.v1alpha1.Application"> & {
   handlers: Handler[];
 
   /**
-   * Messages is a map of each message type's fully-qualified Go type to the
-   * kind of message that the type implements.
+   * MessageTypes is the set of message types that the application's handlers
+   * produce or consume. Each message type appears once.
    *
-   * @generated from field: map<string, dogma.config.v1alpha1.MessageKind> messages = 5;
+   * @generated from field: repeated dogma.config.v1alpha1.MessageType message_types = 5;
    */
-  messages: { [key: string]: MessageKind };
+  messageTypes: MessageType[];
 };
 
 /**
@@ -100,12 +102,11 @@ export type Handler = Message<"dogma.config.v1alpha1.Handler"> & {
   type: HandlerType;
 
   /**
-   * Messages is a map of each message type's fully-qualified Go type to the way
-   * that this handler uses messages of that type.
+   * Routes is the set of the handler's routes.
    *
-   * @generated from field: map<string, dogma.config.v1alpha1.MessageUsage> messages = 4;
+   * @generated from field: repeated dogma.config.v1alpha1.Route routes = 4;
    */
-  messages: { [key: string]: MessageUsage };
+  routes: Route[];
 
   /**
    * IsDisabled indicates whether the handler is disabled.
@@ -158,32 +159,85 @@ export const HandlerSchema: GenMessage<Handler> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_configpb_config, 1);
 
 /**
- * MessageUsage describes how a handler uses a message type.
+ * MessageType describes a type of message that an application's handlers
+ * produce or consume.
  *
- * @generated from message dogma.config.v1alpha1.MessageUsage
+ * @generated from message dogma.config.v1alpha1.MessageType
  */
-export type MessageUsage = Message<"dogma.config.v1alpha1.MessageUsage"> & {
+export type MessageType = Message<"dogma.config.v1alpha1.MessageType"> & {
   /**
-   * IsProduced indicates whether the message is produced by the handler.
+   * Id is the unique identifier of the message type, as per the Dogma message
+   * type registry. An envelope that holds a message of this type gives the same
+   * ID in the type_id of its dogma.protobuf.v1.Message.
    *
-   * @generated from field: bool is_produced = 1 [features.field_presence = IMPLICIT];
+   * @generated from field: dogma.protobuf.v1.UUID id = 1;
    */
-  isProduced: boolean;
+  id?: UUID | undefined;
 
   /**
-   * IsConsumed indicates whether the message is consumed by the handler.
+   * Name is the name of the message type without the package or module that
+   * defines it, such as "OrderPlaced". Two message types can have the same
+   * name.
    *
-   * @generated from field: bool is_consumed = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: string name = 2 [features.field_presence = IMPLICIT];
    */
-  isConsumed: boolean;
+  name: string;
+
+  /**
+   * QualifiedName is the name of the message type with the package or module
+   * that defines it, such as "github.com/example/shop.OrderPlaced". Its format
+   * depends on the programming language of the application.
+   *
+   * @generated from field: string qualified_name = 3 [features.field_presence = IMPLICIT];
+   */
+  qualifiedName: string;
+
+  /**
+   * Kind says whether messages of this type are commands, events or deadlines.
+   *
+   * @generated from field: dogma.config.v1alpha1.MessageKind kind = 4 [features.field_presence = IMPLICIT];
+   */
+  kind: MessageKind;
 };
 
 /**
- * Describes the message dogma.config.v1alpha1.MessageUsage.
- * Use `create(MessageUsageSchema)` to create a new message.
+ * Describes the message dogma.config.v1alpha1.MessageType.
+ * Use `create(MessageTypeSchema)` to create a new message.
  */
-export const MessageUsageSchema: GenMessage<MessageUsage> = /*@__PURE__*/
+export const MessageTypeSchema: GenMessage<MessageType> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_configpb_config, 2);
+
+/**
+ * Route describes one of a handler's routes, which says how the handler uses
+ * messages of one type.
+ *
+ * @generated from message dogma.config.v1alpha1.Route
+ */
+export type Route = Message<"dogma.config.v1alpha1.Route"> & {
+  /**
+   * MessageTypeId is the ID of the type of message that the route is for. It is
+   * the id of one of the message types in Application.message_types.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID message_type_id = 1;
+   */
+  messageTypeId?: UUID | undefined;
+
+  /**
+   * RouteType says what the handler does with messages of that type, such as
+   * handle commands or record events. The kind of message that the route type
+   * names is the kind of the message type.
+   *
+   * @generated from field: dogma.config.v1alpha1.RouteType route_type = 2 [features.field_presence = IMPLICIT];
+   */
+  routeType: RouteType;
+};
+
+/**
+ * Describes the message dogma.config.v1alpha1.Route.
+ * Use `create(RouteSchema)` to create a new message.
+ */
+export const RouteSchema: GenMessage<Route> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_configpb_config, 3);
 
 /**
  * MessageKind is an enumeration of the kinds of message, represented by the
@@ -283,6 +337,68 @@ export const HandlerTypeSchema: GenEnum<HandlerType> = /*@__PURE__*/
   enumDesc(file_github_com_dogmatiq_protobuf_configpb_config, 1);
 
 /**
+ * RouteType is an enumeration of the types of route that a handler can have. A
+ * route says how the handler uses messages of one type.
+ *
+ * @generated from enum dogma.config.v1alpha1.RouteType
+ */
+export enum RouteType {
+  /**
+   * ROUTE_TYPE_UNSPECIFIED is the zero-value. It is not a valid route type.
+   *
+   * @generated from enum value: ROUTE_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ROUTE_TYPE_HANDLES_COMMAND is the type of route that a handler has for a
+   * type of command that it handles.
+   *
+   * @generated from enum value: ROUTE_TYPE_HANDLES_COMMAND = 1;
+   */
+  HANDLES_COMMAND = 1,
+
+  /**
+   * ROUTE_TYPE_HANDLES_EVENT is the type of route that a handler has for a type
+   * of event that it handles.
+   *
+   * @generated from enum value: ROUTE_TYPE_HANDLES_EVENT = 2;
+   */
+  HANDLES_EVENT = 2,
+
+  /**
+   * ROUTE_TYPE_EXECUTES_COMMAND is the type of route that a handler has for a
+   * type of command that it executes.
+   *
+   * @generated from enum value: ROUTE_TYPE_EXECUTES_COMMAND = 3;
+   */
+  EXECUTES_COMMAND = 3,
+
+  /**
+   * ROUTE_TYPE_RECORDS_EVENT is the type of route that a handler has for a type
+   * of event that it records.
+   *
+   * @generated from enum value: ROUTE_TYPE_RECORDS_EVENT = 4;
+   */
+  RECORDS_EVENT = 4,
+
+  /**
+   * ROUTE_TYPE_SCHEDULES_DEADLINE is the type of route that a handler has for a
+   * type of deadline that it schedules. The handler also handles each deadline
+   * that it schedules.
+   *
+   * @generated from enum value: ROUTE_TYPE_SCHEDULES_DEADLINE = 5;
+   */
+  SCHEDULES_DEADLINE = 5,
+}
+
+/**
+ * Describes the enum dogma.config.v1alpha1.RouteType.
+ */
+export const RouteTypeSchema: GenEnum<RouteType> = /*@__PURE__*/
+  enumDesc(file_github_com_dogmatiq_protobuf_configpb_config, 2);
+
+/**
  * ConcurrencyPreference is a hint to the engine as to the best way to handle
  * concurrent messages for a message handler.
  *
@@ -318,5 +434,5 @@ export enum ConcurrencyPreference {
  * Describes the enum dogma.config.v1alpha1.ConcurrencyPreference.
  */
 export const ConcurrencyPreferenceSchema: GenEnum<ConcurrencyPreference> = /*@__PURE__*/
-  enumDesc(file_github_com_dogmatiq_protobuf_configpb_config, 2);
+  enumDesc(file_github_com_dogmatiq_protobuf_configpb_config, 3);
 

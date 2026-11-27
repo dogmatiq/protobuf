@@ -9,6 +9,7 @@ package configpb
 import (
 	"fmt"
 	identitypb "github.com/dogmatiq/protobuf/identitypb"
+	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -34,7 +35,7 @@ func (b *ApplicationBuilder) From(x *Application) *ApplicationBuilder {
 	b.prototype.SetVersion(x.GetVersion())
 	b.prototype.SetGoType(x.GetGoType())
 	b.prototype.SetHandlers(x.GetHandlers())
-	b.prototype.SetMessages(x.GetMessages())
+	b.prototype.SetMessageTypes(x.GetMessageTypes())
 	return b
 }
 
@@ -50,7 +51,7 @@ func (b *ApplicationBuilder) Build() *Application {
 	m.SetVersion(b.prototype.GetVersion())
 	m.SetGoType(b.prototype.GetGoType())
 	m.SetHandlers(b.prototype.GetHandlers())
-	m.SetMessages(b.prototype.GetMessages())
+	m.SetMessageTypes(b.prototype.GetMessageTypes())
 	return m
 }
 
@@ -82,10 +83,10 @@ func (b *ApplicationBuilder) WithHandlers(v []*Handler) *ApplicationBuilder {
 	return b
 }
 
-// WithMessages configures the builder to set the Messages field to v,
+// WithMessageTypes configures the builder to set the MessageTypes field to v,
 // then returns b.
-func (b *ApplicationBuilder) WithMessages(v map[string]MessageKind) *ApplicationBuilder {
-	b.prototype.SetMessages(v)
+func (b *ApplicationBuilder) WithMessageTypes(v []*MessageType) *ApplicationBuilder {
+	b.prototype.SetMessageTypes(v)
 	return b
 }
 
@@ -110,7 +111,7 @@ func (b *HandlerBuilder) From(x *Handler) *HandlerBuilder {
 	}
 	b.prototype.SetGoType(x.GetGoType())
 	b.prototype.SetType(x.GetType())
-	b.prototype.SetMessages(x.GetMessages())
+	b.prototype.SetRoutes(x.GetRoutes())
 	b.prototype.SetIsDisabled(x.GetIsDisabled())
 	b.prototype.SetConcurrencyPreference(x.GetConcurrencyPreference())
 	if x.HasSupportsCompaction() {
@@ -133,7 +134,7 @@ func (b *HandlerBuilder) Build() *Handler {
 	}
 	m.SetGoType(b.prototype.GetGoType())
 	m.SetType(b.prototype.GetType())
-	m.SetMessages(b.prototype.GetMessages())
+	m.SetRoutes(b.prototype.GetRoutes())
 	m.SetIsDisabled(b.prototype.GetIsDisabled())
 	m.SetConcurrencyPreference(b.prototype.GetConcurrencyPreference())
 	if b.prototype.HasSupportsCompaction() {
@@ -166,10 +167,10 @@ func (b *HandlerBuilder) WithType(v HandlerType) *HandlerBuilder {
 	return b
 }
 
-// WithMessages configures the builder to set the Messages field to v,
+// WithRoutes configures the builder to set the Routes field to v,
 // then returns b.
-func (b *HandlerBuilder) WithMessages(v map[string]*MessageUsage) *HandlerBuilder {
-	b.prototype.SetMessages(v)
+func (b *HandlerBuilder) WithRoutes(v []*Route) *HandlerBuilder {
+	b.prototype.SetRoutes(v)
 	return b
 }
 
@@ -201,13 +202,13 @@ func (b *HandlerBuilder) WithSupportsReset(v bool) *HandlerBuilder {
 	return b
 }
 
-type MessageUsageBuilder struct {
-	prototype MessageUsage
+type MessageTypeBuilder struct {
+	prototype MessageType
 }
 
-// NewMessageUsageBuilder returns a builder that constructs [MessageUsage] messages.
-func NewMessageUsageBuilder() *MessageUsageBuilder {
-	return &MessageUsageBuilder{}
+// NewMessageTypeBuilder returns a builder that constructs [MessageType] messages.
+func NewMessageTypeBuilder() *MessageTypeBuilder {
+	return &MessageTypeBuilder{}
 }
 
 // From configures the builder to use x as the prototype for new messages,
@@ -215,35 +216,107 @@ func NewMessageUsageBuilder() *MessageUsageBuilder {
 //
 // It performs a shallow copy of x, such that any changes made via the builder
 // do not modify x. It does not make a copy of the field values themselves.
-func (b *MessageUsageBuilder) From(x *MessageUsage) *MessageUsageBuilder {
+func (b *MessageTypeBuilder) From(x *MessageType) *MessageTypeBuilder {
 	proto.Reset(&b.prototype)
-	b.prototype.SetIsProduced(x.GetIsProduced())
-	b.prototype.SetIsConsumed(x.GetIsConsumed())
+	if x.HasId() {
+		b.prototype.SetId(x.GetId())
+	}
+	b.prototype.SetName(x.GetName())
+	b.prototype.SetQualifiedName(x.GetQualifiedName())
+	b.prototype.SetKind(x.GetKind())
 	return b
 }
 
-// Build returns a new [MessageUsage] containing the values configured via the builder.
+// Build returns a new [MessageType] containing the values configured via the builder.
 //
 // Each call returns a new message, such that future changes to the builder do
 // not modify previously constructed messages.
-func (b *MessageUsageBuilder) Build() *MessageUsage {
-	m := &MessageUsage{}
-	m.SetIsProduced(b.prototype.GetIsProduced())
-	m.SetIsConsumed(b.prototype.GetIsConsumed())
+func (b *MessageTypeBuilder) Build() *MessageType {
+	m := &MessageType{}
+	if b.prototype.HasId() {
+		m.SetId(b.prototype.GetId())
+	}
+	m.SetName(b.prototype.GetName())
+	m.SetQualifiedName(b.prototype.GetQualifiedName())
+	m.SetKind(b.prototype.GetKind())
 	return m
 }
 
-// WithIsProduced configures the builder to set the IsProduced field to v,
+// WithId configures the builder to set the Id field to v,
 // then returns b.
-func (b *MessageUsageBuilder) WithIsProduced(v bool) *MessageUsageBuilder {
-	b.prototype.SetIsProduced(v)
+func (b *MessageTypeBuilder) WithId(v *uuidpb.UUID) *MessageTypeBuilder {
+	b.prototype.SetId(v)
 	return b
 }
 
-// WithIsConsumed configures the builder to set the IsConsumed field to v,
+// WithName configures the builder to set the Name field to v,
 // then returns b.
-func (b *MessageUsageBuilder) WithIsConsumed(v bool) *MessageUsageBuilder {
-	b.prototype.SetIsConsumed(v)
+func (b *MessageTypeBuilder) WithName(v string) *MessageTypeBuilder {
+	b.prototype.SetName(v)
+	return b
+}
+
+// WithQualifiedName configures the builder to set the QualifiedName field to v,
+// then returns b.
+func (b *MessageTypeBuilder) WithQualifiedName(v string) *MessageTypeBuilder {
+	b.prototype.SetQualifiedName(v)
+	return b
+}
+
+// WithKind configures the builder to set the Kind field to v,
+// then returns b.
+func (b *MessageTypeBuilder) WithKind(v MessageKind) *MessageTypeBuilder {
+	b.prototype.SetKind(v)
+	return b
+}
+
+type RouteBuilder struct {
+	prototype Route
+}
+
+// NewRouteBuilder returns a builder that constructs [Route] messages.
+func NewRouteBuilder() *RouteBuilder {
+	return &RouteBuilder{}
+}
+
+// From configures the builder to use x as the prototype for new messages,
+// then returns b.
+//
+// It performs a shallow copy of x, such that any changes made via the builder
+// do not modify x. It does not make a copy of the field values themselves.
+func (b *RouteBuilder) From(x *Route) *RouteBuilder {
+	proto.Reset(&b.prototype)
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
+	b.prototype.SetRouteType(x.GetRouteType())
+	return b
+}
+
+// Build returns a new [Route] containing the values configured via the builder.
+//
+// Each call returns a new message, such that future changes to the builder do
+// not modify previously constructed messages.
+func (b *RouteBuilder) Build() *Route {
+	m := &Route{}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
+	m.SetRouteType(b.prototype.GetRouteType())
+	return m
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *RouteBuilder) WithMessageTypeId(v *uuidpb.UUID) *RouteBuilder {
+	b.prototype.SetMessageTypeId(v)
+	return b
+}
+
+// WithRouteType configures the builder to set the RouteType field to v,
+// then returns b.
+func (b *RouteBuilder) WithRouteType(v RouteType) *RouteBuilder {
+	b.prototype.SetRouteType(v)
 	return b
 }
 
@@ -385,6 +458,90 @@ func Map_HandlerType[T any](
 		return caseHANDLER_TYPE_PROJECTION(HandlerType_HANDLER_TYPE_PROJECTION_Case{})
 	default:
 		panic(fmt.Sprintf("Map_HandlerType: %d is not a valid HandlerType", v))
+	}
+}
+
+type (
+	// RouteType_ROUTE_TYPE_UNSPECIFIED_Case is a type that statically associates a function
+	// with a [RouteType_ROUTE_TYPE_UNSPECIFIED] value.
+	RouteType_ROUTE_TYPE_UNSPECIFIED_Case struct{}
+	// RouteType_ROUTE_TYPE_HANDLES_COMMAND_Case is a type that statically associates a function
+	// with a [RouteType_ROUTE_TYPE_HANDLES_COMMAND] value.
+	RouteType_ROUTE_TYPE_HANDLES_COMMAND_Case struct{}
+	// RouteType_ROUTE_TYPE_HANDLES_EVENT_Case is a type that statically associates a function
+	// with a [RouteType_ROUTE_TYPE_HANDLES_EVENT] value.
+	RouteType_ROUTE_TYPE_HANDLES_EVENT_Case struct{}
+	// RouteType_ROUTE_TYPE_EXECUTES_COMMAND_Case is a type that statically associates a function
+	// with a [RouteType_ROUTE_TYPE_EXECUTES_COMMAND] value.
+	RouteType_ROUTE_TYPE_EXECUTES_COMMAND_Case struct{}
+	// RouteType_ROUTE_TYPE_RECORDS_EVENT_Case is a type that statically associates a function
+	// with a [RouteType_ROUTE_TYPE_RECORDS_EVENT] value.
+	RouteType_ROUTE_TYPE_RECORDS_EVENT_Case struct{}
+	// RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE_Case is a type that statically associates a function
+	// with a [RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE] value.
+	RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE_Case struct{}
+)
+
+// Switch_RouteType dispatches to a function based on the value of v.
+//
+// It invokes the function that corresponds to v. It panics if v is not a
+// recognized [RouteType] value.
+func Switch_RouteType(
+	v RouteType,
+	caseROUTE_TYPE_UNSPECIFIED func(RouteType_ROUTE_TYPE_UNSPECIFIED_Case),
+	caseROUTE_TYPE_HANDLES_COMMAND func(RouteType_ROUTE_TYPE_HANDLES_COMMAND_Case),
+	caseROUTE_TYPE_HANDLES_EVENT func(RouteType_ROUTE_TYPE_HANDLES_EVENT_Case),
+	caseROUTE_TYPE_EXECUTES_COMMAND func(RouteType_ROUTE_TYPE_EXECUTES_COMMAND_Case),
+	caseROUTE_TYPE_RECORDS_EVENT func(RouteType_ROUTE_TYPE_RECORDS_EVENT_Case),
+	caseROUTE_TYPE_SCHEDULES_DEADLINE func(RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE_Case),
+) {
+	switch v {
+	case RouteType_ROUTE_TYPE_UNSPECIFIED:
+		caseROUTE_TYPE_UNSPECIFIED(RouteType_ROUTE_TYPE_UNSPECIFIED_Case{})
+	case RouteType_ROUTE_TYPE_HANDLES_COMMAND:
+		caseROUTE_TYPE_HANDLES_COMMAND(RouteType_ROUTE_TYPE_HANDLES_COMMAND_Case{})
+	case RouteType_ROUTE_TYPE_HANDLES_EVENT:
+		caseROUTE_TYPE_HANDLES_EVENT(RouteType_ROUTE_TYPE_HANDLES_EVENT_Case{})
+	case RouteType_ROUTE_TYPE_EXECUTES_COMMAND:
+		caseROUTE_TYPE_EXECUTES_COMMAND(RouteType_ROUTE_TYPE_EXECUTES_COMMAND_Case{})
+	case RouteType_ROUTE_TYPE_RECORDS_EVENT:
+		caseROUTE_TYPE_RECORDS_EVENT(RouteType_ROUTE_TYPE_RECORDS_EVENT_Case{})
+	case RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE:
+		caseROUTE_TYPE_SCHEDULES_DEADLINE(RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE_Case{})
+	default:
+		panic(fmt.Sprintf("Switch_RouteType: %d is not a valid RouteType", v))
+	}
+}
+
+// Map_RouteType maps a member of the [RouteType] enumeration to a
+// value of type T.
+//
+// It invokes the function that corresponds to v, and returns that function's
+// result. It panics if v is not a recognized [RouteType] value.
+func Map_RouteType[T any](
+	v RouteType,
+	caseROUTE_TYPE_UNSPECIFIED func(RouteType_ROUTE_TYPE_UNSPECIFIED_Case) T,
+	caseROUTE_TYPE_HANDLES_COMMAND func(RouteType_ROUTE_TYPE_HANDLES_COMMAND_Case) T,
+	caseROUTE_TYPE_HANDLES_EVENT func(RouteType_ROUTE_TYPE_HANDLES_EVENT_Case) T,
+	caseROUTE_TYPE_EXECUTES_COMMAND func(RouteType_ROUTE_TYPE_EXECUTES_COMMAND_Case) T,
+	caseROUTE_TYPE_RECORDS_EVENT func(RouteType_ROUTE_TYPE_RECORDS_EVENT_Case) T,
+	caseROUTE_TYPE_SCHEDULES_DEADLINE func(RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE_Case) T,
+) T {
+	switch v {
+	case RouteType_ROUTE_TYPE_UNSPECIFIED:
+		return caseROUTE_TYPE_UNSPECIFIED(RouteType_ROUTE_TYPE_UNSPECIFIED_Case{})
+	case RouteType_ROUTE_TYPE_HANDLES_COMMAND:
+		return caseROUTE_TYPE_HANDLES_COMMAND(RouteType_ROUTE_TYPE_HANDLES_COMMAND_Case{})
+	case RouteType_ROUTE_TYPE_HANDLES_EVENT:
+		return caseROUTE_TYPE_HANDLES_EVENT(RouteType_ROUTE_TYPE_HANDLES_EVENT_Case{})
+	case RouteType_ROUTE_TYPE_EXECUTES_COMMAND:
+		return caseROUTE_TYPE_EXECUTES_COMMAND(RouteType_ROUTE_TYPE_EXECUTES_COMMAND_Case{})
+	case RouteType_ROUTE_TYPE_RECORDS_EVENT:
+		return caseROUTE_TYPE_RECORDS_EVENT(RouteType_ROUTE_TYPE_RECORDS_EVENT_Case{})
+	case RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE:
+		return caseROUTE_TYPE_SCHEDULES_DEADLINE(RouteType_ROUTE_TYPE_SCHEDULES_DEADLINE_Case{})
+	default:
+		panic(fmt.Sprintf("Map_RouteType: %d is not a valid RouteType", v))
 	}
 }
 
@@ -604,7 +761,7 @@ func (x *Handler) Format(f fmt.State, verb rune) {
 // AsString() and GoString() are called even when x is nil, since some message
 // types handle a nil receiver themselves. If either method panics, the panic is
 // formatted the same way the fmt package formats a panicking String() method.
-func (x *MessageUsage) Format(f fmt.State, verb rune) {
+func (x *MessageType) Format(f fmt.State, verb rune) {
 	format := fmt.FormatString(f, verb)
 
 	if verb == 's' || verb == 'q' {
@@ -659,9 +816,82 @@ func (x *MessageUsage) Format(f fmt.State, verb rune) {
 		}
 	}
 
-	type realType = MessageUsage
-	type MessageUsage realType
-	fmt.Fprintf(f, format, (*MessageUsage)(x))
+	type realType = MessageType
+	type MessageType realType
+	fmt.Fprintf(f, format, (*MessageType)(x))
+}
+
+// Format formats x according to the given [fmt] verb.
+//
+// It implements [fmt.Formatter], taking precedence over the String() method
+// generated by the Protocol Buffers compiler.
+//
+// For the %s and %q verbs it uses the string returned by x.AsString() if x
+// provides such a method. For the %#v verb it uses the string returned by
+// x.GoString() if x provides such a method. Otherwise it formats x as though this
+// method were not defined.
+//
+// AsString() and GoString() are called even when x is nil, since some message
+// types handle a nil receiver themselves. If either method panics, the panic is
+// formatted the same way the fmt package formats a panicking String() method.
+func (x *Route) Format(f fmt.State, verb rune) {
+	format := fmt.FormatString(f, verb)
+
+	if verb == 's' || verb == 'q' {
+		if s, ok := any(x).(interface {
+			AsString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=AsString method: %v)", verb, r)
+					}
+				}()
+				return s.AsString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, format, result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	}
+
+	if verb == 'v' && f.Flag('#') {
+		if s, ok := any(x).(interface {
+			GoString() string
+		}); ok {
+			result, ok := func() (result string, ok bool) {
+				defer func() {
+					if r := recover(); r != nil {
+						result = fmt.Sprintf("%%!%c(PANIC=GoString method: %v)", verb, r)
+					}
+				}()
+				return s.GoString(), true
+			}()
+			if ok {
+				fmt.Fprintf(f, fmt.FormatString(f, 's'), result)
+			} else if x == nil {
+				fmt.Fprint(f, "<nil>")
+			} else {
+				fmt.Fprint(f, result)
+			}
+			return
+		}
+	} else {
+		switch verb {
+		case 'v', 's', 'x', 'X', 'q':
+			fmt.Fprintf(f, format, x.String())
+			return
+		}
+	}
+
+	type realType = Route
+	type Route realType
+	fmt.Fprintf(f, format, (*Route)(x))
 }
 
 // MarshalBinary returns the binary representation of the message, equivalent to
@@ -699,15 +929,31 @@ func (x *Handler) UnmarshalBinary(data []byte) error {
 // MarshalBinary returns the binary representation of the message, equivalent to
 // calling proto.Marshal(x).
 //
-// It allows [*MessageUsage] to implement [encoding.BinaryMarshaler].
-func (x *MessageUsage) MarshalBinary() ([]byte, error) {
+// It allows [*MessageType] to implement [encoding.BinaryMarshaler].
+func (x *MessageType) MarshalBinary() ([]byte, error) {
 	return proto.Marshal(x)
 }
 
 // UnmarshalBinary populates x from its binary representation, equivalent to
 // calling proto.Unmarshal(data, x).
 //
-// It allows [*MessageUsage] to implement [encoding.BinaryUnmarshaler].
-func (x *MessageUsage) UnmarshalBinary(data []byte) error {
+// It allows [*MessageType] to implement [encoding.BinaryUnmarshaler].
+func (x *MessageType) UnmarshalBinary(data []byte) error {
+	return proto.Unmarshal(data, x)
+}
+
+// MarshalBinary returns the binary representation of the message, equivalent to
+// calling proto.Marshal(x).
+//
+// It allows [*Route] to implement [encoding.BinaryMarshaler].
+func (x *Route) MarshalBinary() ([]byte, error) {
+	return proto.Marshal(x)
+}
+
+// UnmarshalBinary populates x from its binary representation, equivalent to
+// calling proto.Unmarshal(data, x).
+//
+// It allows [*Route] to implement [encoding.BinaryUnmarshaler].
+func (x *Route) UnmarshalBinary(data []byte) error {
 	return proto.Unmarshal(data, x)
 }
