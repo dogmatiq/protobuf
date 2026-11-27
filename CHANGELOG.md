@@ -11,7 +11,7 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
-## [Unreleased]
+## [0.13.0] - 2026-11-28
 
 This release reworks `MetricsAPI`, which is at `v1alpha1`, and the application
 description in `configpb`. Every engine and client that uses either one has to
@@ -322,6 +322,7 @@ change.
 [0.10.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.10.0
 [0.11.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.11.0
 [0.12.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.12.0
+[0.13.0]: https://github.com/dogmatiq/protobuf/releases/tag/v0.13.0
 
 <!-- version template
 ## [0.0.1] - YYYY-MM-DD
