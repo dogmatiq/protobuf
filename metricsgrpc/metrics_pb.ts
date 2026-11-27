@@ -188,10 +188,6 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * - HandlerEventsRecorded
  * - ProcessInstanceQueueBindings
  * - ProcessInstancesEnded
- * - ProjectionCompactionsCanceled
- * - ProjectionCompactionsCompleted
- * - ProjectionCompactionsDeadlineExceeded
- * - ProjectionCompactionsFailed
  * - QueueCommandsDue
  * - QueueCommandsFailing
  * - QueueCommandsPending

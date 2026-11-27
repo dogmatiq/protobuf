@@ -138,10 +138,6 @@ message WatchMetricsResponse {
   // - HandlerEventsRecorded
   // - ProcessInstanceQueueBindings
   // - ProcessInstancesEnded
-  // - ProjectionCompactionsCanceled
-  // - ProjectionCompactionsCompleted
-  // - ProjectionCompactionsDeadlineExceeded
-  // - ProjectionCompactionsFailed
   // - QueueCommandsDue
   // - QueueCommandsFailing
   // - QueueCommandsPending

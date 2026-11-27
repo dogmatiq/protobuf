@@ -1164,359 +1164,6 @@ func (b0 ProcessInstancesEnded_builder) Build() *ProcessInstancesEnded {
 	return m0
 }
 
-// ProjectionCompactionsCanceled is the cumulative count of the compactions of
-// one projection handler that have ended with the Canceled outcome.
-type ProjectionCompactionsCanceled struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
-}
-
-func (x *ProjectionCompactionsCanceled) Reset() {
-	*x = ProjectionCompactionsCanceled{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProjectionCompactionsCanceled) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProjectionCompactionsCanceled) ProtoMessage() {}
-
-func (x *ProjectionCompactionsCanceled) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *ProjectionCompactionsCanceled) GetHandlerKey() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_HandlerKey
-	}
-	return nil
-}
-
-func (x *ProjectionCompactionsCanceled) GetCumulativeCount() uint64 {
-	if x != nil {
-		return x.xxx_hidden_CumulativeCount
-	}
-	return 0
-}
-
-func (x *ProjectionCompactionsCanceled) SetHandlerKey(v *uuidpb.UUID) {
-	x.xxx_hidden_HandlerKey = v
-}
-
-func (x *ProjectionCompactionsCanceled) SetCumulativeCount(v uint64) {
-	x.xxx_hidden_CumulativeCount = v
-}
-
-func (x *ProjectionCompactionsCanceled) HasHandlerKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_HandlerKey != nil
-}
-
-func (x *ProjectionCompactionsCanceled) ClearHandlerKey() {
-	x.xxx_hidden_HandlerKey = nil
-}
-
-type ProjectionCompactionsCanceled_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// HandlerKey is the handler's identity key, as the application in
-	// WatchMetricsResponse.Preamble.application describes it.
-	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of compactions that have ended with the
-	// Canceled outcome.
-	CumulativeCount uint64
-}
-
-func (b0 ProjectionCompactionsCanceled_builder) Build() *ProjectionCompactionsCanceled {
-	m0 := &ProjectionCompactionsCanceled{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_HandlerKey = b.HandlerKey
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
-	return m0
-}
-
-// ProjectionCompactionsCompleted is the cumulative count of the compactions of
-// one projection handler that have ended with the Success outcome.
-type ProjectionCompactionsCompleted struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
-}
-
-func (x *ProjectionCompactionsCompleted) Reset() {
-	*x = ProjectionCompactionsCompleted{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProjectionCompactionsCompleted) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProjectionCompactionsCompleted) ProtoMessage() {}
-
-func (x *ProjectionCompactionsCompleted) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *ProjectionCompactionsCompleted) GetHandlerKey() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_HandlerKey
-	}
-	return nil
-}
-
-func (x *ProjectionCompactionsCompleted) GetCumulativeCount() uint64 {
-	if x != nil {
-		return x.xxx_hidden_CumulativeCount
-	}
-	return 0
-}
-
-func (x *ProjectionCompactionsCompleted) SetHandlerKey(v *uuidpb.UUID) {
-	x.xxx_hidden_HandlerKey = v
-}
-
-func (x *ProjectionCompactionsCompleted) SetCumulativeCount(v uint64) {
-	x.xxx_hidden_CumulativeCount = v
-}
-
-func (x *ProjectionCompactionsCompleted) HasHandlerKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_HandlerKey != nil
-}
-
-func (x *ProjectionCompactionsCompleted) ClearHandlerKey() {
-	x.xxx_hidden_HandlerKey = nil
-}
-
-type ProjectionCompactionsCompleted_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// HandlerKey is the handler's identity key, as the application in
-	// WatchMetricsResponse.Preamble.application describes it.
-	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of compactions that have ended with the
-	// Success outcome.
-	CumulativeCount uint64
-}
-
-func (b0 ProjectionCompactionsCompleted_builder) Build() *ProjectionCompactionsCompleted {
-	m0 := &ProjectionCompactionsCompleted{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_HandlerKey = b.HandlerKey
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
-	return m0
-}
-
-// ProjectionCompactionsDeadlineExceeded is the cumulative count of the
-// compactions of one projection handler that have ended with the
-// DeadlineExceeded outcome.
-type ProjectionCompactionsDeadlineExceeded struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) Reset() {
-	*x = ProjectionCompactionsDeadlineExceeded{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProjectionCompactionsDeadlineExceeded) ProtoMessage() {}
-
-func (x *ProjectionCompactionsDeadlineExceeded) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) GetHandlerKey() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_HandlerKey
-	}
-	return nil
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) GetCumulativeCount() uint64 {
-	if x != nil {
-		return x.xxx_hidden_CumulativeCount
-	}
-	return 0
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) SetHandlerKey(v *uuidpb.UUID) {
-	x.xxx_hidden_HandlerKey = v
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) SetCumulativeCount(v uint64) {
-	x.xxx_hidden_CumulativeCount = v
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) HasHandlerKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_HandlerKey != nil
-}
-
-func (x *ProjectionCompactionsDeadlineExceeded) ClearHandlerKey() {
-	x.xxx_hidden_HandlerKey = nil
-}
-
-type ProjectionCompactionsDeadlineExceeded_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// HandlerKey is the handler's identity key, as the application in
-	// WatchMetricsResponse.Preamble.application describes it.
-	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of compactions that have ended with the
-	// DeadlineExceeded outcome.
-	CumulativeCount uint64
-}
-
-func (b0 ProjectionCompactionsDeadlineExceeded_builder) Build() *ProjectionCompactionsDeadlineExceeded {
-	m0 := &ProjectionCompactionsDeadlineExceeded{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_HandlerKey = b.HandlerKey
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
-	return m0
-}
-
-// ProjectionCompactionsFailed is the cumulative count of the compactions of one
-// projection handler that have ended with the Error outcome.
-type ProjectionCompactionsFailed struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
-}
-
-func (x *ProjectionCompactionsFailed) Reset() {
-	*x = ProjectionCompactionsFailed{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProjectionCompactionsFailed) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProjectionCompactionsFailed) ProtoMessage() {}
-
-func (x *ProjectionCompactionsFailed) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *ProjectionCompactionsFailed) GetHandlerKey() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_HandlerKey
-	}
-	return nil
-}
-
-func (x *ProjectionCompactionsFailed) GetCumulativeCount() uint64 {
-	if x != nil {
-		return x.xxx_hidden_CumulativeCount
-	}
-	return 0
-}
-
-func (x *ProjectionCompactionsFailed) SetHandlerKey(v *uuidpb.UUID) {
-	x.xxx_hidden_HandlerKey = v
-}
-
-func (x *ProjectionCompactionsFailed) SetCumulativeCount(v uint64) {
-	x.xxx_hidden_CumulativeCount = v
-}
-
-func (x *ProjectionCompactionsFailed) HasHandlerKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_HandlerKey != nil
-}
-
-func (x *ProjectionCompactionsFailed) ClearHandlerKey() {
-	x.xxx_hidden_HandlerKey = nil
-}
-
-type ProjectionCompactionsFailed_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// HandlerKey is the handler's identity key, as the application in
-	// WatchMetricsResponse.Preamble.application describes it.
-	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of compactions that have ended with the Error
-	// outcome.
-	CumulativeCount uint64
-}
-
-func (b0 ProjectionCompactionsFailed_builder) Build() *ProjectionCompactionsFailed {
-	m0 := &ProjectionCompactionsFailed{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_HandlerKey = b.HandlerKey
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
-	return m0
-}
-
 var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc = "" +
@@ -1573,68 +1220,44 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc
 	"\x15ProcessInstancesEnded\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x8b\x01\n" +
-	"\x1dProjectionCompactionsCanceled\x128\n" +
-	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x8c\x01\n" +
-	"\x1eProjectionCompactionsCompleted\x128\n" +
-	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x93\x01\n" +
-	"%ProjectionCompactionsDeadlineExceeded\x128\n" +
-	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x89\x01\n" +
-	"\x1bProjectionCompactionsFailed\x128\n" +
-	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
 	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCountB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes = []any{
-	(*HandlerCommandsPending)(nil),                // 0: dogma.metrics.v1alpha1.HandlerCommandsPending
-	(*HandlerCommandsDue)(nil),                    // 1: dogma.metrics.v1alpha1.HandlerCommandsDue
-	(*HandlerCommandsFailing)(nil),                // 2: dogma.metrics.v1alpha1.HandlerCommandsFailing
-	(*HandlerCommandsHandled)(nil),                // 3: dogma.metrics.v1alpha1.HandlerCommandsHandled
-	(*HandlerDeadlinesPending)(nil),               // 4: dogma.metrics.v1alpha1.HandlerDeadlinesPending
-	(*HandlerDeadlinesDue)(nil),                   // 5: dogma.metrics.v1alpha1.HandlerDeadlinesDue
-	(*HandlerDeadlinesFailing)(nil),               // 6: dogma.metrics.v1alpha1.HandlerDeadlinesFailing
-	(*HandlerDeadlinesHandled)(nil),               // 7: dogma.metrics.v1alpha1.HandlerDeadlinesHandled
-	(*HandlerDeadlinesCanceled)(nil),              // 8: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
-	(*HandlerEventsRecorded)(nil),                 // 9: dogma.metrics.v1alpha1.HandlerEventsRecorded
-	(*HandlerEventsHandled)(nil),                  // 10: dogma.metrics.v1alpha1.HandlerEventsHandled
-	(*HandlerEventsFailing)(nil),                  // 11: dogma.metrics.v1alpha1.HandlerEventsFailing
-	(*ProcessInstancesEnded)(nil),                 // 12: dogma.metrics.v1alpha1.ProcessInstancesEnded
-	(*ProjectionCompactionsCanceled)(nil),         // 13: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled
-	(*ProjectionCompactionsCompleted)(nil),        // 14: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted
-	(*ProjectionCompactionsDeadlineExceeded)(nil), // 15: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded
-	(*ProjectionCompactionsFailed)(nil),           // 16: dogma.metrics.v1alpha1.ProjectionCompactionsFailed
-	(*uuidpb.UUID)(nil),                           // 17: dogma.protobuf.v1.UUID
+	(*HandlerCommandsPending)(nil),   // 0: dogma.metrics.v1alpha1.HandlerCommandsPending
+	(*HandlerCommandsDue)(nil),       // 1: dogma.metrics.v1alpha1.HandlerCommandsDue
+	(*HandlerCommandsFailing)(nil),   // 2: dogma.metrics.v1alpha1.HandlerCommandsFailing
+	(*HandlerCommandsHandled)(nil),   // 3: dogma.metrics.v1alpha1.HandlerCommandsHandled
+	(*HandlerDeadlinesPending)(nil),  // 4: dogma.metrics.v1alpha1.HandlerDeadlinesPending
+	(*HandlerDeadlinesDue)(nil),      // 5: dogma.metrics.v1alpha1.HandlerDeadlinesDue
+	(*HandlerDeadlinesFailing)(nil),  // 6: dogma.metrics.v1alpha1.HandlerDeadlinesFailing
+	(*HandlerDeadlinesHandled)(nil),  // 7: dogma.metrics.v1alpha1.HandlerDeadlinesHandled
+	(*HandlerDeadlinesCanceled)(nil), // 8: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
+	(*HandlerEventsRecorded)(nil),    // 9: dogma.metrics.v1alpha1.HandlerEventsRecorded
+	(*HandlerEventsHandled)(nil),     // 10: dogma.metrics.v1alpha1.HandlerEventsHandled
+	(*HandlerEventsFailing)(nil),     // 11: dogma.metrics.v1alpha1.HandlerEventsFailing
+	(*ProcessInstancesEnded)(nil),    // 12: dogma.metrics.v1alpha1.ProcessInstancesEnded
+	(*uuidpb.UUID)(nil),              // 13: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_depIdxs = []int32{
-	17, // 0: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 1: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 2: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 3: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 4: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 5: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 9: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 10: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 11: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 12: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 13: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 14: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 15: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // 16: dogma.metrics.v1alpha1.ProjectionCompactionsFailed.handler_key:type_name -> dogma.protobuf.v1.UUID
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	13, // 0: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 1: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 2: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 3: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 4: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 5: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 9: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 10: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 11: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // 12: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() }
@@ -1648,7 +1271,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

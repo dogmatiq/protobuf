@@ -17,6 +17,11 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 - **[BC]** Removed the `AggregateInstancesInMemory` and
   `ProcessInstancesInMemory` metrics from `MetricsAPI`.
+- **[BC]** Removed the `ProjectionCompactionsCompleted`,
+  `ProjectionCompactionsFailed`, `ProjectionCompactionsDeadlineExceeded` and
+  `ProjectionCompactionsCanceled` metrics from `MetricsAPI`. Use
+  `GetCompactions` on `ProjectionAPI`, or the `ProjectionCompactionEnded`
+  messages that `EngineAPI.WatchEngine` sends, instead.
 
 ## [0.12.0] - 2026-11-24
 
