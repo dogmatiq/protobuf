@@ -30,7 +30,9 @@ func (b *HandlerCommandsReadyBuilder) From(x *HandlerCommandsReady) *HandlerComm
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
+	}
 	return b
 }
 
@@ -43,7 +45,9 @@ func (b *HandlerCommandsReadyBuilder) Build() *HandlerCommandsReady {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
+	}
 	return m
 }
 
@@ -80,7 +84,9 @@ func (b *HandlerCommandsFailingBuilder) From(x *HandlerCommandsFailing) *Handler
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
+	}
 	return b
 }
 
@@ -93,7 +99,9 @@ func (b *HandlerCommandsFailingBuilder) Build() *HandlerCommandsFailing {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
+	}
 	return m
 }
 
@@ -130,7 +138,9 @@ func (b *HandlerCommandsHandledBuilder) From(x *HandlerCommandsHandled) *Handler
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	if x.HasCumulativeCount() {
+		b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	}
 	return b
 }
 
@@ -143,7 +153,9 @@ func (b *HandlerCommandsHandledBuilder) Build() *HandlerCommandsHandled {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	if b.prototype.HasCumulativeCount() {
+		m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	}
 	return m
 }
 
@@ -180,7 +192,9 @@ func (b *HandlerDeadlinesScheduledBuilder) From(x *HandlerDeadlinesScheduled) *H
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
+	}
 	return b
 }
 
@@ -193,7 +207,9 @@ func (b *HandlerDeadlinesScheduledBuilder) Build() *HandlerDeadlinesScheduled {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
+	}
 	return m
 }
 
@@ -230,7 +246,9 @@ func (b *HandlerDeadlinesReadyBuilder) From(x *HandlerDeadlinesReady) *HandlerDe
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
+	}
 	return b
 }
 
@@ -243,7 +261,9 @@ func (b *HandlerDeadlinesReadyBuilder) Build() *HandlerDeadlinesReady {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
+	}
 	return m
 }
 
@@ -280,7 +300,9 @@ func (b *HandlerDeadlinesFailingBuilder) From(x *HandlerDeadlinesFailing) *Handl
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
+	}
 	return b
 }
 
@@ -293,7 +315,9 @@ func (b *HandlerDeadlinesFailingBuilder) Build() *HandlerDeadlinesFailing {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
+	}
 	return m
 }
 
@@ -330,7 +354,9 @@ func (b *HandlerDeadlinesHandledBuilder) From(x *HandlerDeadlinesHandled) *Handl
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	if x.HasCumulativeCount() {
+		b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	}
 	return b
 }
 
@@ -343,7 +369,9 @@ func (b *HandlerDeadlinesHandledBuilder) Build() *HandlerDeadlinesHandled {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	if b.prototype.HasCumulativeCount() {
+		m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	}
 	return m
 }
 
@@ -380,7 +408,9 @@ func (b *HandlerDeadlinesCanceledBuilder) From(x *HandlerDeadlinesCanceled) *Han
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	if x.HasCumulativeCount() {
+		b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	}
 	return b
 }
 
@@ -393,7 +423,9 @@ func (b *HandlerDeadlinesCanceledBuilder) Build() *HandlerDeadlinesCanceled {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	if b.prototype.HasCumulativeCount() {
+		m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	}
 	return m
 }
 
@@ -430,7 +462,9 @@ func (b *HandlerEventsRecordedBuilder) From(x *HandlerEventsRecorded) *HandlerEv
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	if x.HasCumulativeCount() {
+		b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	}
 	return b
 }
 
@@ -443,7 +477,9 @@ func (b *HandlerEventsRecordedBuilder) Build() *HandlerEventsRecorded {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	if b.prototype.HasCumulativeCount() {
+		m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	}
 	return m
 }
 
@@ -480,7 +516,9 @@ func (b *HandlerEventsHandledBuilder) From(x *HandlerEventsHandled) *HandlerEven
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	if x.HasCumulativeCount() {
+		b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	}
 	return b
 }
 
@@ -493,7 +531,9 @@ func (b *HandlerEventsHandledBuilder) Build() *HandlerEventsHandled {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	if b.prototype.HasCumulativeCount() {
+		m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	}
 	return m
 }
 
@@ -530,7 +570,9 @@ func (b *HandlerEventsFailingBuilder) From(x *HandlerEventsFailing) *HandlerEven
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
+	}
 	return b
 }
 
@@ -543,7 +585,9 @@ func (b *HandlerEventsFailingBuilder) Build() *HandlerEventsFailing {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
+	}
 	return m
 }
 
@@ -580,7 +624,9 @@ func (b *ProcessInstancesEndedBuilder) From(x *ProcessInstancesEnded) *ProcessIn
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	if x.HasCumulativeCount() {
+		b.prototype.SetCumulativeCount(x.GetCumulativeCount())
+	}
 	return b
 }
 
@@ -593,7 +639,9 @@ func (b *ProcessInstancesEndedBuilder) Build() *ProcessInstancesEnded {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	if b.prototype.HasCumulativeCount() {
+		m.SetCumulativeCount(b.prototype.GetCumulativeCount())
+	}
 	return m
 }
 

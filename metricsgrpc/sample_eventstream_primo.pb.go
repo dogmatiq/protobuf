@@ -9,8 +9,27 @@ package metricsgrpc
 import (
 	"fmt"
 	proto "google.golang.org/protobuf/proto"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
+
+// TryGetCreatedAt returns the CreatedAt value if x.Value is set to CreatedAt.
+// Otherwise, ok is false and v is the zero-value.
+func (x *HandlerEventStreamStaleness) TryGetCreatedAt() (v *timestamppb.Timestamp, ok bool) {
+	if x.HasCreatedAt() {
+		return x.GetCreatedAt(), true
+	}
+	return v, false
+}
+
+// TryGetCaughtUp returns the CaughtUp value if x.Value is set to CaughtUp.
+// Otherwise, ok is false and v is the zero-value.
+func (x *HandlerEventStreamStaleness) TryGetCaughtUp() (v *emptypb.Empty, ok bool) {
+	if x.HasCaughtUp() {
+		return x.GetCaughtUp(), true
+	}
+	return v, false
+}
 
 type EventStreamLengthBuilder struct {
 	prototype EventStreamLength
@@ -31,7 +50,9 @@ func (b *EventStreamLengthBuilder) From(x *EventStreamLength) *EventStreamLength
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetWatermark(x.GetWatermark())
+	if x.HasWatermark() {
+		b.prototype.SetWatermark(x.GetWatermark())
+	}
 	return b
 }
 
@@ -44,7 +65,9 @@ func (b *EventStreamLengthBuilder) Build() *EventStreamLength {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetWatermark(b.prototype.GetWatermark())
+	if b.prototype.HasWatermark() {
+		m.SetWatermark(b.prototype.GetWatermark())
+	}
 	return m
 }
 
@@ -81,7 +104,9 @@ func (b *AggregateInstanceEventStreamBindingsBuilder) From(x *AggregateInstanceE
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetCurrentCount(x.GetCurrentCount())
+	if x.HasCurrentCount() {
+		b.prototype.SetCurrentCount(x.GetCurrentCount())
+	}
 	return b
 }
 
@@ -94,7 +119,9 @@ func (b *AggregateInstanceEventStreamBindingsBuilder) Build() *AggregateInstance
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetCurrentCount(b.prototype.GetCurrentCount())
+	if b.prototype.HasCurrentCount() {
+		m.SetCurrentCount(b.prototype.GetCurrentCount())
+	}
 	return m
 }
 
@@ -131,7 +158,9 @@ func (b *HandlerEventStreamLagBuilder) From(x *HandlerEventStreamLag) *HandlerEv
 	if x.HasSubject() {
 		b.prototype.SetSubject(x.GetSubject())
 	}
-	b.prototype.SetGauge(x.GetGauge())
+	if x.HasGauge() {
+		b.prototype.SetGauge(x.GetGauge())
+	}
 	return b
 }
 
@@ -144,7 +173,9 @@ func (b *HandlerEventStreamLagBuilder) Build() *HandlerEventStreamLag {
 	if b.prototype.HasSubject() {
 		m.SetSubject(b.prototype.GetSubject())
 	}
-	m.SetGauge(b.prototype.GetGauge())
+	if b.prototype.HasGauge() {
+		m.SetGauge(b.prototype.GetGauge())
+	}
 	return m
 }
 
@@ -184,6 +215,9 @@ func (b *HandlerEventStreamStalenessBuilder) From(x *HandlerEventStreamStaleness
 	if x.HasCreatedAt() {
 		b.prototype.SetCreatedAt(x.GetCreatedAt())
 	}
+	if x.HasCaughtUp() {
+		b.prototype.SetCaughtUp(x.GetCaughtUp())
+	}
 	return b
 }
 
@@ -198,6 +232,9 @@ func (b *HandlerEventStreamStalenessBuilder) Build() *HandlerEventStreamStalenes
 	}
 	if b.prototype.HasCreatedAt() {
 		m.SetCreatedAt(b.prototype.GetCreatedAt())
+	}
+	if b.prototype.HasCaughtUp() {
+		m.SetCaughtUp(b.prototype.GetCaughtUp())
 	}
 	return m
 }
@@ -214,6 +251,93 @@ func (b *HandlerEventStreamStalenessBuilder) WithSubject(v *HandlerEventStreamSu
 func (b *HandlerEventStreamStalenessBuilder) WithCreatedAt(v *timestamppb.Timestamp) *HandlerEventStreamStalenessBuilder {
 	b.prototype.SetCreatedAt(v)
 	return b
+}
+
+// WithCaughtUp configures the builder to set the CaughtUp field to v,
+// then returns b.
+func (b *HandlerEventStreamStalenessBuilder) WithCaughtUp(v *emptypb.Empty) *HandlerEventStreamStalenessBuilder {
+	b.prototype.SetCaughtUp(v)
+	return b
+}
+
+// MustSwitch_HandlerEventStreamStaleness_Value invokes one of the given functions based on
+// the value of x.Value.
+//
+// It panics if x.Value is nil.
+func MustSwitch_HandlerEventStreamStaleness_Value(
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp),
+	caseCaughtUp func(*emptypb.Empty),
+) {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		caseCaughtUp(x.GetCaughtUp())
+	default:
+		panic("MustSwitch_HandlerEventStreamStaleness_Value: x.Value is not set")
+	}
+}
+
+// Switch_HandlerEventStreamStaleness_Value invokes one of the given functions based on
+// the value of x.Value.
+//
+// It calls none() if x.Value is nil.
+func Switch_HandlerEventStreamStaleness_Value(
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp),
+	caseCaughtUp func(*emptypb.Empty),
+	none func(),
+) {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		caseCaughtUp(x.GetCaughtUp())
+	default:
+		none()
+	}
+}
+
+// MustMap_HandlerEventStreamStaleness_Value maps x.Value to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Value,
+// and returns that function's result. It panics if x.Value is nil.
+func MustMap_HandlerEventStreamStaleness_Value[T any](
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp) T,
+	caseCaughtUp func(*emptypb.Empty) T,
+) T {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		return caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		return caseCaughtUp(x.GetCaughtUp())
+	default:
+		panic("MustMap_HandlerEventStreamStaleness_Value: x.Value is not set")
+	}
+}
+
+// Map_HandlerEventStreamStaleness_Value maps x.Value to a value of type T by invoking
+// one of the given functions.
+//
+// It invokes the function that corresponds to the value of x.Value,
+// and returns that function's result. It calls none() if x.Value is nil.
+func Map_HandlerEventStreamStaleness_Value[T any](
+	x *HandlerEventStreamStaleness,
+	caseCreatedAt func(*timestamppb.Timestamp) T,
+	caseCaughtUp func(*emptypb.Empty) T,
+	none func() T,
+) T {
+	switch x.WhichValue() {
+	case HandlerEventStreamStaleness_CreatedAt_case:
+		return caseCreatedAt(x.GetCreatedAt())
+	case HandlerEventStreamStaleness_CaughtUp_case:
+		return caseCaughtUp(x.GetCaughtUp())
+	default:
+		return none()
+	}
 }
 
 // Format formats x according to the given [fmt] verb.

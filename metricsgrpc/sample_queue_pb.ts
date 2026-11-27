@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue: GenFile = /*@__PURE__*/
-  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJuChdRdWV1ZURlYWRsaW5lc1NjaGVkdWxlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiaQoSUXVldWVDb21tYW5kc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJqChNRdWV1ZURlYWRsaW5lc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJrChRRdWV1ZUNvbW1hbmRzRmFpbGluZxI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIibAoVUXVldWVEZWFkbGluZXNGYWlsaW5nEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJuChRRdWV1ZUNvbW1hbmRzUmVtb3ZlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIibwoVUXVldWVEZWFkbGluZXNSZW1vdmVkEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJ6ChxQcm9jZXNzSW5zdGFuY2VRdWV1ZUJpbmRpbmdzEjwKB3N1YmplY3QYASABKAsyKy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJRdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAJCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
+  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJuChdRdWV1ZURlYWRsaW5lc1NjaGVkdWxlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEiaQoSUXVldWVDb21tYW5kc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJqChNRdWV1ZURlYWRsaW5lc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJrChRRdWV1ZUNvbW1hbmRzRmFpbGluZxI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEibAoVUXVldWVEZWFkbGluZXNGYWlsaW5nEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJuChRRdWV1ZUNvbW1hbmRzUmVtb3ZlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAEibwoVUXVldWVEZWFkbGluZXNSZW1vdmVkEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIASJ6ChxQcm9jZXNzSW5zdGFuY2VRdWV1ZUJpbmRpbmdzEjwKB3N1YmplY3QYASABKAsyKy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJRdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
 
 /**
  * QueueDeadlinesScheduled is the number of deadlines in a single logical queue
@@ -35,9 +35,10 @@ export type QueueDeadlinesScheduled = Message<"dogma.metrics.v1alpha1.QueueDeadl
 
   /**
    * CurrentCount is the number of deadlines in the queue that are scheduled for
-   * a time that has not come yet.
+   * a time that has not come yet. It is absent when the engine has stopped
+   * reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -53,10 +54,9 @@ export const QueueDeadlinesScheduledSchema: GenMessage<QueueDeadlinesScheduled> 
  * QueueCommandsReady is the number of commands in a single logical queue that
  * have not had a failed delivery attempt.
  *
- * A command is ready from the time that the engine adds it to the queue. It is
- * still ready while the engine attempts to deliver it, and while the engine
- * delays it for a reason of its own, such as to deliver messages of higher
- * priority first.
+ * A command is still ready while the engine attempts to deliver it, and while
+ * the engine delays it for a reason of its own, such as to deliver messages of
+ * higher priority first.
  *
  * Each command in the queue is counted in either QueueCommandsReady or
  * QueueCommandsFailing, so the number of commands in the queue is the total of
@@ -74,9 +74,10 @@ export type QueueCommandsReady = Message<"dogma.metrics.v1alpha1.QueueCommandsRe
 
   /**
    * CurrentCount is the number of commands in the queue that have not had a
-   * failed delivery attempt.
+   * failed delivery attempt. It is absent when the engine has stopped reporting
+   * this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -113,9 +114,11 @@ export type QueueDeadlinesReady = Message<"dogma.metrics.v1alpha1.QueueDeadlines
 
   /**
    * CurrentCount is the number of deadlines in the queue that are scheduled for
-   * a time that has come, and that have not had a failed delivery attempt.
+   * a time that has come, and that have not had a failed delivery attempt. It
+   * is absent when the engine has stopped reporting this metric for the
+   * subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -150,9 +153,10 @@ export type QueueCommandsFailing = Message<"dogma.metrics.v1alpha1.QueueCommands
 
   /**
    * CurrentCount is the number of commands in the queue that have had at least
-   * one failed delivery attempt.
+   * one failed delivery attempt. It is absent when the engine has stopped
+   * reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -187,9 +191,10 @@ export type QueueDeadlinesFailing = Message<"dogma.metrics.v1alpha1.QueueDeadlin
 
   /**
    * CurrentCount is the number of deadlines in the queue that have had at least
-   * one failed delivery attempt.
+   * one failed delivery attempt. It is absent when the engine has stopped
+   * reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -218,9 +223,10 @@ export type QueueCommandsRemoved = Message<"dogma.metrics.v1alpha1.QueueCommands
 
   /**
    * CumulativeCount is the number of commands that have been removed from the
-   * queue.
+   * queue. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -249,9 +255,10 @@ export type QueueDeadlinesRemoved = Message<"dogma.metrics.v1alpha1.QueueDeadlin
 
   /**
    * CumulativeCount is the number of deadlines that have been removed from the
-   * queue.
+   * queue. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -285,9 +292,11 @@ export type ProcessInstanceQueueBindings = Message<"dogma.metrics.v1alpha1.Proce
   subject?: HandlerQueueSubject | undefined;
 
   /**
-   * CurrentCount is the number of instances bound to the queue, or to none.
+   * CurrentCount is the number of instances bound to the queue, or to none. It
+   * is absent when the engine has stopped reporting this metric for the
+   * subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };

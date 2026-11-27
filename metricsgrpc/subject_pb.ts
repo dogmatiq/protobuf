@@ -15,8 +15,7 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_subject: GenFile = /*
   fileDesc("CjZnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3N1YmplY3QucHJvdG8SFmRvZ21hLm1ldHJpY3MudjFhbHBoYTEiOQoMUXVldWVTdWJqZWN0EikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCI+Cg5IYW5kbGVyU3ViamVjdBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQiRgoSRXZlbnRTdHJlYW1TdWJqZWN0EjAKD2V2ZW50X3N0cmVhbV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQiewoZSGFuZGxlckV2ZW50U3RyZWFtU3ViamVjdBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMAoPZXZlbnRfc3RyZWFtX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRCJuChNIYW5kbGVyUXVldWVTdWJqZWN0EiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIpCghxdWV1ZV9pZBgCIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQiewoZSGFuZGxlck1lc3NhZ2VUeXBlU3ViamVjdBIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMAoPbWVzc2FnZV90eXBlX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJREIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
- * QueueSubject identifies one queue as the subject of a metric. The subject of
- * a metric is what the metric's value describes.
+ * QueueSubject identifies one queue as the subject of a metric.
  *
  * @generated from message dogma.metrics.v1alpha1.QueueSubject
  */
@@ -37,8 +36,7 @@ export const QueueSubjectSchema: GenMessage<QueueSubject> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_subject, 0);
 
 /**
- * HandlerSubject identifies one handler as the subject of a metric. The subject
- * of a metric is what the metric's value describes.
+ * HandlerSubject identifies one handler as the subject of a metric.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerSubject
  */
@@ -61,7 +59,6 @@ export const HandlerSubjectSchema: GenMessage<HandlerSubject> = /*@__PURE__*/
 
 /**
  * EventStreamSubject identifies one event stream as the subject of a metric.
- * The subject of a metric is what the metric's value describes.
  *
  * @generated from message dogma.metrics.v1alpha1.EventStreamSubject
  */
@@ -83,8 +80,7 @@ export const EventStreamSubjectSchema: GenMessage<EventStreamSubject> = /*@__PUR
 
 /**
  * HandlerEventStreamSubject identifies one handler and one event stream as the
- * subject of a metric. The subject of a metric is what the metric's value
- * describes.
+ * subject of a metric.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventStreamSubject
  */
@@ -114,7 +110,7 @@ export const HandlerEventStreamSubjectSchema: GenMessage<HandlerEventStreamSubje
 
 /**
  * HandlerQueueSubject identifies one handler and one queue as the subject of a
- * metric. The subject of a metric is what the metric's value describes.
+ * metric.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerQueueSubject
  */
@@ -145,8 +141,7 @@ export const HandlerQueueSubjectSchema: GenMessage<HandlerQueueSubject> = /*@__P
 
 /**
  * HandlerMessageTypeSubject identifies one handler and one message type as the
- * subject of a metric. The subject of a metric is what the metric's value
- * describes.
+ * subject of a metric.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerMessageTypeSubject
  */

@@ -21,8 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// QueueSubject identifies one queue as the subject of a metric. The subject of
-// a metric is what the metric's value describes.
+// QueueSubject identifies one queue as the subject of a metric.
 type QueueSubject struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_QueueId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=queue_id,json=queueId"`
@@ -92,8 +91,7 @@ func (b0 QueueSubject_builder) Build() *QueueSubject {
 	return m0
 }
 
-// HandlerSubject identifies one handler as the subject of a metric. The subject
-// of a metric is what the metric's value describes.
+// HandlerSubject identifies one handler as the subject of a metric.
 type HandlerSubject struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -165,7 +163,6 @@ func (b0 HandlerSubject_builder) Build() *HandlerSubject {
 }
 
 // EventStreamSubject identifies one event stream as the subject of a metric.
-// The subject of a metric is what the metric's value describes.
 type EventStreamSubject struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_EventStreamId *uuidpb.UUID           `protobuf:"bytes,1,opt,name=event_stream_id,json=eventStreamId"`
@@ -236,8 +233,7 @@ func (b0 EventStreamSubject_builder) Build() *EventStreamSubject {
 }
 
 // HandlerEventStreamSubject identifies one handler and one event stream as the
-// subject of a metric. The subject of a metric is what the metric's value
-// describes.
+// subject of a metric.
 type HandlerEventStreamSubject struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -335,7 +331,7 @@ func (b0 HandlerEventStreamSubject_builder) Build() *HandlerEventStreamSubject {
 }
 
 // HandlerQueueSubject identifies one handler and one queue as the subject of a
-// metric. The subject of a metric is what the metric's value describes.
+// metric.
 type HandlerQueueSubject struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
@@ -434,8 +430,7 @@ func (b0 HandlerQueueSubject_builder) Build() *HandlerQueueSubject {
 }
 
 // HandlerMessageTypeSubject identifies one handler and one message type as the
-// subject of a metric. The subject of a metric is what the metric's value
-// describes.
+// subject of a metric.
 type HandlerMessageTypeSubject struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`

@@ -5,15 +5,13 @@ option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
 
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
-// QueueSubject identifies one queue as the subject of a metric. The subject of
-// a metric is what the metric's value describes.
+// QueueSubject identifies one queue as the subject of a metric.
 message QueueSubject {
   // QueueId is the ID of the queue.
   dogma.protobuf.v1.UUID queue_id = 1;
 }
 
-// HandlerSubject identifies one handler as the subject of a metric. The subject
-// of a metric is what the metric's value describes.
+// HandlerSubject identifies one handler as the subject of a metric.
 message HandlerSubject {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -21,15 +19,13 @@ message HandlerSubject {
 }
 
 // EventStreamSubject identifies one event stream as the subject of a metric.
-// The subject of a metric is what the metric's value describes.
 message EventStreamSubject {
   // EventStreamId is the ID of the event stream.
   dogma.protobuf.v1.UUID event_stream_id = 1;
 }
 
 // HandlerEventStreamSubject identifies one handler and one event stream as the
-// subject of a metric. The subject of a metric is what the metric's value
-// describes.
+// subject of a metric.
 message HandlerEventStreamSubject {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -40,7 +36,7 @@ message HandlerEventStreamSubject {
 }
 
 // HandlerQueueSubject identifies one handler and one queue as the subject of a
-// metric. The subject of a metric is what the metric's value describes.
+// metric.
 message HandlerQueueSubject {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.
@@ -52,8 +48,7 @@ message HandlerQueueSubject {
 }
 
 // HandlerMessageTypeSubject identifies one handler and one message type as the
-// subject of a metric. The subject of a metric is what the metric's value
-// describes.
+// subject of a metric.
 message HandlerMessageTypeSubject {
   // HandlerKey is the handler's identity key, as the application in
   // WatchMetricsResponse.Preamble.application describes it.

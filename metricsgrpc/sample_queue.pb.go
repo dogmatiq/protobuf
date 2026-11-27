@@ -31,6 +31,8 @@ type QueueDeadlinesScheduled struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *QueueSubject          `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -80,6 +82,7 @@ func (x *QueueDeadlinesScheduled) SetSubject(v *QueueSubject) {
 
 func (x *QueueDeadlinesScheduled) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *QueueDeadlinesScheduled) HasSubject() bool {
@@ -89,8 +92,20 @@ func (x *QueueDeadlinesScheduled) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *QueueDeadlinesScheduled) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *QueueDeadlinesScheduled) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *QueueDeadlinesScheduled) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type QueueDeadlinesScheduled_builder struct {
@@ -99,8 +114,9 @@ type QueueDeadlinesScheduled_builder struct {
 	// Subject identifies the queue.
 	Subject *QueueSubject
 	// CurrentCount is the number of deadlines in the queue that are scheduled for
-	// a time that has not come yet.
-	CurrentCount uint64
+	// a time that has not come yet. It is absent when the engine has stopped
+	// reporting this metric for the subject.
+	CurrentCount *uint64
 }
 
 func (b0 QueueDeadlinesScheduled_builder) Build() *QueueDeadlinesScheduled {
@@ -108,17 +124,19 @@ func (b0 QueueDeadlinesScheduled_builder) Build() *QueueDeadlinesScheduled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
 // QueueCommandsReady is the number of commands in a single logical queue that
 // have not had a failed delivery attempt.
 //
-// A command is ready from the time that the engine adds it to the queue. It is
-// still ready while the engine attempts to deliver it, and while the engine
-// delays it for a reason of its own, such as to deliver messages of higher
-// priority first.
+// A command is still ready while the engine attempts to deliver it, and while
+// the engine delays it for a reason of its own, such as to deliver messages of
+// higher priority first.
 //
 // Each command in the queue is counted in either QueueCommandsReady or
 // QueueCommandsFailing, so the number of commands in the queue is the total of
@@ -127,6 +145,8 @@ type QueueCommandsReady struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *QueueSubject          `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -176,6 +196,7 @@ func (x *QueueCommandsReady) SetSubject(v *QueueSubject) {
 
 func (x *QueueCommandsReady) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *QueueCommandsReady) HasSubject() bool {
@@ -185,8 +206,20 @@ func (x *QueueCommandsReady) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *QueueCommandsReady) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *QueueCommandsReady) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *QueueCommandsReady) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type QueueCommandsReady_builder struct {
@@ -195,8 +228,9 @@ type QueueCommandsReady_builder struct {
 	// Subject identifies the queue.
 	Subject *QueueSubject
 	// CurrentCount is the number of commands in the queue that have not had a
-	// failed delivery attempt.
-	CurrentCount uint64
+	// failed delivery attempt. It is absent when the engine has stopped reporting
+	// this metric for the subject.
+	CurrentCount *uint64
 }
 
 func (b0 QueueCommandsReady_builder) Build() *QueueCommandsReady {
@@ -204,7 +238,10 @@ func (b0 QueueCommandsReady_builder) Build() *QueueCommandsReady {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -223,6 +260,8 @@ type QueueDeadlinesReady struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *QueueSubject          `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -272,6 +311,7 @@ func (x *QueueDeadlinesReady) SetSubject(v *QueueSubject) {
 
 func (x *QueueDeadlinesReady) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *QueueDeadlinesReady) HasSubject() bool {
@@ -281,8 +321,20 @@ func (x *QueueDeadlinesReady) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *QueueDeadlinesReady) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *QueueDeadlinesReady) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *QueueDeadlinesReady) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type QueueDeadlinesReady_builder struct {
@@ -291,8 +343,10 @@ type QueueDeadlinesReady_builder struct {
 	// Subject identifies the queue.
 	Subject *QueueSubject
 	// CurrentCount is the number of deadlines in the queue that are scheduled for
-	// a time that has come, and that have not had a failed delivery attempt.
-	CurrentCount uint64
+	// a time that has come, and that have not had a failed delivery attempt. It
+	// is absent when the engine has stopped reporting this metric for the
+	// subject.
+	CurrentCount *uint64
 }
 
 func (b0 QueueDeadlinesReady_builder) Build() *QueueDeadlinesReady {
@@ -300,7 +354,10 @@ func (b0 QueueDeadlinesReady_builder) Build() *QueueDeadlinesReady {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -317,6 +374,8 @@ type QueueCommandsFailing struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *QueueSubject          `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -366,6 +425,7 @@ func (x *QueueCommandsFailing) SetSubject(v *QueueSubject) {
 
 func (x *QueueCommandsFailing) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *QueueCommandsFailing) HasSubject() bool {
@@ -375,8 +435,20 @@ func (x *QueueCommandsFailing) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *QueueCommandsFailing) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *QueueCommandsFailing) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *QueueCommandsFailing) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type QueueCommandsFailing_builder struct {
@@ -385,8 +457,9 @@ type QueueCommandsFailing_builder struct {
 	// Subject identifies the queue.
 	Subject *QueueSubject
 	// CurrentCount is the number of commands in the queue that have had at least
-	// one failed delivery attempt.
-	CurrentCount uint64
+	// one failed delivery attempt. It is absent when the engine has stopped
+	// reporting this metric for the subject.
+	CurrentCount *uint64
 }
 
 func (b0 QueueCommandsFailing_builder) Build() *QueueCommandsFailing {
@@ -394,7 +467,10 @@ func (b0 QueueCommandsFailing_builder) Build() *QueueCommandsFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -411,6 +487,8 @@ type QueueDeadlinesFailing struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *QueueSubject          `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -460,6 +538,7 @@ func (x *QueueDeadlinesFailing) SetSubject(v *QueueSubject) {
 
 func (x *QueueDeadlinesFailing) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *QueueDeadlinesFailing) HasSubject() bool {
@@ -469,8 +548,20 @@ func (x *QueueDeadlinesFailing) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *QueueDeadlinesFailing) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *QueueDeadlinesFailing) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *QueueDeadlinesFailing) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type QueueDeadlinesFailing_builder struct {
@@ -479,8 +570,9 @@ type QueueDeadlinesFailing_builder struct {
 	// Subject identifies the queue.
 	Subject *QueueSubject
 	// CurrentCount is the number of deadlines in the queue that have had at least
-	// one failed delivery attempt.
-	CurrentCount uint64
+	// one failed delivery attempt. It is absent when the engine has stopped
+	// reporting this metric for the subject.
+	CurrentCount *uint64
 }
 
 func (b0 QueueDeadlinesFailing_builder) Build() *QueueDeadlinesFailing {
@@ -488,7 +580,10 @@ func (b0 QueueDeadlinesFailing_builder) Build() *QueueDeadlinesFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -499,6 +594,8 @@ type QueueCommandsRemoved struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *QueueSubject          `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -548,6 +645,7 @@ func (x *QueueCommandsRemoved) SetSubject(v *QueueSubject) {
 
 func (x *QueueCommandsRemoved) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *QueueCommandsRemoved) HasSubject() bool {
@@ -557,8 +655,20 @@ func (x *QueueCommandsRemoved) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *QueueCommandsRemoved) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *QueueCommandsRemoved) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *QueueCommandsRemoved) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type QueueCommandsRemoved_builder struct {
@@ -567,8 +677,9 @@ type QueueCommandsRemoved_builder struct {
 	// Subject identifies the queue.
 	Subject *QueueSubject
 	// CumulativeCount is the number of commands that have been removed from the
-	// queue.
-	CumulativeCount uint64
+	// queue. It is absent when the engine has stopped reporting this metric for
+	// the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 QueueCommandsRemoved_builder) Build() *QueueCommandsRemoved {
@@ -576,7 +687,10 @@ func (b0 QueueCommandsRemoved_builder) Build() *QueueCommandsRemoved {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -587,6 +701,8 @@ type QueueDeadlinesRemoved struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *QueueSubject          `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -636,6 +752,7 @@ func (x *QueueDeadlinesRemoved) SetSubject(v *QueueSubject) {
 
 func (x *QueueDeadlinesRemoved) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *QueueDeadlinesRemoved) HasSubject() bool {
@@ -645,8 +762,20 @@ func (x *QueueDeadlinesRemoved) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *QueueDeadlinesRemoved) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *QueueDeadlinesRemoved) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *QueueDeadlinesRemoved) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type QueueDeadlinesRemoved_builder struct {
@@ -655,8 +784,9 @@ type QueueDeadlinesRemoved_builder struct {
 	// Subject identifies the queue.
 	Subject *QueueSubject
 	// CumulativeCount is the number of deadlines that have been removed from the
-	// queue.
-	CumulativeCount uint64
+	// queue. It is absent when the engine has stopped reporting this metric for
+	// the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 QueueDeadlinesRemoved_builder) Build() *QueueDeadlinesRemoved {
@@ -664,7 +794,10 @@ func (b0 QueueDeadlinesRemoved_builder) Build() *QueueDeadlinesRemoved {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -680,6 +813,8 @@ type ProcessInstanceQueueBindings struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *HandlerQueueSubject   `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -729,6 +864,7 @@ func (x *ProcessInstanceQueueBindings) SetSubject(v *HandlerQueueSubject) {
 
 func (x *ProcessInstanceQueueBindings) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *ProcessInstanceQueueBindings) HasSubject() bool {
@@ -738,8 +874,20 @@ func (x *ProcessInstanceQueueBindings) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *ProcessInstanceQueueBindings) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *ProcessInstanceQueueBindings) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *ProcessInstanceQueueBindings) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type ProcessInstanceQueueBindings_builder struct {
@@ -748,8 +896,10 @@ type ProcessInstanceQueueBindings_builder struct {
 	// Subject identifies the handler, and the queue that the instances are bound
 	// to if they are bound to one.
 	Subject *HandlerQueueSubject
-	// CurrentCount is the number of instances bound to the queue, or to none.
-	CurrentCount uint64
+	// CurrentCount is the number of instances bound to the queue, or to none. It
+	// is absent when the engine has stopped reporting this metric for the
+	// subject.
+	CurrentCount *uint64
 }
 
 func (b0 ProcessInstanceQueueBindings_builder) Build() *ProcessInstanceQueueBindings {
@@ -757,7 +907,10 @@ func (b0 ProcessInstanceQueueBindings_builder) Build() *ProcessInstanceQueueBind
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -768,28 +921,28 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_rawDesc =
 	";github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto\x12\x16dogma.metrics.v1alpha1\x1a6github.com/dogmatiq/protobuf/metricsgrpc/subject.proto\"\x85\x01\n" +
 	"\x17QueueDeadlinesScheduled\x12>\n" +
 	"\asubject\x18\x01 \x01(\v2$.dogma.metrics.v1alpha1.QueueSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x80\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x80\x01\n" +
 	"\x12QueueCommandsReady\x12>\n" +
 	"\asubject\x18\x01 \x01(\v2$.dogma.metrics.v1alpha1.QueueSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x81\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x81\x01\n" +
 	"\x13QueueDeadlinesReady\x12>\n" +
 	"\asubject\x18\x01 \x01(\v2$.dogma.metrics.v1alpha1.QueueSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x82\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x82\x01\n" +
 	"\x14QueueCommandsFailing\x12>\n" +
 	"\asubject\x18\x01 \x01(\v2$.dogma.metrics.v1alpha1.QueueSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x83\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x83\x01\n" +
 	"\x15QueueDeadlinesFailing\x12>\n" +
 	"\asubject\x18\x01 \x01(\v2$.dogma.metrics.v1alpha1.QueueSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x88\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x88\x01\n" +
 	"\x14QueueCommandsRemoved\x12>\n" +
 	"\asubject\x18\x01 \x01(\v2$.dogma.metrics.v1alpha1.QueueSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x89\x01\n" +
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCount\"\x89\x01\n" +
 	"\x15QueueDeadlinesRemoved\x12>\n" +
 	"\asubject\x18\x01 \x01(\v2$.dogma.metrics.v1alpha1.QueueSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x91\x01\n" +
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCount\"\x91\x01\n" +
 	"\x1cProcessInstanceQueueBindings\x12E\n" +
 	"\asubject\x18\x01 \x01(\v2+.dogma.metrics.v1alpha1.HandlerQueueSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCountB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCountB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_goTypes = []any{

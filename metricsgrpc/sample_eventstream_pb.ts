@@ -4,8 +4,8 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { Timestamp } from "@bufbuild/protobuf/wkt";
-import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
+import type { Empty, Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_empty, file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { EventStreamSubject, HandlerEventStreamSubject } from "./subject_pb.js";
 import { file_github_com_dogmatiq_protobuf_metricsgrpc_subject } from "./subject_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream: GenFile = /*@__PURE__*/
-  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJqChFFdmVudFN0cmVhbUxlbmd0aBI7CgdzdWJqZWN0GAEgASgLMiouZG9nbWEubWV0cmljcy52MWFscGhhMS5FdmVudFN0cmVhbVN1YmplY3QSGAoJd2F0ZXJtYXJrGAIgASgEQgWqAQIIAiKIAQokQWdncmVnYXRlSW5zdGFuY2VFdmVudFN0cmVhbUJpbmRpbmdzEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudFN0cmVhbVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIicQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudFN0cmVhbVN1YmplY3QSFAoFZ2F1Z2UYAiABKARCBaoBAggCIpEBChtIYW5kbGVyRXZlbnRTdHJlYW1TdGFsZW5lc3MSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckV2ZW50U3RyZWFtU3ViamVjdBIuCgpjcmVhdGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
+  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJqChFFdmVudFN0cmVhbUxlbmd0aBI7CgdzdWJqZWN0GAEgASgLMiouZG9nbWEubWV0cmljcy52MWFscGhhMS5FdmVudFN0cmVhbVN1YmplY3QSGAoJd2F0ZXJtYXJrGAIgASgEQgWqAQIIASKIAQokQWdncmVnYXRlSW5zdGFuY2VFdmVudFN0cmVhbUJpbmRpbmdzEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudFN0cmVhbVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEicQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudFN0cmVhbVN1YmplY3QSFAoFZ2F1Z2UYAiABKARCBaoBAggBIskBChtIYW5kbGVyRXZlbnRTdHJlYW1TdGFsZW5lc3MSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckV2ZW50U3RyZWFtU3ViamVjdBIwCgpjcmVhdGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEgAEisKCWNhdWdodF91cBgDIAEoCzIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eUgAQgcKBXZhbHVlQipaKGdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWV0cmljc2dycGNiCGVkaXRpb25zcOkH", [file_google_protobuf_empty, file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
 
 /**
  * EventStreamLength is the number of events on one event stream, which is an
@@ -35,12 +35,14 @@ export type EventStreamLength = Message<"dogma.metrics.v1alpha1.EventStreamLengt
    * Watermark is the number of events on the stream, which is also the offset
    * at which the next event will be appended. It never decreases, so a client
    * that has seen a value knows that the stream has at least that many events.
+   * It is absent when the engine has stopped reporting this metric for the
+   * subject.
    *
    * While ownership of the stream moves from one node to another, both may
    * report it. Both counts are positions on the same stream, so the value for
    * the whole cluster is the greatest value that any node reports.
    *
-   * @generated from field: uint64 watermark = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 watermark = 2 [features.field_presence = EXPLICIT];
    */
   watermark: bigint;
 };
@@ -71,9 +73,10 @@ export type AggregateInstanceEventStreamBindings = Message<"dogma.metrics.v1alph
   subject?: HandlerEventStreamSubject | undefined;
 
   /**
-   * CurrentCount is the number of instances bound to the event stream.
+   * CurrentCount is the number of instances bound to the event stream. It is
+   * absent when the engine has stopped reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -111,12 +114,13 @@ export type HandlerEventStreamLag = Message<"dogma.metrics.v1alpha1.HandlerEvent
   /**
    * Gauge is the number of events after the offset that the handler has
    * reached. It is zero when the handler has handled or skipped every event on
-   * the stream.
+   * the stream. It is absent when the engine has stopped reporting this metric
+   * for the subject.
    *
    * Several nodes can report the lag of one handler on one stream, so adding
    * their values counts the same events more than once.
    *
-   * @generated from field: uint64 gauge = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 gauge = 2 [features.field_presence = EXPLICIT];
    */
   gauge: bigint;
 };
@@ -135,18 +139,15 @@ export const HandlerEventStreamLagSchema: GenMessage<HandlerEventStreamLag> = /*
  *
  * The engine sends it only for process and projection handlers.
  *
- * A handler handles the events of some types and skips the rest. It has reached
- * an offset when it has handled or skipped the event at that offset and every
- * event before it. The oldest event that it has neither handled nor skipped is
- * the first event after the offset that it has reached.
+ * A handler handles the events of some types and skips the rest. The oldest
+ * event that it has neither handled nor skipped is the one with the lowest
+ * offset.
  *
  * The engine that recorded the event set its creation time, from its own clock.
  *
- * The stream may be one of another engine's event streams. An engine can then
- * know that the stream has an event that it has not received yet, and so not
- * know when that event was created. An engine that does not know the creation
- * time stops reporting the metric for that handler and stream, and so sends a
- * Tombstone.
+ * The stream may be one of another engine's event streams, and the engine may
+ * not have received the event yet. An engine that does not know the creation
+ * time sends a tombstone.
  *
  * @generated from message dogma.metrics.v1alpha1.HandlerEventStreamStaleness
  */
@@ -159,17 +160,32 @@ export type HandlerEventStreamStaleness = Message<"dogma.metrics.v1alpha1.Handle
   subject?: HandlerEventStreamSubject | undefined;
 
   /**
-   * CreatedAt is the creation time of the oldest event on the stream that the
-   * handler has neither handled nor skipped, as the created_at of the event's
-   * envelope gives it. It is absent when the handler has handled or skipped
-   * every event on the stream.
+   * Value has one case for a handler that is behind, and one for a handler that
+   * has caught up. Neither case is set when the engine has stopped reporting
+   * this metric for the subject.
    *
-   * Several nodes can report the time for one handler on one stream, and their
-   * values can differ.
-   *
-   * @generated from field: google.protobuf.Timestamp created_at = 2;
+   * @generated from oneof dogma.metrics.v1alpha1.HandlerEventStreamStaleness.value
    */
-  createdAt?: Timestamp | undefined;
+  value: {
+    /**
+     * CreatedAt is the creation time of the oldest event on the stream that the
+     * handler has neither handled nor skipped, as the created_at of the event's
+     * envelope gives it.
+     *
+     * @generated from field: google.protobuf.Timestamp created_at = 2;
+     */
+    value: Timestamp;
+    case: "createdAt";
+  } | {
+    /**
+     * CaughtUp is set when the handler has handled or skipped every event on
+     * the stream.
+     *
+     * @generated from field: google.protobuf.Empty caught_up = 3;
+     */
+    value: Empty;
+    case: "caughtUp";
+  } | { case: undefined; value?: undefined };
 };
 
 /**

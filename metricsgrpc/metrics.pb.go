@@ -118,9 +118,8 @@ func (b0 WatchClusterMetricsRequest_builder) Build() *WatchClusterMetricsRequest
 // The first message in the response contains a Preamble, which lists the
 // metrics that the call reports.
 //
-// Subsequent messages in the response contain a Sample, which reports one
-// metric, or a Tombstone, which reports that the engine has stopped reporting
-// one metric of one subject.
+// Subsequent messages in the response each contain a Sample, which reports one
+// metric of one subject.
 type WatchMetricsResponse struct {
 	state              protoimpl.MessageState         `protogen:"opaque.v1"`
 	xxx_hidden_Payload isWatchMetricsResponse_Payload `protobuf_oneof:"payload"`
@@ -171,15 +170,6 @@ func (x *WatchMetricsResponse) GetSample() *WatchMetricsResponse_Sample {
 	return nil
 }
 
-func (x *WatchMetricsResponse) GetTombstone() *WatchMetricsResponse_Tombstone {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Payload.(*watchMetricsResponse_Tombstone_); ok {
-			return x.Tombstone
-		}
-	}
-	return nil
-}
-
 func (x *WatchMetricsResponse) SetPreamble(v *WatchMetricsResponse_Preamble) {
 	if v == nil {
 		x.xxx_hidden_Payload = nil
@@ -194,14 +184,6 @@ func (x *WatchMetricsResponse) SetSample(v *WatchMetricsResponse_Sample) {
 		return
 	}
 	x.xxx_hidden_Payload = &watchMetricsResponse_Sample_{v}
-}
-
-func (x *WatchMetricsResponse) SetTombstone(v *WatchMetricsResponse_Tombstone) {
-	if v == nil {
-		x.xxx_hidden_Payload = nil
-		return
-	}
-	x.xxx_hidden_Payload = &watchMetricsResponse_Tombstone_{v}
 }
 
 func (x *WatchMetricsResponse) HasPayload() bool {
@@ -227,14 +209,6 @@ func (x *WatchMetricsResponse) HasSample() bool {
 	return ok
 }
 
-func (x *WatchMetricsResponse) HasTombstone() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Payload.(*watchMetricsResponse_Tombstone_)
-	return ok
-}
-
 func (x *WatchMetricsResponse) ClearPayload() {
 	x.xxx_hidden_Payload = nil
 }
@@ -251,16 +225,9 @@ func (x *WatchMetricsResponse) ClearSample() {
 	}
 }
 
-func (x *WatchMetricsResponse) ClearTombstone() {
-	if _, ok := x.xxx_hidden_Payload.(*watchMetricsResponse_Tombstone_); ok {
-		x.xxx_hidden_Payload = nil
-	}
-}
-
 const WatchMetricsResponse_Payload_not_set_case case_WatchMetricsResponse_Payload = 0
 const WatchMetricsResponse_Preamble_case case_WatchMetricsResponse_Payload = 1
 const WatchMetricsResponse_Sample_case case_WatchMetricsResponse_Payload = 2
-const WatchMetricsResponse_Tombstone_case case_WatchMetricsResponse_Payload = 3
 
 func (x *WatchMetricsResponse) WhichPayload() case_WatchMetricsResponse_Payload {
 	if x == nil {
@@ -271,8 +238,6 @@ func (x *WatchMetricsResponse) WhichPayload() case_WatchMetricsResponse_Payload 
 		return WatchMetricsResponse_Preamble_case
 	case *watchMetricsResponse_Sample_:
 		return WatchMetricsResponse_Sample_case
-	case *watchMetricsResponse_Tombstone_:
-		return WatchMetricsResponse_Tombstone_case
 	default:
 		return WatchMetricsResponse_Payload_not_set_case
 	}
@@ -281,13 +246,12 @@ func (x *WatchMetricsResponse) WhichPayload() case_WatchMetricsResponse_Payload 
 type WatchMetricsResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Payload is the Preamble in the first response on a stream, and a Sample or
-	// a Tombstone in every other.
+	// Payload is the Preamble in the first response on a stream, and a Sample in
+	// every other.
 
 	// Fields of oneof xxx_hidden_Payload:
-	Preamble  *WatchMetricsResponse_Preamble
-	Sample    *WatchMetricsResponse_Sample
-	Tombstone *WatchMetricsResponse_Tombstone
+	Preamble *WatchMetricsResponse_Preamble
+	Sample   *WatchMetricsResponse_Sample
 	// -- end of xxx_hidden_Payload
 }
 
@@ -300,9 +264,6 @@ func (b0 WatchMetricsResponse_builder) Build() *WatchMetricsResponse {
 	}
 	if b.Sample != nil {
 		x.xxx_hidden_Payload = &watchMetricsResponse_Sample_{b.Sample}
-	}
-	if b.Tombstone != nil {
-		x.xxx_hidden_Payload = &watchMetricsResponse_Tombstone_{b.Tombstone}
 	}
 	return m0
 }
@@ -329,15 +290,9 @@ type watchMetricsResponse_Sample_ struct {
 	Sample *WatchMetricsResponse_Sample `protobuf:"bytes,2,opt,name=sample,oneof"`
 }
 
-type watchMetricsResponse_Tombstone_ struct {
-	Tombstone *WatchMetricsResponse_Tombstone `protobuf:"bytes,3,opt,name=tombstone,oneof"`
-}
-
 func (*watchMetricsResponse_Preamble_) isWatchMetricsResponse_Payload() {}
 
 func (*watchMetricsResponse_Sample_) isWatchMetricsResponse_Payload() {}
-
-func (*watchMetricsResponse_Tombstone_) isWatchMetricsResponse_Payload() {}
 
 // Preamble identifies the engine that serves the call, and lists the metrics
 // that the call reports.
@@ -473,10 +428,6 @@ type WatchMetricsResponse_Preamble_builder struct {
 	// entry is the full name of the Protocol Buffers message that holds the
 	// metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsReady".
 	// Each name appears once.
-	//
-	// Each Sample identifies the metric that it measures by a zero-based index
-	// into this list, in Sample.metric_index. The indexes apply only to the
-	// subsequent responses on this stream.
 	SupportedMetrics []string
 }
 
@@ -491,55 +442,29 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 	return m0
 }
 
-// Sample is a measurement of one metric, such as the number of messages in
-// one queue. This API defines the metrics listed below, and an engine may
-// define its own.
+// Sample holds the value of one metric for one subject. A Sample whose value
+// is absent is a tombstone, which means that the engine has stopped reporting
+// that metric for that subject.
 //
-// A Sample replaces any earlier Sample or Tombstone of the same metric and
-// subject on the same response stream. The engine chooses how often it
-// measures each metric. It sends a new Sample each time it measures a value
-// that differs from the last one that it sent on the stream for the same
-// metric and subject, including when the new value is zero.
+// A Sample replaces any earlier Sample of the same metric and subject on the
+// same response stream.
+//
+// The engine chooses how often it measures each metric. It sends a new Sample
+// each time it measures a value that differs from the last one that it sent
+// on the stream for the same metric and subject, including when the new value
+// is zero. A subject whose count falls to zero gets a zero or a tombstone,
+// depending on whether the engine keeps measuring it.
 //
 // Some metrics report a cumulative count, such as the number of events that a
 // handler has recorded since the engine started counting. The doc of each
 // says so. Within one response stream, the engine lowers a cumulative count
 // only by starting again from zero.
-//
-// The metrics that this API defines are:
-//
-// - AggregateInstanceEventStreamBindings
-// - EventStreamLength
-// - HandlerCommandsFailing
-// - HandlerCommandsHandled
-// - HandlerCommandsReady
-// - HandlerDeadlinesCanceled
-// - HandlerDeadlinesFailing
-// - HandlerDeadlinesHandled
-// - HandlerDeadlinesReady
-// - HandlerDeadlinesScheduled
-// - HandlerEventStreamLag
-// - HandlerEventStreamStaleness
-// - HandlerEventsFailing
-// - HandlerEventsHandled
-// - HandlerEventsRecorded
-// - ProcessInstanceQueueBindings
-// - ProcessInstancesEnded
-// - QueueCommandsFailing
-// - QueueCommandsReady
-// - QueueCommandsRemoved
-// - QueueDeadlinesFailing
-// - QueueDeadlinesReady
-// - QueueDeadlinesRemoved
-// - QueueDeadlinesScheduled
 type WatchMetricsResponse_Sample struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MetricIndex uint32                 `protobuf:"varint,1,opt,name=metric_index,json=metricIndex"`
-	xxx_hidden_Subject     []byte                 `protobuf:"bytes,2,opt,name=subject"`
-	xxx_hidden_Value       []byte                 `protobuf:"bytes,3,opt,name=value"`
-	xxx_hidden_Revision    []byte                 `protobuf:"bytes,4,opt,name=revision"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state               protoimpl.MessageState               `protogen:"opaque.v1"`
+	xxx_hidden_Revision []byte                               `protobuf:"bytes,1,opt,name=revision"`
+	xxx_hidden_Metric   isWatchMetricsResponse_Sample_Metric `protobuf_oneof:"metric"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *WatchMetricsResponse_Sample) Reset() {
@@ -567,27 +492,6 @@ func (x *WatchMetricsResponse_Sample) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *WatchMetricsResponse_Sample) GetMetricIndex() uint32 {
-	if x != nil {
-		return x.xxx_hidden_MetricIndex
-	}
-	return 0
-}
-
-func (x *WatchMetricsResponse_Sample) GetSubject() []byte {
-	if x != nil {
-		return x.xxx_hidden_Subject
-	}
-	return nil
-}
-
-func (x *WatchMetricsResponse_Sample) GetValue() []byte {
-	if x != nil {
-		return x.xxx_hidden_Value
-	}
-	return nil
-}
-
 func (x *WatchMetricsResponse_Sample) GetRevision() []byte {
 	if x != nil {
 		return x.xxx_hidden_Revision
@@ -595,22 +499,220 @@ func (x *WatchMetricsResponse_Sample) GetRevision() []byte {
 	return nil
 }
 
-func (x *WatchMetricsResponse_Sample) SetMetricIndex(v uint32) {
-	x.xxx_hidden_MetricIndex = v
+func (x *WatchMetricsResponse_Sample) GetAggregateInstanceEventStreamBindings() *AggregateInstanceEventStreamBindings {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings); ok {
+			return x.AggregateInstanceEventStreamBindings
+		}
+	}
+	return nil
 }
 
-func (x *WatchMetricsResponse_Sample) SetSubject(v []byte) {
-	if v == nil {
-		v = []byte{}
+func (x *WatchMetricsResponse_Sample) GetEventStreamLength() *EventStreamLength {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_EventStreamLength); ok {
+			return x.EventStreamLength
+		}
 	}
-	x.xxx_hidden_Subject = v
+	return nil
 }
 
-func (x *WatchMetricsResponse_Sample) SetValue(v []byte) {
-	if v == nil {
-		v = []byte{}
+func (x *WatchMetricsResponse_Sample) GetHandlerCommandsFailing() *HandlerCommandsFailing {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsFailing); ok {
+			return x.HandlerCommandsFailing
+		}
 	}
-	x.xxx_hidden_Value = v
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerCommandsHandled() *HandlerCommandsHandled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsHandled); ok {
+			return x.HandlerCommandsHandled
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerCommandsReady() *HandlerCommandsReady {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsReady); ok {
+			return x.HandlerCommandsReady
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerDeadlinesCanceled() *HandlerDeadlinesCanceled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesCanceled); ok {
+			return x.HandlerDeadlinesCanceled
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerDeadlinesFailing() *HandlerDeadlinesFailing {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesFailing); ok {
+			return x.HandlerDeadlinesFailing
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerDeadlinesHandled() *HandlerDeadlinesHandled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesHandled); ok {
+			return x.HandlerDeadlinesHandled
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerDeadlinesReady() *HandlerDeadlinesReady {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesReady); ok {
+			return x.HandlerDeadlinesReady
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerDeadlinesScheduled() *HandlerDeadlinesScheduled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesScheduled); ok {
+			return x.HandlerDeadlinesScheduled
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerEventStreamLag() *HandlerEventStreamLag {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventStreamLag); ok {
+			return x.HandlerEventStreamLag
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerEventStreamStaleness() *HandlerEventStreamStaleness {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventStreamStaleness); ok {
+			return x.HandlerEventStreamStaleness
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerEventsFailing() *HandlerEventsFailing {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsFailing); ok {
+			return x.HandlerEventsFailing
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerEventsHandled() *HandlerEventsHandled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsHandled); ok {
+			return x.HandlerEventsHandled
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetHandlerEventsRecorded() *HandlerEventsRecorded {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsRecorded); ok {
+			return x.HandlerEventsRecorded
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetProcessInstanceQueueBindings() *ProcessInstanceQueueBindings {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_ProcessInstanceQueueBindings); ok {
+			return x.ProcessInstanceQueueBindings
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetProcessInstancesEnded() *ProcessInstancesEnded {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_ProcessInstancesEnded); ok {
+			return x.ProcessInstancesEnded
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetQueueCommandsFailing() *QueueCommandsFailing {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsFailing); ok {
+			return x.QueueCommandsFailing
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetQueueCommandsReady() *QueueCommandsReady {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsReady); ok {
+			return x.QueueCommandsReady
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetQueueCommandsRemoved() *QueueCommandsRemoved {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsRemoved); ok {
+			return x.QueueCommandsRemoved
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetQueueDeadlinesFailing() *QueueDeadlinesFailing {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesFailing); ok {
+			return x.QueueDeadlinesFailing
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetQueueDeadlinesReady() *QueueDeadlinesReady {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesReady); ok {
+			return x.QueueDeadlinesReady
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetQueueDeadlinesRemoved() *QueueDeadlinesRemoved {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesRemoved); ok {
+			return x.QueueDeadlinesRemoved
+		}
+	}
+	return nil
+}
+
+func (x *WatchMetricsResponse_Sample) GetQueueDeadlinesScheduled() *QueueDeadlinesScheduled {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesScheduled); ok {
+			return x.QueueDeadlinesScheduled
+		}
+	}
+	return nil
 }
 
 func (x *WatchMetricsResponse_Sample) SetRevision(v []byte) {
@@ -620,29 +722,636 @@ func (x *WatchMetricsResponse_Sample) SetRevision(v []byte) {
 	x.xxx_hidden_Revision = v
 }
 
+func (x *WatchMetricsResponse_Sample) SetAggregateInstanceEventStreamBindings(v *AggregateInstanceEventStreamBindings) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetEventStreamLength(v *EventStreamLength) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_EventStreamLength{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerCommandsFailing(v *HandlerCommandsFailing) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerCommandsFailing{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerCommandsHandled(v *HandlerCommandsHandled) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerCommandsHandled{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerCommandsReady(v *HandlerCommandsReady) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerCommandsReady{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerDeadlinesCanceled(v *HandlerDeadlinesCanceled) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesCanceled{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerDeadlinesFailing(v *HandlerDeadlinesFailing) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesFailing{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerDeadlinesHandled(v *HandlerDeadlinesHandled) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesHandled{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerDeadlinesReady(v *HandlerDeadlinesReady) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesReady{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerDeadlinesScheduled(v *HandlerDeadlinesScheduled) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesScheduled{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerEventStreamLag(v *HandlerEventStreamLag) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventStreamLag{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerEventStreamStaleness(v *HandlerEventStreamStaleness) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventStreamStaleness{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerEventsFailing(v *HandlerEventsFailing) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventsFailing{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerEventsHandled(v *HandlerEventsHandled) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventsHandled{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetHandlerEventsRecorded(v *HandlerEventsRecorded) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventsRecorded{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetProcessInstanceQueueBindings(v *ProcessInstanceQueueBindings) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_ProcessInstanceQueueBindings{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetProcessInstancesEnded(v *ProcessInstancesEnded) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_ProcessInstancesEnded{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetQueueCommandsFailing(v *QueueCommandsFailing) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueCommandsFailing{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetQueueCommandsReady(v *QueueCommandsReady) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueCommandsReady{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetQueueCommandsRemoved(v *QueueCommandsRemoved) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueCommandsRemoved{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetQueueDeadlinesFailing(v *QueueDeadlinesFailing) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesFailing{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetQueueDeadlinesReady(v *QueueDeadlinesReady) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesReady{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetQueueDeadlinesRemoved(v *QueueDeadlinesRemoved) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesRemoved{v}
+}
+
+func (x *WatchMetricsResponse_Sample) SetQueueDeadlinesScheduled(v *QueueDeadlinesScheduled) {
+	if v == nil {
+		x.xxx_hidden_Metric = nil
+		return
+	}
+	x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesScheduled{v}
+}
+
+func (x *WatchMetricsResponse_Sample) HasMetric() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Metric != nil
+}
+
+func (x *WatchMetricsResponse_Sample) HasAggregateInstanceEventStreamBindings() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasEventStreamLength() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_EventStreamLength)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerCommandsFailing() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsFailing)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerCommandsHandled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsHandled)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerCommandsReady() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsReady)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerDeadlinesCanceled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesCanceled)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerDeadlinesFailing() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesFailing)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerDeadlinesHandled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesHandled)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerDeadlinesReady() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesReady)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerDeadlinesScheduled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesScheduled)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerEventStreamLag() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventStreamLag)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerEventStreamStaleness() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventStreamStaleness)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerEventsFailing() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsFailing)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerEventsHandled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsHandled)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasHandlerEventsRecorded() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsRecorded)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasProcessInstanceQueueBindings() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_ProcessInstanceQueueBindings)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasProcessInstancesEnded() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_ProcessInstancesEnded)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasQueueCommandsFailing() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsFailing)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasQueueCommandsReady() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsReady)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasQueueCommandsRemoved() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsRemoved)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasQueueDeadlinesFailing() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesFailing)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasQueueDeadlinesReady() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesReady)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasQueueDeadlinesRemoved() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesRemoved)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) HasQueueDeadlinesScheduled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesScheduled)
+	return ok
+}
+
+func (x *WatchMetricsResponse_Sample) ClearMetric() {
+	x.xxx_hidden_Metric = nil
+}
+
+func (x *WatchMetricsResponse_Sample) ClearAggregateInstanceEventStreamBindings() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearEventStreamLength() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_EventStreamLength); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerCommandsFailing() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsFailing); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerCommandsHandled() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsHandled); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerCommandsReady() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerCommandsReady); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerDeadlinesCanceled() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesCanceled); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerDeadlinesFailing() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesFailing); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerDeadlinesHandled() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesHandled); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerDeadlinesReady() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesReady); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerDeadlinesScheduled() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerDeadlinesScheduled); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerEventStreamLag() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventStreamLag); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerEventStreamStaleness() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventStreamStaleness); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerEventsFailing() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsFailing); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerEventsHandled() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsHandled); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearHandlerEventsRecorded() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_HandlerEventsRecorded); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearProcessInstanceQueueBindings() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_ProcessInstanceQueueBindings); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearProcessInstancesEnded() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_ProcessInstancesEnded); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearQueueCommandsFailing() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsFailing); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearQueueCommandsReady() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsReady); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearQueueCommandsRemoved() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueCommandsRemoved); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearQueueDeadlinesFailing() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesFailing); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearQueueDeadlinesReady() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesReady); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearQueueDeadlinesRemoved() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesRemoved); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+func (x *WatchMetricsResponse_Sample) ClearQueueDeadlinesScheduled() {
+	if _, ok := x.xxx_hidden_Metric.(*watchMetricsResponse_Sample_QueueDeadlinesScheduled); ok {
+		x.xxx_hidden_Metric = nil
+	}
+}
+
+const WatchMetricsResponse_Sample_Metric_not_set_case case_WatchMetricsResponse_Sample_Metric = 0
+const WatchMetricsResponse_Sample_AggregateInstanceEventStreamBindings_case case_WatchMetricsResponse_Sample_Metric = 2
+const WatchMetricsResponse_Sample_EventStreamLength_case case_WatchMetricsResponse_Sample_Metric = 3
+const WatchMetricsResponse_Sample_HandlerCommandsFailing_case case_WatchMetricsResponse_Sample_Metric = 4
+const WatchMetricsResponse_Sample_HandlerCommandsHandled_case case_WatchMetricsResponse_Sample_Metric = 5
+const WatchMetricsResponse_Sample_HandlerCommandsReady_case case_WatchMetricsResponse_Sample_Metric = 6
+const WatchMetricsResponse_Sample_HandlerDeadlinesCanceled_case case_WatchMetricsResponse_Sample_Metric = 7
+const WatchMetricsResponse_Sample_HandlerDeadlinesFailing_case case_WatchMetricsResponse_Sample_Metric = 8
+const WatchMetricsResponse_Sample_HandlerDeadlinesHandled_case case_WatchMetricsResponse_Sample_Metric = 9
+const WatchMetricsResponse_Sample_HandlerDeadlinesReady_case case_WatchMetricsResponse_Sample_Metric = 10
+const WatchMetricsResponse_Sample_HandlerDeadlinesScheduled_case case_WatchMetricsResponse_Sample_Metric = 11
+const WatchMetricsResponse_Sample_HandlerEventStreamLag_case case_WatchMetricsResponse_Sample_Metric = 12
+const WatchMetricsResponse_Sample_HandlerEventStreamStaleness_case case_WatchMetricsResponse_Sample_Metric = 13
+const WatchMetricsResponse_Sample_HandlerEventsFailing_case case_WatchMetricsResponse_Sample_Metric = 14
+const WatchMetricsResponse_Sample_HandlerEventsHandled_case case_WatchMetricsResponse_Sample_Metric = 15
+const WatchMetricsResponse_Sample_HandlerEventsRecorded_case case_WatchMetricsResponse_Sample_Metric = 16
+const WatchMetricsResponse_Sample_ProcessInstanceQueueBindings_case case_WatchMetricsResponse_Sample_Metric = 17
+const WatchMetricsResponse_Sample_ProcessInstancesEnded_case case_WatchMetricsResponse_Sample_Metric = 18
+const WatchMetricsResponse_Sample_QueueCommandsFailing_case case_WatchMetricsResponse_Sample_Metric = 19
+const WatchMetricsResponse_Sample_QueueCommandsReady_case case_WatchMetricsResponse_Sample_Metric = 20
+const WatchMetricsResponse_Sample_QueueCommandsRemoved_case case_WatchMetricsResponse_Sample_Metric = 21
+const WatchMetricsResponse_Sample_QueueDeadlinesFailing_case case_WatchMetricsResponse_Sample_Metric = 22
+const WatchMetricsResponse_Sample_QueueDeadlinesReady_case case_WatchMetricsResponse_Sample_Metric = 23
+const WatchMetricsResponse_Sample_QueueDeadlinesRemoved_case case_WatchMetricsResponse_Sample_Metric = 24
+const WatchMetricsResponse_Sample_QueueDeadlinesScheduled_case case_WatchMetricsResponse_Sample_Metric = 25
+
+func (x *WatchMetricsResponse_Sample) WhichMetric() case_WatchMetricsResponse_Sample_Metric {
+	if x == nil {
+		return WatchMetricsResponse_Sample_Metric_not_set_case
+	}
+	switch x.xxx_hidden_Metric.(type) {
+	case *watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings:
+		return WatchMetricsResponse_Sample_AggregateInstanceEventStreamBindings_case
+	case *watchMetricsResponse_Sample_EventStreamLength:
+		return WatchMetricsResponse_Sample_EventStreamLength_case
+	case *watchMetricsResponse_Sample_HandlerCommandsFailing:
+		return WatchMetricsResponse_Sample_HandlerCommandsFailing_case
+	case *watchMetricsResponse_Sample_HandlerCommandsHandled:
+		return WatchMetricsResponse_Sample_HandlerCommandsHandled_case
+	case *watchMetricsResponse_Sample_HandlerCommandsReady:
+		return WatchMetricsResponse_Sample_HandlerCommandsReady_case
+	case *watchMetricsResponse_Sample_HandlerDeadlinesCanceled:
+		return WatchMetricsResponse_Sample_HandlerDeadlinesCanceled_case
+	case *watchMetricsResponse_Sample_HandlerDeadlinesFailing:
+		return WatchMetricsResponse_Sample_HandlerDeadlinesFailing_case
+	case *watchMetricsResponse_Sample_HandlerDeadlinesHandled:
+		return WatchMetricsResponse_Sample_HandlerDeadlinesHandled_case
+	case *watchMetricsResponse_Sample_HandlerDeadlinesReady:
+		return WatchMetricsResponse_Sample_HandlerDeadlinesReady_case
+	case *watchMetricsResponse_Sample_HandlerDeadlinesScheduled:
+		return WatchMetricsResponse_Sample_HandlerDeadlinesScheduled_case
+	case *watchMetricsResponse_Sample_HandlerEventStreamLag:
+		return WatchMetricsResponse_Sample_HandlerEventStreamLag_case
+	case *watchMetricsResponse_Sample_HandlerEventStreamStaleness:
+		return WatchMetricsResponse_Sample_HandlerEventStreamStaleness_case
+	case *watchMetricsResponse_Sample_HandlerEventsFailing:
+		return WatchMetricsResponse_Sample_HandlerEventsFailing_case
+	case *watchMetricsResponse_Sample_HandlerEventsHandled:
+		return WatchMetricsResponse_Sample_HandlerEventsHandled_case
+	case *watchMetricsResponse_Sample_HandlerEventsRecorded:
+		return WatchMetricsResponse_Sample_HandlerEventsRecorded_case
+	case *watchMetricsResponse_Sample_ProcessInstanceQueueBindings:
+		return WatchMetricsResponse_Sample_ProcessInstanceQueueBindings_case
+	case *watchMetricsResponse_Sample_ProcessInstancesEnded:
+		return WatchMetricsResponse_Sample_ProcessInstancesEnded_case
+	case *watchMetricsResponse_Sample_QueueCommandsFailing:
+		return WatchMetricsResponse_Sample_QueueCommandsFailing_case
+	case *watchMetricsResponse_Sample_QueueCommandsReady:
+		return WatchMetricsResponse_Sample_QueueCommandsReady_case
+	case *watchMetricsResponse_Sample_QueueCommandsRemoved:
+		return WatchMetricsResponse_Sample_QueueCommandsRemoved_case
+	case *watchMetricsResponse_Sample_QueueDeadlinesFailing:
+		return WatchMetricsResponse_Sample_QueueDeadlinesFailing_case
+	case *watchMetricsResponse_Sample_QueueDeadlinesReady:
+		return WatchMetricsResponse_Sample_QueueDeadlinesReady_case
+	case *watchMetricsResponse_Sample_QueueDeadlinesRemoved:
+		return WatchMetricsResponse_Sample_QueueDeadlinesRemoved_case
+	case *watchMetricsResponse_Sample_QueueDeadlinesScheduled:
+		return WatchMetricsResponse_Sample_QueueDeadlinesScheduled_case
+	default:
+		return WatchMetricsResponse_Sample_Metric_not_set_case
+	}
+}
+
 type WatchMetricsResponse_Sample_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// MetricIndex identifies the metric that this sample measures. It is a
-	// zero-based index into the supported_metrics of the Preamble on the same
-	// response stream.
-	MetricIndex uint32
-	// Subject identifies what this sample describes, such as one queue.
-	//
-	// Two samples of the same metric have equal subjects if and only if they
-	// describe the same queue, handler or other part of the system. If the
-	// engine runs as a cluster, this holds for samples from any of its nodes: a
-	// subject holds what every node of the cluster knows about the thing that
-	// it describes, such as a queue's ID.
-	Subject []byte
-	// Value is the content of the sample: a Protocol Buffers message,
-	// serialized in the binary format. A client finds the message's full name
-	// in Preamble.supported_metrics, at the index that metric_index holds.
-	Value []byte
 	// Revision is a comparable value that describes when this sample was
-	// measured, relative to other samples and tombstones of the same metric and
-	// subject from the same engine and method. The message with the greatest
-	// revision is the most recent, and replaces the others.
+	// measured, relative to other samples of the same metric and subject from
+	// the same engine and method. The sample with the greatest revision is the
+	// most recent, and replaces the others.
 	//
 	// Two revisions are compared in lexicographic order, as strings of unsigned
 	// bytes. For example, an engine can use a timestamp, encoded as a
@@ -651,187 +1360,405 @@ type WatchMetricsResponse_Sample_builder struct {
 	// An engine should give the same revision to every sample from one
 	// measurement.
 	Revision []byte
+	// Metric identifies which metric the sample is for. Each case holds the
+	// message of one metric, which holds the sample's subject and its value.
+	// The engine always sets one case. A client that finds none of them set
+	// ignores the Sample, because it is for a metric that the client does not
+	// know.
+
+	// Fields of oneof xxx_hidden_Metric:
+	AggregateInstanceEventStreamBindings *AggregateInstanceEventStreamBindings
+	EventStreamLength                    *EventStreamLength
+	HandlerCommandsFailing               *HandlerCommandsFailing
+	HandlerCommandsHandled               *HandlerCommandsHandled
+	HandlerCommandsReady                 *HandlerCommandsReady
+	HandlerDeadlinesCanceled             *HandlerDeadlinesCanceled
+	HandlerDeadlinesFailing              *HandlerDeadlinesFailing
+	HandlerDeadlinesHandled              *HandlerDeadlinesHandled
+	HandlerDeadlinesReady                *HandlerDeadlinesReady
+	HandlerDeadlinesScheduled            *HandlerDeadlinesScheduled
+	HandlerEventStreamLag                *HandlerEventStreamLag
+	HandlerEventStreamStaleness          *HandlerEventStreamStaleness
+	HandlerEventsFailing                 *HandlerEventsFailing
+	HandlerEventsHandled                 *HandlerEventsHandled
+	HandlerEventsRecorded                *HandlerEventsRecorded
+	ProcessInstanceQueueBindings         *ProcessInstanceQueueBindings
+	ProcessInstancesEnded                *ProcessInstancesEnded
+	QueueCommandsFailing                 *QueueCommandsFailing
+	QueueCommandsReady                   *QueueCommandsReady
+	QueueCommandsRemoved                 *QueueCommandsRemoved
+	QueueDeadlinesFailing                *QueueDeadlinesFailing
+	QueueDeadlinesReady                  *QueueDeadlinesReady
+	QueueDeadlinesRemoved                *QueueDeadlinesRemoved
+	QueueDeadlinesScheduled              *QueueDeadlinesScheduled
+	// -- end of xxx_hidden_Metric
 }
 
 func (b0 WatchMetricsResponse_Sample_builder) Build() *WatchMetricsResponse_Sample {
 	m0 := &WatchMetricsResponse_Sample{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_MetricIndex = b.MetricIndex
-	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_Value = b.Value
 	x.xxx_hidden_Revision = b.Revision
+	if b.AggregateInstanceEventStreamBindings != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings{b.AggregateInstanceEventStreamBindings}
+	}
+	if b.EventStreamLength != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_EventStreamLength{b.EventStreamLength}
+	}
+	if b.HandlerCommandsFailing != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerCommandsFailing{b.HandlerCommandsFailing}
+	}
+	if b.HandlerCommandsHandled != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerCommandsHandled{b.HandlerCommandsHandled}
+	}
+	if b.HandlerCommandsReady != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerCommandsReady{b.HandlerCommandsReady}
+	}
+	if b.HandlerDeadlinesCanceled != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesCanceled{b.HandlerDeadlinesCanceled}
+	}
+	if b.HandlerDeadlinesFailing != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesFailing{b.HandlerDeadlinesFailing}
+	}
+	if b.HandlerDeadlinesHandled != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesHandled{b.HandlerDeadlinesHandled}
+	}
+	if b.HandlerDeadlinesReady != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesReady{b.HandlerDeadlinesReady}
+	}
+	if b.HandlerDeadlinesScheduled != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerDeadlinesScheduled{b.HandlerDeadlinesScheduled}
+	}
+	if b.HandlerEventStreamLag != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventStreamLag{b.HandlerEventStreamLag}
+	}
+	if b.HandlerEventStreamStaleness != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventStreamStaleness{b.HandlerEventStreamStaleness}
+	}
+	if b.HandlerEventsFailing != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventsFailing{b.HandlerEventsFailing}
+	}
+	if b.HandlerEventsHandled != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventsHandled{b.HandlerEventsHandled}
+	}
+	if b.HandlerEventsRecorded != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_HandlerEventsRecorded{b.HandlerEventsRecorded}
+	}
+	if b.ProcessInstanceQueueBindings != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_ProcessInstanceQueueBindings{b.ProcessInstanceQueueBindings}
+	}
+	if b.ProcessInstancesEnded != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_ProcessInstancesEnded{b.ProcessInstancesEnded}
+	}
+	if b.QueueCommandsFailing != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueCommandsFailing{b.QueueCommandsFailing}
+	}
+	if b.QueueCommandsReady != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueCommandsReady{b.QueueCommandsReady}
+	}
+	if b.QueueCommandsRemoved != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueCommandsRemoved{b.QueueCommandsRemoved}
+	}
+	if b.QueueDeadlinesFailing != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesFailing{b.QueueDeadlinesFailing}
+	}
+	if b.QueueDeadlinesReady != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesReady{b.QueueDeadlinesReady}
+	}
+	if b.QueueDeadlinesRemoved != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesRemoved{b.QueueDeadlinesRemoved}
+	}
+	if b.QueueDeadlinesScheduled != nil {
+		x.xxx_hidden_Metric = &watchMetricsResponse_Sample_QueueDeadlinesScheduled{b.QueueDeadlinesScheduled}
+	}
 	return m0
 }
 
-// Tombstone reports that the engine has stopped reporting one metric of one
-// subject. A client discards the last Sample that it holds for that metric
-// and subject, if it holds one.
-//
-// An engine sends a Tombstone when it stops reporting the subject, and a
-// Sample with a zero value when it reports a value of zero. A subject whose
-// count falls to zero gets either, depending on whether the engine keeps
-// measuring it.
-type WatchMetricsResponse_Tombstone struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MetricIndex uint32                 `protobuf:"varint,1,opt,name=metric_index,json=metricIndex"`
-	xxx_hidden_Subject     []byte                 `protobuf:"bytes,2,opt,name=subject"`
-	xxx_hidden_Revision    []byte                 `protobuf:"bytes,3,opt,name=revision"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
+type case_WatchMetricsResponse_Sample_Metric protoreflect.FieldNumber
 
-func (x *WatchMetricsResponse_Tombstone) Reset() {
-	*x = WatchMetricsResponse_Tombstone{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *WatchMetricsResponse_Tombstone) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*WatchMetricsResponse_Tombstone) ProtoMessage() {}
-
-func (x *WatchMetricsResponse_Tombstone) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+func (x case_WatchMetricsResponse_Sample_Metric) String() string {
+	md := file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[4].Descriptor()
+	if x == 0 {
+		return "not set"
 	}
-	return mi.MessageOf(x)
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-func (x *WatchMetricsResponse_Tombstone) GetMetricIndex() uint32 {
-	if x != nil {
-		return x.xxx_hidden_MetricIndex
-	}
-	return 0
+type isWatchMetricsResponse_Sample_Metric interface {
+	isWatchMetricsResponse_Sample_Metric()
 }
 
-func (x *WatchMetricsResponse_Tombstone) GetSubject() []byte {
-	if x != nil {
-		return x.xxx_hidden_Subject
-	}
-	return nil
+type watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings struct {
+	AggregateInstanceEventStreamBindings *AggregateInstanceEventStreamBindings `protobuf:"bytes,2,opt,name=aggregate_instance_event_stream_bindings,json=aggregateInstanceEventStreamBindings,oneof"`
 }
 
-func (x *WatchMetricsResponse_Tombstone) GetRevision() []byte {
-	if x != nil {
-		return x.xxx_hidden_Revision
-	}
-	return nil
+type watchMetricsResponse_Sample_EventStreamLength struct {
+	EventStreamLength *EventStreamLength `protobuf:"bytes,3,opt,name=event_stream_length,json=eventStreamLength,oneof"`
 }
 
-func (x *WatchMetricsResponse_Tombstone) SetMetricIndex(v uint32) {
-	x.xxx_hidden_MetricIndex = v
+type watchMetricsResponse_Sample_HandlerCommandsFailing struct {
+	HandlerCommandsFailing *HandlerCommandsFailing `protobuf:"bytes,4,opt,name=handler_commands_failing,json=handlerCommandsFailing,oneof"`
 }
 
-func (x *WatchMetricsResponse_Tombstone) SetSubject(v []byte) {
-	if v == nil {
-		v = []byte{}
-	}
-	x.xxx_hidden_Subject = v
+type watchMetricsResponse_Sample_HandlerCommandsHandled struct {
+	HandlerCommandsHandled *HandlerCommandsHandled `protobuf:"bytes,5,opt,name=handler_commands_handled,json=handlerCommandsHandled,oneof"`
 }
 
-func (x *WatchMetricsResponse_Tombstone) SetRevision(v []byte) {
-	if v == nil {
-		v = []byte{}
-	}
-	x.xxx_hidden_Revision = v
+type watchMetricsResponse_Sample_HandlerCommandsReady struct {
+	HandlerCommandsReady *HandlerCommandsReady `protobuf:"bytes,6,opt,name=handler_commands_ready,json=handlerCommandsReady,oneof"`
 }
 
-type WatchMetricsResponse_Tombstone_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// MetricIndex identifies the metric that the engine has stopped reporting.
-	// It is a zero-based index into the supported_metrics of the Preamble on
-	// the same response stream.
-	MetricIndex uint32
-	// Subject identifies what the engine has stopped reporting, such as one
-	// queue. It holds the same bytes as Sample.subject in the samples of that
-	// subject.
-	Subject []byte
-	// Revision is a comparable value that has the same meaning as
-	// Sample.revision. If the engine sent a Sample for the same metric and
-	// subject on the same response stream, the revision is greater than that of
-	// the last one.
-	Revision []byte
+type watchMetricsResponse_Sample_HandlerDeadlinesCanceled struct {
+	HandlerDeadlinesCanceled *HandlerDeadlinesCanceled `protobuf:"bytes,7,opt,name=handler_deadlines_canceled,json=handlerDeadlinesCanceled,oneof"`
 }
 
-func (b0 WatchMetricsResponse_Tombstone_builder) Build() *WatchMetricsResponse_Tombstone {
-	m0 := &WatchMetricsResponse_Tombstone{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_MetricIndex = b.MetricIndex
-	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_Revision = b.Revision
-	return m0
+type watchMetricsResponse_Sample_HandlerDeadlinesFailing struct {
+	HandlerDeadlinesFailing *HandlerDeadlinesFailing `protobuf:"bytes,8,opt,name=handler_deadlines_failing,json=handlerDeadlinesFailing,oneof"`
 }
+
+type watchMetricsResponse_Sample_HandlerDeadlinesHandled struct {
+	HandlerDeadlinesHandled *HandlerDeadlinesHandled `protobuf:"bytes,9,opt,name=handler_deadlines_handled,json=handlerDeadlinesHandled,oneof"`
+}
+
+type watchMetricsResponse_Sample_HandlerDeadlinesReady struct {
+	HandlerDeadlinesReady *HandlerDeadlinesReady `protobuf:"bytes,10,opt,name=handler_deadlines_ready,json=handlerDeadlinesReady,oneof"`
+}
+
+type watchMetricsResponse_Sample_HandlerDeadlinesScheduled struct {
+	HandlerDeadlinesScheduled *HandlerDeadlinesScheduled `protobuf:"bytes,11,opt,name=handler_deadlines_scheduled,json=handlerDeadlinesScheduled,oneof"`
+}
+
+type watchMetricsResponse_Sample_HandlerEventStreamLag struct {
+	HandlerEventStreamLag *HandlerEventStreamLag `protobuf:"bytes,12,opt,name=handler_event_stream_lag,json=handlerEventStreamLag,oneof"`
+}
+
+type watchMetricsResponse_Sample_HandlerEventStreamStaleness struct {
+	HandlerEventStreamStaleness *HandlerEventStreamStaleness `protobuf:"bytes,13,opt,name=handler_event_stream_staleness,json=handlerEventStreamStaleness,oneof"`
+}
+
+type watchMetricsResponse_Sample_HandlerEventsFailing struct {
+	HandlerEventsFailing *HandlerEventsFailing `protobuf:"bytes,14,opt,name=handler_events_failing,json=handlerEventsFailing,oneof"`
+}
+
+type watchMetricsResponse_Sample_HandlerEventsHandled struct {
+	HandlerEventsHandled *HandlerEventsHandled `protobuf:"bytes,15,opt,name=handler_events_handled,json=handlerEventsHandled,oneof"`
+}
+
+type watchMetricsResponse_Sample_HandlerEventsRecorded struct {
+	HandlerEventsRecorded *HandlerEventsRecorded `protobuf:"bytes,16,opt,name=handler_events_recorded,json=handlerEventsRecorded,oneof"`
+}
+
+type watchMetricsResponse_Sample_ProcessInstanceQueueBindings struct {
+	ProcessInstanceQueueBindings *ProcessInstanceQueueBindings `protobuf:"bytes,17,opt,name=process_instance_queue_bindings,json=processInstanceQueueBindings,oneof"`
+}
+
+type watchMetricsResponse_Sample_ProcessInstancesEnded struct {
+	ProcessInstancesEnded *ProcessInstancesEnded `protobuf:"bytes,18,opt,name=process_instances_ended,json=processInstancesEnded,oneof"`
+}
+
+type watchMetricsResponse_Sample_QueueCommandsFailing struct {
+	QueueCommandsFailing *QueueCommandsFailing `protobuf:"bytes,19,opt,name=queue_commands_failing,json=queueCommandsFailing,oneof"`
+}
+
+type watchMetricsResponse_Sample_QueueCommandsReady struct {
+	QueueCommandsReady *QueueCommandsReady `protobuf:"bytes,20,opt,name=queue_commands_ready,json=queueCommandsReady,oneof"`
+}
+
+type watchMetricsResponse_Sample_QueueCommandsRemoved struct {
+	QueueCommandsRemoved *QueueCommandsRemoved `protobuf:"bytes,21,opt,name=queue_commands_removed,json=queueCommandsRemoved,oneof"`
+}
+
+type watchMetricsResponse_Sample_QueueDeadlinesFailing struct {
+	QueueDeadlinesFailing *QueueDeadlinesFailing `protobuf:"bytes,22,opt,name=queue_deadlines_failing,json=queueDeadlinesFailing,oneof"`
+}
+
+type watchMetricsResponse_Sample_QueueDeadlinesReady struct {
+	QueueDeadlinesReady *QueueDeadlinesReady `protobuf:"bytes,23,opt,name=queue_deadlines_ready,json=queueDeadlinesReady,oneof"`
+}
+
+type watchMetricsResponse_Sample_QueueDeadlinesRemoved struct {
+	QueueDeadlinesRemoved *QueueDeadlinesRemoved `protobuf:"bytes,24,opt,name=queue_deadlines_removed,json=queueDeadlinesRemoved,oneof"`
+}
+
+type watchMetricsResponse_Sample_QueueDeadlinesScheduled struct {
+	QueueDeadlinesScheduled *QueueDeadlinesScheduled `protobuf:"bytes,25,opt,name=queue_deadlines_scheduled,json=queueDeadlinesScheduled,oneof"`
+}
+
+func (*watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings) isWatchMetricsResponse_Sample_Metric() {
+}
+
+func (*watchMetricsResponse_Sample_EventStreamLength) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerCommandsFailing) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerCommandsHandled) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerCommandsReady) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerDeadlinesCanceled) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerDeadlinesFailing) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerDeadlinesHandled) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerDeadlinesReady) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerDeadlinesScheduled) isWatchMetricsResponse_Sample_Metric() {
+}
+
+func (*watchMetricsResponse_Sample_HandlerEventStreamLag) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerEventStreamStaleness) isWatchMetricsResponse_Sample_Metric() {
+}
+
+func (*watchMetricsResponse_Sample_HandlerEventsFailing) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerEventsHandled) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_HandlerEventsRecorded) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_ProcessInstanceQueueBindings) isWatchMetricsResponse_Sample_Metric() {
+}
+
+func (*watchMetricsResponse_Sample_ProcessInstancesEnded) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_QueueCommandsFailing) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_QueueCommandsReady) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_QueueCommandsRemoved) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_QueueDeadlinesFailing) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_QueueDeadlinesReady) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_QueueDeadlinesRemoved) isWatchMetricsResponse_Sample_Metric() {}
+
+func (*watchMetricsResponse_Sample_QueueDeadlinesScheduled) isWatchMetricsResponse_Sample_Metric() {}
 
 var File_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc = "" +
 	"\n" +
-	"6github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto\x12\x16dogma.metrics.v1alpha1\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x19\n" +
+	"6github.com/dogmatiq/protobuf/metricsgrpc/metrics.proto\x12\x16dogma.metrics.v1alpha1\x1a2github.com/dogmatiq/protobuf/configpb/config.proto\x1aAgithub.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto\x1a=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x1a;github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x19\n" +
 	"\x17WatchNodeMetricsRequest\"\x1c\n" +
-	"\x1aWatchClusterMetricsRequest\"\x8f\x06\n" +
+	"\x1aWatchClusterMetricsRequest\"\x93\x18\n" +
 	"\x14WatchMetricsResponse\x12S\n" +
 	"\bpreamble\x18\x01 \x01(\v25.dogma.metrics.v1alpha1.WatchMetricsResponse.PreambleH\x00R\bpreamble\x12M\n" +
-	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x12V\n" +
-	"\ttombstone\x18\x03 \x01(\v26.dogma.metrics.v1alpha1.WatchMetricsResponse.TombstoneH\x00R\ttombstone\x1a\xde\x01\n" +
+	"\x06sample\x18\x02 \x01(\v23.dogma.metrics.v1alpha1.WatchMetricsResponse.SampleH\x00R\x06sample\x1a\xde\x01\n" +
 	"\bPreamble\x12'\n" +
 	"\x02id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\x02id\x126\n" +
 	"\n" +
 	"cluster_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\tclusterId\x12D\n" +
 	"\vapplication\x18\x03 \x01(\v2\".dogma.config.v1alpha1.ApplicationR\vapplication\x12+\n" +
-	"\x11supported_metrics\x18\x04 \x03(\tR\x10supportedMetrics\x1a\x93\x01\n" +
-	"\x06Sample\x12(\n" +
-	"\fmetric_index\x18\x01 \x01(\rB\x05\xaa\x01\x02\b\x02R\vmetricIndex\x12\x1f\n" +
-	"\asubject\x18\x02 \x01(\fB\x05\xaa\x01\x02\b\x02R\asubject\x12\x1b\n" +
-	"\x05value\x18\x03 \x01(\fB\x05\xaa\x01\x02\b\x02R\x05value\x12!\n" +
-	"\brevision\x18\x04 \x01(\fB\x05\xaa\x01\x02\b\x02R\brevision\x1ay\n" +
-	"\tTombstone\x12(\n" +
-	"\fmetric_index\x18\x01 \x01(\rB\x05\xaa\x01\x02\b\x02R\vmetricIndex\x12\x1f\n" +
-	"\asubject\x18\x02 \x01(\fB\x05\xaa\x01\x02\b\x02R\asubject\x12!\n" +
-	"\brevision\x18\x03 \x01(\fB\x05\xaa\x01\x02\b\x02R\brevisionB\t\n" +
+	"\x11supported_metrics\x18\x04 \x03(\tR\x10supportedMetrics\x1a\xea\x14\n" +
+	"\x06Sample\x12!\n" +
+	"\brevision\x18\x01 \x01(\fB\x05\xaa\x01\x02\b\x02R\brevision\x12\x96\x01\n" +
+	"(aggregate_instance_event_stream_bindings\x18\x02 \x01(\v2<.dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindingsH\x00R$aggregateInstanceEventStreamBindings\x12[\n" +
+	"\x13event_stream_length\x18\x03 \x01(\v2).dogma.metrics.v1alpha1.EventStreamLengthH\x00R\x11eventStreamLength\x12j\n" +
+	"\x18handler_commands_failing\x18\x04 \x01(\v2..dogma.metrics.v1alpha1.HandlerCommandsFailingH\x00R\x16handlerCommandsFailing\x12j\n" +
+	"\x18handler_commands_handled\x18\x05 \x01(\v2..dogma.metrics.v1alpha1.HandlerCommandsHandledH\x00R\x16handlerCommandsHandled\x12d\n" +
+	"\x16handler_commands_ready\x18\x06 \x01(\v2,.dogma.metrics.v1alpha1.HandlerCommandsReadyH\x00R\x14handlerCommandsReady\x12p\n" +
+	"\x1ahandler_deadlines_canceled\x18\a \x01(\v20.dogma.metrics.v1alpha1.HandlerDeadlinesCanceledH\x00R\x18handlerDeadlinesCanceled\x12m\n" +
+	"\x19handler_deadlines_failing\x18\b \x01(\v2/.dogma.metrics.v1alpha1.HandlerDeadlinesFailingH\x00R\x17handlerDeadlinesFailing\x12m\n" +
+	"\x19handler_deadlines_handled\x18\t \x01(\v2/.dogma.metrics.v1alpha1.HandlerDeadlinesHandledH\x00R\x17handlerDeadlinesHandled\x12g\n" +
+	"\x17handler_deadlines_ready\x18\n" +
+	" \x01(\v2-.dogma.metrics.v1alpha1.HandlerDeadlinesReadyH\x00R\x15handlerDeadlinesReady\x12s\n" +
+	"\x1bhandler_deadlines_scheduled\x18\v \x01(\v21.dogma.metrics.v1alpha1.HandlerDeadlinesScheduledH\x00R\x19handlerDeadlinesScheduled\x12h\n" +
+	"\x18handler_event_stream_lag\x18\f \x01(\v2-.dogma.metrics.v1alpha1.HandlerEventStreamLagH\x00R\x15handlerEventStreamLag\x12z\n" +
+	"\x1ehandler_event_stream_staleness\x18\r \x01(\v23.dogma.metrics.v1alpha1.HandlerEventStreamStalenessH\x00R\x1bhandlerEventStreamStaleness\x12d\n" +
+	"\x16handler_events_failing\x18\x0e \x01(\v2,.dogma.metrics.v1alpha1.HandlerEventsFailingH\x00R\x14handlerEventsFailing\x12d\n" +
+	"\x16handler_events_handled\x18\x0f \x01(\v2,.dogma.metrics.v1alpha1.HandlerEventsHandledH\x00R\x14handlerEventsHandled\x12g\n" +
+	"\x17handler_events_recorded\x18\x10 \x01(\v2-.dogma.metrics.v1alpha1.HandlerEventsRecordedH\x00R\x15handlerEventsRecorded\x12}\n" +
+	"\x1fprocess_instance_queue_bindings\x18\x11 \x01(\v24.dogma.metrics.v1alpha1.ProcessInstanceQueueBindingsH\x00R\x1cprocessInstanceQueueBindings\x12g\n" +
+	"\x17process_instances_ended\x18\x12 \x01(\v2-.dogma.metrics.v1alpha1.ProcessInstancesEndedH\x00R\x15processInstancesEnded\x12d\n" +
+	"\x16queue_commands_failing\x18\x13 \x01(\v2,.dogma.metrics.v1alpha1.QueueCommandsFailingH\x00R\x14queueCommandsFailing\x12^\n" +
+	"\x14queue_commands_ready\x18\x14 \x01(\v2*.dogma.metrics.v1alpha1.QueueCommandsReadyH\x00R\x12queueCommandsReady\x12d\n" +
+	"\x16queue_commands_removed\x18\x15 \x01(\v2,.dogma.metrics.v1alpha1.QueueCommandsRemovedH\x00R\x14queueCommandsRemoved\x12g\n" +
+	"\x17queue_deadlines_failing\x18\x16 \x01(\v2-.dogma.metrics.v1alpha1.QueueDeadlinesFailingH\x00R\x15queueDeadlinesFailing\x12a\n" +
+	"\x15queue_deadlines_ready\x18\x17 \x01(\v2+.dogma.metrics.v1alpha1.QueueDeadlinesReadyH\x00R\x13queueDeadlinesReady\x12g\n" +
+	"\x17queue_deadlines_removed\x18\x18 \x01(\v2-.dogma.metrics.v1alpha1.QueueDeadlinesRemovedH\x00R\x15queueDeadlinesRemoved\x12m\n" +
+	"\x19queue_deadlines_scheduled\x18\x19 \x01(\v2/.dogma.metrics.v1alpha1.QueueDeadlinesScheduledH\x00R\x17queueDeadlinesScheduledB\b\n" +
+	"\x06metricB\t\n" +
 	"\apayload2\xfc\x01\n" +
 	"\n" +
 	"MetricsAPI\x12s\n" +
 	"\x10WatchNodeMetrics\x12/.dogma.metrics.v1alpha1.WatchNodeMetricsRequest\x1a,.dogma.metrics.v1alpha1.WatchMetricsResponse0\x01\x12y\n" +
 	"\x13WatchClusterMetrics\x122.dogma.metrics.v1alpha1.WatchClusterMetricsRequest\x1a,.dogma.metrics.v1alpha1.WatchMetricsResponse0\x01B*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_goTypes = []any{
-	(*WatchNodeMetricsRequest)(nil),        // 0: dogma.metrics.v1alpha1.WatchNodeMetricsRequest
-	(*WatchClusterMetricsRequest)(nil),     // 1: dogma.metrics.v1alpha1.WatchClusterMetricsRequest
-	(*WatchMetricsResponse)(nil),           // 2: dogma.metrics.v1alpha1.WatchMetricsResponse
-	(*WatchMetricsResponse_Preamble)(nil),  // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
-	(*WatchMetricsResponse_Sample)(nil),    // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
-	(*WatchMetricsResponse_Tombstone)(nil), // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone
-	(*uuidpb.UUID)(nil),                    // 6: dogma.protobuf.v1.UUID
-	(*configpb.Application)(nil),           // 7: dogma.config.v1alpha1.Application
+	(*WatchNodeMetricsRequest)(nil),              // 0: dogma.metrics.v1alpha1.WatchNodeMetricsRequest
+	(*WatchClusterMetricsRequest)(nil),           // 1: dogma.metrics.v1alpha1.WatchClusterMetricsRequest
+	(*WatchMetricsResponse)(nil),                 // 2: dogma.metrics.v1alpha1.WatchMetricsResponse
+	(*WatchMetricsResponse_Preamble)(nil),        // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
+	(*WatchMetricsResponse_Sample)(nil),          // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
+	(*uuidpb.UUID)(nil),                          // 5: dogma.protobuf.v1.UUID
+	(*configpb.Application)(nil),                 // 6: dogma.config.v1alpha1.Application
+	(*AggregateInstanceEventStreamBindings)(nil), // 7: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings
+	(*EventStreamLength)(nil),                    // 8: dogma.metrics.v1alpha1.EventStreamLength
+	(*HandlerCommandsFailing)(nil),               // 9: dogma.metrics.v1alpha1.HandlerCommandsFailing
+	(*HandlerCommandsHandled)(nil),               // 10: dogma.metrics.v1alpha1.HandlerCommandsHandled
+	(*HandlerCommandsReady)(nil),                 // 11: dogma.metrics.v1alpha1.HandlerCommandsReady
+	(*HandlerDeadlinesCanceled)(nil),             // 12: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
+	(*HandlerDeadlinesFailing)(nil),              // 13: dogma.metrics.v1alpha1.HandlerDeadlinesFailing
+	(*HandlerDeadlinesHandled)(nil),              // 14: dogma.metrics.v1alpha1.HandlerDeadlinesHandled
+	(*HandlerDeadlinesReady)(nil),                // 15: dogma.metrics.v1alpha1.HandlerDeadlinesReady
+	(*HandlerDeadlinesScheduled)(nil),            // 16: dogma.metrics.v1alpha1.HandlerDeadlinesScheduled
+	(*HandlerEventStreamLag)(nil),                // 17: dogma.metrics.v1alpha1.HandlerEventStreamLag
+	(*HandlerEventStreamStaleness)(nil),          // 18: dogma.metrics.v1alpha1.HandlerEventStreamStaleness
+	(*HandlerEventsFailing)(nil),                 // 19: dogma.metrics.v1alpha1.HandlerEventsFailing
+	(*HandlerEventsHandled)(nil),                 // 20: dogma.metrics.v1alpha1.HandlerEventsHandled
+	(*HandlerEventsRecorded)(nil),                // 21: dogma.metrics.v1alpha1.HandlerEventsRecorded
+	(*ProcessInstanceQueueBindings)(nil),         // 22: dogma.metrics.v1alpha1.ProcessInstanceQueueBindings
+	(*ProcessInstancesEnded)(nil),                // 23: dogma.metrics.v1alpha1.ProcessInstancesEnded
+	(*QueueCommandsFailing)(nil),                 // 24: dogma.metrics.v1alpha1.QueueCommandsFailing
+	(*QueueCommandsReady)(nil),                   // 25: dogma.metrics.v1alpha1.QueueCommandsReady
+	(*QueueCommandsRemoved)(nil),                 // 26: dogma.metrics.v1alpha1.QueueCommandsRemoved
+	(*QueueDeadlinesFailing)(nil),                // 27: dogma.metrics.v1alpha1.QueueDeadlinesFailing
+	(*QueueDeadlinesReady)(nil),                  // 28: dogma.metrics.v1alpha1.QueueDeadlinesReady
+	(*QueueDeadlinesRemoved)(nil),                // 29: dogma.metrics.v1alpha1.QueueDeadlinesRemoved
+	(*QueueDeadlinesScheduled)(nil),              // 30: dogma.metrics.v1alpha1.QueueDeadlinesScheduled
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_depIdxs = []int32{
-	3, // 0: dogma.metrics.v1alpha1.WatchMetricsResponse.preamble:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
-	4, // 1: dogma.metrics.v1alpha1.WatchMetricsResponse.sample:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
-	5, // 2: dogma.metrics.v1alpha1.WatchMetricsResponse.tombstone:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Tombstone
-	6, // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
-	6, // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
-	7, // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
-	0, // 6: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:input_type -> dogma.metrics.v1alpha1.WatchNodeMetricsRequest
-	1, // 7: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:input_type -> dogma.metrics.v1alpha1.WatchClusterMetricsRequest
-	2, // 8: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
-	2, // 9: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
-	8, // [8:10] is the sub-list for method output_type
-	6, // [6:8] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	3,  // 0: dogma.metrics.v1alpha1.WatchMetricsResponse.preamble:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble
+	4,  // 1: dogma.metrics.v1alpha1.WatchMetricsResponse.sample:type_name -> dogma.metrics.v1alpha1.WatchMetricsResponse.Sample
+	5,  // 2: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.id:type_name -> dogma.protobuf.v1.UUID
+	5,  // 3: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.cluster_id:type_name -> dogma.protobuf.v1.UUID
+	6,  // 4: dogma.metrics.v1alpha1.WatchMetricsResponse.Preamble.application:type_name -> dogma.config.v1alpha1.Application
+	7,  // 5: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.aggregate_instance_event_stream_bindings:type_name -> dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings
+	8,  // 6: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.event_stream_length:type_name -> dogma.metrics.v1alpha1.EventStreamLength
+	9,  // 7: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_commands_failing:type_name -> dogma.metrics.v1alpha1.HandlerCommandsFailing
+	10, // 8: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_commands_handled:type_name -> dogma.metrics.v1alpha1.HandlerCommandsHandled
+	11, // 9: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_commands_ready:type_name -> dogma.metrics.v1alpha1.HandlerCommandsReady
+	12, // 10: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_deadlines_canceled:type_name -> dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
+	13, // 11: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_deadlines_failing:type_name -> dogma.metrics.v1alpha1.HandlerDeadlinesFailing
+	14, // 12: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_deadlines_handled:type_name -> dogma.metrics.v1alpha1.HandlerDeadlinesHandled
+	15, // 13: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_deadlines_ready:type_name -> dogma.metrics.v1alpha1.HandlerDeadlinesReady
+	16, // 14: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_deadlines_scheduled:type_name -> dogma.metrics.v1alpha1.HandlerDeadlinesScheduled
+	17, // 15: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_event_stream_lag:type_name -> dogma.metrics.v1alpha1.HandlerEventStreamLag
+	18, // 16: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_event_stream_staleness:type_name -> dogma.metrics.v1alpha1.HandlerEventStreamStaleness
+	19, // 17: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_events_failing:type_name -> dogma.metrics.v1alpha1.HandlerEventsFailing
+	20, // 18: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_events_handled:type_name -> dogma.metrics.v1alpha1.HandlerEventsHandled
+	21, // 19: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.handler_events_recorded:type_name -> dogma.metrics.v1alpha1.HandlerEventsRecorded
+	22, // 20: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.process_instance_queue_bindings:type_name -> dogma.metrics.v1alpha1.ProcessInstanceQueueBindings
+	23, // 21: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.process_instances_ended:type_name -> dogma.metrics.v1alpha1.ProcessInstancesEnded
+	24, // 22: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.queue_commands_failing:type_name -> dogma.metrics.v1alpha1.QueueCommandsFailing
+	25, // 23: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.queue_commands_ready:type_name -> dogma.metrics.v1alpha1.QueueCommandsReady
+	26, // 24: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.queue_commands_removed:type_name -> dogma.metrics.v1alpha1.QueueCommandsRemoved
+	27, // 25: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.queue_deadlines_failing:type_name -> dogma.metrics.v1alpha1.QueueDeadlinesFailing
+	28, // 26: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.queue_deadlines_ready:type_name -> dogma.metrics.v1alpha1.QueueDeadlinesReady
+	29, // 27: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.queue_deadlines_removed:type_name -> dogma.metrics.v1alpha1.QueueDeadlinesRemoved
+	30, // 28: dogma.metrics.v1alpha1.WatchMetricsResponse.Sample.queue_deadlines_scheduled:type_name -> dogma.metrics.v1alpha1.QueueDeadlinesScheduled
+	0,  // 29: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:input_type -> dogma.metrics.v1alpha1.WatchNodeMetricsRequest
+	1,  // 30: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:input_type -> dogma.metrics.v1alpha1.WatchClusterMetricsRequest
+	2,  // 31: dogma.metrics.v1alpha1.MetricsAPI.WatchNodeMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
+	2,  // 32: dogma.metrics.v1alpha1.MetricsAPI.WatchClusterMetrics:output_type -> dogma.metrics.v1alpha1.WatchMetricsResponse
+	31, // [31:33] is the sub-list for method output_type
+	29, // [29:31] is the sub-list for method input_type
+	29, // [29:29] is the sub-list for extension type_name
+	29, // [29:29] is the sub-list for extension extendee
+	0,  // [0:29] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() }
@@ -839,10 +1766,38 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() {
 	if File_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto != nil {
 		return
 	}
+	file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_init()
+	file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init()
+	file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue_proto_init()
 	file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[2].OneofWrappers = []any{
 		(*watchMetricsResponse_Preamble_)(nil),
 		(*watchMetricsResponse_Sample_)(nil),
-		(*watchMetricsResponse_Tombstone_)(nil),
+	}
+	file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_msgTypes[4].OneofWrappers = []any{
+		(*watchMetricsResponse_Sample_AggregateInstanceEventStreamBindings)(nil),
+		(*watchMetricsResponse_Sample_EventStreamLength)(nil),
+		(*watchMetricsResponse_Sample_HandlerCommandsFailing)(nil),
+		(*watchMetricsResponse_Sample_HandlerCommandsHandled)(nil),
+		(*watchMetricsResponse_Sample_HandlerCommandsReady)(nil),
+		(*watchMetricsResponse_Sample_HandlerDeadlinesCanceled)(nil),
+		(*watchMetricsResponse_Sample_HandlerDeadlinesFailing)(nil),
+		(*watchMetricsResponse_Sample_HandlerDeadlinesHandled)(nil),
+		(*watchMetricsResponse_Sample_HandlerDeadlinesReady)(nil),
+		(*watchMetricsResponse_Sample_HandlerDeadlinesScheduled)(nil),
+		(*watchMetricsResponse_Sample_HandlerEventStreamLag)(nil),
+		(*watchMetricsResponse_Sample_HandlerEventStreamStaleness)(nil),
+		(*watchMetricsResponse_Sample_HandlerEventsFailing)(nil),
+		(*watchMetricsResponse_Sample_HandlerEventsHandled)(nil),
+		(*watchMetricsResponse_Sample_HandlerEventsRecorded)(nil),
+		(*watchMetricsResponse_Sample_ProcessInstanceQueueBindings)(nil),
+		(*watchMetricsResponse_Sample_ProcessInstancesEnded)(nil),
+		(*watchMetricsResponse_Sample_QueueCommandsFailing)(nil),
+		(*watchMetricsResponse_Sample_QueueCommandsReady)(nil),
+		(*watchMetricsResponse_Sample_QueueCommandsRemoved)(nil),
+		(*watchMetricsResponse_Sample_QueueDeadlinesFailing)(nil),
+		(*watchMetricsResponse_Sample_QueueDeadlinesReady)(nil),
+		(*watchMetricsResponse_Sample_QueueDeadlinesRemoved)(nil),
+		(*watchMetricsResponse_Sample_QueueDeadlinesScheduled)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -850,7 +1805,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_metrics_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -3,6 +3,7 @@ package dogma.metrics.v1alpha1;
 
 option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/timestamp.proto";
 import "github.com/dogmatiq/protobuf/metricsgrpc/subject.proto";
 
@@ -16,11 +17,13 @@ message EventStreamLength {
   // Watermark is the number of events on the stream, which is also the offset
   // at which the next event will be appended. It never decreases, so a client
   // that has seen a value knows that the stream has at least that many events.
+  // It is absent when the engine has stopped reporting this metric for the
+  // subject.
   //
   // While ownership of the stream moves from one node to another, both may
   // report it. Both counts are positions on the same stream, so the value for
   // the whole cluster is the greatest value that any node reports.
-  uint64 watermark = 2 [features.field_presence = IMPLICIT];
+  uint64 watermark = 2 [features.field_presence = EXPLICIT];
 }
 
 // AggregateInstanceEventStreamBindings is the number of an aggregate handler's
@@ -33,8 +36,9 @@ message AggregateInstanceEventStreamBindings {
   // bound to.
   HandlerEventStreamSubject subject = 1;
 
-  // CurrentCount is the number of instances bound to the event stream.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of instances bound to the event stream. It is
+  // absent when the engine has stopped reporting this metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerEventStreamLag is the number of events on one event stream, of any
@@ -54,11 +58,12 @@ message HandlerEventStreamLag {
 
   // Gauge is the number of events after the offset that the handler has
   // reached. It is zero when the handler has handled or skipped every event on
-  // the stream.
+  // the stream. It is absent when the engine has stopped reporting this metric
+  // for the subject.
   //
   // Several nodes can report the lag of one handler on one stream, so adding
   // their values counts the same events more than once.
-  uint64 gauge = 2 [features.field_presence = IMPLICIT];
+  uint64 gauge = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerEventStreamStaleness is the creation time of the oldest event on one
@@ -67,28 +72,30 @@ message HandlerEventStreamLag {
 //
 // The engine sends it only for process and projection handlers.
 //
-// A handler handles the events of some types and skips the rest. It has reached
-// an offset when it has handled or skipped the event at that offset and every
-// event before it. The oldest event that it has neither handled nor skipped is
-// the first event after the offset that it has reached.
+// A handler handles the events of some types and skips the rest. The oldest
+// event that it has neither handled nor skipped is the one with the lowest
+// offset.
 //
 // The engine that recorded the event set its creation time, from its own clock.
 //
-// The stream may be one of another engine's event streams. An engine can then
-// know that the stream has an event that it has not received yet, and so not
-// know when that event was created. An engine that does not know the creation
-// time stops reporting the metric for that handler and stream, and so sends a
-// Tombstone.
+// The stream may be one of another engine's event streams, and the engine may
+// not have received the event yet. An engine that does not know the creation
+// time sends a tombstone.
 message HandlerEventStreamStaleness {
   // Subject identifies the handler and the event stream.
   HandlerEventStreamSubject subject = 1;
 
-  // CreatedAt is the creation time of the oldest event on the stream that the
-  // handler has neither handled nor skipped, as the created_at of the event's
-  // envelope gives it. It is absent when the handler has handled or skipped
-  // every event on the stream.
-  //
-  // Several nodes can report the time for one handler on one stream, and their
-  // values can differ.
-  google.protobuf.Timestamp created_at = 2;
+  // Value has one case for a handler that is behind, and one for a handler that
+  // has caught up. Neither case is set when the engine has stopped reporting
+  // this metric for the subject.
+  oneof value {
+    // CreatedAt is the creation time of the oldest event on the stream that the
+    // handler has neither handled nor skipped, as the created_at of the event's
+    // envelope gives it.
+    google.protobuf.Timestamp created_at = 2;
+
+    // CaughtUp is set when the handler has handled or skipped every event on
+    // the stream.
+    google.protobuf.Empty caught_up = 3;
+  }
 }

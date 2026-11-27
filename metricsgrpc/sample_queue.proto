@@ -17,17 +17,17 @@ message QueueDeadlinesScheduled {
   QueueSubject subject = 1;
 
   // CurrentCount is the number of deadlines in the queue that are scheduled for
-  // a time that has not come yet.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // a time that has not come yet. It is absent when the engine has stopped
+  // reporting this metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // QueueCommandsReady is the number of commands in a single logical queue that
 // have not had a failed delivery attempt.
 //
-// A command is ready from the time that the engine adds it to the queue. It is
-// still ready while the engine attempts to deliver it, and while the engine
-// delays it for a reason of its own, such as to deliver messages of higher
-// priority first.
+// A command is still ready while the engine attempts to deliver it, and while
+// the engine delays it for a reason of its own, such as to deliver messages of
+// higher priority first.
 //
 // Each command in the queue is counted in either QueueCommandsReady or
 // QueueCommandsFailing, so the number of commands in the queue is the total of
@@ -37,8 +37,9 @@ message QueueCommandsReady {
   QueueSubject subject = 1;
 
   // CurrentCount is the number of commands in the queue that have not had a
-  // failed delivery attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // failed delivery attempt. It is absent when the engine has stopped reporting
+  // this metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // QueueDeadlinesReady is the number of deadlines in a single logical queue that
@@ -57,8 +58,10 @@ message QueueDeadlinesReady {
   QueueSubject subject = 1;
 
   // CurrentCount is the number of deadlines in the queue that are scheduled for
-  // a time that has come, and that have not had a failed delivery attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // a time that has come, and that have not had a failed delivery attempt. It
+  // is absent when the engine has stopped reporting this metric for the
+  // subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // QueueCommandsFailing is the number of commands in a single logical queue that
@@ -75,8 +78,9 @@ message QueueCommandsFailing {
   QueueSubject subject = 1;
 
   // CurrentCount is the number of commands in the queue that have had at least
-  // one failed delivery attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // one failed delivery attempt. It is absent when the engine has stopped
+  // reporting this metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // QueueDeadlinesFailing is the number of deadlines in a single logical queue
@@ -93,8 +97,9 @@ message QueueDeadlinesFailing {
   QueueSubject subject = 1;
 
   // CurrentCount is the number of deadlines in the queue that have had at least
-  // one failed delivery attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // one failed delivery attempt. It is absent when the engine has stopped
+  // reporting this metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // QueueCommandsRemoved is the cumulative count of the commands that have been
@@ -105,8 +110,9 @@ message QueueCommandsRemoved {
   QueueSubject subject = 1;
 
   // CumulativeCount is the number of commands that have been removed from the
-  // queue.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // queue. It is absent when the engine has stopped reporting this metric for
+  // the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // QueueDeadlinesRemoved is the cumulative count of the deadlines that have been
@@ -117,8 +123,9 @@ message QueueDeadlinesRemoved {
   QueueSubject subject = 1;
 
   // CumulativeCount is the number of deadlines that have been removed from the
-  // queue.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // queue. It is absent when the engine has stopped reporting this metric for
+  // the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // ProcessInstanceQueueBindings is the number of a process handler's instances
@@ -134,6 +141,8 @@ message ProcessInstanceQueueBindings {
   // to if they are bound to one.
   HandlerQueueSubject subject = 1;
 
-  // CurrentCount is the number of instances bound to the queue, or to none.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // CurrentCount is the number of instances bound to the queue, or to none. It
+  // is absent when the engine has stopped reporting this metric for the
+  // subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }

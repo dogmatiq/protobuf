@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFile = /*@__PURE__*/
-  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExIngKFEhhbmRsZXJDb21tYW5kc1JlYWR5EkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiegoWSGFuZGxlckNvbW1hbmRzRmFpbGluZxJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0EhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggCIn0KFkhhbmRsZXJDb21tYW5kc0hhbmRsZWQSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlck1lc3NhZ2VUeXBlU3ViamVjdBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJ9ChlIYW5kbGVyRGVhZGxpbmVzU2NoZWR1bGVkEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIieQoVSGFuZGxlckRlYWRsaW5lc1JlYWR5EkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiewoXSGFuZGxlckRlYWRsaW5lc0ZhaWxpbmcSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlck1lc3NhZ2VUeXBlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJ+ChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0Eh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCIn8KGEhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZBJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0Eh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCInwKFUhhbmRsZXJFdmVudHNSZWNvcmRlZBJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0Eh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggCInsKFEhhbmRsZXJFdmVudHNIYW5kbGVkEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIieAoUSGFuZGxlckV2ZW50c0ZhaWxpbmcSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlck1lc3NhZ2VUeXBlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJxChVQcm9jZXNzSW5zdGFuY2VzRW5kZWQSNwoHc3ViamVjdBgBIAEoCzImLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlclN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAJCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
+  fileDesc("Cj1naXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9oYW5kbGVyLnByb3RvEhZkb2dtYS5tZXRyaWNzLnYxYWxwaGExIngKFEhhbmRsZXJDb21tYW5kc1JlYWR5EkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEiegoWSGFuZGxlckNvbW1hbmRzRmFpbGluZxJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0EhwKDWN1cnJlbnRfY291bnQYAiABKARCBaoBAggBIn0KFkhhbmRsZXJDb21tYW5kc0hhbmRsZWQSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlck1lc3NhZ2VUeXBlU3ViamVjdBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIASJ9ChlIYW5kbGVyRGVhZGxpbmVzU2NoZWR1bGVkEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEieQoVSGFuZGxlckRlYWRsaW5lc1JlYWR5EkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAEiewoXSGFuZGxlckRlYWRsaW5lc0ZhaWxpbmcSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlck1lc3NhZ2VUeXBlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJ+ChdIYW5kbGVyRGVhZGxpbmVzSGFuZGxlZBJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0Eh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggBIn8KGEhhbmRsZXJEZWFkbGluZXNDYW5jZWxlZBJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0Eh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggBInwKFUhhbmRsZXJFdmVudHNSZWNvcmRlZBJCCgdzdWJqZWN0GAEgASgLMjEuZG9nbWEubWV0cmljcy52MWFscGhhMS5IYW5kbGVyTWVzc2FnZVR5cGVTdWJqZWN0Eh8KEGN1bXVsYXRpdmVfY291bnQYAiABKARCBaoBAggBInsKFEhhbmRsZXJFdmVudHNIYW5kbGVkEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJNZXNzYWdlVHlwZVN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAEieAoUSGFuZGxlckV2ZW50c0ZhaWxpbmcSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlck1lc3NhZ2VUeXBlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIASJxChVQcm9jZXNzSW5zdGFuY2VzRW5kZWQSNwoHc3ViamVjdBgBIAEoCzImLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlclN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAFCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
 
 /**
  * HandlerCommandsReady is the number of commands of one type that are ready to
@@ -20,10 +20,9 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler: GenFi
  * integration handlers.
  *
  * A command is ready if it is waiting to be delivered and has not had a failed
- * delivery attempt. It is ready from the time that the engine adds it to a
- * queue. It is still ready while the engine attempts to deliver it, and while
- * the engine delays it for a reason of its own, such as to deliver messages of
- * higher priority first.
+ * delivery attempt. It is still ready while the engine attempts to deliver it,
+ * and while the engine delays it for a reason of its own, such as to deliver
+ * messages of higher priority first.
  *
  * Each command of that type that is waiting to be delivered to the handler is
  * counted in either HandlerCommandsReady or HandlerCommandsFailing, so the
@@ -45,8 +44,10 @@ export type HandlerCommandsReady = Message<"dogma.metrics.v1alpha1.HandlerComman
   /**
    * CurrentCount is the number of commands of one type that are waiting to be
    * delivered to the handler, and that have not had a failed delivery attempt.
+   * It is absent when the engine has stopped reporting this metric for the
+   * subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -87,9 +88,10 @@ export type HandlerCommandsFailing = Message<"dogma.metrics.v1alpha1.HandlerComm
   /**
    * CurrentCount is the number of commands of one type that are waiting to be
    * delivered to the handler, and that have had at least one failed delivery
-   * attempt.
+   * attempt. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -121,9 +123,10 @@ export type HandlerCommandsHandled = Message<"dogma.metrics.v1alpha1.HandlerComm
 
   /**
    * CumulativeCount is the number of commands of one type that the handler has
-   * handled successfully.
+   * handled successfully. It is absent when the engine has stopped reporting
+   * this metric for the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -163,9 +166,10 @@ export type HandlerDeadlinesScheduled = Message<"dogma.metrics.v1alpha1.HandlerD
 
   /**
    * CurrentCount is the number of deadlines of one type for the handler that
-   * are scheduled for a time that has not come yet.
+   * are scheduled for a time that has not come yet. It is absent when the
+   * engine has stopped reporting this metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -208,9 +212,10 @@ export type HandlerDeadlinesReady = Message<"dogma.metrics.v1alpha1.HandlerDeadl
   /**
    * CurrentCount is the number of deadlines of one type for the handler that
    * are scheduled for a time that has come, and that have not had a failed
-   * delivery attempt.
+   * delivery attempt. It is absent when the engine has stopped reporting this
+   * metric for the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -251,9 +256,10 @@ export type HandlerDeadlinesFailing = Message<"dogma.metrics.v1alpha1.HandlerDea
   /**
    * CurrentCount is the number of deadlines of one type that are waiting to be
    * delivered to the handler, and that have had at least one failed delivery
-   * attempt.
+   * attempt. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -285,9 +291,10 @@ export type HandlerDeadlinesHandled = Message<"dogma.metrics.v1alpha1.HandlerDea
 
   /**
    * CumulativeCount is the number of deadlines of one type that the handler has
-   * handled successfully.
+   * handled successfully. It is absent when the engine has stopped reporting
+   * this metric for the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -322,9 +329,10 @@ export type HandlerDeadlinesCanceled = Message<"dogma.metrics.v1alpha1.HandlerDe
 
   /**
    * CumulativeCount is the number of deadlines of one type for the handler that
-   * were canceled.
+   * were canceled. It is absent when the engine has stopped reporting this
+   * metric for the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -356,9 +364,10 @@ export type HandlerEventsRecorded = Message<"dogma.metrics.v1alpha1.HandlerEvent
 
   /**
    * CumulativeCount is the number of events of one type that the handler has
-   * recorded.
+   * recorded. It is absent when the engine has stopped reporting this metric
+   * for the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -390,9 +399,10 @@ export type HandlerEventsHandled = Message<"dogma.metrics.v1alpha1.HandlerEvents
 
   /**
    * CumulativeCount is the number of events of one type that the handler has
-   * handled.
+   * handled. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };
@@ -428,9 +438,10 @@ export type HandlerEventsFailing = Message<"dogma.metrics.v1alpha1.HandlerEvents
   /**
    * CurrentCount is the number of events of one type for the handler that
    * haven't been handled yet, and that have had at least one failed delivery
-   * attempt.
+   * attempt. It is absent when the engine has stopped reporting this metric for
+   * the subject.
    *
-   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = EXPLICIT];
    */
   currentCount: bigint;
 };
@@ -457,9 +468,10 @@ export type ProcessInstancesEnded = Message<"dogma.metrics.v1alpha1.ProcessInsta
   subject?: HandlerSubject | undefined;
 
   /**
-   * CumulativeCount is the number of instances that have ended.
+   * CumulativeCount is the number of instances that have ended. It is absent
+   * when the engine has stopped reporting this metric for the subject.
    *
-   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
    */
   cumulativeCount: bigint;
 };

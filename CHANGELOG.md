@@ -67,6 +67,14 @@ The format is based on [Keep a Changelog], and this project adheres to
   - `HandlerEventsRecorded`
   - `HandlerEventsHandled`
   - `HandlerEventsFailing`
+- **[BC]** `WatchMetricsResponse.Sample` now has a `metric` oneof with a case
+  for each metric. Each case holds that metric's message, with the sample's
+  subject and value. The `metric_index`, `subject` and `value` fields of
+  `Sample` are removed, and a sample no longer refers to
+  `Preamble.supported_metrics` by index.
+- **[BC]** The value field of each metric's message now has explicit presence. A
+  `Sample` whose value is absent is a tombstone, and a `Sample` whose value is
+  zero is a measurement of zero.
 - **[BC]** Replaced `messages` in `configpb.Application`, a map of each message
   type's Go type to its kind, with `message_types`, a list of `MessageType`.
 - **[BC]** Replaced `messages` in `configpb.Handler`, a map of each message
@@ -88,6 +96,10 @@ The format is based on [Keep a Changelog], and this project adheres to
   `MetricsAPI`. The number of commands is the total of the ready and failing
   metrics, and the number of deadlines is the total of the scheduled, ready and
   failing metrics.
+- **[BC]** Removed `WatchMetricsResponse.Tombstone`. An engine sends a `Sample`
+  whose value is absent instead.
+- **[BC]** Removed support for metrics that an engine defines for itself.
+  `MetricsAPI` reports only the metrics that this package defines.
 
 ## [0.12.0] - 2026-11-24
 

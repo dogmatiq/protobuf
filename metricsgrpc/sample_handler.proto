@@ -10,10 +10,9 @@ import "github.com/dogmatiq/protobuf/metricsgrpc/subject.proto";
 // integration handlers.
 //
 // A command is ready if it is waiting to be delivered and has not had a failed
-// delivery attempt. It is ready from the time that the engine adds it to a
-// queue. It is still ready while the engine attempts to deliver it, and while
-// the engine delays it for a reason of its own, such as to deliver messages of
-// higher priority first.
+// delivery attempt. It is still ready while the engine attempts to deliver it,
+// and while the engine delays it for a reason of its own, such as to deliver
+// messages of higher priority first.
 //
 // Each command of that type that is waiting to be delivered to the handler is
 // counted in either HandlerCommandsReady or HandlerCommandsFailing, so the
@@ -27,7 +26,9 @@ message HandlerCommandsReady {
 
   // CurrentCount is the number of commands of one type that are waiting to be
   // delivered to the handler, and that have not had a failed delivery attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // It is absent when the engine has stopped reporting this metric for the
+  // subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerCommandsFailing is the number of commands of one type whose delivery
@@ -50,8 +51,9 @@ message HandlerCommandsFailing {
 
   // CurrentCount is the number of commands of one type that are waiting to be
   // delivered to the handler, and that have had at least one failed delivery
-  // attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // attempt. It is absent when the engine has stopped reporting this metric for
+  // the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerCommandsHandled is the cumulative count of the commands of one type
@@ -65,8 +67,9 @@ message HandlerCommandsHandled {
   HandlerMessageTypeSubject subject = 1;
 
   // CumulativeCount is the number of commands of one type that the handler has
-  // handled successfully.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // handled successfully. It is absent when the engine has stopped reporting
+  // this metric for the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerDeadlinesScheduled is the number of deadlines of one type for one
@@ -88,8 +91,9 @@ message HandlerDeadlinesScheduled {
   HandlerMessageTypeSubject subject = 1;
 
   // CurrentCount is the number of deadlines of one type for the handler that
-  // are scheduled for a time that has not come yet.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // are scheduled for a time that has not come yet. It is absent when the
+  // engine has stopped reporting this metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerDeadlinesReady is the number of deadlines of one type that are ready
@@ -114,8 +118,9 @@ message HandlerDeadlinesReady {
 
   // CurrentCount is the number of deadlines of one type for the handler that
   // are scheduled for a time that has come, and that have not had a failed
-  // delivery attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // delivery attempt. It is absent when the engine has stopped reporting this
+  // metric for the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerDeadlinesFailing is the number of deadlines of one type whose delivery
@@ -138,8 +143,9 @@ message HandlerDeadlinesFailing {
 
   // CurrentCount is the number of deadlines of one type that are waiting to be
   // delivered to the handler, and that have had at least one failed delivery
-  // attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // attempt. It is absent when the engine has stopped reporting this metric for
+  // the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerDeadlinesHandled is the cumulative count of the deadlines of one type
@@ -153,8 +159,9 @@ message HandlerDeadlinesHandled {
   HandlerMessageTypeSubject subject = 1;
 
   // CumulativeCount is the number of deadlines of one type that the handler has
-  // handled successfully.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // handled successfully. It is absent when the engine has stopped reporting
+  // this metric for the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerDeadlinesCanceled is the cumulative count of the deadlines of one type
@@ -171,8 +178,9 @@ message HandlerDeadlinesCanceled {
   HandlerMessageTypeSubject subject = 1;
 
   // CumulativeCount is the number of deadlines of one type for the handler that
-  // were canceled.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // were canceled. It is absent when the engine has stopped reporting this
+  // metric for the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerEventsRecorded is the cumulative count of the events of one type that
@@ -186,8 +194,9 @@ message HandlerEventsRecorded {
   HandlerMessageTypeSubject subject = 1;
 
   // CumulativeCount is the number of events of one type that the handler has
-  // recorded.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // recorded. It is absent when the engine has stopped reporting this metric
+  // for the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerEventsHandled is the cumulative count of the events of one type that
@@ -201,8 +210,9 @@ message HandlerEventsHandled {
   HandlerMessageTypeSubject subject = 1;
 
   // CumulativeCount is the number of events of one type that the handler has
-  // handled.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // handled. It is absent when the engine has stopped reporting this metric for
+  // the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // HandlerEventsFailing is the number of events of one type whose delivery to
@@ -220,8 +230,9 @@ message HandlerEventsFailing {
 
   // CurrentCount is the number of events of one type for the handler that
   // haven't been handled yet, and that have had at least one failed delivery
-  // attempt.
-  uint64 current_count = 2 [features.field_presence = IMPLICIT];
+  // attempt. It is absent when the engine has stopped reporting this metric for
+  // the subject.
+  uint64 current_count = 2 [features.field_presence = EXPLICIT];
 }
 
 // ProcessInstancesEnded is the cumulative count of the instances of one process
@@ -230,6 +241,7 @@ message ProcessInstancesEnded {
   // Subject identifies the handler.
   HandlerSubject subject = 1;
 
-  // CumulativeCount is the number of instances that have ended.
-  uint64 cumulative_count = 2 [features.field_presence = IMPLICIT];
+  // CumulativeCount is the number of instances that have ended. It is absent
+  // when the engine has stopped reporting this metric for the subject.
+  uint64 cumulative_count = 2 [features.field_presence = EXPLICIT];
 }

@@ -25,10 +25,9 @@ const (
 // integration handlers.
 //
 // A command is ready if it is waiting to be delivered and has not had a failed
-// delivery attempt. It is ready from the time that the engine adds it to a
-// queue. It is still ready while the engine attempts to deliver it, and while
-// the engine delays it for a reason of its own, such as to deliver messages of
-// higher priority first.
+// delivery attempt. It is still ready while the engine attempts to deliver it,
+// and while the engine delays it for a reason of its own, such as to deliver
+// messages of higher priority first.
 //
 // Each command of that type that is waiting to be delivered to the handler is
 // counted in either HandlerCommandsReady or HandlerCommandsFailing, so the
@@ -40,6 +39,8 @@ type HandlerCommandsReady struct {
 	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                     `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -89,6 +90,7 @@ func (x *HandlerCommandsReady) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerCommandsReady) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerCommandsReady) HasSubject() bool {
@@ -98,8 +100,20 @@ func (x *HandlerCommandsReady) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerCommandsReady) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerCommandsReady) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerCommandsReady) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type HandlerCommandsReady_builder struct {
@@ -109,7 +123,9 @@ type HandlerCommandsReady_builder struct {
 	Subject *HandlerMessageTypeSubject
 	// CurrentCount is the number of commands of one type that are waiting to be
 	// delivered to the handler, and that have not had a failed delivery attempt.
-	CurrentCount uint64
+	// It is absent when the engine has stopped reporting this metric for the
+	// subject.
+	CurrentCount *uint64
 }
 
 func (b0 HandlerCommandsReady_builder) Build() *HandlerCommandsReady {
@@ -117,7 +133,10 @@ func (b0 HandlerCommandsReady_builder) Build() *HandlerCommandsReady {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -139,6 +158,8 @@ type HandlerCommandsFailing struct {
 	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                     `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -188,6 +209,7 @@ func (x *HandlerCommandsFailing) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerCommandsFailing) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerCommandsFailing) HasSubject() bool {
@@ -197,8 +219,20 @@ func (x *HandlerCommandsFailing) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerCommandsFailing) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerCommandsFailing) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerCommandsFailing) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type HandlerCommandsFailing_builder struct {
@@ -208,8 +242,9 @@ type HandlerCommandsFailing_builder struct {
 	Subject *HandlerMessageTypeSubject
 	// CurrentCount is the number of commands of one type that are waiting to be
 	// delivered to the handler, and that have had at least one failed delivery
-	// attempt.
-	CurrentCount uint64
+	// attempt. It is absent when the engine has stopped reporting this metric for
+	// the subject.
+	CurrentCount *uint64
 }
 
 func (b0 HandlerCommandsFailing_builder) Build() *HandlerCommandsFailing {
@@ -217,7 +252,10 @@ func (b0 HandlerCommandsFailing_builder) Build() *HandlerCommandsFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -231,6 +269,8 @@ type HandlerCommandsHandled struct {
 	state                      protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                     `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -280,6 +320,7 @@ func (x *HandlerCommandsHandled) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerCommandsHandled) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerCommandsHandled) HasSubject() bool {
@@ -289,8 +330,20 @@ func (x *HandlerCommandsHandled) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerCommandsHandled) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerCommandsHandled) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerCommandsHandled) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type HandlerCommandsHandled_builder struct {
@@ -299,8 +352,9 @@ type HandlerCommandsHandled_builder struct {
 	// Subject identifies the handler and the type of command that is counted.
 	Subject *HandlerMessageTypeSubject
 	// CumulativeCount is the number of commands of one type that the handler has
-	// handled successfully.
-	CumulativeCount uint64
+	// handled successfully. It is absent when the engine has stopped reporting
+	// this metric for the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 HandlerCommandsHandled_builder) Build() *HandlerCommandsHandled {
@@ -308,7 +362,10 @@ func (b0 HandlerCommandsHandled_builder) Build() *HandlerCommandsHandled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -330,6 +387,8 @@ type HandlerDeadlinesScheduled struct {
 	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                     `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -379,6 +438,7 @@ func (x *HandlerDeadlinesScheduled) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerDeadlinesScheduled) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerDeadlinesScheduled) HasSubject() bool {
@@ -388,8 +448,20 @@ func (x *HandlerDeadlinesScheduled) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerDeadlinesScheduled) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerDeadlinesScheduled) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerDeadlinesScheduled) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type HandlerDeadlinesScheduled_builder struct {
@@ -398,8 +470,9 @@ type HandlerDeadlinesScheduled_builder struct {
 	// Subject identifies the handler and the type of deadline that is counted.
 	Subject *HandlerMessageTypeSubject
 	// CurrentCount is the number of deadlines of one type for the handler that
-	// are scheduled for a time that has not come yet.
-	CurrentCount uint64
+	// are scheduled for a time that has not come yet. It is absent when the
+	// engine has stopped reporting this metric for the subject.
+	CurrentCount *uint64
 }
 
 func (b0 HandlerDeadlinesScheduled_builder) Build() *HandlerDeadlinesScheduled {
@@ -407,7 +480,10 @@ func (b0 HandlerDeadlinesScheduled_builder) Build() *HandlerDeadlinesScheduled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -431,6 +507,8 @@ type HandlerDeadlinesReady struct {
 	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                     `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -480,6 +558,7 @@ func (x *HandlerDeadlinesReady) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerDeadlinesReady) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerDeadlinesReady) HasSubject() bool {
@@ -489,8 +568,20 @@ func (x *HandlerDeadlinesReady) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerDeadlinesReady) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerDeadlinesReady) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerDeadlinesReady) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type HandlerDeadlinesReady_builder struct {
@@ -500,8 +591,9 @@ type HandlerDeadlinesReady_builder struct {
 	Subject *HandlerMessageTypeSubject
 	// CurrentCount is the number of deadlines of one type for the handler that
 	// are scheduled for a time that has come, and that have not had a failed
-	// delivery attempt.
-	CurrentCount uint64
+	// delivery attempt. It is absent when the engine has stopped reporting this
+	// metric for the subject.
+	CurrentCount *uint64
 }
 
 func (b0 HandlerDeadlinesReady_builder) Build() *HandlerDeadlinesReady {
@@ -509,7 +601,10 @@ func (b0 HandlerDeadlinesReady_builder) Build() *HandlerDeadlinesReady {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -531,6 +626,8 @@ type HandlerDeadlinesFailing struct {
 	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                     `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -580,6 +677,7 @@ func (x *HandlerDeadlinesFailing) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerDeadlinesFailing) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerDeadlinesFailing) HasSubject() bool {
@@ -589,8 +687,20 @@ func (x *HandlerDeadlinesFailing) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerDeadlinesFailing) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerDeadlinesFailing) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerDeadlinesFailing) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type HandlerDeadlinesFailing_builder struct {
@@ -600,8 +710,9 @@ type HandlerDeadlinesFailing_builder struct {
 	Subject *HandlerMessageTypeSubject
 	// CurrentCount is the number of deadlines of one type that are waiting to be
 	// delivered to the handler, and that have had at least one failed delivery
-	// attempt.
-	CurrentCount uint64
+	// attempt. It is absent when the engine has stopped reporting this metric for
+	// the subject.
+	CurrentCount *uint64
 }
 
 func (b0 HandlerDeadlinesFailing_builder) Build() *HandlerDeadlinesFailing {
@@ -609,7 +720,10 @@ func (b0 HandlerDeadlinesFailing_builder) Build() *HandlerDeadlinesFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -623,6 +737,8 @@ type HandlerDeadlinesHandled struct {
 	state                      protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                     `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -672,6 +788,7 @@ func (x *HandlerDeadlinesHandled) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerDeadlinesHandled) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerDeadlinesHandled) HasSubject() bool {
@@ -681,8 +798,20 @@ func (x *HandlerDeadlinesHandled) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerDeadlinesHandled) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerDeadlinesHandled) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerDeadlinesHandled) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type HandlerDeadlinesHandled_builder struct {
@@ -691,8 +820,9 @@ type HandlerDeadlinesHandled_builder struct {
 	// Subject identifies the handler and the type of deadline that is counted.
 	Subject *HandlerMessageTypeSubject
 	// CumulativeCount is the number of deadlines of one type that the handler has
-	// handled successfully.
-	CumulativeCount uint64
+	// handled successfully. It is absent when the engine has stopped reporting
+	// this metric for the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 HandlerDeadlinesHandled_builder) Build() *HandlerDeadlinesHandled {
@@ -700,7 +830,10 @@ func (b0 HandlerDeadlinesHandled_builder) Build() *HandlerDeadlinesHandled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -717,6 +850,8 @@ type HandlerDeadlinesCanceled struct {
 	state                      protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                     `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -766,6 +901,7 @@ func (x *HandlerDeadlinesCanceled) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerDeadlinesCanceled) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerDeadlinesCanceled) HasSubject() bool {
@@ -775,8 +911,20 @@ func (x *HandlerDeadlinesCanceled) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerDeadlinesCanceled) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerDeadlinesCanceled) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerDeadlinesCanceled) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type HandlerDeadlinesCanceled_builder struct {
@@ -785,8 +933,9 @@ type HandlerDeadlinesCanceled_builder struct {
 	// Subject identifies the handler and the type of deadline that is counted.
 	Subject *HandlerMessageTypeSubject
 	// CumulativeCount is the number of deadlines of one type for the handler that
-	// were canceled.
-	CumulativeCount uint64
+	// were canceled. It is absent when the engine has stopped reporting this
+	// metric for the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 HandlerDeadlinesCanceled_builder) Build() *HandlerDeadlinesCanceled {
@@ -794,7 +943,10 @@ func (b0 HandlerDeadlinesCanceled_builder) Build() *HandlerDeadlinesCanceled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -808,6 +960,8 @@ type HandlerEventsRecorded struct {
 	state                      protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                     `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -857,6 +1011,7 @@ func (x *HandlerEventsRecorded) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerEventsRecorded) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerEventsRecorded) HasSubject() bool {
@@ -866,8 +1021,20 @@ func (x *HandlerEventsRecorded) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerEventsRecorded) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerEventsRecorded) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerEventsRecorded) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type HandlerEventsRecorded_builder struct {
@@ -876,8 +1043,9 @@ type HandlerEventsRecorded_builder struct {
 	// Subject identifies the handler and the type of event that is counted.
 	Subject *HandlerMessageTypeSubject
 	// CumulativeCount is the number of events of one type that the handler has
-	// recorded.
-	CumulativeCount uint64
+	// recorded. It is absent when the engine has stopped reporting this metric
+	// for the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 HandlerEventsRecorded_builder) Build() *HandlerEventsRecorded {
@@ -885,7 +1053,10 @@ func (b0 HandlerEventsRecorded_builder) Build() *HandlerEventsRecorded {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -899,6 +1070,8 @@ type HandlerEventsHandled struct {
 	state                      protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                     `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -948,6 +1121,7 @@ func (x *HandlerEventsHandled) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerEventsHandled) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerEventsHandled) HasSubject() bool {
@@ -957,8 +1131,20 @@ func (x *HandlerEventsHandled) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerEventsHandled) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerEventsHandled) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerEventsHandled) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type HandlerEventsHandled_builder struct {
@@ -967,8 +1153,9 @@ type HandlerEventsHandled_builder struct {
 	// Subject identifies the handler and the type of event that is counted.
 	Subject *HandlerMessageTypeSubject
 	// CumulativeCount is the number of events of one type that the handler has
-	// handled.
-	CumulativeCount uint64
+	// handled. It is absent when the engine has stopped reporting this metric for
+	// the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 HandlerEventsHandled_builder) Build() *HandlerEventsHandled {
@@ -976,7 +1163,10 @@ func (b0 HandlerEventsHandled_builder) Build() *HandlerEventsHandled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -993,6 +1183,8 @@ type HandlerEventsFailing struct {
 	state                   protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Subject      *HandlerMessageTypeSubject `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CurrentCount uint64                     `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -1042,6 +1234,7 @@ func (x *HandlerEventsFailing) SetSubject(v *HandlerMessageTypeSubject) {
 
 func (x *HandlerEventsFailing) SetCurrentCount(v uint64) {
 	x.xxx_hidden_CurrentCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *HandlerEventsFailing) HasSubject() bool {
@@ -1051,8 +1244,20 @@ func (x *HandlerEventsFailing) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *HandlerEventsFailing) HasCurrentCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *HandlerEventsFailing) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *HandlerEventsFailing) ClearCurrentCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CurrentCount = 0
 }
 
 type HandlerEventsFailing_builder struct {
@@ -1062,8 +1267,9 @@ type HandlerEventsFailing_builder struct {
 	Subject *HandlerMessageTypeSubject
 	// CurrentCount is the number of events of one type for the handler that
 	// haven't been handled yet, and that have had at least one failed delivery
-	// attempt.
-	CurrentCount uint64
+	// attempt. It is absent when the engine has stopped reporting this metric for
+	// the subject.
+	CurrentCount *uint64
 }
 
 func (b0 HandlerEventsFailing_builder) Build() *HandlerEventsFailing {
@@ -1071,7 +1277,10 @@ func (b0 HandlerEventsFailing_builder) Build() *HandlerEventsFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CurrentCount = b.CurrentCount
+	if b.CurrentCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CurrentCount = *b.CurrentCount
+	}
 	return m0
 }
 
@@ -1081,6 +1290,8 @@ type ProcessInstancesEnded struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Subject         *HandlerSubject        `protobuf:"bytes,1,opt,name=subject"`
 	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -1130,6 +1341,7 @@ func (x *ProcessInstancesEnded) SetSubject(v *HandlerSubject) {
 
 func (x *ProcessInstancesEnded) SetCumulativeCount(v uint64) {
 	x.xxx_hidden_CumulativeCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *ProcessInstancesEnded) HasSubject() bool {
@@ -1139,8 +1351,20 @@ func (x *ProcessInstancesEnded) HasSubject() bool {
 	return x.xxx_hidden_Subject != nil
 }
 
+func (x *ProcessInstancesEnded) HasCumulativeCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *ProcessInstancesEnded) ClearSubject() {
 	x.xxx_hidden_Subject = nil
+}
+
+func (x *ProcessInstancesEnded) ClearCumulativeCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CumulativeCount = 0
 }
 
 type ProcessInstancesEnded_builder struct {
@@ -1148,8 +1372,9 @@ type ProcessInstancesEnded_builder struct {
 
 	// Subject identifies the handler.
 	Subject *HandlerSubject
-	// CumulativeCount is the number of instances that have ended.
-	CumulativeCount uint64
+	// CumulativeCount is the number of instances that have ended. It is absent
+	// when the engine has stopped reporting this metric for the subject.
+	CumulativeCount *uint64
 }
 
 func (b0 ProcessInstancesEnded_builder) Build() *ProcessInstancesEnded {
@@ -1157,7 +1382,10 @@ func (b0 ProcessInstancesEnded_builder) Build() *ProcessInstancesEnded {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Subject = b.Subject
-	x.xxx_hidden_CumulativeCount = b.CumulativeCount
+	if b.CumulativeCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CumulativeCount = *b.CumulativeCount
+	}
 	return m0
 }
 
@@ -1168,40 +1396,40 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc
 	"=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x12\x16dogma.metrics.v1alpha1\x1a6github.com/dogmatiq/protobuf/metricsgrpc/subject.proto\"\x8f\x01\n" +
 	"\x14HandlerCommandsReady\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x91\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x91\x01\n" +
 	"\x16HandlerCommandsFailing\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x97\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x97\x01\n" +
 	"\x16HandlerCommandsHandled\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x94\x01\n" +
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCount\"\x94\x01\n" +
 	"\x19HandlerDeadlinesScheduled\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x90\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x90\x01\n" +
 	"\x15HandlerDeadlinesReady\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x92\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x92\x01\n" +
 	"\x17HandlerDeadlinesFailing\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x98\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x98\x01\n" +
 	"\x17HandlerDeadlinesHandled\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x99\x01\n" +
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCount\"\x99\x01\n" +
 	"\x18HandlerDeadlinesCanceled\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x96\x01\n" +
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCount\"\x96\x01\n" +
 	"\x15HandlerEventsRecorded\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x95\x01\n" +
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCount\"\x95\x01\n" +
 	"\x14HandlerEventsHandled\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x8f\x01\n" +
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCount\"\x8f\x01\n" +
 	"\x14HandlerEventsFailing\x12K\n" +
 	"\asubject\x18\x01 \x01(\v21.dogma.metrics.v1alpha1.HandlerMessageTypeSubjectR\asubject\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x8b\x01\n" +
+	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\fcurrentCount\"\x8b\x01\n" +
 	"\x15ProcessInstancesEnded\x12@\n" +
 	"\asubject\x18\x01 \x01(\v2&.dogma.metrics.v1alpha1.HandlerSubjectR\asubject\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCountB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
+	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x01R\x0fcumulativeCountB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes = []any{
