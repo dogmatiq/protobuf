@@ -13,93 +13,45 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 ## [Unreleased]
 
+This release reworks `MetricsAPI`, which is at `v1alpha1`, and the application
+description in `configpb`. Every engine and client that uses either one has to
+change.
+
 ### Added
 
-- Added the `QueueDeadlinesScheduled` and `HandlerDeadlinesScheduled` metrics to
-  `MetricsAPI`, for the deadlines that are scheduled for a time that has not
-  come yet.
 - Added the `HandlerEventStreamStaleness` metric to `MetricsAPI`, for the
   creation time of the oldest event on one event stream that a handler has yet
   to handle or skip.
-- Added the subject types to `metricsgrpc`. Each identifies what a metric's
-  value describes, and each metric's message holds one in its `subject` field:
-  - `QueueSubject`
-  - `HandlerSubject`
-  - `EventStreamSubject`
-  - `HandlerEventStreamSubject`
-  - `HandlerQueueSubject`
-  - `HandlerMessageTypeSubject`
-- Added `MessageType` to `configpb`, which describes one message type of an
-  application by its ID, its name, its qualified name and its kind. The ID is
-  the one that an envelope gives in `Message.type_id`.
-- Added `Route` and `RouteType` to `configpb`, which describe one of a handler's
-  routes: the ID of the message type that the route is for, and what the handler
-  does with messages of that type.
 
 ### Changed
 
-- **[BC]** Renamed the `QueueCommandsDue`, `QueueDeadlinesDue`,
-  `HandlerCommandsDue` and `HandlerDeadlinesDue` metrics to
-  `QueueCommandsReady`, `QueueDeadlinesReady`, `HandlerCommandsReady` and
-  `HandlerDeadlinesReady`.
+- **[BC]** `MetricsAPI` now sends each metric in a typed `Sample`. A `Sample`
+  holds a `metric` oneof with a case for each metric. Each metric's message
+  holds its value and a `subject`, which has one of six new subject types, such
+  as `QueueSubject`. A `Sample` whose value is absent is a tombstone. The metric
+  index, the opaque subject, the `Tombstone` message and the metrics that an
+  engine defines for itself are removed.
 - **[BC]** Each command or deadline that is waiting to be delivered is now
   counted in exactly one metric: ready or failing for a command, and scheduled,
-  ready or failing for a deadline. The ready metrics count only those that have
-  not had a failed delivery attempt. The failing metrics count those that have
-  had one, whether or not the next attempt is due, and while that attempt is in
-  progress.
-- **[BC]** Replaced the `queue_id`, `handler_key` and `event_stream_id` fields
-  of the metric messages with a `subject` field, which has one of the subject
-  types.
+  ready or failing for a deadline. The `Due` metrics are renamed to `Ready`, the
+  `Pending` metrics are removed, and `QueueDeadlinesScheduled` and
+  `HandlerDeadlinesScheduled` are new.
 - **[BC]** The metrics that count a handler's commands, deadlines and events now
   count the messages of one message type, which the `message_type_id` of the
-  metric's subject identifies. Until now, each counted the handler's messages of
-  every type. A client adds up a handler's samples of a metric to get that
-  count. The metrics are:
-  - `HandlerCommandsReady`
-  - `HandlerCommandsFailing`
-  - `HandlerCommandsHandled`
-  - `HandlerDeadlinesScheduled`
-  - `HandlerDeadlinesReady`
-  - `HandlerDeadlinesFailing`
-  - `HandlerDeadlinesHandled`
-  - `HandlerDeadlinesCanceled`
-  - `HandlerEventsRecorded`
-  - `HandlerEventsHandled`
-  - `HandlerEventsFailing`
-- **[BC]** `WatchMetricsResponse.Sample` now has a `metric` oneof with a case
-  for each metric. Each case holds that metric's message, with the sample's
-  subject and value. The `metric_index`, `subject` and `value` fields of
-  `Sample` are removed, and a sample no longer refers to
-  `Preamble.supported_metrics` by index.
-- **[BC]** The value field of each metric's message now has explicit presence. A
-  `Sample` whose value is absent is a tombstone, and a `Sample` whose value is
-  zero is a measurement of zero.
-- **[BC]** Replaced `messages` in `configpb.Application`, a map of each message
-  type's Go type to its kind, with `message_types`, a list of `MessageType`.
-- **[BC]** Replaced `messages` in `configpb.Handler`, a map of each message
-  type's Go type to a `MessageUsage`, with `routes`, a list of `Route`.
-  `MessageUsage` is removed, and a route's `route_type` takes the place of its
-  `is_produced` and `is_consumed` flags.
+  metric's subject identifies. A client adds up a handler's samples of a metric
+  to get the count for every type.
+- **[BC]** `configpb` now identifies message types by ID. An `Application` lists
+  each message type as a `MessageType`, and a `Handler` lists its routes, each
+  as a `Route` with a `RouteType`. They replace `MessageUsage` and the
+  `messages` maps that were keyed by Go type.
 
 ### Removed
 
 - **[BC]** Removed the `AggregateInstancesInMemory` and
   `ProcessInstancesInMemory` metrics from `MetricsAPI`.
-- **[BC]** Removed the `ProjectionCompactionsCompleted`,
-  `ProjectionCompactionsFailed`, `ProjectionCompactionsDeadlineExceeded` and
-  `ProjectionCompactionsCanceled` metrics from `MetricsAPI`. Use
-  `GetCompactions` on `ProjectionAPI`, or the `ProjectionCompactionEnded`
+- **[BC]** Removed the four `ProjectionCompactions` metrics from `MetricsAPI`.
+  Use `GetCompactions` on `ProjectionAPI`, or the `ProjectionCompactionEnded`
   messages that `EngineAPI.WatchEngine` sends, instead.
-- **[BC]** Removed the `QueueCommandsPending`, `QueueDeadlinesPending`,
-  `HandlerCommandsPending` and `HandlerDeadlinesPending` metrics from
-  `MetricsAPI`. The number of commands is the total of the ready and failing
-  metrics, and the number of deadlines is the total of the scheduled, ready and
-  failing metrics.
-- **[BC]** Removed `WatchMetricsResponse.Tombstone`. An engine sends a `Sample`
-  whose value is absent instead.
-- **[BC]** Removed support for metrics that an engine defines for itself.
-  `MetricsAPI` reports only the metrics that this package defines.
 
 ## [0.12.0] - 2026-11-24
 
