@@ -342,9 +342,9 @@ type HandlerEventStreamLag_builder struct {
 	// Subject identifies the handler and the event stream.
 	Subject *HandlerEventStreamSubject
 	// Gauge is the number of events after the offset that the handler has
-	// reached. It is zero when the handler has handled or skipped every event on
-	// the stream. It is absent when the engine has stopped reporting this metric
-	// for the subject.
+	// reached. It is zero when the handler has handled or skipped every event
+	// that the engine knows is on the stream. It is absent when the engine has
+	// stopped reporting this metric for the subject.
 	//
 	// Several nodes can report the lag of one handler on one stream, so adding
 	// their values counts the same events more than once.
@@ -538,8 +538,8 @@ type HandlerEventStreamStaleness_builder struct {
 	// handler has neither handled nor skipped, as the created_at of the event's
 	// envelope gives it.
 	CreatedAt *timestamppb.Timestamp
-	// CaughtUp is set when the handler has handled or skipped every event on
-	// the stream.
+	// CaughtUp is set when the handler has handled or skipped every event that
+	// the engine knows is on the stream.
 	CaughtUp *emptypb.Empty
 	// -- end of xxx_hidden_Value
 }
@@ -580,8 +580,8 @@ type handlerEventStreamStaleness_CreatedAt struct {
 }
 
 type handlerEventStreamStaleness_CaughtUp struct {
-	// CaughtUp is set when the handler has handled or skipped every event on
-	// the stream.
+	// CaughtUp is set when the handler has handled or skipped every event that
+	// the engine knows is on the stream.
 	CaughtUp *emptypb.Empty `protobuf:"bytes,3,opt,name=caught_up,json=caughtUp,oneof"`
 }
 

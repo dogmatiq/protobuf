@@ -57,9 +57,9 @@ message HandlerEventStreamLag {
   HandlerEventStreamSubject subject = 1;
 
   // Gauge is the number of events after the offset that the handler has
-  // reached. It is zero when the handler has handled or skipped every event on
-  // the stream. It is absent when the engine has stopped reporting this metric
-  // for the subject.
+  // reached. It is zero when the handler has handled or skipped every event
+  // that the engine knows is on the stream. It is absent when the engine has
+  // stopped reporting this metric for the subject.
   //
   // Several nodes can report the lag of one handler on one stream, so adding
   // their values counts the same events more than once.
@@ -94,8 +94,8 @@ message HandlerEventStreamStaleness {
     // envelope gives it.
     google.protobuf.Timestamp created_at = 2;
 
-    // CaughtUp is set when the handler has handled or skipped every event on
-    // the stream.
+    // CaughtUp is set when the handler has handled or skipped every event that
+    // the engine knows is on the stream.
     google.protobuf.Empty caught_up = 3;
   }
 }

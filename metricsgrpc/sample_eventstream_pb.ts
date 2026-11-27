@@ -113,9 +113,9 @@ export type HandlerEventStreamLag = Message<"dogma.metrics.v1alpha1.HandlerEvent
 
   /**
    * Gauge is the number of events after the offset that the handler has
-   * reached. It is zero when the handler has handled or skipped every event on
-   * the stream. It is absent when the engine has stopped reporting this metric
-   * for the subject.
+   * reached. It is zero when the handler has handled or skipped every event
+   * that the engine knows is on the stream. It is absent when the engine has
+   * stopped reporting this metric for the subject.
    *
    * Several nodes can report the lag of one handler on one stream, so adding
    * their values counts the same events more than once.
@@ -178,8 +178,8 @@ export type HandlerEventStreamStaleness = Message<"dogma.metrics.v1alpha1.Handle
     case: "createdAt";
   } | {
     /**
-     * CaughtUp is set when the handler has handled or skipped every event on
-     * the stream.
+     * CaughtUp is set when the handler has handled or skipped every event that
+     * the engine knows is on the stream.
      *
      * @generated from field: google.protobuf.Empty caught_up = 3;
      */

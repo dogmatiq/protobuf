@@ -425,9 +425,8 @@ type WatchMetricsResponse_Preamble_builder struct {
 	// version that it runs.
 	Application *configpb.Application
 	// SupportedMetrics is the list of the metrics that this call reports. Each
-	// entry is the full name of the Protocol Buffers message that holds the
-	// metric's samples, such as "dogma.metrics.v1alpha1.QueueCommandsReady".
-	// Each name appears once.
+	// entry is the full name of one metric's Protocol Buffers message, such as
+	// "dogma.metrics.v1alpha1.QueueCommandsReady". Each name appears once.
 	SupportedMetrics []string
 }
 
@@ -1359,6 +1358,10 @@ type WatchMetricsResponse_Sample_builder struct {
 	//
 	// An engine should give the same revision to every sample from one
 	// measurement.
+	//
+	// If this Sample is a tombstone, its revision is greater than that of the
+	// previous Sample of the same metric and subject on the same response
+	// stream, if there is one.
 	Revision []byte
 	// Metric identifies which metric the sample is for. Each case holds the
 	// message of one metric, which holds the sample's subject and its value.
