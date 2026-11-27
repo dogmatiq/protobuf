@@ -18,6 +18,9 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added the `QueueDeadlinesScheduled` and `HandlerDeadlinesScheduled` metrics to
   `MetricsAPI`, for the deadlines that are scheduled for a time that has not
   come yet.
+- Added the `HandlerEventStreamStaleness` metric to `MetricsAPI`, for the
+  creation time of the oldest event on one event stream that a handler has yet
+  to handle or skip.
 - Added `MessageType` to `configpb`, which describes one message type of an
   application by its ID, its name, its qualified name and its kind. The ID is
   the one that an envelope gives in `Message.type_id`.

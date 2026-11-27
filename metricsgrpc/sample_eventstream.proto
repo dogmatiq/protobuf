@@ -3,6 +3,7 @@ package dogma.metrics.v1alpha1;
 
 option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
 
+import "google/protobuf/timestamp.proto";
 import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 
 // EventStreamLength is the number of events on one event stream, which is an
@@ -66,4 +67,40 @@ message HandlerEventStreamLag {
   // Several nodes can report the lag of one handler on one stream, so adding
   // their values counts the same events more than once.
   uint64 gauge = 3 [features.field_presence = IMPLICIT];
+}
+
+// HandlerEventStreamStaleness is the creation time of the oldest event on one
+// event stream that one handler has neither handled nor skipped. The time that
+// has passed since then is the handler's staleness on that stream.
+//
+// The engine sends it only for process and projection handlers.
+//
+// A handler handles the events of some types and skips the rest. It has reached
+// an offset when it has handled or skipped the event at that offset and every
+// event before it. The oldest event that it has neither handled nor skipped is
+// the first event after the offset that it has reached.
+//
+// The engine that recorded the event set its creation time, from its own clock.
+//
+// The stream may be one of another engine's event streams. An engine can then
+// know that the stream has an event that it has not received yet, and so not
+// know when that event was created. An engine that does not know the creation
+// time stops reporting the metric for that handler and stream, and so sends a
+// Tombstone.
+message HandlerEventStreamStaleness {
+  // HandlerKey is the handler's identity key, as the application in
+  // WatchMetricsResponse.Preamble.application describes it.
+  dogma.protobuf.v1.UUID handler_key = 1;
+
+  // EventStreamId is the ID of the event stream. It is required.
+  dogma.protobuf.v1.UUID event_stream_id = 2;
+
+  // CreatedAt is the creation time of the oldest event on the stream that the
+  // handler has neither handled nor skipped, as the created_at of the event's
+  // envelope gives it. It is absent when the handler has handled or skipped
+  // every event on the stream.
+  //
+  // Several nodes can report the time for one handler on one stream, and their
+  // values can differ.
+  google.protobuf.Timestamp created_at = 3;
 }

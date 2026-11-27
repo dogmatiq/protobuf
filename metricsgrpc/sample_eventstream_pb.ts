@@ -4,6 +4,8 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { Timestamp } from "@bufbuild/protobuf/wkt";
+import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { UUID } from "../uuidpb/uuid_pb.js";
 import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
 import type { Message } from "@bufbuild/protobuf";
@@ -12,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream: GenFile = /*@__PURE__*/
-  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJfChFFdmVudFN0cmVhbUxlbmd0aBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhgKCXdhdGVybWFyaxgCIAEoBEIFqgECCAIipAEKJEFnZ3JlZ2F0ZUluc3RhbmNlRXZlbnRTdHJlYW1CaW5kaW5ncxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMAoPZXZlbnRfc3RyZWFtX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAMgASgEQgWqAQIIAiKNAQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBWdhdWdlGAMgASgEQgWqAQIIAkIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJfChFFdmVudFN0cmVhbUxlbmd0aBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhgKCXdhdGVybWFyaxgCIAEoBEIFqgECCAIipAEKJEFnZ3JlZ2F0ZUluc3RhbmNlRXZlbnRTdHJlYW1CaW5kaW5ncxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMAoPZXZlbnRfc3RyZWFtX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAMgASgEQgWqAQIIAiKNAQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBWdhdWdlGAMgASgEQgWqAQIIAiKtAQobSGFuZGxlckV2ZW50U3RyZWFtU3RhbGVuZXNzEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEi4KCmNyZWF0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQipaKGdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWV0cmljc2dycGNiCGVkaXRpb25zcOkH", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
 
 /**
  * EventStreamLength is the number of events on one event stream, which is an
@@ -141,4 +143,63 @@ export type HandlerEventStreamLag = Message<"dogma.metrics.v1alpha1.HandlerEvent
  */
 export const HandlerEventStreamLagSchema: GenMessage<HandlerEventStreamLag> = /*@__PURE__*/
   messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream, 2);
+
+/**
+ * HandlerEventStreamStaleness is the creation time of the oldest event on one
+ * event stream that one handler has neither handled nor skipped. The time that
+ * has passed since then is the handler's staleness on that stream.
+ *
+ * The engine sends it only for process and projection handlers.
+ *
+ * A handler handles the events of some types and skips the rest. It has reached
+ * an offset when it has handled or skipped the event at that offset and every
+ * event before it. The oldest event that it has neither handled nor skipped is
+ * the first event after the offset that it has reached.
+ *
+ * The engine that recorded the event set its creation time, from its own clock.
+ *
+ * The stream may be one of another engine's event streams. An engine can then
+ * know that the stream has an event that it has not received yet, and so not
+ * know when that event was created. An engine that does not know the creation
+ * time stops reporting the metric for that handler and stream, and so sends a
+ * Tombstone.
+ *
+ * @generated from message dogma.metrics.v1alpha1.HandlerEventStreamStaleness
+ */
+export type HandlerEventStreamStaleness = Message<"dogma.metrics.v1alpha1.HandlerEventStreamStaleness"> & {
+  /**
+   * HandlerKey is the handler's identity key, as the application in
+   * WatchMetricsResponse.Preamble.application describes it.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   */
+  handlerKey?: UUID | undefined;
+
+  /**
+   * EventStreamId is the ID of the event stream. It is required.
+   *
+   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 2;
+   */
+  eventStreamId?: UUID | undefined;
+
+  /**
+   * CreatedAt is the creation time of the oldest event on the stream that the
+   * handler has neither handled nor skipped, as the created_at of the event's
+   * envelope gives it. It is absent when the handler has handled or skipped
+   * every event on the stream.
+   *
+   * Several nodes can report the time for one handler on one stream, and their
+   * values can differ.
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 3;
+   */
+  createdAt?: Timestamp | undefined;
+};
+
+/**
+ * Describes the message dogma.metrics.v1alpha1.HandlerEventStreamStaleness.
+ * Use `create(HandlerEventStreamStalenessSchema)` to create a new message.
+ */
+export const HandlerEventStreamStalenessSchema: GenMessage<HandlerEventStreamStaleness> = /*@__PURE__*/
+  messageDesc(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream, 3);
 

@@ -10,6 +10,7 @@ import (
 	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -358,11 +359,157 @@ func (b0 HandlerEventStreamLag_builder) Build() *HandlerEventStreamLag {
 	return m0
 }
 
+// HandlerEventStreamStaleness is the creation time of the oldest event on one
+// event stream that one handler has neither handled nor skipped. The time that
+// has passed since then is the handler's staleness on that stream.
+//
+// The engine sends it only for process and projection handlers.
+//
+// A handler handles the events of some types and skips the rest. It has reached
+// an offset when it has handled or skipped the event at that offset and every
+// event before it. The oldest event that it has neither handled nor skipped is
+// the first event after the offset that it has reached.
+//
+// The engine that recorded the event set its creation time, from its own clock.
+//
+// The stream may be one of another engine's event streams. An engine can then
+// know that the stream has an event that it has not received yet, and so not
+// know when that event was created. An engine that does not know the creation
+// time stops reporting the metric for that handler and stream, and so sends a
+// Tombstone.
+type HandlerEventStreamStaleness struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_EventStreamId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=event_stream_id,json=eventStreamId"`
+	xxx_hidden_CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=created_at,json=createdAt"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *HandlerEventStreamStaleness) Reset() {
+	*x = HandlerEventStreamStaleness{}
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HandlerEventStreamStaleness) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HandlerEventStreamStaleness) ProtoMessage() {}
+
+func (x *HandlerEventStreamStaleness) ProtoReflect() protoreflect.Message {
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *HandlerEventStreamStaleness) GetHandlerKey() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_HandlerKey
+	}
+	return nil
+}
+
+func (x *HandlerEventStreamStaleness) GetEventStreamId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_EventStreamId
+	}
+	return nil
+}
+
+func (x *HandlerEventStreamStaleness) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_CreatedAt
+	}
+	return nil
+}
+
+func (x *HandlerEventStreamStaleness) SetHandlerKey(v *uuidpb.UUID) {
+	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerEventStreamStaleness) SetEventStreamId(v *uuidpb.UUID) {
+	x.xxx_hidden_EventStreamId = v
+}
+
+func (x *HandlerEventStreamStaleness) SetCreatedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CreatedAt = v
+}
+
+func (x *HandlerEventStreamStaleness) HasHandlerKey() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_HandlerKey != nil
+}
+
+func (x *HandlerEventStreamStaleness) HasEventStreamId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_EventStreamId != nil
+}
+
+func (x *HandlerEventStreamStaleness) HasCreatedAt() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CreatedAt != nil
+}
+
+func (x *HandlerEventStreamStaleness) ClearHandlerKey() {
+	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerEventStreamStaleness) ClearEventStreamId() {
+	x.xxx_hidden_EventStreamId = nil
+}
+
+func (x *HandlerEventStreamStaleness) ClearCreatedAt() {
+	x.xxx_hidden_CreatedAt = nil
+}
+
+type HandlerEventStreamStaleness_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// HandlerKey is the handler's identity key, as the application in
+	// WatchMetricsResponse.Preamble.application describes it.
+	HandlerKey *uuidpb.UUID
+	// EventStreamId is the ID of the event stream. It is required.
+	EventStreamId *uuidpb.UUID
+	// CreatedAt is the creation time of the oldest event on the stream that the
+	// handler has neither handled nor skipped, as the created_at of the event's
+	// envelope gives it. It is absent when the handler has handled or skipped
+	// every event on the stream.
+	//
+	// Several nodes can report the time for one handler on one stream, and their
+	// values can differ.
+	CreatedAt *timestamppb.Timestamp
+}
+
+func (b0 HandlerEventStreamStaleness_builder) Build() *HandlerEventStreamStaleness {
+	m0 := &HandlerEventStreamStaleness{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_EventStreamId = b.EventStreamId
+	x.xxx_hidden_CreatedAt = b.CreatedAt
+	return m0
+}
+
 var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto protoreflect.FileDescriptor
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_rawDesc = "" +
 	"\n" +
-	"Agithub.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"y\n" +
+	"Agithub.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto\x12\x16dogma.metrics.v1alpha1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"y\n" +
 	"\x11EventStreamLength\x12?\n" +
 	"\x0fevent_stream_id\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12#\n" +
 	"\twatermark\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\twatermark\"\xcd\x01\n" +
@@ -375,26 +522,37 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_raw
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12?\n" +
 	"\x0fevent_stream_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x12\x1b\n" +
-	"\x05gauge\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05gaugeB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
+	"\x05gauge\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x05gauge\"\xd3\x01\n" +
+	"\x1bHandlerEventStreamStaleness\x128\n" +
+	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
+	"handlerKey\x12?\n" +
+	"\x0fevent_stream_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\reventStreamId\x129\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAtB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_goTypes = []any{
 	(*EventStreamLength)(nil),                    // 0: dogma.metrics.v1alpha1.EventStreamLength
 	(*AggregateInstanceEventStreamBindings)(nil), // 1: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings
 	(*HandlerEventStreamLag)(nil),                // 2: dogma.metrics.v1alpha1.HandlerEventStreamLag
-	(*uuidpb.UUID)(nil),                          // 3: dogma.protobuf.v1.UUID
+	(*HandlerEventStreamStaleness)(nil),          // 3: dogma.metrics.v1alpha1.HandlerEventStreamStaleness
+	(*uuidpb.UUID)(nil),                          // 4: dogma.protobuf.v1.UUID
+	(*timestamppb.Timestamp)(nil),                // 5: google.protobuf.Timestamp
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_depIdxs = []int32{
-	3, // 0: dogma.metrics.v1alpha1.EventStreamLength.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	3, // 1: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.handler_key:type_name -> dogma.protobuf.v1.UUID
-	3, // 2: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	3, // 3: dogma.metrics.v1alpha1.HandlerEventStreamLag.handler_key:type_name -> dogma.protobuf.v1.UUID
-	3, // 4: dogma.metrics.v1alpha1.HandlerEventStreamLag.event_stream_id:type_name -> dogma.protobuf.v1.UUID
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	4, // 0: dogma.metrics.v1alpha1.EventStreamLength.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	4, // 1: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.handler_key:type_name -> dogma.protobuf.v1.UUID
+	4, // 2: dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	4, // 3: dogma.metrics.v1alpha1.HandlerEventStreamLag.handler_key:type_name -> dogma.protobuf.v1.UUID
+	4, // 4: dogma.metrics.v1alpha1.HandlerEventStreamLag.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	4, // 5: dogma.metrics.v1alpha1.HandlerEventStreamStaleness.handler_key:type_name -> dogma.protobuf.v1.UUID
+	4, // 6: dogma.metrics.v1alpha1.HandlerEventStreamStaleness.event_stream_id:type_name -> dogma.protobuf.v1.UUID
+	5, // 7: dogma.metrics.v1alpha1.HandlerEventStreamStaleness.created_at:type_name -> google.protobuf.Timestamp
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_init() }
@@ -408,7 +566,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_init
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
