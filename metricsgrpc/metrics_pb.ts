@@ -172,7 +172,6 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * The metrics that this API defines are:
  *
  * - AggregateInstanceEventStreamBindings
- * - AggregateInstancesInMemory
  * - EventStreamLength
  * - HandlerCommandsDue
  * - HandlerCommandsFailing
@@ -189,7 +188,6 @@ export const WatchMetricsResponse_PreambleSchema: GenMessage<WatchMetricsRespons
  * - HandlerEventsRecorded
  * - ProcessInstanceQueueBindings
  * - ProcessInstancesEnded
- * - ProcessInstancesInMemory
  * - ProjectionCompactionsCanceled
  * - ProjectionCompactionsCompleted
  * - ProjectionCompactionsDeadlineExceeded

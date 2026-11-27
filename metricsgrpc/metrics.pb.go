@@ -509,7 +509,6 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // The metrics that this API defines are:
 //
 // - AggregateInstanceEventStreamBindings
-// - AggregateInstancesInMemory
 // - EventStreamLength
 // - HandlerCommandsDue
 // - HandlerCommandsFailing
@@ -526,7 +525,6 @@ func (b0 WatchMetricsResponse_Preamble_builder) Build() *WatchMetricsResponse_Pr
 // - HandlerEventsRecorded
 // - ProcessInstanceQueueBindings
 // - ProcessInstancesEnded
-// - ProcessInstancesInMemory
 // - ProjectionCompactionsCanceled
 // - ProjectionCompactionsCompleted
 // - ProjectionCompactionsDeadlineExceeded

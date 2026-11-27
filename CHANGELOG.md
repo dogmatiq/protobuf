@@ -11,6 +11,13 @@ The format is based on [Keep a Changelog], and this project adheres to
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
 [bc]: https://github.com/dogmatiq/.github/blob/main/VERSIONING.md#changelogs
 
+## [Unreleased]
+
+### Removed
+
+- **[BC]** Removed the `AggregateInstancesInMemory` and
+  `ProcessInstancesInMemory` metrics from `MetricsAPI`.
+
 ## [0.12.0] - 2026-11-24
 
 ### Added

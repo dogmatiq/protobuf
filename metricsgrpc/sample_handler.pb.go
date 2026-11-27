@@ -21,182 +21,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// AggregateInstancesInMemory is the number of an aggregate handler's instances
-// that the engine holds in memory, so that it can handle commands for them
-// without loading them from storage.
-type AggregateInstancesInMemory struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
-}
-
-func (x *AggregateInstancesInMemory) Reset() {
-	*x = AggregateInstancesInMemory{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AggregateInstancesInMemory) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AggregateInstancesInMemory) ProtoMessage() {}
-
-func (x *AggregateInstancesInMemory) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *AggregateInstancesInMemory) GetHandlerKey() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_HandlerKey
-	}
-	return nil
-}
-
-func (x *AggregateInstancesInMemory) GetCurrentCount() uint64 {
-	if x != nil {
-		return x.xxx_hidden_CurrentCount
-	}
-	return 0
-}
-
-func (x *AggregateInstancesInMemory) SetHandlerKey(v *uuidpb.UUID) {
-	x.xxx_hidden_HandlerKey = v
-}
-
-func (x *AggregateInstancesInMemory) SetCurrentCount(v uint64) {
-	x.xxx_hidden_CurrentCount = v
-}
-
-func (x *AggregateInstancesInMemory) HasHandlerKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_HandlerKey != nil
-}
-
-func (x *AggregateInstancesInMemory) ClearHandlerKey() {
-	x.xxx_hidden_HandlerKey = nil
-}
-
-type AggregateInstancesInMemory_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// HandlerKey is the handler's identity key, as the application in
-	// WatchMetricsResponse.Preamble.application describes it.
-	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of instances that the engine holds in memory.
-	CurrentCount uint64
-}
-
-func (b0 AggregateInstancesInMemory_builder) Build() *AggregateInstancesInMemory {
-	m0 := &AggregateInstancesInMemory{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_HandlerKey = b.HandlerKey
-	x.xxx_hidden_CurrentCount = b.CurrentCount
-	return m0
-}
-
-// ProcessInstancesInMemory is the number of a process handler's instances that
-// the engine holds in memory, so that it can handle events and deadlines for
-// them without loading them from storage.
-type ProcessInstancesInMemory struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
-}
-
-func (x *ProcessInstancesInMemory) Reset() {
-	*x = ProcessInstancesInMemory{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ProcessInstancesInMemory) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ProcessInstancesInMemory) ProtoMessage() {}
-
-func (x *ProcessInstancesInMemory) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *ProcessInstancesInMemory) GetHandlerKey() *uuidpb.UUID {
-	if x != nil {
-		return x.xxx_hidden_HandlerKey
-	}
-	return nil
-}
-
-func (x *ProcessInstancesInMemory) GetCurrentCount() uint64 {
-	if x != nil {
-		return x.xxx_hidden_CurrentCount
-	}
-	return 0
-}
-
-func (x *ProcessInstancesInMemory) SetHandlerKey(v *uuidpb.UUID) {
-	x.xxx_hidden_HandlerKey = v
-}
-
-func (x *ProcessInstancesInMemory) SetCurrentCount(v uint64) {
-	x.xxx_hidden_CurrentCount = v
-}
-
-func (x *ProcessInstancesInMemory) HasHandlerKey() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_HandlerKey != nil
-}
-
-func (x *ProcessInstancesInMemory) ClearHandlerKey() {
-	x.xxx_hidden_HandlerKey = nil
-}
-
-type ProcessInstancesInMemory_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// HandlerKey is the handler's identity key, as the application in
-	// WatchMetricsResponse.Preamble.application describes it.
-	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of instances that the engine holds in memory.
-	CurrentCount uint64
-}
-
-func (b0 ProcessInstancesInMemory_builder) Build() *ProcessInstancesInMemory {
-	m0 := &ProcessInstancesInMemory{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_HandlerKey = b.HandlerKey
-	x.xxx_hidden_CurrentCount = b.CurrentCount
-	return m0
-}
-
 // HandlerCommandsPending is the number of commands for one handler that are
 // waiting to be delivered. The engine sends it only for aggregate and
 // integration handlers.
@@ -210,7 +34,7 @@ type HandlerCommandsPending struct {
 
 func (x *HandlerCommandsPending) Reset() {
 	*x = HandlerCommandsPending{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[2]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -222,7 +46,7 @@ func (x *HandlerCommandsPending) String() string {
 func (*HandlerCommandsPending) ProtoMessage() {}
 
 func (x *HandlerCommandsPending) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[2]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -298,7 +122,7 @@ type HandlerCommandsDue struct {
 
 func (x *HandlerCommandsDue) Reset() {
 	*x = HandlerCommandsDue{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[3]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -310,7 +134,7 @@ func (x *HandlerCommandsDue) String() string {
 func (*HandlerCommandsDue) ProtoMessage() {}
 
 func (x *HandlerCommandsDue) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[3]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -386,7 +210,7 @@ type HandlerCommandsFailing struct {
 
 func (x *HandlerCommandsFailing) Reset() {
 	*x = HandlerCommandsFailing{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[4]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -398,7 +222,7 @@ func (x *HandlerCommandsFailing) String() string {
 func (*HandlerCommandsFailing) ProtoMessage() {}
 
 func (x *HandlerCommandsFailing) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[4]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -474,7 +298,7 @@ type HandlerCommandsHandled struct {
 
 func (x *HandlerCommandsHandled) Reset() {
 	*x = HandlerCommandsHandled{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[5]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -486,7 +310,7 @@ func (x *HandlerCommandsHandled) String() string {
 func (*HandlerCommandsHandled) ProtoMessage() {}
 
 func (x *HandlerCommandsHandled) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[5]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -562,7 +386,7 @@ type HandlerDeadlinesPending struct {
 
 func (x *HandlerDeadlinesPending) Reset() {
 	*x = HandlerDeadlinesPending{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[6]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -574,7 +398,7 @@ func (x *HandlerDeadlinesPending) String() string {
 func (*HandlerDeadlinesPending) ProtoMessage() {}
 
 func (x *HandlerDeadlinesPending) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[6]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -649,7 +473,7 @@ type HandlerDeadlinesDue struct {
 
 func (x *HandlerDeadlinesDue) Reset() {
 	*x = HandlerDeadlinesDue{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[7]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -661,7 +485,7 @@ func (x *HandlerDeadlinesDue) String() string {
 func (*HandlerDeadlinesDue) ProtoMessage() {}
 
 func (x *HandlerDeadlinesDue) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[7]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -737,7 +561,7 @@ type HandlerDeadlinesFailing struct {
 
 func (x *HandlerDeadlinesFailing) Reset() {
 	*x = HandlerDeadlinesFailing{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[8]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -749,7 +573,7 @@ func (x *HandlerDeadlinesFailing) String() string {
 func (*HandlerDeadlinesFailing) ProtoMessage() {}
 
 func (x *HandlerDeadlinesFailing) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[8]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -825,7 +649,7 @@ type HandlerDeadlinesHandled struct {
 
 func (x *HandlerDeadlinesHandled) Reset() {
 	*x = HandlerDeadlinesHandled{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[9]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -837,7 +661,7 @@ func (x *HandlerDeadlinesHandled) String() string {
 func (*HandlerDeadlinesHandled) ProtoMessage() {}
 
 func (x *HandlerDeadlinesHandled) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[9]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -915,7 +739,7 @@ type HandlerDeadlinesCanceled struct {
 
 func (x *HandlerDeadlinesCanceled) Reset() {
 	*x = HandlerDeadlinesCanceled{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[10]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -927,7 +751,7 @@ func (x *HandlerDeadlinesCanceled) String() string {
 func (*HandlerDeadlinesCanceled) ProtoMessage() {}
 
 func (x *HandlerDeadlinesCanceled) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[10]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1003,7 +827,7 @@ type HandlerEventsRecorded struct {
 
 func (x *HandlerEventsRecorded) Reset() {
 	*x = HandlerEventsRecorded{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[11]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1015,7 +839,7 @@ func (x *HandlerEventsRecorded) String() string {
 func (*HandlerEventsRecorded) ProtoMessage() {}
 
 func (x *HandlerEventsRecorded) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[11]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1090,7 +914,7 @@ type HandlerEventsHandled struct {
 
 func (x *HandlerEventsHandled) Reset() {
 	*x = HandlerEventsHandled{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[12]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1102,7 +926,7 @@ func (x *HandlerEventsHandled) String() string {
 func (*HandlerEventsHandled) ProtoMessage() {}
 
 func (x *HandlerEventsHandled) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[12]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1178,7 +1002,7 @@ type HandlerEventsFailing struct {
 
 func (x *HandlerEventsFailing) Reset() {
 	*x = HandlerEventsFailing{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[13]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1190,7 +1014,7 @@ func (x *HandlerEventsFailing) String() string {
 func (*HandlerEventsFailing) ProtoMessage() {}
 
 func (x *HandlerEventsFailing) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[13]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1265,7 +1089,7 @@ type ProcessInstancesEnded struct {
 
 func (x *ProcessInstancesEnded) Reset() {
 	*x = ProcessInstancesEnded{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1277,7 +1101,7 @@ func (x *ProcessInstancesEnded) String() string {
 func (*ProcessInstancesEnded) ProtoMessage() {}
 
 func (x *ProcessInstancesEnded) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1352,7 +1176,7 @@ type ProjectionCompactionsCanceled struct {
 
 func (x *ProjectionCompactionsCanceled) Reset() {
 	*x = ProjectionCompactionsCanceled{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1364,7 +1188,7 @@ func (x *ProjectionCompactionsCanceled) String() string {
 func (*ProjectionCompactionsCanceled) ProtoMessage() {}
 
 func (x *ProjectionCompactionsCanceled) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1440,7 +1264,7 @@ type ProjectionCompactionsCompleted struct {
 
 func (x *ProjectionCompactionsCompleted) Reset() {
 	*x = ProjectionCompactionsCompleted{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1452,7 +1276,7 @@ func (x *ProjectionCompactionsCompleted) String() string {
 func (*ProjectionCompactionsCompleted) ProtoMessage() {}
 
 func (x *ProjectionCompactionsCompleted) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1529,7 +1353,7 @@ type ProjectionCompactionsDeadlineExceeded struct {
 
 func (x *ProjectionCompactionsDeadlineExceeded) Reset() {
 	*x = ProjectionCompactionsDeadlineExceeded{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[17]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1541,7 +1365,7 @@ func (x *ProjectionCompactionsDeadlineExceeded) String() string {
 func (*ProjectionCompactionsDeadlineExceeded) ProtoMessage() {}
 
 func (x *ProjectionCompactionsDeadlineExceeded) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[17]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1617,7 +1441,7 @@ type ProjectionCompactionsFailed struct {
 
 func (x *ProjectionCompactionsFailed) Reset() {
 	*x = ProjectionCompactionsFailed{}
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[18]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1629,7 +1453,7 @@ func (x *ProjectionCompactionsFailed) String() string {
 func (*ProjectionCompactionsFailed) ProtoMessage() {}
 
 func (x *ProjectionCompactionsFailed) ProtoReflect() protoreflect.Message {
-	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[18]
+	mi := &file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1697,15 +1521,7 @@ var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto protorefl
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc = "" +
 	"\n" +
-	"=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\x82\x01\n" +
-	"\x1aAggregateInstancesInMemory\x128\n" +
-	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x80\x01\n" +
-	"\x18ProcessInstancesInMemory\x128\n" +
-	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"~\n" +
+	"=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"~\n" +
 	"\x16HandlerCommandsPending\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x12*\n" +
@@ -1775,54 +1591,50 @@ const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc
 	"handlerKey\x120\n" +
 	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCountB*Z(github.com/dogmatiq/protobuf/metricsgrpcb\beditionsp\xe9\a"
 
-var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes = []any{
-	(*AggregateInstancesInMemory)(nil),            // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory
-	(*ProcessInstancesInMemory)(nil),              // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory
-	(*HandlerCommandsPending)(nil),                // 2: dogma.metrics.v1alpha1.HandlerCommandsPending
-	(*HandlerCommandsDue)(nil),                    // 3: dogma.metrics.v1alpha1.HandlerCommandsDue
-	(*HandlerCommandsFailing)(nil),                // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing
-	(*HandlerCommandsHandled)(nil),                // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled
-	(*HandlerDeadlinesPending)(nil),               // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending
-	(*HandlerDeadlinesDue)(nil),                   // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue
-	(*HandlerDeadlinesFailing)(nil),               // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing
-	(*HandlerDeadlinesHandled)(nil),               // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled
-	(*HandlerDeadlinesCanceled)(nil),              // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
-	(*HandlerEventsRecorded)(nil),                 // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded
-	(*HandlerEventsHandled)(nil),                  // 12: dogma.metrics.v1alpha1.HandlerEventsHandled
-	(*HandlerEventsFailing)(nil),                  // 13: dogma.metrics.v1alpha1.HandlerEventsFailing
-	(*ProcessInstancesEnded)(nil),                 // 14: dogma.metrics.v1alpha1.ProcessInstancesEnded
-	(*ProjectionCompactionsCanceled)(nil),         // 15: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled
-	(*ProjectionCompactionsCompleted)(nil),        // 16: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted
-	(*ProjectionCompactionsDeadlineExceeded)(nil), // 17: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded
-	(*ProjectionCompactionsFailed)(nil),           // 18: dogma.metrics.v1alpha1.ProjectionCompactionsFailed
-	(*uuidpb.UUID)(nil),                           // 19: dogma.protobuf.v1.UUID
+	(*HandlerCommandsPending)(nil),                // 0: dogma.metrics.v1alpha1.HandlerCommandsPending
+	(*HandlerCommandsDue)(nil),                    // 1: dogma.metrics.v1alpha1.HandlerCommandsDue
+	(*HandlerCommandsFailing)(nil),                // 2: dogma.metrics.v1alpha1.HandlerCommandsFailing
+	(*HandlerCommandsHandled)(nil),                // 3: dogma.metrics.v1alpha1.HandlerCommandsHandled
+	(*HandlerDeadlinesPending)(nil),               // 4: dogma.metrics.v1alpha1.HandlerDeadlinesPending
+	(*HandlerDeadlinesDue)(nil),                   // 5: dogma.metrics.v1alpha1.HandlerDeadlinesDue
+	(*HandlerDeadlinesFailing)(nil),               // 6: dogma.metrics.v1alpha1.HandlerDeadlinesFailing
+	(*HandlerDeadlinesHandled)(nil),               // 7: dogma.metrics.v1alpha1.HandlerDeadlinesHandled
+	(*HandlerDeadlinesCanceled)(nil),              // 8: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled
+	(*HandlerEventsRecorded)(nil),                 // 9: dogma.metrics.v1alpha1.HandlerEventsRecorded
+	(*HandlerEventsHandled)(nil),                  // 10: dogma.metrics.v1alpha1.HandlerEventsHandled
+	(*HandlerEventsFailing)(nil),                  // 11: dogma.metrics.v1alpha1.HandlerEventsFailing
+	(*ProcessInstancesEnded)(nil),                 // 12: dogma.metrics.v1alpha1.ProcessInstancesEnded
+	(*ProjectionCompactionsCanceled)(nil),         // 13: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled
+	(*ProjectionCompactionsCompleted)(nil),        // 14: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted
+	(*ProjectionCompactionsDeadlineExceeded)(nil), // 15: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded
+	(*ProjectionCompactionsFailed)(nil),           // 16: dogma.metrics.v1alpha1.ProjectionCompactionsFailed
+	(*uuidpb.UUID)(nil),                           // 17: dogma.protobuf.v1.UUID
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_depIdxs = []int32{
-	19, // 0: dogma.metrics.v1alpha1.AggregateInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 1: dogma.metrics.v1alpha1.ProcessInstancesInMemory.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 2: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 3: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 4: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 11: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 12: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 13: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 14: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 15: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 16: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 17: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // 18: dogma.metrics.v1alpha1.ProjectionCompactionsFailed.handler_key:type_name -> dogma.protobuf.v1.UUID
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	17, // 0: dogma.metrics.v1alpha1.HandlerCommandsPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 1: dogma.metrics.v1alpha1.HandlerCommandsDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 2: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 3: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 4: dogma.metrics.v1alpha1.HandlerDeadlinesPending.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 5: dogma.metrics.v1alpha1.HandlerDeadlinesDue.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 9: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 10: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 11: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 12: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 13: dogma.metrics.v1alpha1.ProjectionCompactionsCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 14: dogma.metrics.v1alpha1.ProjectionCompactionsCompleted.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 15: dogma.metrics.v1alpha1.ProjectionCompactionsDeadlineExceeded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // 16: dogma.metrics.v1alpha1.ProjectionCompactionsFailed.handler_key:type_name -> dogma.protobuf.v1.UUID
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() }
@@ -1836,7 +1648,7 @@ func file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc), len(file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -122,7 +122,6 @@ message WatchMetricsResponse {
   // The metrics that this API defines are:
   //
   // - AggregateInstanceEventStreamBindings
-  // - AggregateInstancesInMemory
   // - EventStreamLength
   // - HandlerCommandsDue
   // - HandlerCommandsFailing
@@ -139,7 +138,6 @@ message WatchMetricsResponse {
   // - HandlerEventsRecorded
   // - ProcessInstanceQueueBindings
   // - ProcessInstancesEnded
-  // - ProcessInstancesInMemory
   // - ProjectionCompactionsCanceled
   // - ProjectionCompactionsCompleted
   // - ProjectionCompactionsDeadlineExceeded
