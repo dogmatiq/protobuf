@@ -4,15 +4,15 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { UUID } from "../uuidpb/uuid_pb.js";
-import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
+import type { HandlerQueueSubject, QueueSubject } from "./subject_pb.js";
+import { file_github_com_dogmatiq_protobuf_metricsgrpc_subject } from "./subject_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_queue.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue: GenFile = /*@__PURE__*/
-  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJiChdRdWV1ZURlYWRsaW5lc1NjaGVkdWxlZBIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiXQoSUXVldWVDb21tYW5kc1JlYWR5EikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJeChNRdWV1ZURlYWRsaW5lc1JlYWR5EikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJfChRRdWV1ZUNvbW1hbmRzRmFpbGluZxIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiYAoVUXVldWVEZWFkbGluZXNGYWlsaW5nEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJiChRRdWV1ZUNvbW1hbmRzUmVtb3ZlZBIpCghxdWV1ZV9pZBgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIiYwoVUXVldWVEZWFkbGluZXNSZW1vdmVkEikKCHF1ZXVlX2lkGAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiKVAQocUHJvY2Vzc0luc3RhbmNlUXVldWVCaW5kaW5ncxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSKQoIcXVldWVfaWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhwKDWN1cnJlbnRfY291bnQYAyABKARCBaoBAggCQipaKGdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWV0cmljc2dycGNiCGVkaXRpb25zcOkH", [file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CjtnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9xdWV1ZS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJuChdRdWV1ZURlYWRsaW5lc1NjaGVkdWxlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIiaQoSUXVldWVDb21tYW5kc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJqChNRdWV1ZURlYWRsaW5lc1JlYWR5EjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJrChRRdWV1ZUNvbW1hbmRzRmFpbGluZxI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIibAoVUXVldWVEZWFkbGluZXNGYWlsaW5nEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIcCg1jdXJyZW50X2NvdW50GAIgASgEQgWqAQIIAiJuChRRdWV1ZUNvbW1hbmRzUmVtb3ZlZBI1CgdzdWJqZWN0GAEgASgLMiQuZG9nbWEubWV0cmljcy52MWFscGhhMS5RdWV1ZVN1YmplY3QSHwoQY3VtdWxhdGl2ZV9jb3VudBgCIAEoBEIFqgECCAIibwoVUXVldWVEZWFkbGluZXNSZW1vdmVkEjUKB3N1YmplY3QYASABKAsyJC5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLlF1ZXVlU3ViamVjdBIfChBjdW11bGF0aXZlX2NvdW50GAIgASgEQgWqAQIIAiJ6ChxQcm9jZXNzSW5zdGFuY2VRdWV1ZUJpbmRpbmdzEjwKB3N1YmplY3QYASABKAsyKy5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJRdWV1ZVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAJCKlooZ2l0aHViLmNvbS9kb2dtYXRpcS9wcm90b2J1Zi9tZXRyaWNzZ3JwY2IIZWRpdGlvbnNw6Qc", [file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
 
 /**
  * QueueDeadlinesScheduled is the number of deadlines in a single logical queue
@@ -27,11 +27,11 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_queue: GenFile
  */
 export type QueueDeadlinesScheduled = Message<"dogma.metrics.v1alpha1.QueueDeadlinesScheduled"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CurrentCount is the number of deadlines in the queue that are scheduled for
@@ -66,11 +66,11 @@ export const QueueDeadlinesScheduledSchema: GenMessage<QueueDeadlinesScheduled> 
  */
 export type QueueCommandsReady = Message<"dogma.metrics.v1alpha1.QueueCommandsReady"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CurrentCount is the number of commands in the queue that have not had a
@@ -105,11 +105,11 @@ export const QueueCommandsReadySchema: GenMessage<QueueCommandsReady> = /*@__PUR
  */
 export type QueueDeadlinesReady = Message<"dogma.metrics.v1alpha1.QueueDeadlinesReady"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CurrentCount is the number of deadlines in the queue that are scheduled for
@@ -142,11 +142,11 @@ export const QueueDeadlinesReadySchema: GenMessage<QueueDeadlinesReady> = /*@__P
  */
 export type QueueCommandsFailing = Message<"dogma.metrics.v1alpha1.QueueCommandsFailing"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CurrentCount is the number of commands in the queue that have had at least
@@ -179,11 +179,11 @@ export const QueueCommandsFailingSchema: GenMessage<QueueCommandsFailing> = /*@_
  */
 export type QueueDeadlinesFailing = Message<"dogma.metrics.v1alpha1.QueueDeadlinesFailing"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CurrentCount is the number of deadlines in the queue that have had at least
@@ -210,11 +210,11 @@ export const QueueDeadlinesFailingSchema: GenMessage<QueueDeadlinesFailing> = /*
  */
 export type QueueCommandsRemoved = Message<"dogma.metrics.v1alpha1.QueueCommandsRemoved"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CumulativeCount is the number of commands that have been removed from the
@@ -241,11 +241,11 @@ export const QueueCommandsRemovedSchema: GenMessage<QueueCommandsRemoved> = /*@_
  */
 export type QueueDeadlinesRemoved = Message<"dogma.metrics.v1alpha1.QueueDeadlinesRemoved"> & {
   /**
-   * QueueId is the ID of the queue.
+   * Subject identifies the queue.
    *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.QueueSubject subject = 1;
    */
-  queueId?: UUID | undefined;
+  subject?: QueueSubject | undefined;
 
   /**
    * CumulativeCount is the number of deadlines that have been removed from the
@@ -277,25 +277,17 @@ export const QueueDeadlinesRemovedSchema: GenMessage<QueueDeadlinesRemoved> = /*
  */
 export type ProcessInstanceQueueBindings = Message<"dogma.metrics.v1alpha1.ProcessInstanceQueueBindings"> & {
   /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
+   * Subject identifies the handler, and the queue that the instances are bound
+   * to if they are bound to one.
    *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   * @generated from field: dogma.metrics.v1alpha1.HandlerQueueSubject subject = 1;
    */
-  handlerKey?: UUID | undefined;
-
-  /**
-   * QueueId is the ID of the queue that the instances are bound to. It is
-   * absent for the instances that are bound to none.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID queue_id = 2;
-   */
-  queueId?: UUID | undefined;
+  subject?: HandlerQueueSubject | undefined;
 
   /**
    * CurrentCount is the number of instances bound to the queue, or to none.
    *
-   * @generated from field: uint64 current_count = 3 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
   currentCount: bigint;
 };

@@ -3,7 +3,7 @@ package dogma.metrics.v1alpha1;
 
 option go_package = "github.com/dogmatiq/protobuf/metricsgrpc";
 
-import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
+import "github.com/dogmatiq/protobuf/metricsgrpc/subject.proto";
 
 // QueueDeadlinesScheduled is the number of deadlines in a single logical queue
 // that are scheduled for a time that has not come yet, and that have not had a
@@ -13,8 +13,8 @@ import "github.com/dogmatiq/protobuf/uuidpb/uuid.proto";
 // QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
 // the number of deadlines in the queue is the total of the three.
 message QueueDeadlinesScheduled {
-  // QueueId is the ID of the queue.
-  dogma.protobuf.v1.UUID queue_id = 1;
+  // Subject identifies the queue.
+  QueueSubject subject = 1;
 
   // CurrentCount is the number of deadlines in the queue that are scheduled for
   // a time that has not come yet.
@@ -33,8 +33,8 @@ message QueueDeadlinesScheduled {
 // QueueCommandsFailing, so the number of commands in the queue is the total of
 // the two.
 message QueueCommandsReady {
-  // QueueId is the ID of the queue.
-  dogma.protobuf.v1.UUID queue_id = 1;
+  // Subject identifies the queue.
+  QueueSubject subject = 1;
 
   // CurrentCount is the number of commands in the queue that have not had a
   // failed delivery attempt.
@@ -53,8 +53,8 @@ message QueueCommandsReady {
 // QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
 // the number of deadlines in the queue is the total of the three.
 message QueueDeadlinesReady {
-  // QueueId is the ID of the queue.
-  dogma.protobuf.v1.UUID queue_id = 1;
+  // Subject identifies the queue.
+  QueueSubject subject = 1;
 
   // CurrentCount is the number of deadlines in the queue that are scheduled for
   // a time that has come, and that have not had a failed delivery attempt.
@@ -71,8 +71,8 @@ message QueueDeadlinesReady {
 // QueueCommandsFailing, so the number of commands in the queue is the total of
 // the two.
 message QueueCommandsFailing {
-  // QueueId is the ID of the queue.
-  dogma.protobuf.v1.UUID queue_id = 1;
+  // Subject identifies the queue.
+  QueueSubject subject = 1;
 
   // CurrentCount is the number of commands in the queue that have had at least
   // one failed delivery attempt.
@@ -89,8 +89,8 @@ message QueueCommandsFailing {
 // QueueDeadlinesScheduled, QueueDeadlinesReady and QueueDeadlinesFailing, so
 // the number of deadlines in the queue is the total of the three.
 message QueueDeadlinesFailing {
-  // QueueId is the ID of the queue.
-  dogma.protobuf.v1.UUID queue_id = 1;
+  // Subject identifies the queue.
+  QueueSubject subject = 1;
 
   // CurrentCount is the number of deadlines in the queue that have had at least
   // one failed delivery attempt.
@@ -101,8 +101,8 @@ message QueueDeadlinesFailing {
 // removed from a single logical queue, because they were delivered or for any
 // other reason.
 message QueueCommandsRemoved {
-  // QueueId is the ID of the queue.
-  dogma.protobuf.v1.UUID queue_id = 1;
+  // Subject identifies the queue.
+  QueueSubject subject = 1;
 
   // CumulativeCount is the number of commands that have been removed from the
   // queue.
@@ -113,8 +113,8 @@ message QueueCommandsRemoved {
 // removed from a single logical queue, because they were delivered or for any
 // other reason.
 message QueueDeadlinesRemoved {
-  // QueueId is the ID of the queue.
-  dogma.protobuf.v1.UUID queue_id = 1;
+  // Subject identifies the queue.
+  QueueSubject subject = 1;
 
   // CumulativeCount is the number of deadlines that have been removed from the
   // queue.
@@ -130,14 +130,10 @@ message QueueDeadlinesRemoved {
 // The number of the handler's instances that are in progress is the total
 // across the queues, and the instances that are bound to none.
 message ProcessInstanceQueueBindings {
-  // HandlerKey is the handler's identity key, as the application in
-  // WatchMetricsResponse.Preamble.application describes it.
-  dogma.protobuf.v1.UUID handler_key = 1;
-
-  // QueueId is the ID of the queue that the instances are bound to. It is
-  // absent for the instances that are bound to none.
-  dogma.protobuf.v1.UUID queue_id = 2;
+  // Subject identifies the handler, and the queue that the instances are bound
+  // to if they are bound to one.
+  HandlerQueueSubject subject = 1;
 
   // CurrentCount is the number of instances bound to the queue, or to none.
-  uint64 current_count = 3 [features.field_presence = IMPLICIT];
+  uint64 current_count = 2 [features.field_presence = IMPLICIT];
 }

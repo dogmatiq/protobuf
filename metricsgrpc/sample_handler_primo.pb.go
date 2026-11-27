@@ -8,7 +8,6 @@ package metricsgrpc
 
 import (
 	"fmt"
-	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -28,11 +27,8 @@ func NewHandlerCommandsReadyBuilder() *HandlerCommandsReadyBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerCommandsReadyBuilder) From(x *HandlerCommandsReady) *HandlerCommandsReadyBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -44,27 +40,17 @@ func (b *HandlerCommandsReadyBuilder) From(x *HandlerCommandsReady) *HandlerComm
 // not modify previously constructed messages.
 func (b *HandlerCommandsReadyBuilder) Build() *HandlerCommandsReady {
 	m := &HandlerCommandsReady{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerCommandsReadyBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsReadyBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerCommandsReadyBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerCommandsReadyBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerCommandsReadyBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerCommandsReadyBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -91,11 +77,8 @@ func NewHandlerCommandsFailingBuilder() *HandlerCommandsFailingBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerCommandsFailingBuilder) From(x *HandlerCommandsFailing) *HandlerCommandsFailingBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -107,27 +90,17 @@ func (b *HandlerCommandsFailingBuilder) From(x *HandlerCommandsFailing) *Handler
 // not modify previously constructed messages.
 func (b *HandlerCommandsFailingBuilder) Build() *HandlerCommandsFailing {
 	m := &HandlerCommandsFailing{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerCommandsFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsFailingBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerCommandsFailingBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerCommandsFailingBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerCommandsFailingBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerCommandsFailingBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -154,11 +127,8 @@ func NewHandlerCommandsHandledBuilder() *HandlerCommandsHandledBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerCommandsHandledBuilder) From(x *HandlerCommandsHandled) *HandlerCommandsHandledBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -170,27 +140,17 @@ func (b *HandlerCommandsHandledBuilder) From(x *HandlerCommandsHandled) *Handler
 // not modify previously constructed messages.
 func (b *HandlerCommandsHandledBuilder) Build() *HandlerCommandsHandled {
 	m := &HandlerCommandsHandled{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerCommandsHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsHandledBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerCommandsHandledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerCommandsHandledBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerCommandsHandledBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerCommandsHandledBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -217,11 +177,8 @@ func NewHandlerDeadlinesScheduledBuilder() *HandlerDeadlinesScheduledBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerDeadlinesScheduledBuilder) From(x *HandlerDeadlinesScheduled) *HandlerDeadlinesScheduledBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -233,27 +190,17 @@ func (b *HandlerDeadlinesScheduledBuilder) From(x *HandlerDeadlinesScheduled) *H
 // not modify previously constructed messages.
 func (b *HandlerDeadlinesScheduledBuilder) Build() *HandlerDeadlinesScheduled {
 	m := &HandlerDeadlinesScheduled{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerDeadlinesScheduledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesScheduledBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerDeadlinesScheduledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesScheduledBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerDeadlinesScheduledBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerDeadlinesScheduledBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -280,11 +227,8 @@ func NewHandlerDeadlinesReadyBuilder() *HandlerDeadlinesReadyBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerDeadlinesReadyBuilder) From(x *HandlerDeadlinesReady) *HandlerDeadlinesReadyBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -296,27 +240,17 @@ func (b *HandlerDeadlinesReadyBuilder) From(x *HandlerDeadlinesReady) *HandlerDe
 // not modify previously constructed messages.
 func (b *HandlerDeadlinesReadyBuilder) Build() *HandlerDeadlinesReady {
 	m := &HandlerDeadlinesReady{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerDeadlinesReadyBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesReadyBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerDeadlinesReadyBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesReadyBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerDeadlinesReadyBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerDeadlinesReadyBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -343,11 +277,8 @@ func NewHandlerDeadlinesFailingBuilder() *HandlerDeadlinesFailingBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerDeadlinesFailingBuilder) From(x *HandlerDeadlinesFailing) *HandlerDeadlinesFailingBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -359,27 +290,17 @@ func (b *HandlerDeadlinesFailingBuilder) From(x *HandlerDeadlinesFailing) *Handl
 // not modify previously constructed messages.
 func (b *HandlerDeadlinesFailingBuilder) Build() *HandlerDeadlinesFailing {
 	m := &HandlerDeadlinesFailing{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerDeadlinesFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesFailingBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerDeadlinesFailingBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesFailingBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerDeadlinesFailingBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerDeadlinesFailingBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -406,11 +327,8 @@ func NewHandlerDeadlinesHandledBuilder() *HandlerDeadlinesHandledBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerDeadlinesHandledBuilder) From(x *HandlerDeadlinesHandled) *HandlerDeadlinesHandledBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -422,27 +340,17 @@ func (b *HandlerDeadlinesHandledBuilder) From(x *HandlerDeadlinesHandled) *Handl
 // not modify previously constructed messages.
 func (b *HandlerDeadlinesHandledBuilder) Build() *HandlerDeadlinesHandled {
 	m := &HandlerDeadlinesHandled{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerDeadlinesHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesHandledBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerDeadlinesHandledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesHandledBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerDeadlinesHandledBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerDeadlinesHandledBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -469,11 +377,8 @@ func NewHandlerDeadlinesCanceledBuilder() *HandlerDeadlinesCanceledBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerDeadlinesCanceledBuilder) From(x *HandlerDeadlinesCanceled) *HandlerDeadlinesCanceledBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -485,27 +390,17 @@ func (b *HandlerDeadlinesCanceledBuilder) From(x *HandlerDeadlinesCanceled) *Han
 // not modify previously constructed messages.
 func (b *HandlerDeadlinesCanceledBuilder) Build() *HandlerDeadlinesCanceled {
 	m := &HandlerDeadlinesCanceled{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerDeadlinesCanceledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesCanceledBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerDeadlinesCanceledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesCanceledBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerDeadlinesCanceledBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerDeadlinesCanceledBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -532,11 +427,8 @@ func NewHandlerEventsRecordedBuilder() *HandlerEventsRecordedBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerEventsRecordedBuilder) From(x *HandlerEventsRecorded) *HandlerEventsRecordedBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -548,27 +440,17 @@ func (b *HandlerEventsRecordedBuilder) From(x *HandlerEventsRecorded) *HandlerEv
 // not modify previously constructed messages.
 func (b *HandlerEventsRecordedBuilder) Build() *HandlerEventsRecorded {
 	m := &HandlerEventsRecorded{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerEventsRecordedBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventsRecordedBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerEventsRecordedBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerEventsRecordedBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerEventsRecordedBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerEventsRecordedBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -595,11 +477,8 @@ func NewHandlerEventsHandledBuilder() *HandlerEventsHandledBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerEventsHandledBuilder) From(x *HandlerEventsHandled) *HandlerEventsHandledBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -611,27 +490,17 @@ func (b *HandlerEventsHandledBuilder) From(x *HandlerEventsHandled) *HandlerEven
 // not modify previously constructed messages.
 func (b *HandlerEventsHandledBuilder) Build() *HandlerEventsHandled {
 	m := &HandlerEventsHandled{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerEventsHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventsHandledBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerEventsHandledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerEventsHandledBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerEventsHandledBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerEventsHandledBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -658,11 +527,8 @@ func NewHandlerEventsFailingBuilder() *HandlerEventsFailingBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerEventsFailingBuilder) From(x *HandlerEventsFailing) *HandlerEventsFailingBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasMessageTypeId() {
-		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -674,27 +540,17 @@ func (b *HandlerEventsFailingBuilder) From(x *HandlerEventsFailing) *HandlerEven
 // not modify previously constructed messages.
 func (b *HandlerEventsFailingBuilder) Build() *HandlerEventsFailing {
 	m := &HandlerEventsFailing{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasMessageTypeId() {
-		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerEventsFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventsFailingBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
-// then returns b.
-func (b *HandlerEventsFailingBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerEventsFailingBuilder {
-	b.prototype.SetMessageTypeId(v)
+func (b *HandlerEventsFailingBuilder) WithSubject(v *HandlerMessageTypeSubject) *HandlerEventsFailingBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -721,8 +577,8 @@ func NewProcessInstancesEndedBuilder() *ProcessInstancesEndedBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *ProcessInstancesEndedBuilder) From(x *ProcessInstancesEnded) *ProcessInstancesEndedBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -734,17 +590,17 @@ func (b *ProcessInstancesEndedBuilder) From(x *ProcessInstancesEnded) *ProcessIn
 // not modify previously constructed messages.
 func (b *ProcessInstancesEndedBuilder) Build() *ProcessInstancesEnded {
 	m := &ProcessInstancesEnded{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *ProcessInstancesEndedBuilder) WithHandlerKey(v *uuidpb.UUID) *ProcessInstancesEndedBuilder {
-	b.prototype.SetHandlerKey(v)
+func (b *ProcessInstancesEndedBuilder) WithSubject(v *HandlerSubject) *ProcessInstancesEndedBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 

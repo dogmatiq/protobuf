@@ -6,15 +6,15 @@ import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
-import type { UUID } from "../uuidpb/uuid_pb.js";
-import { file_github_com_dogmatiq_protobuf_uuidpb_uuid } from "../uuidpb/uuid_pb.js";
+import type { EventStreamSubject, HandlerEventStreamSubject } from "./subject_pb.js";
+import { file_github_com_dogmatiq_protobuf_metricsgrpc_subject } from "./subject_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
  * Describes the file github.com/dogmatiq/protobuf/metricsgrpc/sample_eventstream.proto.
  */
 export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream: GenFile = /*@__PURE__*/
-  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJfChFFdmVudFN0cmVhbUxlbmd0aBIwCg9ldmVudF9zdHJlYW1faWQYASABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhgKCXdhdGVybWFyaxgCIAEoBEIFqgECCAIipAEKJEFnZ3JlZ2F0ZUluc3RhbmNlRXZlbnRTdHJlYW1CaW5kaW5ncxIsCgtoYW5kbGVyX2tleRgBIAEoCzIXLmRvZ21hLnByb3RvYnVmLnYxLlVVSUQSMAoPZXZlbnRfc3RyZWFtX2lkGAIgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIcCg1jdXJyZW50X2NvdW50GAMgASgEQgWqAQIIAiKNAQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEhQKBWdhdWdlGAMgASgEQgWqAQIIAiKtAQobSGFuZGxlckV2ZW50U3RyZWFtU3RhbGVuZXNzEiwKC2hhbmRsZXJfa2V5GAEgASgLMhcuZG9nbWEucHJvdG9idWYudjEuVVVJRBIwCg9ldmVudF9zdHJlYW1faWQYAiABKAsyFy5kb2dtYS5wcm90b2J1Zi52MS5VVUlEEi4KCmNyZWF0ZWRfYXQYAyABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wQipaKGdpdGh1Yi5jb20vZG9nbWF0aXEvcHJvdG9idWYvbWV0cmljc2dycGNiCGVkaXRpb25zcOkH", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_uuidpb_uuid]);
+  fileDesc("CkFnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjL3NhbXBsZV9ldmVudHN0cmVhbS5wcm90bxIWZG9nbWEubWV0cmljcy52MWFscGhhMSJqChFFdmVudFN0cmVhbUxlbmd0aBI7CgdzdWJqZWN0GAEgASgLMiouZG9nbWEubWV0cmljcy52MWFscGhhMS5FdmVudFN0cmVhbVN1YmplY3QSGAoJd2F0ZXJtYXJrGAIgASgEQgWqAQIIAiKIAQokQWdncmVnYXRlSW5zdGFuY2VFdmVudFN0cmVhbUJpbmRpbmdzEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudFN0cmVhbVN1YmplY3QSHAoNY3VycmVudF9jb3VudBgCIAEoBEIFqgECCAIicQoVSGFuZGxlckV2ZW50U3RyZWFtTGFnEkIKB3N1YmplY3QYASABKAsyMS5kb2dtYS5tZXRyaWNzLnYxYWxwaGExLkhhbmRsZXJFdmVudFN0cmVhbVN1YmplY3QSFAoFZ2F1Z2UYAiABKARCBaoBAggCIpEBChtIYW5kbGVyRXZlbnRTdHJlYW1TdGFsZW5lc3MSQgoHc3ViamVjdBgBIAEoCzIxLmRvZ21hLm1ldHJpY3MudjFhbHBoYTEuSGFuZGxlckV2ZW50U3RyZWFtU3ViamVjdBIuCgpjcmVhdGVkX2F0GAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcEIqWihnaXRodWIuY29tL2RvZ21hdGlxL3Byb3RvYnVmL21ldHJpY3NncnBjYghlZGl0aW9uc3DpBw", [file_google_protobuf_timestamp, file_github_com_dogmatiq_protobuf_metricsgrpc_subject]);
 
 /**
  * EventStreamLength is the number of events on one event stream, which is an
@@ -25,11 +25,11 @@ export const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_eventstream: G
  */
 export type EventStreamLength = Message<"dogma.metrics.v1alpha1.EventStreamLength"> & {
   /**
-   * EventStreamId is the ID of the event stream.
+   * Subject identifies the event stream.
    *
-   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 1;
+   * @generated from field: dogma.metrics.v1alpha1.EventStreamSubject subject = 1;
    */
-  eventStreamId?: UUID | undefined;
+  subject?: EventStreamSubject | undefined;
 
   /**
    * Watermark is the number of events on the stream, which is also the offset
@@ -63,25 +63,17 @@ export const EventStreamLengthSchema: GenMessage<EventStreamLength> = /*@__PURE_
  */
 export type AggregateInstanceEventStreamBindings = Message<"dogma.metrics.v1alpha1.AggregateInstanceEventStreamBindings"> & {
   /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
+   * Subject identifies the handler and the event stream that the instances are
+   * bound to.
    *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   * @generated from field: dogma.metrics.v1alpha1.HandlerEventStreamSubject subject = 1;
    */
-  handlerKey?: UUID | undefined;
-
-  /**
-   * EventStreamId is the ID of the event stream that the instances are bound
-   * to. It is required.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 2;
-   */
-  eventStreamId?: UUID | undefined;
+  subject?: HandlerEventStreamSubject | undefined;
 
   /**
    * CurrentCount is the number of instances bound to the event stream.
    *
-   * @generated from field: uint64 current_count = 3 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 current_count = 2 [features.field_presence = IMPLICIT];
    */
   currentCount: bigint;
 };
@@ -110,19 +102,11 @@ export const AggregateInstanceEventStreamBindingsSchema: GenMessage<AggregateIns
  */
 export type HandlerEventStreamLag = Message<"dogma.metrics.v1alpha1.HandlerEventStreamLag"> & {
   /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
+   * Subject identifies the handler and the event stream.
    *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   * @generated from field: dogma.metrics.v1alpha1.HandlerEventStreamSubject subject = 1;
    */
-  handlerKey?: UUID | undefined;
-
-  /**
-   * EventStreamId is the ID of the event stream. It is required.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 2;
-   */
-  eventStreamId?: UUID | undefined;
+  subject?: HandlerEventStreamSubject | undefined;
 
   /**
    * Gauge is the number of events after the offset that the handler has
@@ -132,7 +116,7 @@ export type HandlerEventStreamLag = Message<"dogma.metrics.v1alpha1.HandlerEvent
    * Several nodes can report the lag of one handler on one stream, so adding
    * their values counts the same events more than once.
    *
-   * @generated from field: uint64 gauge = 3 [features.field_presence = IMPLICIT];
+   * @generated from field: uint64 gauge = 2 [features.field_presence = IMPLICIT];
    */
   gauge: bigint;
 };
@@ -168,19 +152,11 @@ export const HandlerEventStreamLagSchema: GenMessage<HandlerEventStreamLag> = /*
  */
 export type HandlerEventStreamStaleness = Message<"dogma.metrics.v1alpha1.HandlerEventStreamStaleness"> & {
   /**
-   * HandlerKey is the handler's identity key, as the application in
-   * WatchMetricsResponse.Preamble.application describes it.
+   * Subject identifies the handler and the event stream.
    *
-   * @generated from field: dogma.protobuf.v1.UUID handler_key = 1;
+   * @generated from field: dogma.metrics.v1alpha1.HandlerEventStreamSubject subject = 1;
    */
-  handlerKey?: UUID | undefined;
-
-  /**
-   * EventStreamId is the ID of the event stream. It is required.
-   *
-   * @generated from field: dogma.protobuf.v1.UUID event_stream_id = 2;
-   */
-  eventStreamId?: UUID | undefined;
+  subject?: HandlerEventStreamSubject | undefined;
 
   /**
    * CreatedAt is the creation time of the oldest event on the stream that the
@@ -191,7 +167,7 @@ export type HandlerEventStreamStaleness = Message<"dogma.metrics.v1alpha1.Handle
    * Several nodes can report the time for one handler on one stream, and their
    * values can differ.
    *
-   * @generated from field: google.protobuf.Timestamp created_at = 3;
+   * @generated from field: google.protobuf.Timestamp created_at = 2;
    */
   createdAt?: Timestamp | undefined;
 };

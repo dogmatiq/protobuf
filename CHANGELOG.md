@@ -21,6 +21,14 @@ The format is based on [Keep a Changelog], and this project adheres to
 - Added the `HandlerEventStreamStaleness` metric to `MetricsAPI`, for the
   creation time of the oldest event on one event stream that a handler has yet
   to handle or skip.
+- Added the subject types to `metricsgrpc`. Each identifies what a metric's
+  value describes, and each metric's message holds one in its `subject` field:
+  - `QueueSubject`
+  - `HandlerSubject`
+  - `EventStreamSubject`
+  - `HandlerEventStreamSubject`
+  - `HandlerQueueSubject`
+  - `HandlerMessageTypeSubject`
 - Added `MessageType` to `configpb`, which describes one message type of an
   application by its ID, its name, its qualified name and its kind. The ID is
   the one that an envelope gives in `Message.type_id`.
@@ -40,11 +48,14 @@ The format is based on [Keep a Changelog], and this project adheres to
   not had a failed delivery attempt. The failing metrics count those that have
   had one, whether or not the next attempt is due, and while that attempt is in
   progress.
+- **[BC]** Replaced the `queue_id`, `handler_key` and `event_stream_id` fields
+  of the metric messages with a `subject` field, which has one of the subject
+  types.
 - **[BC]** The metrics that count a handler's commands, deadlines and events now
-  count the messages of one message type, which a new `message_type_id` field
-  identifies. Until now, each counted the handler's messages of every type. A
-  client adds up a handler's samples of a metric to get that count. The metrics
-  are:
+  count the messages of one message type, which the `message_type_id` of the
+  metric's subject identifies. Until now, each counted the handler's messages of
+  every type. A client adds up a handler's samples of a metric to get that
+  count. The metrics are:
   - `HandlerCommandsReady`
   - `HandlerCommandsFailing`
   - `HandlerCommandsHandled`

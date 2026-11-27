@@ -8,7 +8,6 @@ package metricsgrpc
 
 import (
 	"fmt"
-	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	proto "google.golang.org/protobuf/proto"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -29,8 +28,8 @@ func NewEventStreamLengthBuilder() *EventStreamLengthBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *EventStreamLengthBuilder) From(x *EventStreamLength) *EventStreamLengthBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetWatermark(x.GetWatermark())
 	return b
@@ -42,17 +41,17 @@ func (b *EventStreamLengthBuilder) From(x *EventStreamLength) *EventStreamLength
 // not modify previously constructed messages.
 func (b *EventStreamLengthBuilder) Build() *EventStreamLength {
 	m := &EventStreamLength{}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetWatermark(b.prototype.GetWatermark())
 	return m
 }
 
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *EventStreamLengthBuilder) WithEventStreamId(v *uuidpb.UUID) *EventStreamLengthBuilder {
-	b.prototype.SetEventStreamId(v)
+func (b *EventStreamLengthBuilder) WithSubject(v *EventStreamSubject) *EventStreamLengthBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -79,11 +78,8 @@ func NewAggregateInstanceEventStreamBindingsBuilder() *AggregateInstanceEventStr
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *AggregateInstanceEventStreamBindingsBuilder) From(x *AggregateInstanceEventStreamBindings) *AggregateInstanceEventStreamBindingsBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -95,27 +91,17 @@ func (b *AggregateInstanceEventStreamBindingsBuilder) From(x *AggregateInstanceE
 // not modify previously constructed messages.
 func (b *AggregateInstanceEventStreamBindingsBuilder) Build() *AggregateInstanceEventStreamBindings {
 	m := &AggregateInstanceEventStreamBindings{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *AggregateInstanceEventStreamBindingsBuilder) WithHandlerKey(v *uuidpb.UUID) *AggregateInstanceEventStreamBindingsBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
-// then returns b.
-func (b *AggregateInstanceEventStreamBindingsBuilder) WithEventStreamId(v *uuidpb.UUID) *AggregateInstanceEventStreamBindingsBuilder {
-	b.prototype.SetEventStreamId(v)
+func (b *AggregateInstanceEventStreamBindingsBuilder) WithSubject(v *HandlerEventStreamSubject) *AggregateInstanceEventStreamBindingsBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -142,11 +128,8 @@ func NewHandlerEventStreamLagBuilder() *HandlerEventStreamLagBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerEventStreamLagBuilder) From(x *HandlerEventStreamLag) *HandlerEventStreamLagBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetGauge(x.GetGauge())
 	return b
@@ -158,27 +141,17 @@ func (b *HandlerEventStreamLagBuilder) From(x *HandlerEventStreamLag) *HandlerEv
 // not modify previously constructed messages.
 func (b *HandlerEventStreamLagBuilder) Build() *HandlerEventStreamLag {
 	m := &HandlerEventStreamLag{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetGauge(b.prototype.GetGauge())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerEventStreamLagBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventStreamLagBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
-// then returns b.
-func (b *HandlerEventStreamLagBuilder) WithEventStreamId(v *uuidpb.UUID) *HandlerEventStreamLagBuilder {
-	b.prototype.SetEventStreamId(v)
+func (b *HandlerEventStreamLagBuilder) WithSubject(v *HandlerEventStreamSubject) *HandlerEventStreamLagBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -205,11 +178,8 @@ func NewHandlerEventStreamStalenessBuilder() *HandlerEventStreamStalenessBuilder
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *HandlerEventStreamStalenessBuilder) From(x *HandlerEventStreamStaleness) *HandlerEventStreamStalenessBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasEventStreamId() {
-		b.prototype.SetEventStreamId(x.GetEventStreamId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	if x.HasCreatedAt() {
 		b.prototype.SetCreatedAt(x.GetCreatedAt())
@@ -223,11 +193,8 @@ func (b *HandlerEventStreamStalenessBuilder) From(x *HandlerEventStreamStaleness
 // not modify previously constructed messages.
 func (b *HandlerEventStreamStalenessBuilder) Build() *HandlerEventStreamStaleness {
 	m := &HandlerEventStreamStaleness{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasEventStreamId() {
-		m.SetEventStreamId(b.prototype.GetEventStreamId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	if b.prototype.HasCreatedAt() {
 		m.SetCreatedAt(b.prototype.GetCreatedAt())
@@ -235,17 +202,10 @@ func (b *HandlerEventStreamStalenessBuilder) Build() *HandlerEventStreamStalenes
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *HandlerEventStreamStalenessBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventStreamStalenessBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithEventStreamId configures the builder to set the EventStreamId field to v,
-// then returns b.
-func (b *HandlerEventStreamStalenessBuilder) WithEventStreamId(v *uuidpb.UUID) *HandlerEventStreamStalenessBuilder {
-	b.prototype.SetEventStreamId(v)
+func (b *HandlerEventStreamStalenessBuilder) WithSubject(v *HandlerEventStreamSubject) *HandlerEventStreamStalenessBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 

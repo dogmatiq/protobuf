@@ -8,7 +8,6 @@ package metricsgrpc
 
 import (
 	"fmt"
-	uuidpb "github.com/dogmatiq/protobuf/uuidpb"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -28,8 +27,8 @@ func NewQueueDeadlinesScheduledBuilder() *QueueDeadlinesScheduledBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *QueueDeadlinesScheduledBuilder) From(x *QueueDeadlinesScheduled) *QueueDeadlinesScheduledBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -41,17 +40,17 @@ func (b *QueueDeadlinesScheduledBuilder) From(x *QueueDeadlinesScheduled) *Queue
 // not modify previously constructed messages.
 func (b *QueueDeadlinesScheduledBuilder) Build() *QueueDeadlinesScheduled {
 	m := &QueueDeadlinesScheduled{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithQueueId configures the builder to set the QueueId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *QueueDeadlinesScheduledBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesScheduledBuilder {
-	b.prototype.SetQueueId(v)
+func (b *QueueDeadlinesScheduledBuilder) WithSubject(v *QueueSubject) *QueueDeadlinesScheduledBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -78,8 +77,8 @@ func NewQueueCommandsReadyBuilder() *QueueCommandsReadyBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *QueueCommandsReadyBuilder) From(x *QueueCommandsReady) *QueueCommandsReadyBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -91,17 +90,17 @@ func (b *QueueCommandsReadyBuilder) From(x *QueueCommandsReady) *QueueCommandsRe
 // not modify previously constructed messages.
 func (b *QueueCommandsReadyBuilder) Build() *QueueCommandsReady {
 	m := &QueueCommandsReady{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithQueueId configures the builder to set the QueueId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *QueueCommandsReadyBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommandsReadyBuilder {
-	b.prototype.SetQueueId(v)
+func (b *QueueCommandsReadyBuilder) WithSubject(v *QueueSubject) *QueueCommandsReadyBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -128,8 +127,8 @@ func NewQueueDeadlinesReadyBuilder() *QueueDeadlinesReadyBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *QueueDeadlinesReadyBuilder) From(x *QueueDeadlinesReady) *QueueDeadlinesReadyBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -141,17 +140,17 @@ func (b *QueueDeadlinesReadyBuilder) From(x *QueueDeadlinesReady) *QueueDeadline
 // not modify previously constructed messages.
 func (b *QueueDeadlinesReadyBuilder) Build() *QueueDeadlinesReady {
 	m := &QueueDeadlinesReady{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithQueueId configures the builder to set the QueueId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *QueueDeadlinesReadyBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesReadyBuilder {
-	b.prototype.SetQueueId(v)
+func (b *QueueDeadlinesReadyBuilder) WithSubject(v *QueueSubject) *QueueDeadlinesReadyBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -178,8 +177,8 @@ func NewQueueCommandsFailingBuilder() *QueueCommandsFailingBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *QueueCommandsFailingBuilder) From(x *QueueCommandsFailing) *QueueCommandsFailingBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -191,17 +190,17 @@ func (b *QueueCommandsFailingBuilder) From(x *QueueCommandsFailing) *QueueComman
 // not modify previously constructed messages.
 func (b *QueueCommandsFailingBuilder) Build() *QueueCommandsFailing {
 	m := &QueueCommandsFailing{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithQueueId configures the builder to set the QueueId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *QueueCommandsFailingBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommandsFailingBuilder {
-	b.prototype.SetQueueId(v)
+func (b *QueueCommandsFailingBuilder) WithSubject(v *QueueSubject) *QueueCommandsFailingBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -228,8 +227,8 @@ func NewQueueDeadlinesFailingBuilder() *QueueDeadlinesFailingBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *QueueDeadlinesFailingBuilder) From(x *QueueDeadlinesFailing) *QueueDeadlinesFailingBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -241,17 +240,17 @@ func (b *QueueDeadlinesFailingBuilder) From(x *QueueDeadlinesFailing) *QueueDead
 // not modify previously constructed messages.
 func (b *QueueDeadlinesFailingBuilder) Build() *QueueDeadlinesFailing {
 	m := &QueueDeadlinesFailing{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithQueueId configures the builder to set the QueueId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *QueueDeadlinesFailingBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesFailingBuilder {
-	b.prototype.SetQueueId(v)
+func (b *QueueDeadlinesFailingBuilder) WithSubject(v *QueueSubject) *QueueDeadlinesFailingBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -278,8 +277,8 @@ func NewQueueCommandsRemovedBuilder() *QueueCommandsRemovedBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *QueueCommandsRemovedBuilder) From(x *QueueCommandsRemoved) *QueueCommandsRemovedBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -291,17 +290,17 @@ func (b *QueueCommandsRemovedBuilder) From(x *QueueCommandsRemoved) *QueueComman
 // not modify previously constructed messages.
 func (b *QueueCommandsRemovedBuilder) Build() *QueueCommandsRemoved {
 	m := &QueueCommandsRemoved{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithQueueId configures the builder to set the QueueId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *QueueCommandsRemovedBuilder) WithQueueId(v *uuidpb.UUID) *QueueCommandsRemovedBuilder {
-	b.prototype.SetQueueId(v)
+func (b *QueueCommandsRemovedBuilder) WithSubject(v *QueueSubject) *QueueCommandsRemovedBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -328,8 +327,8 @@ func NewQueueDeadlinesRemovedBuilder() *QueueDeadlinesRemovedBuilder {
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *QueueDeadlinesRemovedBuilder) From(x *QueueDeadlinesRemoved) *QueueDeadlinesRemovedBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
@@ -341,17 +340,17 @@ func (b *QueueDeadlinesRemovedBuilder) From(x *QueueDeadlinesRemoved) *QueueDead
 // not modify previously constructed messages.
 func (b *QueueDeadlinesRemovedBuilder) Build() *QueueDeadlinesRemoved {
 	m := &QueueDeadlinesRemoved{}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
 
-// WithQueueId configures the builder to set the QueueId field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *QueueDeadlinesRemovedBuilder) WithQueueId(v *uuidpb.UUID) *QueueDeadlinesRemovedBuilder {
-	b.prototype.SetQueueId(v)
+func (b *QueueDeadlinesRemovedBuilder) WithSubject(v *QueueSubject) *QueueDeadlinesRemovedBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 
@@ -378,11 +377,8 @@ func NewProcessInstanceQueueBindingsBuilder() *ProcessInstanceQueueBindingsBuild
 // do not modify x. It does not make a copy of the field values themselves.
 func (b *ProcessInstanceQueueBindingsBuilder) From(x *ProcessInstanceQueueBindings) *ProcessInstanceQueueBindingsBuilder {
 	proto.Reset(&b.prototype)
-	if x.HasHandlerKey() {
-		b.prototype.SetHandlerKey(x.GetHandlerKey())
-	}
-	if x.HasQueueId() {
-		b.prototype.SetQueueId(x.GetQueueId())
+	if x.HasSubject() {
+		b.prototype.SetSubject(x.GetSubject())
 	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
@@ -394,27 +390,17 @@ func (b *ProcessInstanceQueueBindingsBuilder) From(x *ProcessInstanceQueueBindin
 // not modify previously constructed messages.
 func (b *ProcessInstanceQueueBindingsBuilder) Build() *ProcessInstanceQueueBindings {
 	m := &ProcessInstanceQueueBindings{}
-	if b.prototype.HasHandlerKey() {
-		m.SetHandlerKey(b.prototype.GetHandlerKey())
-	}
-	if b.prototype.HasQueueId() {
-		m.SetQueueId(b.prototype.GetQueueId())
+	if b.prototype.HasSubject() {
+		m.SetSubject(b.prototype.GetSubject())
 	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
 
-// WithHandlerKey configures the builder to set the HandlerKey field to v,
+// WithSubject configures the builder to set the Subject field to v,
 // then returns b.
-func (b *ProcessInstanceQueueBindingsBuilder) WithHandlerKey(v *uuidpb.UUID) *ProcessInstanceQueueBindingsBuilder {
-	b.prototype.SetHandlerKey(v)
-	return b
-}
-
-// WithQueueId configures the builder to set the QueueId field to v,
-// then returns b.
-func (b *ProcessInstanceQueueBindingsBuilder) WithQueueId(v *uuidpb.UUID) *ProcessInstanceQueueBindingsBuilder {
-	b.prototype.SetQueueId(v)
+func (b *ProcessInstanceQueueBindingsBuilder) WithSubject(v *HandlerQueueSubject) *ProcessInstanceQueueBindingsBuilder {
+	b.prototype.SetSubject(v)
 	return b
 }
 

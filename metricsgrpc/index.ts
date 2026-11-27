@@ -3,3 +3,4 @@ export * from "./revision.js";
 export * from "./sample_eventstream_pb.js";
 export * from "./sample_handler_pb.js";
 export * from "./sample_queue_pb.js";
+export * from "./subject_pb.js";
