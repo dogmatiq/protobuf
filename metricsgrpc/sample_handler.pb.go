@@ -21,24 +21,29 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// HandlerCommandsReady is the number of commands for one handler that are
-// waiting to be delivered, and that have not had a failed delivery attempt. The
-// engine sends it only for aggregate and integration handlers.
+// HandlerCommandsReady is the number of commands of one type that are ready to
+// be delivered to one handler. The engine sends it only for aggregate and
+// integration handlers.
 //
-// A command is ready from the time that the engine adds it to a queue. It is
-// still ready while the engine attempts to deliver it, and while the engine
-// delays it for a reason of its own, such as to deliver messages of higher
-// priority first.
+// A command is ready if it is waiting to be delivered and has not had a failed
+// delivery attempt. It is ready from the time that the engine adds it to a
+// queue. It is still ready while the engine attempts to deliver it, and while
+// the engine delays it for a reason of its own, such as to deliver messages of
+// higher priority first.
 //
-// Each command that is waiting to be delivered to the handler is counted in
-// either HandlerCommandsReady or HandlerCommandsFailing, so the number of those
-// commands is the total of the two.
+// Each command of that type that is waiting to be delivered to the handler is
+// counted in either HandlerCommandsReady or HandlerCommandsFailing, so the
+// number of those commands is the total of the two.
+//
+// The number of the handler's ready commands is the total across the types of
+// command.
 type HandlerCommandsReady struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_MessageTypeId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CurrentCount  uint64                 `protobuf:"varint,3,opt,name=current_count,json=currentCount"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *HandlerCommandsReady) Reset() {
@@ -73,6 +78,13 @@ func (x *HandlerCommandsReady) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerCommandsReady) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerCommandsReady) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
@@ -82,6 +94,10 @@ func (x *HandlerCommandsReady) GetCurrentCount() uint64 {
 
 func (x *HandlerCommandsReady) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerCommandsReady) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerCommandsReady) SetCurrentCount(v uint64) {
@@ -95,8 +111,19 @@ func (x *HandlerCommandsReady) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerCommandsReady) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerCommandsReady) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerCommandsReady) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerCommandsReady_builder struct {
@@ -105,8 +132,12 @@ type HandlerCommandsReady_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of commands for the handler that are waiting to
-	// be delivered, and that have not had a failed delivery attempt.
+	// MessageTypeId is the ID of the type of command that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CurrentCount is the number of commands of one type that are waiting to be
+	// delivered to the handler, and that have not had a failed delivery attempt.
 	CurrentCount uint64
 }
 
@@ -115,27 +146,32 @@ func (b0 HandlerCommandsReady_builder) Build() *HandlerCommandsReady {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CurrentCount = b.CurrentCount
 	return m0
 }
 
-// HandlerCommandsFailing is the number of commands for one handler that are
-// waiting to be delivered, and that have had at least one failed delivery
-// attempt. The engine sends it only for aggregate and integration handlers.
+// HandlerCommandsFailing is the number of commands of one type whose delivery
+// to one handler is failing. The engine sends it only for aggregate and
+// integration handlers.
 //
-// A command stays failing for as long as it is waiting to be delivered, whether
-// or not its next delivery attempt is due, and while that attempt is in
-// progress.
+// A command is failing if it is waiting to be delivered and has had at least
+// one failed delivery attempt. It stays failing whether or not its next
+// delivery attempt is due, and while that attempt is in progress.
 //
-// Each command that is waiting to be delivered to the handler is counted in
-// either HandlerCommandsReady or HandlerCommandsFailing, so the number of those
-// commands is the total of the two.
+// Each command of that type that is waiting to be delivered to the handler is
+// counted in either HandlerCommandsReady or HandlerCommandsFailing, so the
+// number of those commands is the total of the two.
+//
+// The number of the handler's failing commands is the total across the types of
+// command.
 type HandlerCommandsFailing struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_MessageTypeId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CurrentCount  uint64                 `protobuf:"varint,3,opt,name=current_count,json=currentCount"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *HandlerCommandsFailing) Reset() {
@@ -170,6 +206,13 @@ func (x *HandlerCommandsFailing) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerCommandsFailing) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerCommandsFailing) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
@@ -179,6 +222,10 @@ func (x *HandlerCommandsFailing) GetCurrentCount() uint64 {
 
 func (x *HandlerCommandsFailing) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerCommandsFailing) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerCommandsFailing) SetCurrentCount(v uint64) {
@@ -192,8 +239,19 @@ func (x *HandlerCommandsFailing) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerCommandsFailing) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerCommandsFailing) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerCommandsFailing) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerCommandsFailing_builder struct {
@@ -202,8 +260,13 @@ type HandlerCommandsFailing_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of commands for the handler that are waiting to
-	// be delivered, and that have had at least one failed delivery attempt.
+	// MessageTypeId is the ID of the type of command that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CurrentCount is the number of commands of one type that are waiting to be
+	// delivered to the handler, and that have had at least one failed delivery
+	// attempt.
 	CurrentCount uint64
 }
 
@@ -212,17 +275,22 @@ func (b0 HandlerCommandsFailing_builder) Build() *HandlerCommandsFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CurrentCount = b.CurrentCount
 	return m0
 }
 
-// HandlerCommandsHandled is the cumulative count of the commands that one
-// handler has handled successfully. The engine sends it only for aggregate and
-// integration handlers.
+// HandlerCommandsHandled is the cumulative count of the commands of one type
+// that one handler has handled successfully. The engine sends it only for
+// aggregate and integration handlers.
+//
+// The number of commands that the handler has handled successfully is the total
+// across the types of command.
 type HandlerCommandsHandled struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	xxx_hidden_MessageTypeId   *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,3,opt,name=cumulative_count,json=cumulativeCount"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -259,6 +327,13 @@ func (x *HandlerCommandsHandled) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerCommandsHandled) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerCommandsHandled) GetCumulativeCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CumulativeCount
@@ -268,6 +343,10 @@ func (x *HandlerCommandsHandled) GetCumulativeCount() uint64 {
 
 func (x *HandlerCommandsHandled) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerCommandsHandled) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerCommandsHandled) SetCumulativeCount(v uint64) {
@@ -281,8 +360,19 @@ func (x *HandlerCommandsHandled) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerCommandsHandled) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerCommandsHandled) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerCommandsHandled) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerCommandsHandled_builder struct {
@@ -291,8 +381,12 @@ type HandlerCommandsHandled_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of commands that the handler has handled
-	// successfully.
+	// MessageTypeId is the ID of the type of command that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CumulativeCount is the number of commands of one type that the handler has
+	// handled successfully.
 	CumulativeCount uint64
 }
 
@@ -301,24 +395,32 @@ func (b0 HandlerCommandsHandled_builder) Build() *HandlerCommandsHandled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CumulativeCount = b.CumulativeCount
 	return m0
 }
 
-// HandlerDeadlinesScheduled is the number of deadlines for one handler that are
-// scheduled for a time that has not come yet, and that have not had a failed
-// delivery attempt. The engine sends it only for process handlers.
+// HandlerDeadlinesScheduled is the number of deadlines of one type for one
+// handler that are scheduled for a time that has not come yet. The engine sends
+// it only for process handlers.
 //
-// Each deadline that is waiting to be delivered to the handler is counted in
-// exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
-// HandlerDeadlinesFailing, so the number of those deadlines is the total of the
-// three.
+// A deadline that has had a failed delivery attempt is failing, whatever time
+// it is scheduled for.
+//
+// Each deadline of that type that is waiting to be delivered to the handler is
+// counted in exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady
+// and HandlerDeadlinesFailing, so the number of those deadlines is the total of
+// the three.
+//
+// The number of the handler's scheduled deadlines is the total across the types
+// of deadline.
 type HandlerDeadlinesScheduled struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_MessageTypeId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CurrentCount  uint64                 `protobuf:"varint,3,opt,name=current_count,json=currentCount"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *HandlerDeadlinesScheduled) Reset() {
@@ -353,6 +455,13 @@ func (x *HandlerDeadlinesScheduled) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerDeadlinesScheduled) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerDeadlinesScheduled) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
@@ -362,6 +471,10 @@ func (x *HandlerDeadlinesScheduled) GetCurrentCount() uint64 {
 
 func (x *HandlerDeadlinesScheduled) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerDeadlinesScheduled) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerDeadlinesScheduled) SetCurrentCount(v uint64) {
@@ -375,8 +488,19 @@ func (x *HandlerDeadlinesScheduled) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerDeadlinesScheduled) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerDeadlinesScheduled) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerDeadlinesScheduled) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerDeadlinesScheduled_builder struct {
@@ -385,8 +509,12 @@ type HandlerDeadlinesScheduled_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of deadlines for the handler that are scheduled
-	// for a time that has not come yet.
+	// MessageTypeId is the ID of the type of deadline that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CurrentCount is the number of deadlines of one type for the handler that
+	// are scheduled for a time that has not come yet.
 	CurrentCount uint64
 }
 
@@ -395,29 +523,34 @@ func (b0 HandlerDeadlinesScheduled_builder) Build() *HandlerDeadlinesScheduled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CurrentCount = b.CurrentCount
 	return m0
 }
 
-// HandlerDeadlinesReady is the number of deadlines for one handler that are
-// waiting to be delivered, that are scheduled for a time that has come, and
-// that have not had a failed delivery attempt. The engine sends it only for
-// process handlers.
+// HandlerDeadlinesReady is the number of deadlines of one type that are ready
+// to be delivered to one handler. The engine sends it only for process
+// handlers.
 //
-// A deadline is still ready while the engine attempts to deliver it, and while
-// the engine delays it for a reason of its own, such as to deliver messages of
-// higher priority first.
+// A deadline is ready if it is waiting to be delivered, is scheduled for a time
+// that has come, and has not had a failed delivery attempt. It is still ready
+// while the engine attempts to deliver it, and while the engine delays it for a
+// reason of its own, such as to deliver messages of higher priority first.
 //
-// Each deadline that is waiting to be delivered to the handler is counted in
-// exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
-// HandlerDeadlinesFailing, so the number of those deadlines is the total of the
-// three.
+// Each deadline of that type that is waiting to be delivered to the handler is
+// counted in exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady
+// and HandlerDeadlinesFailing, so the number of those deadlines is the total of
+// the three.
+//
+// The number of the handler's ready deadlines is the total across the types of
+// deadline.
 type HandlerDeadlinesReady struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_MessageTypeId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CurrentCount  uint64                 `protobuf:"varint,3,opt,name=current_count,json=currentCount"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *HandlerDeadlinesReady) Reset() {
@@ -452,6 +585,13 @@ func (x *HandlerDeadlinesReady) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerDeadlinesReady) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerDeadlinesReady) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
@@ -461,6 +601,10 @@ func (x *HandlerDeadlinesReady) GetCurrentCount() uint64 {
 
 func (x *HandlerDeadlinesReady) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerDeadlinesReady) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerDeadlinesReady) SetCurrentCount(v uint64) {
@@ -474,8 +618,19 @@ func (x *HandlerDeadlinesReady) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerDeadlinesReady) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerDeadlinesReady) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerDeadlinesReady) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerDeadlinesReady_builder struct {
@@ -484,8 +639,13 @@ type HandlerDeadlinesReady_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of deadlines for the handler that are scheduled
-	// for a time that has come, and that have not had a failed delivery attempt.
+	// MessageTypeId is the ID of the type of deadline that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CurrentCount is the number of deadlines of one type for the handler that
+	// are scheduled for a time that has come, and that have not had a failed
+	// delivery attempt.
 	CurrentCount uint64
 }
 
@@ -494,28 +654,32 @@ func (b0 HandlerDeadlinesReady_builder) Build() *HandlerDeadlinesReady {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CurrentCount = b.CurrentCount
 	return m0
 }
 
-// HandlerDeadlinesFailing is the number of deadlines for one handler that are
-// waiting to be delivered, and that have had at least one failed delivery
-// attempt. The engine sends it only for process handlers.
+// HandlerDeadlinesFailing is the number of deadlines of one type whose delivery
+// to one handler is failing. The engine sends it only for process handlers.
 //
-// A deadline stays failing for as long as it is waiting to be delivered,
-// whether or not its next delivery attempt is due, and while that attempt is in
-// progress.
+// A deadline is failing if it is waiting to be delivered and has had at least
+// one failed delivery attempt. It stays failing whether or not its next
+// delivery attempt is due, and while that attempt is in progress.
 //
-// Each deadline that is waiting to be delivered to the handler is counted in
-// exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady and
-// HandlerDeadlinesFailing, so the number of those deadlines is the total of the
-// three.
+// Each deadline of that type that is waiting to be delivered to the handler is
+// counted in exactly one of HandlerDeadlinesScheduled, HandlerDeadlinesReady
+// and HandlerDeadlinesFailing, so the number of those deadlines is the total of
+// the three.
+//
+// The number of the handler's failing deadlines is the total across the types
+// of deadline.
 type HandlerDeadlinesFailing struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_MessageTypeId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CurrentCount  uint64                 `protobuf:"varint,3,opt,name=current_count,json=currentCount"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *HandlerDeadlinesFailing) Reset() {
@@ -550,6 +714,13 @@ func (x *HandlerDeadlinesFailing) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerDeadlinesFailing) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerDeadlinesFailing) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
@@ -559,6 +730,10 @@ func (x *HandlerDeadlinesFailing) GetCurrentCount() uint64 {
 
 func (x *HandlerDeadlinesFailing) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerDeadlinesFailing) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerDeadlinesFailing) SetCurrentCount(v uint64) {
@@ -572,8 +747,19 @@ func (x *HandlerDeadlinesFailing) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerDeadlinesFailing) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerDeadlinesFailing) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerDeadlinesFailing) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerDeadlinesFailing_builder struct {
@@ -582,8 +768,13 @@ type HandlerDeadlinesFailing_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of deadlines for the handler that are waiting to
-	// be delivered, and that have had at least one failed delivery attempt.
+	// MessageTypeId is the ID of the type of deadline that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CurrentCount is the number of deadlines of one type that are waiting to be
+	// delivered to the handler, and that have had at least one failed delivery
+	// attempt.
 	CurrentCount uint64
 }
 
@@ -592,17 +783,22 @@ func (b0 HandlerDeadlinesFailing_builder) Build() *HandlerDeadlinesFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CurrentCount = b.CurrentCount
 	return m0
 }
 
-// HandlerDeadlinesHandled is the cumulative count of the deadlines that one
-// handler has handled successfully. The engine sends it only for process
-// handlers.
+// HandlerDeadlinesHandled is the cumulative count of the deadlines of one type
+// that one handler has handled successfully. The engine sends it only for
+// process handlers.
+//
+// The number of deadlines that the handler has handled successfully is the
+// total across the types of deadline.
 type HandlerDeadlinesHandled struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	xxx_hidden_MessageTypeId   *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,3,opt,name=cumulative_count,json=cumulativeCount"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -639,6 +835,13 @@ func (x *HandlerDeadlinesHandled) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerDeadlinesHandled) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerDeadlinesHandled) GetCumulativeCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CumulativeCount
@@ -648,6 +851,10 @@ func (x *HandlerDeadlinesHandled) GetCumulativeCount() uint64 {
 
 func (x *HandlerDeadlinesHandled) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerDeadlinesHandled) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerDeadlinesHandled) SetCumulativeCount(v uint64) {
@@ -661,8 +868,19 @@ func (x *HandlerDeadlinesHandled) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerDeadlinesHandled) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerDeadlinesHandled) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerDeadlinesHandled) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerDeadlinesHandled_builder struct {
@@ -671,8 +889,12 @@ type HandlerDeadlinesHandled_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of deadlines that the handler has handled
-	// successfully.
+	// MessageTypeId is the ID of the type of deadline that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CumulativeCount is the number of deadlines of one type that the handler has
+	// handled successfully.
 	CumulativeCount uint64
 }
 
@@ -681,18 +903,25 @@ func (b0 HandlerDeadlinesHandled_builder) Build() *HandlerDeadlinesHandled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CumulativeCount = b.CumulativeCount
 	return m0
 }
 
-// HandlerDeadlinesCanceled is the cumulative count of the deadlines of one
-// handler that were canceled before they were handled, such as when the process
-// instance that scheduled them ended. The engine sends it only for process
+// HandlerDeadlinesCanceled is the cumulative count of the deadlines of one type
+// for one handler that were canceled. The engine sends it only for process
 // handlers.
+//
+// A deadline is canceled when the engine removes it before it is handled, such
+// as when the process instance that scheduled it ends.
+//
+// The number of the handler's deadlines that were canceled is the total across
+// the types of deadline.
 type HandlerDeadlinesCanceled struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	xxx_hidden_MessageTypeId   *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,3,opt,name=cumulative_count,json=cumulativeCount"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -729,6 +958,13 @@ func (x *HandlerDeadlinesCanceled) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerDeadlinesCanceled) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerDeadlinesCanceled) GetCumulativeCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CumulativeCount
@@ -738,6 +974,10 @@ func (x *HandlerDeadlinesCanceled) GetCumulativeCount() uint64 {
 
 func (x *HandlerDeadlinesCanceled) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerDeadlinesCanceled) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerDeadlinesCanceled) SetCumulativeCount(v uint64) {
@@ -751,8 +991,19 @@ func (x *HandlerDeadlinesCanceled) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerDeadlinesCanceled) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerDeadlinesCanceled) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerDeadlinesCanceled) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerDeadlinesCanceled_builder struct {
@@ -761,7 +1012,12 @@ type HandlerDeadlinesCanceled_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of deadlines that were canceled.
+	// MessageTypeId is the ID of the type of deadline that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CumulativeCount is the number of deadlines of one type for the handler that
+	// were canceled.
 	CumulativeCount uint64
 }
 
@@ -770,17 +1026,22 @@ func (b0 HandlerDeadlinesCanceled_builder) Build() *HandlerDeadlinesCanceled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CumulativeCount = b.CumulativeCount
 	return m0
 }
 
-// HandlerEventsRecorded is the cumulative count of the events that one handler
-// has recorded. The engine sends it only for aggregate handlers, and for
-// integration handlers that record events.
+// HandlerEventsRecorded is the cumulative count of the events of one type that
+// one handler has recorded. The engine sends it only for aggregate handlers,
+// and for integration handlers that record events.
+//
+// The number of events that the handler has recorded is the total across the
+// types of event.
 type HandlerEventsRecorded struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	xxx_hidden_MessageTypeId   *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,3,opt,name=cumulative_count,json=cumulativeCount"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -817,6 +1078,13 @@ func (x *HandlerEventsRecorded) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerEventsRecorded) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerEventsRecorded) GetCumulativeCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CumulativeCount
@@ -826,6 +1094,10 @@ func (x *HandlerEventsRecorded) GetCumulativeCount() uint64 {
 
 func (x *HandlerEventsRecorded) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerEventsRecorded) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerEventsRecorded) SetCumulativeCount(v uint64) {
@@ -839,8 +1111,19 @@ func (x *HandlerEventsRecorded) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerEventsRecorded) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerEventsRecorded) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerEventsRecorded) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerEventsRecorded_builder struct {
@@ -849,7 +1132,12 @@ type HandlerEventsRecorded_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of events that the handler has recorded.
+	// MessageTypeId is the ID of the type of event that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CumulativeCount is the number of events of one type that the handler has
+	// recorded.
 	CumulativeCount uint64
 }
 
@@ -858,16 +1146,22 @@ func (b0 HandlerEventsRecorded_builder) Build() *HandlerEventsRecorded {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CumulativeCount = b.CumulativeCount
 	return m0
 }
 
-// HandlerEventsHandled is the cumulative count of the events that one handler
-// has handled. The engine sends it only for process and projection handlers.
+// HandlerEventsHandled is the cumulative count of the events of one type that
+// one handler has handled. The engine sends it only for process and projection
+// handlers.
+//
+// The number of events that the handler has handled is the total across the
+// types of event.
 type HandlerEventsHandled struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_HandlerKey      *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,2,opt,name=cumulative_count,json=cumulativeCount"`
+	xxx_hidden_MessageTypeId   *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CumulativeCount uint64                 `protobuf:"varint,3,opt,name=cumulative_count,json=cumulativeCount"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -904,6 +1198,13 @@ func (x *HandlerEventsHandled) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerEventsHandled) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerEventsHandled) GetCumulativeCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CumulativeCount
@@ -913,6 +1214,10 @@ func (x *HandlerEventsHandled) GetCumulativeCount() uint64 {
 
 func (x *HandlerEventsHandled) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerEventsHandled) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerEventsHandled) SetCumulativeCount(v uint64) {
@@ -926,8 +1231,19 @@ func (x *HandlerEventsHandled) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerEventsHandled) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerEventsHandled) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerEventsHandled) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerEventsHandled_builder struct {
@@ -936,7 +1252,12 @@ type HandlerEventsHandled_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CumulativeCount is the number of events that the handler has handled.
+	// MessageTypeId is the ID of the type of event that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CumulativeCount is the number of events of one type that the handler has
+	// handled.
 	CumulativeCount uint64
 }
 
@@ -945,19 +1266,27 @@ func (b0 HandlerEventsHandled_builder) Build() *HandlerEventsHandled {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CumulativeCount = b.CumulativeCount
 	return m0
 }
 
-// HandlerEventsFailing is the number of events for one handler that haven't
-// been handled yet and that have had at least one failed delivery attempt. The
-// engine sends it only for process and projection handlers.
+// HandlerEventsFailing is the number of events of one type whose delivery to
+// one handler is failing. The engine sends it only for process and projection
+// handlers.
+//
+// An event is failing if the handler has not handled it yet and it has had at
+// least one failed delivery attempt.
+//
+// The number of the handler's failing events is the total across the types of
+// event.
 type HandlerEventsFailing struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_HandlerKey   *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
-	xxx_hidden_CurrentCount uint64                 `protobuf:"varint,2,opt,name=current_count,json=currentCount"`
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_HandlerKey    *uuidpb.UUID           `protobuf:"bytes,1,opt,name=handler_key,json=handlerKey"`
+	xxx_hidden_MessageTypeId *uuidpb.UUID           `protobuf:"bytes,2,opt,name=message_type_id,json=messageTypeId"`
+	xxx_hidden_CurrentCount  uint64                 `protobuf:"varint,3,opt,name=current_count,json=currentCount"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *HandlerEventsFailing) Reset() {
@@ -992,6 +1321,13 @@ func (x *HandlerEventsFailing) GetHandlerKey() *uuidpb.UUID {
 	return nil
 }
 
+func (x *HandlerEventsFailing) GetMessageTypeId() *uuidpb.UUID {
+	if x != nil {
+		return x.xxx_hidden_MessageTypeId
+	}
+	return nil
+}
+
 func (x *HandlerEventsFailing) GetCurrentCount() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CurrentCount
@@ -1001,6 +1337,10 @@ func (x *HandlerEventsFailing) GetCurrentCount() uint64 {
 
 func (x *HandlerEventsFailing) SetHandlerKey(v *uuidpb.UUID) {
 	x.xxx_hidden_HandlerKey = v
+}
+
+func (x *HandlerEventsFailing) SetMessageTypeId(v *uuidpb.UUID) {
+	x.xxx_hidden_MessageTypeId = v
 }
 
 func (x *HandlerEventsFailing) SetCurrentCount(v uint64) {
@@ -1014,8 +1354,19 @@ func (x *HandlerEventsFailing) HasHandlerKey() bool {
 	return x.xxx_hidden_HandlerKey != nil
 }
 
+func (x *HandlerEventsFailing) HasMessageTypeId() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_MessageTypeId != nil
+}
+
 func (x *HandlerEventsFailing) ClearHandlerKey() {
 	x.xxx_hidden_HandlerKey = nil
+}
+
+func (x *HandlerEventsFailing) ClearMessageTypeId() {
+	x.xxx_hidden_MessageTypeId = nil
 }
 
 type HandlerEventsFailing_builder struct {
@@ -1024,8 +1375,13 @@ type HandlerEventsFailing_builder struct {
 	// HandlerKey is the handler's identity key, as the application in
 	// WatchMetricsResponse.Preamble.application describes it.
 	HandlerKey *uuidpb.UUID
-	// CurrentCount is the number of events for the handler that haven't been
-	// handled yet, and that have had at least one failed delivery attempt.
+	// MessageTypeId is the ID of the type of event that is counted, as the
+	// application in WatchMetricsResponse.Preamble.application describes it. It
+	// is required.
+	MessageTypeId *uuidpb.UUID
+	// CurrentCount is the number of events of one type for the handler that
+	// haven't been handled yet, and that have had at least one failed delivery
+	// attempt.
 	CurrentCount uint64
 }
 
@@ -1034,6 +1390,7 @@ func (b0 HandlerEventsFailing_builder) Build() *HandlerEventsFailing {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_HandlerKey = b.HandlerKey
+	x.xxx_hidden_MessageTypeId = b.MessageTypeId
 	x.xxx_hidden_CurrentCount = b.CurrentCount
 	return m0
 }
@@ -1129,51 +1486,62 @@ var File_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto protorefl
 
 const file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_rawDesc = "" +
 	"\n" +
-	"=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"|\n" +
+	"=github.com/dogmatiq/protobuf/metricsgrpc/sample_handler.proto\x12\x16dogma.metrics.v1alpha1\x1a.github.com/dogmatiq/protobuf/uuidpb/uuid.proto\"\xbd\x01\n" +
 	"\x14HandlerCommandsReady\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"~\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x12*\n" +
+	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\xbf\x01\n" +
 	"\x16HandlerCommandsFailing\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x84\x01\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x12*\n" +
+	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\xc5\x01\n" +
 	"\x16HandlerCommandsHandled\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x81\x01\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x120\n" +
+	"\x10cumulative_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\xc2\x01\n" +
 	"\x19HandlerDeadlinesScheduled\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"}\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x12*\n" +
+	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\xbe\x01\n" +
 	"\x15HandlerDeadlinesReady\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x7f\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x12*\n" +
+	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\xc0\x01\n" +
 	"\x17HandlerDeadlinesFailing\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x85\x01\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x12*\n" +
+	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\xc6\x01\n" +
 	"\x17HandlerDeadlinesHandled\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x86\x01\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x120\n" +
+	"\x10cumulative_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\xc7\x01\n" +
 	"\x18HandlerDeadlinesCanceled\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x83\x01\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x120\n" +
+	"\x10cumulative_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\xc4\x01\n" +
 	"\x15HandlerEventsRecorded\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\x82\x01\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x120\n" +
+	"\x10cumulative_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\xc3\x01\n" +
 	"\x14HandlerEventsHandled\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x120\n" +
-	"\x10cumulative_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"|\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x120\n" +
+	"\x10cumulative_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\x0fcumulativeCount\"\xbd\x01\n" +
 	"\x14HandlerEventsFailing\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
-	"handlerKey\x12*\n" +
-	"\rcurrent_count\x18\x02 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x83\x01\n" +
+	"handlerKey\x12?\n" +
+	"\x0fmessage_type_id\x18\x02 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\rmessageTypeId\x12*\n" +
+	"\rcurrent_count\x18\x03 \x01(\x04B\x05\xaa\x01\x02\b\x02R\fcurrentCount\"\x83\x01\n" +
 	"\x15ProcessInstancesEnded\x128\n" +
 	"\vhandler_key\x18\x01 \x01(\v2\x17.dogma.protobuf.v1.UUIDR\n" +
 	"handlerKey\x120\n" +
@@ -1197,22 +1565,33 @@ var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_goTypes =
 }
 var file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_depIdxs = []int32{
 	12, // 0: dogma.metrics.v1alpha1.HandlerCommandsReady.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 1: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 2: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 3: dogma.metrics.v1alpha1.HandlerDeadlinesScheduled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 4: dogma.metrics.v1alpha1.HandlerDeadlinesReady.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 5: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 8: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 9: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 10: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // 11: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	12, // 1: dogma.metrics.v1alpha1.HandlerCommandsReady.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 2: dogma.metrics.v1alpha1.HandlerCommandsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 3: dogma.metrics.v1alpha1.HandlerCommandsFailing.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 4: dogma.metrics.v1alpha1.HandlerCommandsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 5: dogma.metrics.v1alpha1.HandlerCommandsHandled.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 6: dogma.metrics.v1alpha1.HandlerDeadlinesScheduled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 7: dogma.metrics.v1alpha1.HandlerDeadlinesScheduled.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 8: dogma.metrics.v1alpha1.HandlerDeadlinesReady.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 9: dogma.metrics.v1alpha1.HandlerDeadlinesReady.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 10: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 11: dogma.metrics.v1alpha1.HandlerDeadlinesFailing.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 12: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 13: dogma.metrics.v1alpha1.HandlerDeadlinesHandled.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 14: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 15: dogma.metrics.v1alpha1.HandlerDeadlinesCanceled.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 16: dogma.metrics.v1alpha1.HandlerEventsRecorded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 17: dogma.metrics.v1alpha1.HandlerEventsRecorded.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 18: dogma.metrics.v1alpha1.HandlerEventsHandled.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 19: dogma.metrics.v1alpha1.HandlerEventsHandled.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 20: dogma.metrics.v1alpha1.HandlerEventsFailing.handler_key:type_name -> dogma.protobuf.v1.UUID
+	12, // 21: dogma.metrics.v1alpha1.HandlerEventsFailing.message_type_id:type_name -> dogma.protobuf.v1.UUID
+	12, // 22: dogma.metrics.v1alpha1.ProcessInstancesEnded.handler_key:type_name -> dogma.protobuf.v1.UUID
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_github_com_dogmatiq_protobuf_metricsgrpc_sample_handler_proto_init() }

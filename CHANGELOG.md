@@ -37,6 +37,22 @@ The format is based on [Keep a Changelog], and this project adheres to
   not had a failed delivery attempt. The failing metrics count those that have
   had one, whether or not the next attempt is due, and while that attempt is in
   progress.
+- **[BC]** The metrics that count a handler's commands, deadlines and events now
+  count the messages of one message type, which a new `message_type_id` field
+  identifies. Until now, each counted the handler's messages of every type. A
+  client adds up a handler's samples of a metric to get that count. The metrics
+  are:
+  - `HandlerCommandsReady`
+  - `HandlerCommandsFailing`
+  - `HandlerCommandsHandled`
+  - `HandlerDeadlinesScheduled`
+  - `HandlerDeadlinesReady`
+  - `HandlerDeadlinesFailing`
+  - `HandlerDeadlinesHandled`
+  - `HandlerDeadlinesCanceled`
+  - `HandlerEventsRecorded`
+  - `HandlerEventsHandled`
+  - `HandlerEventsFailing`
 - **[BC]** Replaced `messages` in `configpb.Application`, a map of each message
   type's Go type to its kind, with `message_types`, a list of `MessageType`.
 - **[BC]** Replaced `messages` in `configpb.Handler`, a map of each message

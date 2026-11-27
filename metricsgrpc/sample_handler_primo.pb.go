@@ -31,6 +31,9 @@ func (b *HandlerCommandsReadyBuilder) From(x *HandlerCommandsReady) *HandlerComm
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
@@ -44,6 +47,9 @@ func (b *HandlerCommandsReadyBuilder) Build() *HandlerCommandsReady {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
@@ -52,6 +58,13 @@ func (b *HandlerCommandsReadyBuilder) Build() *HandlerCommandsReady {
 // then returns b.
 func (b *HandlerCommandsReadyBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsReadyBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerCommandsReadyBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerCommandsReadyBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -81,6 +94,9 @@ func (b *HandlerCommandsFailingBuilder) From(x *HandlerCommandsFailing) *Handler
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
@@ -94,6 +110,9 @@ func (b *HandlerCommandsFailingBuilder) Build() *HandlerCommandsFailing {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
@@ -102,6 +121,13 @@ func (b *HandlerCommandsFailingBuilder) Build() *HandlerCommandsFailing {
 // then returns b.
 func (b *HandlerCommandsFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsFailingBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerCommandsFailingBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerCommandsFailingBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -131,6 +157,9 @@ func (b *HandlerCommandsHandledBuilder) From(x *HandlerCommandsHandled) *Handler
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
@@ -144,6 +173,9 @@ func (b *HandlerCommandsHandledBuilder) Build() *HandlerCommandsHandled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
@@ -152,6 +184,13 @@ func (b *HandlerCommandsHandledBuilder) Build() *HandlerCommandsHandled {
 // then returns b.
 func (b *HandlerCommandsHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerCommandsHandledBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerCommandsHandledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerCommandsHandledBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -181,6 +220,9 @@ func (b *HandlerDeadlinesScheduledBuilder) From(x *HandlerDeadlinesScheduled) *H
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
@@ -194,6 +236,9 @@ func (b *HandlerDeadlinesScheduledBuilder) Build() *HandlerDeadlinesScheduled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
@@ -202,6 +247,13 @@ func (b *HandlerDeadlinesScheduledBuilder) Build() *HandlerDeadlinesScheduled {
 // then returns b.
 func (b *HandlerDeadlinesScheduledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesScheduledBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerDeadlinesScheduledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesScheduledBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -231,6 +283,9 @@ func (b *HandlerDeadlinesReadyBuilder) From(x *HandlerDeadlinesReady) *HandlerDe
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
@@ -244,6 +299,9 @@ func (b *HandlerDeadlinesReadyBuilder) Build() *HandlerDeadlinesReady {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
@@ -252,6 +310,13 @@ func (b *HandlerDeadlinesReadyBuilder) Build() *HandlerDeadlinesReady {
 // then returns b.
 func (b *HandlerDeadlinesReadyBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesReadyBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerDeadlinesReadyBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesReadyBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -281,6 +346,9 @@ func (b *HandlerDeadlinesFailingBuilder) From(x *HandlerDeadlinesFailing) *Handl
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
@@ -294,6 +362,9 @@ func (b *HandlerDeadlinesFailingBuilder) Build() *HandlerDeadlinesFailing {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
@@ -302,6 +373,13 @@ func (b *HandlerDeadlinesFailingBuilder) Build() *HandlerDeadlinesFailing {
 // then returns b.
 func (b *HandlerDeadlinesFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesFailingBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerDeadlinesFailingBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesFailingBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -331,6 +409,9 @@ func (b *HandlerDeadlinesHandledBuilder) From(x *HandlerDeadlinesHandled) *Handl
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
@@ -344,6 +425,9 @@ func (b *HandlerDeadlinesHandledBuilder) Build() *HandlerDeadlinesHandled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
@@ -352,6 +436,13 @@ func (b *HandlerDeadlinesHandledBuilder) Build() *HandlerDeadlinesHandled {
 // then returns b.
 func (b *HandlerDeadlinesHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesHandledBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerDeadlinesHandledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesHandledBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -381,6 +472,9 @@ func (b *HandlerDeadlinesCanceledBuilder) From(x *HandlerDeadlinesCanceled) *Han
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
@@ -394,6 +488,9 @@ func (b *HandlerDeadlinesCanceledBuilder) Build() *HandlerDeadlinesCanceled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
@@ -402,6 +499,13 @@ func (b *HandlerDeadlinesCanceledBuilder) Build() *HandlerDeadlinesCanceled {
 // then returns b.
 func (b *HandlerDeadlinesCanceledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerDeadlinesCanceledBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerDeadlinesCanceledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerDeadlinesCanceledBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -431,6 +535,9 @@ func (b *HandlerEventsRecordedBuilder) From(x *HandlerEventsRecorded) *HandlerEv
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
@@ -444,6 +551,9 @@ func (b *HandlerEventsRecordedBuilder) Build() *HandlerEventsRecorded {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
@@ -452,6 +562,13 @@ func (b *HandlerEventsRecordedBuilder) Build() *HandlerEventsRecorded {
 // then returns b.
 func (b *HandlerEventsRecordedBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventsRecordedBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerEventsRecordedBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerEventsRecordedBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -481,6 +598,9 @@ func (b *HandlerEventsHandledBuilder) From(x *HandlerEventsHandled) *HandlerEven
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCumulativeCount(x.GetCumulativeCount())
 	return b
 }
@@ -494,6 +614,9 @@ func (b *HandlerEventsHandledBuilder) Build() *HandlerEventsHandled {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCumulativeCount(b.prototype.GetCumulativeCount())
 	return m
 }
@@ -502,6 +625,13 @@ func (b *HandlerEventsHandledBuilder) Build() *HandlerEventsHandled {
 // then returns b.
 func (b *HandlerEventsHandledBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventsHandledBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerEventsHandledBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerEventsHandledBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
@@ -531,6 +661,9 @@ func (b *HandlerEventsFailingBuilder) From(x *HandlerEventsFailing) *HandlerEven
 	if x.HasHandlerKey() {
 		b.prototype.SetHandlerKey(x.GetHandlerKey())
 	}
+	if x.HasMessageTypeId() {
+		b.prototype.SetMessageTypeId(x.GetMessageTypeId())
+	}
 	b.prototype.SetCurrentCount(x.GetCurrentCount())
 	return b
 }
@@ -544,6 +677,9 @@ func (b *HandlerEventsFailingBuilder) Build() *HandlerEventsFailing {
 	if b.prototype.HasHandlerKey() {
 		m.SetHandlerKey(b.prototype.GetHandlerKey())
 	}
+	if b.prototype.HasMessageTypeId() {
+		m.SetMessageTypeId(b.prototype.GetMessageTypeId())
+	}
 	m.SetCurrentCount(b.prototype.GetCurrentCount())
 	return m
 }
@@ -552,6 +688,13 @@ func (b *HandlerEventsFailingBuilder) Build() *HandlerEventsFailing {
 // then returns b.
 func (b *HandlerEventsFailingBuilder) WithHandlerKey(v *uuidpb.UUID) *HandlerEventsFailingBuilder {
 	b.prototype.SetHandlerKey(v)
+	return b
+}
+
+// WithMessageTypeId configures the builder to set the MessageTypeId field to v,
+// then returns b.
+func (b *HandlerEventsFailingBuilder) WithMessageTypeId(v *uuidpb.UUID) *HandlerEventsFailingBuilder {
+	b.prototype.SetMessageTypeId(v)
 	return b
 }
 
